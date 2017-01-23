@@ -1,0 +1,13 @@
+*.dat
+*.mod
+*.log
+*.opa
+*.mog
+*.grid
+*.moo
+session*
+*.cont
+*.norm
+*.spec
+fort.*
+*.pdf

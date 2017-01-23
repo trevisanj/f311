@@ -1,0 +1,11 @@
+recursive-include f311/data *
+
+# include pyperdrive/data/default/*
+# include pyperdrive/data/*
+# include pyperdrive/data/icons/*
+# recursive-include pyfant/data *
+# include pyfant/data/default/*
+# include pyfant/data/*
+# recursive-include aosss/data *
+# include aosss/data/default/*
+# include aosss/data/*
