@@ -6,9 +6,8 @@ which adds entries to the _* variables in this module
 """
 
 
-import hypydrive as hpd
 from collections import OrderedDict
-
+import f311.filetypes as ft
 
 __all__ = [
     "_classes_txt", "_classes_bin", "_classes_sp", "_classes_file", "_classes_vis",
@@ -21,7 +20,7 @@ def get_suitable_vis_classes(obj):
     """Retuns a list of Vis classes that can handle obj."""
 
     ret = []
-    for class_ in hpd.classes_vis():
+    for class_ in a99.classes_vis():
         if isinstance(obj, class_.input_classes):
             ret.append(class_)
     return ret
@@ -31,8 +30,8 @@ def get_suitable_vis_list_classes(objs):
     """Retuns a list of VisList classes that can handle a list of objects."""
 
     ret = []
-    for class_ in hpd.classes_vis():
-        if isinstance(class_, hpd.VisList):
+    for class_ in a99.classes_vis():
+        if isinstance(class_, a99.VisList):
             flag_can = True
             for obj in objs:
                 if not isinstance(obj, class_.item_input_classes):
@@ -53,8 +52,8 @@ def get_class_package(class_):
     if __flag_first:
         __setup_collaboration()
     root_pkg_name = class_.__module__.split(".")[0]
-    if root_pkg_name == hpd.__name__:
-        return hpd
+    if root_pkg_name == a99.__name__:
+        return a99
     if root_pkg_name not in __collaborators:
         raise RuntimeError("Class '{}' belongs to package '{}', "
                            "but the latter is not among hypydrive collaborators".
@@ -83,7 +82,7 @@ def _collect_classes(m):
         classes.extend([class_ for class_ in newclasses if class_ not in classes])
         # classes.extend(newclasses)
 
-    file_classes = hpd.get_classes_in_module(m.datatypes, hpd.DataFile)
+    file_classes = a99.get_classes_in_module(m.datatypes, ft.DataFile)
 
     # Classes to consider when attempts to load a text file (see hypydrive.load_any_file())
     _extend(_classes_txt, [class_ for class_ in file_classes if class_.flag_txt])
@@ -91,11 +90,11 @@ def _collect_classes(m):
     # Classes to consider when attempts to load a binary file (see hypydrive.load_any_file())
     _extend(_classes_bin, [class_ for class_ in file_classes if not class_.flag_txt])
     # Adds Classes to consider when attempts to load a spectrum file (see hypydrive.load_spectrum())
-    _extend(_classes_sp, [class_ for class_ in file_classes if issubclass(class_, hpd.FileSpectrum)])
+    _extend(_classes_sp, [class_ for class_ in file_classes if issubclass(class_, a99.FileSpectrum)])
     # All kwown File* classes
     _extend(_classes_file, file_classes)
     # All kwnown Vis* classes
-    _extend(_classes_vis, hpd.get_classes_in_module(m.vis, hpd.Vis))
+    _extend(_classes_vis, a99.get_classes_in_module(m.vis, a99.Vis))
 
 
 # # List of classes representing all file formats either read or written
@@ -152,12 +151,9 @@ def classes_vis():
 
 # # Tries to "collaborate" with other packages
 # "collaborator" packages: {"name": package}
-__collaborators = OrderedDict()  # (("hypydrive",  hpd),))
+__collaborators = OrderedDict()  # (("hypydrive",  a99),))
 
-# TODO include aosss again
-
-__PACKAGE_NAMES = ["hypydrive", "pyfant", "aosss"]
-# __PACKAGE_NAMES = ["hypydrive", "pyfant"]
+__PACKAGE_NAMES = ["f311.filetypes"]
 
 
 def __setup_collaboration():
@@ -167,7 +163,7 @@ def __setup_collaboration():
     for pkgname in __PACKAGE_NAMES:
         try:
             pkg = __import__(pkgname)
-            hpd.get_python_logger().info("imported collaborator package '{}'".format(pkgname))
+            a99.get_python_logger().info("imported collaborator package '{}'".format(pkgname))
 
             try:
                 if hasattr(pkg, "_setup_hypydrive"):
@@ -177,13 +173,13 @@ def __setup_collaboration():
 
                 __collaborators[pkgname] = pkg
             except:
-                hpd.get_python_logger().exception(
+                a99.get_python_logger().exception(
                     "hypydrive: actually, package '{}' gave error".format(pkgname))
         except:
-            hpd.get_python_logger.warning("failed to import package '{}".format(pkgname))
+            a99.get_python_logger.warning("failed to import package '{}".format(pkgname))
             pass
 
 
 if __name__ == "__main__":
-    import hypydrive as hpd
-    print(hpd.classes_sp())
+    import a99
+    print(a99.classes_sp())

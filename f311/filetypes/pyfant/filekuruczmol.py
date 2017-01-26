@@ -6,6 +6,7 @@ __all__ = ["KuruczMolLine", "FileKuruczMolecule"]
 # from ..gear import *
 import sys
 import a99
+from .. import DataFile
 import io
 import fortranformat as ff
 import os
@@ -47,7 +48,7 @@ class KuruczMolLine(a99.AttrsPart):
             self.lambda_doublingl, self.spinl, self.iso,)
 
 
-class FileKuruczMolecule(ex.DataFile):
+class FileKuruczMolecule(DataFile):
     """
     Kurucz molecular lines file
 
@@ -67,7 +68,7 @@ class FileKuruczMolecule(ex.DataFile):
         return len(self.lines)
 
     def __init__(self):
-        ex.DataFile.__init__(self)
+        DataFile.__init__(self)
 
         # list of KuruczMolLine objects
         self.lines = []

@@ -6,11 +6,12 @@ __all__ = ["FileSpectrumList"]
 
 
 from . import SpectrumList
-from a99 import DataFile, froze_it, overwrite_fits
 from astropy.io import fits
+import a99
+from .. import DataFile
 
 
-@froze_it
+@a99.froze_it
 class FileSpectrumList(DataFile):
     """FITS Spectrum List"""
     attrs = ['splist']
@@ -29,7 +30,7 @@ class FileSpectrumList(DataFile):
 
     def _do_save_as(self, filename):
         hdul = self.splist.to_hdulist()
-        overwrite_fits(hdul, filename)
+        a99.overwrite_fits(hdul, filename)
 
     def init_default(self):
         # Already created OK

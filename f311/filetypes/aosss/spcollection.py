@@ -1,25 +1,27 @@
 """"
 List of spectra sharing same wavenumber axis. Uses FITS format
 """
-
-__all__ = ["SpectrumCollection"]
-
-
-from a99 import Spectrum, AttrsPart, froze_it, eval_fieldnames
+# from a99 import Spectrum, AttrsPart, froze_it, eval_fieldnames
+import a99
 from astropy.io import fits
 import os
 import numpy as np
 import numbers
 import copy
-import f311.physics
+# import f311.physics as ph
+# import f311.filetypes as ft
+from .. import Spectrum
 
-class SpectrumCollection(AttrsPart):
+__all__ = ["SpectrumCollection"]
+
+
+class SpectrumCollection(a99.AttrsPart):
     """Base class, maintains spectra with "more headers"; to/from HDU without much interpretation"""
 
     attrs = ["fieldnames", "more_headers", "spectra"]
 
     def __init__(self):
-        AttrsPart.__init__(self)
+        a99.AttrsPart.__init__(self)
         self._flag_created_by_block = False  # assertion
         self.filename = None
         # _LambdaReference instance, can be inferred from first spectrum added
@@ -41,6 +43,7 @@ class SpectrumCollection(AttrsPart):
     # - NAXIS(1/2/3) apparently managed by pyfits
     # - FIELDNAM & FIELDN_V are parsed separately
     _IGNORE_HEADERS = ("NAXIS", "FIELDNAM", "FIELDN_V")
+
     def from_hdulist(self, hdul):
         assert isinstance(hdul, fits.HDUList)
         if not (hdul[0].header.get("ANCHOVA") or hdul[0].header.get("TAINHA")):
@@ -57,13 +60,13 @@ class SpectrumCollection(AttrsPart):
                 # self.fieldnames is not overwritten if there is no such information in HDU
                 temp = hdu.header.get("FIELDNAM")
                 if temp:
-                    self.fieldnames = eval_fieldnames(temp)
+                    self.fieldnames = a99.eval_fieldnames(temp)
                 # self.fieldnames_visible is overwritten yes
                 temp = hdu.header.get("FIELDN_V")
                 if temp is None:
                     self.fieldnames_visible = copy.copy(self.fieldnames)
                 else:
-                    self.fieldnames_visible = eval_fieldnames(temp)
+                    self.fieldnames_visible = a99.eval_fieldnames(temp)
             else:
                 sp = Spectrum()
                 sp.from_hdu(hdu)
@@ -137,27 +140,27 @@ class SpectrumCollection(AttrsPart):
             self.add_spectrum(sp)
 
 
-    def to_colors(self, visible_range=None, flag_scale=False, method=0):
-        """Returns a [n, 3] red-green-blue (0.-1.) matrix
-
-        Arguments:
-          visible_range=None -- if passed, the true human visible range will be
-                                affine-transformed to visible_range in order
-                                to use the red-to-blue scale to paint the pixels
-          flag_scale -- whether to scale the luminosities proportionally
-                        the weight for each spectra will be the area under the flux
-          method -- see Spectrum.get_rgb()
-        """
-        weights = np.zeros((len(self), 3))
-        max_area = 0.
-        ret = np.zeros((len(self), 3))
-        for i, sp in enumerate(self.spectra):
-            ret[i, :] = ph.spectrum_to_rgb(sp, visible_range, method)
-            sp_area = np.sum(sp.y)
-            max_area = max(max_area, sp_area)
-            weights[i, :] = sp_area
-        if flag_scale:
-            weights *= 1. / max_area
-            ret *= weights
-        # TODO return weights if necessary
-        return ret
+    # def to_colors(self, visible_range=None, flag_scale=False, method=0):
+    #     """Returns a [n, 3] red-green-blue (0.-1.) matrix
+    #
+    #     Arguments:
+    #       visible_range=None -- if passed, the true human visible range will be
+    #                             affine-transformed to visible_range in order
+    #                             to use the red-to-blue scale to paint the pixels
+    #       flag_scale -- whether to scale the luminosities proportionally
+    #                     the weight for each spectra will be the area under the flux
+    #       method -- see Spectrum.get_rgb()
+    #     """
+    #     weights = np.zeros((len(self), 3))
+    #     max_area = 0.
+    #     ret = np.zeros((len(self), 3))
+    #     for i, sp in enumerate(self.spectra):
+    #         ret[i, :] = ph.spectrum_to_rgb(sp, visible_range, method)
+    #         sp_area = np.sum(sp.y)
+    #         max_area = max(max_area, sp_area)
+    #         weights[i, :] = sp_area
+    #     if flag_scale:
+    #         weights *= 1. / max_area
+    #         ret *= weights
+    #     # TODO return weights if necessary
+    #     return ret

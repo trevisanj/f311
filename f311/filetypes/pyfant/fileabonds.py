@@ -1,14 +1,14 @@
 __all__ = ["FileAbonds"]
 
 import struct
-import f311.pyfant as pf
 import a99
+from .. import DataFile, adjust_atomic_symbol
 import re
 from .filedissoc import FileDissoc
 import tabulate
 
 
-class FileAbonds(ex.DataFile):
+class FileAbonds(DataFile):
     """PFANT Stellar Chemical Abundances"""
 
     description = "chemical abundances"
@@ -16,7 +16,7 @@ class FileAbonds(ex.DataFile):
     attrs = ["ele", "abol", "notes"]
 
     def __init__(self):
-        ex.DataFile.__init__(self)
+        DataFile.__init__(self)
         self.ele = []   # list of atomic symbols
         self.abol = []  # corresponding abundances
         self.notes = []  # ignored by pfant
@@ -54,7 +54,7 @@ class FileAbonds(ex.DataFile):
                 if not re.search(r'[a-z]', ele, re.IGNORECASE):
                     raise RuntimeError("Invalid element symbol: '%s'" % ele.strip())
 
-                self.ele.append(pf.adjust_atomic_symbol(ele))
+                self.ele.append(adjust_atomic_symbol(ele))
                 self.abol.append(float(abol))
                 self.notes.append(notes.strip())
 

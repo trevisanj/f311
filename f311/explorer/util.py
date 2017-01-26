@@ -16,7 +16,7 @@ import f311.physics as ph
 
 __all__ = [
     "load_any_file", "load_spectrum", "load_spectrum_fits_messed_x", "list_data_types",
-    "cut_spectrum", "load_with_classes"
+    "cut_spectrum", "load_with_classes", "crop_splist"
 ]
 
 
@@ -229,3 +229,34 @@ def get_rgb(self, visible_range=None, method=0):
         return ret
     else:
         raise RuntimeError("Unknown method: {0!s}".format(method))
+
+
+def crop_splist(splist, lambda0=None, lambda1=None):
+    """
+    Cuts all spectra in SpectrumList
+
+    **Note** lambda1 **included** in interval (not pythonic).
+    """
+    if len(splist.spectra) == 0:
+        raise RuntimeError("Need at least one spectrum added in order to crop")
+
+    if lambda0 is None:
+        lambda0 = splist.wavelength[0]
+    if lambda1 is None:
+        lambda1 = splist.wavelength[-1]
+    if not (lambda0 <= lambda1):
+        raise RuntimeError('lambda0 must be <= lambda1')
+
+    if not any([lambda0 != splist.wavelength[0], lambda1 != splist.wavelength[-1]]):
+        return
+
+    for i in range(len(splist)):
+        sp = cut_spectrum(splist.spectra[i], lambda0, lambda1)
+        if i == 0:
+            n = len(sp)
+            if n < 2:
+                raise RuntimeError(
+                    "Cannot cut, spectrum will have %d point%s" % (n, "" if n == 1 else "s"))
+        splist.spectra[i] = sp
+
+    splist.__update()

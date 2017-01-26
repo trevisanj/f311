@@ -1,18 +1,19 @@
 __all__ = ["FileHmap", "HmapRow"]
 
 
-from a99 import froze_it, AttrsPart, DataFile, write_lf
+import a99
+from .. import DataFile
 import tabulate
 
 
-@froze_it
-class HmapRow(AttrsPart):
+@a99.froze_it
+class HmapRow(a99.AttrsPart):
     """Same structure as pfantlib.f90::hmap_row type."""
 
     attrs = ["fn", "na", "nb", "clam", "kiex", "c1"]
 
     def __init__(self):
-        AttrsPart.__init__(self)
+        a99.AttrsPart.__init__(self)
         self.fn = None
         self.na = None
         self.nb = None
@@ -21,7 +22,7 @@ class HmapRow(AttrsPart):
         self.c1 = None
 
 
-@froze_it
+@a99.froze_it
 class FileHmap(DataFile):
     """
     PFANT Hygrogen Lines Map
@@ -72,6 +73,6 @@ class FileHmap(DataFile):
 
     def _do_save_as(self, filename):
         with open(filename, "w") as h:
-            write_lf(h, "# filename / niv inf / niv sup / central lambda / kiex / c1")
+            a99.write_lf(h, "# filename / niv inf / niv sup / central lambda / kiex / c1")
             for r in self.rows:
-                write_lf(h, "%s %s %s %s %s %s" % (r.fn, r.na, r.nb, r.clam, r.kiex, r.c1))
+                a99.write_lf(h, "%s %s %s %s %s %s" % (r.fn, r.na, r.nb, r.clam, r.kiex, r.c1))

@@ -7,12 +7,10 @@ Object-oriented framework to handle file types:
   - Plugin system to support (read/write/visualize) new file types
 """
 
-from . import filetypes
 from . import gui
 from . import vis
 from . import blocks
 
-from .filetypes import *
 from .gui import *
 from .vis import *
 from .blocks import *

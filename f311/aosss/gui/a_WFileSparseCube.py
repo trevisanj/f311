@@ -283,6 +283,8 @@ class WFileSparseCube(a99.WBase):
         ###
         lgo.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
+
+        # TODO get rid of this
         # #### More Tools tab
         wset = self.keep_ref(QWidget())
         tt0.addTab(wset, "&More")
@@ -456,6 +458,7 @@ class WFileSparseCube(a99.WBase):
                 obj.set_color(next_color)
                 self.canvas1.draw()
 
+    # TODO don't worry, this shouldn't be here anyway
     def crop_clicked(self):
         try:
             sky = self.f.sparsecube

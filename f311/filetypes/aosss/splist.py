@@ -7,12 +7,14 @@ __all__ = ["SpectrumList"]
 
 
 from . import SpectrumCollection, FullCube
-from a99 import froze_it, Spectrum, cut_spectrum
+# from a99 import froze_it, cut_spectrum
+from .. import Spectrum
 from astropy.io import fits
 import numpy as np
+import a99
 
 
-@froze_it
+@a99.froze_it
 class SpectrumList(SpectrumCollection):
     attrs = SpectrumCollection.attrs+["wavelength"]
 
@@ -56,35 +58,6 @@ class SpectrumList(SpectrumCollection):
         if n == 0:
             return np.array()
         return np.vstack([sp.y for sp in self.spectra])
-
-    def crop(self, lambda0=None, lambda1=None):
-        """
-        Cuts all spectra
-
-        **Note** lambda1 **included** in interval (not pythonic).
-        """
-        if len(self.spectra) == 0:
-            raise RuntimeError("Need at least one spectrum added in order to crop")
-
-        if lambda0 is None:
-            lambda0 = self.wavelength[0]
-        if lambda1 is None:
-            lambda1 = self.wavelength[-1]
-        if not (lambda0 <= lambda1):
-            raise RuntimeError('lambda0 must be <= lambda1')
-
-        if not any([lambda0 != self.wavelength[0], lambda1 != self.wavelength[-1]]):
-            return
-
-        for i in range(len(self)):
-            sp = cut_spectrum(self.spectra[i], lambda0, lambda1)
-            if i == 0:
-                n = len(sp)
-                if n < 2:
-                    raise RuntimeError("Cannot cut, spectrum will have %d point%s" % (n, "" if n == 1 else "s"))
-            self.spectra[i] = sp
-
-        self.__update()
 
     def from_hdulist(self, hdul):
         self.__flag_update = False

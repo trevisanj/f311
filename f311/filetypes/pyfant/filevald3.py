@@ -6,6 +6,7 @@ __all__ = ["Vald3Species", "FileVald3", "Vald3Line"]
 # from ..gear import *
 import sys
 import a99
+from .. import DataFile
 import io
 
 
@@ -69,7 +70,7 @@ class Vald3Line(a99.AttrsPart):
         self.v2l = None
 
 
-class FileVald3(ex.DataFile):
+class FileVald3(DataFile):
     """
     VALD3 atomic or molecular lines file
 
@@ -90,7 +91,7 @@ class FileVald3(ex.DataFile):
         return len(self.speciess)
 
     def __init__(self):
-        ex.DataFile.__init__(self)
+        DataFile.__init__(self)
 
         # list of Atom objects
         self.speciess = []
@@ -100,7 +101,7 @@ class FileVald3(ex.DataFile):
 
     def remove_formula(self, formula):
         """Removes given element (any ionization level)."""
-        formula = a99.adjust_atomic_symbol(formula)
+        formula = ft.adjust_atomic_symbol(formula)
         for i in reversed(list(range(len(self)))):
             atom = self.speciess[i]
             if atom.formula == formula:

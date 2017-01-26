@@ -2,12 +2,12 @@ __all__ = ["FileDissoc"]
 
 
 import fortranformat as ff
-from pyfant import adjust_atomic_symbol
 import a99
+from .. import DataFile, adjust_atomic_symbol
 
 
 @a99.froze_it
-class FileDissoc(ex.DataFile):
+class FileDissoc(DataFile):
     """PFANT Stellar Dissociation Equilibrium Information"""
     default_filename = "dissoc.dat"
 
@@ -15,7 +15,7 @@ class FileDissoc(ex.DataFile):
              'nmol', 'mol', 'c', 'mmax', 'nelem', 'natom', 'eps', 'switer']
 
     def __init__(self):
-        ex.DataFile.__init__(self)
+        DataFile.__init__(self)
         # atom-related
         self.nmetal = None
         self.nimax = None

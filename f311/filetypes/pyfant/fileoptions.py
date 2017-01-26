@@ -2,13 +2,13 @@ import re
 import sys
 import imp
 import a99
-
+from .. import FilePy
 
 __all__ = ["FileOptions"]
 
 
 @a99.froze_it
-class FileOptions(a99.FilePy):
+class FileOptions(FilePy):
     """
     `x.py` Command-line Options
 
@@ -23,7 +23,7 @@ class FileOptions(a99.FilePy):
     attrs = []
 
     def __init__(self):
-        a99.FilePy.__init__(self)
+        FilePy.__init__(self)
 
         # innewmarcs, hydro2, pfant, nulbad
         self.logging_level = None
@@ -96,7 +96,7 @@ class FileOptions(a99.FilePy):
 
     def get_names(self):
         """Returns a list with the names of all the options. Names come sorted"""
-        d = dir(ex.DataFile())
+        d = dir(FilePy())
         return [x for x in dir(self) if not x.startswith(('_', 'get_')) and
          x not in d]
 

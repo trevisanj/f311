@@ -4,10 +4,10 @@
 __all__ = ["FileAbXFwhm"]
 
 
-from pyfant import adjust_atomic_symbol
+from .. import FilePy, adjust_atomic_symbol
 import imp
 import numpy as np
-from a99 import FilePy
+import a99
 
 
 _COMMENT0 = """# Specification of differential abundances for each chemical.
@@ -20,6 +20,7 @@ _COMMENT2 = """# Convolutions specification for fwhm parameter:
 # [first value, last value, step]"""
 
 
+@a99.froze_it
 class FileAbXFwhm(FilePy):
     __doc__ = """`x.py` Differential Abundances and FWHMs (Python source)
 

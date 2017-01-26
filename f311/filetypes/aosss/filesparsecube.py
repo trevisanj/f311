@@ -1,12 +1,13 @@
 __all__ = ["FileSparseCube"]
 
 
-from a99 import DataFile, froze_it, overwrite_fits
+import a99
+from .. import DataFile
 from . import SparseCube
 from astropy.io import fits
 
 
-@froze_it
+@a99.froze_it
 class FileSparseCube(DataFile):
     """FITS Sparse Data Cube (storage to take less disk space)"""
     attrs = ['sparsecube']
@@ -25,7 +26,7 @@ class FileSparseCube(DataFile):
 
     def _do_save_as(self, filename):
         hdul = self.sparsecube.to_hdulist()
-        overwrite_fits(hdul, filename)
+        a99.overwrite_fits(hdul, filename)
 
     def init_default(self):
         # Already created OK

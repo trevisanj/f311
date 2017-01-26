@@ -1,7 +1,8 @@
 """Represents SQLite database of molecular constants"""
 
 import a99
-import f311.pyfant as pf
+from .. import DataFile
+import pyfant as pf
 import tabulate
 
 

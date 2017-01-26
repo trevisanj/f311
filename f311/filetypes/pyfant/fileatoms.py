@@ -1,17 +1,18 @@
 __all__ = ["FileAtoms", "Atom", "AtomicLine"]
 
-from ..gear import *
-from ..errors import *
+# from ..gear import *
+# from ..errors import *
 import struct
 import logging
 import sys
 import numpy as np
-from a99 import froze_it, AttrsPart, DataFile, write_lf, str_vector, ordinal_suffix, float_vector
 import tabulate
+import a99
+from .. import DataFile, adjust_atomic_symbol
 
 
-@froze_it
-class Atom(AttrsPart):
+@a99.froze_it
+class Atom(a99.AttrsPart):
     """
     Element with its atomic lines
 
@@ -46,7 +47,7 @@ class Atom(AttrsPart):
         return np.array([x.abondr for x in self.lines])
 
     def __init__(self):
-        AttrsPart.__init__(self)
+        a99.AttrsPart.__init__(self)
         self.lines = []  # list of AtomicLine
         self.elem = None
         self.ioni = None
@@ -70,12 +71,12 @@ class Atom(AttrsPart):
                 del self.lines[i]
 
 
-@froze_it
-class AtomicLine(AttrsPart):
+@a99.froze_it
+class AtomicLine(a99.AttrsPart):
     attrs = ["lambda_", "kiex", "algf", "ch", "gr", "ge", "zinf", "abondr"]
 
     def __init__(self):
-        AttrsPart.__init__(self)
+        a99.AttrsPart.__init__(self)
 
         # all scalars
         self.lambda_ = None
@@ -167,7 +168,8 @@ class FileAtoms(DataFile):
 
         Arguments:
           function -- receives an AtomicLine object as argument.
-           Example: lambda line: line.algf >= -7
+
+        Example: lambda line: line.algf >= -7
         """
         for i in reversed(list(range(len(self)))):
             atom = self.atoms[i]
@@ -211,7 +213,7 @@ class FileAtoms(DataFile):
                     line = AtomicLine()
 
                     # (EE)(I) --whitespace-- (float) --ignored...--
-                    temp = str_vector(h)
+                    temp = a99.str_vector(h)
                     elem, s_ioni = temp[0][:-1], temp[0][-1]
                     line.lambda_ = float(temp[1])
                     elem = adjust_atomic_symbol(elem)
@@ -227,14 +229,14 @@ class FileAtoms(DataFile):
                     r += 1
 
                     [line.kiex, line.algf, line.ch, line.gr, line.ge, line.zinf, line.abondr, finrai] = \
-                        float_vector(h)
+                        a99.float_vector(h)
                     r += 1
                     # last element is end-of-file flag "finrai"
                     if finrai == 1:
                         break
             except Exception as e:
                 raise type(e)(("Error around %d%s row of file '%s'" %
-                               (r+1, ordinal_suffix(r+1), filename))+": "+str(e)).with_traceback(sys.exc_info()[2])
+                               (r+1, a99.ordinal_suffix(r+1), filename))+": "+str(e)).with_traceback(sys.exc_info()[2])
 
     def _do_save_as(self, filename):
         with open(filename, "w") as h:
@@ -243,11 +245,11 @@ class FileAtoms(DataFile):
                 p = len(e)
                 for j, a in enumerate(e.lines):
                     finrai = 1 if i == n-1 and j == p-1 else 0
-                    write_lf(h, "%2s%1d %10.3f" % (e.elem, e.ioni, a.lambda_))
+                    a99.write_lf(h, "%2s%1d %10.3f" % (e.elem, e.ioni, a.lambda_))
                     # Writing floating-point numbers with %.7g format creates a more compact
                     # file. In Fortran it is read with '*' format, so it understands as
                     # long as there is a space between numbers.
-                    write_lf(h, "%.7g %.7g %.7g %.7g %.7g %.7g %.7g %1d" % \
+                    a99.write_lf(h, "%.7g %.7g %.7g %.7g %.7g %.7g %.7g %1d" % \
                              (a.kiex, a.algf, a.ch, a.gr, a.ge, a.zinf, a.abondr, finrai))
                     # old way write_lf(h, "%8.3f %.7g %8.3f %8.3f %8.3f %6.1f %3.1f %1d" % \
                     #     (a.kiex, a.algf, a.ch, a.gr, a.ge, a.zinf, a.abondr, finrai))

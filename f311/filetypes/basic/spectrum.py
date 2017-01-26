@@ -1,10 +1,8 @@
-
 from astropy.io import fits
 from astropy import units as u
 from scipy import interp
 import numpy as np
 import a99
-import f311.physics as ph
 
 __all__ = ["Spectrum", "fnu", "flambda"]
 

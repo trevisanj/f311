@@ -1,11 +1,12 @@
 __all__ = ["FilePar"]
 
 
-from a99 import DataFile, froze_it
+import a99
+from .. import DataFile
 from collections import OrderedDict
 
 
-@froze_it
+@a99.froze_it
 class FilePar(DataFile):
     """WebSim-COMPASS ".par" (parameters) file"""
 

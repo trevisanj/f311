@@ -4,11 +4,12 @@ __all__ = ["FileFullCube"]
 from . import FullCube
 from astropy.io import fits
 import a99
-import f311.explorer as ex
+# import f311.explorer as ex
+from .. import DataFile
 
 
 @a99.froze_it
-class FileFullCube(ex.DataFile):
+class FileFullCube(DataFile):
     """
     FITS Data Cube ("full" opposed to "sparse")
 
@@ -23,7 +24,7 @@ class FileFullCube(ex.DataFile):
     default_filename = "default.fullcube"
 
     def __init__(self):
-        ex.DataFile.__init__(self)
+        DataFile.__init__(self)
         self.wcube = FullCube()
         self.hdulist = None
 

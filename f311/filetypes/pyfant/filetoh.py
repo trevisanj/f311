@@ -1,13 +1,13 @@
 __all__ = ["FileToH"]
 
-from ..errors import *
 import math
 import numpy as np
 import fortranformat as ff
 import a99
+from .. import DataFile
 
 
-class FileToH(ex.DataFile):
+class FileToH(DataFile):
     """
     PFANT Hydrogen Line Profile
 
@@ -22,7 +22,7 @@ class FileToH(ex.DataFile):
     attrs = ["titre", "ntot", "zut1", "zut2", "zut3", "th", "lambdh", "jmax"]
 
     def __init__(self):
-        ex.DataFile.__init__(self)
+        DataFile.__init__(self)
         self.titre = None
 
         # second row
@@ -64,7 +64,7 @@ class FileToH(ex.DataFile):
             self.lambdh = np.array(v)
 
             if not (len(self.lambdh) == self.jmax):
-                raise FileConsistencyError("len(lambdh)=%d should be %d" % (len(self.lambdh), self.jmax))
+                raise RuntimeError("len(lambdh)=%d should be %d" % (len(self.lambdh), self.jmax))
 
             #-- (lambda) x (atmospheric layer) matrix
             v = []  # Will accumulate values for future reshape
@@ -73,7 +73,7 @@ class FileToH(ex.DataFile):
                 s = s.strip('\n')
                 v.extend([float(x) for x in a99.chunk_string(s, FLOAT_SIZE)])
             if len(v)/self.jmax != self.ntot:
-                raise FileConsistencyError("Should have found %d values for th matrix (found %d)" %
+                raise RuntimeError("Should have found %d values for th matrix (found %d)" %
                                            (self.jmax*self.ntot, len(v)))
 
             # Note that matrix is filled horizontally, i.e., first row, then second row, ...

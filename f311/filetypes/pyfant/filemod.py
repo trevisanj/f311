@@ -2,7 +2,7 @@ import struct
 import numpy as np
 import os
 import a99
-import f311.explorer as ex
+from .. import DataFile
 
 
 __all__ = ["FileModBin", "ModRecord", "FileModTxt", "FileOpa", "FileMoo",
@@ -49,7 +49,7 @@ class ModRecord(a99.AttrsPart):
 MOD_REC_SIZE = 1200
 
 
-class FileModBin(ex.DataFile):
+class FileModBin(DataFile):
   """
   PFANT Atmospheric Model (binary file)
 
@@ -66,7 +66,7 @@ class FileModBin(ex.DataFile):
   flag_txt = False
 
   def __init__(self):
-    ex.DataFile.__init__(self)
+    DataFile.__init__(self)
     self.records = None
 
   def __len__(self):
@@ -109,7 +109,7 @@ class FileModBin(ex.DataFile):
     raise RuntimeError("Not applicable")
 
 
-class FileModTxt(ex.DataFile):
+class FileModTxt(DataFile):
     """
     MARCS Atmospheric Model (text file)
 
@@ -126,7 +126,7 @@ class FileModTxt(ex.DataFile):
     attrs = ["record"]
 
     def __init__(self):
-        ex.DataFile.__init__(self)
+        DataFile.__init__(self)
         self.record = None
 
     def __len__(self):
@@ -187,7 +187,7 @@ class FileModTxt(ex.DataFile):
         self.record = r
 
 
-class FileOpa(ex.DataFile):
+class FileOpa(DataFile):
     """MARCS ".opa" (opacity model) file format.
 
     Reference: http://marcs.astro.uu.se
@@ -197,7 +197,7 @@ class FileOpa(ex.DataFile):
     attrs = ["ndp", "swave", "nwav"]
 
     def __init__(self):
-        ex.DataFile.__init__(self)
+        DataFile.__init__(self)
 
         # # Global properties of the opacity model file
         # the 4-byte standard model code 'MRXF'
@@ -366,7 +366,7 @@ MOG_REC_SIZE = MOD_REC_SIZE+OPA_REC_SIZE
 NTOT = 56    # must be 56
 NWAV = 1071  # must be 1071
 
-class FileMoo(ex.DataFile):
+class FileMoo(DataFile):
     """
     Atmospheric model or grid of models (with opacities included)
 
@@ -377,7 +377,7 @@ class FileMoo(ex.DataFile):
     flag_txt = False
 
     def __init__(self):
-        ex.DataFile.__init__(self)
+        DataFile.__init__(self)
         self.records = None
 
     def __len__(self):

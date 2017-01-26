@@ -6,12 +6,9 @@ __all__ = ["vald3_to_atoms"]
 
 import csv
 import f311.pyfant as pf
+import f311.filetypes as ft
 import a99
-
 import sys
-
-
-
 
 
 # Temporary: no partition function for this
@@ -127,7 +124,7 @@ def vald3_to_atoms(file_obj):
             line.abondr = 1
 
             # # Stores in object
-            elem = pf.adjust_atomic_symbol(elem)
+            elem = ft.adjust_atomic_symbol(elem)
             key = elem+s_ioni  # will gb.py elements by this key
 
             if key in edict:

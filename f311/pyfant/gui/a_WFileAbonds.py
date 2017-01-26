@@ -5,9 +5,10 @@ __all__ = ["WFileAbonds"]
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from pyfant import FileAbonds, adjust_atomic_symbol, FileDissoc
+# from pyfant import FileAbonds, adjust_atomic_symbol, FileDissoc
 import a99
 import f311.pyfant as pf
+import f311.filetypes as ft
 
 
 ABONDS_HEADERS = ["Element", "Abundance", "Notes"]
@@ -309,7 +310,7 @@ class WFileAbonds(QWidget):
                 x = self._validate_element(i, x)
             except Exception as E:
                 errors.append(_format_error(i, str(E)))
-            ele.append(adjust_atomic_symbol(x))
+            ele.append(ft.adjust_atomic_symbol(x))
             item.setText(x)
 
             # # Abundance

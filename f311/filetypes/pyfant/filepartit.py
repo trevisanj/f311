@@ -1,14 +1,18 @@
-__all__ = ["FileAbsoru2"]
-
-from a99 import DataFile
+__all__ = ["FilePartit"]
 
 
-class FileAbsoru2(DataFile):
-    """"Absoru2" file
+import a99
+from .. import DataFile
 
-    Reader/writes not implemented (will be implemented when there is the need for so)"""
 
-    default_filename = "absoru2.dat"
+class FilePartit(DataFile):
+    """
+    PFANT Partition Function
+
+    Reader/writer not implemented (will be implemented  when there is the need for so)
+    """
+
+    default_filename = "partit.dat"
 
     def __init__(self):
         DataFile.__init__(self)

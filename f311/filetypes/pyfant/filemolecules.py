@@ -2,25 +2,21 @@ __all__ = ["FileMolecules", "Molecule", "SetOfLines", ]
 
 
 
-from ..errors import *
 import sys
 import numpy as np
-from a99 import froze_it, AttrsPart, write_lf, DataFile, float_vector,  ordinal_suffix, \
-                     multirow_str_vector, str_vector, readline_strip, get_python_logger, \
-                     int_vector
 import a99
-import f311.pyfant as pf
+from .. import DataFile, adjust_atomic_symbol, branch_to_iz, iz_to_branch, description_to_symbols
 import re
 
 
 # TODO convert all sequences to numpy arrays
 
-@froze_it
-class SetOfLines(AttrsPart):
+@a99.froze_it
+class SetOfLines(a99.AttrsPart):
     attrs = ["vl", "v2l", "qqv", "ggv", "bbv", "ddv", "fact", "num_lines"]
 
     def __init__(self, vl=None, v2l=None, qqv=None, ggv=None, bbv=None, ddv=None, fact=None):
-        AttrsPart.__init__(self)
+        a99.AttrsPart.__init__(self)
 
         self.vl = vl
         self.v2l = v2l
@@ -73,12 +69,12 @@ class SetOfLines(AttrsPart):
         self.sj.append(sj)
         self.jj.append(jj)
         if isinstance(branch, str):
-            branch = pf.branch_to_iz(branch)
+            branch = branch_to_iz(branch)
         self.branch.append(branch)
 
 
-@froze_it
-class Molecule(AttrsPart):
+@a99.froze_it
+class Molecule(a99.AttrsPart):
     attrs = ["description", "symbols", "fe", "do", "mm", "am", "bm", "ua", "ub",
              "te", "cro", "s", "nv", "num_lines"]
 
@@ -112,7 +108,7 @@ class Molecule(AttrsPart):
         return [x.qqv for x in self.sol]
 
     def __init__(self):
-        AttrsPart.__init__(self)
+        a99.AttrsPart.__init__(self)
 
         # # "titulo" part
         # (20161206) titulo is now used semantically: it has 3 fields separated by a "#":
@@ -160,7 +156,7 @@ class Molecule(AttrsPart):
 
 
 # TODO Save information in molecule header
-@froze_it
+@a99.froze_it
 class FileMolecules(DataFile):
     """
     PFANT Molecular Lines
@@ -275,10 +271,10 @@ class FileMolecules(DataFile):
             try:
                 number = int(h.readline())  # not used (see below)
                 r += 1
-                self.titm = readline_strip(h)
+                self.titm = a99.readline_strip(h)
                 r += 1
 
-                nv = int_vector(h)  # number of transitions=sets-of-lines for each molecule
+                nv = a99.int_vector(h)  # number of transitions=sets-of-lines for each molecule
                 r += 1
                 # Uses length of nv vector to know how many molecules to read (ignores "number")
                 num_mol = len(nv)
@@ -289,16 +285,16 @@ class FileMolecules(DataFile):
                     m = Molecule()
                     self.molecules.append(m)
 
-                    m.titulo = readline_strip(h)
-                    get_python_logger().debug('Reading %d%s molecule \'%s\'' % (im+1, ordinal_suffix(im+1), m.titulo))
+                    m.titulo = a99.readline_strip(h)
+                    a99.get_python_logger().debug('Reading %d%s molecule \'%s\'' % (im+1, a99.ordinal_suffix(im+1), m.titulo))
 
                     parts = [s.strip() for s in m.titulo.split("#")]
                     m.description = parts[0]
                     if len(parts) > 1:
-                        m.symbols = [pf.adjust_atomic_symbol(s) for s in
+                        m.symbols = [adjust_atomic_symbol(s) for s in
                                      [s.strip() for s in parts[1].split(" ") if len(s.strip()) > 0]]
                     else:
-                        temp = pf.description_to_symbols(parts[0])
+                        temp = description_to_symbols(parts[0])
                         m.symbols = temp or []
                     transitions = []
                     if len(parts) > 2:
@@ -306,7 +302,7 @@ class FileMolecules(DataFile):
                         transitions = list(zip(numbers[0::2], numbers[1::2]))
 
                     r += 1
-                    m.fe, m.do, m.mm, m.am, m.bm, m.ua, m.ub, m.te, m.cro = float_vector(h)
+                    m.fe, m.do, m.mm, m.am, m.bm, m.ua, m.ub, m.te, m.cro = a99.float_vector(h)
                     r += 1
 
                     h.readline()  # Skips line which is blank in file
@@ -318,25 +314,25 @@ class FileMolecules(DataFile):
                     r += 1
 
                     # These vectors must have nvi elements
-                    s_v, r_inc = multirow_str_vector(h, nvi, r)
+                    s_v, r_inc = a99.multirow_str_vector(h, nvi, r)
                     r += r_inc
                     qqv = list(map(float, s_v))
-                    s_v, r_inc = multirow_str_vector(h, nvi, r)
+                    s_v, r_inc = a99.multirow_str_vector(h, nvi, r)
                     r += r_inc
                     ggv = list(map(float, s_v))
-                    s_v, r_inc = multirow_str_vector(h, nvi, r)
+                    s_v, r_inc = a99.multirow_str_vector(h, nvi, r)
                     r += r_inc
                     bbv = list(map(float, s_v))
-                    s_v, r_inc = multirow_str_vector(h, nvi, r)
+                    s_v, r_inc = a99.multirow_str_vector(h, nvi, r)
                     r += r_inc
                     ddv = list(map(float, s_v))
-                    s_v, r_inc = multirow_str_vector(h, nvi, r)
+                    s_v, r_inc = a99.multirow_str_vector(h, nvi, r)
                     r += r_inc
                     fact = list(map(float, s_v))
                     for name in ["qqv", "ggv", "bbv", "ddv", "fact"]:
                         v = eval(name)
                         if len(v) != nvi:
-                            raise FileConsistencyError(
+                            raise RuntimeError(
                                 'Attribute %s of molecule #%d must be a vector with %d elements (has %d)' %
                                 (name, im+1, nvi, len(v)))
 
@@ -360,7 +356,7 @@ class FileMolecules(DataFile):
                         # which was causing my reading to crash.
                         # Therefore I read the line and discard beyond the 5th column before
                         # converting to float
-                        temp = str_vector(h)
+                        temp = a99.str_vector(h)
                         lmbdam = float(temp[0])
                         sj = float(temp[1])
                         jj = float(temp[2])
@@ -386,7 +382,7 @@ class FileMolecules(DataFile):
                     o.jj = np.array(o.jj)
                     o.branch = np.array(o.branch)
 
-                    get_python_logger().info("Loading '{}': {}".format(filename, a99.format_progress(im+1, num_mol)))
+                    a99.get_python_logger().info("Loading '{}': {}".format(filename, a99.format_progress(im+1, num_mol)))
 
                     if im+1 == num_mol:
                         break
@@ -394,7 +390,7 @@ class FileMolecules(DataFile):
                     # im += 1
             except Exception as e:
                 raise type(e)(("Error around %d%s row of file '%s'" %
-                    (r+1, ordinal_suffix(r+1), filename))+": "+str(e)).with_traceback(sys.exc_info()[2])
+                    (r+1, a99.a99.ordinal_suffix(r+1), filename))+": "+str(e)).with_traceback(sys.exc_info()[2])
 
     def cut(self, lzero, lfin):
         """Reduces the number of lines to only the ones whose lmbdam is inside [lzero, lfin]"""
@@ -407,9 +403,9 @@ class FileMolecules(DataFile):
 
     def _do_save_as(self, filename):
         with open(filename, "w") as h:
-            write_lf(h, str(len(self.molecules)))
-            write_lf(h, self.titm)
-            write_lf(h, " ".join([str(x.nv) for x in self.molecules]))
+            a99.write_lf(h, str(len(self.molecules)))
+            a99.write_lf(h, self.titm)
+            a99.write_lf(h, " ".join([str(x.nv) for x in self.molecules]))
             for m in self.molecules:
 
                 # # Assembles "titulo"
@@ -426,21 +422,21 @@ class FileMolecules(DataFile):
 
                 # - mled change, incorporate shit
 
-                write_lf(h, new_titulo)
-                write_lf(h, (" ".join(["%.10g"]*9)) % (m.fe, m.do, m.mm, m.am,
+                a99.write_lf(h, new_titulo)
+                a99.write_lf(h, (" ".join(["%.10g"]*9)) % (m.fe, m.do, m.mm, m.am,
                     m.bm, m.ua, m.ub, m.te, m.cro))
-                write_lf(h, "")
-                write_lf(h, str(m.s))
-                write_lf(h, " ".join(["{:g}".format(x.qqv) for x in m.sol]))
-                write_lf(h, " ".join(["{:.2f}".format(x.ggv) for x in m.sol]))
-                write_lf(h, " ".join(["{:.5f}".format(x.bbv) for x in m.sol]))
-                write_lf(h, " ".join(["{:.2f}".format(x.ddv) for x in m.sol]))
-                write_lf(h, " ".join(["{:g}".format(x.fact) for x in m.sol]))
+                a99.write_lf(h, "")
+                a99.write_lf(h, str(m.s))
+                a99.write_lf(h, " ".join(["{:g}".format(x.qqv) for x in m.sol]))
+                a99.write_lf(h, " ".join(["{:.2f}".format(x.ggv) for x in m.sol]))
+                a99.write_lf(h, " ".join(["{:.5f}".format(x.bbv) for x in m.sol]))
+                a99.write_lf(h, " ".join(["{:.2f}".format(x.ddv) for x in m.sol]))
+                a99.write_lf(h, " ".join(["{:g}".format(x.fact) for x in m.sol]))
 
                 num_sol = len(m.sol)
                 for i, s in enumerate(m.sol):
                     num_lines = len(s)  # number of lines for current set-of-lines
                     for j in range(num_lines):
                         numlin = 0 if j < num_lines-1 else 9 if i == num_sol-1 else 1
-                        write_lf(h, "%.10g %.10g %.10g %s %d" % (s.lmbdam[j], s.sj[j], s.jj[j],
+                        a99.write_lf(h, "%.10g %.10g %.10g %s %d" % (s.lmbdam[j], s.sj[j], s.jj[j],
                                                                  s.branch[j], numlin))

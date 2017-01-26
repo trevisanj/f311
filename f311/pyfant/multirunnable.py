@@ -17,7 +17,7 @@ _multi_id_maker = pf.IdMaker()
 _multi_id_maker.session_prefix_singular = pf.MULTISESSION_PREFIX
 
 
-@froze_it
+@a99.froze_it
 class MultiRunnableStatus(object):
     def __init__(self, runnable):
         assert isinstance(runnable, MultiRunnable)
@@ -41,7 +41,7 @@ class MultiRunnableStatus(object):
         return "?"
 
 
-@froze_it
+@a99.froze_it
 class MultiRunnable(pf.Runnable):
     """
     Differential abundances X FWHM's runnable.

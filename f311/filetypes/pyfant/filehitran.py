@@ -14,7 +14,7 @@
 #
 # __all__ = ["FileHitran", "Atom", "HitranLine"]
 #
-# import f311.pyfant as pf
+# import pyfant as pf
 # import hapi
 # from ..misc import *
 # from ..errors import *

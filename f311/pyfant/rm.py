@@ -1,7 +1,8 @@
 """ThreadManager2 class."""
 __all__ = ["RunnableManager"]
 
-from a99 import random_name, seconds2str, get_python_logger, MyLock, froze_it
+#from a99 import random_name, seconds2str, get_python_logger, MyLock, froze_it
+import a99
 import threading
 from PyQt5.QtCore import QObject, pyqtSignal
 import multiprocessing
@@ -21,7 +22,7 @@ class RunnableManagerError(Exception):
     pass
 
 
-@froze_it
+@a99.froze_it
 class RunnableManager(QObject, threading.Thread):
     """
     Thread takes care of other threads.
@@ -123,7 +124,7 @@ class RunnableManager(QObject, threading.Thread):
         if self.__max_simultaneous is None: self.__max_simultaneous = multiprocessing.cpu_count()
         QObject.__init__(self)
         threading.Thread.__init__(self, *args, **kwargs)
-        self.__logger = get_python_logger()
+        self.__logger = a99.get_python_logger()
         # counts finished
         self.__num_finished = 0
         # counts failed
@@ -220,12 +221,12 @@ class RunnableManager(QObject, threading.Thread):
                 l.append("***failed: %d" % (self.__num_failed))
             if self.__time_started:
                 ella, tot, rema = self.__unlocked_get_times()
-                l.append("***time ellapsed: %s" % seconds2str(ella))
+                l.append("***time ellapsed: %s" % a99.seconds2str(ella))
                 if self.__num_finished > 0:
                     tpr = self.__time_per_runnable
-                    l.append("***time per runnable: %s" % seconds2str(tpr))
-                    l.append("***time total estimate: %s" % seconds2str(tot))
-                    l.append("***time remaining estimate: %s" % seconds2str(rema))
+                    l.append("***time per runnable: %s" % a99.seconds2str(tpr))
+                    l.append("***time total estimate: %s" % a99.seconds2str(tot))
+                    l.append("***time remaining estimate: %s" % a99.seconds2str(rema))
         return l
 
     def __str__(self):
@@ -394,7 +395,7 @@ class RunnableManager(QObject, threading.Thread):
         return ella, tot, rema
 
 
-@froze_it
+@a99.froze_it
 class _Runner(threading.Thread):
     """
     Thread that runs object of class Runnable.
@@ -405,7 +406,7 @@ class _Runner(threading.Thread):
         assert isinstance(manager, RunnableManager)
         self.runnable = None
         self.manager = manager
-        self.name = self.__class__.__name__+random_name()
+        self.name = self.__class__.__name__+a99.random_name()
         self.flag_exit = False
         self.flag_idle = True
         self.lock = Lock()
@@ -429,7 +430,7 @@ class _Runner(threading.Thread):
             self.runnable.kill()
 
     def run(self):
-        self.__logger = get_python_logger()
+        self.__logger = a99.get_python_logger()
         # this was leaving file open after finished add_file_handler(self.__logger, "python.log")
         self.__logger.debug("\\o/ %s is alive \\o/" % (self.name))
         misses = 0
