@@ -50,7 +50,7 @@ def vald3_to_atoms(file_obj):
 # 14|'KP                Li 1 - K 5 Bell    2 KP        2 KP        2 KP        2 KP        2 KP        2 KP        2 KP        2 KP        2 KP      Ar+           '
 
     reader = csv.reader(file_obj)
-    ret = pf.FileAtoms()
+    ret = ft.FileAtoms()
     edict = {}  # links atomic symbols with Atom objects created (key is atomic symbol)
     r = 0
     num_skip_ioni, num_skip_mol = 0, 0

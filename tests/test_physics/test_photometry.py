@@ -104,7 +104,7 @@ def flux_to_mag(flux, bp, system="stdflux", zero_point=0.):
 
     Returns: float
     """
-    if isinstance(flux, a99.Spectrum):
+    if isinstance(flux, ft.Spectrum):
         if flux.yunit != a99.fnu:
             raise ValueError("Spectrum y-unit must be '{}', not '{}'".format(a99.fnu, flux.yunit))
         flux = flux.y
@@ -201,7 +201,7 @@ class Bandpass(object):
     def __rmul__(self, other):
         """Right multiplication accepts Spectrum or tuple:(wave, flux)"""
 
-        if isinstance(other, a99.Spectrum):
+        if isinstance(other, ft.Spectrum):
             out = copy.deepcopy(other)
             x, y = out.x, out.y
         elif isinstance(other, tuple) and len(other) == 2 and isinstance(other[0], np.ndarray) and \

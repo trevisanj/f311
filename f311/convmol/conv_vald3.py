@@ -4,6 +4,8 @@ VALD3-specific conversion
 
 
 import f311.pyfant as pf
+import f311.filetypes as ft
+import f311.physics as ph
 import a99
 from .calc_qgbd import calc_qgbd_tio_like
 from .convlog import *
@@ -29,7 +31,7 @@ def vald3_to_sols(mol_row, state_row, file_vald3, qgbd_calculator):
         qgbd_calculator: callable that can calculate "qv", "gv", "bv", "dv",
                          e.g., calc_qbdg_tio_like()
 
-    Returns: (a list of pyfant.SetOfLines objects, a MolConversionLog object)
+    Returns: (a list of ftpyfant.SetOfLines objects, a MolConversionLog object)
     """
 
     def append_error(msg):
@@ -44,7 +46,7 @@ def vald3_to_sols(mol_row, state_row, file_vald3, qgbd_calculator):
     # C     HL: Honl-London factor
     # C     FR: oscillator strength
 
-    if not isinstance(file_vald3, pf.FileVald3):
+    if not isinstance(file_vald3, ft.FileVald3):
         raise TypeError("Invalid type for argument 'file_vald3': {}".format(type(file_vald3)))
     if len(file_vald3) > 1:
         raise ValueError("Argument 'file_vald3' must have only one species, but it has {}".format(len(file_vald3)))
@@ -59,7 +61,7 @@ def vald3_to_sols(mol_row, state_row, file_vald3, qgbd_calculator):
     log = MolConversionLog(n)
 
     for i, line in enumerate(lines):
-        assert isinstance(line, pf.Vald3Line)
+        assert isinstance(line, ft.Vald3Line)
         try:
             wl = line.lambda_
             # Br, J2l = f_group(data["local_lower_quanta"][i])
@@ -89,10 +91,10 @@ def vald3_to_sols(mol_row, state_row, file_vald3, qgbd_calculator):
             ggv = qgbd["gv"]
             bbv = qgbd["bv"]
             ddv = qgbd["dv"]
-            sols[sol_key] = pf.SetOfLines(line.vl, line.v2l, qqv, ggv, bbv, ddv, 1.)
+            sols[sol_key] = ft.SetOfLines(line.vl, line.v2l, qqv, ggv, bbv, ddv, 1.)
 
         sol = sols[sol_key]
         # TODO assuming singlet!!!
-        sol.append_line(wl, gf_pfant, J2l_pfant, a99.singlet.quanta_to_branch(line.Jl, line.J2l))
+        sol.append_line(wl, gf_pfant, J2l_pfant, ph.singlet.quanta_to_branch(line.Jl, line.J2l))
 
     return (list(sols.values()), log)

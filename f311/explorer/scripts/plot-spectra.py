@@ -36,6 +36,7 @@ import traceback
 import logging
 import glob
 import os.path
+import f311.explorer as ex
 
 a99.logging_level = logging.INFO
 a99.flag_log_file = True
@@ -90,7 +91,7 @@ if __name__ == "__main__":
     flag_ok = False
     for x in ff:
         print("Reading file '{0!s}'...".format(x))
-        f = ax.load_with_classes(x, ex.classes_sp())
+        f = ex.load_with_classes(x, ex.classes_sp())
         if f is None:
             a99.print_error("... type not recognized, sorry")
         else:

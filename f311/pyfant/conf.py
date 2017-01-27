@@ -255,7 +255,7 @@ class Conf(object):
         self.file_molecules = None
 
         # # Command-line options
-        self.__opt = pf.FileOptions()
+        self.__opt = ft.FileOptions()
 
         # # Read-only properties
         self.__popen_text_dest = None
@@ -313,7 +313,7 @@ class Conf(object):
             opt = self.__opt
         if self.file_main is not None:
             return self.file_main
-        file_ = pf.FileMain()
+        file_ = ft.FileMain()
         if opt.fn_main is None:
             file_.load()  # will try to load default file
         else:
@@ -385,7 +385,7 @@ class Conf(object):
 
     def get_fn_modeles(self):
         """Returns name of atmospheric model file."""
-        return pf.FileModBin.default_filename if self.__opt.fn_modeles is None \
+        return ft.FileModBin.default_filename if self.__opt.fn_modeles is None \
          else self.__opt.fn_modeles
 
     def get_args(self):
@@ -441,10 +441,10 @@ class Conf(object):
             # # innewmarcs -> (hydro2, pfant)
             opt.fn_modeles = sid.join_with_session_dir(
              os.path.basename(opt.fn_modeles) if opt.fn_modeles is not None
-             else pf.FileModBin.default_filename)
+             else ft.FileModBin.default_filename)
             opt.fn_opa = sid.join_with_session_dir(
              os.path.basename(opt.fn_opa) if opt.fn_opa is not None
-             else pf.FileOpa.default_filename)
+             else ft.FileOpa.default_filename)
 
         if FOR_HYDRO2 in sequence:
             # # hydro2 -> pfant
@@ -453,9 +453,9 @@ class Conf(object):
 
             if not self.file_hmap:
                 # if self doesn't have a Hmap object, will load from file
-                o = self.file_hmap = pf.FileHmap()
+                o = self.file_hmap = ft.FileHmap()
                 fn = opt.fn_hmap if opt.fn_hmap is not None else \
-                 pf.FileHmap.default_filename
+                 ft.FileHmap.default_filename
                 o.load(fn)
             else:
                 o = self.file_hmap

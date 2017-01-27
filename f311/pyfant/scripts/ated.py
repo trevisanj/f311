@@ -22,10 +22,10 @@ if __name__ == "__main__":
     formatter_class=a99.SmartFormatter
     )
     parser.add_argument('fn', type=str, help='atoms file name',
-                        default=pf.FileAtoms.default_filename, nargs='?')
+                        default=ft.FileAtoms.default_filename, nargs='?')
     args = parser.parse_args()
 
-    m = pf.FileAtoms()
+    m = ft.FileAtoms()
     m.load(args.fn)
     app = a99.get_QApplication([])
     form = pf.XFileAtoms()

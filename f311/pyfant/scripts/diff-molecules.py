@@ -28,10 +28,10 @@ if __name__ == "__main__":
     fn1 = args.fn1[0]
     fn2 = args.fn2[0]
 
-    fa = pf.FileMolecules()
+    fa = ft.FileMolecules()
     fa.load(fn1)
 
-    fb = pf.FileMolecules()
+    fb = ft.FileMolecules()
     fb.load(fn2)
 
 

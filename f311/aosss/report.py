@@ -4,12 +4,13 @@ __all__ = ["create_simulation_report", "create_index"]
 import os
 from astropy.io import fits
 from matplotlib import pyplot as plt
-from .misc import *
+from .util import *
 import numpy as np
 import traceback
 import glob
 import a99
-import aosss as ao
+from .. import aosss as ao
+import f311.filetypes as ft
 
 
 def create_index(dir_="."):
@@ -131,7 +132,7 @@ def create_simulation_report(simid, dir_="."):
         if  flag_par:
             flag_par_ok = True
             try:
-                filepar = ao.FilePar()
+                filepar = ft.FilePar()
                 filepar.load(fn_par)
             except Exception as E:
                 flag_par_ok = False
@@ -178,7 +179,7 @@ def create_simulation_report(simid, dir_="."):
             try:
                 fig = None
                 FIGURE_WIDTH = 570
-                if isinstance(item.fileobj, ao.FileFullCube) and (not "cube_seeing" in item.filename):
+                if isinstance(item.fileobj, ft.FileFullCube) and (not "cube_seeing" in item.filename):
                     # note: skips "ifu_seeing" because it takes too long to renderize
                     fig = plt.figure()
                     ax = fig.gca(projection='3d')
@@ -187,13 +188,13 @@ def create_simulation_report(simid, dir_="."):
                     ao.draw_cube_3d(ax, sparsecube)
                     a99.set_figure_size(fig, FIGURE_WIDTH, 480. / 640 * FIGURE_WIDTH)
                     fig.tight_layout()
-                elif isinstance(item.fileobj, a99.FileSpectrum):
+                elif isinstance(item.fileobj, ft.FileSpectrum):
                     if item.keyword == "spintg":
                         sp_ref = item.fileobj.spectrum
                     fig = a99.draw_spectra([item.fileobj.spectrum])
                     a99.set_figure_size(fig, FIGURE_WIDTH, 270. / 640 * FIGURE_WIDTH)
                     fig.tight_layout()
-                elif isinstance(item.fileobj, a99.FileFits):
+                elif isinstance(item.fileobj, ft.FileFits):
                     if item.keyword == "mask_fiber_in_aperture":
                         fig = _draw_mask(item.fileobj)
                     elif item.keyword == "cube_seeing":

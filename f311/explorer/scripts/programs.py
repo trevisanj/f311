@@ -8,19 +8,20 @@ import a99
 import argparse
 import os
 from collections import OrderedDict
+import f311.explorer as ex
 
 def _get_programs_list(format, pkgname_only=None):
 
     allinfo = OrderedDict()
     pkgnames = []
-    for pkgname, pkg in a99.collaborators().items():
+    for pkgname, pkg in ex.collaborators().items():
         if pkgname_only is not None and pkgname != pkgname_only:
                 continue
         allinfo["Package '{}'".format(pkgname)] = a99.get_exe_info(a99.get_scripts_path(module=pkg))
         pkgnames.append(pkgname)
 
     # This can be called (without much shame) a "gambiarra"
-    if "pyfant" in pkgnames:
+    if "ftpyfant" in pkgnames:
         import f311.pyfant as pf
         allinfo["PFANT Fortran binaries"] = pf.get_fortrans()
 

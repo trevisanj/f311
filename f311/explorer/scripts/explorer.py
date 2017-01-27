@@ -3,6 +3,7 @@
 """AstroAPI Explorer --  list, visualize, and edit data files (_à la_ File Manager)"""
 
 import a99
+import f311.explorer as ex
 import sys
 import argparse
 import logging
@@ -20,7 +21,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     app = a99.get_QApplication([])
-    form = a99.XExplorer(None, args.dir)
+    form = ex.XExplorer(None, args.dir)
     form.show()
     a99.place_center(form)
     sys.exit(app.exec_())

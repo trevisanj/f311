@@ -1,11 +1,10 @@
 __all__ = ["GB_UseNumPyFunc", "GB_SNR"]
 
 
-from .base import *
+from .basic import *
 from . import sb
 import a99
-import aosss as ao
-
+from ... import explorer as ex
 
 class GB_UseNumPyFunc(GroupBlock):
     """Output contains single spectrum whose y-vector is calculated using a numpy function
@@ -19,7 +18,7 @@ class GB_UseNumPyFunc(GroupBlock):
 
     def _do_use(self, inp):
         output = self._new_output()
-        sp = a99.Spectrum()
+        sp = ft.Spectrum()
         sp.wavelength = np.copy(inp.wavelength)
         sp.flux = self.func(inp.matrix(), 0)
         if len(sp.flux) != len(sp.wavelength):
@@ -30,6 +29,9 @@ class GB_UseNumPyFunc(GroupBlock):
 
 class GB_SNR(GroupBlock):
     """Calculates the GB_SNR(lambda) = Power_signal(lambda)/Power_noise(lambda)
+
+    **Warning** Don't use this block, empirical SNR is usually calculated **per spectrum**, as
+    reinforced by EC and BLB (using IRAF procedure, which is Amplitude_RMS/std
 
     Arguments:
         continua -- SpectrumList containing the continua that will be used as the "signal" level.
@@ -47,14 +49,14 @@ class GB_SNR(GroupBlock):
 
     def _do_use(self, inp):
         if self.continua is None:
-            continua = ao.SLB_UseSpectrumBlock(sb.SB_Rubberband(True)).use(inp)
+            continua = ex.SLB_UseSpectrumBlock(sb.SB_Rubberband(True)).use(inp)
         else:
             continua = self.continua
-        cont_2 = ao.UseSpectrumBlock(sb.SB_ElementWise(np.square)).use(continua)  # continua squared
+        cont_2 = ex.SLB_UseSpectrumBlock(sb.SB_ElementWise(np.square)).use(continua)  # continua squared
         mean_cont_2 = GB_UseNumPyFunc(np.mean).use(cont_2)
         var_spectra = GB_UseNumPyFunc(np.var).use(inp)
         output = self._new_output()
-        sp = a99.Spectrum()
+        sp = ft.Spectrum()
         sp.wavelength = np.copy(inp.wavelength)
         sp.flux = mean_cont_2.spectra[0].flux/var_spectra.spectra[0].flux
         output.add_spectrum(sp)

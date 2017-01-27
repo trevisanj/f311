@@ -1,4 +1,4 @@
-"""OH Franck-Condom Factors as in B. Castilho's work"""
+"""OH Franck-Condom Factors as in B. Castilho's work (thesis)"""
 
 __all__ = ["get_fcf_oh"]
 

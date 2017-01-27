@@ -11,6 +11,8 @@ import argparse
 import logging
 import sys
 import a99
+import f311.filetypes as ft
+import f311.explorer as ex
 
 a99.logging_level = logging.INFO
 
@@ -28,7 +30,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    sp = a99.load_spectrum(args.fn_input[0])
+    sp = ex.load_spectrum(args.fn_input[0])
     if not sp:
         print("File '{0!s}' not recognized as a spectrum file.".format(args.fn_input[0]))
         sys.exit()
@@ -39,7 +41,7 @@ if __name__ == "__main__":
     print("Original interval: [{0:g}, {1:g}]".format(m, M))
     print("New interval: [{0:g}, {1:g}]".format(args.llzero[0], args.llfin[0]))
 
-    f = a99.FileSpectrumXY()
+    f = ft.FileSpectrumXY()
     f.spectrum = a99.cut_spectrum(sp, args.llzero[0], args.llfin[0])
     f.save_as(args.fn_output[0])
     print("Successfully created file '{0!s}'".format(args.fn_output[0]))

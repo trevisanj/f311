@@ -1,7 +1,7 @@
 __all__ = ["ToScalar_SNR", "ToScalar_Magnitude", "ToScalar_UseNumPyFunc"]
 
 
-from .base import ToScalar
+from .basic import ToScalar
 import numpy as np
 
 

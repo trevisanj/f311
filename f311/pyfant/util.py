@@ -132,7 +132,7 @@ def setup_inputs(dest_dir='.', star='sun-asplund-2009', common='common', h=True,
 
 
 def copy_star(src_dir):
-    star_classes = [pf.FileMain, pf.FileDissoc, pf.FileAbonds]
+    star_classes = [ft.FileMain, ft.FileDissoc, ft.FileAbonds]
 
     print(("Will look inside directory %s" % src_dir))
 
@@ -146,7 +146,7 @@ def copy_star(src_dir):
 
 
 def link_to_data(src_dir):
-    star_classes = [pf.FileMain, pf.FileDissoc, pf.FileAbonds]
+    star_classes = [ft.FileMain, ft.FileDissoc, ft.FileAbonds]
 
     print(("Will look inside directory %s" % src_dir))
 
@@ -178,12 +178,12 @@ def create_or_replace_or_skip_links(ff, dest_dir="."):
             a99.print_skipped("file exists in local directory")
             flag_skip = True
         else:
-            obj = ex.load_with_classes(f, [pf.FileMain, pf.FileAbonds, pf.FileDissoc, pf.FileToH])
+            obj = ex.load_with_classes(f, [ft.FileMain, ft.FileAbonds, ft.FileDissoc, ft.FileToH])
             if obj is not None:
                 a99.print_skipped("detected type %s" % obj.__class__.__name__)
                 flag_skip = True
             else:
-                obj = ex.load_with_classes(f, [pf.FileModBin])
+                obj = ex.load_with_classes(f, [ft.FileModBin])
                 if obj is not None:
                     if len(obj) == 1:
                         a99.print_skipped("%s of only one record" % obj.__class__.__name__)
@@ -219,7 +219,7 @@ def copy_or_skip_files(ff, dest_dir="."):
             a99.print_skipped("file exists in local directory")
             flag_skip = True
         else:
-            obj = ex.load_with_classes(f, [pf.FileMain, pf.FileAbonds, pf.FileDissoc])
+            obj = ex.load_with_classes(f, [ft.FileMain, ft.FileAbonds, ft.FileDissoc])
             if obj is not None:
                 pass
             else:

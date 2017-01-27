@@ -21,7 +21,7 @@ import argparse
 import os
 import glob
 import sys
-import aosss as ao
+import f311.aosss as ao
 import logging
 import a99
 

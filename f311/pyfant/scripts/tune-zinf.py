@@ -103,7 +103,7 @@ if __name__ == "__main__":
     logger.info("Using inflate = %g" % args.inflate)
     logger.info("Using ge_current = %s" % args.ge_current)
 
-    file_atoms = pf.FileAtoms()
+    file_atoms = ft.FileAtoms()
     file_atoms.load(args.fn_input[0])
 
     logger.info("Number of lines in file '%s': %d" % \
@@ -128,7 +128,7 @@ if __name__ == "__main__":
     EXCEPTIONS = ["FE", "HE"]
     logger.info("Preparing abundances (Adding %g to all abundances, " % K_ADD)
     logger.info("except those of %s)..." % str(EXCEPTIONS))
-    fa = pf.FileAbonds()
+    fa = ft.FileAbonds()
     fa.load("abonds.dat")
     cnt = 0
     for i in range(len(fa)):
@@ -162,7 +162,7 @@ if __name__ == "__main__":
         for line in atom.lines:
             a = copy.copy(atom)  # shallow copy
             a.lines = [line]
-            f = pf.FileAtoms()
+            f = ft.FileAtoms()
             f.atoms = [a]
             combo = pf.Combo([pf.FOR_PFANT])
             # Fortran messages will not be displayed in terminal

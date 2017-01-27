@@ -28,7 +28,7 @@ def get_data_path(*args, module=__def_module):
 
 # TODO this may really not be the case: get_scripts_path
 def get_scripts_path(*args, module=__def_module):
-    """Returns path to pyfant scripts. Arguments are added to the end os os.path.join()"""
+    """Returns path to ftpyfant scripts. Arguments are added to the end os os.path.join()"""
     return get_path("scripts", *args, module=module)
 
 

@@ -12,18 +12,15 @@ Two modes are available:
 
 import sys
 import argparse
-from aosss import *
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 import matplotlib as mpl
 import numpy as np
 import numbers
-import os.path
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import logging
-import aosss
+from f311 import aosss as ao
+from f311 import physics as ph
 import a99
 
 
@@ -205,7 +202,7 @@ cc = [MyCoverage("HMM", [(4000, 18000)]),
 
 ###############################################################################
 def draw(fig, sp_sky, redshift=0):
-    l0, lf = 3000, a99.get_ubv_bandpass("K").lf
+    l0, lf = 3000, ph.get_ubv_bandpass("K").lf
     x =  np.logspace(np.log10(l0), np.log10(lf), 1000, base=10.)
 
     ax = fig.gca()
@@ -237,7 +234,7 @@ def draw(fig, sp_sky, redshift=0):
 
     # # bands
     #   =====
-    for band_name, bandpass in a99.get_ubv_bandpasses_dict().items():
+    for band_name, bandpass in ph.get_ubv_bandpasses_dict().items():
         y = bandpass.ufunc()(x)*.75
         plt.plot(x, y, label=band_name, c=COLOR_BAND)
         idx_max = np.argmax(y)
@@ -390,7 +387,7 @@ if __name__ == "__main__":
     # for fn in telluric_filenames:
     #     path_ = get_aosss_data_path(fn)
     #     try:
-    #         fileobj = a99.FileSpectrumFits()
+    #         fileobj = ft.FileSpectrumFits()
     #         fileobj.load(path_)
     #         telluric_spectra.append(fileobj.spectrum)
     #     except:

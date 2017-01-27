@@ -1,5 +1,5 @@
 import a99
-from .visbase import Vis
+from .basic import Vis
 
 
 __all__ = ["VisPrint"]

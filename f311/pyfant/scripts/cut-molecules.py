@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    file_molecules = pf.FileMolecules()
+    file_molecules = ft.FileMolecules()
     file_molecules.load(args.fn_input[0])
 
     lmbdam = file_molecules.lmbdam

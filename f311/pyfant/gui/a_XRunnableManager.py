@@ -8,8 +8,10 @@ from ..rm import RunnableManager
 from threading import Lock
 import time
 import matplotlib.pyplot as plt
-import f311.pyfant as pf
 import a99
+import f311.explorer as ex
+import f311.filetypes as ft
+from ... import pyfant as pf
 
 
 COLORS = [QColor(255, 0, 0),
@@ -260,7 +262,7 @@ class XRunnableManager(QMainWindow):
         try:
             k = a99.ErrorCollector()
             k.collect_errors(".")
-            w = a99.XHTML(self, k.get_html(), "Errors in '.' and subdirectories")
+            w = ex.XHTML(self, k.get_html(), "Errors in '.' and subdirectories")
             w.show()
         except Exception as e:
             MSG = "Could not collect errors"
@@ -379,7 +381,7 @@ class XRunnableManager(QMainWindow):
         runnable = self.runnables[self.tableWidget.currentRow()]
         dir_ = runnable.sid.dir
         if not self.__explorer_form:
-            f = self.__explorer_form = a99.XExplorer(self, dir_)
+            f = self.__explorer_form = ex.XExplorer(self, dir_)
             f.flag_close_mpl_plots_on_close = False
         else:
             self.__explorer_form.set_dir(dir_)

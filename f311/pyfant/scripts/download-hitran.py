@@ -49,7 +49,7 @@ if __name__ == "__main__":
     # default='()', nargs='?')
     args = parser.parse_args()
 
-    db = pf.FileHitranDB()
+    db = ft.FileHitranDB()
     db.init_default()
     if args.M == _DEF_M:
         print()

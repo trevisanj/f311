@@ -1,6 +1,6 @@
-import a99
-from .visbase import Vis
-
+from ... import filetypes as ft
+from .basic import Vis
+from ... import explorer as ex
 
 __all__ = ["VisPrint", "VisSpectrum"]
 
@@ -18,10 +18,10 @@ class VisPrint(Vis):
 class VisSpectrum(Vis):
     """Plots single spectrum."""
 
-    input_classes = (a99.FileSpectrum,)
+    input_classes = (ft.FileSpectrum,)
     action = "Plot spectrum"
 
     def _do_use(self, m):
         s = m.spectrum
-        a99.plot_spectra([s])
+        ex.plot_spectra([s])
 

@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
         for filename in norm_filenames:
             a99.get_python_logger().info("    File '{}'".format(filename))
-            f = a99.FileSpectrumPfant()
+            f = ft.FileSpectrumPfant()
 
             # Note: takes first .norm file that finds
             f.load(filename)

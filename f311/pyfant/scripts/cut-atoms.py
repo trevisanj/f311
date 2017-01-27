@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    file_atoms = pf.FileAtoms()
+    file_atoms = ft.FileAtoms()
     file_atoms.load(args.fn_input[0])
 
     m = min([min(a.lambda_) for a in file_atoms.atoms])

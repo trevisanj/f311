@@ -3,6 +3,9 @@
 
 
 import f311.pyfant as pf
+import f311.physics as ph
+import f311.filetypes as ft
+from .. import convmol as cm
 import a99
 from .convlog import *
 from collections import OrderedDict
@@ -33,7 +36,7 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
         flag_normhlf: Whether to multiply calculated gf's by normalization factor
 
 
-    Returns: (a list of pyfant.SetOfLines objects, a MolConversionLog object)
+    Returns: (a list of ftpyfant.SetOfLines objects, a MolConversionLog object)
     """
 
     def append_error(msg):
@@ -48,8 +51,7 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
     # C     HL: Honl-London factor
     # C     FR: oscillator strength
 
-
-    if not isinstance(fileobj, pf.FileKuruczMolecule):
+    if not isinstance(fileobj, ft.FileKuruczMolecule):
         raise TypeError("Invalid type for argument 'fileobj': {}".format(type(fileobj).__name__))
 
     lines = fileobj.lines
@@ -64,7 +66,7 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
     LAM2L = 1 # Pi
 
     if flag_hlf:
-        formulas = a99.doublet.get_honllondon_formulas(LAML, LAM2L)
+        formulas = ph.doublet.get_honllondon_formulas(LAML, LAM2L)
     sols = OrderedDict()  # one item per (vl, v2l) pair
     log = MolConversionLog(n)
 
@@ -74,12 +76,12 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
     scale_factor = 730.485807466/2
 
     for i, line in enumerate(lines):
-        assert isinstance(line, pf.KuruczMolLine)
+        assert isinstance(line, ft.KuruczMolLine)
         # TODO is it spin 2l?
-        branch = a99.doublet.quanta_to_branch(line.Jl, line.J2l, line.spin2l)
+        branch = ph.doublet.quanta_to_branch(line.Jl, line.J2l, line.spin2l)
         try:
             # TODO take this outta here, for now just to filter to match others
-            fcf = pf.convmol.get_fcf_oh(line.vl, line.v2l)
+            fcf = cm.get_fcf_oh(line.vl, line.v2l)
 
             wl = line.lambda_
 
@@ -118,7 +120,7 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
  #           fcf = 1.3201e-1
 
             if flag_fcf:
-                fcf = pf.convmol.get_fcf_oh(line.vl, line.v2l)
+                fcf = cm.get_fcf_oh(line.vl, line.v2l)
 
                 gf_pfant *= fcf
 
@@ -150,7 +152,7 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
             ggv = qgbd["gv"]
             bbv = qgbd["bv"]
             ddv = qgbd["dv"]
-            sols[sol_key] = pf.SetOfLines(line.vl, line.v2l, qqv, ggv, bbv, ddv, 1.)
+            sols[sol_key] = ft.SetOfLines(line.vl, line.v2l, qqv, ggv, bbv, ddv, 1.)
 
         sol = sols[sol_key]
         sol.append_line(wl, gf_pfant, J2l_pfant, branch)

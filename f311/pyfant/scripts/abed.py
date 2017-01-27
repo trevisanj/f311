@@ -23,7 +23,7 @@ if __name__ == "__main__":
     parser.add_argument('fn', type=str, help='abundances file name', default='abonds.dat', nargs='?')
     args = parser.parse_args()
 
-    m = pf.FileAbonds()
+    m = ft.FileAbonds()
     m.load(args.fn)
     app = a99.get_QApplication([])
     form = pf.XFileAbonds()

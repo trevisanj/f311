@@ -21,10 +21,10 @@ if __name__ == "__main__":
     formatter_class=a99.SmartFormatter
     )
     parser.add_argument('fn', type=str, help='molecules file name',
-                        default=pf.FileMolecules.default_filename, nargs='?')
+                        default=ft.FileMolecules.default_filename, nargs='?')
     args = parser.parse_args()
 
-    m = pf.FileMolecules()
+    m = ft.FileMolecules()
     m.load(args.fn)
     app = a99.get_QApplication([])
     form = pf.XFileMolecules()

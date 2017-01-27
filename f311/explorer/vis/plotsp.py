@@ -11,6 +11,8 @@ from matplotlib import rc
 import logging
 import numpy as np
 import a99
+import f311.filetypes as ft
+
 
 __all__ = ["plot_spectra", "plot_spectra_overlapped", "plot_spectra_pieces_pdf",
  "plot_spectra_pages_pdf", "draw_spectra", "PlotSpectrumSetup"]
@@ -223,7 +225,7 @@ def _calc_max_min(ss):
     """
     xmin, xmax, ymin, ymax = 1e38, -1e38, 1e38, -1e38
     for s in ss:
-        assert isinstance(s, a99.Spectrum)
+        assert isinstance(s, ft.Spectrum)
         xmin, xmax = min(min(s.x), xmin), max(max(s.x), xmax)
         ymin, ymax = min(min(s.y), ymin), max(max(s.y), ymax)
     xspan = xmax-xmin
@@ -256,7 +258,7 @@ def draw_spectra(ss, title=None, num_rows=None, setup=_default_setup):
             if i >= num_rows:
                 break
             j = 0
-        assert isinstance(s, a99.Spectrum)
+        assert isinstance(s, ft.Spectrum)
         ax = axarr[i, j]
         y = s.y
         ax.plot(s.x, y)

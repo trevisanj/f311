@@ -1,6 +1,6 @@
 # pyfant demos
 
-This directory contains a few usage examples of the ```pyfant``` package.
+This directory contains a few usage examples of the ```ftpyfant``` package.
 
 *Attention* (Windows users): in order to save space, there are links to data files
 ```../../data/common/*.dat```. These links work well in Linux but not in Windows.

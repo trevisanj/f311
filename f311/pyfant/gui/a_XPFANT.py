@@ -4,16 +4,18 @@ __all__ = ["XPFANT"]
 
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from pyfant import *
-from .a_XMainAbonds import *
 import os.path
 import copy
 import shutil
 import a99
+import f311.explorer as ex
+import f311.filetypes as ft
+from ... import pyfant as pf
+
 
 
 ################################################################################
-class XPFANT(XMainAbonds):
+class XPFANT(ex.XMainAbonds):
     """
     Arguments:
       parent=None -- nevermind
@@ -22,7 +24,7 @@ class XPFANT(XMainAbonds):
 
     def __init__(self, *args, **kwargs):
         ## State variables
-        XMainAbonds.__init__(self, *args, **kwargs)
+        ex.XMainAbonds.__init__(self, *args, **kwargs)
 
         # # Central layout
 
@@ -58,7 +60,7 @@ class XPFANT(XMainAbonds):
                 if len(s) == 0:
                     errors.append("Please inform custom session id.")
                 elif len(errors) == 0: # will only offer to remove directory if everything is ok so far
-                    dirname = SESSION_PREFIX_SINGULAR+s
+                    dirname = pf.SESSION_PREFIX_SINGULAR+s
                     if os.path.isdir(dirname):
                         r = QMessageBox.question(self, "Directory exists",
                          "Directory '%s' already exists.\n\n"
@@ -88,7 +90,7 @@ class XPFANT(XMainAbonds):
         self.__update_lineEdit_custom_id()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
-    # Slots for signals emited by pyfant widgets
+    # Slots for signals emited by ftpyfant widgets
 
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
@@ -98,7 +100,7 @@ class XPFANT(XMainAbonds):
         return str(self.lineEdit_custom_id.text()).strip()
 
     def __submit_job(self):
-        r = Combo()
+        r = pf.Combo()
         if self.checkbox_custom_id.isChecked():
             r.conf.sid.id = self.__get_custom_session_id()
         r.conf.opt = copy.copy(self.oe.f)

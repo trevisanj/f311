@@ -60,13 +60,13 @@ if __name__ == "__main__":
     fn_output = tokens['innewmarcs output file']
     indexes = np.array(np.matrix(tokens['innewmarcs indexes'])).flatten()
     records = []  # ModRecord, name
-    m = pf.FileModBin()
+    m = ft.FileModBin()
     m.load(fn_grid)
     for i in indexes:
         record_name = '%s#%d' % (fn_grid, i)
         records.append((m.records[i-1], record_name))
 
-    mod = pf.FileModBin()
+    mod = ft.FileModBin()
     mod.load(fn_output)
     rm = mod.records[0]
 

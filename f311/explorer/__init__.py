@@ -7,13 +7,23 @@ Object-oriented framework to handle file types:
   - Plugin system to support (read/write/visualize) new file types
 """
 
+
 from . import gui
 from . import vis
 from . import blocks
 
+from .basic import *
 from .gui import *
 from .vis import *
 from .blocks import *
 from .paths import *
 from .util import *
 from .collaborate import *
+from .blocks import *
+
+
+# # Function to access package-specific config file
+def get_config():
+    """Returns AAConfigObj object that corresponds to file ~/.MY-PACKAGE-NAME.conf"""
+    import a99
+    return a99.get_config_obj(".f311.explorer.conf")

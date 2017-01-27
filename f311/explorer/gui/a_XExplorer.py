@@ -5,13 +5,15 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import a99
-import f311.explorer as ex
+import f311.filetypes as ft
 import os
 import glob
 import os.path
 import time
 import matplotlib.pyplot as plt
 import numpy as np
+# from .. import *
+from ... import explorer as ex
 
 COLOR_LOADED = "#ADFFB4"  # light green
 COLOR_LOAD_ERROR = "#FFB5B5"  # light red
@@ -76,9 +78,6 @@ class LoadThread(QThread):
     def __init__(self, parent, propss):
         QThread.__init__(self, parent)
         self.propss = propss
-        print("************************************")
-        print("************************************")
-        print("************************************")
 
     def run(self):
         for props in self.propss:
@@ -434,10 +433,10 @@ class XExplorer(QMainWindow):
             p = propss[0]
             # Visualization options
             if p.flag_scanned:
-                if isinstance(p.f, ex.DataFile):
-                    classes.extend(a99.get_suitable_vis_classes(p.f))
-                    if a99.VisPrint in classes:
-                        classes.remove(a99.VisPrint)
+                if isinstance(p.f, ft.DataFile):
+                    classes.extend(ex.get_suitable_vis_classes(p.f))
+                    if ex.VisPrint in classes:
+                        classes.remove(ex.VisPrint)
                 if p.flag_text:
                     # This is an exception, since "txt" is not a Vis descendant.
                     # This will be properly handled in __visualize()
@@ -460,8 +459,8 @@ class XExplorer(QMainWindow):
         elif npp >= 2:
             s0 = "{0:d} selected".format(npp)
             ff = [p.f for p in propss]
-            flag_spectra = all([isinstance(f, a99.FileSpectrum) for f in ff])
-            flag_mod = all([isinstance(f, a99.FileModBin) and len(f.records) > 1 for f in ff])
+            flag_spectra = all([isinstance(f, ft.FileSpectrum) for f in ff])
+            flag_mod = all([isinstance(f, ft.FileModBin) and len(f.records) > 1 for f in ff])
             if flag_spectra:
                 z.addItem(QListWidgetItem("Plot spectra stacked"))
                 classes.append("sta")
@@ -492,19 +491,19 @@ class XExplorer(QMainWindow):
             if vis_class == "ovl":
                 propss = self.__lock_get_current_propss()
                 spectra = [p.f.spectrum for p in propss]
-                a99.plot_spectra_overlapped(spectra)
+                ex.plot_spectra_overlapped(spectra)
             elif vis_class == "sta":
                 propss = self.__lock_get_current_propss()
                 spectra = [p.f.spectrum for p in propss]
-                a99.plot_spectra(spectra)
+                ex.plot_spectra(spectra)
             elif vis_class == "modgrid":
                 propss = self.__lock_get_current_propss()
                 models = [p.f for p in propss]
-                a99.plot_mod_grid(models)
+                ex.plot_mod_grid(models)
             else:
                 props = self.__lock_get_current_props()
                 if vis_class == "txt":
-                    w = a99.XText(self, open(props.filepath, "r").read(), props.filepath)
+                    w = ex.XText(self, open(props.filepath, "r").read(), props.filepath)
                     w.show()
                 else:
                     vis_class().use(props.f)

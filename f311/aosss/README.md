@@ -13,7 +13,7 @@ Welcome!
 
 #<a name=S1></a>1 Introduction
 
-`aosss` is a Python package and set of applications to facilitate 
+`ftaosss` is a Python package and set of applications to facilitate 
 steps in spectrograph+telescope simulation workflows: 
 
   - assemble a data cube for IFU simulation
@@ -25,27 +25,27 @@ steps in spectrograph+telescope simulation workflows:
   
 ## 1.1 Structure
 
-`aosss` contains an API (application programming interface) and a set of scripts (standalone programs)
+`ftaosss` contains an API (application programming interface) and a set of scripts (standalone programs)
 that use this API.
 
 ### 1.1.1 Programs available
 
-:bulb: To print a list of `aosss` programs, run `programs.py` from the console:
+:bulb: To print a list of `ftaosss` programs, run `programs.py` from the console:
 
 Graphical applications:
   - `wavelength-chart.py` -- Draws a [wavelength] x [various stacked information] chart
 
 Command-line tools:
   - `create-spectrum-lists.py` -- Create several .splist files, grouping spectra by their wavelength vector
-  - `aosss-create-websim-report.py` -- Creates report for a given set of WEBSIM-COMPASS output files
+  - `ftaosss-create-websim-report.py` -- Creates report for a given set of WEBSIM-COMPASS output files
   - `get-compass.py` -- Downloads a number of Websim-Compass simulations
-  - `aosss-programs.py` -- Lists all programs available with `aosss` package
+  - `ftaosss-programs.py` -- Lists all programs available with `ftaosss` package
 
 All the programs above can be called with the `--help` or `-h` option for more documentation
 
 #<a name=S2></a>2. Installation
 
-TO install _package `aosss`, please follow [installation instructions for _astrogear_](../README.md) 
+TO install _package `ftaosss`, please follow [installation instructions for _astrogear_](../README.md) 
 
 #<a name=S3></a>3. Usage Examples
 

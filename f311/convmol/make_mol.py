@@ -1,4 +1,5 @@
 import f311.pyfant as pf
+import f311.filetypes as ft
 import datetime
 
 
@@ -23,8 +24,8 @@ def make_file_molecules(mol_row, state_consts, lines, qgbd_calculator, sols_calc
 
     sols, log = sols_calculator(mol_row, state_consts, lines, qgbd_calculator)
     mol = _make_molecule(mol_row, sols)
-    f = pf.FileMolecules()
-    f.titm = "Created by pyfant.make_file_molecules() @ {}".format(datetime.datetime.now().isoformat())
+    f = ft.FileMolecules()
+    f.titm = "Created by ftpyfant.make_file_molecules() @ {}".format(datetime.datetime.now().isoformat())
     f.molecules = [mol]
 
     return f, log
@@ -36,7 +37,7 @@ def _make_molecule(mol_row, sols):
     Args:
         mol_row: MyDBRow object representing row from 'molecules' table
         mol_consts: dict-like object with keys "fe", "do", "am", "bm", "ua", "ub", "te"
-        sol: pyfant.SetOfLines object
+        sol: ftpyfant.SetOfLines object
 
     **Note** Doesn't take take "fe", "do", etc. directly from the 'molecule' table because these
              values may have been customized by the user in widget WMolConst

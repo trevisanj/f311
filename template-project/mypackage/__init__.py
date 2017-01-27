@@ -45,7 +45,7 @@ def get_config():
 #     # Classes to consider when attempts to load a binary file (see a99.load_any_file())
 #     a99._classes_bin.extend([class_ for class_ in file_classes if not class_.flag_txt])
 #     # Adds Classes to consider when attempts to load a spectrum file (see a99.load_spectrum())
-#     a99._classes_sp.extend([class_ for class_ in file_classes if issubclass(class_, a99.FileSpectrum)])
+#     a99._classes_sp.extend([class_ for class_ in file_classes if issubclass(class_, ft.FileSpectrum)])
 #     # All kwown File* classes
 #     a99._classes_file.extend(file_classes)
 #     # All kwnown Vis* classes

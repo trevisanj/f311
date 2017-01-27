@@ -2,10 +2,10 @@ __all__ = ["SLB_UseSpectrumBlock", "SLB_ExtractContinua"]
 
 import numpy as np
 import a99
-import aosss as ao
 import copy
-from .base import *
+from .basic import *
 from . import sb
+from ...explorer import *
 
 
 class SLB_UseSpectrumBlock(SpectrumListBlock):
@@ -29,7 +29,7 @@ class SLB_ExtractContinua(SpectrumListBlock):
 
     def _do_use(self, inp):
         output = SLB_UseSpectrumBlock(sb.SB_Rubberband(flag_upper=True)).use(inp)
-        spectrum_std = ao.GB_UseNumPyFunc(func=np.std).use(inp)
+        spectrum_std = ex.GB_UseNumPyFunc(func=np.std).use(inp)
         mean_std = np.mean(spectrum_std.spectra[0].y)
         for spectrum in output.spectra:
             spectrum.y -= mean_std * 3
@@ -40,16 +40,12 @@ class SLB_UseGroupBlock(SpectrumListBlock):
     """
     "Group by" operation using a GroupBlock
 
-    Arguments:
-        expr -- expression which will be eval()'ed with expected result to be a GroupBlock
-                Example: "GB_SNR()"
-
-                TODO I should not eval here, the argument should be the block itself
-
-        group_by -- sequence of spectrum "more_headers" fieldnames.
-                    If not passed, will treat the whole SpectrumCollection as a single gb.py.
-                    If passed, will split the collection in groups and perform the "merge down" operations separately
-                    for each gb.py
+    Args:
+        block: a GroupBlock
+        group_by: sequence of spectrum "more_headers" fieldnames.
+                  If not passed, will treat the whole SpectrumCollection as a single gb.py.
+                  If passed, will split the collection in groups and perform the "merge down" operations separately
+                  for each gb.py
 
     Returns: (SpectrumCollection containing query result, list of error strings)
     """
@@ -76,7 +72,7 @@ class SLB_UseGroupBlock(SpectrumListBlock):
             unique_keys.sort()
             sk = list(zip(inp.spectra, grouping_keys))
             for unique_key in unique_keys:
-                group = ao.SpectrumList()
+                group = ft.SpectrumList()
                 for spectrum, grouping_key in sk:
                     if grouping_key == unique_key:
                         group.add_spectrum(spectrum)

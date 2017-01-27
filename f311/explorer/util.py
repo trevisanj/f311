@@ -11,7 +11,7 @@ from astropy.io import fits
 import logging
 import a99
 from f311.filetypes import *
-import f311.explorer as ex
+from .. import explorer as ex
 import f311.physics as ph
 
 __all__ = [
@@ -122,17 +122,11 @@ def load_spectrum_fits_messed_x(filename, sp_ref=None):
 def list_data_types():
     """
     Returns a list with all data types, in Markdown table format
-
-    >>> import f311.explorer as ex
-    >>> print("\\n".join(ex.list_data_types()))
     """
     ll = []  # [(description, default filename), ...]
 
 
     for attr in ex.classes_file():
-        # print("iiiiiiiiiiiiiiiiiii", item)
-        # attr = a99.datatypes.__getattribute__(item)
-
         doc = attr.__doc__
         doc = attr.__name__ if doc is None else doc.strip().split("\n")[0]
 
@@ -166,7 +160,7 @@ def cut_spectrum(sp, l0, lf):
 
 
 def copy_default_data_file(filename, module=a99):
-    """Copies file from pyfant/data/default directory to local directory."""
+    """Copies file from ftpyfant/data/default directory to local directory."""
     fullpath = ex.get_default_data_path(filename, module=module)
     shutil.copy(fullpath, ".")
 

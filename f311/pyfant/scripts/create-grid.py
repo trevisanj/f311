@@ -74,9 +74,9 @@ if __name__ == "__main__":
             name = os.path.splitext(os.path.basename(filename))[0]
             print("Considering files '{0!s}'+('.mod', '.opa') ...".format(name))
             try:
-                f = pf.FileModTxt()
+                f = ft.FileModTxt()
                 f.load(filename)
-                g = pf.FileOpa()
+                g = ft.FileOpa()
                 g.load(name+".opa")
                 r = a99.MooRecord()
                 r.from_marcs_files(f, g)
@@ -88,11 +88,11 @@ if __name__ == "__main__":
             print("Considering file '{0!s}'+('.mod', '.opa') ...".format(nameext))
             try:
                 if args.mode == "modtxt":
-                    f = pf.FileModTxt()
+                    f = ft.FileModTxt()
                     f.load(filename)
                     records.append(f.record)
                 else:
-                    f = pf.FileModBin()
+                    f = ft.FileModBin()
                     f.load(filename)
                     records.extend(f.records)
             except:
@@ -106,9 +106,9 @@ if __name__ == "__main__":
     records.sort(key=lambda r: r.asalog*1e10+r.teff*100+r.glog)
 
     if args.mode == "opa":
-        g = pf.FileMoo()
+        g = ft.FileMoo()
     else:
-        g = pf.FileModBin()
+        g = ft.FileModBin()
     g.records = records
     g.save_as(args.fn_output)
 

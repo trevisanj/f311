@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
   args = parser.parse_args()
 
-  m = pf.FileModBin()
+  m = ft.FileModBin()
   m.load(args.fn)
 
   v = a99.VisModRecord()

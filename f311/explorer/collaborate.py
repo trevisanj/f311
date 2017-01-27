@@ -8,19 +8,28 @@ which adds entries to the _* variables in this module
 
 from collections import OrderedDict
 import f311.filetypes as ft
+from .. import explorer as ex
+import importlib
+import a99
 
 __all__ = [
-    "_classes_txt", "_classes_bin", "_classes_sp", "_classes_file", "_classes_vis",
     "classes_txt", "classes_bin", "classes_sp", "classes_file", "classes_vis", "collaborators",
-    "get_suitable_vis_classes", "get_class_package"
+    "get_suitable_vis_classes", "get_class_package", "classes_collection"
     ]
+
+
+# __all__ = [
+#     "_classes_txt", "_classes_bin", "_classes_sp", "_classes_file", "_classes_vis",
+#     "classes_txt", "classes_bin", "classes_sp", "classes_file", "classes_vis", "collaborators",
+#     "get_suitable_vis_classes", "get_class_package", "classes_collection"
+#     ]
 
 
 def get_suitable_vis_classes(obj):
     """Retuns a list of Vis classes that can handle obj."""
 
     ret = []
-    for class_ in a99.classes_vis():
+    for class_ in classes_vis():
         if isinstance(obj, class_.input_classes):
             ret.append(class_)
     return ret
@@ -30,8 +39,8 @@ def get_suitable_vis_list_classes(objs):
     """Retuns a list of VisList classes that can handle a list of objects."""
 
     ret = []
-    for class_ in a99.classes_vis():
-        if isinstance(class_, a99.VisList):
+    for class_ in classes_vis():
+        if isinstance(class_, ex.VisList):
             flag_can = True
             for obj in objs:
                 if not isinstance(obj, class_.item_input_classes):
@@ -82,7 +91,7 @@ def _collect_classes(m):
         classes.extend([class_ for class_ in newclasses if class_ not in classes])
         # classes.extend(newclasses)
 
-    file_classes = a99.get_classes_in_module(m.datatypes, ft.DataFile)
+    file_classes = a99.get_classes_in_module(m, ft.DataFile)
 
     # Classes to consider when attempts to load a text file (see hypydrive.load_any_file())
     _extend(_classes_txt, [class_ for class_ in file_classes if class_.flag_txt])
@@ -90,11 +99,11 @@ def _collect_classes(m):
     # Classes to consider when attempts to load a binary file (see hypydrive.load_any_file())
     _extend(_classes_bin, [class_ for class_ in file_classes if not class_.flag_txt])
     # Adds Classes to consider when attempts to load a spectrum file (see hypydrive.load_spectrum())
-    _extend(_classes_sp, [class_ for class_ in file_classes if issubclass(class_, a99.FileSpectrum)])
+    _extend(_classes_sp, [class_ for class_ in file_classes if issubclass(class_, ft.FileSpectrum)])
     # All kwown File* classes
     _extend(_classes_file, file_classes)
     # All kwnown Vis* classes
-    _extend(_classes_vis, a99.get_classes_in_module(m.vis, a99.Vis))
+    _extend(_classes_vis, a99.get_classes_in_module(m, ex.Vis))
 
 
 # # List of classes representing all file formats either read or written
@@ -148,12 +157,19 @@ def classes_vis():
     return _classes_vis
 
 
+def classes_collection():
+    """
+    Returns list of File* classes that can be converted to a SpectrumCollection
+    """
+    return ex.classes_sp() + [ft.FileSpectrumList, ft.FileSparseCube, ft.FileFullCube]
+
+
 
 # # Tries to "collaborate" with other packages
 # "collaborator" packages: {"name": package}
 __collaborators = OrderedDict()  # (("hypydrive",  a99),))
 
-__PACKAGE_NAMES = ["f311.filetypes"]
+__PACKAGE_NAMES = ["f311.filetypes", "f311.explorer"]
 
 
 def __setup_collaboration():
@@ -162,12 +178,12 @@ def __setup_collaboration():
     __flag_first = False
     for pkgname in __PACKAGE_NAMES:
         try:
-            pkg = __import__(pkgname)
+            pkg = importlib.import_module(pkgname)
             a99.get_python_logger().info("imported collaborator package '{}'".format(pkgname))
 
             try:
-                if hasattr(pkg, "_setup_hypydrive"):
-                    pkg._setup_hypydrive()
+                if hasattr(pkg, "_setup_explorer"):
+                    pkg._setup_explorer()
                 else:
                     _collect_classes(pkg)
 
@@ -175,8 +191,9 @@ def __setup_collaboration():
             except:
                 a99.get_python_logger().exception(
                     "hypydrive: actually, package '{}' gave error".format(pkgname))
+                raise
         except:
-            a99.get_python_logger.warning("failed to import package '{}".format(pkgname))
+            a99.get_python_logger().warning("failed to import package '{}".format(pkgname))
             pass
 
 

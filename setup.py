@@ -1,4 +1,6 @@
 import sys
+import os
+
 if sys.version_info[0] < 3:
     print("Python version detected:\n*****\n{0!s}\n*****\nCannot run, must be using Python 3".format(sys.version))
     sys.exit()
@@ -7,15 +9,18 @@ from setuptools import setup, find_packages
 from glob import glob
 
 
-def find_scripts(pkgs):
+def find_scripts(pkgnames):
     ret = []
-    for pkgname in pkgs:
-        ret.extend(glob(pkgname + '/scripts/*.py'))
+    for pkgname in pkgnames:
+        for item in os.walk(pkgname):
+            _, last = os.path.split(item[0])
+            if last == "scripts":
+                ret.extend(glob(os.path.join(item[0], '*.py')))
     return ret
 
 
 pkgs = find_packages()
-scripts = find_scripts(pkgs)
+scripts = find_scripts(["f311"])
 
 
 setup(

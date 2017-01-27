@@ -15,16 +15,16 @@ and visualization, and a programming library to embed spectral synthesis into yo
   2. [Installation](#S2)
   3. [Handled file types](#S3)
   4. [Tasks](#S4)
-  5. [Programming with `pyfant`](#S5)
+  5. [Programming with `ftpyfant`](#S5)
   6. [Troubleshooting](#S6)
 
 
 # <a name=S1></a>1 Introduction
 
-The `pyfant` Python package was created as a Python interface for PFANT, a Fortran-developed
+The `ftpyfant` Python package was created as a Python interface for PFANT, a Fortran-developed
 Spectral Synthesis Software for Astronomy (http://github.com/trevisanj/PFANT).
 
-`pyfant` was first created with the intention to provide an object-oriented library to develop such
+`ftpyfant` was first created with the intention to provide an object-oriented library to develop such
 algorithms in Python. It allows one to create several "spectral synthesis cases" (_e.g._ similar
 calculations where only the chemical abundance of one element will vary slightly) and run these cases
 in parallel.
@@ -37,7 +37,7 @@ many convenient tasks:
 
 #<a name=S2></a>2. Installation
 
-TO install _package `pyfant`, please follow [installation instructions for _astrogear_](../README.md)
+TO install _package `ftpyfant`, please follow [installation instructions for _astrogear_](../README.md)
 
 # <a name=S3></a>3 Applications Available
 
@@ -70,7 +70,7 @@ Command-line tools:
 
 # <a name=S4></a>4 Tasks
 
-This section briefly describes some tasks that can be performed with `pyfant` applications.
+This section briefly describes some tasks that can be performed with `ftpyfant` applications.
 
 
 

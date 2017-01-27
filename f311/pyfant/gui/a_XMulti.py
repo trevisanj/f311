@@ -5,12 +5,13 @@ __all__ = ["XMulti"]
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import os.path
-from .a_XPFANT import *
-from .a_WFileAbXFwhm import *
 import shutil
 from ._shared import *
+from .a_XPFANT import *
 import a99
-import f311.pyfant as pf
+import f311.explorer as ex
+import f311.filetypes as ft
+from ... import pyfant as pf
 
 WINDOW_WIDTH = 700
 WINDOW_HEIGHT = 768
@@ -73,7 +74,7 @@ class XMulti(XPFANT):
 
         # ### Editor for multi setup
 
-        editor = self.multi_editor = WFileAbXFwhm()
+        editor = self.multi_editor = ex.WFileAbXFwhm()
         editor.edited.connect(self.on_multi_edited)
         l.addWidget(editor)
 
@@ -82,7 +83,7 @@ class XMulti(XPFANT):
         self.flags_changed.append(False)
         self.save_as_texts.append("Save abundances X FWHM's configuration as")
         self.open_texts.append("Load abundandex X FWHM's file")
-        self.clss.append(pf.FileAbXFwhm)
+        self.clss.append(ft.FileAbXFwhm)
         self.editors.append(self.multi_editor)
         self.labels_fn.append(self.label_fn_abxfwhm)
         self.wilds.append("*.py")
@@ -90,8 +91,8 @@ class XMulti(XPFANT):
         self.__update_lineEdit_multi_custom_id()
         # tt.setCurrentIndex(3)
         # ## Loads abxfwhm file
-        if os.path.isfile(pf.FileAbXFwhm.default_filename):
-            f = pf.FileAbXFwhm()
+        if os.path.isfile(ft.FileAbXFwhm.default_filename):
+            f = ft.FileAbXFwhm()
             f.load()
             self.multi_editor.load(f)
         # ## calls slot to perform cross-check between FileAbonds and FileAbXFwhm
@@ -164,7 +165,7 @@ class XMulti(XPFANT):
         self._on_edited()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
-    # Slots for signals emited by pyfant widgets
+    # Slots for signals emited by ftpyfant widgets
 
     def on_file_abonds_loaded(self):
         self.multi_editor.file_abonds = self.ae.f

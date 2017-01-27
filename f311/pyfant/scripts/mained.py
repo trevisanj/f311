@@ -23,7 +23,7 @@ if __name__ == "__main__":
     parser.add_argument('fn', type=str, help='main configuration file name', default='main.dat', nargs='?')
     args = parser.parse_args()
 
-    m = pf.FileMain()
+    m = ft.FileMain()
     m.load(args.fn)
     app = a99.get_QApplication([])
     form = pf.XFileMain()

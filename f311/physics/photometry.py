@@ -9,8 +9,9 @@ import collections
 from scipy.interpolate import interp1d
 import copy
 import a99
-import f311.explorer as ex
-import f311.physics as ph
+import f311.filetypes as ft
+from .. import physics as ph
+from .. import explorer as ex
 
 MAGNITUDE_BASE = 100. ** (1. / 5)  # approx. 2.512
 _REF_NUM_POINTS = 5000   # number of evaluation points over entire band range
@@ -145,9 +146,9 @@ def flux_to_mag(flux, bp, system="stdflux", zero_point=0.):
 
     Returns: float
     """
-    if isinstance(flux, ex.Spectrum):
+    if isinstance(flux, ft.Spectrum):
         if flux.yunit != ph.fnu:
-            raise ValueError("Spectrum y-unit must be '{}', not '{}'".format(bo.fnu, flux.yunit))
+            raise ValueError("Spectrum y-unit must be '{}', not '{}'".format(ph.fnu, flux.yunit))
         flux = flux.y
     zero_flux = get_zero_flux(bp, system)
     return -2.5 * np.log10(flux / zero_flux) - zero_point
@@ -194,12 +195,12 @@ def __get_vega_spectrum():
     """Returns Spectrum of Vega"""
     global __vega_spectrum
     if __vega_spectrum is None:
-        __vega_spectrum = bo.load_spectrum(bo.get_data_path("pysynphot-vega-fnu.xy", module=bo))
+        __vega_spectrum = ex.load_spectrum(ex.get_data_path("pysynphot-vega-fnu.xy", module=ph))
     return __vega_spectrum
 
 def get_vega_spectrum():
     """Returns Spectrum of Vega"""
-    return bo.load_spectrum(bo.get_data_path("pysynphot-vega-fnu.xy"))
+    return ex.load_spectrum(ex.get_data_path("pysynphot-vega-fnu.xy"))
 
 
 class Bandpass(object):
@@ -242,7 +243,7 @@ class Bandpass(object):
     def __rmul__(self, other):
         """Right multiplication accepts Spectrum or tuple:(wave, flux)"""
 
-        if isinstance(other, ex.Spectrum):
+        if isinstance(other, ft.Spectrum):
             out = copy.deepcopy(other)
             x, y = out.x, out.y
         elif isinstance(other, tuple) and len(other) == 2 and isinstance(other[0], np.ndarray) and \

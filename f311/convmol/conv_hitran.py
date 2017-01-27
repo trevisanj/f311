@@ -8,7 +8,8 @@ References:
 """
 
 
-import f311.pyfant as pf
+import f311.physics as ph
+import f311.filetypes as ft
 import a99
 from .calc_qgbd import calc_qgbd_tio_like
 from .convlog import *
@@ -120,7 +121,7 @@ def hitran_to_sols(mol_row, state_row, lines, qgbd_calculator):
         qgbd_calculator: callable that can calculate "qv", "gv", "bv", "dv",
                          e.g., calc_qbdg_tio_like()
 
-    Returns: (a list of pyfant.SetOfLines objects, a MolConversionLog object)
+    Returns: (a list of ftpyfant.SetOfLines objects, a MolConversionLog object)
     """
 
     def append_error(msg):
@@ -167,10 +168,10 @@ def hitran_to_sols(mol_row, state_row, lines, qgbd_calculator):
 
         try:
             nu = data["nu"][i]
-            wl = a99.vacuum_to_air(1e8/nu)
+            wl = ph.vacuum_to_air(1e8/nu)
             Br, J2l = f_group(data["local_lower_quanta"][i])
             # TODO assuming singlet!!!
-            Jl = a99.singlet.quanta_to_branch(Br, J2l)
+            Jl = ph.singlet.quanta_to_branch(Br, J2l)
             V = f_class(data["global_upper_quanta"][i])
             V_ = f_class(data["global_lower_quanta"][i])
             A = data["a"][i]
@@ -197,7 +198,7 @@ def hitran_to_sols(mol_row, state_row, lines, qgbd_calculator):
             bbv = qgbd["bv"]
             ddv = qgbd["dv"]
 
-            sols[sol_key] = pf.SetOfLines(V, V_, qqv, ggv, bbv, ddv, 1.)
+            sols[sol_key] = ft.SetOfLines(V, V_, qqv, ggv, bbv, ddv, 1.)
         sol = sols[sol_key]
         sol.append_line(wl, gf, J2l_pfant, Br)
 

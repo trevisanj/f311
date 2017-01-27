@@ -148,7 +148,7 @@ class Runnable(object):
             self.sid.clean(False)
 
     def clean(self, *args):
-        """Wraps self.sid.clean(). See pyfant.SID"""
+        """Wraps self.sid.clean(). See ftpyfant.SID"""
         self.sid.clean(*args)
 
     def _get_sid(self):
@@ -160,7 +160,7 @@ class Executable(Runnable):
     PFANT executables common ancestor class.
     """
 
-    # Set at descendant class with a pyfant.conf.FOR_* value
+    # Set at descendant class with a ftpyfant.conf.FOR_* value
     sequence_index = -1
 
     @property
@@ -339,7 +339,7 @@ class Innewmarcs(Executable):
         self.modeles = None
 
     def load_result(self):
-        file_mod = pf.FileModBin()
+        file_mod = ft.FileModBin()
         filepath = self.conf.get_fn_modeles()
         file_mod.load(filepath)
         # Assigns .modeles for backward compatibility
@@ -410,7 +410,7 @@ class Pfant(Executable):
 
         for type_ in ("norm", "cont", "spec"):
             filepath = self.conf.get_pfant_output_filepath(type_)
-            file_sp = a99.FileSpectrumPfant()
+            file_sp = ft.FileSpectrumPfant()
             file_sp.load(filepath)
             self.__setattr__(type_, file_sp.spectrum)
             self._result[type_] = file_sp.spectrum
@@ -430,7 +430,7 @@ class Nulbad(Executable):
         self.convolved = None
 
     def load_result(self):
-        file_sp = a99.FileSpectrumNulbad()
+        file_sp = ft.FileSpectrumNulbad()
         filepath = self.conf.get_nulbad_output_filepath()
         file_sp.load(filepath)
         self.convolved = file_sp.spectrum
