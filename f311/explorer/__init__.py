@@ -16,9 +16,8 @@ from .basic import *
 from .gui import *
 from .vis import *
 from .blocks import *
-from .paths import *
 from .util import *
-from .collaborate import *
+from .classcatalog import *
 from .blocks import *
 from .from_vald import *
 

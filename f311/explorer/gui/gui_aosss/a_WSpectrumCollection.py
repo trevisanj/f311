@@ -660,7 +660,7 @@ class WSpectrumCollection(a99.WBase):
         for filename in filenames:
             filename = str(filename)
             basename = os.path.basename(filename)
-            file = ex.load_with_classes(filename, classes)
+            file = ft.load_with_classes(filename, classes)
             try:
                 if file is None:
                     raise RuntimeError("Could not load file")

@@ -378,25 +378,6 @@ if __name__ == "__main__":
                         help='Plot mode (default is GUI mode)')
     args = parser.parse_args()
 
-
-    # # Loads telluric features
-    # telluric_filenames = ["telluric-5000-10000.fits", "atmos_S_H.fits",
-    #  "atmos_S_J.fits", "atmos_S_K.fits", "atmos_S_SZ.fits"]
-    #
-    # telluric_spectra = []
-    # for fn in telluric_filenames:
-    #     path_ = get_aosss_data_path(fn)
-    #     try:
-    #         fileobj = ft.FileSpectrumFits()
-    #         fileobj.load(path_)
-    #         telluric_spectra.append(fileobj.spectrum)
-    #     except:
-    #         a99.get_python_logger().exception("Failed to load '%s'" % path_)
-    #
-    # # Loads telluric features
-    # telluric_filenames = ["telluric-5000-10000.fits", "atmos_S_H.fits",
-    #  "atmos_S_J.fits", "atmos_S_K.fits", "atmos_S_SZ.fits"]
-
     sp_sky = None
     try:
         sp_sky = ao.load_eso_sky()

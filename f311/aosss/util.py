@@ -16,26 +16,6 @@ import f311.explorer as ex
 from .. import aosss as ao
 
 
-# def load_spectrum_from_fits_cube_or_not(filename, x=0, y=0):
-#     """Loads FITS file and gets given spectrum in data cube.
-#
-#     This routine intends to deal with files such as "C000793_reduced.fits" """
-#
-#     hdul = fits.open(filename)
-#
-#     hdu = hdul[0]
-#
-#     hdu_out = fits.PrimaryHDU()
-#     hdu_out.header["CDELT1"] = hdu.header["CDELT3"]
-#     hdu_out.header["CRVAL1"] = hdu.header["CRVAL3"]
-#     hdu_out.data = hdu.data[:, y, x]
-#
-#     ret = ft.Spectrum()
-#     ret.from_hdu(hdu_out)
-#
-#     return ret
-
-
 FILE_MAP = OrderedDict((
  ("cube_hr", ft.FileFullCube),
  ("cube_seeing", ft.FileFits),
@@ -86,7 +66,7 @@ def load_bulk(simid, dir_='.'):
             if class_ == "messed":
                 # Note that sp_ref may be None here if Cxxxx_spintg.fits fails to load
                 # In this case, sp will have a default x-axis
-                sp = ex.load_spectrum_fits_messed_x(fn, sp_ref)
+                sp = ft.load_spectrum_fits_messed_x(fn, sp_ref)
                 if sp:
                     fileobj = ft.FileSpectrum()
                     fileobj.spectrum = sp
@@ -258,7 +238,6 @@ def create_spectrum_lists(dir_, pipeline_stage="spintg"):
         a99.get_python_logger().info("Created file '%s'" % fn)
 
 
-
 def load_eso_sky():
     """Loads ESO sky model and returns two spectra: emission, transmission"""
 
@@ -271,9 +250,9 @@ def load_eso_sky():
     # dtrans1: sky transmission -1sigma uncertainty
     # dtrans2: sky transmission +1sigma uncertainty
 
-    path_ = ao.get_aosss_data_path()
+    path_ = a99.get_path("data", "eso-sky.fits", module=ao)
 
-    hl = fits.open(os.path.join(path_, "eso-sky.fits"))
+    hl = fits.open(path_)
     d = hl[1].data
 
     x, y0, y1 = d["lam"]*10000, d["flux"], d["trans"]

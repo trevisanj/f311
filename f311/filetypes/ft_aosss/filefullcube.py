@@ -22,6 +22,7 @@ class FileFullCube(DataFile):
     attrs = ['wcube']
     description = "WebSim Compass Data Cube (FITS file)"
     default_filename = "default.fullcube"
+    flag_txt = False
 
     def __init__(self):
         DataFile.__init__(self)

@@ -7,9 +7,11 @@ Run all scripts
 Review this mapping: try not to get rid of the plugin system but perhaps split it
   - file types
   - visualization types
-  - scripts (programs.py)
-  - default data: delegate to filetypes package
-
+  - ~~scripts (programs.py)~~
+  - ONGOING ... default data: delegate to filetypes package
+  
+  
+Template project
 
 
 FileSPectrumPfant not loading properly anymore!!

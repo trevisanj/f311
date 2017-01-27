@@ -85,7 +85,7 @@ class LoadThread(QThread):
                 continue
             f = None
             try:
-                f = ex.load_any_file(props.filepath)
+                f = ft.load_any_file(props.filepath)
                 props.f = f
             except Exception as e:
                 # Suppresses exceptions

@@ -192,15 +192,20 @@ def mag_to_flux(mag, bp, system="stdflux"):
 
 __vega_spectrum = None
 def __get_vega_spectrum():
-    """Returns Spectrum of Vega"""
+    """Returns spectrum of Vega loaded internally (always the same object)"""
     global __vega_spectrum
     if __vega_spectrum is None:
-        __vega_spectrum = ex.load_spectrum(ex.get_data_path("pysynphot-vega-fnu.xy", module=ph))
+        __vega_spectrum = __get_new_vega_spectrum()
     return __vega_spectrum
 
+
+def __get_new_vega_spectrum():
+    return ft.load_spectrum(a99.get_path("data", "pysynphot-vega-fnu.xy", module=ph))
+
+
 def get_vega_spectrum():
-    """Returns Spectrum of Vega"""
-    return ex.load_spectrum(ex.get_data_path("pysynphot-vega-fnu.xy"))
+    """Returns a spectrum of Vega (always a different object)"""
+    return __get_new_vega_spectrum()
 
 
 class Bandpass(object):

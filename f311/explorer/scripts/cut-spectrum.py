@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    sp = ex.load_spectrum(args.fn_input[0])
+    sp = ft.load_spectrum(args.fn_input[0])
     if not sp:
         print("File '{0!s}' not recognized as a spectrum file.".format(args.fn_input[0]))
         sys.exit()
@@ -42,6 +42,6 @@ if __name__ == "__main__":
     print("New interval: [{0:g}, {1:g}]".format(args.llzero[0], args.llfin[0]))
 
     f = ft.FileSpectrumXY()
-    f.spectrum = a99.cut_spectrum(sp, args.llzero[0], args.llfin[0])
+    f.spectrum = ex.cut_spectrum(sp, args.llzero[0], args.llfin[0])
     f.save_as(args.fn_output[0])
     print("Successfully created file '{0!s}'".format(args.fn_output[0]))

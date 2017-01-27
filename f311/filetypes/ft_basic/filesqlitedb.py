@@ -4,6 +4,7 @@ from collections import OrderedDict
 import sqlite3
 from .datafile import DataFile
 import a99
+from ... import filetypes as ft
 import shutil
 import os
 
@@ -55,8 +56,9 @@ class FileSQLiteDB(DataFile):
         Should not keep default file open either (as it is in the API directory and shouldn't be
         messed by user)
         """
-        pkg = a99.get_class_package(self.__class__)
-        fullpath = a99.get_default_data_path(self.default_filename, module=pkg)
+        if self.default_filename is None:
+            raise RuntimeError("Class '{}' has no default filename".format(self.__class__.__name__))
+        fullpath = ft.get_default_data_path(self.default_filename, class_=self.__class__)
         self.load(fullpath)
         name, ext = os.path.splitext(self.default_filename)
         new = a99.new_filename(os.path.join("./", name), ext)

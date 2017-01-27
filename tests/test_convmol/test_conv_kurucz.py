@@ -1,6 +1,7 @@
-import f311.pyfant as pf
 import os
 import io
+import f311.filetypes as ft
+import f311.convmol as cm
 
 
 def _fake_file():
@@ -38,5 +39,5 @@ def test_conv_kurucz(tmpdir):
     fileobj = ft.FileKuruczMolecule()
     fileobj._do_load_h(h, "_fake_file")
 
-    sols, log = pf.convmol.kurucz_to_sols(mol_row, state_row, fileobj,
-        pf.convmol.calc_qgbd_tio_like, flag_hlf=True, flag_fcf=True)
+    sols, log = cm.kurucz_to_sols(mol_row, state_row, fileobj,
+        cm.calc_qgbd_tio_like, flag_hlf=True, flag_fcf=True)

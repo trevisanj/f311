@@ -1,6 +1,5 @@
 # # Imports
 from .basic import *
-from .paths import *
 from .util import *
 from .report import *
 from .mosaic import *

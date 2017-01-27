@@ -13,6 +13,7 @@ class FileSparseCube(DataFile):
     attrs = ['sparsecube']
     description = "Data Cube (FITS file)"
     default_filename = "default.sparsecube"
+    flag_txt = False
 
     def __init__(self):
         DataFile.__init__(self)

@@ -17,6 +17,7 @@ class FileSpectrumList(DataFile):
     attrs = ['splist']
     description = "Spectrum List"
     default_filename = "default.splist"
+    flag_txt = False
 
     def __init__(self):
         DataFile.__init__(self)

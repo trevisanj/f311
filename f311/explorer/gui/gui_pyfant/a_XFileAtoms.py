@@ -461,5 +461,5 @@ class XFileAtoms(QMainWindow):
 
     @staticmethod
     def get_atom_string(a):
-        assert isinstance(a, pf.Atom)
+        assert isinstance(a, ft.Atom)
         return "%-3s (%4d)" % (str(a).strip(), len(a))

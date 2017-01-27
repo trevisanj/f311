@@ -5,7 +5,7 @@ Ancestor class for all classes that represent an input file.
 
 import a99
 import os
-
+from ... import filetypes as ft
 
 __all__ = ["DataFile"]
 
@@ -100,8 +100,9 @@ class DataFile(a99.AttrsPart):
         For safety, filename is reset to None so that it doesn't point to the
         original file.
         """
-        pkg = a99.get_class_package(self.__class__)
-        fullpath = a99.get_default_data_path(self.default_filename, module=pkg)
+        if self.default_filename is None:
+            raise RuntimeError("Class '{}' has no default filename".format(self.__class__.__name__))
+        fullpath = ft.get_default_data_path(self.default_filename, module=ft)
         self.load(fullpath)
         self.filename = None
 

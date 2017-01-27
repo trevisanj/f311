@@ -31,11 +31,10 @@ Types of files supported:
 """
 import argparse
 import a99
-import traceback
 import logging
 import glob
-import os.path
 import f311.explorer as ex
+import f311.filetypes as ft
 
 a99.logging_level = logging.INFO
 a99.flag_log_file = True
@@ -90,7 +89,7 @@ if __name__ == "__main__":
     flag_ok = False
     for x in ff:
         print("Reading file '{0!s}'...".format(x))
-        f = ex.load_with_classes(x, ex.classes_sp())
+        f = ft.load_with_classes(x, ft.classes_sp())
         if f is None:
             a99.print_error("... type not recognized, sorry")
         else:
@@ -100,15 +99,15 @@ if __name__ == "__main__":
     if len(ss) == 0:
         a99.print_error("Nothing to plot!")
     else:
-        setup = a99.PlotSpectrumSetup(ymin=ymin)
+        setup = ex.PlotSpectrumSetup(ymin=ymin)
 
         if args.pieces:
-            a99.plot_spectra_pieces_pdf(ss, aint=args.aint,
+            ex.plot_spectra_pieces_pdf(ss, aint=args.aint,
                                     pdf_filename=args.fn_output, setup=setup)
         elif args.pages:
-            a99.plot_spectra_pages_pdf(ss, pdf_filename=args.fn_output, setup=setup)
+            ex.plot_spectra_pages_pdf(ss, pdf_filename=args.fn_output, setup=setup)
         else:
             if args.ovl:
-                a99.plot_spectra_overlapped(ss, "", setup=setup)
+                ex.plot_spectra_overlapped(ss, "", setup=setup)
             else:
-                a99.plot_spectra(ss, "", setup=setup, num_rows=num_rows)
+                ex.plot_spectra(ss, "", setup=setup, num_rows=num_rows)

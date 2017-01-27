@@ -190,7 +190,7 @@ class WOptionsEditor(QWidget):
         l1 = self.layout23432 = QHBoxLayout()
         la.addLayout(l1)
         w = self.checkbox_main = QCheckBox("Show options that override main configuration file")
-        w.setStyleSheet("QCheckBox {color: %s}" % a99.COLOR_CONFIG)
+        w.setStyleSheet("QCheckBox {color: %s}" % COLOR_CONFIG)
         w.setChecked(True)
         w.stateChanged.connect(self.on_checkbox_main_clicked)
         w.setToolTip("Show options that, if set, will override values "
