@@ -31,7 +31,6 @@ Types of files supported:
 """
 import argparse
 import a99
-import matplotlib.pyplot as plt
 import traceback
 import logging
 import glob

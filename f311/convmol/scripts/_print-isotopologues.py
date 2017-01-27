@@ -7,13 +7,12 @@ If ID is specified, prints data for single molecule;
 otherwise, prints full table
 """
 
-import f311.pyfant as pf
 import argparse
 import logging
 import a99
 
 
-pf.logging_level = logging.INFO
+a99.logging_level = logging.INFO
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

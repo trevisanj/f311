@@ -7,8 +7,7 @@ If formula is specified, prints data for single formula;
 otherwise, prints full table
 """
 
-import f311.pyfant as pf
-import pyfant.convmol as cm
+import f311.convmol as cm
 import argparse
 import logging
 import a99

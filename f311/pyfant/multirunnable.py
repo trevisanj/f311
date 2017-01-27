@@ -4,14 +4,15 @@ Miscellanea routines that depend on other pyfant modules.
 Rule: no pyfant module can import util!!!
 
 """
-__all__ = ["MultiRunnable"]
-
-import f311.pyfant as pf
 import copy
 import os
 import logging
-from a99 import get_python_logger, froze_it
+import a99
+from .. import filetypes as ft
+from .. import pyfant as pf
 
+
+__all__ = ["MultiRunnable"]
 
 _multi_id_maker = pf.IdMaker()
 _multi_id_maker.session_prefix_singular = pf.MULTISESSION_PREFIX
@@ -65,7 +66,7 @@ class MultiRunnable(pf.Runnable):
         self.__status = MultiRunnableStatus(self)
 
         # # Private variables
-        self.__logger = get_python_logger()
+        self.__logger = a99.get_python_logger()
         self.__sid = pf.SID(_multi_id_maker)
         self.__runnable_manager = None
 

@@ -29,8 +29,11 @@ import logging
 import copy
 import numpy as np
 import os.path
-import f311.pyfant as pf
 import a99
+import f311.filetypes as ft
+import f311.explorer as ex
+import f311.filetypes as ft
+import f311.explorer as ex
 
 
 a99.logging_level = logging.INFO

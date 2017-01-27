@@ -1,7 +1,7 @@
 import a99
 import f311.filetypes as ft
-import f311.pyfant as pf
 from ... import convmol as cm
+from ... import pyfant as pf
 
 __all__ = ["populate_moldb"]
 

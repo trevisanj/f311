@@ -5,6 +5,7 @@ Lists all programs available
 """
 
 import a99
+import f311.filetypes as ft
 import argparse
 import os
 from collections import OrderedDict
@@ -17,7 +18,7 @@ def _get_programs_list(format, pkgname_only=None):
     for pkgname, pkg in ex.collaborators().items():
         if pkgname_only is not None and pkgname != pkgname_only:
                 continue
-        allinfo["Package '{}'".format(pkgname)] = a99.get_exe_info(a99.get_scripts_path(module=pkg))
+        allinfo["Package '{}'".format(pkgname)] = a99.get_exe_info(ex.get_scripts_path(module=pkg))
         pkgnames.append(pkgname)
 
     # This can be called (without much shame) a "gambiarra"

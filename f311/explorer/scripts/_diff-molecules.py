@@ -5,10 +5,10 @@ Compares two molecular lines files and prints report with differences
 """
 
 import a99
-import f311.pyfant as pf
 import tabulate
 import logging
 import argparse
+import f311.filetypes as ft
 
 
 a99.logging_level = logging.INFO
@@ -34,7 +34,6 @@ if __name__ == "__main__":
     fb = ft.FileMolecules()
     fb.load(fn2)
 
-
     data = []
     header = [fn1, fn2]
 
@@ -53,7 +52,8 @@ if __name__ == "__main__":
 
     check_append("file", "num_lines", fa, fb)
 
-    to_check = ["formula", "nv", "num_lines", "fe", "do", "mm", "am", "bm", "ua", "ub", "te", "cro", "s",]
+    to_check = ["formula", "nv", "num_lines", "fe", "do", "mm", "am", "bm", "ua", "ub", "te",
+                "cro", "s", ]
 
     for i, (ma, mb) in enumerate(zip(fa, fb)):
         for attr in to_check:

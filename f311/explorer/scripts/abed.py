@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 
-"""
-Atomic lines file editor
-"""
+"""Abundances file editor"""
 
 import sys
 import argparse
 import logging
-import f311.pyfant as pf
+import f311.filetypes as ft
+import f311.explorer as ex
 import a99
-import logging
 
 
 a99.logging_level = logging.INFO
@@ -21,14 +19,13 @@ if __name__ == "__main__":
     description=__doc__,
     formatter_class=a99.SmartFormatter
     )
-    parser.add_argument('fn', type=str, help='atoms file name',
-                        default=ft.FileAtoms.default_filename, nargs='?')
+    parser.add_argument('fn', type=str, help='abundances file name', default='abonds.dat', nargs='?')
     args = parser.parse_args()
 
-    m = ft.FileAtoms()
+    m = ft.FileAbonds()
     m.load(args.fn)
     app = a99.get_QApplication([])
-    form = pf.XFileAtoms()
+    form = ex.XFileAbonds()
     form.show()
     form.load(m)
     sys.exit(app.exec_())

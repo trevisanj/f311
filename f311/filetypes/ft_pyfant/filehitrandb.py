@@ -45,13 +45,6 @@ class FileHitranDB(FileSQLiteDB):
     def _create_schema(self):
         conn = self.get_conn()
         c = conn.cursor()
-
-
-
-
-
-
-
         c.execute("""create table molecule (ID integer unique, Formula text unique, Name text)""")
         # **Note** isotopologue.ID is not unique, it starts over for each molecule
         c.execute("""create table isotopologue (ID integer,

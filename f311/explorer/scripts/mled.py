@@ -10,6 +10,8 @@ import argparse
 import logging
 import f311.pyfant as pf
 import a99
+import f311.filetypes as ft
+import f311.explorer as ex
 
 
 if __name__ == "__main__":

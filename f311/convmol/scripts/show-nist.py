@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 
 
-"""Retrieves molecular constants from NIST Web Book for a particular molecule
+"""Downloads and prints molecular constants from NIST Web Book for a particular molecule
 
 Example:
 
-    get-nist-mol.py OH
+    show-nist.py OH
 
 """
 
 
 import tabulate
 import sys
-from pyfant.convmol.nistbot import get_nist_webbook_constants
 import a99
 import logging
 import argparse
+import f311.convmol as cm
 
 
 a99.logging_level = logging.INFO
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     parser.add_argument('formula', type=str, help='NIST formula', nargs=1)
     args = parser.parse_args()
 
-    data, header, title = get_nist_webbook_constants(args.formula)
+    data, header, title = cm.get_nist_webbook_constants(args.formula)
     print("\n*** {} ***\n".format(title))
     print(tabulate.tabulate(data, header))
 

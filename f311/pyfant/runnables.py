@@ -1,15 +1,15 @@
-__all__ = ["Runnable", "RunnableStatus", "ExecutableStatus", "Executable",
-           "Innewmarcs", "Hydro2", "Pfant", "Nulbad", "Combo"]
-
-
 import subprocess
 from .conf import *
 import os
-from .gear import *
 from .errors import *
 from threading import Lock
 import a99
-import f311.pyfant as pf
+from .. import filetypes as ft
+
+
+__all__ = ["Runnable", "RunnableStatus", "ExecutableStatus", "Executable",
+           "Innewmarcs", "Hydro2", "Pfant", "Nulbad", "Combo"]
+
 
 @a99.froze_it
 class RunnableStatus(object):

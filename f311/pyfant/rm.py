@@ -1,7 +1,5 @@
-"""ThreadManager2 class."""
-__all__ = ["RunnableManager"]
+"""RunnableManager classs"""
 
-#from a99 import random_name, seconds2str, get_python_logger, MyLock, froze_it
 import a99
 import threading
 from PyQt5.QtCore import QObject, pyqtSignal
@@ -11,6 +9,10 @@ import time
 from threading import Lock
 import sys
 import collections
+
+
+__all__ = ["RunnableManager"]
+
 
 
 def _tm_print(s):

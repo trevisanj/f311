@@ -5,7 +5,6 @@ VALD3-to-PFANT conversions
 __all__ = ["vald3_to_atoms"]
 
 import csv
-import f311.pyfant as pf
 import f311.filetypes as ft
 import a99
 import sys
@@ -97,7 +96,7 @@ def vald3_to_atoms(file_obj):
                 # Therefore, we fall back.
                 _waals = 0
 
-            line = pf.AtomicLine()
+            line = ft.AtomicLine()
             line.lambda_ = float(row[1])
             line.algf = float(row[2])
             line.kiex = float(row[3])
@@ -130,7 +129,7 @@ def vald3_to_atoms(file_obj):
             if key in edict:
                 a = edict[key]
             else:
-                a = edict[key] = pf.Atom()
+                a = edict[key] = ft.Atom()
                 a.elem = elem
                 a.ioni = int(s_ioni)
                 ret.atoms.append(a)

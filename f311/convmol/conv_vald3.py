@@ -3,7 +3,6 @@ VALD3-specific conversion
 """
 
 
-import f311.pyfant as pf
 import f311.filetypes as ft
 import f311.physics as ph
 import a99

@@ -9,6 +9,7 @@ import argparse
 import logging
 import f311.pyfant as pf
 import a99
+import f311.filetypes as ft
 
 
 a99.logging_level = logging.INFO

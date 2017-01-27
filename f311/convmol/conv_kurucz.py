@@ -2,7 +2,6 @@
 """
 
 
-import f311.pyfant as pf
 import f311.physics as ph
 import f311.filetypes as ft
 from .. import convmol as cm

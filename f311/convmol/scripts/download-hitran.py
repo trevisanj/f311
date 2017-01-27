@@ -4,14 +4,14 @@
 Downloads molecular lines from HITRAN database
 """
 
-import f311.pyfant as pf
 import argparse
 import logging
 import a99
 import tabulate
 import sys
 import os
-from pyfant.convmol import hapi
+from f311 import hapi
+import f311.filetypes as ft
 
 _DEF_T = '(molecular formula)'
 _DEF_M = '(lists molecules)'

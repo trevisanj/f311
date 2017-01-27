@@ -2,7 +2,6 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import a99
-import f311.pyfant as pf
 # from a_WState import WState
 # import moldb as db
 from .a_WFileMolDB import *

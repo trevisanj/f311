@@ -10,8 +10,10 @@ import argparse
 import logging
 import numpy as np
 import sys
-import f311.pyfant as pf
 import a99
+import f311.filetypes as ft
+import f311.explorer as ex
+import f311.explorer as ex
 
 
 a99.logging_level = logging.INFO
@@ -21,10 +23,7 @@ a99.flag_log_file = True
 DEFOUT = "atoms-untuned-<fn_input>"
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-     description=__doc__,
-     formatter_class=a99.SmartFormatter
-     )
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=a99.SmartFormatter)
     parser.add_argument('fn_input', type=str, help='input file name', nargs=1)
     parser.add_argument('fn_output', type=str, help='output file name', nargs="?",
      default=DEFOUT)
@@ -42,7 +41,7 @@ if __name__ == "__main__":
 
     logger.info("Converting file...")
     with open(args.fn_input[0], 'r') as file_:
-        file_atoms = pf.vald3_to_atoms(file_)
+        file_atoms = ex.vald3_to_atoms(file_)
 
     n0 = file_atoms.num_lines
     logger.info("Number of lines before filtering: %d" % n0)

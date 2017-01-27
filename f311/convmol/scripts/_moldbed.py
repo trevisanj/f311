@@ -7,7 +7,6 @@ Molecular Constants DB editor
 import sys
 import argparse
 import logging
-import f311.pyfant as pf
 import a99
 import logging
 import os

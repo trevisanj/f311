@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from pyfant import hitrandb as db
 import a99
 import os
 import sys

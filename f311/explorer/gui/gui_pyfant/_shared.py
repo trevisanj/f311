@@ -2,11 +2,9 @@
 Constants shared among windows, and resources that are not general enough to be put in API
 """
 
-import a99
 
-__all__ = ["COLOR_STAR", "COLOR_CONFIG", "INITIALIZES_SUN", "PARAMS_INVALID", "LLZERO_LLFIN",
-           "DESCR_PTDISK", "DESCR_MULTI", "SOL_HEADERS", "SOL_HEADERS_PLOT", "SOL_ATTR_NAMES",
-           "ATOM_HEADERS", "ATOM_ATTR_NAMES", "PlotInfo"]
+# No need to implementa a "__all__", a99 will be del'ed at the end
+import a99
 
 
 # Color for labels indicating a star parameter
@@ -62,3 +60,5 @@ class PlotInfo(object):
         self.mpl_obj = None  # matplotlib Lines2D object
         self.axis = None  # matplotlib axis
         self.y_vector = None  # reference to sol.sj or jj
+
+del a99

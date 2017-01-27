@@ -5,11 +5,12 @@ Cuts molecular lines file to wavelength interval specified
 The interval is [llzero, llfin]
 """
 
+# TODO add this functionality to mled.py
 
 import argparse
 import logging
-import f311.pyfant as pf
 import a99
+import f311.filetypes as ft
 
 
 a99.logging_level = logging.INFO

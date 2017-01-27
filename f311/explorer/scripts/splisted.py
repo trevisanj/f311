@@ -5,7 +5,8 @@
 import sys
 import argparse
 import a99
-import f311.aosss as ao
+import f311.filetypes as ft
+import f311.explorer as ex
 import logging
 import f311.explorer as ex
 import f311.filetypes as ft

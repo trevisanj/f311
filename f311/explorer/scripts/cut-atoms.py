@@ -5,11 +5,15 @@ Cuts atomic lines file to wavelength interval specified
 The interval is [llzero, llfin]
 """
 
+# TODO add this functionality to ated.py
+
 
 import argparse
 import logging
-import f311.pyfant as pf
 import a99
+import f311.filetypes as ft
+import f311.explorer as ex
+import f311.filetypes as ft
 
 
 a99.logging_level = logging.INFO

@@ -12,7 +12,7 @@ import logging
 import a99
 from f311.filetypes import *
 from .. import explorer as ex
-import f311.physics as ph
+from .. import physics as ph
 
 __all__ = [
     "load_any_file", "load_spectrum", "load_spectrum_fits_messed_x", "list_data_types",

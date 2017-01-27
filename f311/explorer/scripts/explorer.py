@@ -3,6 +3,8 @@
 """AstroAPI Explorer --  list, visualize, and edit data files (_à la_ File Manager)"""
 
 import a99
+import f311.filetypes as ft
+import f311.explorer as ex
 import f311.explorer as ex
 import sys
 import argparse

@@ -11,7 +11,6 @@ from ... import hapi
 import os
 import datetime
 from collections import OrderedDict
-import f311.pyfant as pf
 import f311.filetypes as ft
 
 

@@ -9,12 +9,12 @@ __all__ = ["Conf", "FOR_INNEWMARCS", "FOR_HYDRO2", "FOR_PFANT",
 
 import shutil
 import os
-from .gear import *
 import logging
 import subprocess
 from threading import Lock
-import f311.pyfant as pf
 import a99
+from .. import filetypes as ft
+from .. import pyfant as pf
 
 
 # Indexes to use in Conf.sequence property
@@ -419,7 +419,7 @@ class Conf(object):
                 obj = self.__getattribute__(attr_name)
 
                 if obj is not None:
-                    assert isinstance(obj, ex.DataFile)
+                    assert isinstance(obj, ft.DataFile)
                     fn_attr_name = "fn_"+attr_name[5:]
                     curr_fn = self.__opt.__getattribute__(fn_attr_name)
                     # Tries to preserve custom file name given to file

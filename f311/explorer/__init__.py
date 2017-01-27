@@ -20,6 +20,7 @@ from .paths import *
 from .util import *
 from .collaborate import *
 from .blocks import *
+from .from_vald import *
 
 
 # # Function to access package-specific config file

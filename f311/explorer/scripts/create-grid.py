@@ -36,6 +36,8 @@ import glob
 import os
 import sys
 import a99
+import f311.filetypes as ft
+import f311.explorer as ex
 
 
 a99.logging_level = logging.INFO

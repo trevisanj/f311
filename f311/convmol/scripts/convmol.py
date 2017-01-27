@@ -4,10 +4,11 @@
 
 import sys
 import argparse
-import f311.pyfant as pf
 import a99
 import logging
 import os
+import f311.filetypes as ft
+import f311.convmol as cm
 
 
 a99.logging_level = logging.INFO
@@ -34,7 +35,7 @@ if __name__ == "__main__":
         m = ft.FileMolDB()
         m.load(args.fn)
     app = a99.get_QApplication([])
-    form = pf.convmol.XConvMol(None, m)
+    form = cm.XConvMol(None, m)
     form.show()
     sys.exit(app.exec_())
 

@@ -1,10 +1,7 @@
-import f311.pyfant as pf
 import f311.filetypes as ft
 import datetime
 
-
 __all__ = ["make_file_molecules"]
-
 
 
 def make_file_molecules(mol_row, state_consts, lines, qgbd_calculator, sols_calculator):
@@ -43,7 +40,7 @@ def _make_molecule(mol_row, sols):
              values may have been customized by the user in widget WMolConst
     """
 
-    mol = pf.Molecule()
+    mol = ft.Molecule()
     mol.description = "{name} ({formula})".format(**mol_row)
     mol.symbols = [mol_row["symbol_a"], mol_row["symbol_b"]]
     mol.fe = mol_row["fe"]

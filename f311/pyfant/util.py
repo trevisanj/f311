@@ -4,17 +4,19 @@ Miscellanea routines that depend on other pyfant modules.
 Rule: only 'gui/' modules can import util!!!
 
 """
+import os
+import glob
+import shutil
+import a99
+from .. import pyfant as pf
+from .. import explorer as ex
+
+
 __all__ = [
     "run_parallel", "setup_inputs", "copy_star", "link_to_data", "create_or_replace_or_skip_links",
     "copy_or_skip_files",
 ]
 
-import os
-import glob
-import shutil
-import a99
-import f311.pyfant as pf
-import f311.explorer as ex
 
 
 # ##################################################################################################
