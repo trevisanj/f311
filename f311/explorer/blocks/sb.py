@@ -1,4 +1,4 @@
-__all__ = ["SB_Rubberband", "SB_AddNoise", "SB_FnuToFlambda", "SB_FLambdaToFNu", "SB_ElementWise",
+__all__ = ["SB_Rubberband", "SB_AddNoise", "SB_FNuToFlambda", "SB_FLambdaToFNu", "SB_ElementWise",
            "SB_Extend", "SB_Cut", "SB_Normalize", "SB_ConvertYUnit", "SB_Add", "SB_Mul",
            "SB_MulByLambda", "SB_DivByLambda"]
 
@@ -9,6 +9,7 @@ import copy
 from . import SpectrumBlock
 import astropy.units as u
 from ... import explorer as ex
+from ... import physics as ph
 
 
 class SB_Rubberband(SpectrumBlock):
@@ -63,55 +64,6 @@ class SB_AddNoise(SpectrumBlock):
         output.y = np.copy(inp.y) + np.random.normal(0, self.std, n)
         return output
 
-
-class SB_FLambdaToFNu(SpectrumBlock):
-    """
-    Flux-lambda to flux-nu conversion. Assumes the wavelength axis is in angstrom
-
-    Formula:
-        f_nu = f_lambda*(lambda/nu) = f_lambda*lambda**2/c
-
-        where
-            lambda is the wavelength in cm,
-            c is the speed of light in cm/s
-            f_lambda has irrelevant unit for this purpose
-    """
-    def _do_use(self, inp):
-        out = self._copy_input(inp)
-        out.flambda_to_fnu()
-        return out
-
-
-class SB_FnuToFlambda(SpectrumBlock):
-    """
-    Flux-nu to flux-lambda conversion. Assumes the wavelength axis is in angstrom
-
-    Formula:
-        f_lambda = f_nu*(nu/lambda) = f_nu*c/lambda**2
-
-        where
-            lambda is the wavelength in cm,
-            c is the speed of light in cm/s
-            f_lambda has irrelevant unit for this purpose
-    """
-
-    def _do_use(self, inp):
-        out = self._copy_input(inp)
-        out.fnu_to_flambda()
-        return out
-
-
-class SB_FlambdaToFnu(SpectrumBlock):
-    """
-    Flux-nu to flux-lambda conversion. Assumes the wavelength axis is in angstrom
-
-    Formula:
-        f_nu = f_lambda*(lambda/nu) = f_lambda*lambda**2/c
-    """
-    def _do_use(self, inp):
-        out = self._copy_input(inp)
-        out.flambda_to_fnu()
-        return out
 
 
 class SB_ElementWise(SpectrumBlock):
@@ -316,8 +268,37 @@ class SB_ConvertYUnit(SpectrumBlock):
         # qty = inp.y * inp.yunit
         out = self._copy_input(inp)
         out.y = out.yunit.to(self.unit, out.y, equivalencies=u.spectral_density(out.xunit, out.x))
-        out.unit = copy.deepcopy(self.unit)
+        out.yunit = copy.deepcopy(self.unit)
         return out
+
+
+class SB_FNuToFlambda(SB_ConvertYUnit):
+    """
+    Flux-nu to flux-lambda conversion. Assumes the wavelength axis is in angstrom
+
+    Formula:
+        f_lambda = f_nu*(nu/lambda) = f_nu*c/lambda**2
+
+        where
+            lambda is the wavelength in cm,
+            c is the speed of light in cm/s
+            f_lambda has irrelevant unit for this purpose
+    """
+
+    def __init__(self):
+        SB_ConvertYUnit.__init__(self, ph.flambda)
+
+
+class SB_FLambdaToFNu(SB_ConvertYUnit):
+    """
+    Flux-nu to flux-lambda conversion. Assumes the wavelength axis is in angstrom
+
+    Formula:
+        f_nu = f_lambda*(lambda/nu) = f_lambda*lambda**2/c
+    """
+    def __init__(self):
+        SB_ConvertYUnit.__init__(self, ph.fnu)
+
 
 
 class SB_Mul(SpectrumBlock):

@@ -180,12 +180,12 @@ def create_or_replace_or_skip_links(ff, dest_dir="."):
             a99.print_skipped("file exists in local directory")
             flag_skip = True
         else:
-            obj = ft.load_with_classes(f, [ft.FileMain, ft.FileAbonds, ft.FileDissoc, ft.FileToH])
+            obj = a99.load_with_classes(f, [ft.FileMain, ft.FileAbonds, ft.FileDissoc, ft.FileToH])
             if obj is not None:
                 a99.print_skipped("detected type %s" % obj.__class__.__name__)
                 flag_skip = True
             else:
-                obj = ft.load_with_classes(f, [ft.FileModBin])
+                obj = a99.load_with_classes(f, [ft.FileModBin])
                 if obj is not None:
                     if len(obj) == 1:
                         a99.print_skipped("%s of only one record" % obj.__class__.__name__)
@@ -221,7 +221,7 @@ def copy_or_skip_files(ff, dest_dir="."):
             a99.print_skipped("file exists in local directory")
             flag_skip = True
         else:
-            obj = ft.load_with_classes(f, [ft.FileMain, ft.FileAbonds, ft.FileDissoc])
+            obj = a99.load_with_classes(f, [ft.FileMain, ft.FileAbonds, ft.FileDissoc])
             if obj is not None:
                 pass
             else:

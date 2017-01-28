@@ -11,7 +11,7 @@ import numpy as np
 import a99
 from .... import explorer as ex
 import f311.filetypes as ft
-# import f311.filetypes as ft
+import f311.physics as ph
 
 
 class XScaleSpectrum(a99.XLogDialog):
@@ -25,7 +25,7 @@ class XScaleSpectrum(a99.XLogDialog):
 
         self.setWindowTitle("Scale spectrum")
 
-        self.bandpasses = a99.get_ubv_bandpasses()
+        self.bandpasses = ph.get_ubv_bandpasses()
 
         # Internal flag to prevent taking action when some field is updated programatically
         self.flag_process_changes = False
@@ -114,7 +114,6 @@ class XScaleSpectrum(a99.XLogDialog):
             label.setToolTip(long_descr)
             edit.setToolTip(long_descr)
 
-
         # ### Text Edit To Show calculated results
         x = self.keep_ref(QLabel("<b>Computations</b>"))
         y = self.textEdit = QTextEdit()
@@ -200,7 +199,7 @@ class XScaleSpectrum(a99.XLogDialog):
 
     def accept(self):
         if self.factor_ is None or np.isinf(self.factor_):
-            mag = QMessageBox.critical(None, "Cannot scale", "Scaling factor cannot be calculated")
+            _ = QMessageBox.critical(None, "Cannot scale", "Scaling factor cannot be calculated")
             return False
         QDialog.accept(self)
 
@@ -222,7 +221,7 @@ class XScaleSpectrum(a99.XLogDialog):
             fig.clear()
             # name = self.band_name()
             bandpass = self.bandpasses[self.band_index()]
-            mag_data = a99.calculate_magnitude(self.spectrum, bandpass, self.system(), self.zero_point(),
+            mag_data = ph.calculate_magnitude(self.spectrum, bandpass, self.system(), self.zero_point(),
                                               self.flag_force_band_range())
             _draw_figure(fig, mag_data, self.spectrum, self.flag_force_band_range())
             self.canvas0.draw()
@@ -230,7 +229,7 @@ class XScaleSpectrum(a99.XLogDialog):
             mag = self.desired_magnitude()
             cmag = mag_data["cmag"]
 
-            self.factor_ = k = a99.MAGNITUDE_BASE ** (cmag - mag) if cmag is not None else float("nan")
+            self.factor_ = k = ph.MAGNITUDE_BASE ** (cmag - mag) if cmag is not None else float("nan")
 
             # Updates calculated state
 
@@ -303,7 +302,7 @@ def _draw_figure(fig, mag_data, spectrum, flag_force_band_range):
     overall_max_y = 0
     ax = fig.add_subplot(312, sharex=ax0)
     # other bands
-    for band in a99.get_ubv_bandpasses():
+    for band in ph.get_ubv_bandpasses():
         if band.lf >= plot_l0 and band.l0 <= plot_lf:
             x = np.linspace(band.l0, band.lf, 200)
             y = band.ufunc()(x)

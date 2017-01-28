@@ -26,7 +26,7 @@ class XPlotXY(a99.XLogMainWindow):
             self._refs.append(obj)
             return obj
 
-        assert isinstance(collection, ex.SpectrumCollection)
+        assert isinstance(collection, ft.SpectrumCollection)
         self.collection = collection
 
         lw1 = keep_ref(QVBoxLayout())

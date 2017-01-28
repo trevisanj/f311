@@ -63,10 +63,10 @@ class WSpectrumCollection(a99.WBase):
         action.setToolTip("Selected spectra will be deleted and transformed spectra will be added at the end")
         action.triggered.connect(self.on_sel_use_spectrum_block)
 
-        action = self.action_sel_plot_stacked = QAction(a99.get_icon("visualization"), "Plot &Stacked", self)
+        action = self.action_sel_plot_stacked = QAction(a99.get_icon("chart2"), "Plot &Stacked", self)
         action.triggered.connect(self.on_sel_plot_stacked)
 
-        action = self.action_sel_plot_overlapped = QAction(a99.get_icon("visualization"), "Plot &Overlapped", self)
+        action = self.action_sel_plot_overlapped = QAction(a99.get_icon("chart1"), "Plot &Overlapped", self)
         action.triggered.connect(self.on_sel_plot_overlapped)
 
         action = self.action_sel_open_in_new = QAction(a99.get_icon("window-new"), "Open in new window", self)
@@ -228,7 +228,7 @@ class WSpectrumCollection(a99.WBase):
     # # Interface
 
     def set_collection(self, x):
-        assert isinstance(x, ex.SpectrumCollection)
+        assert isinstance(x, ft.SpectrumCollection)
         self.collection = x
         self.__update_gui()
         self.setEnabled(True)
@@ -549,13 +549,13 @@ class WSpectrumCollection(a99.WBase):
     def on_sel_plot_stacked(self):
         sspp = self.get_selected_spectra()
         if len(sspp) > 0:
-            a99.plot_spectra(sspp)
+            ex.plot_spectra(sspp)
 
 
     def on_sel_plot_overlapped(self):
         sspp = self.get_selected_spectra()
         if len(sspp) > 0:
-            a99.plot_spectra_overlapped(sspp)
+            ex.plot_spectra_overlapped(sspp)
 
 
     def on_sel_open_in_new(self):
@@ -654,13 +654,13 @@ class WSpectrumCollection(a99.WBase):
         if not filenames:
             return
 
-        # classes = ex.classes_sp()+[ft.FileSpectrumList, ft.FileSparseCube]
-        classes = ex.classes_collection()
+        # classes = ft.classes_sp()+[ft.FileSpectrumList, ft.FileSparseCube]
+        classes = ft.classes_collection()
         report, successful, failed = ["<b>Results</b>"], [], []
         for filename in filenames:
             filename = str(filename)
             basename = os.path.basename(filename)
-            file = ft.load_with_classes(filename, classes)
+            file = a99.load_with_classes(filename, classes)
             try:
                 if file is None:
                     raise RuntimeError("Could not load file")
@@ -770,7 +770,7 @@ class WSpectrumCollection(a99.WBase):
 
 
     def __update_enabled_actions(self):
-        can_group = isinstance(self.collection, ex.SpectrumList)
+        can_group = isinstance(self.collection, ft.SpectrumList)
         has_any = self.twSpectra.rowCount() > 0
         any_selected = len(self.twSpectra.selectedItems()) > 0
         has_current = self.twSpectra.currentRow() > -1

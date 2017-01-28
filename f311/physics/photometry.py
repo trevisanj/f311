@@ -11,7 +11,7 @@ import copy
 import a99
 import f311.filetypes as ft
 from .. import physics as ph
-from .. import explorer as ex
+
 
 MAGNITUDE_BASE = 100. ** (1. / 5)  # approx. 2.512
 _REF_NUM_POINTS = 5000   # number of evaluation points over entire band range
@@ -38,9 +38,11 @@ def get_ubv_bandpasses_dict():
     return _ubv_bandpasses_dict
 
 
-def get_ubv_bandpass(name):
+def get_ubv_bandpass(bp):
+    if isinstance(bp, Bandpass):
+        return bp
     get_ubv_bandpasses()  # just to assure the dict is assembled
-    return _ubv_bandpasses_dict[name]
+    return _ubv_bandpasses_dict[bp]
 
 
 def calc_mag(sp, bp, system="stdflux", zero_point=0., flag_force_band_range=False):

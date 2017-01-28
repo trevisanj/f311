@@ -5,10 +5,12 @@
 Run all scripts
 
 Review this mapping: try not to get rid of the plugin system but perhaps split it
-  - file types
-  - visualization types
+  - ~file types~
+  - ~visualization types~
   - ~~scripts (programs.py)~~
-  - ONGOING ... default data: delegate to filetypes package
+  - ~ONGOING ... default data: delegate to filetypes package~
+
+**grid.moo not opening**
   
   
 Template project

@@ -30,8 +30,8 @@ class XFileSpectrumList(a99.XFileMainWindow):
         self.save_as_texts[0] = "Save %s as..." % _VVV
         self.open_texts[0] = "Load %s" % _VVV
         self.clss[0] = ft.FileSpectrumList
-        self.clsss[0] = ex.classes_collection()  # file types that can be opened
-        self.clsss[0] = tuple([ft.FileSpectrumList, ft.FileFullCube]+ex.classes_sp())  # file types that can be opened
+        self.clsss[0] = ft.classes_collection()  # file types that can be opened
+        self.clsss[0] = tuple([ft.FileSpectrumList, ft.FileFullCube]+ft.classes_sp())  # file types that can be opened
         self.wilds[0] = "*.splist"
 
         lv = keep_ref(QVBoxLayout(self.gotting))

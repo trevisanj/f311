@@ -396,7 +396,7 @@ class FileMoo(DataFile):
             raise RuntimeError("Incorrect file size! Must be a multiple of {0:d}".format(
                                MOG_REC_SIZE))
 
-        num_rec = b/MOG_REC_SIZE
+        num_rec = int(b/MOG_REC_SIZE)
         self.records = []
         with open(filename, "rb") as h:
             for inum in range(1, num_rec+1):

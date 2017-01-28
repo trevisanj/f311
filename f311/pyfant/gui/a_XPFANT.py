@@ -47,6 +47,15 @@ class XPFANT(ex.XMainAbonds):
         self.setWindowTitle("PFANT launcher")
         self.__update_lineEdit_custom_id()
 
+
+    # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
+    # "Duck-typing"
+
+    def set_manager_form(self, x):
+        assert isinstance(x, pf.XRunnableManager)
+        self._manager_form = x
+        self._rm = x.rm
+
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # Slots for Qt library signals
 

@@ -3,7 +3,7 @@ __all__ = ["ToScalar_SNR", "ToScalar_Magnitude", "ToScalar_UseNumPyFunc"]
 
 from .basic import ToScalar
 import numpy as np
-
+import f311.physics as ph
 
 class ToScalar_SNR(ToScalar):
     """
@@ -48,25 +48,31 @@ class ToScalar_Magnitude(ToScalar):
     """
     Calculates the magnitude of a spectrum
 
-        Arguments:
-            band_name -- U/B/V/R/I/Y/J/H/K/L/M/N/Q
-            flag_force_parametric -- (default: False) if set, will use parametric data even for
-                the tabulated bands U/B/V/R/I
-            flag_force_band_range -- (default: False) if set, will consider that the spectrum
-                extends over the full range of the band even if it is narrower than that
+        Args:
+            band_name: U/B/V/R/I/Y/J/H/K/L/M/N/Q
+            system: reference magnitude system.
+                Choices:
+                    "stdflux" -- literature reference values for bands U,B,V,R,I,J,H,K only
+                    "vega" -- uses the Vega star spectrum as a reference
+                    "ab" -- AB[solute] magnitude system
+            zero_point: subtracts this value from the calculated magnitude to implement some desired
+                        correction.
+            flag_force_band_range: (default: False) if set, will consider that the spectrum
+                                   extends over the full range of the band even if it is narrower
+                                   than that
     """
 
 
-    def __init__(self, band_name, flag_force_parametric=False, flag_force_band_range=False):
+    def __init__(self, band_name, system="stdflux", zero_point=0., flag_force_band_range=False):
         ToScalar.__init__(self)
         self.band_name = band_name
-        self.flag_force_parametric = flag_force_parametric
+        self.system = system
+        self.zero_point = zero_point
         self.flag_force_band_range = flag_force_band_range
 
     def _do_use(self, inp):
-        temp = inp.calculate_magnitude(self.band_name, self.flag_force_parametric,
-                                      self.flag_force_band_range)
-        return temp["cmag"]
+        return ph.calc_mag(inp, self.band_name, self.system, self.zero_point,
+                           self.flag_force_band_range)
 
 
 class ToScalar_UseNumPyFunc(ToScalar):

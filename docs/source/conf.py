@@ -107,7 +107,7 @@ html_static_path = ['nstatic']
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'astroapidoc'
+htmlhelp_basename = 'f311doc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -134,7 +134,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'astrogear.tex', 'astrogear Documentation',
+    (master_doc, 'f311.tex', 'f311 Documentation',
      'Julio Trevisan', 'manual'),
 ]
 
@@ -144,7 +144,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'astrogear', 'astrogear Documentation',
+    (master_doc, 'f311', 'f311Documentation',
      [author], 1)
 ]
 
@@ -155,8 +155,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'astrogear', 'astrogear Documentation',
-     author, 'astrogear', 'One line description of project.',
+    (master_doc, 'f311', 'f311 Documentation',
+     author, 'f311', 'One line description of project.',
      'Miscellaneous'),
 ]
 

@@ -12,6 +12,7 @@ import sys
 import os
 from f311 import hapi
 import f311.filetypes as ft
+import f311.physics as ph
 
 _DEF_T = '(molecular formula)'
 _DEF_M = '(lists molecules)'
@@ -117,8 +118,8 @@ if __name__ == "__main__":
                 sys.exit()
 
             # Here will fetch data
-            wn0 = a99.air_to_vacuum(1e8/args.llzero)
-            wn1 = a99.air_to_vacuum(1e8/args.llfin)
+            wn0 = ph.air_to_vacuum(1e8/args.llzero)
+            wn1 = ph.air_to_vacuum(1e8/args.llfin)
             print("Wavenumber interval (vacuum): [{}, {}] cm**-1".format(wn1, wn0))
 
             table_name = args.t if args.t != _DEF_T else row1["Formula"]

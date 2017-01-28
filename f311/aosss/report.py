@@ -11,6 +11,7 @@ import glob
 import a99
 from .. import aosss as ao
 import f311.filetypes as ft
+import f311.explorer as ex
 
 
 def create_index(dir_="."):
@@ -59,7 +60,6 @@ def _color(s, color):
     return '<span style="color: %s">%s</span>' % (color, s)
 
 
-
 def create_simulation_report(simid, dir_="."):
     """Creates HTML output and several PNG files with coherent naming
 
@@ -81,7 +81,7 @@ def create_simulation_report(simid, dir_="."):
     # file_prefix: common start to all filenames generated
     file_prefix = os.path.join(dir_, "report-"+simid)
     fn_output = file_prefix + ".html"
-    #f_fn_fits = lambda middle: os.path.join(dir_, "%s_%s.fits" % (simid, middle))
+    # f_fn_fits = lambda middle: os.path.join(dir_, "%s_%s.fits" % (simid, middle))
     fn_log = os.path.join(dir_, "%s.out" % simid)
     fn_par = os.path.join(dir_, "%s.par" % simid)
     flag_log = os.path.isfile(fn_log)
@@ -126,7 +126,6 @@ def create_simulation_report(simid, dir_="."):
 
         l_s.append("</pre>\n")
         html.write("".join(l_s))
-
 
         html.write(_h("2. Simulation specification", 2))
         if  flag_par:
@@ -183,15 +182,15 @@ def create_simulation_report(simid, dir_="."):
                     # note: skips "ifu_seeing" because it takes too long to renderize
                     fig = plt.figure()
                     ax = fig.gca(projection='3d')
-                    sparsecube = ao.SparseCube()
+                    sparsecube = ft.SparseCube()
                     sparsecube.from_full_cube(item.fileobj.wcube)
-                    ao.draw_cube_3d(ax, sparsecube)
+                    ex.draw_cube_3d(ax, sparsecube)
                     a99.set_figure_size(fig, FIGURE_WIDTH, 480. / 640 * FIGURE_WIDTH)
                     fig.tight_layout()
                 elif isinstance(item.fileobj, ft.FileSpectrum):
                     if item.keyword == "spintg":
                         sp_ref = item.fileobj.spectrum
-                    fig = a99.draw_spectra([item.fileobj.spectrum])
+                    fig = ex.draw_spectra([item.fileobj.spectrum])
                     a99.set_figure_size(fig, FIGURE_WIDTH, 270. / 640 * FIGURE_WIDTH)
                     fig.tight_layout()
                 elif isinstance(item.fileobj, ft.FileFits):
@@ -221,7 +220,6 @@ def create_simulation_report(simid, dir_="."):
             html.write("</td>\n")
             html.write("</tr>\n")
         html.write("</table>\n")
-
 
         html.write(_h("4. Log file dump", 2))
         if  flag_log:

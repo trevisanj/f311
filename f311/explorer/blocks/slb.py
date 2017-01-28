@@ -5,7 +5,7 @@ import a99
 import copy
 from .basic import *
 from . import sb
-from ...explorer import *
+from ... import explorer as ex
 
 
 class SLB_UseSpectrumBlock(SpectrumListBlock):

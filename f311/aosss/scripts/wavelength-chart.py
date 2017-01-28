@@ -138,7 +138,7 @@ cc = [MyCoverage("HMM", [(4000, 18000)]),
 #
 #     # # bands
 #     #   =====
-#     for band_name, bandpass in a99.get_ubv_bandpasses_dict().items():
+#     for band_name, bandpass in ph.get_ubv_bandpasses_dict().items():
 #         y = bandpass.ufunc()(x)*.75
 #         plt.plot(x, y, label=band_name, c=COLOR_BAND)
 #         idx_max = np.argmax(y)

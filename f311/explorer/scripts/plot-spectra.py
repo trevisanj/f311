@@ -89,7 +89,7 @@ if __name__ == "__main__":
     flag_ok = False
     for x in ff:
         print("Reading file '{0!s}'...".format(x))
-        f = ft.load_with_classes(x, ft.classes_sp())
+        f = a99.load_with_classes(x, ft.classes_sp())
         if f is None:
             a99.print_error("... type not recognized, sorry")
         else:

@@ -29,7 +29,7 @@ class VisModRecord(Vis):
     action = "Visualize single record"
 
     def __init__(self):
-        a99.Vis.__init__(self)
+        Vis.__init__(self)
         # 1-based (first is 1 (as in Fortran), not 0) record index in .mod file
         self.inum = None
 

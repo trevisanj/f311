@@ -1,3 +1,17 @@
+.. toctree::
+   :maxdepth: 3
+
+   f311
+   aosss
+   convmol
+   explorer
+   filetypes
+   physics
+   pyfant
+   modules
+   license
+
+
 pyperdrive API reference
 ======================
 
@@ -9,13 +23,6 @@ For installation and overview, please refer to http://github.com/trevisanj/pyper
 Guide
 ^^^^^
 
-.. toctree::
-   :maxdepth: 3
-
-   modules
-   pyperdrive.datatypes
-   pyperdrive.gui
-   license
 
 
 Indices and tables
