@@ -14,11 +14,11 @@ Sub-packages:
 
 ## Installation
 
-Installation instructions: [_f311_ documentation website](http://f311.readthedocs.org) or
+Installation instructions: [_f311_ documentation website](http://trevisanj.github.io/f311) or
 or [here](docs/source/index.rst)
 
 ## Documentation
 
-http://f311.readthedocs.org
+http://trevisanj.github.io/f311
 
  
