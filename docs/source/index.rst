@@ -38,6 +38,7 @@ Required Software
 
 Python packages
 ^^^^^^^^^^^^^^^
+- a99
 - matplotlib
 - scipy
 - numpy
@@ -61,7 +62,7 @@ Method 1 (prefer _pip_, use _apt_ package as alternative)
 
 .. code:: shell
 
-   sudo pip3 install numpy scipy matplotlib astropy configobj pyqt5 bs4 robobrowser requests fortranformat tabulate # requirements
+   sudo pip3 install a99 numpy scipy matplotlib astropy configobj pyqt5 bs4 robobrowser requests fortranformat tabulate # requirements
    sudo pip3 install f311
 
 
@@ -77,7 +78,7 @@ Method 2 (prefer _apt_, use _pip_ if no _apt_ package available)
 .. code:: shell
 
    sudo apt-get install python3-matplotlib python3-scipy python3-PyQt5 python3-astropy python3-pip python3-bs4
-   sudo pip3 install configobj robobrowser fortranformat tabulate # Requirements not in apt repository
+   sudo pip3 install a99 configobj robobrowser fortranformat tabulate # Requirements not in apt repository
    sudo pip3 install f311
 
 Method 3 (virtual environment with _conda_)
@@ -102,7 +103,7 @@ Now you should be able to install _f311_ from _pip_:
 
 .. code:: shell
 
-   pip install numpy scipy matplotlib astropy configobj pyqt5 bs4 robobrowser requests fortranformat tabulate  # requirements
+   pip install a99 numpy scipy matplotlib astropy configobj pyqt5 bs4 robobrowser requests fortranformat tabulate  # requirements
    pip install f311
 
 **Note** Every time you want to work with _f311_, you will need to activate the environment:
