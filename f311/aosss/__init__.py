@@ -1,3 +1,5 @@
+'''"Adaptive Optics Systems Simulation Support"'''
+
 # # Imports
 from .basic import *
 from .util import *
@@ -13,7 +15,7 @@ from .util import *
 
 # # Function to access package-specific config file
 def get_config():
-    """Returns AAConfigObj object that corresponds to file ~/.MY-PACKAGE-NAME.conf"""
+    """Returns AAConfigObj object that corresponds to file ~/.f311.aosss.conf"""
     import a99
     return a99.get_config_obj(".f311.aosss.conf")
 

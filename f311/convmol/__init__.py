@@ -2,7 +2,6 @@
 Conversion of molecular lines files.
 """
 
-
 from .convlog import *
 from .calc_qgbd import *
 from .conv_hitran import *

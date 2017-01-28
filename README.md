@@ -1,2 +1,24 @@
 # f311
-Collection of Astronomy-related packages and applications in Python
+
+Collection of Astronomy-related packages written in Python.
+
+Sub-packages:
+
+  - _f311.pyfant_: spectral synthesis
+  - _f311.convmol_: conversion of molecular spectral lines
+  - _f311.explorer_: browse, read, write, visualize, edit files
+  - _f311.filetypes_: file handling API
+  - _f311.physics_: some physics (photometry, Hönl-London factors, etc.)
+  - _f311.aosss_: Adaptive Optics Systems Simulation Support
+
+
+## Installation
+
+Installation instructions: [_f311_ documentation website](http://f311.readthedocs.org) or
+or [here](docs/source/index.rst)
+
+## Documentation
+
+http://f311.readthedocs.org
+
+ 

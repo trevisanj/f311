@@ -1,12 +1,10 @@
-aosss
+*f311.aosss*: Adaptive Optics Systems Simulation Support
 =====
-
-Adaptive Optics Systems Simulation Support
 
 Welcome!
 
 Introduction
-============
+------------
 
 *aosss* is a Python package and set of applications to facilitate
 steps in spectrograph+telescope simulation workflows:
@@ -18,14 +16,9 @@ steps in spectrograph+telescope simulation workflows:
 -  compile results into *spectrum list files*
 -  process/convert/visualize these *spectrum list files*
 
-Structure
----------
 
-*aosss* contains an API (application programming interface) and a
-set of scripts (standalone programs) that use this API.
-
-*aosss* Applications
-~~~~~~~~~~~~~~~~~~~~
+Applications
+------------
 
 Graphical applications:
 
@@ -43,20 +36,20 @@ All the programs above can be called with the ``--help`` or ``-h``
 option for more documentation
 
 Quick Start
-===========
+-----------
 
 This sections shows examples on how to perform a variety of tasks using
 *aosss* applications.
 
 List *aosss* applications
--------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: shell
 
     programs.py -p aosss
 
 Download simulation results
----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: shell
 
@@ -67,7 +60,7 @@ will download results for simulations *C001206*, *C001207*, ...,
 ``C*.fits``, ``C*.par``, ``C*.out``
 
 Create reports
---------------
+~~~~~~~~~~~~~~
 
 .. code:: shell
 
@@ -82,7 +75,7 @@ creates **HTML** and **PNG** files, for instance:
     report-C001206-001.png  report-C001206-003.png  report-C001206-005.png  report-C001206-007.png  report-C001206-009.png
 
 Group resulting spectra with same wavelength axis
--------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following will group all files ``C*_spintg.fits`` into different
 **spectrum list files**. Each of these files will contain the spectra
@@ -93,7 +86,7 @@ that share the same wavelength axis.
     aosss-create-spectrum-lists.py
 
 Organize files
---------------
+~~~~~~~~~~~~~~
 
 The following will move files into different directories according to
 some rules:
@@ -129,7 +122,7 @@ some rules:
     Continue (Y/n)? 
 
 Browse through reports
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: shell
 
@@ -142,7 +135,7 @@ will open file "index.html" in browser
 Example of reports index: |image0|
 
 Inspecting where spectral lines of interest will fall due to redshift
----------------------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: shell
 
@@ -156,7 +149,8 @@ Lines with ``z=3.5``: |image2|
 .. |image1| image:: img/chart-z-0.png
 .. |image2| image:: img/chart-z-35.png
 
-API reference
-=============
 
-.. include:: f311.aosss.rst
+API reference
+-------------
+
+:doc:`autodoc/f311.aosss`

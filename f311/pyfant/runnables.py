@@ -559,7 +559,6 @@ class Combo(Runnable):
     def load_result(self):
         """Calls load_result() for all contained executables, then collects all into self._result"""
         for exe in self.get_exes():
-            print ("EEEEEEEEEEEEEEEEe", exe)
             exe.load_result()
 
             # Bug checking: Executables must not repeat the names of their results,
