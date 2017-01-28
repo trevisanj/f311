@@ -78,6 +78,7 @@ class FileHitranDB(FileSQLiteDB):
         Args, Returns: see query_molecule
 
         Example:
+
         >>> f = FileHitranDB()
         >>> f.init_default()
         >>> _ = f.query_isotopologue(**{"molecule.formula": "OH"})
@@ -97,6 +98,8 @@ class FileHitranDB(FileSQLiteDB):
 
         Args:
             **kwargs: arguments passed to query_state()
+
+        Example:
 
         >>> f = FileHitranDB()
         >>> f.init_default()

@@ -209,6 +209,8 @@ Elm Ion      WL_air(A)   log gf* E_low(eV) J lo  E_up(eV) J up  lower  upper   m
 def _test():
     """Test code in docstring
 
+    Example:
+
     >>> h = _fake_file()
     >>> f = FileVald3()
     >>> f._do_load_h(h, "_fake_file")

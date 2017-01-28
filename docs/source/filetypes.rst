@@ -1,12 +1,12 @@
 *f311.filetypes*: file handling API
-=====
+===================================
 
 Introduction
 ------------
 
 *f311.filetypes* has classes to handle many different file formats used in Astronomy.
 
-All classes descend from :ref:`DataFile` containing some basic methods:
+All classes descend from :any:`DataFile` containing some basic methods:
 
 - ``load()``: loads file from disk into internal object variables
 - ``save_as()``: saves file to disk

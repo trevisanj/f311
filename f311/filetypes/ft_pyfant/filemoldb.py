@@ -125,6 +125,8 @@ class FileMolDB(FileSQLiteDB):
         """
         Test function
 
+        Example:
+
         >>> f = FileMolDB()
         >>> f.init_default()
         >>> conn = f.get_conn()
@@ -141,6 +143,8 @@ class FileMolDB(FileSQLiteDB):
 
         Args:
             **kwargs: arguments passed to query_state()
+
+        Example:
 
         >>> f = FileMolDB()
         >>> f.init_default()

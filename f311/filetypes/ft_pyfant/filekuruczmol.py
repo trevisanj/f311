@@ -185,6 +185,8 @@ def _fake_file():
 def _test():
     """Test code in docstring
 
+    Example:
+
     >>> h = _fake_file()
     >>> f = FileKuruczMolecule()
     >>> f._do_load_h(h, "_fake_file")

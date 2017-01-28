@@ -24,6 +24,8 @@ def quanta_to_branch(Jl, J2l, spin):
 
     Returns: branch letter: "P"/"Q"/"R"
 
+    Example:
+
     >>> quanta_to_branch(10.5, 11.5, 1)
     'P1'
     >>> quanta_to_branch(11.5, 10.5, 2)
@@ -60,7 +62,7 @@ def get_honllondon_formulas(LAML, LAM2L):
 
     Order as in Kovacs 1969, p130, 1st column
 
-    Usage, examples and tests:
+    Examples:
 
     >>> formulas = get_honllondon_formulas(1, 0)
 

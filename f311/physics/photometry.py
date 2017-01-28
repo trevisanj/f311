@@ -51,7 +51,10 @@ def calc_mag(sp, bp, system="stdflux", zero_point=0., flag_force_band_range=Fals
 
     Returns: (float) calculated magnitude
 
-    The following example prints a table showing the calculated magnitude for the Vega spectrum in several systems
+    Example:
+
+    >>> # The following example prints a table showing the calculated magnitude for the
+    >>> # Vega spectrum in several systems
     >>> import f311.physics as ph
     >>> import tabulate
     >>> systems = ["stdflux", "ab", "vega"]
@@ -97,6 +100,8 @@ def calculate_magnitude(sp, bp, system="stdflux", zero_point=0., flag_force_band
                 True -- zero-fill the spectrum to overlap the filter range completely
 
     Returns: a dictionary with "cmag": calculated magnitude, and many intermediary steps
+
+    Example:
 
     >>> from f311 import physics as ph
     >>> calculate_magnitude(ph.get_vega_spectrum(), "U", "stdflux", 0, False)

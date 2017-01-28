@@ -17,7 +17,9 @@ def vacuum_to_air(λvac):
     Original reference:
         Donald Morton (2000, ApJ. Suppl., 130, 403)
 
-    The following code converts wavenumber=2000 cm**-1 to wavelength in Angstrom
+    Example:
+
+    >>> # The following code converts wavenumber=2000 cm**-1 to wavelength in Angstrom
     >>> vacuum_to_air(1e8/2000)
     49986.36934549974
     """
@@ -43,12 +45,16 @@ def air_to_vacuum(λair):
     Formula author (according to [1]):
         N. Piskunov
 
-    The following code converts wavelength=5500 Angstrom to wavenumber in cm**-1:
+    Example:
+
+    >>> # The following code converts wavelength=5500 Angstrom to wavenumber in cm**-1:
     >>> 1e8/air_to_vacuum(5500.)
     18176.768046090445
 
-    The following code reproduces the figure shown in [1] ("comparison of the Morton and the inverse
-    transformation by NP between 2000 Å and 100000 Å.")
+    Example:
+
+    >>> # The following code reproduces the figure shown in [1] ("comparison of the Morton and the inverse
+    >>> # transformation by NP between 2000 Å and 100000 Å.")
     >>> import matplotlib.pyplot as plt
     >>> import numpy as np
     >>> λvac = 10**np.linspace(np.log10(2000), np.log10(1000000), 2000)

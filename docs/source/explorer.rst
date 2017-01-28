@@ -1,5 +1,5 @@
 *f311.explorer*: browse, read, write, visualize, edit files
-=====
+===========================================================
 
 Introduction
 ------------
@@ -24,7 +24,7 @@ Graphical applications:
 
 - `cubeed.py` -- Data Cube Editor, import/export WebSim-COMPASS data cubes
 
-- `explorer.py` -- AstroAPI Explorer --  list, visualize, and edit data files (_à la_ File Manager)
+- `explorer.py` -- AstroAPI Explorer --  list, visualize, and edit data files (*à la* File Manager)
 
 - `mained.py` -- Main configuration file editor.
 

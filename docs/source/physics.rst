@@ -1,5 +1,5 @@
-*f311.physics*: some physics
-=====
+*f311.physics*: Physics
+=======================
 
 Introduction
 ------------
@@ -10,7 +10,7 @@ Selected Physics-related resources:
 
 - Spectrum-to-RGB (red, green, blue) color conversion
 
-- Air-to-vacuum and _vice versa_ wavelenght conversion
+- Air-to-vacuum and vice versa wavelenght conversion
 
 - Calculation of Hönl-London factors according to formulas in Kovács' 1969 [1]
 
@@ -45,6 +45,7 @@ The following example compares flux-to-magnitude conversion of the Vega spectrum
 for different magnitude systems.
 
 .. code:: python
+
     import f311.physics as ph
     import tabulate
     systems = ["stdflux", "ab", "vega"]

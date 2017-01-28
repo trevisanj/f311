@@ -1,6 +1,8 @@
 """
 Rainbow colors
 
+Example:
+
 >>> for color in rainbow_colors:
 ...     color
 Color('Violet', [ 0.54509804  0.          1.        ], 4000.0, 3775.0, 4225.0)
@@ -10,6 +12,8 @@ Color('Green', [ 0.  1.  0.], 5100.0, 4925.0, 5400.0)
 Color('Yellow', [ 1.  1.  0.], 5700.0, 5400.0, 5800.0)
 Color('Orange', [ 1.          0.49803922  0.        ], 5900.0, 5800.0, 6200.0)
 Color('Red', [ 1.  0.  0.], 6500.0, 6200.0, 6800.0)
+
+Example:
 
 >>> import matplotlib.pyplot as plt
 >>> for color in rainbow_colors:
@@ -91,6 +95,8 @@ def spectrum_to_rgb(sp, visible_range=None, method=0):
               1: RGB (alternative method using red, green, blue only instead of full range of rainbow colors)
 
     Returns: 3-element sequence where each element is in [0, 1] range
+
+    Example:
 
     >>> import a99
     >>> vega = a99.get_vega_spectrum()
