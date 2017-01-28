@@ -3,4 +3,4 @@ scipy
 matplotlib
 astropy
 configobj
-pyqt5
+# pyqt5
