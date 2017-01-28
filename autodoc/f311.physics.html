@@ -1,0 +1,487 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>f311.physics package &#8212; f311 17.1.28 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '17.1.28',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>f311 17.1.28 documentation</span></a></h1>
+        <h2 class="heading"><span>f311.physics package</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="f311-physics-package">
+<h1>f311.physics package<a class="headerlink" href="#f311-physics-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="f311.physics.multiplicity.html">f311.physics.multiplicity package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="f311.physics.multiplicity.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="f311.physics.multiplicity.html#module-f311.physics.multiplicity.doublet">f311.physics.multiplicity.doublet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="f311.physics.multiplicity.html#module-f311.physics.multiplicity.singlet">f311.physics.multiplicity.singlet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="f311.physics.multiplicity.html#module-f311.physics.multiplicity">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-f311.physics.airvacuum">
+<span id="f311-physics-airvacuum-module"></span><h2>f311.physics.airvacuum module<a class="headerlink" href="#module-f311.physics.airvacuum" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="f311.physics.airvacuum.air_to_vacuum">
+<code class="descclassname">f311.physics.airvacuum.</code><code class="descname">air_to_vacuum</code><span class="sig-paren">(</span><em>λair</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.airvacuum.air_to_vacuum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Air-to-vacuum wavelength conversion</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>λair</strong> &#8211; air wavelength in Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">vacuum wavelength in Angstrom</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">λvac</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Formula author (according to [1]):</dt>
+<dd><ol class="first last upperalpha simple" start="14">
+<li>Piskunov</li>
+</ol>
+</dd>
+</dl>
+<p>The following code converts wavelength=5500 Angstrom to wavenumber in cm**-1:
+&gt;&gt;&gt; 1e8/air_to_vacuum(5500.)
+18176.768046090445</p>
+<p>The following code reproduces the figure shown in [1] (&#8220;comparison of the Morton and the inverse
+transformation by NP between 2000 Å and 100000 Å.&#8221;)
+&gt;&gt;&gt; import matplotlib.pyplot as plt
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; λvac = 10**np.linspace(np.log10(2000), np.log10(1000000), 2000)
+&gt;&gt;&gt; y = air_to_vacuum(vacuum_to_air(λvac))-λvac
+&gt;&gt;&gt; _ = plt.semilogx(λvac, y)
+&gt;&gt;&gt; _ = plt.xlabel(&#8220;$lambda$ in Angstroem&#8221;)
+&gt;&gt;&gt; _ = plt.ylabel(&#8220;$Deltalambda$&#8221;)
+&gt;&gt;&gt; _ = plt.xlim([λvac[0]-50, λvac[-1]])
+&gt;&gt;&gt; _ = plt.title(&#8220;air_to_vacuum(vacuum_to_air($lambda_{vac}$))-$lambda_{vac}$&#8221;)
+&gt;&gt;&gt; _ = plt.tight_layout()
+&gt;&gt;&gt; _ = plt.show()</p>
+<dl class="docutils">
+<dt>Source:</dt>
+<dd>[1] <a class="reference external" href="http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion">http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion</a></dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.airvacuum.vacuum_to_air">
+<code class="descclassname">f311.physics.airvacuum.</code><code class="descname">vacuum_to_air</code><span class="sig-paren">(</span><em>λvac</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.airvacuum.vacuum_to_air" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vacuum-to-air wavelength conversion</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>λvac</strong> &#8211; vacuum wavelength in Angstrom</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">air wavelength in Angstrom</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">λair</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Source:</dt>
+<dd><a class="reference external" href="http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion">http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion</a></dd>
+<dt>Original reference:</dt>
+<dd>Donald Morton (2000, ApJ. Suppl., 130, 403)</dd>
+</dl>
+<p>The following code converts wavenumber=2000 cm**-1 to wavelength in Angstrom
+&gt;&gt;&gt; vacuum_to_air(1e8/2000)
+49986.36934549974</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.physics.constants">
+<span id="f311-physics-constants-module"></span><h2>f311.physics.constants module<a class="headerlink" href="#module-f311.physics.constants" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-f311.physics.photometry">
+<span id="f311-physics-photometry-module"></span><h2>f311.physics.photometry module<a class="headerlink" href="#module-f311.physics.photometry" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="f311.physics.photometry.calculate_magnitude">
+<code class="descclassname">f311.physics.photometry.</code><code class="descname">calculate_magnitude</code><span class="sig-paren">(</span><em>sp</em>, <em>bp</em>, <em>system='stdflux'</em>, <em>zero_point=0.0</em>, <em>flag_force_band_range=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.calculate_magnitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates magnitude from a Spectrum object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>-- Spectrum instance. flux unit</strong> (<em>sp</em>) &#8211; erg/cm**2/s/Hz aka &#8220;Fnu&#8221;</li>
+<li><strong>-- Bandpass object</strong><strong>, or </strong><strong>string in &quot;UBVRIYJHKLMNQ&quot;</strong> (<em>bp</em>) &#8211; If string in &#8220;UBVRI&#8221;, creates a UBVTabular Bandpass object;
+If string otherwise, creates a UBVParametric object.</li>
+<li><strong>-- reference magnitude system.</strong> (<a class="reference internal" href="f311.explorer.gui.gui_aosss.html#f311.explorer.gui.gui_aosss.a_XScaleSpectrum.XScaleSpectrum.system" title="f311.explorer.gui.gui_aosss.a_XScaleSpectrum.XScaleSpectrum.system"><em>system</em></a>) &#8211; <dl class="docutils">
+<dt>Choices:</dt>
+<dd>&#8220;stdflux&#8221; &#8211; literature reference values for bands U,B,V,R,I,J,H,K only
+&#8220;vega&#8221; &#8211; uses the Vega star spectrum as a reference
+&#8220;ab&#8221; &#8211; AB[solute] magnitude system</dd>
+</dl>
+</li>
+<li><strong>-- subtracts this value from the calculated magnitude to implement some desired</strong> (<a class="reference internal" href="f311.explorer.gui.gui_aosss.html#f311.explorer.gui.gui_aosss.a_XScaleSpectrum.XScaleSpectrum.zero_point" title="f311.explorer.gui.gui_aosss.a_XScaleSpectrum.XScaleSpectrum.zero_point"><em>zero_point</em></a>) &#8211; correction.</li>
+<li><strong>-- this flag has effect when the spectrum does not completely overlap</strong> (<a class="reference internal" href="f311.explorer.gui.gui_aosss.html#f311.explorer.gui.gui_aosss.a_XScaleSpectrum.XScaleSpectrum.flag_force_band_range" title="f311.explorer.gui.gui_aosss.a_XScaleSpectrum.XScaleSpectrum.flag_force_band_range"><em>flag_force_band_range</em></a>) &#8211; <dl class="docutils">
+<dt>the bandpass filter. How it works:</dt>
+<dd><dl class="first docutils">
+<dt>False (default) &#8211; restricts the weighted mean flux calculation to the overlap</dt>
+<dd>range between the spectrum and the filter</dd>
+</dl>
+<p class="last">True &#8211; zero-fill the spectrum to overlap the filter range completely</p>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns: a dictionary with &#8220;cmag&#8221;: calculated magnitude, and many intermediary steps</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">f311</span> <span class="k">import</span> <span class="n">physics</span> <span class="k">as</span> <span class="n">ph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_magnitude</span><span class="p">(</span><span class="n">ph</span><span class="o">.</span><span class="n">get_vega_spectrum</span><span class="p">(),</span> <span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="s2">&quot;stdflux&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.photometry.get_vega_spectrum">
+<code class="descclassname">f311.physics.photometry.</code><code class="descname">get_vega_spectrum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.get_vega_spectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a spectrum of Vega (always a different object)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.physics.photometry.Bandpass">
+<em class="property">class </em><code class="descclassname">f311.physics.photometry.</code><code class="descname">Bandpass</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.Bandpass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Wavelength filter band, with class tools</p>
+<p>This class is kept clean whereas UBVRIBands has examples and deeper documentation on parameters</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>--</strong> (<em>parametric</em>) &#8211; </li>
+<li><strong>--</strong> &#8211; </li>
+<li><strong>-- reference mean flux passing through filter at magnitude 0 in Jy units</strong> (<em>ref_mean_flux</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="f311.physics.photometry.Bandpass.area">
+<code class="descname">area</code><span class="sig-paren">(</span><em>l0</em>, <em>lf</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.Bandpass.area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates area (unit: a.u.*angstrom) under given range [l0, lf]
+:param l0 &#8211; lower edge of range:
+:param lf &#8211; upper edge of range:</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.physics.photometry.Bandpass.l0">
+<code class="descname">l0</code><a class="headerlink" href="#f311.physics.photometry.Bandpass.l0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.physics.photometry.Bandpass.lf">
+<code class="descname">lf</code><a class="headerlink" href="#f311.physics.photometry.Bandpass.lf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.physics.photometry.Bandpass.ufunc">
+<code class="descname">ufunc</code><span class="sig-paren">(</span><em>flag_force_parametric=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.Bandpass.ufunc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.physics.photometry.UBVTabulated">
+<em class="property">class </em><code class="descclassname">f311.physics.photometry.</code><code class="descname">UBVTabulated</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.UBVTabulated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.physics.photometry.Bandpass" title="f311.physics.photometry.Bandpass"><code class="xref py py-class docutils literal"><span class="pre">f311.physics.photometry.Bandpass</span></code></a></p>
+<p>Tabular filter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>-- band name. Choices</strong> (<em>name</em>) &#8211; U,B,V,R,I</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="f311.physics.photometry.UBVTabulated.DATA">
+<code class="descname">DATA</code><em class="property"> = OrderedDict([('U', ((3000, 0.0), (3050, 0.016), (3100, 0.068), (3150, 0.167), (3200, 0.287), (3250, 0.423), (3300, 0.56), (3350, 0.673), (3400, 0.772), (3450, 0.841), (3500, 0.905), (3550, 0.943), (3600, 0.981), (3650, 0.993), (3700, 1.0), (3750, 0.989), (3800, 0.916), (3850, 0.804), (3900, 0.625), (3950, 0.423), (4000, 0.238), (4050, 0.114), (4100, 0.051), (4150, 0.019), (4200, 0.0))), ('B', ((3600, 0.0), (3700, 0.03), (3800, 0.134), (3900, 0.567), (4000, 0.92), (4100, 0.978), (4200, 1.0), (4300, 0.978), (4400, 0.935), (4500, 0.853), (4600, 0.74), (4700, 0.64), (4800, 0.536), (4900, 0.424), (5000, 0.325), (5100, 0.235), (5200, 0.15), (5300, 0.095), (5400, 0.043), (5500, 0.009), (5600, 0.0))), ('V', ((4700, 0.0), (4800, 0.03), (4900, 0.163), (5000, 0.458), (5100, 0.78), (5200, 0.967), (5300, 1.0), (5400, 0.973), (5500, 0.898), (5600, 0.792), (5700, 0.684), (5800, 0.574), (5900, 0.461), (6000, 0.359), (6100, 0.27), (6200, 0.197), (6300, 0.135), (6400, 0.081), (6500, 0.045), (6600, 0.025), (6700, 0.017), (6800, 0.013), (6900, 0.009), (7000, 0.0))), ('R', ((5500, 0.0), (5600, 0.23), (5700, 0.74), (5800, 0.91), (5900, 0.98), (6000, 1.0), (6100, 0.98), (6200, 0.96), (6300, 0.93), (6400, 0.9), (6500, 0.86), (6600, 0.81), (6700, 0.78), (6800, 0.72), (6900, 0.67), (7000, 0.61), (7100, 0.56), (7200, 0.51), (7300, 0.46), (7400, 0.4), (7500, 0.35), (8000, 0.14), (8500, 0.03), (9000, 0.0))), ('I', ((7000, 0.0), (7100, 0.024), (7200, 0.232), (7300, 0.555), (7400, 0.785), (7500, 0.91), (7600, 0.965), (7700, 0.985), (7800, 0.99), (7900, 0.995), (8000, 1.0), (8100, 1.0), (8200, 0.99), (8300, 0.98), (8400, 0.95), (8500, 0.91), (8600, 0.86), (8700, 0.75), (8800, 0.56), (8900, 0.33), (9000, 0.15), (9100, 0.03), (9200, 0.0)))])</em><a class="headerlink" href="#f311.physics.photometry.UBVTabulated.DATA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.physics.photometry.UBVTabulated.ufunc">
+<code class="descname">ufunc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.UBVTabulated.ufunc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.physics.photometry.UBVParametric">
+<em class="property">class </em><code class="descclassname">f311.physics.photometry.</code><code class="descname">UBVParametric</code><span class="sig-paren">(</span><em>name</em>, <em>num_stds=3</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.UBVParametric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.physics.photometry.Bandpass" title="f311.physics.photometry.Bandpass"><code class="xref py py-class docutils literal"><span class="pre">f311.physics.photometry.Bandpass</span></code></a></p>
+<p>Parametric Gaussian filter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>-- band name. Choices</strong> (<em>name</em>) &#8211; U,B,V,R,I,Y,J,H,K,L,M,N,Q</li>
+<li><strong>-- number of standard deviations to left and right of midpoint to consider as</strong> (<em>num_stds=3</em>) &#8211; band limits. Does not affect self.ufunc()</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="f311.physics.photometry.UBVParametric.X0_FWHM">
+<code class="descname">X0_FWHM</code><em class="property"> = OrderedDict([('U', (3650.0, 660.0)), ('B', (4450.0, 940.0)), ('V', (5510.0, 880.0)), ('R', (6580.0, 1380.0)), ('I', (8060.0, 1490.0)), ('Y', (10200.0, 1200.0)), ('J', (12200.0, 2130.0)), ('H', (16300.0, 3070.0)), ('K', (21900.0, 3900.0)), ('L', (34500.0, 4720.0)), ('M', (47500.0, 4600.0)), ('N', (105000.0, 25000.0)), ('Q', (210000.0, 58000.0))])</em><a class="headerlink" href="#f311.physics.photometry.UBVParametric.X0_FWHM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.physics.photometry.UBVParametric.ufunc">
+<code class="descname">ufunc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.UBVParametric.ufunc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.photometry.ufunc_gauss">
+<code class="descclassname">f311.physics.photometry.</code><code class="descname">ufunc_gauss</code><span class="sig-paren">(</span><em>x0</em>, <em>fwhm</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.ufunc_gauss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Gaussian function (callable) that works as a numpy ufunc</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>-- maximum value</strong><strong>, </strong><strong>where the function evaluates to 1.</strong> (<em>x0</em>) &#8211; </li>
+<li><strong>-- &quot;Full-Width at Half-Maximum&quot;</strong> (<em>fwhm</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Reference: <a class="reference external" href="https://en.wikipedia.org/wiki/Gaussian_function">https://en.wikipedia.org/wiki/Gaussian_function</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.photometry.get_ubv_bandpasses">
+<code class="descclassname">f311.physics.photometry.</code><code class="descname">get_ubv_bandpasses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.get_ubv_bandpasses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list with UBVRI... Bandpass objects</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.photometry.get_zero_flux">
+<code class="descclassname">f311.physics.photometry.</code><code class="descname">get_zero_flux</code><span class="sig-paren">(</span><em>bp</em>, <em>system='stdflux'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.get_zero_flux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns flux (erg/cm**2/s/Hz) for which magnitude is zero</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>-- Bandpass object</strong><strong>, or </strong><strong>band name</strong><strong>, </strong><strong>e.g.</strong><strong>, </strong><strong>&quot;U&quot;</strong> (<em>bp</em>) &#8211; </li>
+<li><strong>-- {&quot;stdflux&quot;</strong><strong>, </strong><strong>&quot;ab&quot;</strong><strong>, </strong><strong>&quot;vega&quot;} reference magnitude system</strong> (<a class="reference internal" href="f311.explorer.gui.gui_aosss.html#f311.explorer.gui.gui_aosss.a_XScaleSpectrum.XScaleSpectrum.system" title="f311.explorer.gui.gui_aosss.a_XScaleSpectrum.XScaleSpectrum.system"><em>system</em></a>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>For more on arguments, see calculate_magnitude()</p>
+<p>Returns: float</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.photometry.flux_to_mag">
+<code class="descclassname">f311.physics.photometry.</code><code class="descname">flux_to_mag</code><span class="sig-paren">(</span><em>flux</em>, <em>bp</em>, <em>system='stdflux'</em>, <em>zero_point=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.flux_to_mag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates magnitude for a single scalar flux value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>-- float</strong> (<a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.spectrum.Spectrum.flux" title="f311.filetypes.ft_basic.spectrum.Spectrum.flux"><em>flux</em></a>) &#8211; </li>
+<li><strong>system</strong><strong>, </strong><strong>zero_point -- see calculate_magnitude</strong><strong>(</strong><strong></strong><strong>)</strong><strong></strong> (<em>bp</em><em>,</em><em></em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns: float</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.photometry.mag_to_flux">
+<code class="descclassname">f311.physics.photometry.</code><code class="descname">mag_to_flux</code><span class="sig-paren">(</span><em>mag</em>, <em>bp</em>, <em>system='stdflux'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.mag_to_flux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse of calc_mag()</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.photometry.get_ubv_bandpass">
+<code class="descclassname">f311.physics.photometry.</code><code class="descname">get_ubv_bandpass</code><span class="sig-paren">(</span><em>bp</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.get_ubv_bandpass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.photometry.get_ubv_bandpasses_dict">
+<code class="descclassname">f311.physics.photometry.</code><code class="descname">get_ubv_bandpasses_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.get_ubv_bandpasses_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dictionary with band name, i.e., U/B/V/etc. as dict</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.photometry.calc_mag">
+<code class="descclassname">f311.physics.photometry.</code><code class="descname">calc_mag</code><span class="sig-paren">(</span><em>sp</em>, <em>bp</em>, <em>system='stdflux'</em>, <em>zero_point=0.0</em>, <em>flag_force_band_range=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.calc_mag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates magnitude from a Spectrum object. See calculate_magnitude for arguments documentation</p>
+<p>Returns: (float) calculated magnitude</p>
+<p>The following example prints a table showing the calculated magnitude for the Vega spectrum in several systems
+&gt;&gt;&gt; import f311.physics as ph
+&gt;&gt;&gt; import tabulate
+&gt;&gt;&gt; systems = [&#8220;stdflux&#8221;, &#8220;ab&#8221;, &#8220;vega&#8221;]
+&gt;&gt;&gt; bands = &#8220;UBVRIJHK&#8221;
+&gt;&gt;&gt; sp = ph.get_vega_spectrum()
+&gt;&gt;&gt; rows = [([band]+[ph.calc_mag(sp, band, system) for system in systems]) for band in bands]
+&gt;&gt;&gt; print(tabulate.tabulate(rows, [&#8220;band&#8221;]+systems))
+band        stdflux          ab    vega
+&#8212;&#8212;  &#8212;&#8212;&#8212;&#8211;  &#8212;&#8212;&#8212;-  &#8212;&#8212;
+U        0.00572505   0.761594       -0
+B        0.0696287   -0.10383        -0
+V        0.0218067    0.0191189      -0
+R        0.0359559    0.214645       -0
+I        0.0661095    0.449825       -0
+J       -0.0150993    0.874666       -0
+H        0.0315447    1.34805        -0
+K        0.0246046    1.85948        -0</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.physics.rainbow">
+<span id="f311-physics-rainbow-module"></span><h2>f311.physics.rainbow module<a class="headerlink" href="#module-f311.physics.rainbow" title="Permalink to this headline">¶</a></h2>
+<p>Rainbow colors</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">rainbow_colors</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">color</span>
+<span class="go">Color(&#39;Violet&#39;, [ 0.54509804  0.          1.        ], 4000.0, 3775.0, 4225.0)</span>
+<span class="go">Color(&#39;Indigo&#39;, [ 0.29411765  0.          0.50980392], 4450.0, 4225.0, 4600.0)</span>
+<span class="go">Color(&#39;Blue&#39;, [ 0.  0.  1.], 4750.0, 4600.0, 4925.0)</span>
+<span class="go">Color(&#39;Green&#39;, [ 0.  1.  0.], 5100.0, 4925.0, 5400.0)</span>
+<span class="go">Color(&#39;Yellow&#39;, [ 1.  1.  0.], 5700.0, 5400.0, 5800.0)</span>
+<span class="go">Color(&#39;Orange&#39;, [ 1.          0.49803922  0.        ], 5900.0, 5800.0, 6200.0)</span>
+<span class="go">Color(&#39;Red&#39;, [ 1.  0.  0.], 6500.0, 6200.0, 6800.0)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">rainbow_colors</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="n">color</span><span class="o">.</span><span class="n">l0</span><span class="p">,</span> <span class="n">color</span><span class="o">.</span><span class="n">lf</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">rgb</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (angstrom)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="f311.physics.rainbow.Color">
+<em class="property">class </em><code class="descclassname">f311.physics.rainbow.</code><code class="descname">Color</code><span class="sig-paren">(</span><em>name</em>, <em>rgb</em>, <em>clambda</em>, <em>l0=-1</em>, <em>lf=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.rainbow.Color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.parts.AttrsPart</span></code></p>
+<p>Definition of a color: name, RGB code, wavelength range</p>
+<dl class="attribute">
+<dt id="f311.physics.rainbow.Color.attrs">
+<code class="descname">attrs</code><em class="property"> = ['name', 'rgb', 'clambda', 'l0', 'lf']</em><a class="headerlink" href="#f311.physics.rainbow.Color.attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.rainbow.spectrum_to_rgb">
+<code class="descclassname">f311.physics.rainbow.</code><code class="descname">spectrum_to_rgb</code><span class="sig-paren">(</span><em>sp</em>, <em>visible_range=None</em>, <em>method=0</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.rainbow.spectrum_to_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes weighted average of rainbow colors RGB&#8217;s</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>-- Spectrum instance</strong> (<em>sp</em>) &#8211; </li>
+<li><strong>-- if passed</strong><strong>, </strong><strong>affine-transforms the rainbow colors</strong> (<em>visible_range=None</em>) &#8211; <dl class="docutils">
+<dt>method &#8211;</dt>
+<dd>0: rainbow colors
+1: RGB (alternative method using red, green, blue only instead of full range of rainbow colors)</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns: 3-element sequence where each element is in [0, 1] range</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">a99</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vega</span> <span class="o">=</span> <span class="n">a99</span><span class="o">.</span><span class="n">get_vega_spectrum</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum_to_rgb</span><span class="p">(</span><span class="n">vega</span><span class="p">)</span>
+<span class="go">array([  5.45057920e-01,   1.61124778e-05,   9.99930126e-01])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.physics.units">
+<span id="f311-physics-units-module"></span><h2>f311.physics.units module<a class="headerlink" href="#module-f311.physics.units" title="Permalink to this headline">¶</a></h2>
+<p>AstroPy units defined for convenience</p>
+</div>
+<div class="section" id="module-f311.physics">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.physics" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2017, JT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

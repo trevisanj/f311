@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>f311.convmol.gui package &#8212; f311 17.1.28 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '17.1.28',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>f311 17.1.28 documentation</span></a></h1>
+        <h2 class="heading"><span>f311.convmol.gui package</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="f311-convmol-gui-package">
+<h1>f311.convmol.gui package<a class="headerlink" href="#f311-convmol-gui-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-f311.convmol.gui.a_WDBMolecule">
+<span id="f311-convmol-gui-a-wdbmolecule-module"></span><h2>f311.convmol.gui.a_WDBMolecule module<a class="headerlink" href="#module-f311.convmol.gui.a_WDBMolecule" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry">
+<em class="property">class </em><code class="descclassname">f311.convmol.gui.a_WDBMolecule.</code><code class="descname">WDBRegistry</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.gui.a_WBase.WBase</span></code></p>
+<p>Base class for registry widgets</p>
+<dl class="docutils">
+<dt>Comes with</dt>
+<dd><ul class="first last simple">
+<li>table widget</li>
+<li>tool bar</li>
+<li>set of actions</li>
+<li>id_changed signal</li>
+<li>id+row properties</li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry.eventFilter">
+<code class="descname">eventFilter</code><span class="sig-paren">(</span><em>source</em>, <em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry.eventFilter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry.f">
+<code class="descname">f</code><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry.f" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry.id">
+<code class="descname">id</code><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Molecule id or None</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry.id_changed">
+<code class="descname">id_changed</code><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry.id_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_delete">
+<code class="descname">on_delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_edit">
+<code class="descname">on_edit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_edit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_insert">
+<code class="descname">on_insert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_insert" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_tableWidget_currentCellChanged">
+<code class="descname">on_tableWidget_currentCellChanged</code><span class="sig-paren">(</span><em>currentRow</em>, <em>currentColumn</em>, <em>previousRow</em>, <em>previousColumn</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_tableWidget_currentCellChanged" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_tableWidget_customContextMenuRequested">
+<code class="descname">on_tableWidget_customContextMenuRequested</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_tableWidget_customContextMenuRequested" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_tableWidget_doubleClicked">
+<code class="descname">on_tableWidget_doubleClicked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry.on_tableWidget_doubleClicked" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WDBMolecule.WDBRegistry.row">
+<code class="descname">row</code><a class="headerlink" href="#f311.convmol.gui.a_WDBMolecule.WDBRegistry.row" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Returns current data row</em> &#8211; MyDBRow object, or None</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.convmol.gui.a_WDBState">
+<span id="f311-convmol-gui-a-wdbstate-module"></span><h2>f311.convmol.gui.a_WDBState module<a class="headerlink" href="#module-f311.convmol.gui.a_WDBState" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.convmol.gui.a_WDBState.WDBState">
+<em class="property">class </em><code class="descclassname">f311.convmol.gui.a_WDBState.</code><code class="descname">WDBState</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WDBState.WDBState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.gui.a_WDBRegistry.WDBRegistry</span></code></p>
+<p>Registry for table &#8216;state&#8217;</p>
+<dl class="method">
+<dt id="f311.convmol.gui.a_WDBState.WDBState.find_formula">
+<code class="descname">find_formula</code><span class="sig-paren">(</span><em>formula</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WDBState.WDBState.find_formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves to row where formula is (if found, otherwise does nothing)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WDBState.WDBState.set_id_molecule">
+<code class="descname">set_id_molecule</code><span class="sig-paren">(</span><em>id_</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WDBState.WDBState.set_id_molecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets molecule id and re-populates table</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.convmol.gui.a_WFileMolDB">
+<span id="f311-convmol-gui-a-wfilemoldb-module"></span><h2>f311.convmol.gui.a_WFileMolDB module<a class="headerlink" href="#module-f311.convmol.gui.a_WFileMolDB" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.convmol.gui.a_WFileMolDB.WFileMolDB">
+<em class="property">class </em><code class="descclassname">f311.convmol.gui.a_WFileMolDB.</code><code class="descname">WFileMolDB</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WFileMolDB.WFileMolDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.gui.a_WBase.WBase</span></code></p>
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WFileMolDB.WFileMolDB.f">
+<code class="descname">f</code><a class="headerlink" href="#f311.convmol.gui.a_WFileMolDB.WFileMolDB.f" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WFileMolDB.WFileMolDB.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WFileMolDB.WFileMolDB.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WFileMolDB.WFileMolDB.mol_id_changed">
+<code class="descname">mol_id_changed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WFileMolDB.WFileMolDB.mol_id_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WFileMolDB.WFileMolDB.update_gui_label_fn">
+<code class="descname">update_gui_label_fn</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WFileMolDB.WFileMolDB.update_gui_label_fn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.convmol.gui.a_WMolConst">
+<span id="f311-convmol-gui-a-wmolconst-module"></span><h2>f311.convmol.gui.a_WMolConst module<a class="headerlink" href="#module-f311.convmol.gui.a_WMolConst" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.convmol.gui.a_WMolConst.WMolConst">
+<em class="property">class </em><code class="descclassname">f311.convmol.gui.a_WMolConst.</code><code class="descname">WMolConst</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WMolConst.WMolConst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.gui.a_WBase.WBase</span></code></p>
+<p>Widget for the user to inform molecular parameters. Has a embedded WDBMolecule</p>
+<dl class="method">
+<dt id="f311.convmol.gui.a_WMolConst.WMolConst.None_to_zero">
+<code class="descname">None_to_zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WMolConst.WMolConst.None_to_zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills missing values with zeros</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WMolConst.WMolConst.constants">
+<code class="descname">constants</code><a class="headerlink" href="#f311.convmol.gui.a_WMolConst.WMolConst.constants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary with all molecular constants</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WMolConst.WMolConst.fieldnames">
+<code class="descname">fieldnames</code><a class="headerlink" href="#f311.convmol.gui.a_WMolConst.WMolConst.fieldnames" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WMolConst.WMolConst.id_changed">
+<code class="descname">id_changed</code><a class="headerlink" href="#f311.convmol.gui.a_WMolConst.WMolConst.id_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WMolConst.WMolConst.row">
+<code class="descname">row</code><a class="headerlink" href="#f311.convmol.gui.a_WMolConst.WMolConst.row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wraps WDBMolecule.row</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WMolConst.WMolConst.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WMolConst.WMolConst.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if all edit fields can be converted to float, otherwise False</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.convmol.gui.a_WStateConst">
+<span id="f311-convmol-gui-a-wstateconst-module"></span><h2>f311.convmol.gui.a_WStateConst module<a class="headerlink" href="#module-f311.convmol.gui.a_WStateConst" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.convmol.gui.a_WStateConst.WStateConst">
+<em class="property">class </em><code class="descclassname">f311.convmol.gui.a_WStateConst.</code><code class="descname">WStateConst</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WStateConst.WStateConst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.gui.a_WBase.WBase</span></code></p>
+<p>Widget for the user to select/modify state-specific constants. Has a embedded WDBState</p>
+<dl class="method">
+<dt id="f311.convmol.gui.a_WStateConst.WStateConst.None_to_zero">
+<code class="descname">None_to_zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WStateConst.WStateConst.None_to_zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills missing values with zeros</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WStateConst.WStateConst.constants">
+<code class="descname">constants</code><a class="headerlink" href="#f311.convmol.gui.a_WStateConst.WStateConst.constants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary with all molecular constants</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WStateConst.WStateConst.fieldnames">
+<code class="descname">fieldnames</code><a class="headerlink" href="#f311.convmol.gui.a_WStateConst.WStateConst.fieldnames" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.convmol.gui.a_WStateConst.WStateConst.row">
+<code class="descname">row</code><a class="headerlink" href="#f311.convmol.gui.a_WStateConst.WStateConst.row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wraps WDBMolecule.row</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WStateConst.WStateConst.set_id_molecule">
+<code class="descname">set_id_molecule</code><span class="sig-paren">(</span><em>id_</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WStateConst.WStateConst.set_id_molecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls WDBState.set_id_molecule</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_WStateConst.WStateConst.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_WStateConst.WStateConst.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if all edit fields can be converted to float, otherwise False</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.convmol.gui.a_XConvMol">
+<span id="f311-convmol-gui-a-xconvmol-module"></span><h2>f311.convmol.gui.a_XConvMol module<a class="headerlink" href="#module-f311.convmol.gui.a_XConvMol" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.convmol.gui.a_XConvMol.XConvMol">
+<em class="property">class </em><code class="descclassname">f311.convmol.gui.a_XConvMol.</code><code class="descname">XConvMol</code><span class="sig-paren">(</span><em>parent=None</em>, <em>fileobj=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_XConvMol.XConvMol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.gui.a_XFileMainWindow.XFileMainWindow</span></code></p>
+<dl class="method">
+<dt id="f311.convmol.gui.a_XConvMol.XConvMol.convert_clicked">
+<code class="descname">convert_clicked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_XConvMol.XConvMol.convert_clicked" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_XConvMol.XConvMol.eventFilter">
+<code class="descname">eventFilter</code><span class="sig-paren">(</span><em>obj_focused</em>, <em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_XConvMol.XConvMol.eventFilter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_XConvMol.XConvMol.open_mol_clicked">
+<code class="descname">open_mol_clicked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_XConvMol.XConvMol.open_mol_clicked" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_XConvMol.XConvMol.source_changed">
+<code class="descname">source_changed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_XConvMol.XConvMol.source_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_XConvMol.XConvMol.wants_auto">
+<code class="descname">wants_auto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_XConvMol.XConvMol.wants_auto" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.convmol.gui.a_XFileMolDB">
+<span id="f311-convmol-gui-a-xfilemoldb-module"></span><h2>f311.convmol.gui.a_XFileMolDB module<a class="headerlink" href="#module-f311.convmol.gui.a_XFileMolDB" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.convmol.gui.a_XFileMolDB.XFileMolDB">
+<em class="property">class </em><code class="descclassname">f311.convmol.gui.a_XFileMolDB.</code><code class="descname">XFileMolDB</code><span class="sig-paren">(</span><em>parent=None</em>, <em>fileobj=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_XFileMolDB.XFileMolDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.gui.a_XFileMainWindow.XFileMainWindow</span></code></p>
+<dl class="method">
+<dt id="f311.convmol.gui.a_XFileMolDB.XFileMolDB.on_fill_missing">
+<code class="descname">on_fill_missing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_XFileMolDB.XFileMolDB.on_fill_missing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.convmol.gui.a_XFileMolDB.XFileMolDB.wants_auto">
+<code class="descname">wants_auto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.gui.a_XFileMolDB.XFileMolDB.wants_auto" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.convmol.gui">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.convmol.gui" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2017, JT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

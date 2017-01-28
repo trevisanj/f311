@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>f311.physics: some physics &#8212; f311 17.1.28 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '17.1.28',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="f311.aosss: Adaptive Optics Systems Simulation Support" href="aosss.html" />
+    <link rel="prev" title="f311.filetypes: file handling API" href="filetypes.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>f311 17.1.28 documentation</span></a></h1>
+        <h2 class="heading"><span>f311.physics: some physics</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="filetypes.html"><em>f311.filetypes</em>: file handling API</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="aosss.html"><em>f311.aosss</em>: Adaptive Optics Systems Simulation Support</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="f311-physics-some-physics">
+<h1><em>f311.physics</em>: some physics<a class="headerlink" href="#f311-physics-some-physics" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Selected Physics-related resources:</p>
+<ul class="simple">
+<li>Photometry (AB/Vega/Standard)</li>
+<li>Spectrum-to-RGB (red, green, blue) color conversion</li>
+<li>Air-to-vacuum and vice versa wavelenght conversion</li>
+<li>Calculation of Hönl-London factors according to formulas in Kovács&#8217; 1969 [1]</li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p><strong>Air-to-vacuum (&amp; vice versa) wavelength conversion</strong>. The following code reproduces the figure
+shown in VALD3 Wiki (<a class="reference external" href="http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion">http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion</a>)
+(&#8220;comparison of the Morton and the inverse transformation by NP between 2000 Å and 100000 Å.&#8221;)</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">f311.physics</span> <span class="k">as</span> <span class="nn">ph</span>
+<span class="n">λvac</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">2000</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1000000</span><span class="p">),</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">ph</span><span class="o">.</span><span class="n">air_to_vacuum</span><span class="p">(</span><span class="n">ph</span><span class="o">.</span><span class="n">vacuum_to_air</span><span class="p">(</span><span class="n">λvac</span><span class="p">))</span><span class="o">-</span><span class="n">λvac</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">λvac</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$ in Angstroem&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$\Delta\lambda$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">λvac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="n">λvac</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;air_to_vacuum(vacuum_to_air($\lambda_</span><span class="si">{vac}</span><span class="s2">$))-$\lambda_</span><span class="si">{vac}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>![](air-vac.png)</p>
+<p>### Flux-to-magnitude conversion</p>
+<p>The following example compares flux-to-magnitude conversion of the Vega spectrum
+for different magnitude systems.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311.physics</span> <span class="k">as</span> <span class="nn">ph</span>
+<span class="kn">import</span> <span class="nn">tabulate</span>
+<span class="n">systems</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;stdflux&quot;</span><span class="p">,</span> <span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;vega&quot;</span><span class="p">]</span>
+<span class="n">bands</span> <span class="o">=</span> <span class="s2">&quot;UBVRIJHK&quot;</span>
+<span class="n">sp</span> <span class="o">=</span> <span class="n">ph</span><span class="o">.</span><span class="n">get_vega_spectrum</span><span class="p">()</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[([</span><span class="n">band</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="n">ph</span><span class="o">.</span><span class="n">calc_mag</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">band</span><span class="p">,</span> <span class="n">system</span><span class="p">)</span> <span class="k">for</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">systems</span><span class="p">])</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="n">bands</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;band&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">systems</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">band</span>        <span class="n">stdflux</span>          <span class="n">ab</span>    <span class="n">vega</span>
+<span class="o">------</span>  <span class="o">-----------</span>  <span class="o">----------</span>  <span class="o">------</span>
+<span class="n">U</span>        <span class="mf">0.00572505</span>   <span class="mf">0.761594</span>       <span class="o">-</span><span class="mi">0</span>
+<span class="n">B</span>        <span class="mf">0.0696287</span>   <span class="o">-</span><span class="mf">0.10383</span>        <span class="o">-</span><span class="mi">0</span>
+<span class="n">V</span>        <span class="mf">0.0218067</span>    <span class="mf">0.0191189</span>      <span class="o">-</span><span class="mi">0</span>
+<span class="n">R</span>        <span class="mf">0.0359559</span>    <span class="mf">0.214645</span>       <span class="o">-</span><span class="mi">0</span>
+<span class="n">I</span>        <span class="mf">0.0661095</span>    <span class="mf">0.449825</span>       <span class="o">-</span><span class="mi">0</span>
+<span class="n">J</span>       <span class="o">-</span><span class="mf">0.0150993</span>    <span class="mf">0.874666</span>       <span class="o">-</span><span class="mi">0</span>
+<span class="n">H</span>        <span class="mf">0.0315447</span>    <span class="mf">1.34805</span>        <span class="o">-</span><span class="mi">0</span>
+<span class="n">K</span>        <span class="mf">0.0246046</span>    <span class="mf">1.85948</span>        <span class="o">-</span><span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="api-reference">
+<h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="autodoc/f311.physics.html"><span class="doc">f311.physics package</span></a></p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="filetypes.html"><em>f311.filetypes</em>: file handling API</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="aosss.html"><em>f311.aosss</em>: Adaptive Optics Systems Simulation Support</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2017, JT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

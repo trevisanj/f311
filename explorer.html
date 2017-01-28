@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>f311.explorer: browse, read, write, visualize, edit files &#8212; f311 17.1.28 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '17.1.28',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="f311.filetypes: file handling API" href="filetypes.html" />
+    <link rel="prev" title="f311.convmol: Conversion of molecular spectral lines" href="convmol.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>f311 17.1.28 documentation</span></a></h1>
+        <h2 class="heading"><span>f311.explorer: browse, read, write, visualize, edit files</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="convmol.html"><em>f311.convmol</em>: Conversion of molecular spectral lines</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="filetypes.html"><em>f311.filetypes</em>: file handling API</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="f311-explorer-browse-read-write-visualize-edit-files">
+<h1><em>f311.explorer</em>: browse, read, write, visualize, edit files<a class="headerlink" href="#f311-explorer-browse-read-write-visualize-edit-files" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><em>explorer</em> provides applications and an API to handle many file format used in Astronomy.</p>
+<p>Most resources are accessible through <code class="docutils literal"><span class="pre">explorer.py</span></code> (file-explorer-like application)</p>
+</div>
+<div class="section" id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">programs</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">p</span> <span class="n">explorer</span> <span class="n">markdown</span><span class="o">-</span><span class="nb">list</span>
+</pre></div>
+</div>
+<p>Graphical applications:</p>
+<ul class="simple">
+<li><cite>abed.py</cite> &#8211; Abundances file editor</li>
+<li><cite>ated.py</cite> &#8211; Atomic lines file editor</li>
+<li><cite>cubeed.py</cite> &#8211; Data Cube Editor, import/export WebSim-COMPASS data cubes</li>
+<li><cite>explorer.py</cite> &#8211; AstroAPI Explorer &#8211;  list, visualize, and edit data files (<em>à la</em> File Manager)</li>
+<li><cite>mained.py</cite> &#8211; Main configuration file editor.</li>
+<li><cite>mled.py</cite> &#8211; Molecular lines file editor.</li>
+<li><cite>splisted.py</cite> &#8211; Spectrum List Editor</li>
+<li><cite>tune-zinf.py</cite> &#8211; Tunes the &#8220;zinf&#8221; parameter for each atomic line in atomic lines file</li>
+</ul>
+<p>Command-line tools:</p>
+<ul class="simple">
+<li><cite>create-grid.py</cite> &#8211; Merges several atmospheric models into a single file (_i.e._, the &#8220;grid&#8221;)</li>
+<li><cite>cut-atoms.py</cite> &#8211; Cuts atomic lines file to wavelength interval specified</li>
+<li><cite>cut-molecules.py</cite> &#8211; Cuts molecular lines file to wavelength interval specified</li>
+<li><cite>cut-spectrum.py</cite> &#8211; Cuts spectrum file to wavelength interval specified</li>
+<li><cite>plot-spectra.py</cite> &#8211; Plots spectra on screen or creates PDF file</li>
+<li><cite>vald3-to-atoms.py</cite> &#8211; Converts VALD3 atomic/molecular lines file to PFANT atomic lines file.</li>
+</ul>
+<p>All the programs above can be called with the <code class="docutils literal"><span class="pre">--help</span></code> or <code class="docutils literal"><span class="pre">-h</span></code>
+option for more information.</p>
+</div>
+<div class="section" id="api-reference">
+<h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="autodoc/f311.explorer.html"><span class="doc">f311.explorer package</span></a></p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="convmol.html"><em>f311.convmol</em>: Conversion of molecular spectral lines</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="filetypes.html"><em>f311.filetypes</em>: file handling API</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2017, JT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

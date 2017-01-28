@@ -1,0 +1,447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>f311.filetypes.ft_basic package &#8212; f311 17.1.28 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '17.1.28',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>f311 17.1.28 documentation</span></a></h1>
+        <h2 class="heading"><span>f311.filetypes.ft_basic package</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="f311-filetypes-ft-basic-package">
+<h1>f311.filetypes.ft_basic package<a class="headerlink" href="#f311-filetypes-ft-basic-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-f311.filetypes.ft_basic.datafile">
+<span id="f311-filetypes-ft-basic-datafile-module"></span><h2>f311.filetypes.ft_basic.datafile module<a class="headerlink" href="#module-f311.filetypes.ft_basic.datafile" title="Permalink to this headline">¶</a></h2>
+<p>Ancestor class for all classes that represent an input file.</p>
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.datafile.DataFile">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.datafile.</code><code class="descname">DataFile</code><a class="headerlink" href="#f311.filetypes.ft_basic.datafile.DataFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.parts.AttrsPart</span></code></p>
+<p>Class representing a file in disk</p>
+<dl class="docutils">
+<dt>Inheriting this class:</dt>
+<dd><ul class="first last simple">
+<li>implement _do_load() if you want to make it loadable</li>
+<li>implement _do_save() if you would like to make it saveable</li>
+<li>implement some filetype check, either inheriting _test_magic() or within _do_load().
+This is optional, but <strong>strongly advised</strong>, because this will lower the chance that the
+automatic loader (see load_with_classes()) detects a wrong file type</li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.datafile.DataFile.default_filename">
+<code class="descname">default_filename</code><em class="property"> = None</em><a class="headerlink" href="#f311.filetypes.ft_basic.datafile.DataFile.default_filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.datafile.DataFile.description">
+<code class="descname">description</code><em class="property"> = ''</em><a class="headerlink" href="#f311.filetypes.ft_basic.datafile.DataFile.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.datafile.DataFile.flag_txt">
+<code class="descname">flag_txt</code><em class="property"> = True</em><a class="headerlink" href="#f311.filetypes.ft_basic.datafile.DataFile.flag_txt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.datafile.DataFile.init_default">
+<code class="descname">init_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.datafile.DataFile.init_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default initialization of attributes listed in self.attrs.</p>
+<p>DataFile behaviour is to try to load self.default_filename from default
+directory.</p>
+<p>For safety, filename is reset to None so that it doesn&#8217;t point to the
+original file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.datafile.DataFile.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.datafile.DataFile.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads file and registers filename as attribute.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.datafile.DataFile.save_as">
+<code class="descname">save_as</code><span class="sig-paren">(</span><em>filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.datafile.DataFile.save_as" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dumps object contents into file on disk.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>optional</em>) &#8211; will be updated to filename.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.filetypes.ft_basic.filefits">
+<span id="f311-filetypes-ft-basic-filefits-module"></span><h2>f311.filetypes.ft_basic.filefits module<a class="headerlink" href="#module-f311.filetypes.ft_basic.filefits" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.filefits.FileFits">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filefits.</code><code class="descname">FileFits</code><a class="headerlink" href="#f311.filetypes.ft_basic.filefits.FileFits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
+<p>Generic representation of a FITS file</p>
+<p><strong>Note</strong> normally, the DataFile classes load operation reads all contents
+and closes the file, however this class keeps the file <strong>open</strong> as an
+astropy.io.fits.HDUList object in self.hdulist, because apparently many
+HDUList methods need the file open to work, even after calling
+HDUList.readall()</p>
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.filefits.FileFits.flag_txt">
+<code class="descname">flag_txt</code><em class="property"> = False</em><a class="headerlink" href="#f311.filetypes.ft_basic.filefits.FileFits.flag_txt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.filetypes.ft_basic.filepy">
+<span id="f311-filetypes-ft-basic-filepy-module"></span><h2>f311.filetypes.ft_basic.filepy module<a class="headerlink" href="#module-f311.filetypes.ft_basic.filepy" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.filepy.FilePy">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filepy.</code><code class="descname">FilePy</code><a class="headerlink" href="#f311.filetypes.ft_basic.filepy.FilePy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
+<p>Configuration file saved as a .py Python source script</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.filetypes.ft_basic.filespectrum">
+<span id="f311-filetypes-ft-basic-filespectrum-module"></span><h2>f311.filetypes.ft_basic.filespectrum module<a class="headerlink" href="#module-f311.filetypes.ft_basic.filespectrum" title="Permalink to this headline">¶</a></h2>
+<p>Classes FileSpectrum and descendants</p>
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrum">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filespectrum.</code><code class="descname">FileSpectrum</code><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrum.attrs">
+<code class="descname">attrs</code><em class="property"> = ['spectrum']</em><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrum.attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrum.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrum.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method was overriden to set spectrum.filename as well</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrumPfant">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filespectrum.</code><code class="descname">FileSpectrumPfant</code><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrumPfant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrum" title="f311.filetypes.ft_basic.filespectrum.FileSpectrum"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filespectrum.FileSpectrum</span></code></a></p>
+<p>PFANT Spectrum (<cite>pfant</cite> output)</p>
+<p>This file alternates a &#8220;header&#8221; line where most of the information is
+repeated, and a &#8220;values&#8221; line, with the values of the flux
+corresponding to the lambda interval lzero-lfin</p>
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrumPfant.default_filename">
+<code class="descname">default_filename</code><em class="property"> = 'flux.norm'</em><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrumPfant.default_filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrumNulbad">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filespectrum.</code><code class="descname">FileSpectrumNulbad</code><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrumNulbad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrum" title="f311.filetypes.ft_basic.filespectrum.FileSpectrum"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filespectrum.FileSpectrum</span></code></a></p>
+<p>PFANT Spectrum (<cite>nulbad</cite> output)</p>
+<p>This file alternates a &#8220;header&#8221; line where most of the information is
+repeated, and a &#8220;values&#8221; line, with the values of the flux
+corresponding to the lambda interval lzero-lfin</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrumXY">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filespectrum.</code><code class="descname">FileSpectrumXY</code><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrumXY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrum" title="f311.filetypes.ft_basic.filespectrum.FileSpectrum"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filespectrum.FileSpectrum</span></code></a></p>
+<p>&#8220;Lambda-flux&#8221; Spectrum (2-column text file)</p>
+<p>File may have comment lines; these will be ignored altogether, because the file
+is read with numpy.loadtxt()</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrumFits">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filespectrum.</code><code class="descname">FileSpectrumFits</code><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrumFits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrum" title="f311.filetypes.ft_basic.filespectrum.FileSpectrum"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filespectrum.FileSpectrum</span></code></a></p>
+<p>FITS Spectrum</p>
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrumFits.flag_txt">
+<code class="descname">flag_txt</code><em class="property"> = False</em><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrumFits.flag_txt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.filetypes.ft_basic.filesqlitedb">
+<span id="f311-filetypes-ft-basic-filesqlitedb-module"></span><h2>f311.filetypes.ft_basic.filesqlitedb module<a class="headerlink" href="#module-f311.filetypes.ft_basic.filesqlitedb" title="Permalink to this headline">¶</a></h2>
+<p>Represents a SQLite database file</p>
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filesqlitedb.</code><code class="descname">FileSQLiteDB</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.attrs">
+<code class="descname">attrs</code><em class="property"> = ['classname', 'filename', 'tables']</em><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.create_schema">
+<code class="descname">create_schema</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.create_schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates database schema</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CAREFUL</strong> needless say</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.flag_txt">
+<code class="descname">flag_txt</code><em class="property"> = False</em><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.flag_txt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.get_conn">
+<code class="descname">get_conn</code><span class="sig-paren">(</span><em>flag_force_new=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.get_conn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns sqlite3.Connection object with a non-default row factory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flag_force_new</strong> &#8211; returns a new connection irrespective of one already being open.
+Does <strong>not</strong> close existing open connection</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.get_table_info">
+<code class="descname">get_table_info</code><span class="sig-paren">(</span><em>tablename</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.get_table_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns information about fields of a specific table</p>
+<p>Returns:  dict of MyDBRow indexed by field name</p>
+<p><strong>Note</strong> Fields &#8220;caption&#8221; and &#8220;tooltip&#8221; are added to rows using information in moldb.gui_info</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.gui_info">
+<code class="descname">gui_info</code><em class="property"> = {}</em><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.gui_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.init_default">
+<code class="descname">init_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.init_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overriden to take default database and save locally</p>
+<p>The issue was that init_default() sets self.filename to None; however there can be no
+SQLite database without a corresponding file (not using <em>memory</em> here)</p>
+<p>Should not keep default file open either (as it is in the API directory and shouldn&#8217;t be
+messed by user)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.populate">
+<code class="descname">populate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.populate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Series of INSERT statements to populate database with its initial contents</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.tables">
+<code class="descname">tables</code><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.tables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.filetypes.ft_basic.spectrum">
+<span id="f311-filetypes-ft-basic-spectrum-module"></span><h2>f311.filetypes.ft_basic.spectrum module<a class="headerlink" href="#module-f311.filetypes.ft_basic.spectrum" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.spectrum.</code><code class="descname">Spectrum</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Spectrum with several <em>in-place</em> operations, conversion utilities etc.</p>
+<p>Routines that have the term <em>in place</em>: it means that the spectrum
+itself is changed and nothing is returned</p>
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.clear_more_headers">
+<code class="descname">clear_more_headers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.clear_more_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears .more_headers dictionary, except for X-UNIT and Y-UNIT</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.convert_x">
+<code class="descname">convert_x</code><span class="sig-paren">(</span><em>new_unit</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.convert_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts x-axis to new unit</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.cut">
+<code class="descname">cut</code><span class="sig-paren">(</span><em>l0</em>, <em>l1</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.cut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cuts <em>in place</em> to wavelength interval [l0, l1]. Cut is done within the array objects thus keeping the same objects</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.cut_idxs">
+<code class="descname">cut_idxs</code><span class="sig-paren">(</span><em>i0</em>, <em>i1</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.cut_idxs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cuts <em>in place</em> to slice i0:i1 (pythonic, interval = [i0, i1[</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.delta_lambda">
+<code class="descname">delta_lambda</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.delta_lambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns delta lambda or NaN if found not to be constant</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.flux">
+<code class="descname">flux</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.flux" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.from_hdu">
+<code class="descname">from_hdu</code><span class="sig-paren">(</span><em>hdu</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.from_hdu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.l0">
+<code class="descname">l0</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.l0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.lf">
+<code class="descname">lf</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.lf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.one_liner_str">
+<code class="descname">one_liner_str</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.one_liner_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.pixel_x">
+<code class="descname">pixel_x</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.pixel_x" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.pixel_y">
+<code class="descname">pixel_y</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.pixel_y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.resample">
+<code class="descname">resample</code><span class="sig-paren">(</span><em>new_wavelength</em>, <em>kind='linear'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.resample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resamples <em>in-place</em> to new wavelength vector using interpolation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>-- new wavelength vector</strong> (<em>new_wavelength</em>) &#8211; </li>
+<li><strong>-- interpolation kind to be passed to scipy.interpolate.interp1d</strong> (<em>kind</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.title">
+<code class="descname">title</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculated, read-only property</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.to_hdu">
+<code class="descname">to_hdu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.to_hdu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts to FITS HDU. delta_lambda must be a constant</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.wavelength">
+<code class="descname">wavelength</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.wavelength" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.xunit">
+<code class="descname">xunit</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.xunit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.ylabel">
+<code class="descname">ylabel</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.ylabel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.yunit">
+<code class="descname">yunit</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.yunit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.z_start">
+<code class="descname">z_start</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.z_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.filetypes.ft_basic">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.filetypes.ft_basic" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2017, JT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

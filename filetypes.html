@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>f311.filetypes: file handling API &#8212; f311 17.1.28 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '17.1.28',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="f311.physics: some physics" href="physics.html" />
+    <link rel="prev" title="f311.explorer: browse, read, write, visualize, edit files" href="explorer.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>f311 17.1.28 documentation</span></a></h1>
+        <h2 class="heading"><span>f311.filetypes: file handling API</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="explorer.html"><em>f311.explorer</em>: browse, read, write, visualize, edit files</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="physics.html"><em>f311.physics</em>: some physics</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="f311-filetypes-file-handling-api">
+<h1><em>f311.filetypes</em>: file handling API<a class="headerlink" href="#f311-filetypes-file-handling-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><em>f311.filetypes</em> has classes to handle many different file formats used in Astronomy.</p>
+<p>All classes descend from <a class="reference internal" href="autodoc/f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref any py py-class docutils literal"><span class="pre">DataFile</span></code></a> containing some basic methods:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">load()</span></code>: loads file from disk into internal object variables</li>
+<li><code class="docutils literal"><span class="pre">save_as()</span></code>: saves file to disk</li>
+<li><code class="docutils literal"><span class="pre">init_default()</span></code>: initializes file object with default information</li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The following example generates a random spectrum and saves it to disk as a FITS file.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">FileSpectrumFits</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">spectrum</span><span class="o">.</span><span class="n">wavelength</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">5000.</span><span class="p">,</span> <span class="mf">5100.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">)</span>  <span class="c1"># angstrom</span>
+<span class="n">f</span><span class="o">.</span><span class="n">spectrum</span><span class="o">.</span><span class="n">flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">+</span><span class="mf">2.</span>
+<span class="n">f</span><span class="o">.</span><span class="n">save_as</span><span class="p">(</span><span class="s2">&quot;random-spectrum.fits&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following code lists all supported data types in a table:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ft</span><span class="o">.</span><span class="n">list_data_types</span><span class="p">()))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>File type                                                     | Default filename (for all purposes)
+------------------------------------------------------------- | -----------------------------------
+&quot;Absoru2&quot; file                                                | absoru2.dat
+&quot;Lambda-flux&quot; Spectrum (2-column text file)                   | -
+Atmospheric model or grid of models (with opacities included) | grid.moo
+Configuration file saved as a .py Python source script        | -
+FITS Data Cube (&quot;full&quot; opposed to &quot;sparse&quot;)                   | default.fullcube
+FITS Sparse Data Cube (storage to take less disk space)       | default.sparsecube
+FITS Spectrum                                                 | -
+FITS Spectrum List                                            | default.splist
+FileHitranDB                                                  | hitrandb.sqlite
+FileMolDB                                                     | moldb.sqlite
+FileSQLiteDB                                                  | -
+FileSpectrum                                                  | -
+Generic representation of a FITS file                         | -
+Kurucz molecular lines file                                   | -
+MARCS &quot;.opa&quot; (opacity model) file format.                     | modeles.opa
+MARCS Atmospheric Model (text file)                           | -
+PFANT Atmospheric Model (binary file)                         | modeles.mod
+PFANT Atomic Lines                                            | atoms.dat
+PFANT Hydrogen Line Profile                                   | thalpha
+PFANT Hygrogen Lines Map                                      | hmap.dat
+PFANT Molecular Lines                                         | molecules.dat
+PFANT Partition Function                                      | partit.dat
+PFANT Spectrum (`nulbad` output)                              | -
+PFANT Spectrum (`pfant` output)                               | flux.norm
+PFANT Stellar Chemical Abundances                             | abonds.dat
+PFANT Stellar Dissociation Equilibrium Information            | dissoc.dat
+PFANT Stellar Main Configuration                              | main.dat
+VALD3 atomic or molecular lines file                          | -
+WebSim-COMPASS &quot;.par&quot; (parameters) file                       | -
+`x.py` Command-line Options                                   | options.py
+`x.py` Differential Abundances and FWHMs (Python source)      | abxfwhm.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="api-reference">
+<h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="autodoc/f311.filetypes.html"><span class="doc">f311.filetypes package</span></a></p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="explorer.html"><em>f311.explorer</em>: browse, read, write, visualize, edit files</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="physics.html"><em>f311.physics</em>: some physics</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2017, JT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>
