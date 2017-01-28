@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>f311.convmol.downloaders package &#8212; f311 17.1.28 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '17.1.28',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>f311 17.1.28 documentation</span></a></h1>
+        <h2 class="heading"><span>f311.convmol.downloaders package</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="f311-convmol-downloaders-package">
+<h1>f311.convmol.downloaders package<a class="headerlink" href="#f311-convmol-downloaders-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-f311.convmol.downloaders.downhitran">
+<span id="f311-convmol-downloaders-downhitran-module"></span><h2>f311.convmol.downloaders.downhitran module<a class="headerlink" href="#module-f311.convmol.downloaders.downhitran" title="Permalink to this headline">¶</a></h2>
+<p>HITRAN downloader</p>
+<dl class="function">
+<dt id="f311.convmol.downloaders.downhitran.get_hitran_molecules">
+<code class="descclassname">f311.convmol.downloaders.downhitran.</code><code class="descname">get_hitran_molecules</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.downloaders.downhitran.get_hitran_molecules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accesses <a class="reference external" href="http://hitran.org/lbl">http://hitran.org/lbl</a>/# and reads its table
+Returns: tuple: table (list of lists), header (list of strings)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.convmol.downloaders.downhitran.get_hitran_isotopologues">
+<code class="descclassname">f311.convmol.downloaders.downhitran.</code><code class="descname">get_hitran_isotopologues</code><span class="sig-paren">(</span><em>id_molecule</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.downloaders.downhitran.get_hitran_isotopologues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accesses <a class="reference external" href="http://hitran.org/lbl/2">http://hitran.org/lbl/2</a> and reads its table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id_molecule</strong> &#8211; molecule ID as in HITRAN database (use get_hitran_molecules() to get
+this information)</td>
+</tr>
+</tbody>
+</table>
+<p>Returns: tuple: table (list of lists), header (list of strings)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.convmol.downloaders.downnist">
+<span id="f311-convmol-downloaders-downnist-module"></span><h2>f311.convmol.downloaders.downnist module<a class="headerlink" href="#module-f311.convmol.downloaders.downnist" title="Permalink to this headline">¶</a></h2>
+<p>NIST Downloader</p>
+<dl class="function">
+<dt id="f311.convmol.downloaders.downnist.get_nist_webbook_constants">
+<code class="descclassname">f311.convmol.downloaders.downnist.</code><code class="descname">get_nist_webbook_constants</code><span class="sig-paren">(</span><em>formula</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.downloaders.downnist.get_nist_webbook_constants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Navigates through NIST webbook pages to retrieve a table of molecular constants</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>formula</strong> &#8211; example: &#8220;OH&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>Returns: tuple: table (list of lists), header (list of strings), name of molecule</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.convmol.downloaders">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.convmol.downloaders" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2017, JT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>
