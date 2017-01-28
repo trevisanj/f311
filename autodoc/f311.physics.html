@@ -86,22 +86,28 @@
 </ol>
 </dd>
 </dl>
-<p>The following code converts wavelength=5500 Angstrom to wavenumber in cm**-1:
-&gt;&gt;&gt; 1e8/air_to_vacuum(5500.)
-18176.768046090445</p>
-<p>The following code reproduces the figure shown in [1] (&#8220;comparison of the Morton and the inverse
-transformation by NP between 2000 Å and 100000 Å.&#8221;)
-&gt;&gt;&gt; import matplotlib.pyplot as plt
-&gt;&gt;&gt; import numpy as np
-&gt;&gt;&gt; λvac = 10**np.linspace(np.log10(2000), np.log10(1000000), 2000)
-&gt;&gt;&gt; y = air_to_vacuum(vacuum_to_air(λvac))-λvac
-&gt;&gt;&gt; _ = plt.semilogx(λvac, y)
-&gt;&gt;&gt; _ = plt.xlabel(&#8220;$lambda$ in Angstroem&#8221;)
-&gt;&gt;&gt; _ = plt.ylabel(&#8220;$Deltalambda$&#8221;)
-&gt;&gt;&gt; _ = plt.xlim([λvac[0]-50, λvac[-1]])
-&gt;&gt;&gt; _ = plt.title(&#8220;air_to_vacuum(vacuum_to_air($lambda_{vac}$))-$lambda_{vac}$&#8221;)
-&gt;&gt;&gt; _ = plt.tight_layout()
-&gt;&gt;&gt; _ = plt.show()</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The following code converts wavelength=5500 Angstrom to wavenumber in cm**-1:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span><span class="n">e8</span><span class="o">/</span><span class="n">air_to_vacuum</span><span class="p">(</span><span class="mf">5500.</span><span class="p">)</span>
+<span class="go">18176.768046090445</span>
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The following code reproduces the figure shown in [1] (&quot;comparison of the Morton and the inverse</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># transformation by NP between 2000 Å and 100000 Å.&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">λvac</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">2000</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1000000</span><span class="p">),</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">air_to_vacuum</span><span class="p">(</span><span class="n">vacuum_to_air</span><span class="p">(</span><span class="n">λvac</span><span class="p">))</span><span class="o">-</span><span class="n">λvac</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">λvac</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$ in Angstroem&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$\Delta\lambda$&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">λvac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="n">λvac</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;air_to_vacuum(vacuum_to_air($\lambda_</span><span class="si">{vac}</span><span class="s2">$))-$\lambda_</span><span class="si">{vac}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="docutils">
 <dt>Source:</dt>
 <dd>[1] <a class="reference external" href="http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion">http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion</a></dd>
@@ -130,9 +136,12 @@ transformation by NP between 2000 Å and 100000 Å.&#8221;)
 <dt>Original reference:</dt>
 <dd>Donald Morton (2000, ApJ. Suppl., 130, 403)</dd>
 </dl>
-<p>The following code converts wavenumber=2000 cm**-1 to wavelength in Angstrom
-&gt;&gt;&gt; vacuum_to_air(1e8/2000)
-49986.36934549974</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The following code converts wavenumber=2000 cm**-1 to wavelength in Angstrom</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vacuum_to_air</span><span class="p">(</span><span class="mi">1</span><span class="n">e8</span><span class="o">/</span><span class="mi">2000</span><span class="p">)</span>
+<span class="go">49986.36934549974</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -177,6 +186,7 @@ If string otherwise, creates a UBVParametric object.</li>
 </tbody>
 </table>
 <p>Returns: a dictionary with &#8220;cmag&#8221;: calculated magnitude, and many intermediary steps</p>
+<p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">f311</span> <span class="k">import</span> <span class="n">physics</span> <span class="k">as</span> <span class="n">ph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_magnitude</span><span class="p">(</span><span class="n">ph</span><span class="o">.</span><span class="n">get_vega_spectrum</span><span class="p">(),</span> <span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="s2">&quot;stdflux&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
@@ -373,30 +383,35 @@ If string otherwise, creates a UBVParametric object.</li>
 <code class="descclassname">f311.physics.photometry.</code><code class="descname">calc_mag</code><span class="sig-paren">(</span><em>sp</em>, <em>bp</em>, <em>system='stdflux'</em>, <em>zero_point=0.0</em>, <em>flag_force_band_range=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.calc_mag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates magnitude from a Spectrum object. See calculate_magnitude for arguments documentation</p>
 <p>Returns: (float) calculated magnitude</p>
-<p>The following example prints a table showing the calculated magnitude for the Vega spectrum in several systems
-&gt;&gt;&gt; import f311.physics as ph
-&gt;&gt;&gt; import tabulate
-&gt;&gt;&gt; systems = [&#8220;stdflux&#8221;, &#8220;ab&#8221;, &#8220;vega&#8221;]
-&gt;&gt;&gt; bands = &#8220;UBVRIJHK&#8221;
-&gt;&gt;&gt; sp = ph.get_vega_spectrum()
-&gt;&gt;&gt; rows = [([band]+[ph.calc_mag(sp, band, system) for system in systems]) for band in bands]
-&gt;&gt;&gt; print(tabulate.tabulate(rows, [&#8220;band&#8221;]+systems))
-band        stdflux          ab    vega
-&#8212;&#8212;  &#8212;&#8212;&#8212;&#8211;  &#8212;&#8212;&#8212;-  &#8212;&#8212;
-U        0.00572505   0.761594       -0
-B        0.0696287   -0.10383        -0
-V        0.0218067    0.0191189      -0
-R        0.0359559    0.214645       -0
-I        0.0661095    0.449825       -0
-J       -0.0150993    0.874666       -0
-H        0.0315447    1.34805        -0
-K        0.0246046    1.85948        -0</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The following example prints a table showing the calculated magnitude for the</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Vega spectrum in several systems</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">f311.physics</span> <span class="k">as</span> <span class="nn">ph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tabulate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">systems</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;stdflux&quot;</span><span class="p">,</span> <span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;vega&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bands</span> <span class="o">=</span> <span class="s2">&quot;UBVRIJHK&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">ph</span><span class="o">.</span><span class="n">get_vega_spectrum</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="p">[([</span><span class="n">band</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="n">ph</span><span class="o">.</span><span class="n">calc_mag</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">band</span><span class="p">,</span> <span class="n">system</span><span class="p">)</span> <span class="k">for</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">systems</span><span class="p">])</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="n">bands</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;band&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">systems</span><span class="p">))</span>
+<span class="go">band        stdflux          ab    vega</span>
+<span class="go">------  -----------  ----------  ------</span>
+<span class="go">U        0.00572505   0.761594       -0</span>
+<span class="go">B        0.0696287   -0.10383        -0</span>
+<span class="go">V        0.0218067    0.0191189      -0</span>
+<span class="go">R        0.0359559    0.214645       -0</span>
+<span class="go">I        0.0661095    0.449825       -0</span>
+<span class="go">J       -0.0150993    0.874666       -0</span>
+<span class="go">H        0.0315447    1.34805        -0</span>
+<span class="go">K        0.0246046    1.85948        -0</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
 <div class="section" id="module-f311.physics.rainbow">
 <span id="f311-physics-rainbow-module"></span><h2>f311.physics.rainbow module<a class="headerlink" href="#module-f311.physics.rainbow" title="Permalink to this headline">¶</a></h2>
 <p>Rainbow colors</p>
+<p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">rainbow_colors</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">color</span>
 <span class="go">Color(&#39;Violet&#39;, [ 0.54509804  0.          1.        ], 4000.0, 3775.0, 4225.0)</span>
@@ -408,6 +423,7 @@ K        0.0246046    1.85948        -0</p>
 <span class="go">Color(&#39;Red&#39;, [ 1.  0.  0.], 6500.0, 6200.0, 6800.0)</span>
 </pre></div>
 </div>
+<p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">rainbow_colors</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="n">color</span><span class="o">.</span><span class="n">l0</span><span class="p">,</span> <span class="n">color</span><span class="o">.</span><span class="n">lf</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">rgb</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -451,6 +467,7 @@ K        0.0246046    1.85948        -0</p>
 </tbody>
 </table>
 <p>Returns: 3-element sequence where each element is in [0, 1] range</p>
+<p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">a99</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vega</span> <span class="o">=</span> <span class="n">a99</span><span class="o">.</span><span class="n">get_vega_spectrum</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum_to_rgb</span><span class="p">(</span><span class="n">vega</span><span class="p">)</span>

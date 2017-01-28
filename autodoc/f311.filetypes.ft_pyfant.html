@@ -237,7 +237,7 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.fileatoms.FileAtoms.cut">
 <code class="descname">cut</code><span class="sig-paren">(</span><em>llzero</em>, <em>llfin</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileatoms.FileAtoms.cut" title="Permalink to this definition">¶</a></dt>
-<dd><p>Keeps only the lines with their llzero &lt;= <a href="#id3"><span class="problematic" id="id4">lambda_</span></a> &lt;= llfin.</p>
+<dd><p>Keeps only the lines with their llzero &lt;= <a href="#id1"><span class="problematic" id="id2">lambda_</span></a> &lt;= llfin.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -448,7 +448,7 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.gui_data">
-<code class="descname">gui_data</code><em class="property"> = {'molecule': {'te': [None, 'electronic term'], 'bm': [None, 'mass of second element'], 'symbol_a': ['Symbol A', 'symbol of first element'], 's': [None, '?doc?'], 'ub': [None, 'value of partition function for second element'], 'symbol_b': ['Symbol B', 'symbol of second element'], 'do': [None, 'dissociation constant (eV)'], 'fe': [None, 'oscillator strength'], 'ua': [None, 'value of partition function for first element'], 'name': [None, &quot;name of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;], 'cro': [None, 'delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)'], 'am': [None, 'mass of first element']}, 'state': {'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.gui_data" title="Permalink to this definition">¶</a></dt>
+<code class="descname">gui_data</code><em class="property"> = {'state': {'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)']}, 'molecule': {'ua': [None, 'value of partition function for first element'], 'fe': [None, 'oscillator strength'], 'ub': [None, 'value of partition function for second element'], 'bm': [None, 'mass of second element'], 'do': [None, 'dissociation constant (eV)'], 'cro': [None, 'delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)'], 's': [None, '?doc?'], 'symbol_b': ['Symbol B', 'symbol of second element'], 'name': [None, &quot;name of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;], 'symbol_a': ['Symbol A', 'symbol of first element'], 'am': [None, 'mass of first element'], 'te': [None, 'electronic term']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.gui_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -463,6 +463,7 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 </tr>
 </tbody>
 </table>
+<p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">FileHitranDB</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">init_default</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">print_isotopologues</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s2">&quot;molecule.formula&quot;</span><span class="p">:</span> <span class="s2">&quot;CO&quot;</span><span class="p">})</span>
@@ -475,10 +476,12 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 <code class="descname">query_isotopologue</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.query_isotopologue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience function to query &#8216;isotopologue&#8217; table</p>
 <p>Args, Returns: see query_molecule</p>
-<p>Example:
-&gt;&gt;&gt; f = FileHitranDB()
-&gt;&gt;&gt; f.init_default()
-&gt;&gt;&gt; _ = f.query_isotopologue(<a href="#id1"><span class="problematic" id="id2">**</span></a>{&#8220;molecule.formula&#8221;: &#8220;OH&#8221;})</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">FileHitranDB</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">init_default</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">query_isotopologue</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s2">&quot;molecule.formula&quot;</span><span class="p">:</span> <span class="s2">&quot;OH&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -507,7 +510,7 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
 <p>PFANT Hygrogen Lines Map</p>
 <p>Imitates the logic of reader_hmap.f90::read_hmap().</p>
-<p>Attributes match reader_hmap.f90::hmap_* (minus the &#8220;<a href="#id5"><span class="problematic" id="id6">hmap_</span></a>&#8221; prefix)</p>
+<p>Attributes match reader_hmap.f90::hmap_* (minus the &#8220;<a href="#id3"><span class="problematic" id="id4">hmap_</span></a>&#8221; prefix)</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filehmap.FileHmap.attrs">
 <code class="descname">attrs</code><em class="property"> = ['rows']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehmap.FileHmap.attrs" title="Permalink to this definition">¶</a></dt>
@@ -578,7 +581,7 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
 <p>PFANT Stellar Main Configuration</p>
 <p>Imitates the logic of reader_main.f90::read_main().</p>
-<p>Attributes match reader_main.f90::main_* (minus the &#8220;<a href="#id7"><span class="problematic" id="id8">main_</span></a>&#8221; prefix)</p>
+<p>Attributes match reader_main.f90::main_* (minus the &#8220;<a href="#id5"><span class="problematic" id="id6">main_</span></a>&#8221; prefix)</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemain.FileMain.attrs">
 <code class="descname">attrs</code><em class="property"> = ['titrav', 'pas', 'fwhm', 'ivtot', 'vvt', 'tolv', 'teff', 'glog', 'asalog', 'nhe', 'ptdisk', 'mu', 'flprefix', 'llzero', 'llfin', 'aint']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemain.FileMain.attrs" title="Permalink to this definition">¶</a></dt>
@@ -607,7 +610,7 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 <p>File may have several 1200-byte records.</p>
 <p>Files created by the innermarcs executable (usually named &#8220;modeles.mod&#8221;)</p>
 <p>Imitates the logic of reader_modeles.f90::read_modele().</p>
-<p>Attributes match reader_modeles.f90:modeles_* (minus the &#8220;<a href="#id9"><span class="problematic" id="id10">modeles_</span></a>&#8221; prefix)</p>
+<p>Attributes match reader_modeles.f90:modeles_* (minus the &#8220;<a href="#id7"><span class="problematic" id="id8">modeles_</span></a>&#8221; prefix)</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemod.FileModBin.attrs">
 <code class="descname">attrs</code><em class="property"> = ['records']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemod.FileModBin.attrs" title="Permalink to this definition">¶</a></dt>
@@ -639,7 +642,7 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 this class only stores one of these records, specified by &#8220;inum&#8221;  argument
 of load()</p>
 <p>Imitates the logic of reader_modeles.f90::read_modele().</p>
-<p>Attributes match reader_modeles.f90:modeles_* (minus the &#8220;<a href="#id11"><span class="problematic" id="id12">modeles_</span></a>&#8221; prefix)</p>
+<p>Attributes match reader_modeles.f90:modeles_* (minus the &#8220;<a href="#id9"><span class="problematic" id="id10">modeles_</span></a>&#8221; prefix)</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemod.ModRecord.attrs">
 <code class="descname">attrs</code><em class="property"> = ['ntot', 'teff', 'glog', 'asalog', 'asalalf', 'nhe', 'tit', 'tiabs', 'nh', 'teta', 'pe', 'pg', 'log_tau_ross']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemod.ModRecord.attrs" title="Permalink to this definition">¶</a></dt>
@@ -772,7 +775,7 @@ attributes, except for redundant attributes, i.e.:</p>
 
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_data">
-<code class="descname">gui_data</code><em class="property"> = {'molecule': {'te': [None, 'electronic term'], 'bm': [None, 'mass of second element'], 'symbol_a': ['Symbol A', 'symbol of first element'], 's': [None, '?doc?'], 'ub': [None, 'value of partition function for second element'], 'symbol_b': ['Symbol B', 'symbol of second element'], 'do': [None, 'dissociation constant (eV)'], 'fe': [None, 'oscillator strength'], 'ua': [None, 'value of partition function for first element'], 'name': [None, &quot;name of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;], 'cro': [None, 'delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)'], 'am': [None, 'mass of first element']}, 'state': {'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_data" title="Permalink to this definition">¶</a></dt>
+<code class="descname">gui_data</code><em class="property"> = {'state': {'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)']}, 'molecule': {'ua': [None, 'value of partition function for first element'], 'fe': [None, 'oscillator strength'], 'ub': [None, 'value of partition function for second element'], 'bm': [None, 'mass of second element'], 'do': [None, 'dissociation constant (eV)'], 'cro': [None, 'delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)'], 's': [None, '?doc?'], 'symbol_b': ['Symbol B', 'symbol of second element'], 'name': [None, &quot;name of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;], 'symbol_a': ['Symbol A', 'symbol of first element'], 'am': [None, 'mass of first element'], 'te': [None, 'electronic term']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -787,6 +790,7 @@ attributes, except for redundant attributes, i.e.:</p>
 </tr>
 </tbody>
 </table>
+<p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">FileMolDB</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">init_default</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">print_states</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s2">&quot;OH&quot;</span><span class="p">)</span>
@@ -820,6 +824,7 @@ attributes, except for redundant attributes, i.e.:</p>
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.test_query_state">
 <code class="descname">test_query_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.test_query_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test function</p>
+<p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">FileMolDB</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">init_default</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get_conn</span><span class="p">()</span>
@@ -1109,7 +1114,7 @@ a command-line option &#8220;&#8211;xxxx&#8221;</p>
 <p>Imitates the logic of reader_filetoh.f90::read_filetoh(). Difference: pfant
 reads second row as single character-variable &#8220;ttt&#8221;, but hydro2 saves 5 values
 in second row. I am reading these values.</p>
-<p>Attributes match reader_filetoh.f90:filetoh_r_* (minus the &#8220;<a href="#id13"><span class="problematic" id="id14">filetoh_r_</span></a>&#8221; prefix)</p>
+<p>Attributes match reader_filetoh.f90:filetoh_r_* (minus the &#8220;<a href="#id11"><span class="problematic" id="id12">filetoh_r_</span></a>&#8221; prefix)</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filetoh.FileToH.attrs">
 <code class="descname">attrs</code><em class="property"> = ['titre', 'ntot', 'zut1', 'zut2', 'zut3', 'th', 'lambdh', 'jmax']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filetoh.FileToH.attrs" title="Permalink to this definition">¶</a></dt>

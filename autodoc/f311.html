@@ -369,7 +369,7 @@ as they present in almost any programming language.</p>
 
 <dl class="data">
 <dt id="f311.hapi.OPERATORS">
-<code class="descclassname">f311.hapi.</code><code class="descname">OPERATORS</code><em class="property"> = {'|': &lt;function &lt;lambda&gt;&gt;, '&lt;&gt;': &lt;function &lt;lambda&gt;&gt;, 'AND': &lt;function &lt;lambda&gt;&gt;, 'COUNT': &lt;function &lt;lambda&gt;&gt;, '&lt;': &lt;function &lt;lambda&gt;&gt;, '&gt;=': &lt;function &lt;lambda&gt;&gt;, 'NOT': &lt;function &lt;lambda&gt;&gt;, 'LESSOREQUAL': &lt;function &lt;lambda&gt;&gt;, '!=': &lt;function &lt;lambda&gt;&gt;, 'LT': &lt;function &lt;lambda&gt;&gt;, 'DIFF': &lt;function &lt;lambda&gt;&gt;, 'EQUALS': &lt;function &lt;lambda&gt;&gt;, 'EQ': &lt;function &lt;lambda&gt;&gt;, 'LIST': &lt;function &lt;lambda&gt;&gt;, 'MTE': &lt;function &lt;lambda&gt;&gt;, 'NOTEQUAL': &lt;function &lt;lambda&gt;&gt;, '&amp;&amp;': &lt;function &lt;lambda&gt;&gt;, 'OR': &lt;function &lt;lambda&gt;&gt;, '/': &lt;function &lt;lambda&gt;&gt;, '+': &lt;function &lt;lambda&gt;&gt;, 'RANGE': &lt;function &lt;lambda&gt;&gt;, '||': &lt;function &lt;lambda&gt;&gt;, 'MUL': &lt;function &lt;lambda&gt;&gt;, 'LIKE': &lt;function &lt;lambda&gt;&gt;, '~=': &lt;function &lt;lambda&gt;&gt;, 'LESS': &lt;function &lt;lambda&gt;&gt;, 'SEARCH': &lt;function &lt;lambda&gt;&gt;, 'MOREOREQUAL': &lt;function &lt;lambda&gt;&gt;, '&lt;=': &lt;function &lt;lambda&gt;&gt;, 'MT': &lt;function &lt;lambda&gt;&gt;, 'MATCH': &lt;function &lt;lambda&gt;&gt;, 'BETWEEN': &lt;function &lt;lambda&gt;&gt;, 'LTE': &lt;function &lt;lambda&gt;&gt;, '!': &lt;function &lt;lambda&gt;&gt;, 'FINDALL': &lt;function &lt;lambda&gt;&gt;, '-': &lt;function &lt;lambda&gt;&gt;, 'SUM': &lt;function &lt;lambda&gt;&gt;, '==': &lt;function &lt;lambda&gt;&gt;, '&gt;': &lt;function &lt;lambda&gt;&gt;, 'IN': &lt;function &lt;lambda&gt;&gt;, 'MORE': &lt;function &lt;lambda&gt;&gt;, 'NE': &lt;function &lt;lambda&gt;&gt;, 'DIV': &lt;function &lt;lambda&gt;&gt;, 'SUBSET': &lt;function &lt;lambda&gt;&gt;, '&amp;': &lt;function &lt;lambda&gt;&gt;, 'EQUAL': &lt;function &lt;lambda&gt;&gt;, '*': &lt;function &lt;lambda&gt;&gt;, '=': &lt;function &lt;lambda&gt;&gt;}</em><a class="headerlink" href="#f311.hapi.OPERATORS" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">OPERATORS</code><em class="property"> = {'MATCH': &lt;function &lt;lambda&gt;&gt;, 'MUL': &lt;function &lt;lambda&gt;&gt;, 'LESSOREQUAL': &lt;function &lt;lambda&gt;&gt;, '&amp;&amp;': &lt;function &lt;lambda&gt;&gt;, 'DIFF': &lt;function &lt;lambda&gt;&gt;, 'OR': &lt;function &lt;lambda&gt;&gt;, 'RANGE': &lt;function &lt;lambda&gt;&gt;, '!': &lt;function &lt;lambda&gt;&gt;, 'MT': &lt;function &lt;lambda&gt;&gt;, 'IN': &lt;function &lt;lambda&gt;&gt;, 'DIV': &lt;function &lt;lambda&gt;&gt;, 'SUBSET': &lt;function &lt;lambda&gt;&gt;, 'LESS': &lt;function &lt;lambda&gt;&gt;, '&amp;': &lt;function &lt;lambda&gt;&gt;, 'MORE': &lt;function &lt;lambda&gt;&gt;, 'LTE': &lt;function &lt;lambda&gt;&gt;, '!=': &lt;function &lt;lambda&gt;&gt;, '/': &lt;function &lt;lambda&gt;&gt;, '&lt;': &lt;function &lt;lambda&gt;&gt;, 'NOT': &lt;function &lt;lambda&gt;&gt;, '&lt;=': &lt;function &lt;lambda&gt;&gt;, '||': &lt;function &lt;lambda&gt;&gt;, '-': &lt;function &lt;lambda&gt;&gt;, 'EQUALS': &lt;function &lt;lambda&gt;&gt;, 'AND': &lt;function &lt;lambda&gt;&gt;, 'BETWEEN': &lt;function &lt;lambda&gt;&gt;, '&gt;=': &lt;function &lt;lambda&gt;&gt;, 'FINDALL': &lt;function &lt;lambda&gt;&gt;, 'SEARCH': &lt;function &lt;lambda&gt;&gt;, 'MOREOREQUAL': &lt;function &lt;lambda&gt;&gt;, '=': &lt;function &lt;lambda&gt;&gt;, 'EQ': &lt;function &lt;lambda&gt;&gt;, '==': &lt;function &lt;lambda&gt;&gt;, '&lt;&gt;': &lt;function &lt;lambda&gt;&gt;, '*': &lt;function &lt;lambda&gt;&gt;, 'NOTEQUAL': &lt;function &lt;lambda&gt;&gt;, '|': &lt;function &lt;lambda&gt;&gt;, 'MTE': &lt;function &lt;lambda&gt;&gt;, 'SUM': &lt;function &lt;lambda&gt;&gt;, 'EQUAL': &lt;function &lt;lambda&gt;&gt;, 'COUNT': &lt;function &lt;lambda&gt;&gt;, '&gt;': &lt;function &lt;lambda&gt;&gt;, 'NE': &lt;function &lt;lambda&gt;&gt;, '~=': &lt;function &lt;lambda&gt;&gt;, '+': &lt;function &lt;lambda&gt;&gt;, 'LIKE': &lt;function &lt;lambda&gt;&gt;, 'LT': &lt;function &lt;lambda&gt;&gt;, 'LIST': &lt;function &lt;lambda&gt;&gt;}</em><a class="headerlink" href="#f311.hapi.OPERATORS" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>def evaluateExpression(root,VarDictionary,GroupIndexKey=None)</em> &#8211; # input = local tree root
 # XXX: this could be very slow due to passing
 #      every time VarDictionary as a parameter
@@ -712,32 +712,32 @@ where γ is the line width equal to the half base of the triangle.</p>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef_Doppler">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Doppler</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Doppler" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Doppler</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Doppler" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef_Gauss">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Gauss</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Gauss" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Gauss</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Gauss" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef_HT">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_HT</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_HT" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_HT</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_HT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef_Lorentz">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Lorentz</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Lorentz" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Lorentz</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Lorentz" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef_Voigt">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Voigt</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Voigt" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Voigt</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Voigt" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -2168,7 +2168,7 @@ TT,PartSum = partitionSum(1,1,[296,1000],step=0.1)</div></blockquote>
 
 <dl class="function">
 <dt id="f311.hapi.radianceSpectrum">
-<code class="descclassname">f311.hapi.</code><code class="descname">radianceSpectrum</code><span class="sig-paren">(</span><em>Omegas</em>, <em>AbsorptionCoefficient</em>, <em>Environment={'l': 100.0</em>, <em>'T': 296.0}</em>, <em>File=None</em>, <em>Format='%e %e'</em>, <em>Wavenumber=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.radianceSpectrum" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">radianceSpectrum</code><span class="sig-paren">(</span><em>Omegas</em>, <em>AbsorptionCoefficient</em>, <em>Environment={'T': 296.0</em>, <em>'l': 100.0}</em>, <em>File=None</em>, <em>Format='%e %e'</em>, <em>Wavenumber=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.radianceSpectrum" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>INPUT PARAMETERS:</dt>
 <dd><p class="first">Wavenumber/Omegas:   wavenumber grid                   (required)

@@ -1,5 +1,5 @@
-*f311.physics*: some physics
-============================
+*f311.physics*: Physics
+=======================
 
 Introduction
 ------------
