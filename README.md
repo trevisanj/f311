@@ -15,7 +15,7 @@ Sub-packages:
 ## Installation
 
 Installation instructions: [_f311_ documentation website](http://trevisanj.github.io/f311) or
-or [here](docs/source/index.rst)
+[here](docs/source/index.rst)
 
 ## Documentation
 

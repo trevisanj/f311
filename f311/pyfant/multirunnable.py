@@ -72,8 +72,8 @@ class MultiRunnable(pf.Runnable):
 
     def kill(self):
         self._flag_killed = True
-        if self._flag_running and self.__rm:
-            self.__rm.exit()
+        if self._flag_running and self.__runnable_manager:
+            self.__runnable_manager.exit()
 
     def get_status(self):
         return self.__status
@@ -177,7 +177,7 @@ class MultiRunnable(pf.Runnable):
             self.__logger.debug(pfant.conf.opt.flprefix)
 
             pfant_list.append(pfant)
-        rm = self.__rm = pf.RunnableManager()
+        rm = self.__runnable_manager = pf.RunnableManager()
         pf.run_parallel(pfant_list, flag_console=False, runnable_manager=rm)
         if self._flag_killed:
             return
@@ -221,7 +221,7 @@ class MultiRunnable(pf.Runnable):
         # ## Runs nulbads
         self.__status.stage = "nulbad stage"
         self.__logger.info("+++ nulbad stage...")
-        rm = self.__rm = pf.RunnableManager()
+        rm = self.__runnable_manager = pf.RunnableManager()
         pf.run_parallel(nulbad_list, flag_console=False, runnable_manager=rm)
         if self._flag_killed:
             return

@@ -5,7 +5,7 @@
 
 Example:
 
-    show-nist.py OH
+    print-nist.py OH
 
 """
 

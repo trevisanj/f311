@@ -141,6 +141,16 @@ Install in **developer** mode:
    sudo python3 setup.py develop
 
 
+Installation troubleshooting
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: shell
+
+   ValueError: Unrecognized backend string "qt5agg": valid strings are ['GTKAgg', 'template', 'pdf',
+   'GTK3Agg', 'cairo', 'TkAgg', 'pgf', 'MacOSX', 'GTK', 'WX', 'GTKCairo', 'Qt4Agg', 'svg', 'agg',
+   'ps', 'emf', 'WebAgg', 'gdk', 'WXAgg', 'CocoaAgg', 'GTK3Cairo']
+
+
 More
 ----
 

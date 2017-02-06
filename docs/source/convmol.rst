@@ -31,7 +31,7 @@ Command-line tools:
 
 - ``download-hitran.py`` -- Downloads molecular lines from HITRAN database (using "HITRAN API" backend)
 
-- ``show-nist.py`` -- Downloads and prints molecular constants from NIST Web Book for a particular molecule
+- ``print-nist.py`` -- Downloads and prints molecular constants from NIST Web Book for a particular molecule
 
 
 All the programs above can be called with the ``--help`` or ``-h``
@@ -40,4 +40,4 @@ option for more information.
 API reference
 -------------
 
-:doc:`autodoc/f311.aosss`
+:doc:`autodoc/f311.convmol`

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Converion of molecular lines data to PFANT format"""
+"""Conversion of molecular lines data to PFANT format"""
 
 import sys
 import argparse

@@ -1,23 +1,17 @@
 # TODO list
 
-## TODAY
-
-Run all scripts
-
-Review this mapping: try not to get rid of the plugin system but perhaps split it
-  - ~file types~
-  - ~visualization types~
-  - ~~scripts (programs.py)~~
-  - ~ONGOING ... default data: delegate to filetypes package~
-
-**grid.moo not opening**
+## GENERAL
   
-  
-Template project
+- Documentation: **Get some inspiration** (read lots of shit)!!!!
+- Template project
+- FileSPectrumPfant not loading properly anymore!!
+- Programs and file types listings: implement rst rendering
+- & update explorer list_file_types() example
 
 
-FileSPectrumPfant not loading properly anymore!!
+## Convmol
 
+- Figure out Kurucz
 
 ## astrogear
 
@@ -28,22 +22,12 @@ FileSPectrumPfant not loading properly anymore!!
   - Sort the thing with DataFile.description
   - ~~Look for PFANT~~
   - implement categories in scripts (dunno, perhaps a `# cat: whatever`)
-  - allow for multiple database simultaneously somehow
   - treat sqlite DB as config file (can wait)
 
 ## pyfant
 
   - **SEE WHY PYFANT SETUP IS MESSING ASTROGEAR!!!!!!**
 
-  - ~~OK implement ToScalar_UseNumPyFunc~~
-  - ~~OK add combobox to XToScalar~~
-  - ~~OK Smarter loading of Full Cube~~
-  
-  - ~~FIX MOLECULES FILE!!!!!
-    comparing old x new moleculagrade
-    perhaps best it is to keep both versions: contemplating diversity and whoever did whatever
-    best would be to create an editor to mingle the molecules~~
-  
   
   - Normalize("1") cause re-sampling, sth is not right
   - Fill origin when converting from FileFullCube to FileSpectrumList (somehow)
@@ -51,9 +35,6 @@ FileSPectrumPfant not loading properly anymore!!
   - XHelpDialog is too ugly
   - Investigate what this a_XAtomsHistogram is about
   - Make sun Grevesse 1998 as default sun for pyfant
-  - ~~legend=False in plot_*()~~
-  - ~~p.conf.sid.clean() not intuitive~~
-  - ~~easier to work with command line options~~
   - ~~nulbad load_result~~
   - Warn assumptions in ConvMol
   - ~~Resolve branches for other molecules~~ HITRAN OK
@@ -62,6 +43,5 @@ FileSPectrumPfant not loading properly anymore!!
 ## aosss
 
   - documentation: illustrate another case
-  - OK read and plot ESO sky tables
-  - OK incorporate in the wavelength chart
+
   
