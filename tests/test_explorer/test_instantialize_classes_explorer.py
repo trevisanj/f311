@@ -50,8 +50,8 @@ def test_SB_FLambdaToFNu():
     _ = ex.SB_FLambdaToFNu()
 
 
-def test_SB_FnuToFlambda():
-    _ = ex.SB_FnuToFlambda()
+def test_SB_FNuToFLambda():
+    _ = ex.SB_FNuToFLambda()
 
 
 def test_SB_Mul():

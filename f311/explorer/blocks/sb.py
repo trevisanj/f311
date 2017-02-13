@@ -1,4 +1,4 @@
-__all__ = ["SB_Rubberband", "SB_AddNoise", "SB_FNuToFlambda", "SB_FLambdaToFNu", "SB_ElementWise",
+__all__ = ["SB_Rubberband", "SB_AddNoise", "SB_FNuToFLambda", "SB_FLambdaToFNu", "SB_ElementWise",
            "SB_Extend", "SB_Cut", "SB_Normalize", "SB_ConvertYUnit", "SB_Add", "SB_Mul",
            "SB_MulByLambda", "SB_DivByLambda"]
 
@@ -272,7 +272,7 @@ class SB_ConvertYUnit(SpectrumBlock):
         return out
 
 
-class SB_FNuToFlambda(SB_ConvertYUnit):
+class SB_FNuToFLambda(SB_ConvertYUnit):
     """
     Flux-nu to flux-lambda conversion. Assumes the wavelength axis is in angstrom
 

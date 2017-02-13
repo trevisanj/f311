@@ -81,9 +81,9 @@ def test_use_SB_FLambdaToFNu():
     out = blk.use(sp)
 
 
-def test_use_SB_FNuToFlambda():
+def test_use_SB_FNuToFLambda():
     sp = get_spectrum()
-    blk = ex.SB_FNuToFlambda()
+    blk = ex.SB_FNuToFLambda()
     out = blk.use(sp)
 
 

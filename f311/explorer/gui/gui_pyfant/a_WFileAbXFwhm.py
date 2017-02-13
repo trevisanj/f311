@@ -189,7 +189,7 @@ def _format_exception_only(etype, value):
     # Clear these out first because issubtype(string1, SyntaxError)
     # would raise another exception and mask the original problem.
     if (isinstance(etype, BaseException) or
-        isinstance(etype, types.InstanceType) or
+        isinstance(etype, object) or
         etype is None or type(etype) is str):
         return [traceback._format_final_exc_line(etype, value)]
 
