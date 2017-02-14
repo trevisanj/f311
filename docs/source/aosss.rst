@@ -175,12 +175,52 @@ Now open the Spectrum List Editor
 
     splisted.py group-spintg-00-C001700-C001721.splist
 
+
+In the following steps, we will:
+
+- Plot the spectra
+
+- Calculate the Signal-to-noise ratio (SNR)
+
+- Plot the Detector Integration Time (DIT) *vs* the SNR
+
+
+1. Select all the spectra by pressing **Ctrl+A**
+
+2. Click on "Plot Overlapped". A plot window opens. From this plot, we can see that the region
+   16508-16534 seems to be free of atmospheric contamination. You may close the plot window
+
 |imaget0|
 
 |imaget1|
 
+
+3. Click on "To Scalar". Another window opens
+
+4. Type "ToScalar_SNR(16508, 16534)"
+
+5. Click on "OK". Notice that a new column "SNR" appear in the spectrum list
+
+|imaget2|
+
+6. Click on "X-Y Plot"
+
+|imaget3|
+
+7. Select "Error bars"
+
+8. Select "OBS_DIT"
+
+9. Click on "Redraw"
+
+|imaget4|
+
+
 .. |imaget0| image:: img/splisted-tut-0.png
 .. |imaget1| image:: img/splisted-tut-1.png
+.. |imaget2| image:: img/splisted-tut-2.png
+.. |imaget3| image:: img/splisted-tut-3.png
+.. |imaget4| image:: img/splisted-tut-4.png
 
 
 Calculate SNR
