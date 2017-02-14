@@ -190,20 +190,19 @@ In the following steps, we will:
 2. Click on "Plot Overlapped". A plot window opens. From this plot, we can see that the region
    16508-16534 seems to be free of atmospheric contamination. You may close the plot window
 
+3. Click on "To Scalar". Another window opens
+
 |imaget0|
 
 |imaget1|
 
-
-3. Click on "To Scalar". Another window opens
-
 4. Type "ToScalar_SNR(16508, 16534)"
 
-5. Click on "OK". Notice that a new column "SNR" appear in the spectrum list
+5. Click on "OK"
 
 |imaget2|
 
-6. Click on "X-Y Plot"
+6. Notice that a new column "SNR" appear in the table. Click on "X-Y Plot"
 
 |imaget3|
 
@@ -221,14 +220,6 @@ In the following steps, we will:
 .. |imaget2| image:: img/splisted-tut-2.png
 .. |imaget3| image:: img/splisted-tut-3.png
 .. |imaget4| image:: img/splisted-tut-4.png
-
-
-Calculate SNR
-^^^^^^^^^^^^^
-
-We'll perform two steps. First we
-
-
 
 
 API reference
