@@ -102,7 +102,7 @@ class SpectrumList(SpectrumCollection):
             self.wavelength = np.copy(sp.wavelength)
         else:
             if not np.all(self.wavelength == sp.wavelength):
-                print("VAI TER QUE RESAMPLEAR ALGO")
+                # print("VAI TER QUE RESAMPLEAR ALGO")
                 xcur0, xcur1 = self.wavelength[0], self.wavelength[-1]
                 xsp0, xsp1 = sp.x[0], sp.x[-1]
 
@@ -116,15 +116,16 @@ class SpectrumList(SpectrumCollection):
                 self.wavelength = np.arange(n)*dl+xnew0
 
                 if not (xnew0 == xcur0 and xnew1 == xcur1):
-                    print("RESAMPLEANDO EXISTING")
+                    # print("RESAMPLEANDO EXISTING")
                     for sp_existing in self.spectra:
                         sp_existing.resample(self.wavelength)
 
                 if not(xnew0 == xsp0 and xnew1 == xsp1 and dl == sp.delta_lambda):
-                    print("RESAMPLING NEWCOMER")
+                    # print("RESAMPLING NEWCOMER")
                     sp.resample(self.wavelength)
                 else:
-                    print("NO NEED TO RESAMPLE NEWCOMER")
+                    # print("NO NEED TO RESAMPLE NEWCOMER")
+                    pass
 
                 # raise RuntimeError("Cannot add spectrum, wavelength vector does not match existing")
 

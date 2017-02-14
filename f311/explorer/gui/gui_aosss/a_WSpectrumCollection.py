@@ -12,6 +12,9 @@ import a99
 from .... import explorer as ex
 import f311.filetypes as ft
 
+# TODO options window to set this up
+_CONFIG_LEGEND = "/gui/WSpectrumCollection/plot_overlapped/flag_legend"
+
 
 class WSpectrumCollection(a99.WBase):
     """Editor for SpectrumCollection objects"""
@@ -554,8 +557,10 @@ class WSpectrumCollection(a99.WBase):
 
     def on_sel_plot_overlapped(self):
         sspp = self.get_selected_spectra()
+        flag_legend = ex.get_config().get_item(_CONFIG_LEGEND, True)
+        oo = ex.PlotSpectrumSetup(flag_legend=flag_legend)
         if len(sspp) > 0:
-            ex.plot_spectra_overlapped(sspp)
+            ex.plot_spectra_overlapped(sspp, setup=oo)
 
 
     def on_sel_open_in_new(self):

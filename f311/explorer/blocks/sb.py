@@ -23,7 +23,7 @@ class SB_Rubberband(SpectrumBlock):
     Stretches a polygonal line from below/above the spectrum. The vertices of this multi-segment
     line will touch "troughs" of the spectrum without crossing the spectrum
 
-    This was inspired on -- but is not equivalent to -- OPUS SB_Rubberband baseline correction [1].
+    This was inspired on -- but is not equivalent to -- OPUS Rubberband baseline correction [1].
     However, this one is parameterless, whereas OPUS RBBC asks for a number of points
 
     References:

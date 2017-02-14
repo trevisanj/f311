@@ -49,7 +49,7 @@ class PlotSpectrumSetup(object):
         self.flag_legend = flag_legend
 
     def __repr__(self):
-        return "{}({}, {}, {}, {}, {})".format(self.__class__.__name__,self.fmt_xlabel, self.fmt_ylabel,
+        return "{}('{}', '{}', '{}', {}, {})".format(self.__class__.__name__,self.fmt_xlabel, self.fmt_ylabel,
                                            self.fmt_title, self.ymin, self.flag_legend)
 
 
@@ -118,6 +118,7 @@ def plot_spectra_overlapped(ss, title=None, setup=_default_setup):
     ymin = ymin_ if setup.ymin is None else setup.ymin
     plt.xlim([xmin-xspan*_T, xmax+xspan*_T])
     plt.ylim([ymin-yspan*_T, ymax+yspan*_T])
+
 
     if setup.flag_legend:
         leg = plt.legend(loc=0)

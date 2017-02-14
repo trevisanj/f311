@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Creates report for a given set of WEBSIM-COMPASS output files
+Creates HTML reports from WebSim-COMPASS output files
 """
 
 
