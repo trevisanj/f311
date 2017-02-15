@@ -133,7 +133,7 @@ reinforced by EC and BLB (using IRAF procedure, which is Amplitude_RMS/std</p>
 </table>
 <p>Stretches a polygonal line from below/above the spectrum. The vertices of this multi-segment
 line will touch &#8220;troughs&#8221; of the spectrum without crossing the spectrum</p>
-<p>This was inspired on &#8211; but is not equivalent to &#8211; OPUS SB_Rubberband baseline correction [1].
+<p>This was inspired on &#8211; but is not equivalent to &#8211; OPUS Rubberband baseline correction [1].
 However, this one is parameterless, whereas OPUS RBBC asks for a number of points</p>
 <p class="rubric">References</p>
 <p>[1] Bruker Optik GmbH, OPUS 5 Reference Manual. Ettlingen: Bruker, 2004.</p>
@@ -155,8 +155,8 @@ However, this one is parameterless, whereas OPUS RBBC asks for a number of point
 </dd></dl>
 
 <dl class="class">
-<dt id="f311.explorer.blocks.sb.SB_FNuToFlambda">
-<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_FNuToFlambda</code><a class="headerlink" href="#f311.explorer.blocks.sb.SB_FNuToFlambda" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.explorer.blocks.sb.SB_FNuToFLambda">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_FNuToFLambda</code><a class="headerlink" href="#f311.explorer.blocks.sb.SB_FNuToFLambda" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.sb.SB_ConvertYUnit" title="f311.explorer.blocks.sb.SB_ConvertYUnit"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.sb.SB_ConvertYUnit</span></code></a></p>
 <p>Flux-nu to flux-lambda conversion. Assumes the wavelength axis is in angstrom</p>
 <dl class="docutils">
@@ -247,7 +247,7 @@ does not allow for many iterations until the baseline is found</dd>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>-- initial wavelength</strong> (<a class="reference internal" href="f311.physics.html#f311.physics.photometry.Bandpass.l0" title="f311.physics.photometry.Bandpass.l0"><em>l0</em></a>) &#8211; </li>
-<li><strong>-- final wavelength</strong> (<a class="reference internal" href="f311.physics.html#f311.physics.photometry.Bandpass.lf" title="f311.physics.photometry.Bandpass.lf"><em>lf</em></a>) &#8211; </li>
+<li><strong>-- final wavelength</strong> (<a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.spectrum.Spectrum.lf" title="f311.filetypes.ft_basic.spectrum.Spectrum.lf"><em>lf</em></a>) &#8211; </li>
 </ul>
 </td>
 </tr>
@@ -426,7 +426,7 @@ than that</dd>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2015-2017, JT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
   </body>
 </html>

@@ -167,7 +167,7 @@ sqy &#8211; &#8220;place spectrum&#8221; y</dd>
 <p>Routines also used by plot-spectra.py</p>
 <dl class="function">
 <dt id="f311.explorer.vis.plotsp.plot_spectra">
-<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">plot_spectra</code><span class="sig-paren">(</span><em>ss</em>, <em>title=None</em>, <em>num_rows=None</em>, <em>setup=PlotSpectrumSetup({.xunit}</em>, <em>{.yunit}</em>, <em>{.title}</em>, <em>None</em>, <em>True)</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.plot_spectra" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">plot_spectra</code><span class="sig-paren">(</span><em>ss</em>, <em>title=None</em>, <em>num_rows=None</em>, <em>setup=PlotSpectrumSetup('{.xunit}'</em>, <em>'{.yunit}'</em>, <em>'{.title}'</em>, <em>None</em>, <em>True)</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.plot_spectra" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots one or more stacked in subplots sharing same x-axis.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -188,7 +188,7 @@ If passed, number of columns is calculated automatically.</li>
 
 <dl class="function">
 <dt id="f311.explorer.vis.plotsp.plot_spectra_overlapped">
-<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">plot_spectra_overlapped</code><span class="sig-paren">(</span><em>ss</em>, <em>title=None</em>, <em>setup=PlotSpectrumSetup({.xunit}</em>, <em>{.yunit}</em>, <em>{.title}</em>, <em>None</em>, <em>True)</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.plot_spectra_overlapped" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">plot_spectra_overlapped</code><span class="sig-paren">(</span><em>ss</em>, <em>title=None</em>, <em>setup=PlotSpectrumSetup('{.xunit}'</em>, <em>'{.yunit}'</em>, <em>'{.title}'</em>, <em>None</em>, <em>True)</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.plot_spectra_overlapped" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots one or more spectra in the same plot.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -207,7 +207,7 @@ If passed, number of columns is calculated automatically.</li>
 
 <dl class="function">
 <dt id="f311.explorer.vis.plotsp.plot_spectra_pieces_pdf">
-<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">plot_spectra_pieces_pdf</code><span class="sig-paren">(</span><em>ss</em>, <em>aint=10</em>, <em>pdf_filename='pieces.pdf'</em>, <em>setup=PlotSpectrumSetup({.xunit}</em>, <em>{.yunit}</em>, <em>{.title}</em>, <em>None</em>, <em>True)</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.plot_spectra_pieces_pdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">plot_spectra_pieces_pdf</code><span class="sig-paren">(</span><em>ss</em>, <em>aint=10</em>, <em>pdf_filename='pieces.pdf'</em>, <em>setup=PlotSpectrumSetup('{.xunit}'</em>, <em>'{.yunit}'</em>, <em>'{.title}'</em>, <em>None</em>, <em>True)</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.plot_spectra_pieces_pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots spectra, overlapped, in small wavelength intervals into a PDF file,
 one interval per page of the PDF file.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -229,7 +229,7 @@ one interval per page of the PDF file.</p>
 
 <dl class="function">
 <dt id="f311.explorer.vis.plotsp.plot_spectra_pages_pdf">
-<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">plot_spectra_pages_pdf</code><span class="sig-paren">(</span><em>ss</em>, <em>pdf_filename='pages.pdf'</em>, <em>setup=PlotSpectrumSetup({.xunit}</em>, <em>{.yunit}</em>, <em>{.title}</em>, <em>None</em>, <em>True)</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.plot_spectra_pages_pdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">plot_spectra_pages_pdf</code><span class="sig-paren">(</span><em>ss</em>, <em>pdf_filename='pages.pdf'</em>, <em>setup=PlotSpectrumSetup('{.xunit}'</em>, <em>'{.yunit}'</em>, <em>'{.title}'</em>, <em>None</em>, <em>True)</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.plot_spectra_pages_pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots spectra into a PDF file, one spectrum per page.</p>
 <p>Splits into several pieces of width</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -249,7 +249,7 @@ one interval per page of the PDF file.</p>
 
 <dl class="function">
 <dt id="f311.explorer.vis.plotsp.draw_spectra">
-<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">draw_spectra</code><span class="sig-paren">(</span><em>ss</em>, <em>title=None</em>, <em>num_rows=None</em>, <em>setup=PlotSpectrumSetup({.xunit}</em>, <em>{.yunit}</em>, <em>{.title}</em>, <em>None</em>, <em>True)</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.draw_spectra" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">draw_spectra</code><span class="sig-paren">(</span><em>ss</em>, <em>title=None</em>, <em>num_rows=None</em>, <em>setup=PlotSpectrumSetup('{.xunit}'</em>, <em>'{.yunit}'</em>, <em>'{.title}'</em>, <em>None</em>, <em>True)</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.draw_spectra" title="Permalink to this definition">¶</a></dt>
 <dd><p>Same as plot_spectra, but does not call plt.show(); returns figure</p>
 </dd></dl>
 
@@ -351,7 +351,7 @@ one interval per page of the PDF file.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2015-2017, JT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
   </body>
 </html>

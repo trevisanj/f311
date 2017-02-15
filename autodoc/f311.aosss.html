@@ -57,8 +57,12 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>--</strong><strong> [</strong><strong>spec0</strong><strong>, </strong><strong>spec1</strong><strong>, </strong><strong>..</strong><strong>]</strong><strong></strong><strong>, </strong><strong>where each element may be</strong> (<em>specs</em>) &#8211; a number (convertible to int), or
-a range such as &#8216;1000-1010&#8217; (string)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>specs</strong> &#8211; <p><code class="docutils literal"><span class="pre">[spec0,</span> <span class="pre">spec1,</span> <span class="pre">...]</span></code>, where each element may be:</p>
+<ul class="simple">
+<li>a number (convertible to int), or</li>
+<li>a range such as &#8216;1000-1010&#8217; (string)</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -78,18 +82,17 @@ a range such as &#8216;1000-1010&#8217; (string)</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
-<li><strong>-- name of spectrograph mode</strong> (<em>name</em>) &#8211; </li>
-<li><strong>-- abbreviation of spectrograph mode</strong> (<em>abbreviation</em>) &#8211; </li>
-<li><strong>-- aperture in</strong> (<em>aperture</em>) &#8211; </li>
-<li><strong>-- maximum number of simultaneous objects being observed</strong> (<em>multiplex</em>) &#8211; </li>
-<li><strong>--</strong><strong> [</strong><strong>lambda_min</strong><strong>, </strong><strong>lambda_max</strong><strong>]</strong><strong></strong> (<em>wavelength_range</em>) &#8211; </li>
-<li><strong>-- lambda/delta_lambda</strong> (<em>resolving_power</em>) &#8211; </li>
-<li><strong>-- field-of-view</strong> (<em>fov</em>) &#8211; </li>
-<li><strong>-- whether</strong><strong> or </strong><strong>not Ground-Layer Adaptive Optics is available for this mode</strong> (<em>flag_glao</em>) &#8211; </li>
-<li><strong>-- whether of not Multi-Object Adaptive Optics is available for this mode</strong> (<em>flag_moao</em>) &#8211; </li>
-<li><strong>-- spatial pixel size</strong> (<em>pixel_size</em>) &#8211; </li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; name of spectrograph mode</li>
+<li><strong>abbreviation</strong> &#8211; abbreviation of spectrograph mode</li>
+<li><strong>aperture</strong> &#8211; aperture in (arcsec)</li>
+<li><strong>multiplex</strong> &#8211; maximum number of simultaneous objects being observed (unitless)</li>
+<li><strong>wavelength_range</strong> &#8211; [lambda_min, lambda_max] (angstrom)</li>
+<li><strong>resolving_power</strong> &#8211; lambda/delta_lambda (unitless)</li>
+<li><strong>fov</strong> &#8211; field-of-view (arcmin**2)</li>
+<li><strong>flag_glao</strong> &#8211; whether or not Ground-Layer Adaptive Optics is available for this mode</li>
+<li><strong>flag_moao</strong> &#8211; whether of not Multi-Object Adaptive Optics is available for this mode</li>
+<li><strong>pixel_size</strong> &#8211; spatial pixel size</li>
 </ul>
 </td>
 </tr>
@@ -109,15 +112,20 @@ a range such as &#8216;1000-1010&#8217; (string)</td>
 <dt id="f311.aosss.report.create_simulation_report">
 <code class="descclassname">f311.aosss.report.</code><code class="descname">create_simulation_report</code><span class="sig-paren">(</span><em>simid</em>, <em>dir_='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.report.create_simulation_report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates HTML output and several PNG files with coherent naming</p>
-<p>Returns: name of output file created, which will be &#8216;&lt;<a href="#id1"><span class="problematic" id="id2">dir_</span></a>&gt;/report-&lt;simid&gt;.html&#8217;</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>-- simulation ID. This should be a string starting with a &quot;C&quot;</strong><strong>, </strong><strong>e.g.</strong><strong>,</strong><strong></strong> (<em>simid</em>) &#8211; &#8220;C000793&#8221;</li>
-<li><strong>-- directory containing the simulation ouput files</strong> (<a class="reference internal" href="f311.pyfant.html#f311.pyfant.conf.SID.dir" title="f311.pyfant.conf.SID.dir"><em>dir</em></a>) &#8211; </li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>simid</strong> &#8211; simulation ID. This should be a string starting with a &#8220;C&#8221;, e.g., &#8220;C000793&#8221;</li>
+<li><strong>dir</strong> &#8211; directory containing the simulation ouput files</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">name of output file created, which will be <code class="docutils literal"><span class="pre">&lt;dir_&gt;/report-&lt;simid&gt;.html</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
 </td>
 </tr>
 </tbody>
@@ -142,15 +150,13 @@ a range such as &#8216;1000-1010&#8217; (string)</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>-- input &amp; output directory</strong> (<a class="reference internal" href="f311.pyfant.html#f311.pyfant.conf.SID.dir" title="f311.pyfant.conf.SID.dir"><em>dir</em></a>) &#8211; </li>
-<li><strong>-- input &quot;stage&quot;</strong><strong>, </strong><strong>i.e.</strong><strong>, </strong><strong>which stage of the pipeline will be loaded.</strong> (<em>pipeline_stage=&quot;spintg&quot;</em>) &#8211; <dl class="docutils">
-<dt>Valid values:</dt>
-<dd>&#8220;spintg&#8221; &#8211; integrated spectrum (final stage)
-&#8220;ifu_noseeing&#8221; &#8211; take first spectrum of 7x1 data cube TODO explain<p class="last">NO &#8220;cube_hr&#8221; &#8211; extracts spectrum from files &#8220;C*_cube_hr.fits&#8221;.
-NO              These files are FITS data cubes with the template spectrum placed
-NO               in the center</p>
-</dd>
-</dl>
+<li><strong>dir</strong> &#8211; input &amp; output directory</li>
+<li><strong>pipeline_stage=&quot;spintg&quot;</strong> &#8211; <p>input &#8220;stage&#8221;, i.e., which stage of the pipeline will be loaded.
+Possible values:</p>
+<ul>
+<li>&#8220;spintg&#8221;: integrated spectrum (final stage)</li>
+<li>&#8220;ifu_noseeing&#8221;: take first spectrum of 7x1 data cube TODO explain</li>
+</ul>
 </li>
 </ul>
 </td>
@@ -177,6 +183,16 @@ NO               in the center</p>
 <dt id="f311.aosss.util.load_eso_sky">
 <code class="descclassname">f311.aosss.util.</code><code class="descname">load_eso_sky</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.util.load_eso_sky" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads ESO sky model and returns two spectra: emission, transmission</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">emission, transmission (two <cite>f311.filetypes.Spectrum</cite> objects)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -204,7 +220,7 @@ NO               in the center</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2015-2017, JT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
   </body>
 </html>

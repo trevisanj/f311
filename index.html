@@ -95,6 +95,7 @@
 <li>bs4</li>
 <li>robobrowser</li>
 <li>requests</li>
+<li>rows</li>
 </ul>
 </div>
 </div>
@@ -102,7 +103,7 @@
 <h3>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="method-1-prefer-pip-use-apt-package-as-alternative">
 <h4>Method 1 (prefer _pip_, use _apt_ package as alternative)<a class="headerlink" href="#method-1-prefer-pip-use-apt-package-as-alternative" title="Permalink to this headline">¶</a></h4>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">a99</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">pyqt5</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="c1"># requirements</span>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">a99</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">pyqt5</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span>
 <span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">f311</span>
 </pre></div>
 </div>
@@ -114,7 +115,7 @@
 <div class="section" id="method-2-prefer-apt-use-pip-if-no-apt-package-available">
 <h4>Method 2 (prefer _apt_, use _pip_ if no _apt_ package available)<a class="headerlink" href="#method-2-prefer-apt-use-pip-if-no-apt-package-available" title="Permalink to this headline">¶</a></h4>
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">matplotlib</span> <span class="n">python3</span><span class="o">-</span><span class="n">scipy</span> <span class="n">python3</span><span class="o">-</span><span class="n">PyQt5</span> <span class="n">python3</span><span class="o">-</span><span class="n">astropy</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">python3</span><span class="o">-</span><span class="n">bs4</span>
-<span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">a99</span> <span class="n">configobj</span> <span class="n">robobrowser</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="c1"># Requirements not in apt repository</span>
+<span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">a99</span> <span class="n">configobj</span> <span class="n">robobrowser</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="c1"># Requirements not in apt repository rows</span>
 <span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">f311</span>
 </pre></div>
 </div>
@@ -132,7 +133,7 @@ Here you need to have _Anaconda_ or _Miniconda_ installed.</p>
 </pre></div>
 </div>
 <p>Now you should be able to install _f311_ from _pip_:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">a99</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">pyqt5</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span>  <span class="c1"># requirements</span>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">a99</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">pyqt5</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">f311</span>
 </pre></div>
 </div>
@@ -162,6 +163,14 @@ Here you need to have _Anaconda_ or _Miniconda_ installed.</p>
 </div>
 </div>
 </div>
+<div class="section" id="installation-troubleshooting">
+<h3>Installation troubleshooting<a class="headerlink" href="#installation-troubleshooting" title="Permalink to this headline">¶</a></h3>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">Unrecognized</span> <span class="n">backend</span> <span class="n">string</span> <span class="s2">&quot;qt5agg&quot;</span><span class="p">:</span> <span class="n">valid</span> <span class="n">strings</span> <span class="n">are</span> <span class="p">[</span><span class="s1">&#39;GTKAgg&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="s1">&#39;pdf&#39;</span><span class="p">,</span>
+<span class="s1">&#39;GTK3Agg&#39;</span><span class="p">,</span> <span class="s1">&#39;cairo&#39;</span><span class="p">,</span> <span class="s1">&#39;TkAgg&#39;</span><span class="p">,</span> <span class="s1">&#39;pgf&#39;</span><span class="p">,</span> <span class="s1">&#39;MacOSX&#39;</span><span class="p">,</span> <span class="s1">&#39;GTK&#39;</span><span class="p">,</span> <span class="s1">&#39;WX&#39;</span><span class="p">,</span> <span class="s1">&#39;GTKCairo&#39;</span><span class="p">,</span> <span class="s1">&#39;Qt4Agg&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span>
+<span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;emf&#39;</span><span class="p">,</span> <span class="s1">&#39;WebAgg&#39;</span><span class="p">,</span> <span class="s1">&#39;gdk&#39;</span><span class="p">,</span> <span class="s1">&#39;WXAgg&#39;</span><span class="p">,</span> <span class="s1">&#39;CocoaAgg&#39;</span><span class="p">,</span> <span class="s1">&#39;GTK3Cairo&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="more">
 <h2>More<a class="headerlink" href="#more" title="Permalink to this headline">¶</a></h2>
@@ -188,7 +197,7 @@ Here you need to have _Anaconda_ or _Miniconda_ installed.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2015-2017, JT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
   </body>
 </html>
