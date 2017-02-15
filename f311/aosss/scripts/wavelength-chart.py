@@ -2,7 +2,7 @@
 
 
 """
-Draws chart showing spectral lines of interest, spectrograph wavelength ranges, atmospheric windows, etc.
+Draws chart showing spectral lines of interest, spectrograph wavelength ranges, ESO atmospheric model, etc.
 
 Two modes are available:
   - GUI mode (default): opens a GUI allowing for setup parameters

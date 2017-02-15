@@ -19,8 +19,8 @@ List *aosss* applications
     ----------------------
 
       wavelength-chart.py ......... Draws chart showing spectral lines of interest,
-                                    spectrograph wavelength ranges, atmospheric
-                                    windows, etc.
+                                    spectrograph wavelength ranges, ESO atmospheric
+                                    model, etc.
 
     Command-line tools
     ------------------
@@ -51,21 +51,20 @@ Find wavelength region for simulation
 
 **Figure** -- Lines with zero redshift
 
-This application stacks on the same chart an ESO Earth atmospheric model and the MOSAIC spectrograph
-wavelength coverages. This may server either as a reference to MOSAIC wavelength invervals for each
-mode (on this, see also ``list-mosaic-modes.py``) or to verify Earth atmospheric emission/trasmission
+This application creates a chart stacking the MOSAIC spectrograph wavelength coverages and
+an ESO Earth atmospheric model. This may serve either as a reference to MOSAIC wavelength invervals for each
+mode (on this, see also ``list-mosaic-modes.py``) or to verify the Earth atmospheric emission/trasmission
 in a wavelength region of observational interest.
 
-It is also possible to inform a redshift so that the chemical lines will be accordingly displaced.
-
+It is also possible to inform a redshift so that the chemical lines will be accordingly displaced:
 
 |image2|
 
 **Figure** -- ``z=3.5``
 
-
 .. |image1| image:: img/chart-z-0.png
 .. |image2| image:: img/chart-z-35.png
+
 
 
 Download simulation results
@@ -156,7 +155,7 @@ will open file "index.html" in browser
 
 |image0|
 
-** Figure** -- Reports index
+**Figure** -- Reports index
 
 .. |image0| image:: img/index-html.png
 
@@ -169,7 +168,7 @@ If you types the commands above to visualize reports, you will need to go back o
 
     cd ..
 
-Now open the Spectrum List Editor
+Now open the Spectrum List Editor (part of the f311 package):
 
 .. code:: shell
 
@@ -185,16 +184,17 @@ In the following steps, we will:
 - Plot the Detector Integration Time (DIT) *vs* the SNR
 
 
-1. Select all the spectra by pressing **Ctrl+A**
+1. Select all the spectra: click inside the table, then press **Ctrl+A**
+
+
+|imaget0|
 
 2. Click on "Plot Overlapped". A plot window opens. From this plot, we can see that the region
    16508-16534 seems to be free of atmospheric contamination. You may close the plot window
 
-3. Click on "To Scalar". Another window opens
-
-|imaget0|
-
 |imaget1|
+
+3. Click on "To Scalar". Another window opens
 
 4. Type "ToScalar_SNR(16508, 16534)"
 

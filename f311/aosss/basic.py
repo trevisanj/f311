@@ -7,10 +7,12 @@ def compile_simids(specs):
     """
     Compiles a list of simulation IDs (e.g., 'C000793') from a sequence of specifications
 
-    Arguments:
-        specs -- [spec0, spec1, ...], where each element may be:
-            a number (convertible to int), or
-            a range such as '1000-1010' (string)
+    Args:
+        specs: ``[spec0, spec1, ...]``, where each element may be:
+
+            - a number (convertible to int), or
+
+            - a range such as '1000-1010' (string)
 
     Returns: list of strings starting with "C"
     """
