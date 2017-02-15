@@ -17,8 +17,8 @@ from ... import pyfant as pf
 ################################################################################
 class XPFANT(ex.XMainAbonds):
     """
-    Arguments:
-      parent=None -- nevermind
+    Args:
+      parent=None: nevermind
       file_main (optional)-- FileMain instance
     """
 

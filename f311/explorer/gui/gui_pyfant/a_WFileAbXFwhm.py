@@ -19,7 +19,7 @@ class WFileAbXFwhm(QWidget):
     """
     Editor for editor widget.
 
-    Arguments:
+    Args:
       parent=None
     """
 

@@ -11,7 +11,7 @@ from .. import explorer as ex
 import importlib
 import a99
 
-__all__ = ["classes_vis", "collaborators", "get_suitable_vis_classes"]
+__all__ = ["classes_vis", "get_suitable_vis_classes"]
 
 
 __COLLABORATORS = ["f311.explorer"]
@@ -43,21 +43,21 @@ def get_suitable_vis_list_classes(objs):
     return ret
 
 
-def collaborators():
-    """Returns a dictionary of packages scanned to populate _classes_*
-
-    Example: {"f311.explorer": f311.explorer, }
-    """
-    if __flag_first:
-        __setup()
-    return __collaborators
+# def collaborators():
+#     """Returns a dictionary of packages scanned to populate _classes_*
+#
+#     Example: {"f311.explorer": f311.explorer, }
+#     """
+#     if __flag_first:
+#         __setup()
+#     return __collaborators
 
 def _collect_classes(m):
     """
     Adds entries to _classes_*
 
     Args:
-        m -- module object that must contain the following sub-modules: datatypes, vis
+        m: module object that must contain the following sub-modules: datatypes, vis
     """
 
     def _extend(classes, newclasses):

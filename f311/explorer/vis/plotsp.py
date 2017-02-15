@@ -33,12 +33,12 @@ def _set_plot(callable_, fmt, spectrum):
 class PlotSpectrumSetup(object):
     """
 
-    Arguments:
-        fmt_xlabel -- format string for x-label
-        fmt_ylabel -- format string for y-label
-        fmt_title -- format string for title
-        ymin -- (optional) force mininum y-value
-        flag_legend -- Whether to show legend in plot
+    Args:
+        fmt_xlabel: format string for x-label
+        fmt_ylabel: format string for y-label
+        fmt_title: format string for title
+        ymin: (optional) force mininum y-value
+        flag_legend: Whether to show legend in plot
     """
     def __init__(self, fmt_xlabel="{.xunit}", fmt_ylabel="{.yunit}", fmt_title="{.title}",
                  ymin=None, flag_legend=True):
@@ -60,13 +60,13 @@ def plot_spectra(ss, title=None, num_rows=None, setup=_default_setup):
     """
     Plots one or more stacked in subplots sharing same x-axis.
 
-    Arguments:
-      ss -- list of Spectrum objects
-      title=None -- window title
-      num_rows=None -- (optional) number of rows for subplot grid. If not passed,
+    Args:
+      ss: list of Spectrum objects
+      title=None: window title
+      num_rows=None: (optional) number of rows for subplot grid. If not passed,
         num_rows will be the number of plots, and the number of columns will be 1.
         If passed, number of columns is calculated automatically.
-      setup -- PlotSpectrumSetup object
+      setup: PlotSpectrumSetup object
 
     """
 
@@ -79,10 +79,10 @@ def plot_spectra_overlapped(ss, title=None, setup=_default_setup):
     """
     Plots one or more spectra in the same plot.
 
-    Arguments:
-      ss -- list of Spectrum objects
-      title=None -- window title
-      setup -- PlotSpectrumSetup object
+    Args:
+      ss: list of Spectrum objects
+      title=None: window title
+      setup: PlotSpectrumSetup object
     """
 
     n = len(ss)
@@ -135,11 +135,11 @@ def plot_spectra_pieces_pdf(ss, aint=10, pdf_filename='pieces.pdf', setup=_defau
     Plots spectra, overlapped, in small wavelength intervals into a PDF file,
     one interval per page of the PDF file.
 
-    Arguments:
-      ss -- list of Spectrum objects
-      aint -- wavelength interval for each plot
-      pdf_filename -- name of output file
-      setup -- PlotSpectrumSetup object
+    Args:
+      ss: list of Spectrum objects
+      aint: wavelength interval for each plot
+      pdf_filename: name of output file
+      setup: PlotSpectrumSetup object
 
     **Note** overrides setup.fmt_xlabel; leaves y-labell and title blank
     """
@@ -187,9 +187,9 @@ def plot_spectra_pages_pdf(ss, pdf_filename='pages.pdf', setup=_default_setup):
 
     Splits into several pieces of width
 
-    Arguments:
-      ss -- list of Spectrum objects
-      pdf_filename -- name of output file
+    Args:
+      ss: list of Spectrum objects
+      pdf_filename: name of output file
       TODO
     """
     logger = a99.get_python_logger()

@@ -14,8 +14,8 @@ class XGroupSpectra(XHelpDialog):
     Edit Parameters gb.py a SpectrumList
 
     Relevant attributes (set on close):
-      self.block -- None or GroupBlock instance
-      self.group_by -- sequence of
+      self.block: None or GroupBlock instance
+      self.group_by: sequence of
           (field names) = (FITS header keys) = (keys in Spectrum.more_headers)
     """
 

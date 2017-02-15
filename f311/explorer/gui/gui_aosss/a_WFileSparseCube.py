@@ -26,7 +26,7 @@ class WFileSparseCube(a99.WBase):
     """
     FileSparseCube editor widget.
 
-    Arguments:
+    Args:
       parent=None
     """
 

@@ -59,7 +59,7 @@ def get_fortrans(max_len=None):
     Generates listing of files in the Fortran bin directory
 
     Arguments
-      max_len -- (optional) if passed, will use it, otherwise will be the
+      max_len: (optional) if passed, will use it, otherwise will be the
                  maximum number of characters among all Fortran executable names.
 
     Returns: list of a99.ExeInfo

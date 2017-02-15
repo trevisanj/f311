@@ -19,8 +19,8 @@ class XToScalar(XHelpDialog):
     Edit Parameters to apply ToScalar blocks to a Spectrum List
 
     Relevant attributes:
-      self.block -- None or ToScalar instance, set before closing when one clicks on "OK"
-      self.fieldname -- string
+      self.block: None or ToScalar instance, set before closing when one clicks on "OK"
+      self.fieldname: string
     """
 
     def __init__(self, *args):

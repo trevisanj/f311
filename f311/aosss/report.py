@@ -63,7 +63,7 @@ def _color(s, color):
 def create_simulation_report(simid, dir_="."):
     """Creates HTML output and several PNG files with coherent naming
 
-    Arguments:
+    Args:
         simid: simulation ID. This should be a string starting with a "C", e.g., "C000793"
         dir_: directory containing the simulation ouput files
 

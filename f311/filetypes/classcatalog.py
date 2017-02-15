@@ -3,27 +3,26 @@ Class Catalog -- resources to retrieve File* classes by different criteria
 """
 
 from collections import OrderedDict
-from .. import filetypes as ft
+# from .. import filetypes as ft
 import importlib
 import a99
 
 __all__ = [
-    "classes_txt", "classes_bin", "classes_sp", "classes_file", "collaborators",
-    "classes_collection"
+    "classes_txt", "classes_bin", "classes_sp", "classes_file", "classes_collection"
     ]
 
 
 __COLLABORATORS = ["f311.filetypes"]
 
 
-def collaborators():
-    """Returns a dictionary of packages scanned to populate _classes_*
-
-    Example: {"f311.filetypes": f311.filetypes, }
-    """
-    if __flag_first:
-        __setup()
-    return __collaborators
+# def collaborators():
+#     """Returns a dictionary of packages scanned to populate _classes_*
+#
+#     Example: {"f311.filetypes": f311.filetypes, }
+#     """
+#     if __flag_first:
+#         __setup()
+#     return __collaborators
 
 
 def classes_txt():
@@ -58,6 +57,7 @@ def classes_collection():
     """
     Returns list of File* classes that can be converted to a SpectrumCollection
     """
+    from f311 import filetypes as ft
     return classes_sp() + [ft.FileSpectrumList, ft.FileSparseCube, ft.FileFullCube]
 
 
@@ -66,8 +66,9 @@ def _collect_classes(m):
     Adds entries to _classes_*
 
     Args:
-        m -- module object that must contain the following sub-modules: datatypes, vis
+        m: module object that must contain the following sub-modules: datatypes, vis
     """
+    from f311 import filetypes as ft
 
     def _extend(classes, newclasses):
         """Filters out classes already present in list.

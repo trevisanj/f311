@@ -238,8 +238,8 @@ class SparseCube(SpectrumCollection):
         """
         "Paints" pixel with given spectrum
 
-        Arguments:
-            sp -- Spectrum instance
+        Args:
+            sp: Spectrum instance
 
         **Note** coordinate (x=0, y=0) corresponds to lower left pixel of cube cross-section
         """
@@ -272,9 +272,9 @@ class SparseCube(SpectrumCollection):
 
         **Note** if there is no spectra at point (x, y), returns an empty spectrum, for speed
 
-        Arguments:
-            x, y -- 0-based pixel coordinates
-            flag_copy -- disable vector copies to speed up but don't the spectrum
+        Args:
+            x, y: 0-based pixel coordinates
+            flag_copy: disable vector copies to speed up but don't the spectrum
         """
 
         ret = ft.Spectrum()

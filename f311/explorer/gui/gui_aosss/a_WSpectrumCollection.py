@@ -19,7 +19,7 @@ _CONFIG_LEGEND = "/gui/WSpectrumCollection/plot_overlapped/flag_legend"
 class WSpectrumCollection(a99.WBase):
     """Editor for SpectrumCollection objects"""
 
-    # argument0 -- flag_changed_header
+    # argument0: flag_changed_header
     edited = pyqtSignal(bool)
 
     def __init__(self, parent):

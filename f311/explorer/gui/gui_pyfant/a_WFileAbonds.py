@@ -22,7 +22,7 @@ class WFileAbonds(QWidget):
     """
     FileAbonds editor widget.
 
-    Arguments:
+    Args:
       parent=None
     """
 

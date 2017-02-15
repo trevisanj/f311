@@ -24,8 +24,8 @@ class XFileAtomsHistogram(QMainWindow):
     Interactive window that plots a histogram of selected field of a FileAtoms
     object.
 
-    Arguments:
-      file_atoms -- FileAtoms object.
+    Args:
+      file_atoms: FileAtoms object.
     """
 
     def __init__(self, file_atoms):

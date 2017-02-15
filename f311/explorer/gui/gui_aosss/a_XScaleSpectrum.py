@@ -73,9 +73,9 @@ class XScaleSpectrum(a99.XLogDialog):
         x.setBuddy(y)
         y.addItems(["ab", "vega", "stdflux"])
         map.append((x, y, "Magnitude &system",
-                   "<b>'ab'</b> -- AB[solute]<br>"
-                   "<b>'vega'</b> -- uses Vega spectrum as reference;<br>"
-                   "<b>'stdflux'</b> -- uses standard reference values<br>from literature", ""))
+                   "<b>'ab'</b>: AB[solute]<br>"
+                   "<b>'vega'</b>: uses Vega spectrum as reference;<br>"
+                   "<b>'stdflux'</b>: uses standard reference values<br>from literature", ""))
         ###
         x = self.label_zero_point = QLabel()
         y = self.spinBox_zero_point = QDoubleSpinBox()

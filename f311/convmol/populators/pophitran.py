@@ -11,7 +11,7 @@ def populate_hitrandb(db):
     Populates a sqlite3 database represented by a FileHitranDB object with information downloaded
     from the HITRAN website
 
-    Arguments:
+    Args:
         db: FileHitranDB instance
     """
 

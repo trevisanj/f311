@@ -143,13 +143,13 @@ class SpectrumCollection(a99.AttrsPart):
     # def to_colors(self, visible_range=None, flag_scale=False, method=0):
     #     """Returns a [n, 3] red-green-blue (0.-1.) matrix
     #
-    #     Arguments:
-    #       visible_range=None -- if passed, the true human visible range will be
+    #     Args:
+    #       visible_range=None: if passed, the true human visible range will be
     #                             affine-transformed to visible_range in order
     #                             to use the red-to-blue scale to paint the pixels
-    #       flag_scale -- whether to scale the luminosities proportionally
+    #       flag_scale: whether to scale the luminosities proportionally
     #                     the weight for each spectra will be the area under the flux
-    #       method -- see Spectrum.get_rgb()
+    #       method: see Spectrum.get_rgb()
     #     """
     #     weights = np.zeros((len(self), 3))
     #     max_area = 0.

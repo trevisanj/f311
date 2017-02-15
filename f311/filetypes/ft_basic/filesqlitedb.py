@@ -1,10 +1,9 @@
-"""Represents a SQLite database file"""
 
 from collections import OrderedDict
 import sqlite3
 from .datafile import DataFile
 import a99
-from ... import filetypes as ft
+#from ... import filetypes as ft
 import shutil
 import os
 
@@ -13,6 +12,11 @@ __all__ = ["FileSQLiteDB"]
 
 
 class FileSQLiteDB(DataFile):
+    """Represents a SQLite database file.
+
+    This class is not supposed to be instantialized. It serves as an ancestor for other classes
+    that implement specific database schemas."""
+
     attrs = ["classname", "filename", "tables"]
     flag_txt = False
 
@@ -23,6 +27,7 @@ class FileSQLiteDB(DataFile):
 
     @property
     def tables(self):
+        """Return a list of the database table names"""
         return self._get_table_names()
 
     def __init__(self, *args):
@@ -56,6 +61,7 @@ class FileSQLiteDB(DataFile):
         Should not keep default file open either (as it is in the API directory and shouldn't be
         messed by user)
         """
+        from f311 import filetypes as ft
         if self.default_filename is None:
             raise RuntimeError("Class '{}' has no default filename".format(self.__class__.__name__))
         fullpath = ft.get_default_data_path(self.default_filename, class_=self.__class__)
@@ -92,7 +98,7 @@ class FileSQLiteDB(DataFile):
         return a99.get_table_names(self.__get_conn())
 
     def delete(self):
-        """**CAREFUL** needless say"""
+        """Removes .sqlite file. **CAREFUL** needless say"""
         self._ensure_filename()
         self._close_if_open()
         os.remove(self.filename)

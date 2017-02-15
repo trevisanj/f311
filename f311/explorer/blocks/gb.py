@@ -33,8 +33,8 @@ class GB_SNR(GroupBlock):
     **Warning** Don't use this block, empirical SNR is usually calculated **per spectrum**, as
     reinforced by EC and BLB (using IRAF procedure, which is Amplitude_RMS/std
 
-    Arguments:
-        continua -- SpectrumList containing the continua that will be used as the "signal" level.
+    Args:
+        continua: SpectrumList containing the continua that will be used as the "signal" level.
                     If not passed, will be calculated from the input spectra using a SB_Rubberband(True) block
 
     References:

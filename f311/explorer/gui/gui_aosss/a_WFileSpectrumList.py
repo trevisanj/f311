@@ -22,7 +22,7 @@ class WFileSpectrumList(a99.WBase):
     """
     FileSpectrumList editor widget.
 
-    Arguments:
+    Args:
       parent=None
     """
 

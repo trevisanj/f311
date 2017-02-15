@@ -15,7 +15,7 @@ class WFileMain(QWidget):
     """
     FileMain editor widget.
 
-    Arguments:
+    Args:
       parent=None
     """
 

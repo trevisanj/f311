@@ -102,8 +102,8 @@ class SID(object):
     def clean(self, flag_remove_dir=True):
         """Deletes directory with all files inside.
 
-        Arguments:
-          flag_remove_dif=True -- if not set, will only delete the contents,
+        Args:
+          flag_remove_dif=True: if not set, will only delete the contents,
             keeping the directory
         """
 
@@ -355,8 +355,8 @@ class Conf(object):
     def get_pfant_output_filepath(self, type_="norm"):
         """Returns path to a pfant output filename.
 
-        Arguments:
-          type -- "spec", "norm", or "cont"
+        Args:
+          type: "spec", "norm", or "cont"
 
         Looks for this information in several places; see get_flprefix()
         for more information.
@@ -399,7 +399,7 @@ class Conf(object):
         Adds session dir to names of files that will be created by any of the
         executables. To be called *before* create_data_files
 
-        Arguments:
+        Args:
           sequence: list containing one or more i_* values such as innewmarcs etc
 
         Note: in order to link pfant->nulbad correctly,

@@ -49,9 +49,9 @@ DEFOUT = "<made-up filename>"
 def _get_zinf(lambda_centre, norm):
     """Returns zinf given *normalized* spectrum, or 0 if line if flat.
 
-    Arguments:
-      lambda_centre -- centre of line
-      norm -- Spectrum instance
+    Args:
+      lambda_centre: centre of line
+      norm: Spectrum instance
 
     Spectrum is expected to contain one line only.
     """

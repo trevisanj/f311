@@ -9,6 +9,8 @@ __all__ = ["FilePy"]
 class FilePy(DataFile):
     """
     Configuration file saved as a .py Python source script
+
+    This class is not intendend to be instantialized. It is an ancestor class for other classes.
     """
 
     def _test_magic(self, filename):

@@ -92,7 +92,7 @@ def create_spectrum_lists(dir_, pipeline_stage="spintg"):
     """
     Create several .splist files, grouping spectra by their wavelength vector
 
-    Arguments:
+    Args:
         dir_: input & output directory
         pipeline_stage="spintg": input "stage", i.e., which stage of the pipeline will be loaded.
             Possible values:

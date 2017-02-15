@@ -166,9 +166,7 @@ class FileSpectrumNulbad(FileSpectrum):
     """
     PFANT Spectrum (`nulbad` output)
 
-    This file alternates a "header" line where most of the information is
-    repeated, and a "values" line, with the values of the flux
-    corresponding to the lambda interval lzero-lfin
+    This file is a two-column text file with two lines of comment at the beginning
     """
 
     def _do_load(self, filename):

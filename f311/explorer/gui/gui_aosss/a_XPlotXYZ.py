@@ -16,8 +16,8 @@ class XPlotXYZ(a99.XLogMainWindow):
     """
     Plots two fields of a SpectrumCollection object in a simple x-y plot
 
-    Arguments:
-      collection -- SpectrumCollection object
+    Args:
+      collection: SpectrumCollection object
     """
     def __init__(self, collection, *args):
         a99.XLogMainWindow.__init__(self, *args)

@@ -18,8 +18,8 @@ import sys
 def vald3_to_atoms(file_obj):
     """Converts data from a VALD3 file into a FileAtoms object.
 
-    Arguments:
-      file_obj -- file-like object, e.g., returned by open()
+    Args:
+      file_obj: file-like object, e.g., returned by open()
 
     Returns: a FileAtoms object.
 

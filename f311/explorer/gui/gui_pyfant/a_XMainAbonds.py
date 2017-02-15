@@ -21,8 +21,8 @@ __all__ = ["XMainAbonds"]
 ################################################################################
 class XMainAbonds(QMainWindow):
     """
-    Arguments:
-      parent=None -- nevermind
+    Args:
+      parent=None: nevermind
       file_main (optional)-- FileMain instance
     """
 

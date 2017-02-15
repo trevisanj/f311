@@ -15,8 +15,8 @@ from .... import explorer as ex
 ################################################################################
 class XFileAbonds(QMainWindow):
     """
-    Arguments:
-      parent=None -- nevermind
+    Args:
+      parent=None: nevermind
       file_abonds (optional)-- FileAbonds instance
     """
 

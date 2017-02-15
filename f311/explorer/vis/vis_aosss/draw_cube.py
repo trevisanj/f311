@@ -13,9 +13,9 @@ def draw_cube_3d(ax, sparsecube, height_threshold=15):
     """
     Plots front and back grid, scaled fluxes, into existing axis
 
-    Arguments:
-        sparsecube -- SparseCube instance
-        height_threshold -- maximum cube height to plot actual spectra.
+    Args:
+        sparsecube: SparseCube instance
+        height_threshold: maximum cube height to plot actual spectra.
          If the cube height is greated than this, line segments will be drawn
          instead of plotting the spectra (for speed)
 
@@ -94,11 +94,11 @@ def draw_cube_colors(ax, sparsecube, vrange, sqx=None, sqy=None, flag_scale=Fals
     Plots image on existing axis
 
     Arguments
-      ax -- matplotlib axis
-      sparsecube -- SparseCube instance
-      vrange -- visible range
-      sqx -- "place spectrum" x
-      sqy -- "place spectrum" y
+      ax: matplotlib axis
+      sparsecube: SparseCube instance
+      vrange: visible range
+      sqx: "place spectrum" x
+      sqy: "place spectrum" y
 
     Returns: matplotlib plot object representing square, or None
     """

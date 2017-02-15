@@ -18,7 +18,7 @@ class XUseSpectrumBlock(XHelpDialog):
     Edit Parameters to apply a SpectrumBlock to each spectrum in a Spectrum List
 
     Relevant attributes (set on close):
-      self.block -- None or SpectrumBlock instance
+      self.block: None or SpectrumBlock instance
     """
 
     def __init__(self, *args):

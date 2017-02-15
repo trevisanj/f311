@@ -10,9 +10,9 @@ import a99
 ################################################################################
 class XText(QMainWindow):
     """
-    Arguments:
-      parent=None -- nevermind
-      text -- string
+    Args:
+      parent=None: nevermind
+      text: string
     """
 
     def __init__(self, parent=None, text="", title=""):
@@ -31,9 +31,9 @@ class XText(QMainWindow):
 ################################################################################
 class XHTML(QMainWindow):
     """
-    Arguments:
-      parent=None -- nevermind
-      html -- string
+    Args:
+      parent=None: nevermind
+      html: string
     """
 
     def __init__(self, parent=None, html="", title=""):

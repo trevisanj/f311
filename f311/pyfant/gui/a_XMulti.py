@@ -20,8 +20,8 @@ WINDOW_HEIGHT = 768
 ################################################################################
 class XMulti(XPFANT):
     """
-    Arguments:
-      parent=None -- nevermind
+    Args:
+      parent=None: nevermind
       file_main (optional)-- FileMain instance
     """
 

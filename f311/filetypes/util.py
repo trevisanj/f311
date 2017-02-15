@@ -4,7 +4,7 @@ Miscellanea routines that depend on other modules and sub-packages.
 
 import logging
 import a99
-from .. import filetypes as ft
+# from f311 import filetypes as ft
 from astropy.io import fits
 
 # TODO usage example for list_data_types(), or even a script
@@ -16,7 +16,12 @@ __all__ = [
 def load_any_file(filename):
     """
     Attempts to load filename by trial-and-error using _classes as list of classes.
+
+    Returns:
+        A DataFile descendant, whose specific class depends on the file format detected, or None
+        if the file canonot be loaded
     """
+    from f311 import filetypes as ft
 
     # Splits attempts using ((binary X text) file) criterion
     if a99.is_text_file(filename):
@@ -27,8 +32,13 @@ def load_any_file(filename):
 
 def load_spectrum(filename):
     """
-    Attempts to load spectrum as one of the supported types. Returns a Spectrum, or None
+    Attempts to load spectrum as one of the supported types.
+
+    Returns:
+        a Spectrum, or None
     """
+    from f311 import filetypes as ft
+
     f = a99.load_with_classes(filename, ft.classes_sp())
     if f:
         return f.spectrum
@@ -37,6 +47,7 @@ def load_spectrum(filename):
 
 def load_spectrum_fits_messed_x(filename, sp_ref=None):
     """Loads FITS file spectrum that does not have the proper headers. Returns a Spectrum"""
+    from f311 import filetypes as ft
 
     # First tries to load as usual
     f = a99.load_with_classes(filename, (ft.FileSpectrumFits,))
@@ -71,6 +82,7 @@ def list_data_types():
     """
     Returns a list with all data types, in Markdown table format
     """
+    from f311 import filetypes as ft
     ll = []  # [(description, default filename), ...]
 
     for attr in ft.classes_file():

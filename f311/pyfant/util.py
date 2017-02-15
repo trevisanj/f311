@@ -26,11 +26,11 @@ __all__ = [
 # TODO TEST run_parallel
 def run_parallel(rr, max_simultaneous=None, flag_console=True, runnable_manager=None):
     """
-    Arguments:
-      rr -- list of Runnable instances
-      max_simultaneous -- (optional, default is RunnableManager default)
+    Args:
+      rr: list of Runnable instances
+      max_simultaneous: (optional, default is RunnableManager default)
        maximum number of simultaneous processes.
-      runnable_manager=None -- (optional) if passed, will use passed;
+      runnable_manager=None: (optional) if passed, will use passed;
        if not, will create new.
 
     Returns: the RunnableManager object
@@ -91,14 +91,14 @@ def setup_inputs(dest_dir='.', star='sun-asplund-2009', common='common', h=True,
     """
     Sets up input data for spectral synthesis.
 
-    Arguments:
-      dest_dir='.' -- directory where files and links will be created
-      star='sun-asplund-2009' -- directory (relative to PFANT/data) for stellar data
-      common='common' -- directory (relative to PFANT/data) for star-independent data files
-      h=True -- whether to look for hmap.dat
-      atoms=True -- whether to look for atoms.dat
-      molecules=True -- whether to look for molecules.dat
-      opa=True -- whether to look for grid.moo
+    Args:
+      dest_dir='.': directory where files and links will be created
+      star='sun-asplund-2009': directory (relative to PFANT/data) for stellar data
+      common='common': directory (relative to PFANT/data) for star-independent data files
+      h=True: whether to look for hmap.dat
+      atoms=True: whether to look for atoms.dat
+      molecules=True: whether to look for molecules.dat
+      opa=True: whether to look for grid.moo
     """
 
     logger = a99.get_python_logger()
@@ -164,9 +164,9 @@ def link_to_data(src_dir):
 def create_or_replace_or_skip_links(ff, dest_dir="."):
     """Creates a series of links given a list of target filepaths.
 
-    Arguments:
-      ff -- list of full path to files
-      dest_dir="." -- destination directory
+    Args:
+      ff: list of full path to files
+      dest_dir=".": destination directory
 
     It skips files of types FileMain, FileAbonds, FileDissoc, FileToH
     """
@@ -207,9 +207,9 @@ def create_or_replace_or_skip_links(ff, dest_dir="."):
 def copy_or_skip_files(ff, dest_dir="."):
     """Copies a series of files, skipping those which already exist.
 
-    Arguments:
-      ff -- list of full paths to files to be copied
-      dest_dir="." -- destination directory
+    Args:
+      ff: list of full paths to files to be copied
+      dest_dir=".": destination directory
     """
 
     for f in ff:
