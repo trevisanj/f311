@@ -24,7 +24,7 @@ Graphical applications:
 
 - ``cubeed.py`` -- Data Cube Editor, import/export WebSim-COMPASS data cubes
 
-- ``explorer.py`` -- AstroAPI Explorer --  list, visualize, and edit data files (*à la* File Manager)
+- ``explorer.py`` -- F311 Explorer --  list, visualize, and edit data files (*à la* File Manager)
 
 - ``mained.py`` -- Main configuration file editor.
 

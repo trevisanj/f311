@@ -117,7 +117,7 @@ class LoadThread(QThread):
 
 
 class XExplorer(QMainWindow):
-    """AstroAPI Explorer window
+    """"F311 Explorer" window
 
     Args:
       parent=None

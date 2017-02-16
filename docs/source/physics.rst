@@ -98,6 +98,8 @@ This code should output:
 
     1.0
 
+The formulas for the HLFs were taken from the book *Istvan Kovacs, "Rotational Structure in the spectra of diatomic molecules. American Elsevier, 1969*
+
 API reference
 -------------
 

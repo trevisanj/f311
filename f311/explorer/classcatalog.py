@@ -1,8 +1,5 @@
 """
 "Collaboration" with other packages
-
-"Collaborator" packages should have a method '_setup_astroapi()',
-which adds entries to the _* variables in this module
 """
 
 
