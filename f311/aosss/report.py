@@ -9,7 +9,6 @@ import numpy as np
 import traceback
 import glob
 import a99
-from .. import aosss as ao
 import f311.filetypes as ft
 import f311.explorer as ex
 

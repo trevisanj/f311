@@ -10,8 +10,6 @@ import time
 import matplotlib.pyplot as plt
 import a99
 import f311.explorer as ex
-import f311.filetypes as ft
-from ... import pyfant as pf
 
 
 COLORS = [QColor(255, 0, 0),

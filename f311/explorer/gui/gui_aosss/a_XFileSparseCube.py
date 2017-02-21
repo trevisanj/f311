@@ -14,7 +14,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from .a_WFileSparseCube import *
 import a99
-from .... import explorer as ex
 import f311.filetypes as ft
 
 

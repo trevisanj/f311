@@ -6,8 +6,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from .a_XHelpDialog import *
 import a99
-from .... import explorer as ex
-import f311.filetypes as ft
 
 
 _CLASS_PREFIX = ""
@@ -24,6 +22,8 @@ class XToScalar(XHelpDialog):
     """
 
     def __init__(self, *args):
+        from f311 import explorer as ex
+
         XHelpDialog.__init__(self, *args)
 
         def keep_ref(obj):
@@ -66,6 +66,8 @@ class XToScalar(XHelpDialog):
 
 
     def accept(self):
+        from f311 import explorer as ex
+
         try:
             expr = str(self.cb_operation.currentText())
             symbols_available = a99.module_to_dict(ex.blocks.toscalar)

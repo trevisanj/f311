@@ -1,6 +1,6 @@
 import a99
 import f311.filetypes as ft
-from ... import convmol as cm
+#from ... import convmol as cm
 from ... import pyfant as pf
 
 __all__ = ["populate_moldb"]
@@ -8,8 +8,8 @@ __all__ = ["populate_moldb"]
 
 def populate_moldb(moldb):
     """Tries to download data from NIST Web Book online"""
-
     assert isinstance(moldb, ft.FileMolDB)
+    from f311 import convmol as cm
 
     conn = moldb.get_conn()
     # TODO gather more formulae

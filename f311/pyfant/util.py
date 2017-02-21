@@ -8,7 +8,7 @@ import os
 import glob
 import shutil
 import a99
-from .. import pyfant as pf
+# from .. import pyfant as pf
 from .. import filetypes as ft
 
 
@@ -35,6 +35,7 @@ def run_parallel(rr, max_simultaneous=None, flag_console=True, runnable_manager=
 
     Returns: the RunnableManager object
     """
+    from f311 import pyfant as pf
 
     # Adds to pool
     logger = a99.get_python_logger()
@@ -100,6 +101,7 @@ def setup_inputs(dest_dir='.', star='sun-asplund-2009', common='common', h=True,
       molecules=True: whether to look for molecules.dat
       opa=True: whether to look for grid.moo
     """
+    from f311 import pyfant as pf
 
     logger = a99.get_python_logger()
     dd = pf.get_pfant_path("data")

@@ -13,7 +13,7 @@ import f311.filetypes as ft
 from astropy.io import fits
 import astropy.units as u
 import f311.explorer as ex
-from .. import aosss as ao
+# from .. import aosss as ao
 
 
 FILE_MAP = OrderedDict((
@@ -241,6 +241,7 @@ def load_eso_sky():
     Returns:
         tuple: ``(emission, transmission)`` (two `f311.filetypes.Spectrum` objects)
     """
+    from f311 import aosss as ao
 
     # From comments in file:
     # lam:     vacuum wavelength in micron

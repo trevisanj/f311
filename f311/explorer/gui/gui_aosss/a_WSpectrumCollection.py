@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import *
 from .a_XScaleSpectrum import *
 from astropy import units as u
 import a99
-from .... import explorer as ex
+# from .... import explorer as ex
 import f311.filetypes as ft
 
 # TODO options window to set this up
@@ -404,6 +404,8 @@ class WSpectrumCollection(a99.WBase):
 
 
     def on_all_group(self):
+        from f311 import explorer as ex
+
         # Import here to circumvent cyclic dependency
         from .a_XGroupSpectra import XGroupSpectra
         form = XGroupSpectra()
@@ -550,12 +552,16 @@ class WSpectrumCollection(a99.WBase):
 
 
     def on_sel_plot_stacked(self):
+        from f311 import explorer as ex
+
         sspp = self.get_selected_spectra()
         if len(sspp) > 0:
             ex.plot_spectra(sspp)
 
 
     def on_sel_plot_overlapped(self):
+        from f311 import explorer as ex
+
         sspp = self.get_selected_spectra()
         flag_legend = ex.get_config().get_item(_CONFIG_LEGEND, True)
         oo = ex.PlotSpectrumSetup(flag_legend=flag_legend)

@@ -11,7 +11,6 @@ from .a_XPFANT import *
 import a99
 import f311.explorer as ex
 import f311.filetypes as ft
-from ... import pyfant as pf
 
 WINDOW_WIDTH = 700
 WINDOW_HEIGHT = 768
@@ -106,6 +105,7 @@ class XMulti(XPFANT):
     # Slots for Qt library signals
 
     def on_run_multi(self):
+        from f311 import pyfant as pf
         errors = self._check_single_setup()
 
         if not self.multi_editor.f:
@@ -180,6 +180,7 @@ class XMulti(XPFANT):
         return str(self.lineEdit_multi_custom_id.text()).strip()
 
     def __submit_multi(self):
+        from f311 import pyfant as pf
         r = pf.MultiRunnable(self.me.f, self.ae.f, self.oe.f, self.multi_editor.f)
         if self.checkbox_multi_custom_id.isChecked():
             r.sid.id = self.__get_multi_custom_session_id()

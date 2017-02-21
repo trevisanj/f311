@@ -11,7 +11,6 @@ import matplotlib as mpl
 from mpl_toolkits.mplot3d import Axes3D  # yes, required (see below)
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 from ..basic import Vis
 
 

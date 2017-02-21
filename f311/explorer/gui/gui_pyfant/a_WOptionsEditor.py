@@ -5,7 +5,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 from ._shared import *
 
 __all__ = ["WOptionsEditor"]

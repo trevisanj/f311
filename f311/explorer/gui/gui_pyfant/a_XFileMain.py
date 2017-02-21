@@ -9,7 +9,6 @@ import os.path
 from ._shared import *
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 
 
 ################################################################################

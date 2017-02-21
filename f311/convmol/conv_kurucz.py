@@ -4,7 +4,7 @@
 
 import f311.physics as ph
 import f311.filetypes as ft
-from .. import convmol as cm
+#from .. import convmol as cm
 import a99
 from .convlog import *
 from collections import OrderedDict
@@ -37,6 +37,7 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
 
     Returns: (a list of ftpyfant.SetOfLines objects, a MolConversionLog object)
     """
+    from f311 import convmol as cm
 
     def append_error(msg):
         log.errors.append("#{}{} line: {}".format(i + 1, a99.ordinal_suffix(i + 1), str(msg)))

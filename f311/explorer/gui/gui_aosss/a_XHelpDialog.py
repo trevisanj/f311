@@ -5,8 +5,6 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import a99
-from .... import explorer as ex
-import f311.filetypes as ft
 
 
 class XHelpDialog(a99.XLogDialog):

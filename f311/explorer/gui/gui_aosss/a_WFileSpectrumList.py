@@ -14,7 +14,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from .a_WSpectrumCollection import *
 import a99
-from .... import explorer as ex
 import f311.filetypes as ft
 
 
@@ -389,9 +388,12 @@ class WFileSpectrumList(a99.WBase):
             raise
 
     def rubberband_clicked(self):
+        from f311 import explorer as ex
+
         self.__use_sblock(ex.SB_Rubberband(flag_upper=True))
 
     def add_noise_clicked(self):
+        from f311 import explorer as ex
         specs = (("std", {"caption": "Noise standard deviation", "value": 1.}),)
         form = a99.XParametersEditor(specs=specs, title="Select sub-range")
         if form.exec_():
@@ -399,6 +401,7 @@ class WFileSpectrumList(a99.WBase):
             self.__use_sblock(block)
 
     def extract_continua_clicked(self):
+        from f311 import explorer as ex
         self.__use_slblock(ex.SLB_ExtractContinua())
 
     # def std_clicked(self):
@@ -476,6 +479,7 @@ class WFileSpectrumList(a99.WBase):
 
     def __use_sblock(self, block):
         """Uses block and opens result in new window"""
+        from f311 import explorer as ex
 
         # Does not touch the original self.f
         clone = copy.deepcopy(self.f)

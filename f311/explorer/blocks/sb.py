@@ -8,9 +8,8 @@ import a99
 import copy
 from . import SpectrumBlock
 import astropy.units as u
-from ... import explorer as ex
 from ... import physics as ph
-
+from .. import basic
 
 class SB_Rubberband(SpectrumBlock):
     """
@@ -40,7 +39,7 @@ class SB_Rubberband(SpectrumBlock):
         y = inp.y
         if self.flag_upper:
             y = -y
-        output.y = ex.rubberband(y)
+        output.y = basic.rubberband(y)
         if self.flag_upper:
             output.y = -output.y
         return output

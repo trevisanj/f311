@@ -9,13 +9,19 @@ import os
 import logging
 import a99
 from .. import filetypes as ft
-from .. import pyfant as pf
-
+# from .. import pyfant as pf
+from . import runnables
 
 __all__ = ["MultiRunnable"]
 
-_multi_id_maker = pf.IdMaker()
-_multi_id_maker.session_prefix_singular = pf.MULTISESSION_PREFIX
+__multi_id_maker = None
+
+def _multi_id_maker():
+    global __multi_id_maker
+    if __multi_id_maker is None:
+        from f311 import pyfant as pf
+        __multi_id_maker = pf.IdMaker()
+        __multi_id_maker.session_prefix_singular = pf.MULTISESSION_PREFIX
 
 
 @a99.froze_it
@@ -43,13 +49,14 @@ class MultiRunnableStatus(object):
 
 
 @a99.froze_it
-class MultiRunnable(pf.Runnable):
+class MultiRunnable(runnables.Runnable):
     """
     Differential abundances X FWHM's runnable.
     """
 
     def __init__(self, file_main, file_abonds, options, file_abxfwhm,
                  custom_id=None):
+        from f311 import pyfant as pf
         pf.Runnable.__init__(self)
         assert isinstance(file_main, ft.FileMain)
         assert isinstance(file_abonds, ft.FileAbonds)
@@ -104,7 +111,7 @@ class MultiRunnable(pf.Runnable):
         # **Note** If something is not right here: *raise*.
         #
         # **Note** It plays around with Conf, SID, IdMaker objects
-
+        from f311 import pyfant as pf
 
         # # Preparation
         self.__status.stage = "preparing"

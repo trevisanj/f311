@@ -4,7 +4,6 @@
 
 
 from collections import OrderedDict
-from .. import explorer as ex
 import importlib
 import a99
 
@@ -26,6 +25,8 @@ def get_suitable_vis_classes(obj):
 
 def get_suitable_vis_list_classes(objs):
     """Retuns a list of VisList classes that can handle a list of objects."""
+
+    from f311 import explorer as ex
 
     ret = []
     for class_ in classes_vis():
@@ -56,6 +57,8 @@ def _collect_classes(m):
     Args:
         m: module object that must contain the following sub-modules: datatypes, vis
     """
+
+    from f311 import explorer as ex
 
     def _extend(classes, newclasses):
         """Filters out classes already present in list.

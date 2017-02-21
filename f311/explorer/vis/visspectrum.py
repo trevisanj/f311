@@ -1,6 +1,6 @@
 from ... import filetypes as ft
 from .basic import Vis
-from ... import explorer as ex
+# from ... import explorer as ex
 
 __all__ = ["VisPrint", "VisSpectrum"]
 
@@ -22,6 +22,7 @@ class VisSpectrum(Vis):
     action = "Plot spectrum"
 
     def _do_use(self, m):
+        from f311 import explorer as ex
         s = m.spectrum
         ex.plot_spectra([s])
 

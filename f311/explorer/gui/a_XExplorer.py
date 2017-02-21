@@ -13,7 +13,7 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 # from .. import *
-from ... import explorer as ex
+
 
 COLOR_LOADED = "#ADFFB4"  # light green
 COLOR_LOAD_ERROR = "#FFB5B5"  # light red
@@ -422,6 +422,7 @@ class XExplorer(QMainWindow):
 
     def __update_info(self):
         """Updates "visualization options" and "file info" areas."""
+        from f311 import explorer as ex
         t = self.tableWidget
         z = self.listWidgetVis
         z.clear()
@@ -484,6 +485,7 @@ class XExplorer(QMainWindow):
         QApplication.instance().processEvents()
 
     def __visualize(self):
+        from f311 import explorer as ex
         self.__flag_visualizing = True
         self.__set_status_text("Creating visualization, please wait...")
         try:
@@ -699,3 +701,5 @@ class XExplorer(QMainWindow):
                 t = self.__load_thread = LoadThread(self, propss)
                 t.finished.connect(self.__finished_loading)
                 t.start()
+
+#

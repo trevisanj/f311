@@ -12,7 +12,6 @@ import os
 import matplotlib.pyplot as plt
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 
 
 __all__ = ["XMainAbonds"]

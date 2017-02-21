@@ -7,7 +7,6 @@ from PyQt5.QtWidgets import *
 import numpy as np
 import matplotlib.pyplot as plt
 import a99
-from .... import explorer as ex
 import f311.filetypes as ft
 
 

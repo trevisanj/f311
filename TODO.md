@@ -1,6 +1,9 @@
 # TODO list
 
 ## GENERAL
+
+  
+  OPEN IN NEW WINDOW NOT COPYING EVERYTHIGN!!!!!
   
 - Documentation: **Get some inspiration** (read lots of shit)!!!!
 - Template project

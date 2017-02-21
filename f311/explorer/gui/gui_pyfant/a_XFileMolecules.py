@@ -16,7 +16,6 @@ import sys
 from ._shared import *
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 
 
 __all__ = ["XFileMolecules"]
