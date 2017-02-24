@@ -31,6 +31,7 @@ class WFileSparseCube(a99.WBase):
     """
 
     def __init__(self, parent):
+        from f311 import explorer as ex
         a99.WBase.__init__(self, parent)
 
         # Whether all the values in the fields are valid or not
@@ -108,7 +109,7 @@ class WFileSparseCube(a99.WBase):
         map = self._map0 = []
         ###
         x = self.label_sp = QLabel()
-        y = self.choosesp = a99.WChooseSpectrum()
+        y = self.choosesp = ex.WChooseSpectrum()
         y.installEventFilter(self)
         y.edited.connect(self.on_colors_setup_edited)
         # y.setValidator(QIntValidator())

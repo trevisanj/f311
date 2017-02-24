@@ -10,11 +10,12 @@ from PyQt5.QtWidgets import *
 from .a_WFileSpectrumList import *
 import a99
 import f311.filetypes as ft
+from ..a_XFileMainWindow import *
 
 
-class XFileSpectrumList(a99.XFileMainWindow):
+class XFileSpectrumList(XFileMainWindow):
     def __init__(self, parent=None, fileobj=None):
-        a99.XFileMainWindow.__init__(self, parent)
+        XFileMainWindow.__init__(self, parent)
 
         def keep_ref(obj):
             self._refs.append(obj)

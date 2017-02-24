@@ -101,8 +101,9 @@ def draw_cube_colors(ax, sparsecube, vrange, sqx=None, sqy=None, flag_scale=Fals
 
     Returns: matplotlib plot object representing square, or None
     """
+    from f311 import explorer as ex
     assert isinstance(sparsecube, ft.SparseCube)
-    im = sparsecube.to_colors(vrange, flag_scale, method)
+    im = ex.sparse_cube_to_colors(sparsecube, vrange, flag_scale, method)
     ax.imshow(im, interpolation="nearest")
     ax.invert_yaxis()
     obj_square = None

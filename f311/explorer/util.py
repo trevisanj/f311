@@ -7,10 +7,9 @@ Rule: only 'gui/' modules can import util!!!
 import numpy as np
 import copy
 from .. import physics as ph
+import a99
 
-__all__ = ["cut_spectrum", "crop_splist"]
-
-
+__all__ = ["cut_spectrum", "crop_splist",]
 def cut_spectrum(sp, l0, lf):
     """
     Cuts spectrum given a wavelength interval

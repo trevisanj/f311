@@ -7,7 +7,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import argparse
 import logging
-import f311.pyfant as pf
+import f311.explorer as ex
 import a99
 import f311.filetypes as ft
 
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     m = ft.FileMain()
     m.load(args.fn)
     app = a99.get_QApplication([])
-    form = pf.XFileMain()
+    form = ex.XFileMain()
     form.load(m)
     form.show()
     sys.exit(app.exec_())

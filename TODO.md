@@ -1,9 +1,16 @@
 # TODO list
 
+
+## WSpectrumCollection
+
+- OPEN IN NEW WINDOW NOT COPYING EVERYTHIGN!!!!!
+- Add spectrum when in Cube Editor: handle pixel-x and pixel-y properly
+
+
 ## GENERAL
 
   
-  OPEN IN NEW WINDOW NOT COPYING EVERYTHIGN!!!!!
+  
   
 - Documentation: **Get some inspiration** (read lots of shit)!!!!
 - Template project

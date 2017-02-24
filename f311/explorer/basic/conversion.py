@@ -6,6 +6,7 @@ Basic routines, they don't use anything from parent module
 import numpy as np
 import f311.physics as ph
 
+__all__ = ["sparse_cube_to_colors", "spectrum_to_rgb"]
 
 def sparse_cube_to_colors(scube, visible_range=None, flag_scale=False, method=0):
     """Returns a [nY, nX, 3] red-green-blue (0.-1.) matrix

@@ -12,7 +12,8 @@ import os
 import datetime
 from collections import OrderedDict
 import f311.filetypes as ft
-
+import f311.pyfant as pf
+import f311.explorer as ex
 
 __all__ = ["XConvMol"]
 
@@ -422,7 +423,7 @@ class _WKuruczPanel(a99.WBase):
 
         a = self.keep_ref(QLabel("Apply normalization factor for HLFs to add up to 1 (for fixed J)"))
         w = self.checkbox_normhlf = QCheckBox()
-        w.setToolTip("If selected, calculated 'gf's will be divided by\n"
+        w.setToolTip("If selected, calculated 'gf's will be multiplied by\n"
                      "2 / ((2 * J2l + 1) * (2 * S + 1)*(2 - DELTAK))")
         lg.addWidget(a, 2, 0)
         lg.addWidget(w, 2, 1)
@@ -458,9 +459,9 @@ class _WTurboSpectrumPanel(a99.WBase):
 
 
 
-class XConvMol(a99.XFileMainWindow):
+class XConvMol(ex.XFileMainWindow):
     def __init__(self, parent=None, fileobj=None):
-        a99.XFileMainWindow.__init__(self, parent)
+        ex.XFileMainWindow.__init__(self, parent)
 
         # # Synchronized sequences
         _VVV = ft.FileMolDB.description
@@ -471,7 +472,7 @@ class XConvMol(a99.XFileMainWindow):
         self.clss = [ft.FileMolDB, None, None]  # save class
         self.clsss = [(ft.FileMolDB,), None, None]  # accepted load classes
         self.wilds = ["*.sqlite", None, None]  # e.g. '*.fits'
-        self.editors = [a99.NullEditor(), a99.NullEditor(), a99.NullEditor()]  # editor widgets, must comply ...
+        self.editors = [ex.NullEditor(), ex.NullEditor(), ex.NullEditor()]  # editor widgets, must comply ...
         tw0 = self.tabWidget
         tw0.setTabText(1, self.tab_texts[2])
 
@@ -612,7 +613,7 @@ class XConvMol(a99.XFileMainWindow):
     #     self.title_state.setText(a99.format_title0(s))
 
     def convert_clicked(self):
-        cm = pf.convmol
+        from f311 import convmol as cm
         try:
             errors = []
             name = self.w_source.source.name
@@ -695,5 +696,5 @@ class XConvMol(a99.XFileMainWindow):
         if len(filename) > 0:
             f = ft.FileMolecules()
             f.load(filename)
-            vis = pf.VisMolecules()
+            vis = ex.VisMolecules()
             vis.use(f)

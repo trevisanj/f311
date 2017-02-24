@@ -330,6 +330,7 @@ class WSpectrumCollection(a99.WBase):
 
         menu = QMenu()
         act_hide_current = None
+        fieldname_current = None
 
         if col_idx < len(obj.fieldnames_visible):
             fieldname_current = obj.fieldnames_visible[col_idx]
@@ -350,7 +351,7 @@ class WSpectrumCollection(a99.WBase):
 
         action = menu.exec_(self.twSpectra.mapToGlobal(position))
         flag_update = False
-        if action == act_hide_current:
+        if action == act_hide_current and fieldname_current is not None:
             obj.fieldnames_visible.remove(fieldname_current)
             flag_update = True
 
@@ -671,7 +672,7 @@ class WSpectrumCollection(a99.WBase):
         for filename in filenames:
             filename = str(filename)
             basename = os.path.basename(filename)
-            file = a99.load_with_classes(filename, classes)
+            file = ft.load_with_classes(filename, classes)
             try:
                 if file is None:
                     raise RuntimeError("Could not load file")

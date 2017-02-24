@@ -15,6 +15,38 @@ import re
 class SetOfLines(a99.AttrsPart):
     attrs = ["vl", "v2l", "qqv", "ggv", "bbv", "ddv", "fact", "num_lines"]
 
+    @property
+    def lmbdam(self):
+        return np.array(self._lmbdam)
+
+    @lmbdam.setter
+    def lmbdam(self, value):
+        self._lmbdam = value
+
+    @property
+    def sj(self):
+        return np.array(self._sj)
+
+    @sj.setter
+    def sj(self, value):
+        self._sj = value
+
+    @property
+    def jj(self):
+        return np.array(self._jj)
+
+    @jj.setter
+    def jj(self, value):
+        self._jj = value
+
+    @property
+    def branch(self):
+        return np.array(self._branch)
+
+    @branch.setter
+    def branch(self, value):
+        self._branch = value
+
     def __init__(self, vl=None, v2l=None, qqv=None, ggv=None, bbv=None, ddv=None, fact=None):
         a99.AttrsPart.__init__(self)
 
@@ -26,10 +58,11 @@ class SetOfLines(a99.AttrsPart):
         self.ddv = ddv
         self.fact = fact
 
-        self.lmbdam = []
-        self.sj = []
-        self.jj = []
-        self.branch = []
+        # Vectors are keps as lists in order to .append_line() to work
+        self._lmbdam = []
+        self._sj = []
+        self._jj = []
+        self._branch = []
 
     @property
     def num_lines(self):
@@ -45,32 +78,39 @@ class SetOfLines(a99.AttrsPart):
     def __iter__(self):
         """Creates MyDBRow objects to represent each molecular line"""
         fieldnames = ["lmbdam", "sj", "jj", "branch"]
-        for t in zip(self.lmbdam, self.sj, self.jj, self.branch):
+        for t in zip(self._lmbdam, self._sj, self._jj, self._branch):
             obj = a99.MyDBRow()
             for fieldname, value in zip(fieldnames, t):
                 obj[fieldname] = value
             yield obj
 
-
-
     def cut(self, lzero, lfin):
         """Reduces the number of lines to only the ones whose lmbdam is inside [lzero, lfin]"""
         l, s, j, b = [], [], [], []
-        for _l, _s, _j, _b in zip(self.lmbdam, self.sj, self.jj, self.branch):
+        for _l, _s, _j, _b in zip(self._lmbdam, self._sj, self._jj, self._branch):
             if lzero <= _l <= lfin:
                 l.append(_l)
                 s.append(_s)
                 j.append(_j)
                 b.append(_b)
-        self.lmbdam, self.sj, self.jj, self.branch = l, s, j, b
+        self._lmbdam, self._sj, self._jj, self._branch = l, s, j, b
 
     def append_line(self, lmbdam, sj, jj, branch):
-        self.lmbdam.append(lmbdam)
-        self.sj.append(sj)
-        self.jj.append(jj)
+        self._lmbdam.append(lmbdam)
+        self._sj.append(sj)
+        self._jj.append(jj)
         if isinstance(branch, str):
             branch = branch_to_iz(branch)
-        self.branch.append(branch)
+        self._branch.append(branch)
+
+    def sort(self):
+        """Sort **in-place**. However, replaces the internal vectors"""
+
+        ii = np.argsort(self.lmbdam)
+        self._lmbdam = list(self.lmbdam[ii])
+        self._sj = list(self.sj[ii])
+        self._jj = list(self.jj[ii])
+        self._branch = list(self.branch[ii])
 
 
 @a99.froze_it
@@ -351,6 +391,7 @@ class FileMolecules(DataFile):
                     # Now reads lines
                     sol_iter = iter(m.sol)  # iterator to change the current set-of-lines with the "numlin" flag
                     o = next(sol_iter)  # current set-of-lines
+                    # o._lmbdam, o._sj, o._jj, o._branch = [], [], [], []
                     while True:
                         # Someone added "*" signs as a 6th column of some lines
                         # which was causing my reading to crash.
@@ -365,10 +406,10 @@ class FileMolecules(DataFile):
 
                         r += 1
 
-                        o.lmbdam.append(lmbdam)
-                        o.sj.append(sj)
-                        o.jj.append(jj)
-                        o.branch.append(iz)
+                        o._lmbdam.append(lmbdam)
+                        o._sj.append(sj)
+                        o._jj.append(jj)
+                        o._branch.append(iz)
 
                         if numlin > 0:
                             if numlin == 9:
@@ -376,11 +417,11 @@ class FileMolecules(DataFile):
                             o = next(sol_iter)
 
 
-                    # TODO review this
-                    o.lmbdam = np.array(o.lmbdam)
-                    o.sj = np.array(o.sj)
-                    o.jj = np.array(o.jj)
-                    o.branch = np.array(o.branch)
+
+                    # o.lmbdam = _lmbdam
+                    # o.sj = _sj
+                    # o.jj = _jj
+                    # o.branch = _branch
 
                     a99.get_python_logger().info("Loading '{}': {}".format(filename, a99.format_progress(im+1, num_mol)))
 

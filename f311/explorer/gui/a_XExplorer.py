@@ -414,7 +414,7 @@ class XExplorer(QMainWindow):
     def __update_window_title(self):
         full_dir = os.path.abspath(self.dir)
         # self.setWindowTitle("PFANT Explorer -- %s" % os.path.abspath(self.dir))
-        self.setWindowTitle("AstroGear Explorer")
+        self.setWindowTitle("F311 Explorer")
         self.lineEditDir.setText(full_dir)
 
     def __get_current_vis_class(self):

@@ -7,14 +7,15 @@ import a99
 from .a_WFileMolDB import *
 import os
 import f311.filetypes as ft
+import f311.explorer as ex
 
 
 __all__ = ["XFileMolDB"]
 
 
-class XFileMolDB(a99.XFileMainWindow):
+class XFileMolDB(ex.XFileMainWindow):
     def __init__(self, parent=None, fileobj=None):
-        a99.XFileMainWindow.__init__(self, parent)
+        ex.XFileMainWindow.__init__(self, parent)
 
         # # Synchronized sequences
         _VVV = ft.FileMolDB.description

@@ -14,6 +14,8 @@ import glob
 import os
 import argparse
 import f311.pyfant as pf
+import f311.filetypes as ft
+import f311.explorer as ex
 import logging
 
 
@@ -57,7 +59,7 @@ if __name__ == "__main__":
             # Note: takes first .norm file that finds
             f.load(filename)
 
-            a99.draw_spectra([f.spectrum])  #v.title = "%s" % name
+            ex.draw_spectra([f.spectrum])  #v.title = "%s" % name
 
             fig = plt.gcf()
             if args.samey:
