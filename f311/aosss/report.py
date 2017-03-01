@@ -9,7 +9,6 @@ import numpy as np
 import traceback
 import glob
 import a99
-from .. import aosss as ao
 import f311.filetypes as ft
 import f311.explorer as ex
 
@@ -63,14 +62,12 @@ def _color(s, color):
 def create_simulation_report(simid, dir_="."):
     """Creates HTML output and several PNG files with coherent naming
 
-    Returns: name of output file created, which will be '<dir_>/report-<simid>.html'
+    Args:
+        simid: simulation ID. This should be a string starting with a "C", e.g., "C000793"
+        dir_: directory containing the simulation ouput files
 
-    Arguments:
-      simid -- simulation ID. This should be a string starting with a "C", e.g.,
-        "C000793"
-      dir_ -- directory containing the simulation ouput files
-
-
+    Returns:
+        str: name of output file created, which will be ``<dir_>/report-<simid>.html``
     """
 
     if simid[0] != "C":

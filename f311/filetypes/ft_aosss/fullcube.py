@@ -22,7 +22,7 @@ class FullCube(a99.AttrsPart):
       - CDELT3, CRVAL3 refer to z
     """
 
-    attrs = ["R", "hrfactor", "ifu_pix_size"]
+    attrs = ["hdu"]
 
     @property
     def flag_created(self):
@@ -48,10 +48,11 @@ class FullCube(a99.AttrsPart):
         Sets self.hdu and with HDU object passed. Warning: may change HDU object.
 
         Default HDU headers:
-         CDELT1 defaults to 1.
-         CDELT2 defaults to CDELT1
-         CRDELT3 defaults to 1.
-         CRVAL3 defaults to 0.
+
+            - CDELT1 defaults to 1
+            - CDELT2 defaults to CDELT1
+            - CRDELT3 defaults to 1
+            - CRVAL3 defaults to 0
         """
         assert isinstance(hdu, fits.PrimaryHDU)
 
@@ -90,7 +91,7 @@ class FullCube(a99.AttrsPart):
     def create1(self, R, dims, hr_pix_size, hrfactor):
         """Creates FITS HDU, including the cube full with zeros
 
-          dims -- (nlambda, height, width)
+          dims: (nlambda, height, width)
         """
         cube = np.zeros(dims)
         hdu = fits.PrimaryHDU()
@@ -109,6 +110,7 @@ class FullCube(a99.AttrsPart):
 
         **Note** coordinate (x=0, y=0) corresponds to lower left pixel of cube cross-section
         """
+        import f311.filetypes as ft
         assert self.flag_wavelengthed
 
         sp = ft.Spectrum()

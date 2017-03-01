@@ -23,6 +23,7 @@ class Spectrum(object):
 
     @property
     def xunit(self):
+        """Unit of the wavelength axis (some unit from astropy.units)"""
         return self.more_headers["X-UNIT"]
 
     @xunit.setter
@@ -33,6 +34,7 @@ class Spectrum(object):
 
     @property
     def yunit(self):
+        """Unit of the wavelength axis (some unit from astropy.units)"""
         return self.more_headers["Y-UNIT"]
 
     @yunit.setter
@@ -43,7 +45,7 @@ class Spectrum(object):
 
     @property
     def title(self):
-        """Calculated, read-only property"""
+        """"Title" of the spectrum. Calculated, read-only property"""
         ret = None
         if ret is None:
             ret = self.filename
@@ -53,6 +55,7 @@ class Spectrum(object):
 
     @property
     def wavelength(self):
+        """Wavelength vector. Equivalent to `wavelenght`"""
         return self.x
 
     @wavelength.setter
@@ -61,14 +64,17 @@ class Spectrum(object):
 
     @property
     def l0(self):
+        """Lower bound of wavelength vector"""
         return self.x[0]
 
     @property
     def lf(self):
+        """Upper bound of wavelength vector"""
         return self.x[-1]
 
     @property
     def flux(self):
+        """Flux vector. Equivalent to `y`"""
         return self.y
 
     @flux.setter
@@ -107,8 +113,10 @@ class Spectrum(object):
     def z_start(self, value):
         self.more_headers["Z-START"] = value
 
+    # TODO maybe this is obsolete
     @property
     def ylabel(self):
+        """Y-label for plotting purposes"""
         return self.more_headers.get("YLABEL")
 
     @ylabel.setter
@@ -321,9 +329,9 @@ class Spectrum(object):
     def resample(self, new_wavelength, kind='linear'):
         """Resamples *in-place* to new wavelength vector using interpolation
 
-        Arguments:
-            new_wavelength -- new wavelength vector
-            kind -- interpolation kind to be passed to scipy.interpolate.interp1d
+        Args:
+            new_wavelength: new wavelength vector
+            kind: interpolation kind to be passed to scipy.interpolate.interp1d
         """
         # f = interp1d(self.x, self.y, kind='linear', bounds_error=True, fill_value=0)
         self.y = interp(new_wavelength, self.x, self.y)

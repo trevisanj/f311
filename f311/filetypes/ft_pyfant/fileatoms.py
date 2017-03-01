@@ -166,8 +166,8 @@ class FileAtoms(DataFile):
         """
         Filters atomic lines for which function(line) is true.
 
-        Arguments:
-          function -- receives an AtomicLine object as argument.
+        Args:
+          function: receives an AtomicLine object as argument.
 
         Example: lambda line: line.algf >= -7
         """
@@ -183,8 +183,8 @@ class FileAtoms(DataFile):
         """
         Filters Atom objects for which function(line) is true.
 
-        Arguments:
-          function -- receives an Atomic object as argument.
+        Args:
+          function: receives an Atomic object as argument.
            Example: lambda atom: atom.ioni <= 2
         """
         self.atoms = list(filter(function, self.atoms))

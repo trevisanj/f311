@@ -3,8 +3,9 @@ __all__ = ["GB_UseNumPyFunc", "GB_SNR"]
 
 from .basic import *
 from . import sb
+from . import slb
 import a99
-from ... import explorer as ex
+
 
 class GB_UseNumPyFunc(GroupBlock):
     """Output contains single spectrum whose y-vector is calculated using a numpy function
@@ -33,8 +34,8 @@ class GB_SNR(GroupBlock):
     **Warning** Don't use this block, empirical SNR is usually calculated **per spectrum**, as
     reinforced by EC and BLB (using IRAF procedure, which is Amplitude_RMS/std
 
-    Arguments:
-        continua -- SpectrumList containing the continua that will be used as the "signal" level.
+    Args:
+        continua: SpectrumList containing the continua that will be used as the "signal" level.
                     If not passed, will be calculated from the input spectra using a SB_Rubberband(True) block
 
     References:
@@ -49,10 +50,10 @@ class GB_SNR(GroupBlock):
 
     def _do_use(self, inp):
         if self.continua is None:
-            continua = ex.SLB_UseSpectrumBlock(sb.SB_Rubberband(True)).use(inp)
+            continua = slb.SLB_UseSpectrumBlock(sb.SB_Rubberband(True)).use(inp)
         else:
             continua = self.continua
-        cont_2 = ex.SLB_UseSpectrumBlock(sb.SB_ElementWise(np.square)).use(continua)  # continua squared
+        cont_2 = slb.SLB_UseSpectrumBlock(sb.SB_ElementWise(np.square)).use(continua)  # continua squared
         mean_cont_2 = GB_UseNumPyFunc(np.mean).use(cont_2)
         var_spectra = GB_UseNumPyFunc(np.var).use(inp)
         output = self._new_output()

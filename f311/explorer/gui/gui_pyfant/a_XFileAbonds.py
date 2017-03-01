@@ -9,14 +9,13 @@ import os
 from ._shared import *
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 
 
 ################################################################################
 class XFileAbonds(QMainWindow):
     """
-    Arguments:
-      parent=None -- nevermind
+    Args:
+      parent=None: nevermind
       file_abonds (optional)-- FileAbonds instance
     """
 
@@ -135,6 +134,7 @@ class XFileAbonds(QMainWindow):
 
 
     def on_export_turbospectrum(self, _):
+        from f311 import explorer as ex
         w = ex.XText(self, self.editor.f.get_turbospectrum_str(), "Atomic number & abundance")
         w.show()
 

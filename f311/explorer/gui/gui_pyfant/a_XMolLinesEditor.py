@@ -7,7 +7,6 @@ from PyQt5.QtWidgets import *
 from ._shared import *
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 
 
 class XMolLinesEditor(QMainWindow):

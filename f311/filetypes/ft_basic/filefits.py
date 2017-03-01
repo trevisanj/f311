@@ -18,6 +18,7 @@ class FileFits(DataFile):
     """
 
     flag_txt = False
+    attrs = ["hdulist"]
 
     def __init__(self):
         DataFile.__init__(self)

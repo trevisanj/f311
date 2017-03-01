@@ -166,9 +166,7 @@ class FileSpectrumNulbad(FileSpectrum):
     """
     PFANT Spectrum (`nulbad` output)
 
-    This file alternates a "header" line where most of the information is
-    repeated, and a "values" line, with the values of the flux
-    corresponding to the lambda interval lzero-lfin
+    This file is a two-column text file with two lines of comment at the beginning
     """
 
     def _do_load(self, filename):
@@ -180,6 +178,10 @@ class FileSpectrumNulbad(FileSpectrum):
             # Original format: ('#',A,'Tef=',F6.3,X,'log g=',F4.1,X,'[M/H]=',F5.2,X,F5.2)
             # s_header0 = struct.Struct("1x 20s 4x 6s 7x 4s 7x 5s 1x 5s")
             s = h.readline()
+
+            if not s.startswith("#"):
+                raise RuntimeError("Not a nulbad output file")
+
             # [sp.tit, sp.tetaef, sp.glog, sp.asalog, sp.amg] = \
             #     s_header0.unpack_from(s)
             # [sp.tetaef, sp.glog, sp.asalog, sp.amg] = \
@@ -190,6 +192,9 @@ class FileSpectrumNulbad(FileSpectrum):
             # F10.2,2X,'PAS =',F5.2,2x,'FWHM =',F5.2)
             # s_header1 = struct.Struct("1x 6s 21x 10s 8x 10s 7x 5s 8x 5s")
             s = h.readline()
+
+            if not s.startswith("#"):
+                raise RuntimeError("Not a nulbad output file")
 
             # [_, sp.l0, sp.lf, sp.pas, sp.fwhm] = \
             #     s_header1.unpack_from(s)

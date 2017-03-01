@@ -6,7 +6,6 @@ import re
 import os
 import shutil
 import sys
-from .. import filetypes as ft
 
 
 __all__ = ["adjust_atomic_symbol", "description_to_symbols", "iz_to_branch", "branch_to_iz",
@@ -46,9 +45,16 @@ def description_to_symbols(descr):
     after the first "#" in the molecule 'titulo'
 
     Args:
-        descr: e.g., "12C16O INFRARED  X 1 SIGMA+,   version 15/oct/98"
+        descr: string
 
-    Returns: list of two elements, e.g., ["MG", " H"]
+    Returns:
+        list of two elements, e.g., [" C", " O"]
+
+    Example:
+
+    >>> import f311.filetypes as ft
+    >>> ft.description_to_symbols("12C16O INFRARED  X 1 SIGMA+,   version 15/oct/98")
+    [' C', ' O']
     """
 
     descr = descr.upper()
@@ -75,7 +81,7 @@ def branch_to_iz(br):
     return _branch_to_iz_map[br]
 
 
-def get_default_data_path(*args, module=ft, class_=None):
+def get_default_data_path(*args, module=None, class_=None):
     """
     Returns path to default data directory
 
@@ -91,6 +97,8 @@ def get_default_data_path(*args, module=ft, class_=None):
                 **Has precedence over 'module' argument**
 
     """
+    if module is None:
+        module = __get_filetypes_module()
 
     if class_ is not None:
         pkgname =  class_.__module__
@@ -104,7 +112,15 @@ def get_default_data_path(*args, module=ft, class_=None):
     return p
 
 
-def copy_default_data_file(filename, module=ft):
+def copy_default_data_file(filename, module=None):
     """Copies file from ftpyfant/data/default directory to local directory."""
+    if module is None:
+        module = __get_filetypes_module()
     fullpath = get_default_data_path(filename, module=module)
     shutil.copy(fullpath, ".")
+
+
+def __get_filetypes_module():
+    from f311 import filetypes as ft
+    return ft
+

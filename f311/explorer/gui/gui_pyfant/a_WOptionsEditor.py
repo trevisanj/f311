@@ -5,7 +5,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 from ._shared import *
 
 __all__ = ["WOptionsEditor"]
@@ -71,9 +70,9 @@ class _Option(a99.AttrsPart):
     def update_gui(self, options, flag_reset=False):
         """Updates control and in-use-checkbox.
 
-        Arguments:
-          options -- FileOptions instance
-          flag_reset=False -- resets controls to default value if their value in the
+        Args:
+          options: FileOptions instance
+          flag_reset=False: resets controls to default value if their value in the
                               FileOptions object is None
         """
         assert isinstance(options, ft.FileOptions)
@@ -122,7 +121,7 @@ class WOptionsEditor(QWidget):
     """
     FileOptions editor widget.
 
-    Arguments:
+    Args:
       parent=None
     """
 
@@ -726,8 +725,8 @@ class WOptionsEditor(QWidget):
     def __update_from_data(self, data=None, flag_reset=False):
         """Updates the edits and in-use-checkboxes.
 
-        data=self.f -- FileOptions instance
-        flag_reset -- options are loaded as if for the first time into GUI
+        data=self.f: FileOptions instance
+        flag_reset: options are loaded as if for the first time into GUI
         """
         self.flag_process_changes = False
         try:

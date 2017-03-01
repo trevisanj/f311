@@ -1,6 +1,16 @@
 # TODO list
 
+
+## WSpectrumCollection
+
+- OPEN IN NEW WINDOW NOT COPYING EVERYTHIGN!!!!!
+- Add spectrum when in Cube Editor: handle pixel-x and pixel-y properly
+
+
 ## GENERAL
+
+  
+  
   
 - Documentation: **Get some inspiration** (read lots of shit)!!!!
 - Template project
@@ -18,7 +28,7 @@
   - ~~Make it work~~
   - ~~Figure out list of actions to plug things in~~
   - ~~Create a collaborator template~~
-  - Installation of other packages could write in astroapi config file (or not)!!
+  - Installation of other packages could write in f311 config file (or not)!!
   - Sort the thing with DataFile.description
   - ~~Look for PFANT~~
   - implement categories in scripts (dunno, perhaps a `# cat: whatever`)

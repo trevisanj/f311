@@ -5,8 +5,6 @@ import a99
 import copy
 from .basic import *
 from . import sb
-from ... import explorer as ex
-
 
 class SLB_UseSpectrumBlock(SpectrumListBlock):
     """Calls sblock.use() for each individual spectrum"""
@@ -28,8 +26,9 @@ class SLB_ExtractContinua(SpectrumListBlock):
     # TODO this is not a great system. Just de-noising could substantially improve the extracted continua
 
     def _do_use(self, inp):
+        from . import gb
         output = SLB_UseSpectrumBlock(sb.SB_Rubberband(flag_upper=True)).use(inp)
-        spectrum_std = ex.GB_UseNumPyFunc(func=np.std).use(inp)
+        spectrum_std = gb.GB_UseNumPyFunc(func=np.std).use(inp)
         mean_std = np.mean(spectrum_std.spectra[0].y)
         for spectrum in output.spectra:
             spectrum.y -= mean_std * 3

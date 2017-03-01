@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""AstroAPI Explorer --  list, visualize, and edit data files (_à la_ File Manager)"""
+"""F311 Explorer --  list, visualize, and edit data files (_à la_ File Manager)"""
 
 import a99
 import f311.filetypes as ft

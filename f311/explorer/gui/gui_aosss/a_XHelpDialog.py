@@ -5,8 +5,6 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import a99
-from .... import explorer as ex
-import f311.filetypes as ft
 
 
 class XHelpDialog(a99.XLogDialog):
@@ -17,11 +15,11 @@ class XHelpDialog(a99.XLogDialog):
     2. The Help Area contains a combo box and a text area
 
     Relevant attributes:
-      self.help_data -- [(class name without prefix, docstring), ...]
-      self.block -- None or ToScalar instance, set before closing when one clicks on "OK"
-      self.grid -- grid layout (initially empty)
-      self.labelHelpTopics -- label with text "Help Topics", exposed in case you want to change this text
-      self.comboBox -- combo box to add the help topics
+      self.help_data: [(class name without prefix, docstring), ...]
+      self.block: None or ToScalar instance, set before closing when one clicks on "OK"
+      self.grid: grid layout (initially empty)
+      self.labelHelpTopics: label with text "Help Topics", exposed in case you want to change this text
+      self.comboBox: combo box to add the help topics
 
     """
 

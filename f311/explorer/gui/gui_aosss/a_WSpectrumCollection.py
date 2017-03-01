@@ -9,14 +9,17 @@ from PyQt5.QtWidgets import *
 from .a_XScaleSpectrum import *
 from astropy import units as u
 import a99
-from .... import explorer as ex
+# from .... import explorer as ex
 import f311.filetypes as ft
+
+# TODO options window to set this up
+_CONFIG_LEGEND = "/gui/WSpectrumCollection/plot_overlapped/flag_legend"
 
 
 class WSpectrumCollection(a99.WBase):
     """Editor for SpectrumCollection objects"""
 
-    # argument0 -- flag_changed_header
+    # argument0: flag_changed_header
     edited = pyqtSignal(bool)
 
     def __init__(self, parent):
@@ -327,6 +330,7 @@ class WSpectrumCollection(a99.WBase):
 
         menu = QMenu()
         act_hide_current = None
+        fieldname_current = None
 
         if col_idx < len(obj.fieldnames_visible):
             fieldname_current = obj.fieldnames_visible[col_idx]
@@ -347,7 +351,7 @@ class WSpectrumCollection(a99.WBase):
 
         action = menu.exec_(self.twSpectra.mapToGlobal(position))
         flag_update = False
-        if action == act_hide_current:
+        if action == act_hide_current and fieldname_current is not None:
             obj.fieldnames_visible.remove(fieldname_current)
             flag_update = True
 
@@ -401,6 +405,8 @@ class WSpectrumCollection(a99.WBase):
 
 
     def on_all_group(self):
+        from f311 import explorer as ex
+
         # Import here to circumvent cyclic dependency
         from .a_XGroupSpectra import XGroupSpectra
         form = XGroupSpectra()
@@ -547,15 +553,21 @@ class WSpectrumCollection(a99.WBase):
 
 
     def on_sel_plot_stacked(self):
+        from f311 import explorer as ex
+
         sspp = self.get_selected_spectra()
         if len(sspp) > 0:
             ex.plot_spectra(sspp)
 
 
     def on_sel_plot_overlapped(self):
+        from f311 import explorer as ex
+
         sspp = self.get_selected_spectra()
+        flag_legend = ex.get_config().get_item(_CONFIG_LEGEND, True)
+        oo = ex.PlotSpectrumSetup(flag_legend=flag_legend)
         if len(sspp) > 0:
-            ex.plot_spectra_overlapped(sspp)
+            ex.plot_spectra_overlapped(sspp, setup=oo)
 
 
     def on_sel_open_in_new(self):
@@ -660,7 +672,7 @@ class WSpectrumCollection(a99.WBase):
         for filename in filenames:
             filename = str(filename)
             basename = os.path.basename(filename)
-            file = a99.load_with_classes(filename, classes)
+            file = ft.load_with_classes(filename, classes)
             try:
                 if file is None:
                     raise RuntimeError("Could not load file")

@@ -101,12 +101,12 @@ class FileVald3(DataFile):
 
     def remove_formula(self, formula):
         """Removes given element (any ionization level)."""
+        from f311 import filetypes as ft
         formula = ft.adjust_atomic_symbol(formula)
         for i in reversed(list(range(len(self)))):
             atom = self.speciess[i]
             if atom.formula == formula:
                 del self.speciess[i]
-
 
     def _do_load(self, filename):
         """Clears internal lists and loads from file."""

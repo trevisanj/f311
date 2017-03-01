@@ -9,17 +9,17 @@ class SpectrographMode(AttrsPart):
     """
     Spectrograph mode specification
 
-    Keyword arguments:
-        name -- name of spectrograph mode
-        abbreviation -- abbreviation of spectrograph mode
-        aperture -- aperture in (arcsec)
-        multiplex -- maximum number of simultaneous objects being observed (unitless)
-        wavelength_range -- [lambda_min, lambda_max] (angstrom)
-        resolving_power -- lambda/delta_lambda (unitless)
-        fov -- field-of-view (arcmin**2)
-        flag_glao -- whether or not Ground-Layer Adaptive Optics is available for this mode
-        flag_moao -- whether of not Multi-Object Adaptive Optics is available for this mode
-        pixel_size -- spatial pixel size
+    Args:
+        name: name of spectrograph mode
+        abbreviation: abbreviation of spectrograph mode
+        aperture: aperture in (arcsec)
+        multiplex: maximum number of simultaneous objects being observed (unitless)
+        wavelength_range: [lambda_min, lambda_max] (angstrom)
+        resolving_power: lambda/delta_lambda (unitless)
+        fov: field-of-view (arcmin**2)
+        flag_glao: whether or not Ground-Layer Adaptive Optics is available for this mode
+        flag_moao: whether of not Multi-Object Adaptive Optics is available for this mode
+        pixel_size: spatial pixel size
     """
 
     attrs = ["name", "abbreviation", "aperture", "multiplex", "wavelength_range", "resolving_power",

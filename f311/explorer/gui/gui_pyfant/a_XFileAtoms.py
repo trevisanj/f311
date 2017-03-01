@@ -18,7 +18,7 @@ import sys
 from ._shared import *
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
+# from .... import explorer as ex
 
 
 NUM_PLOTS = len(ATOM_HEADERS)-1  # -1 because whe "lambda" does not have its plot
@@ -256,6 +256,7 @@ class XFileAtoms(QMainWindow):
         self.plot_lines()
 
     def on_histogram(self, _):
+        from f311 import explorer as ex
         if self.form_histogram is None:
             self.form_histogram = ex.XFileAtomsHistogram(self.f)
         self.form_histogram.show()

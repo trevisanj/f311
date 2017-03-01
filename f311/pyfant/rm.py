@@ -31,7 +31,7 @@ class RunnableManager(QObject, threading.Thread):
 
     Keyword arguments:
       max_simultaneous=multiprocessing.cpu_count()
-      flag_auto_clean=False -- if set, will load result and remove the session
+      flag_auto_clean=False: if set, will load result and remove the session
        directory as soon as a runnable has finished
     """
 

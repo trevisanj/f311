@@ -4,7 +4,7 @@
 
 import f311.physics as ph
 import f311.filetypes as ft
-from .. import convmol as cm
+#from .. import convmol as cm
 import a99
 from .convlog import *
 from collections import OrderedDict
@@ -15,7 +15,7 @@ __all__ = ["kurucz_to_sols"]
 
 
 def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False, flag_normhlf=False,
-                   flag_fcf=False):
+                   flag_fcf=False, flag_quiet=False):
     """
     Converts Kurucz molecular lines data to PFANT "sets of lines"
 
@@ -33,10 +33,14 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
                   use Kurucz's loggf instead
 
         flag_normhlf: Whether to multiply calculated gf's by normalization factor
-
+        flag_quiet: Will not log exceptions when a molecular line fails
 
     Returns: (a list of ftpyfant.SetOfLines objects, a MolConversionLog object)
+
+    If calculation of a line fails, will catch exception, add to MolConversion log (and log using
+    get_python_logger() if flag_quiet is False)
     """
+    from f311 import convmol as cm
 
     def append_error(msg):
         log.errors.append("#{}{} line: {}".format(i + 1, a99.ordinal_suffix(i + 1), str(msg)))
@@ -80,7 +84,7 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
         branch = ph.doublet.quanta_to_branch(line.Jl, line.J2l, line.spin2l)
         try:
             # TODO take this outta here, for now just to filter to match others
-            fcf = cm.get_fcf_oh(line.vl, line.v2l)
+            # fcf = cm.get_fcf_oh(line.vl, line.v2l)
 
             wl = line.lambda_
 
@@ -105,19 +109,6 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
                 # Normaliza = scale_factor * k
                 gf_pfant = k*10**line.loggf
 
-            # # TODO ask BLB for references on these Franck-Condon Factors & try to generalize (these are for OH only I think)
-            # x = line.J2l * (line.J2l + 1)
-            # if branch[0] == "P":
-            #     fcf = 3.651E-2 * (1 + 4.309E-6 * x + 1.86E-10 * (x ** 2)) ** 2
-            # elif branch[0] == "Q":
-            #     fcf = 3.674E-2 * (1 + 6.634E-6 * x + 1.34E-10 * (x ** 2)) ** 2
-            # elif branch[0] == "R":
-            #     fcf = 3.698E-2 * (1 + 1.101E-5 * x + 7.77E-11 * (x ** 2)) ** 2
-            # else:
-            #     raise RuntimeError("Shouldn't fall in here (branch ie neither P/Q/R)")
-
- #           fcf = 1.3201e-1
-
             if flag_fcf:
                 fcf = cm.get_fcf_oh(line.vl, line.v2l)
 
@@ -134,14 +125,10 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
 
             J2l_pfant = line.J2l
         except Exception as e:
-            # if isinstance(e, ZeroDivisionError):
-            #     print("OOOOOOOOOOOOOOOOOOOOOO")
-            #     print(str(line))
-            #     sys.exit()
-
             msg = "#{}{} line: {}".format(i + 1, a99.ordinal_suffix(i + 1), a99.str_exc(e))
             log.errors.append(msg)
-            a99.get_python_logger().exception(msg)
+            if not flag_quiet:
+                a99.get_python_logger().exception(msg)
             continue
 
         sol_key = "%3d%3d" % (line.vl, line.v2l)  # (v', v'') transition (v_sup, v_inf)

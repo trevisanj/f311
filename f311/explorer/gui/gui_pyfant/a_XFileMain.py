@@ -9,14 +9,13 @@ import os.path
 from ._shared import *
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 
 
 ################################################################################
 class XFileMain(QMainWindow):
     """
-    Arguments:
-      parent=None -- nevermind
+    Args:
+      parent=None: nevermind
       file_main (optional)-- FileMain instance
     """
 
@@ -123,6 +122,6 @@ class XFileMain(QMainWindow):
             self.update_window_title()
 
     def update_window_title(self):
-        self.setWindowTitle("mained -- %s%s%s" % (self.editor.f.filename,
+        self.setWindowTitle("mained: %s%s%s" % (self.editor.f.filename,
           "" if not self.flag_changed else " (changed)",
           "" if self.editor.flag_valid else " (*invalid*)"))

@@ -2,7 +2,7 @@
 
 
 """
-Downloads a number of Websim-Compass simulations
+Downloads WebSim-COMPASS simulations
 
 Based on shell script by Mathieu Puech
 

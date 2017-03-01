@@ -12,7 +12,6 @@ import os
 import matplotlib.pyplot as plt
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 
 
 __all__ = ["XMainAbonds"]
@@ -21,8 +20,8 @@ __all__ = ["XMainAbonds"]
 ################################################################################
 class XMainAbonds(QMainWindow):
     """
-    Arguments:
-      parent=None -- nevermind
+    Args:
+      parent=None: nevermind
       file_main (optional)-- FileMain instance
     """
 

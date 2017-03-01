@@ -5,7 +5,6 @@ Ancestor class for all classes that represent an input file.
 
 import a99
 import os
-from ... import filetypes as ft
 
 __all__ = ["DataFile"]
 
@@ -59,8 +58,8 @@ class DataFile(a99.AttrsPart):
         """
         Dumps object contents into file on disk.
 
-        Arguments:
-          filename (optional) -- defaults to self.filename. If passed, self.filename
+        Args:
+          filename (optional): defaults to self.filename. If passed, self.filename
             will be updated to filename.
         """
         if filename is None:
@@ -92,14 +91,13 @@ class DataFile(a99.AttrsPart):
 
     def init_default(self):
         """
-        Default initialization of attributes listed in self.attrs.
+        Initializes object with its default values
 
-        DataFile behaviour is to try to load self.default_filename from default
-        directory.
-
-        For safety, filename is reset to None so that it doesn't point to the
+        Tries to load self.default_filename from default
+        data directory. For safety, filename is reset to None so that it doesn't point to the
         original file.
         """
+        from f311 import filetypes as ft
         if self.default_filename is None:
             raise RuntimeError("Class '{}' has no default filename".format(self.__class__.__name__))
         fullpath = ft.get_default_data_path(self.default_filename, module=ft)

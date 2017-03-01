@@ -7,7 +7,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 
 
 ABONDS_HEADERS = ["Element", "Abundance", "Notes"]
@@ -22,7 +21,7 @@ class WFileAbonds(QWidget):
     """
     FileAbonds editor widget.
 
-    Arguments:
+    Args:
       parent=None
     """
 

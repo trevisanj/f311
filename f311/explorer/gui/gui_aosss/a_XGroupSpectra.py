@@ -5,8 +5,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from .a_XHelpDialog import *
 import a99
-from .... import explorer as ex
-import f311.filetypes as ft
 
 
 class XGroupSpectra(XHelpDialog):
@@ -14,12 +12,14 @@ class XGroupSpectra(XHelpDialog):
     Edit Parameters gb.py a SpectrumList
 
     Relevant attributes (set on close):
-      self.block -- None or GroupBlock instance
-      self.group_by -- sequence of
+      self.block: None or GroupBlock instance
+      self.group_by: sequence of
           (field names) = (FITS header keys) = (keys in Spectrum.more_headers)
     """
 
     def __init__(self, *args):
+        from f311 import explorer as ex
+
         XHelpDialog.__init__(self, *args)
 
         self.block = None
@@ -48,6 +48,8 @@ class XGroupSpectra(XHelpDialog):
         a99.place_center(self, 800, 600)
 
     def accept(self):
+        from f311 import explorer as ex
+
         try:
             expr = str(self.editFunction.text())
             symbols_available = a99.module_to_dict(ex.blocks.gb)

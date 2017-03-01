@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 """
-Performs a list of pre-defined tasks to organize a directory containing simulations:
+Organizes simulation directory (creates folders, moves files, creates 'index.html')
+
   - moves 'root/report-*'       to 'root/reports'
   - moves 'root/C*'             to 'root/raw'
   - moves 'root/raw/simgroup*'  to 'root/'

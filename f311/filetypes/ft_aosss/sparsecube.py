@@ -238,18 +238,19 @@ class SparseCube(SpectrumCollection):
         """
         "Paints" pixel with given spectrum
 
-        Arguments:
-            sp -- Spectrum instance
+        Args:
+            sp: Spectrum instance
 
         **Note** coordinate (x=0, y=0) corresponds to lower left pixel of cube cross-section
         """
+        from f311 import filetypes as ft
         assert isinstance(sp, ft.Spectrum)
         # assert self.flag_created, "Cube has not been created yet"
 
         if len(sp.x) < 2:
             raise RuntimeError("Spectrum must have at least two points")
 
-        sp.start_z = -1  # will cause update to check on spectrum
+        sp.z_start = -1  # will cause update to check on spectrum
         SpectrumCollection.add_spectrum(self, sp)
         self.__update()
 
@@ -272,10 +273,11 @@ class SparseCube(SpectrumCollection):
 
         **Note** if there is no spectra at point (x, y), returns an empty spectrum, for speed
 
-        Arguments:
-            x, y -- 0-based pixel coordinates
-            flag_copy -- disable vector copies to speed up but don't the spectrum
+        Args:
+            x, y: 0-based pixel coordinates
+            flag_copy: disable vector copies to speed up but don't the spectrum
         """
+        from f311 import filetypes as ft
 
         ret = ft.Spectrum()
         if len(self.spectra) > 0:

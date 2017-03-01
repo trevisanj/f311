@@ -14,7 +14,7 @@ import subprocess
 from threading import Lock
 import a99
 from .. import filetypes as ft
-from .. import pyfant as pf
+#from .. import pyfant as pf
 
 
 # Indexes to use in Conf.sequence property
@@ -102,8 +102,8 @@ class SID(object):
     def clean(self, flag_remove_dir=True):
         """Deletes directory with all files inside.
 
-        Arguments:
-          flag_remove_dif=True -- if not set, will only delete the contents,
+        Args:
+          flag_remove_dif=True: if not set, will only delete the contents,
             keeping the directory
         """
 
@@ -133,6 +133,7 @@ class IdMaker(object):
     """
 
     def __init__(self):
+        from f311 import pyfant as pf
         self.dirs_per_dir = 1000  # only if flag_split_dirs
         self.session_prefix_singular = pf.SESSION_PREFIX_SINGULAR
         self.session_prefix_plural = pf.SESSION_PREFIX_PLURAL
@@ -260,7 +261,7 @@ class Conf(object):
         # # Read-only properties
         self.__popen_text_dest = None
         self.__logger = None
-        self.__sid = SID(_conf_id_maker)
+        self.__sid = SID(_conf_id_maker())
 
 
         # # Internals
@@ -355,8 +356,8 @@ class Conf(object):
     def get_pfant_output_filepath(self, type_="norm"):
         """Returns path to a pfant output filename.
 
-        Arguments:
-          type -- "spec", "norm", or "cont"
+        Args:
+          type: "spec", "norm", or "cont"
 
         Looks for this information in several places; see get_flprefix()
         for more information.
@@ -399,7 +400,7 @@ class Conf(object):
         Adds session dir to names of files that will be created by any of the
         executables. To be called *before* create_data_files
 
-        Arguments:
+        Args:
           sequence: list containing one or more i_* values such as innewmarcs etc
 
         Note: in order to link pfant->nulbad correctly,
@@ -479,4 +480,13 @@ class Conf(object):
                 # run only once.
                 opt.fn_cv = sid.join_with_session_dir(opt.fn_cv)
 
-_conf_id_maker = IdMaker()
+
+__conf_id_maker = None
+
+def _conf_id_maker():
+    """Returns internal ID maker"""
+    global __conf_id_maker
+    if __conf_id_maker is None:
+        __conf_id_maker = IdMaker()
+    return __conf_id_maker
+

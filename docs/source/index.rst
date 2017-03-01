@@ -53,6 +53,7 @@ Optional packages (functionality will be limited without them):
 - bs4
 - robobrowser
 - requests
+- rows
 
 Install
 ~~~~~~~
@@ -62,9 +63,14 @@ Method 1 (prefer _pip_, use _apt_ package as alternative)
 
 .. code:: shell
 
-   sudo pip3 install a99 numpy scipy matplotlib astropy configobj pyqt5 bs4 robobrowser requests fortranformat tabulate # requirements
-   sudo pip3 install f311
+   pip install a99 numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows
+   pip install pyqt5
+   pip install f311
 
+
+**Note** You may need superuser rights (``sudo``) to install the packages above.
+
+**Note** You may have to replace ``pip`` with ``pip3`` depending on your environment.
 
 If _PyQt5_ fails to install with _pip_:
 
@@ -78,7 +84,7 @@ Method 2 (prefer _apt_, use _pip_ if no _apt_ package available)
 .. code:: shell
 
    sudo apt-get install python3-matplotlib python3-scipy python3-PyQt5 python3-astropy python3-pip python3-bs4
-   sudo pip3 install a99 configobj robobrowser fortranformat tabulate # Requirements not in apt repository
+   sudo pip3 install a99 configobj robobrowser fortranformat tabulate # Requirements not in apt repository rows
    sudo pip3 install f311
 
 Method 3 (virtual environment with _conda_)
@@ -103,7 +109,7 @@ Now you should be able to install _f311_ from _pip_:
 
 .. code:: shell
 
-   pip install a99 numpy scipy matplotlib astropy configobj pyqt5 bs4 robobrowser requests fortranformat tabulate  # requirements
+   pip install a99 numpy scipy matplotlib astropy configobj pyqt5 bs4 robobrowser requests fortranformat tabulate rows
    pip install f311
 
 **Note** Every time you want to work with _f311_, you will need to activate the environment:

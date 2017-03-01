@@ -9,7 +9,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import numpy as np
 import a99
-from .... import explorer as ex
 import f311.filetypes as ft
 import f311.physics as ph
 
@@ -73,9 +72,9 @@ class XScaleSpectrum(a99.XLogDialog):
         x.setBuddy(y)
         y.addItems(["ab", "vega", "stdflux"])
         map.append((x, y, "Magnitude &system",
-                   "<b>'ab'</b> -- AB[solute]<br>"
-                   "<b>'vega'</b> -- uses Vega spectrum as reference;<br>"
-                   "<b>'stdflux'</b> -- uses standard reference values<br>from literature", ""))
+                   "<b>'ab'</b>: AB[solute]<br>"
+                   "<b>'vega'</b>: uses Vega spectrum as reference;<br>"
+                   "<b>'stdflux'</b>: uses standard reference values<br>from literature", ""))
         ###
         x = self.label_zero_point = QLabel()
         y = self.spinBox_zero_point = QDoubleSpinBox()
@@ -252,6 +251,7 @@ class XScaleSpectrum(a99.XLogDialog):
 
 
 def _draw_figure(fig, mag_data, spectrum, flag_force_band_range):
+    from f311 import explorer as ex
 
     # y = s*f ; s and y: fluxes ; f: filter ; all functions of wavelength
     # out_area = integrate y over whole axis, but y = 0 outside the filter range

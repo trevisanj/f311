@@ -6,8 +6,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from .a_XHelpDialog import *
 import a99
-from .... import explorer as ex
-import f311.filetypes as ft
 
 
 _CONFIG_OPERATIONS = "/gui/XUseSpectrumBlock/operations"
@@ -18,10 +16,12 @@ class XUseSpectrumBlock(XHelpDialog):
     Edit Parameters to apply a SpectrumBlock to each spectrum in a Spectrum List
 
     Relevant attributes (set on close):
-      self.block -- None or SpectrumBlock instance
+      self.block: None or SpectrumBlock instance
     """
 
     def __init__(self, *args):
+        from f311 import explorer as ex
+
         XHelpDialog.__init__(self, *args)
 
         self.previous_operations = ex.get_config().get_item(_CONFIG_OPERATIONS, [])
@@ -48,6 +48,8 @@ class XUseSpectrumBlock(XHelpDialog):
 
 
     def accept(self):
+        from f311 import explorer as ex
+
         try:
             expr = str(self.cb_operation.currentText())
             block = eval(expr.strip(), {}, a99.module_to_dict(ex.blocks.sb))

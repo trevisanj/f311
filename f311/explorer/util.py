@@ -7,18 +7,17 @@ Rule: only 'gui/' modules can import util!!!
 import numpy as np
 import copy
 from .. import physics as ph
+import a99
 
-__all__ = ["cut_spectrum", "crop_splist"]
-
-
+__all__ = ["cut_spectrum", "crop_splist",]
 def cut_spectrum(sp, l0, lf):
     """
     Cuts spectrum given a wavelength interval
 
-    Arguments:
-        sp -- Spectrum instance
-        l0 -- initial wavelength
-        lf -- final wavelength
+    Args:
+        sp: Spectrum instance
+        l0: initial wavelength
+        lf: final wavelength
     """
 
     if l0 >= lf:
@@ -34,8 +33,8 @@ def cut_spectrum(sp, l0, lf):
 def get_rgb(self, visible_range=None, method=0):
     """Takes weighted average of rainbow colors RGB's
 
-    Arguments:
-        visible_range=None -- if passed, affine-transforms the rainbow colors
+    Args:
+        visible_range=None: if passed, affine-transforms the rainbow colors
         method --
           0: rainbow colors
           1: RGB

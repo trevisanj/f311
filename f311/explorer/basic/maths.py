@@ -13,8 +13,8 @@ def bc_rubber(vx):
     """
     Convex Polygonal Line baseline correction
 
-    Arguments:
-        vx -- vector
+    Args:
+        vx: vector
 
     Returns: vx-rubberband(vx)
     """
@@ -26,8 +26,8 @@ def rubberband(vx):
     """
     Convex polygonal line (aka rubberband)
 
-    Arguments:
-        vx -- 1-D numpy array
+    Args:
+        vx: 1-D numpy array
 
     Returns: the rubberband: a 1-D numpy array with same shape as vx
 
@@ -65,11 +65,11 @@ def poly_baseline(flux, order, epsilon=None, maxit=None):
     """"
     Polynomial baseline
 
-    Arguments:
-      vx -- np 1D array ("flux")
-      order -- polynomial order
-      epsilon -- tolerance to stop iterations. If zero or no value given, will default to sqrt(1/30*num_points)
-      maxit -- if informed, will restrict the maximum number of iterations to this value
+    Args:
+      vx: np 1D array ("flux")
+      order: polynomial order
+      epsilon: tolerance to stop iterations. If zero or no value given, will default to sqrt(1/30*num_points)
+      maxit: if informed, will restrict the maximum number of iterations to this value
 
     Returns: the baseline vector
 

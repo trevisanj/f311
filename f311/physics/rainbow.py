@@ -37,6 +37,7 @@ class Color(AttrsPart):
     """Definition of a color: name, RGB code, wavelength range"""
 
     attrs = ["name", "rgb", "clambda", "l0", "lf"]
+
     def __init__(self, name, rgb, clambda, l0=-1, lf=-1):
         AttrsPart.__init__(self)
         # Name of color
@@ -54,6 +55,7 @@ class Color(AttrsPart):
         return "Color('{}', {}, {}, {}, {})".format(self.name, self.rgb, self.clambda, self.l0, self.lf)
 
 
+#: Rainbow colors
 rainbow_colors = [Color("Violet", [139, 0, 255], 4000),
                   Color("Indigo", [75, 0, 130], 4450),
                   Color("Blue", [0, 0, 255], 4750),
@@ -87,20 +89,22 @@ for c in rainbow_colors:
 def spectrum_to_rgb(sp, visible_range=None, method=0):
     """Takes weighted average of rainbow colors RGB's
 
-    Arguments:
-        sp -- Spectrum instance
-        visible_range=None -- if passed, affine-transforms the rainbow colors
-            method --
-              0: rainbow colors
-              1: RGB (alternative method using red, green, blue only instead of full range of rainbow colors)
+    Args:
+        sp: Spectrum instance
+        visible_range=None: if passed, affine-transforms the rainbow colors
+        method:
 
-    Returns: 3-element sequence where each element is in [0, 1] range
+            - ``0``: rainbow colors
+            - ``1``: RGB (alternative method using red, green, blue only instead of full range of rainbow colors)
+
+    Returns:
+        3-element sequence where each element is in [0, 1] range
 
     Example:
 
-    >>> import a99
-    >>> vega = a99.get_vega_spectrum()
-    >>> spectrum_to_rgb(vega)
+    >>> import f311.physics as ph
+    >>> vega = ph.get_vega_spectrum()
+    >>> ph.spectrum_to_rgb(vega)
     array([  5.45057920e-01,   1.61124778e-05,   9.99930126e-01])
     """
 

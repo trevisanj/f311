@@ -18,7 +18,7 @@ def calc_qgbd_tio_like(state_consts, v_lo):
     Based on Fortran source 'agrup.plez7.f'
 
     Args:
-        state_consts -- dict-like object with keys:
+        state_consts: dict-like object with keys:
             "omega_e"
             "omega_ex_e"
             "omega_ey_e"
@@ -27,7 +27,7 @@ def calc_qgbd_tio_like(state_consts, v_lo):
             "D_e"
             "beta_e"
 
-        v_lo -- (integer) low transition level
+        v_lo: (integer) low transition level
 
     Returns: qbdg, i.e., a dictionary with keys:
             "qv", "gv", "bv", "dv", "gzero"

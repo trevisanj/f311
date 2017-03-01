@@ -1,5 +1,5 @@
 __all__ = ["MAGNITUDE_BASE", "STDFLUX", "calculate_magnitude", "get_vega_spectrum",
-           "Bandpass", "UBVTabulated", "UBVParametric", "ufunc_gauss", "get_ubv_bandpasses",
+           "Bandpass", "UBVTabulated", "UBVParametric", "get_ubv_bandpasses",
            "get_zero_flux", "flux_to_mag", "mag_to_flux", "get_ubv_bandpass",
            "get_ubv_bandpasses_dict", "calc_mag"]
 
@@ -10,8 +10,7 @@ from scipy.interpolate import interp1d
 import copy
 import a99
 import f311.filetypes as ft
-from .. import physics as ph
-
+# from .. import physics as ph
 
 MAGNITUDE_BASE = 100. ** (1. / 5)  # approx. 2.512
 _REF_NUM_POINTS = 5000   # number of evaluation points over entire band range
@@ -39,6 +38,14 @@ def get_ubv_bandpasses_dict():
 
 
 def get_ubv_bandpass(bp):
+    """Returns a BandPass object for given band name
+
+    Args:
+        bp: band name or BandPass object
+
+    Returns:
+        f311.physics.BandPass: BandPass object. If `bp` is already a BandPass object, returns `bp`
+    """
     if isinstance(bp, Bandpass):
         return bp
     get_ubv_bandpasses()  # just to assure the dict is assembled
@@ -81,30 +88,44 @@ def calculate_magnitude(sp, bp, system="stdflux", zero_point=0., flag_force_band
     """
     Calculates magnitude from a Spectrum object.
 
-    Arguments:
-        sp -- Spectrum instance. **flux unit**: erg/cm**2/s/Hz aka "Fnu"
-        bp -- Bandpass object, or string in "UBVRIYJHKLMNQ"
-            If string in "UBVRI", creates a UBVTabular Bandpass object;
-            If string otherwise, creates a UBVParametric object.
-        system -- reference magnitude system.
-            Choices:
-                "stdflux" -- literature reference values for bands U,B,V,R,I,J,H,K only
-                "vega" -- uses the Vega star spectrum as a reference
-                "ab" -- AB[solute] magnitude system
-        zero_point -- subtracts this value from the calculated magnitude to implement some desired
-                     correction.
-        flag_force_band_range -- this flag has effect when the spectrum does not completely overlap
-            the bandpass filter. How it works:
-                False (default) -- restricts the weighted mean flux calculation to the overlap
-                    range between the spectrum and the filter
-                True -- zero-fill the spectrum to overlap the filter range completely
+    Args:
+        sp: `f311.filetypes.Spectrum` instance. **flux unit** must be ``erg/cm**2/s/Hz`` aka "Fnu"
+        bp: Bandpass object, or string in "UBVRIYJHKLMNQ". How it works:
 
-    Returns: a dictionary with "cmag": calculated magnitude, and many intermediary steps
+            - If string in "UBVRI", creates a UBVTabular Bandpass object;
+            - If string otherwise, creates a UBVParametric object.
+
+        system: reference magnitude system. Possible values:
+
+            - ``"stdflux"``: literature reference values for bands U,B,V,R,I,J,H,K only
+            - ``"vega"``: uses the Vega star spectrum as a reference
+            - ``"ab"``: AB[solute] magnitude system
+
+        zero_point: subtracts this value from the calculated magnitude to implement some desired
+                    correction.
+
+        flag_force_band_range: this flag has effect when the spectrum does not completely overlap
+            the bandpass filter. How it works:
+
+            - ``False`` (default): restricts the weighted mean flux calculation to the overlap
+              range between the spectrum and the filter
+            - ``True``: zero-fill the spectrum to overlap the filter range completely
+
+    Returns:
+        dict: dictionary with the following keys:
+
+            - ``"calc_l0"``: lower edge of wavelength interval considered,
+            - ``"calc_lf"``: upper edge of wavelength interval considered,
+            - ``"filtered_sp"``: filtered spectrum
+            - ``"filtered_sp_area"``: area of filtered spectrum within [calc_l0, calc_lf]
+            - ``"weighted_mean_flux"``: weighted mean of flux; weights are band values
+            - ``"zero_flux"``: flux value for which magnitude is zero
+            - ``"cmag"``: calculated magnitude
 
     Example:
 
     >>> from f311 import physics as ph
-    >>> calculate_magnitude(ph.get_vega_spectrum(), "U", "stdflux", 0, False)
+    >>> ph.calculate_magnitude(ph.get_vega_spectrum(), "U", "stdflux", 0, False)
 
     """
 
@@ -147,12 +168,14 @@ def flux_to_mag(flux, bp, system="stdflux", zero_point=0.):
     """
     Calculates magnitude for a single scalar flux value
 
-    Arguments:
-        flux -- float (erg/cm**2/s/Hz), of Spectrum instance
-        bp, system, zero_point -- see calculate_magnitude()
+    Args:
+        flux: float (erg/cm**2/s/Hz), of Spectrum instance
+        bp, system, zero_point: see calculate_magnitude()
 
     Returns: float
     """
+    from f311 import physics as ph
+
     if isinstance(flux, ft.Spectrum):
         if flux.yunit != ph.fnu:
             raise ValueError("Spectrum y-unit must be '{}', not '{}'".format(ph.fnu, flux.yunit))
@@ -165,9 +188,9 @@ def get_zero_flux(bp, system="stdflux"):
     """
     Returns flux (erg/cm**2/s/Hz) for which magnitude is zero
 
-    Arguments:
-        bp -- Bandpass object, or band name, e.g., "U"
-        system -- {"stdflux", "ab", "vega"} reference magnitude system
+    Args:
+        bp: Bandpass object, or band name, e.g., "U"
+        system: {"stdflux", "ab", "vega"} reference magnitude system
 
     For more on arguments, see calculate_magnitude()
 
@@ -207,11 +230,18 @@ def __get_vega_spectrum():
 
 
 def __get_new_vega_spectrum():
+    from f311 import physics as ph
     return ft.load_spectrum(a99.get_path("data", "pysynphot-vega-fnu.xy", module=ph))
 
 
 def get_vega_spectrum():
-    """Returns a spectrum of Vega (always a different object)"""
+    """Returns a spectrum of the Vega star
+
+    Creates a new `f311.filetypes.Spectrum` object at every call
+
+    Returns:
+        `f311.filetypes.Spectrum`: spectrum
+    """
     return __get_new_vega_spectrum()
 
 
@@ -221,10 +251,10 @@ class Bandpass(object):
 
     This class is kept clean whereas UBVRIBands has examples and deeper documentation on parameters
 
-    Arguments:
-        tabular -- ((wl, y), ...), 0 <= y <= 1
-        parametric -- ((wl, fwhm), ...)
-        ref_mean_flux -- reference mean flux passing through filter at magnitude 0 in Jy units
+    Args:
+        tabular: ((wl, y), ...), 0 <= y <= 1
+        parametric: ((wl, fwhm), ...)
+        ref_mean_flux: reference mean flux passing through filter at magnitude 0 in Jy units
     """
 
     @property
@@ -284,9 +314,9 @@ class Bandpass(object):
     def area(self, l0, lf):
         """
         Calculates area (unit: a.u.*angstrom) under given range [l0, lf]
-        Arguments:
-            l0 -- lower edge of range
-            lf -- upper edge of range
+        Args:
+            l0: lower edge of range
+            lf: upper edge of range
         """
         # Calculates number of points as a fraction of REF_NUM_POINTS, minimum 10 points
         num_points = max(10, int((lf - l0) / (self.lf - self.l0) * _REF_NUM_POINTS))
@@ -299,8 +329,8 @@ class UBVTabulated(Bandpass):
     """
     Tabular filter
 
-    Arguments:
-        name -- band name. Choices: U,B,V,R,I
+    Args:
+        name: band name. Choices: U,B,V,R,I
     """
 
     # Tabular data for filters U,B,V,R,I
@@ -352,9 +382,9 @@ class UBVParametric(Bandpass):
     """
     Parametric Gaussian filter
 
-    Arguments:
-        name -- band name. Choices: U,B,V,R,I,Y,J,H,K,L,M,N,Q
-        num_stds=3 -- number of standard deviations to left and right of midpoint to consider as
+    Args:
+        name: band name. Choices: U,B,V,R,I,Y,J,H,K,L,M,N,Q
+        num_stds=3: number of standard deviations to left and right of midpoint to consider as
             band limits. Does not affect self.ufunc()
     """
 
@@ -395,16 +425,16 @@ class UBVParametric(Bandpass):
         return self._lf
 
     def ufunc(self):
-        return ufunc_gauss(self.x0, self.fwhm)
+        return _ufunc_gauss(self.x0, self.fwhm)
 
 
-def ufunc_gauss(x0, fwhm):
+def _ufunc_gauss(x0, fwhm):
     """
     Returns Gaussian function (callable) that works as a numpy ufunc
 
-    Arguments:
-        x0 -- maximum value, where the function evaluates to 1.
-        fwhm -- "Full-Width at Half-Maximum"
+    Args:
+        x0: maximum value, where the function evaluates to 1.
+        fwhm: "Full-Width at Half-Maximum"
 
     Reference: https://en.wikipedia.org/wiki/Gaussian_function
     """

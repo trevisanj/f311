@@ -29,7 +29,7 @@ if __name__ == "__main__":
     m = ft.FileMolecules()
     m.load(args.fn)
     app = a99.get_QApplication([])
-    form = pf.XFileMolecules()
+    form = ex.XFileMolecules()
     form.show()
     form.load(m)
     sys.exit(app.exec_())

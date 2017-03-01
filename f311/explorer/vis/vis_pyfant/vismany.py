@@ -6,7 +6,6 @@ import matplotlib as mpl
 from mpl_toolkits.mplot3d import Axes3D  # yes, required (see below)
 import a99
 import f311.filetypes as ft
-from .... import explorer as ex
 from ..basic import Vis
 
 class VisFileToH(Vis):
@@ -45,7 +44,7 @@ class VisAtoms(Vis):
     action = "Edit using atomic lines editor"
 
     def _do_use(self, r):
-
+        from f311 import explorer as ex
         form = a99.keep_ref(ex.XFileAtoms(self.parent_form))
         form.load(r)
         form.show()
@@ -57,6 +56,7 @@ class VisMolecules(Vis):
     action = "Edit using molecular lines editor"
 
     def _do_use(self, r):
+        from f311 import explorer as ex
         form = a99.keep_ref(ex.XFileMolecules(self.parent_form))
         form.load(r)
         form.show()
@@ -68,6 +68,7 @@ class VisMain(Vis):
     action = "Edit using main configuration file editor"
 
     def _do_use(self, r):
+        from f311 import explorer as ex
         form = a99.keep_ref(ex.XFileMain(self.parent_form, r))
         form.show()
 
@@ -78,5 +79,6 @@ class VisAbonds(Vis):
     action = "Edit using abundances file editor"
 
     def _do_use(self, r):
+        from f311 import explorer as ex
         form = a99.keep_ref(ex.XFileAbonds(self.parent_form, r))
         form.show()

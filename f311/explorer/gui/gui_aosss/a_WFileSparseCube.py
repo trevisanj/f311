@@ -15,7 +15,7 @@ from PyQt5.QtWidgets import *
 from .a_XScaleSpectrum import *
 from .a_WSpectrumCollection import *
 import a99
-from .... import explorer as ex
+# from .... import explorer as ex
 import f311.filetypes as ft
 
 _COLORS_SQ = [(.1, .6, .5), (.5, .1, .7)]
@@ -26,11 +26,12 @@ class WFileSparseCube(a99.WBase):
     """
     FileSparseCube editor widget.
 
-    Arguments:
+    Args:
       parent=None
     """
 
     def __init__(self, parent):
+        from f311 import explorer as ex
         a99.WBase.__init__(self, parent)
 
         # Whether all the values in the fields are valid or not
@@ -108,7 +109,7 @@ class WFileSparseCube(a99.WBase):
         map = self._map0 = []
         ###
         x = self.label_sp = QLabel()
-        y = self.choosesp = a99.WChooseSpectrum()
+        y = self.choosesp = ex.WChooseSpectrum()
         y.installEventFilter(self)
         y.edited.connect(self.on_colors_setup_edited)
         # y.setValidator(QIntValidator())
@@ -647,6 +648,7 @@ class WFileSparseCube(a99.WBase):
             self.flag_update_pending[idx] = False
 
     def plot_spectra(self):
+        from f311 import explorer as ex
         # self.clear_markers()
         if self.f is None:
             return
@@ -664,6 +666,7 @@ class WFileSparseCube(a99.WBase):
             a99.get_python_logger().exception("Could not plot spectra")
 
     def plot_colors(self):
+        from f311 import explorer as ex
         # self.clear_markers()
         if self.f is None:
             return

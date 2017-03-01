@@ -10,15 +10,14 @@ import shutil
 import a99
 import f311.explorer as ex
 import f311.filetypes as ft
-from ... import pyfant as pf
 
 
 
 ################################################################################
 class XPFANT(ex.XMainAbonds):
     """
-    Arguments:
-      parent=None -- nevermind
+    Args:
+      parent=None: nevermind
       file_main (optional)-- FileMain instance
     """
 
@@ -52,6 +51,7 @@ class XPFANT(ex.XMainAbonds):
     # "Duck-typing"
 
     def set_manager_form(self, x):
+        from f311 import pyfant as pf
         assert isinstance(x, pf.XRunnableManager)
         self._manager_form = x
         self._rm = x.rm
@@ -60,6 +60,7 @@ class XPFANT(ex.XMainAbonds):
     # Slots for Qt library signals
 
     def on_submit(self):
+        from f311 import pyfant as pf
         flag_ok = True
         errors = self._check_single_setup()
         if len(errors) == 0:
@@ -109,6 +110,7 @@ class XPFANT(ex.XMainAbonds):
         return str(self.lineEdit_custom_id.text()).strip()
 
     def __submit_job(self):
+        from f311 import pyfant as pf
         r = pf.Combo()
         if self.checkbox_custom_id.isChecked():
             r.conf.sid.id = self.__get_custom_session_id()

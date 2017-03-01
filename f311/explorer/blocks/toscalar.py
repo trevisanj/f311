@@ -52,9 +52,9 @@ class ToScalar_Magnitude(ToScalar):
             band_name: U/B/V/R/I/Y/J/H/K/L/M/N/Q
             system: reference magnitude system.
                 Choices:
-                    "stdflux" -- literature reference values for bands U,B,V,R,I,J,H,K only
-                    "vega" -- uses the Vega star spectrum as a reference
-                    "ab" -- AB[solute] magnitude system
+                    "stdflux": literature reference values for bands U,B,V,R,I,J,H,K only
+                    "vega": uses the Vega star spectrum as a reference
+                    "ab": AB[solute] magnitude system
             zero_point: subtracts this value from the calculated magnitude to implement some desired
                         correction.
             flag_force_band_range: (default: False) if set, will consider that the spectrum

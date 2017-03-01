@@ -10,42 +10,49 @@ from .. import DataFile
 import io
 import fortranformat as ff
 import os
+from collections import namedtuple
 
 
-@a99.froze_it
-class KuruczMolLine(a99.AttrsPart):
-    attrs = ["lambda_", "loggf", "J2l", "E2l", "Jl", "El", "atomn0", "atomn1", "state2l", "v2l",
-             "lambda_doubling2l", "spin2l", "statel", "vl", "lambda_doublingl", "spinl", "iso",]
+# @a99.froze_it
 
-    def __init__(self, lambda_=None, loggf=None, J2l=None, E2l=None, Jl=None, El=None, atomn0=None,
-                 atomn1=None, state2l=None, v2l=None, lambda_doubling2l=None, spin2l=None,
-                 statel=None, vl=None, lambda_doublingl=None, spinl=None, iso=None):
-        a99.AttrsPart.__init__(self)
-        # Wavelength in **Angstrom*** (although it is is stored in nm)
-        self.lambda_ = lambda_
-        self.loggf = loggf
-        self.J2l = J2l
-        self.E2l = E2l
-        self.Jl = Jl
-        self.El = El
-        self.atomn0 = atomn0
-        self.atomn1 = atomn1
-        self.state2l = state2l
-        self.v2l = v2l
-        self.lambda_doubling2l = lambda_doubling2l
-        self.spin2l = spin2l
-        self.statel = statel
-        self.vl = vl
-        self.lambda_doublingl = lambda_doublingl
-        self.spinl = spinl
-        self.iso = iso
+KuruczMolLine = namedtuple("KuruczMolLine",
+    ["lambda_", "loggf", "J2l", "E2l", "Jl", "El", "atomn0", "atomn1", "state2l", "v2l",
+    "lambda_doubling2l", "spin2l", "statel", "vl", "lambda_doublingl", "spinl", "iso",])
 
-    def __repr__(self):
-        return "{}({}, {}, {}, {}, {}, {}, {}, {}, '{}', {}, '{}', {}, '{}', {}, '{}', {}, {})".\
-            format(self.__class__.__name__, self.lambda_,
-            self.loggf, self.J2l, self.E2l, self.Jl, self.El, self.atomn0, self.atomn1,
-            self.state2l, self.v2l, self.lambda_doubling2l, self.spin2l, self.statel, self.vl,
-            self.lambda_doublingl, self.spinl, self.iso,)
+
+# class KuruczMolLine(a99.AttrsPart):
+#     attrs = ["lambda_", "loggf", "J2l", "E2l", "Jl", "El", "atomn0", "atomn1", "state2l", "v2l",
+#              "lambda_doubling2l", "spin2l", "statel", "vl", "lambda_doublingl", "spinl", "iso",]
+#
+#     def __init__(self, lambda_=None, loggf=None, J2l=None, E2l=None, Jl=None, El=None, atomn0=None,
+#                  atomn1=None, state2l=None, v2l=None, lambda_doubling2l=None, spin2l=None,
+#                  statel=None, vl=None, lambda_doublingl=None, spinl=None, iso=None):
+#         a99.AttrsPart.__init__(self)
+#         # Wavelength in **Angstrom*** (although it is is stored in nm)
+#         self.lambda_ = lambda_
+#         self.loggf = loggf
+#         self.J2l = J2l
+#         self.E2l = E2l
+#         self.Jl = Jl
+#         self.El = El
+#         self.atomn0 = atomn0
+#         self.atomn1 = atomn1
+#         self.state2l = state2l
+#         self.v2l = v2l
+#         self.lambda_doubling2l = lambda_doubling2l
+#         self.spin2l = spin2l
+#         self.statel = statel
+#         self.vl = vl
+#         self.lambda_doublingl = lambda_doublingl
+#         self.spinl = spinl
+#         self.iso = iso
+#
+#     def __repr__(self):
+#         return "{}({}, {}, {}, {}, {}, {}, {}, {}, '{}', {}, '{}', {}, '{}', {}, '{}', {}, {})".\
+#             format(self.__class__.__name__, self.lambda_,
+#             self.loggf, self.J2l, self.E2l, self.Jl, self.El, self.atomn0, self.atomn1,
+#             self.state2l, self.v2l, self.lambda_doubling2l, self.spin2l, self.statel, self.vl,
+#             self.lambda_doublingl, self.spinl, self.iso,)
 
 
 class FileKuruczMolecule(DataFile):
@@ -126,30 +133,55 @@ class FileKuruczMolecule(DataFile):
                 if len(s) == 0:
                     break
 
-                line = KuruczMolLine()
-                # FortranFormat too slow
-                # line.lambda_, line.loggf, line.J2l, line.E2l, line.Jl, line.El, line.atomn0, \
-                # line.atomn1, line.state2l, line.v2l, line.lambda_doubling2l, line.spin2l, \
-                # line.statel, line.vl, line.lambda_doublingl, line.spinl, line.iso = fr.read(s)
-
+                # line = KuruczMolLine()
+                # # FortranFormat too slow
+                # # line.lambda_, line.loggf, line.J2l, line.E2l, line.Jl, line.El, line.atomn0, \
+                # # line.atomn1, line.state2l, line.v2l, line.lambda_doubling2l, line.spin2l, \
+                # # line.statel, line.vl, line.lambda_doublingl, line.spinl, line.iso = fr.read(s)
                 #
-                line.lambda_ = float(s[0:10])*10
-                line.loggf = float(s[10:17])
-                line.J2l = float(s[17:22])
-                line.E2l = float(s[22:32])
-                line.Jl = float(s[32:37])
-                line.El = float(s[37:48])
-                line.atomn0 = int(s[48:50])
-                line.atomn1 = int(s[50:52])
-                line.state2l = s[52:53]
-                line.v2l = int(s[53:55])
-                line.lambda_doubling2l = s[55:56]
-                line.spin2l = int(s[56:57])
-                line.statel = s[60:61]
-                line.vl = int(s[61:63])
-                line.lambda_doublingl = s[63:64]
-                line.spinl = int(s[64:65])
-                line.iso = s[69:71]
+                # #
+                #
+                #
+                #
+                # line.lambda_ = float(s[0:10])*10
+                # line.loggf = float(s[10:17])
+                # line.J2l = float(s[17:22])
+                # line.E2l = float(s[22:32])
+                # line.Jl = float(s[32:37])
+                # line.El = float(s[37:48])
+                # line.atomn0 = int(s[48:50])
+                # line.atomn1 = int(s[50:52])
+                # line.state2l = s[52:53]
+                # line.v2l = int(s[53:55])
+                # line.lambda_doubling2l = s[55:56]
+                # line.spin2l = int(s[56:57])
+                # line.statel = s[60:61]
+                # line.vl = int(s[61:63])
+                # line.lambda_doublingl = s[63:64]
+                # line.spinl = int(s[64:65])
+                # line.iso = s[69:71]
+
+
+                line = KuruczMolLine(
+                    float(s[0:10]) * 10,
+                    float(s[10:17]),
+                    float(s[17:22]),
+                    float(s[22:32]),
+                    float(s[32:37]),
+                    float(s[37:48]),
+                    int(s[48:50]),
+                    int(s[50:52]),
+                    s[52:53],
+                    int(s[53:55]),
+                    s[55:56],
+                    int(s[56:57]),
+                    s[60:61],
+                    int(s[61:63]),
+                    s[63:64],
+                    int(s[64:65]),
+                    s[69:71], )
+
+
                 self.lines.append(line)
                 r += 1
                 ii += 1

@@ -1,4 +1,4 @@
-__all__ = ["SB_Rubberband", "SB_AddNoise", "SB_FNuToFlambda", "SB_FLambdaToFNu", "SB_ElementWise",
+__all__ = ["SB_Rubberband", "SB_AddNoise", "SB_FNuToFLambda", "SB_FLambdaToFNu", "SB_ElementWise",
            "SB_Extend", "SB_Cut", "SB_Normalize", "SB_ConvertYUnit", "SB_Add", "SB_Mul",
            "SB_MulByLambda", "SB_DivByLambda"]
 
@@ -8,22 +8,21 @@ import a99
 import copy
 from . import SpectrumBlock
 import astropy.units as u
-from ... import explorer as ex
 from ... import physics as ph
-
+from .. import basic
 
 class SB_Rubberband(SpectrumBlock):
     """
     Convex polygonal line (aka "rubberband")
 
-    Arguments:
-        flag_upper=True -- whether to stretch rubberband from above the
+    Args:
+        flag_upper=True: whether to stretch rubberband from above the
             spectrum; otherwise, stretches line from below
 
     Stretches a polygonal line from below/above the spectrum. The vertices of this multi-segment
     line will touch "troughs" of the spectrum without crossing the spectrum
 
-    This was inspired on -- but is not equivalent to -- OPUS SB_Rubberband baseline correction [1].
+    This was inspired on -- but is not equivalent to -- OPUS Rubberband baseline correction [1].
     However, this one is parameterless, whereas OPUS RBBC asks for a number of points
 
     References:
@@ -40,7 +39,7 @@ class SB_Rubberband(SpectrumBlock):
         y = inp.y
         if self.flag_upper:
             y = -y
-        output.y = ex.rubberband(y)
+        output.y = basic.rubberband(y)
         if self.flag_upper:
             output.y = -output.y
         return output
@@ -50,8 +49,8 @@ class SB_AddNoise(SpectrumBlock):
     """
     Adds normally distributed (Gaussian) random noise
 
-    Arguments:
-        std=1. -- standard deviation of Gaussian noise
+    Args:
+        std=1.: standard deviation of Gaussian noise
     """
     def __init__(self, std=1.):
         SpectrumBlock.__init__(self)
@@ -70,8 +69,8 @@ class SB_ElementWise(SpectrumBlock):
     """
     Applies specified function to spectrum flux
 
-    Arguments:
-        func -- a function that takes a vector (_i.e._, NumPy 1-D array) as input. It must return
+    Args:
+        func: a function that takes a vector (_i.e._, NumPy 1-D array) as input. It must return
             vector of same dimension as input.NumPy ufunc's are suited for this.
             Examples:
                 np.square
@@ -100,16 +99,16 @@ class SB_Extend(SpectrumBlock):
     """
     Extends to left and/or right side
 
-    Arguments:
-        fraction -- amount relative to number of points. Note that this
+    Args:
+        fraction: amount relative to number of points. Note that this
                     applies individually to left and right (see below)
-        flag_left -- whether to extend by fraction to left
-        flag_right -- whether to extend by fraction to right
-        fill_mode='poly_baseline' -- how to fill the new points. Valid values:
-            'poly_baseline' -- The y-value (left/right) to use is found by using a "coarse"
+        flag_left: whether to extend by fraction to left
+        flag_right: whether to extend by fraction to right
+        fill_mode='poly_baseline': how to fill the new points. Valid values:
+            'poly_baseline': The y-value (left/right) to use is found by using a "coarse"
                                 2nd-order polynomial baseline. The baseline is "coarse" because it
                                 does not allow for many iterations until the baseline is found
-            'zero' -- Fills with zero
+            'zero': Fills with zero
 
     Examples:
         SB_Extend(.1, True, True)  # if original has 100 points, resulting will have 120 points
@@ -166,9 +165,9 @@ class SB_Cut(SpectrumBlock):
     """
     Cuts spectrum given a wavelength interval
 
-    Arguments:
-        l0 -- initial wavelength
-        lf -- final wavelength
+    Args:
+        l0: initial wavelength
+        lf: final wavelength
     """
 
     def __init__(self, l0, lf):
@@ -194,7 +193,7 @@ class SB_Normalize(SpectrumBlock):
     """
     Normalizes spectrum according to specified method
 
-    Arguments:
+    Args:
         method --
             "01": normalizes between 0 and 1
             "1": scales to have maximum at 1, keeping the 0 where it is
@@ -230,8 +229,8 @@ class SB_Normalize(SpectrumBlock):
 #     """
 #     Converts x-axis unit
 #
-#     Arguments:
-#         new_unit -- astropy.units.unit or str
+#     Args:
+#         new_unit: astropy.units.unit or str
 #     """
 #
 #     def __init__(self, new_unit):
@@ -253,8 +252,8 @@ class SB_ConvertYUnit(SpectrumBlock):
     """
     Converts y-axis unit
 
-    Arguments:
-        new_unit -- astropy.units.unit or str
+    Args:
+        new_unit: astropy.units.unit or str
     """
 
     def __init__(self, new_unit):
@@ -272,7 +271,7 @@ class SB_ConvertYUnit(SpectrumBlock):
         return out
 
 
-class SB_FNuToFlambda(SB_ConvertYUnit):
+class SB_FNuToFLambda(SB_ConvertYUnit):
     """
     Flux-nu to flux-lambda conversion. Assumes the wavelength axis is in angstrom
 
@@ -305,7 +304,7 @@ class SB_Mul(SpectrumBlock):
     """
     Multiplies y-values by constant value
 
-    Arguments:
+    Args:
         value
     """
 
@@ -327,7 +326,7 @@ class SB_Add(SpectrumBlock):
     """
     Adds constant value to y-values
 
-    Arguments:
+    Args:
         value
     """
 

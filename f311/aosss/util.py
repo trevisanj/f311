@@ -13,7 +13,7 @@ import f311.filetypes as ft
 from astropy.io import fits
 import astropy.units as u
 import f311.explorer as ex
-from .. import aosss as ao
+# from .. import aosss as ao
 
 
 FILE_MAP = OrderedDict((
@@ -92,16 +92,13 @@ def create_spectrum_lists(dir_, pipeline_stage="spintg"):
     """
     Create several .splist files, grouping spectra by their wavelength vector
 
-    Arguments:
-        dir_ -- input & output directory
-        pipeline_stage="spintg" -- input "stage", i.e., which stage of the pipeline will be loaded.
-            Valid values:
-                "spintg" -- integrated spectrum (final stage)
-                "ifu_noseeing" -- take first spectrum of 7x1 data cube TODO explain
+    Args:
+        dir_: input & output directory
+        pipeline_stage="spintg": input "stage", i.e., which stage of the pipeline will be loaded.
+            Possible values:
 
-                NO "cube_hr" -- extracts spectrum from files "C*_cube_hr.fits".
-                NO              These files are FITS data cubes with the template spectrum placed
-                NO               in the center
+            - "spintg": integrated spectrum (final stage)
+            - "ifu_noseeing": take first spectrum of 7x1 data cube TODO explain
     """
 
     if pipeline_stage in ("spintg", "sky", "skysub"):
@@ -239,7 +236,12 @@ def create_spectrum_lists(dir_, pipeline_stage="spintg"):
 
 
 def load_eso_sky():
-    """Loads ESO sky model and returns two spectra: emission, transmission"""
+    """Loads ESO sky model from data directory
+
+    Returns:
+        tuple: ``(emission, transmission)`` (two `f311.filetypes.Spectrum` objects)
+    """
+    from f311 import aosss as ao
 
     # From comments in file:
     # lam:     vacuum wavelength in micron

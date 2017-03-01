@@ -443,8 +443,8 @@ class Combo(Runnable):
     """
     Runs sequence of executables: innermarcs, hydro2, pfant, nulbad.
 
-    Arguments:
-      sequence (optional) -- sequence of executables to run. Defaults to
+    Args:
+      sequence (optional): sequence of executables to run. Defaults to
         [e_innewmarcs, e_hydro2, e_pfant, e_nulbad]. If you want to run only
         pfant and nulbad, for example, you can pass [e_pfant, e_nulbad]
 

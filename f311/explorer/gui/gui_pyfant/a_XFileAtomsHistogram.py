@@ -12,8 +12,6 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT # as Navigat
 import matplotlib.pyplot as plt
 from ._shared import *
 import a99
-import f311.filetypes as ft
-from .... import explorer as ex
 
 
 MAX_NUM_BINS = 500
@@ -24,8 +22,8 @@ class XFileAtomsHistogram(QMainWindow):
     Interactive window that plots a histogram of selected field of a FileAtoms
     object.
 
-    Arguments:
-      file_atoms -- FileAtoms object.
+    Args:
+      file_atoms: FileAtoms object.
     """
 
     def __init__(self, file_atoms):
