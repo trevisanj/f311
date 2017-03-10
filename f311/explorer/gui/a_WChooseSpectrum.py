@@ -80,10 +80,10 @@ class WChooseSpectrum(QWidget):
         #                                  self.open_texts[index], self.clss[index], self.labels_fn[index], \
         #                                  self.wilds[index]
         try:
-            d = self.sp.filename if self.sp and self.sp.filename is not None else a99.FileSpectrumPfant.default_filename
+            d = self.sp.filename if self.sp and self.sp.filename is not None else ft.FileSpectrumPfant.default_filename
             new_filename = QFileDialog.getOpenFileName(self, "Cube", d, "*.fits")[0]
             if new_filename:
-                sp = a99.load_spectrum(new_filename)
+                sp = ft.load_spectrum(new_filename)
                 if not sp:
                     raise RuntimeError("Failed to load '{0!s}'".format(new_filename))
                 self.sp = sp

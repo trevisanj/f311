@@ -114,7 +114,7 @@ class XFileMainWindow(a99.XLogMainWindow):
             raise RuntimeError('Object to load must be in {0!s} (not a {1!s})'.format([x.__name__ for x in self.clsss[index]], f.__class__.__name__))
         f = self._filter_on_load(f)
 
-        assert f.filename is not None, "_filter_on_load() probably forgot to assign file name"
+        # assert f.filename is not None, "_filter_on_load() probably forgot to assign file name"
 
         editor = self.editors[index]
         editor.load(f)

@@ -13,7 +13,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from .a_XScaleSpectrum import *
-from .a_WSpectrumCollection import *
+from .a_WSparseCube import *
 import a99
 # from .... import explorer as ex
 import f311.filetypes as ft
@@ -82,98 +82,16 @@ class WFileSparseCube(a99.WBase):
         spp = QSplitter(Qt.Vertical)
         tt0.addTab(spp, "&Spectra")
 
-        # ##### Place Spectrum area
-        # Widget that will be handled by the scrollable area
-        sa0 = self.keep_ref(QScrollArea())
-        sa0.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        sa0.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        wscrw = self.keep_ref(QWidget())
-        sa0.setWidget(wscrw)
-        sa0.setWidgetResizable(True)
-        ###
-        lscrw = QVBoxLayout(wscrw)
-        a99.set_margin(lscrw, 3)
-        ###
-        alabel = self.keep_ref(QLabel("<b>Place spectrum</b>"))
-        lscrw.addWidget(alabel)
-        ###
-        # Place Spectrum variables & button
-        lg = self.keep_ref(QGridLayout())
-        lscrw.addLayout(lg)
-        a99.set_margin(lg, 0)
-        lg.setVerticalSpacing(4)
-        lg.setHorizontalSpacing(5)
-        # lscrw.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
-
-        # field map: [(label widget, edit widget, field name, short description, long description), ...]
-        map = self._map0 = []
-        ###
-        x = self.label_sp = QLabel()
-        y = self.choosesp = ex.WChooseSpectrum()
-        y.installEventFilter(self)
-        y.edited.connect(self.on_colors_setup_edited)
-        # y.setValidator(QIntValidator())
-        x.setBuddy(y)
-        map.append((x, y, "&spectrum", ".dat, .fits ...", ""))
-        ###
-        x = self.label_x = QLabel()
-        y = self.spinbox_X = QSpinBox()
-        y.valueChanged.connect(self.on_place_spectrum_edited)
-        y.setMinimum(0)
-        y.setMaximum(1000)
-        x.setBuddy(y)
-        map.append((x, y, "&x", "x-coordinate<br>(pixels; 0-based)", ""))
-        ###
-        x = self.label_y = QLabel()
-        # TODO more elegant as spinboxes
-        y = self.spinbox_Y = QSpinBox()
-        y.valueChanged.connect(self.on_place_spectrum_edited)
-        y.setMinimum(0)
-        y.setMaximum(1000)
-        x.setBuddy(y)
-        map.append((x, y, "&y", "y-coordinate", ""))
-        # ##### FWHM maybe later
-        # x = self.label_fwhm = QLabel()
-        # y = self.lineEdit_fwhm = QLineEdit()
-        # y.installEventFilter(self)
-        # y.textEdited.connect(self.on_place_spectrum_edited)
-        # y.setValidator(QDoubleValidator(0, 10, 5))
-        # x.setBuddy(y)
-        # map.append((x, y, "f&whm", "full width at<br>half-maximum (pixels)", ""))
-
-
-        for i, (label, edit, name, short_descr, long_descr) in enumerate(map):
-            # label.setStyleSheet("QLabel {text-align: right}")
-            assert isinstance(label, QLabel)
-            label.setText(a99.enc_name_descr(name, short_descr))
-            label.setAlignment(Qt.AlignRight)
-            lg.addWidget(label, i, 0)
-            lg.addWidget(edit, i, 1)
-            label.setToolTip(long_descr)
-            edit.setToolTip(long_descr)
-
-        # button
-        l = QHBoxLayout()
-        lscrw.addLayout(l)
-        a99.set_margin(l, 0)
-        l.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
-        b = QPushButton("&Place spectrum")
-        l.addWidget(b)
-        b.clicked.connect(self.go_clicked)
-
         # ##### Existing Spectra area
         wex = QWidget()
         lwex = QVBoxLayout(wex)
         a99.set_margin(lwex, 3)
         ###
-        lwex.addWidget(self.keep_ref(QLabel("<b>Existing spectra</b>")))
-        ###
-        w = self.wsptable = WSpectrumCollection(self.parent_form)
+        w = self.wsptable = WSparseCube(self.parent_form)
         w.edited.connect(self.on_spectra_edited)
         lwex.addWidget(w)
 
         # ##### Finally...
-        spp.addWidget(sa0)
         spp.addWidget(wex)
 
         # #### Second tab (NEW FileSparseCube)
@@ -422,24 +340,6 @@ class WFileSparseCube(a99.WBase):
         # could only update the obj_square but this is easier
         self.plot_colors()
 
-    def go_clicked(self):
-        print("GO CLICKED\n" * 10)
-        flag_emit = False
-        try:
-            x, y = self.get_place_spectrum_xy()
-            sp = self.choosesp.sp
-            if not sp:
-                raise RuntimeError("Spectrum not loaded")
-            sp.pixel_x, sp.pixel_y = x, y
-            self.f.sparsecube.add_spectrum(sp)
-            self.__update_gui()
-            flag_emit = True
-        except Exception as E:
-            self.add_log_error(a99.str_exc(E), True)
-            raise
-        if flag_emit:
-            self.edited.emit()
-
     def header_revert(self):
         self.__update_gui_header()
 
@@ -530,8 +430,8 @@ class WFileSparseCube(a99.WBase):
     def on_colors_click(self, event):
         x, y = int(event.xdata + .5), int(event.ydata + .5)
         if 0 <= x < self.f.sparsecube.width and 0 <= y < self.f.sparsecube.height:
-            self.spinbox_X.setValue(x)
-            self.spinbox_Y.setValue(y)
+            self.wsptable.spinbox_x.setValue(x)
+            self.wsptable.spinbox_y.setValue(y)
             self.plot_colors()
 
     def on_collect_fieldnames(self):
@@ -544,15 +444,6 @@ class WFileSparseCube(a99.WBase):
     def __emit_if(self):
         if self.flag_process_changes:
             self.edited.emit()
-
-    def get_place_spectrum_xy(self):
-        x = int(self.spinbox_X.value())
-        if not (0 <= x < self.f.sparsecube.width):
-            raise RuntimeError("x must be in [0, %s)" % self.f.sparsecube.width)
-        y = int(self.spinbox_Y.value())
-        if not (0 <= y < self.f.sparsecube.height):
-            raise RuntimeError("y must be in [0, %s)" % self.f.sparsecube.height)
-        return x, y
 
     def __update_gui(self, flag_header=False):
         """Updates GUI to reflect what is in self.f"""
@@ -683,8 +574,9 @@ class WFileSparseCube(a99.WBase):
             flag_scale = self.checkBox_scale.isChecked()
             method = self.comboBox_cmap.currentIndex()
             try:
-                sqx, sqy = self.get_place_spectrum_xy()
+                sqx, sqy = self.wsptable.get_pixel_xy()
             except:
+                a99.get_python_logger().exception("Cannot draw square")
                 pass  # Nevermind (does not draw square)
             self.obj_square = ex.draw_cube_colors(ax, self.f.sparsecube, vrange, sqx, sqy, flag_scale, method)
 

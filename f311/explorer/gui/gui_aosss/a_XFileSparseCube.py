@@ -1,4 +1,4 @@
-__all__ = ["XFileSparseCube"]
+__ll__ = ["XFileSparseCube"]
 
 import collections
 import copy

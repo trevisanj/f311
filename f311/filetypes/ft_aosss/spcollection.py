@@ -133,7 +133,7 @@ class SpectrumCollection(a99.AttrsPart):
         """Removes all spectra from the collection"""
         self.spectra = []
 
-    def merge_with(self, other):
+    def merge_with(self, other, default_pixel_x=None, default_pixel_y=None):
         """Adds spectra from other SpectrumCollection to self"""
         assert isinstance(other, SpectrumCollection)
         for sp in other.spectra:

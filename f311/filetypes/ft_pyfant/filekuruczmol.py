@@ -161,14 +161,22 @@ class FileKuruczMolecule(DataFile):
                 # line.spinl = int(s[64:65])
                 # line.iso = s[69:71]
 
+                # Kurucz: "negative energies are predicted or extrapolated"
+                # (http: // kurucz.harvard.edu / linelists.html)
+                E2l = float(s[22:32])
+                if E2l < 0:
+                    E2l = -E2l
+                El = float(s[37:48])
+                if El < 0:
+                    El = -El
 
                 line = KuruczMolLine(
                     float(s[0:10]) * 10,
                     float(s[10:17]),
                     float(s[17:22]),
-                    float(s[22:32]),
+                    E2l,
                     float(s[32:37]),
-                    float(s[37:48]),
+                    El,
                     int(s[48:50]),
                     int(s[50:52]),
                     s[52:53],

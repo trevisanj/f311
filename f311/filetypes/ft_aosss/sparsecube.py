@@ -234,12 +234,21 @@ class SparseCube(SpectrumCollection):
         return wcube
 
 
-    def add_spectrum(self, sp):
+    def merge_with(self, other, default_pixel_x=None, default_pixel_y=None):
+        """Adds spectra from other SpectrumCollection to self"""
+        assert isinstance(other, SpectrumCollection)
+        for sp in other.spectra:
+            self.add_spectrum(sp, default_pixel_x, default_pixel_y)
+
+
+    def add_spectrum(self, sp, default_pixel_x=None, default_pixel_y=None):
         """
         "Paints" pixel with given spectrum
 
         Args:
             sp: Spectrum instance
+            default_pixel_x: pixel x-coordinate if sp.pixel_x is None
+            default_pixel_y: pixel y-coordinate if sp.pixel_y is None
 
         **Note** coordinate (x=0, y=0) corresponds to lower left pixel of cube cross-section
         """
@@ -250,6 +259,10 @@ class SparseCube(SpectrumCollection):
         if len(sp.x) < 2:
             raise RuntimeError("Spectrum must have at least two points")
 
+        if default_pixel_x is not None:
+            sp.pixel_x = default_pixel_x
+        if default_pixel_y is not None:
+            sp.pixel_y = default_pixel_y
         sp.z_start = -1  # will cause update to check on spectrum
         SpectrumCollection.add_spectrum(self, sp)
         self.__update()

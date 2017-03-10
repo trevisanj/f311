@@ -3,7 +3,9 @@ from .a_XPlotXY import *
 from .a_XPlotXYZ import *
 from .a_WFileSparseCube import *
 from .a_WFileSpectrumList import *
-from .a_WSpectrumCollection import *
+from .a_WSpectrumCollectionBase import *
+from .a_WSpectrumList import *
+from .a_WSparseCube import *
 from .a_XFileSparseCube import *
 from .a_XFileSpectrumList import *
 from .a_XGroupSpectra import *

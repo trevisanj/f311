@@ -12,7 +12,7 @@ from itertools import product, combinations, cycle
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from .a_WSpectrumCollection import *
+from .a_WSpectrumList import *
 import a99
 import f311.filetypes as ft
 
@@ -87,7 +87,7 @@ class WFileSpectrumList(a99.WBase):
         # ###
         # lwex.addWidget(keep_ref(QLabel("<b>Existing spectra</b>")))
         ###
-        w = self.wsptable = WSpectrumCollection(self.parent_form)
+        w = self.wsptable = WSpectrumList(self.parent_form)
         w.edited.connect(self.on_spectra_edited)
         lwex.addWidget(w)
 
@@ -159,44 +159,6 @@ class WFileSpectrumList(a99.WBase):
         bgo.clicked.connect(self.header_apply)
         ###
         lgo.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
-
-        # #### More Tools tab
-        wset = keep_ref(QWidget())
-        tt0.addTab(wset, "&More")
-        lwset = keep_ref(QVBoxLayout(wset))
-        ###
-        la = keep_ref(QLabel("<b>Data manipulation</b>"))
-        lwset.addWidget(la)
-        ###
-        b = keep_ref(QPushButton("&Crop in new window..."))
-        lwset.addWidget(b)
-        b.clicked.connect(self.crop_clicked)
-        ###
-        b = keep_ref(QPushButton("Add &noise..."))
-        lwset.addWidget(b)
-        b.clicked.connect(self.add_noise_clicked)
-        ###
-        b = keep_ref(QPushButton("&Upper envelopes"))
-        lwset.addWidget(b)
-        b.clicked.connect(self.rubberband_clicked)
-        ###
-        b = keep_ref(QPushButton("&Extract continua"))
-        lwset.addWidget(b)
-        b.clicked.connect(self.extract_continua_clicked)
-        ###
-        lwset.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
-
-        # # ### Tabbed widget occupying right of horizontal splitter
-        # tt1 = self.tabWidgetVis = QTabWidget(self)
-        # tt1.setFont(a99.MONO_FONT)
-        # tt1.currentChanged.connect(self.current_tab_changed_vis)
-        #
-        # # #### Tab containing 3D plot representation
-        # w0 = keep_ref(QWidget())
-        # tt1.addTab(w0, "&P")
-        # # #### Colors tab
-        # w1 = keep_ref(QWidget())
-        # tt1.addTab(w1, "&Q")
 
         # ### Finally ...
         sp2.addWidget(wfilett0)
@@ -299,63 +261,6 @@ class WFileSpectrumList(a99.WBase):
 
     def current_tab_changed_options(self):
         pass
-
-    def crop_clicked(self):
-        try:
-            splist = self.f.splist
-            specs = (("wavelength_range", {"value": "[%g, %g]" % (splist.wavelength[0], splist.wavelength[-1])}),)
-            form = a99.XParametersEditor(specs=specs, title="Add Gaussian noise")
-            while True:
-                r = form.exec_()
-                if not r:
-                    break
-                kk = form.get_kwargs()
-                s = ""
-                try:
-                    s = "wavelength_range"
-                    lambda0, lambda1 = eval(kk["wavelength_range"])
-                except Exception as E:
-                    self.add_log_error("Failed evaluating %s: %s" % (s, a99.str_exc(E)), True)
-                    continue
-
-                # Works with clone, then replaces original, to ensure atomic operation
-                clone = copy.deepcopy(self.f)
-                clone.filename = None
-                try:
-                    clone.splist.crop(lambda0, lambda1)
-                except Exception as E:
-                    self.add_log_error("Crop operation failed: %s" % a99.str_exc(E), True)
-                    continue
-
-                self.__new_window(clone)
-                break
-
-        except Exception as E:
-            self.add_log_error("Crop failed: %s" % a99.str_exc(E), True)
-            raise
-
-    def rubberband_clicked(self):
-        from f311 import explorer as ex
-
-        self.__use_sblock(ex.SB_Rubberband(flag_upper=True))
-
-    def add_noise_clicked(self):
-        from f311 import explorer as ex
-        specs = (("std", {"caption": "Noise standard deviation", "value": 1.}),)
-        form = a99.XParametersEditor(specs=specs, title="Select sub-range")
-        if form.exec_():
-            block = ex.SB_AddNoise(**form.get_kwargs())
-            self.__use_sblock(block)
-
-    def extract_continua_clicked(self):
-        from f311 import explorer as ex
-        self.__use_slblock(ex.SLB_ExtractContinua())
-
-    # def std_clicked(self):
-    #     self.__use_slblock(MergeDown(np.std))
-    #
-    # def snr_clicked(self):
-    #     self.__use_slblock(GB_SNR())
 
     def on_collect_fieldnames(self):
         # TODO confirmation

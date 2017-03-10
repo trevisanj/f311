@@ -38,48 +38,8 @@ class WSpectrumCollection(a99.WBase):
 
         # # Creates actions
 
-        action = self.action_add_spectra = QAction(a99.get_icon("list-add"), "&Add spectra...", self)
-        action.setToolTip("Opens a 'Open File' window where multiple files can be selected.\n"
-                          "Accepts any supported spectral type, and also other Spectrum Collection files.\n"
-                          "Files are added in alphabetical order.")
-        action.triggered.connect(self.on_add_spectra)
-
         action = self.action_all_group = QAction(a99.get_icon("group-by"), "&Group...", self)
         action.triggered.connect(self.on_all_group)
-
-        # action = self.action_all_use_spectrum_block = QAction(a99.get_icon("go-next"), "&Transform...", self)
-        # action.triggered.connect(self.on_all_use_spectrum_block)
-
-        action = self.action_all_to_scalar = QAction(a99.get_icon("go-next"), "To &Scalar...", self)
-        action.triggered.connect(self.on_all_to_scalar)
-
-        action = self.action_all_plot_xy = QAction(a99.get_icon("visualization"), "X-&Y Plot", self)
-        action.triggered.connect(self.on_plot_xy)
-
-        action = self.action_all_plot_xyz = QAction(a99.get_icon("visualization"), "X-Y-&Z Plot", self)
-        action.triggered.connect(self.on_plot_xyz)
-
-        action = self.action_all_export_csv = QAction(a99.get_icon("document-export"), "&Export CSV...", self)
-        action.triggered.connect(self.on_all_export_csv)
-
-        action = self.action_sel_use_spectrum_block = QAction(a99.get_icon("go-next"), "&Transform...", self)
-        action.setToolTip("Selected spectra will be deleted and transformed spectra will be added at the end")
-        action.triggered.connect(self.on_sel_use_spectrum_block)
-
-        action = self.action_sel_plot_stacked = QAction(a99.get_icon("chart2"), "Plot &Stacked", self)
-        action.triggered.connect(self.on_sel_plot_stacked)
-
-        action = self.action_sel_plot_overlapped = QAction(a99.get_icon("chart1"), "Plot &Overlapped", self)
-        action.triggered.connect(self.on_sel_plot_overlapped)
-
-        action = self.action_sel_open_in_new = QAction(a99.get_icon("window-new"), "Open in new window", self)
-        action.triggered.connect(self.on_sel_open_in_new)
-
-        action = self.action_sel_delete = QAction(a99.get_icon("list-remove"), "Delete", self)
-        action.triggered.connect(self.on_sel_delete)
-
-        action = self.action_curr_scale = QAction(a99.get_icon("zoom-fit"), "Scale to Magnitude...", self)
-        action.triggered.connect(self.on_curr_scale)
 
 
         # ## Makes a menu
@@ -107,7 +67,6 @@ class WSpectrumCollection(a99.WBase):
         lwmain = self.centralLayout = QVBoxLayout()
         a99.set_margin(lwmain, 0)
         self.setLayout(lwmain)
-
 
 
 
@@ -283,10 +242,15 @@ class WSpectrumCollection(a99.WBase):
             return None
         return self.collection.spectra[spectrum_index]
 
-
     def update(self):
         """Refreshes the GUI to reflect what is in self.collection"""
         self.__update_gui()
+
+    def is_spectrum_list(self):
+        """Returns True if self.collection is a ft.SpectrumList
+
+        Collection is either a ft.SpectrumList or ft.SparseCube"""
+        return isinstance(self.collection, ft.SpectrumList)
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Qt override
@@ -571,17 +535,25 @@ class WSpectrumCollection(a99.WBase):
 
 
     def on_sel_open_in_new(self):
-        from .a_XFileSpectrumList import XFileSpectrumList
         ii = self.get_selected_spectrum_indexes()
         if len(ii) > 0:
             other = copy.deepcopy(self.collection)
-            other.spectra = [other.spectra[i] for i in ii]
+            other.spectra = [copy.deepcopy(other.spectra[i]) for i in ii]
             # TODO who said it is a spectrum list? Could well be a FileSparseCube!!!! How to sort this?????????????????????????????????????????????????????????????????????
-            f = ft.FileSpectrumList()
-            f.splist = other
-            f.filename = "noname.dontknowextension"  # TODO figure out a way to determine this filename because I dont know the original filename
 
-            form = self.keep_ref(XFileSpectrumList())
+            # "Gambiarra"
+            if self.is_spectrum_list():
+                from .a_XFileSpectrumList import XFileSpectrumList
+                f = ft.FileSpectrumList()
+                form = self.keep_ref(XFileSpectrumList())
+            else:
+                from .a_XFileSparseCube import XFileSparseCube
+                f = ft.FileSparseCube()
+                f.sparsecube = other
+                form = self.keep_ref(XFileSparseCube())
+
+            # f.filename = "noname"
+
             form.load(f)
             form.show()
 
@@ -693,6 +665,16 @@ class WSpectrumCollection(a99.WBase):
             report.extend(["", "Successful:"])
             report.extend(successful)
 
+            # # "Gambiarra" to expose field names
+            # if not self.is_spectrum_list():
+            #     c = self.collection
+            #     ffnn, aann = ["PIXEL-X", "PIXEL-Y"], ["fieldnames", "fieldnames_visible"]
+            #     for fn in ffnn:
+            #         for an in aann:
+            #             a = c.__getattribute__(an)
+            #             if fn not in a:
+            #                 a.append(fn)
+
             self.__update_gui()
             flag_emit = True
 
@@ -780,7 +762,6 @@ class WSpectrumCollection(a99.WBase):
 
             self.flag_process_changes = True
 
-
     def __update_enabled_actions(self):
         can_group = isinstance(self.collection, ft.SpectrumList)
         has_any = self.twSpectra.rowCount() > 0
@@ -797,11 +778,3 @@ class WSpectrumCollection(a99.WBase):
         self.action_sel_open_in_new.setEnabled(any_selected)
         self.action_sel_delete.setEnabled(any_selected)
         self.action_curr_scale.setEnabled(has_current)
-
-    def __delete_spectra(self):
-        ii = self.get_selected_spectrum_indexes()
-        if len(ii) > 0:
-            self.collection.delete_spectra(ii)
-            self.__update_gui()
-
-        return len(ii)
