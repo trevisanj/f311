@@ -9,6 +9,19 @@ import a99
 from .. import DataFile
 import io
 
+#: List of all atomic symbols
+_symbols = [
+'H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si',
+ 'P', 'S', 'Cl', 'Ar', 'K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co',
+ 'Ni', 'Cu', 'Zn', 'Ga', 'Ge', 'As', 'Se', 'Br', 'Kr', 'Rb', 'Sr', 'Y', 'Zr',
+ 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd', 'In', 'Sn', 'Sb', 'Te', 'I',
+ 'Xe', 'Cs', 'Ba', 'La', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
+ 'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au',
+ 'Hg', 'Tl', 'Pb', 'Bi', 'Po', 'At', 'Rn', 'Fr', 'Ra', 'Ac', 'Th', 'Pa', 'U',
+ 'Np', 'Pu', 'Am', 'Cm', 'Bk', 'Cf', 'Es', 'Fm', 'Md', 'No', 'Lr', 'Rf', 'Db',
+ 'Sg', 'Bh', 'Hs', 'Mt'
+]
+
 
 @a99.froze_it
 class Vald3Species(a99.AttrsPart):
@@ -30,7 +43,7 @@ class Vald3Species(a99.AttrsPart):
     # def lambda_(self):
     #     return np.array([x.lambda_ for x in self.lines])
 
-    def __init__(self, formula=None, ioni=None):
+    def __init__(self):
         a99.AttrsPart.__init__(self)
         self.lines = []  # list of Vald3Line
         self.formula = None
@@ -55,6 +68,8 @@ class Vald3Species(a99.AttrsPart):
                 del self.lines[i]
 
 
+# TODO Today I leave it like this, but tomorrow I must group the (system+vl,v2l)
+
 @a99.froze_it
 class Vald3Line(a99.AttrsPart):
     attrs = ["lambda_", "loggf", "Jl", "J2l", "vl", "v2l"]
@@ -68,6 +83,9 @@ class Vald3Line(a99.AttrsPart):
         self.J2l = None
         self.vl = None
         self.v2l = None
+        self.sys0 = None
+        self.sys1 = None
+        self.sys2 = None
 
 
 class FileVald3(DataFile):
@@ -150,17 +168,22 @@ class FileVald3(DataFile):
                 r += 1
 
 
-                if formula in a99.symbols:
+                if formula in _symbols:
                     # Skips energy levels information for the atoms
                     for _ in range(2):
                         h.readline()
                         r += 1
                 else:
                     s = h.readline().strip()
-                    line.vl = float(s[s.rfind(",") + 1:-1])  # v superior / v upper
+                    info = _parse_system(s)
+
+                    # TODO dunno what comes first, vl or v2l, but if it follows the file header,
+                    # v2l (v lower) should come first, because "J lo" comes before "J up" in the file header
+
+                    line.vl = float(s[s.rfind(",") + 1:-1])  # v superior (v upper)
                     r += 1
                     s = h.readline().strip()
-                    line.v2l = float(s[s.rfind(",") + 1:-1])  # v inferior / v lower
+                    line.v2l = float(s[s.rfind(",") + 1:-1])  # v inferior (v lower)
                     r += 1
 
                 key = formula + s_ioni  # will gb.py elements by this key
@@ -181,6 +204,39 @@ class FileVald3(DataFile):
             raise type(e)(("Error around %d%s row of file '%s'" %
                            (r + 1, a99.ordinal_suffix(r + 1), filename)) + ": " + str(
                 e)).with_traceback(sys.exc_info()[2])
+
+
+def _parse_system(s):
+    """Parses "system" information from VALD3 string
+
+    Args:
+        s: string (see examples below)
+
+    Examples of lines:
+
+    ```
+    '  Hb                                                  3s2.4s2.1p4.5s1          X,2,0,,19,3'
+    '  Hb                                                 3s2.4s2.1p3.5s2          A,2,1,e,20,9'
+    '  Hb                         2sg2.2su2.3sg1.1pu3                            a,3,1,e,29,3,g'
+    '  Hb                         2sg2.2su1.3sg1.1pu3/2sg2.2su2.3sg1.1pg1.1pu2   d,3,1,e,29,2,g'
+    ```
+
+    Returns:
+        dict: with keys "sys0", "sys1", "sys2" (information about system, TODO rename when I know
+              better their meanings); "v" (quantum number, either vl or v2l)
+    """
+
+    kk = s[s.find(",")-1:-1].split(",")
+    ret = {}
+    ret["sys0"] = kk[0]
+    ret["sys1"] = kk[1]
+    ret["sys2"] = kk[2]
+    try:
+        ret["v"] = int(kk[-1])
+    except ValueError:
+        # This covers the case when last item is "g" (see example in docstring)
+        ret["v"] = int(kk[-2])
+    if kk[-1] == "g"1
 
 
 def _fake_file():
@@ -220,3 +276,6 @@ def _test():
 # h = _fake_file()
 # f = FileVald3()
 # f._do_load_h(h, "_fake_file")
+
+
+
