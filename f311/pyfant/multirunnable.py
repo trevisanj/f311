@@ -22,6 +22,7 @@ def _multi_id_maker():
         from f311 import pyfant as pf
         __multi_id_maker = pf.IdMaker()
         __multi_id_maker.session_prefix_singular = pf.MULTISESSION_PREFIX
+    return __multi_id_maker
 
 
 @a99.froze_it
@@ -74,7 +75,7 @@ class MultiRunnable(runnables.Runnable):
 
         # # Private variables
         self.__logger = a99.get_python_logger()
-        self.__sid = pf.SID(_multi_id_maker)
+        self.__sid = pf.SID(_multi_id_maker())
         self.__runnable_manager = None
 
     def kill(self):

@@ -156,6 +156,10 @@ Installation troubleshooting
    'GTK3Agg', 'cairo', 'TkAgg', 'pgf', 'MacOSX', 'GTK', 'WX', 'GTKCairo', 'Qt4Agg', 'svg', 'agg',
    'ps', 'emf', 'WebAgg', 'gdk', 'WXAgg', 'CocoaAgg', 'GTK3Cairo']
 
+**Solution**: update Matplotlib to version 1.4 or later
+
+
+
 
 More
 ----
