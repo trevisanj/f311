@@ -15,6 +15,19 @@ import sys
 # _to_skip = ['H', 'NE', 'F', 'HE']
 
 
+SYMBOLS = [
+'H', 'HE', 'LI', 'BE', 'B', 'C', 'N', 'O', 'F', 'NE', 'NA', 'MG', 'AL', 'SI',
+ 'P', 'S', 'CL', 'AR', 'K', 'CA', 'SC', 'TI', 'V', 'CR', 'MN', 'FE', 'CO',
+ 'NI', 'CU', 'ZN', 'GA', 'GE', 'AS', 'SE', 'BR', 'KR', 'RB', 'SR', 'Y', 'ZR',
+ 'NB', 'MO', 'TC', 'RU', 'RH', 'PD', 'AG', 'CD', 'IN', 'SN', 'SB', 'TE', 'I',
+ 'XE', 'CS', 'BA', 'LA', 'CE', 'PR', 'ND', 'PM', 'SM', 'EU', 'GD', 'TB', 'DY',
+ 'HO', 'ER', 'TM', 'YB', 'LU', 'HF', 'TA', 'W', 'RE', 'OS', 'IR', 'PT', 'AU',
+ 'HG', 'TL', 'PB', 'BI', 'PO', 'AT', 'RN', 'FR', 'RA', 'AC', 'TH', 'PA', 'U',
+ 'NP', 'PU', 'AM', 'CM', 'BK', 'CF', 'ES', 'FM', 'MD', 'NO', 'LR', 'RF', 'DB',
+ 'SG', 'BH', 'HS', 'MT'
+]
+
+
 def vald3_to_atoms(file_obj):
     """Converts data from a VALD3 file into a FileAtoms object.
 
@@ -63,7 +76,7 @@ def vald3_to_atoms(file_obj):
 #                continue  # skips molecule
 
             elem = row[0][1:row[0].index(" ")]
-            if not elem in a99.SYMBOLS:
+            if not elem in SYMBOLS:
                 #x = raw_input("Skipping #"+elem+"#")
                 num_skip_mol += 1
                 continue  # skips molecule

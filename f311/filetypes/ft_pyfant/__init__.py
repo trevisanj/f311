@@ -14,6 +14,8 @@ from .filevald3 import *
 from .filemoldb import *
 from .filehitrandb import *
 from .filekuruczmol import *
+from .filepleztio import *
+
 
 # from . import filemod
 # from . import filedissoc

@@ -1,13 +1,14 @@
 """VALD3 atomic or molecular lines file"""
 
 
-__all__ = ["Vald3Species", "FileVald3", "Vald3Line"]
+__all__ = ["FileVald3", "Vald3MolecularLine", "Vald3SolKey"]
 
 # from ..gear import *
 import sys
 import a99
 from .. import DataFile
 import io
+from collections import namedtuple, defaultdict
 
 #: List of all atomic symbols
 _symbols = [
@@ -70,27 +71,49 @@ class Vald3Species(a99.AttrsPart):
 
 # TODO Today I leave it like this, but tomorrow I must group the (system+vl,v2l)
 
-@a99.froze_it
-class Vald3Line(a99.AttrsPart):
-    attrs = ["lambda_", "loggf", "Jl", "J2l", "vl", "v2l"]
+# @a99.froze_it
+# class Vald3Line(a99.AttrsPart):
+#     attrs = ["lambda_", "loggf", "Jl", "J2l", "vl", "v2l"]
+#
+#     def __init__(self):
+#         a99.AttrsPart.__init__(self)
+#
+#         self.lambda_ = None
+#         self.loggf = None
+#         self.Jl = None
+#         self.J2l = None
+#         self.vl = None
+#         self.v2l = None
+#         self.sys0 = None
+#         self.sys1 = None
+#         self.sys2 = None
 
-    def __init__(self):
-        a99.AttrsPart.__init__(self)
 
-        self.lambda_ = None
-        self.loggf = None
-        self.Jl = None
-        self.J2l = None
-        self.vl = None
-        self.v2l = None
-        self.sys0 = None
-        self.sys1 = None
-        self.sys2 = None
-
+Vald3MolecularLine = namedtuple("Vald3MolecularLine", ["lambda_", "loggf", "Jl", "J2l"])
+Vald3SolKey = namedtuple("Vald3SolKey", ["vl", "v2l", "sys00", "sys01", "sys02", "sys10", "sys11", "sys12"])
 
 class FileVald3(DataFile):
     """
     VALD3 atomic or molecular lines file
+
+    Args:
+        flag_parse_atoms=True: whether or not to parse the atomic lines
+        flag_parse_molecules=True: whether or not to parse the molecular lines
+
+
+    Species are encoded as follows.
+
+    self.speciess (double s) is a dictionary where
+
+        key: (formula, ionization), e.g. ("MgH", 1)
+        value: "sets of lines", dict where
+
+            key: 0 (int) if atom (not implemented)
+                 (vl, v2l, sys00, sys01, sys02, sys10, sys11, sys12) if molecule
+            value: list of Vald3AtomicLine if atom (not implemented yet)
+                   list of Vald3MolecularLine if molecule
+
+    TODO: parsing of atomic lines!
 
     **Note** Load only
 
@@ -108,23 +131,17 @@ class FileVald3(DataFile):
     def __len__(self):
         return len(self.speciess)
 
-    def __init__(self):
+    def __init__(self, flag_parse_atoms=True, flag_parse_molecules=True):
         DataFile.__init__(self)
 
-        # list of Atom objects
-        self.speciess = []
+        # Configuration
+        self.flag_parse_atoms = flag_parse_atoms
+        self.flag_parse_molecules = flag_parse_molecules
+
+        self.speciess = {}
 
     def __iter__(self):
         return iter(self.speciess)
-
-    def remove_formula(self, formula):
-        """Removes given element (any ionization level)."""
-        from f311 import filetypes as ft
-        formula = ft.adjust_atomic_symbol(formula)
-        for i in reversed(list(range(len(self)))):
-            atom = self.speciess[i]
-            if atom.formula == formula:
-                del self.speciess[i]
 
     def _do_load(self, filename):
         """Clears internal lists and loads from file."""
@@ -141,7 +158,7 @@ class FileVald3(DataFile):
         # '  Hb                                                 2s2.3s2.1p3              X,2,1,f,39,7'
 
         r = 0  # counts rows of file
-        speciess = {}
+        self.speciess = defaultdict(lambda: defaultdict(lambda: []))
         try:
             # Uses header as "magic characters"
             s = h.readline().strip("\n")
@@ -152,8 +169,9 @@ class FileVald3(DataFile):
             r += 1
 
             while True:
-                line = Vald3Line()
-
+                # Line 1/4
+                # ========
+                #
                 s = h.readline().strip()
                 if len(s) == 0 or not s.startswith("'"):
                     # EOF: blank line or references section
@@ -161,42 +179,42 @@ class FileVald3(DataFile):
 
                 fields = s.split(",")
                 formula, s_ioni = fields[0][1:-1].split(" ")
-                line.lambda_ = float(fields[1])
-                line.loggf = float(fields[2])
-                line.Jl = float(fields[6])  # J_up
-                line.J2l = float(fields[4])  # J_lo
-                r += 1
-
 
                 if formula in _symbols:
-                    # Skips energy levels information for the atoms
-                    for _ in range(2):
+                    r += 1
+                    # Atom, skips altogether (skips next three lines and loops)
+                    for _ in range(3):
                         h.readline()
                         r += 1
-                else:
-                    s = h.readline().strip()
-                    info = _parse_system(s)
+                    continue
 
-                    # TODO dunno what comes first, vl or v2l, but if it follows the file header,
-                    # v2l (v lower) should come first, because "J lo" comes before "J up" in the file header
+                line = Vald3MolecularLine(lambda_=float(fields[1]),
+                                          loggf=float(fields[2]),
+                                          Jl=float(fields[6]),  # J_up
+                                          J2l = float(fields[4])  # J_lo
+                                          )
+                r += 1
 
-                    line.vl = float(s[s.rfind(",") + 1:-1])  # v superior (v upper)
-                    r += 1
-                    s = h.readline().strip()
-                    line.v2l = float(s[s.rfind(",") + 1:-1])  # v inferior (v lower)
-                    r += 1
+                # Line 2/4 and 3/4
+                # ================
+                #
+                # Parses "molecular system" TODO rename this term later
+                # TODO dunno what comes first, vl or v2l, but if it follows the file header,
+                # v2l (v lower) should come first, because "J lo" comes before "J up" in the file header
+                s = h.readline().strip()
+                r += 1
+                sys00, sys01, sys02, v2l = _parse_system(s)
+                s = h.readline().strip()
+                r += 1
+                sys10, sys11, sys12, vl = _parse_system(s)
 
-                key = formula + s_ioni  # will gb.py elements by this key
-                if key in speciess:
-                    a = speciess[key]
-                else:
-                    a = speciess[key] = Vald3Species()
-                    a.formula = formula
-                    a.ioni = int(s_ioni)
-                    self.speciess.append(a)
-                a.lines.append(line)
+                species_key = (formula, int(s_ioni))
+                sol_key = Vald3SolKey(vl, v2l, sys00, sys01, sys02, sys10, sys11, sys12)
+                self.speciess[species_key][sol_key].append(line)
 
-                # Skips the citation line
+                # Line 4/4 (citation line (skips))
+                # ================================
+                #
                 h.readline()
                 r += 1
 
@@ -204,7 +222,6 @@ class FileVald3(DataFile):
             raise type(e)(("Error around %d%s row of file '%s'" %
                            (r + 1, a99.ordinal_suffix(r + 1), filename)) + ": " + str(
                 e)).with_traceback(sys.exc_info()[2])
-
 
 def _parse_system(s):
     """Parses "system" information from VALD3 string
@@ -222,21 +239,23 @@ def _parse_system(s):
     ```
 
     Returns:
-        dict: with keys "sys0", "sys1", "sys2" (information about system, TODO rename when I know
-              better their meanings); "v" (quantum number, either vl or v2l)
+        tuple: (sys0, sys1, sys2, v), wheter
+
+            - sys0, sys1, sys2: information about system, TODO rename when I know better their meanings);
+            - v: quantum number, either vl or v2l
     """
 
     kk = s[s.find(",")-1:-1].split(",")
     ret = {}
-    ret["sys0"] = kk[0]
-    ret["sys1"] = kk[1]
-    ret["sys2"] = kk[2]
+    sys0 = kk[0]
+    sys1 = int(kk[1])
+    sys2 = int(kk[2])
     try:
-        ret["v"] = int(kk[-1])
+        v = int(kk[-1])
     except ValueError:
         # This covers the case when last item is "g" (see example in docstring)
-        ret["v"] = int(kk[-2])
-    if kk[-1] == "g"1
+        v = int(kk[-2])
+    return sys0, sys1, sys2, v
 
 
 def _fake_file():
