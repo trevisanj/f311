@@ -49,6 +49,15 @@ class FilePlezTiO(DataFile):
     Plez molecular lines file, TiO format
 
     Lines are encoded as PlezTiOLine object
+
+    Because Plez files are too big, they will be ***filtered upon load** (unfiltered files may take up
+    several GB of RAM memory if fully loaded). See arguments list
+
+    Args:
+        min_gf=0: minimum gf
+        max_J2l=99999: Maximum J" (J lower)
+        max_vl=99999: Maximum v' (v upper)
+        max_v2l=99999: Maximum v" (v lower)
     """
 
     attrs = ["num_lines"]
@@ -60,17 +69,20 @@ class FilePlezTiO(DataFile):
     def __len__(self):
         return len(self.lines)
 
-    def __init__(self, flag_parse_atoms=True, flag_parse_molecules=True):
+    def __init__(self, min_gf=0, max_J2l=99999, max_vl=99999, max_v2l=99999):
         DataFile.__init__(self)
-
         self.lines = []
+        self.min_gf = min_gf
+        self.max_J2l = max_J2l
+        self.max_vl = max_vl
+        self.max_v2l = max_v2l
 
     def __iter__(self):
         return iter(self.lines)
 
     def _do_load(self, filename):
-        def strip(s): return str(s).strip()
-        def I(x): return str(x)  # Identity
+        def strip(s): return s.decode("ascii").strip()
+        def I(s): return s.decode("ascii")  # Identity
         my_struct = struct.Struct("14s 13s 12s 4s 6s 6s 3s 12s 4s 6s 6s 3s 13s 2x 3s 1x 1s 1x 1s 6s 2x")
         func_map = [float, float, float, int, float, float, int, float, int, float, float, int,
                     float, strip, I, I, strip]
@@ -88,18 +100,44 @@ class FilePlezTiO(DataFile):
                 ii = 0  # progress feedback auxiliary variable
                 while True:
                     s = h.readline()
+
+                    # print(s)
+                    # break
                     if len(s) == 0: break  # # EOF: blank line or references section
+
+                    # Filtering part
+
+                    gf = float(s[14:27])
+                    J2l = float(s[43:49])
+                    vl = int(s[70:74])
+                    v2l = int(s[49:53])
+
+                    # gf = float(bits[1])
+                    # J2l = float(bits[4])
+                    # vl = float(bits[8])
+                    # v2l = float(bits[3])
+
+                    # gf = args[1]
+                    # J2l = args[4]
+                    # vl = args[8]
+                    # v2l = args[3]
+
+
+                    if not (gf >= self.min_gf and J2l <= self.max_J2l and vl <= self.max_vl and v2l <= self.max_v2l):
+                        r +=1
+                        continue
 
                     bits = my_struct.unpack_from(s)
 
-                    # print("<<<<<<<<<<<<<<<<<<<<<<< {}".format(bits))
-                    # print("<<<<<<<<<<<<<<<<<<<<<<< {}".format(len(bits)))
                     args = [func(x) for func, x in zip(func_map, bits)]
-                    # print("<<<<<<<<<<<<<<<<<<<<<<< {}".format(args))
-
-
                     line = PlezTiOLine(*args)
                     self.lines.append(line)
+                    r += 1
+
+                    # args = [func(x) for func, x in zip(func_map, bits)]
+                    # line = PlezTiOLine(*bits)
+                    # self.lines.append(line)
+
 
 
                     #           1         2         3         4         5         6         7         8         9        10        11
@@ -108,25 +146,24 @@ class FilePlezTiO(DataFile):
                     #    lambda_air(A)   gf         Elow(cm-1)  vl  Jl    Nl  syml  Eup(cm-1) vu   Ju    Nu  symu  gamrad    mol trans branch
                     #      3164.8716 0.769183E-11   3459.6228   0   5.0   5.0  0  35047.3396  15   6.0   6.0  0 1.821557E+07|'TiO a f  R    '
                     # 12345678901234                                                                                        | 12345678901234
-                    #               1234567890123                                                                           |
-                    #                            123456789012                                                               |
-                    #                                        1234                                                           |
-                    #                                            123456                                                     |
-                    #                                                  123456                                               |
-                    #                                                        123                                            |
-                    #                                                           123456789012                                |
-                    #                                                                       1234                            |
-                    #                                                                           123456                      |
-                    #                                                                                 123456                |
-                    #                                                                                       123             |
-                    #                                                                                          1234567890123|
-                    #                                                                                                       2x
+                    # 0             1234567890123                                                                           |
+                    #               1            123456789012                                                               |
+                    #                            2           1234                                                           |
+                    #                                        3   123456                                                     |
+                    #                                            4     123456                                               |
+                    #                                                  5     123                                            |
+                    #                                                        6  123456789012                                |
+                    #                                                           7           1234                            |
+                    #                                                                       8   123456                      |
+                    #                                                                           9     123456                |
+                    #                                                                                 10    123             |
+                    #                                                                                       11 1234567890123|
+                    #                                                                                          12           2x
                     #                                                                                                         123 1 1 123456
-                    #                                                                                                                       1s/2sx
+                    #                                                                                                         13  141516
 
-                    r += 1
                     ii += 1
-                    if ii > 1234:
+                    if ii > 12345:
                         a99.get_python_logger().info(
                             "Loading '{}': {}".format(filename, a99.format_progress(r + 1, num_lines)))
                         ii = 0
@@ -138,3 +175,8 @@ class FilePlezTiO(DataFile):
                     e)).with_traceback(sys.exc_info()[2])
 
 
+
+    def _do_save_as(self, filename):
+        with open(filename, "w") as h:
+            for line in self.lines:
+               h.write("{:14.4f} {:12e} {:11.4f} {:3d} {:5.1f} {:5.1f} {:2d} {:11.4f} {:3d} {:5.1f} {:5.1f} {:2d} {:12e} '{:3s} {:1s} {:1s} {:6s}'\n".format(*line))

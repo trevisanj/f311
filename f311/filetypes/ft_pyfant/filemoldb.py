@@ -4,6 +4,7 @@ import a99
 from .. import FileSQLiteDB
 # import sqlite3
 import tabulate
+import re
 
 
 __all__ = ["FileMolDB"]
@@ -159,3 +160,30 @@ class FileMolDB(FileSQLiteDB):
         header = header0
 
         print(tabulate.tabulate(data, header))
+
+    def load_transitions(self):
+        rm = self.query_molecule()
+        for rowm in rm:
+            rs = self.query_state(id_molecule=rowm["id"])
+            for rows in rs:
+                t = rows["Trans"]
+                key = (rowm["formula"], )
+
+    @staticmethod
+    def _formula_trans_to_keys(formula, trans):
+        lr = [re.split(" ", x.strip()) for x in re.split("[↔←→]", trans)]
+        if "→" in trans:
+            from_ = lr[0]
+            to = lr[1]
+        elif "←" in trans:
+            to = lr[0]
+            from_ = lr[1]
+        else:
+            from_ = to = lr[0]+lr[1]
+
+        pairs = [(f, t) for t in to for f in from_ if t != f]
+
+        for pair in pairs:
+            key = (formula,)+pair
+            print(key)
+
