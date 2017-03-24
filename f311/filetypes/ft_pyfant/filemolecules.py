@@ -8,12 +8,21 @@ import a99
 from .. import DataFile, adjust_atomic_symbol, branch_to_iz, iz_to_branch, description_to_symbols
 import re
 
-
-# TODO convert all sequences to numpy arrays
+# TODO figure out trans0, trans1
 
 @a99.froze_it
 class SetOfLines(a99.AttrsPart):
-    attrs = ["vl", "v2l", "qqv", "ggv", "bbv", "ddv", "fact", "num_lines"]
+    """
+
+    Args:
+        trans1=None: Transition letter; however I am not sure whether this is the lower or upper,
+                     but I suspect this is the upper one.
+        trans0=None: Transition letter; however I am not sure whether this is the lower or upper,
+                     but I suspect this is the lower one.
+
+    """
+
+    attrs = ["vl", "v2l", "qqv", "ggv", "bbv", "ddv", "fact", "num_lines", "trans1", "trans0"]
 
     @property
     def lmbdam(self):
@@ -47,7 +56,7 @@ class SetOfLines(a99.AttrsPart):
     def branch(self, value):
         self._branch = value
 
-    def __init__(self, vl=None, v2l=None, qqv=None, ggv=None, bbv=None, ddv=None, fact=None):
+    def __init__(self, vl=None, v2l=None, qqv=None, ggv=None, bbv=None, ddv=None, fact=None, trans1=None, trans0=None):
         a99.AttrsPart.__init__(self)
 
         self.vl = vl
@@ -57,6 +66,8 @@ class SetOfLines(a99.AttrsPart):
         self.bbv = bbv
         self.ddv = ddv
         self.fact = fact
+        self.trans1 = trans1
+        self.trans0 = trans0
 
         # Vectors are keps as lists in order to .append_line() to work
         self._lmbdam = []

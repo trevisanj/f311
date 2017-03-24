@@ -48,7 +48,10 @@ def _floatify(str_):
     try:
         ret = float(str_)
     except:
-        gg = re.match("[\[(]*([0-9.-]+)", str_)
+        # Note: It seems that NIST Chemistry WebBook has some OCR behind.
+        #       I am making some effort to go around some cases I bumped into, for example, : "4.7E-_7"
+
+        gg = re.match("[\[(]*([0-9\.\-E]+)", str_.replace("_", ""))
         if gg is None:
             ret = str_
         else:

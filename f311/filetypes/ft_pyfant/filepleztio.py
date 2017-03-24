@@ -10,6 +10,7 @@ import io
 from collections import namedtuple, defaultdict
 import struct
 import os
+import numpy as np
 
 #: List of all atomic symbols
 _symbols = [
@@ -58,6 +59,13 @@ class FilePlezTiO(DataFile):
         max_J2l=99999: Maximum J" (J lower)
         max_vl=99999: Maximum v' (v upper)
         max_v2l=99999: Maximum v" (v lower)
+
+    Example:
+
+        >>> from f311 import filetypes as ft
+        >>> f = ft.FilePlezTiO(min_gf=10**-4, max_J2l=120, max_vl=9, max_v2l=9)
+        >>> f.load("linelist_reduced46_all_deltacorr.dat")
+        >>> print("Number of lines loaded: {}".format(len(f))
     """
 
     attrs = ["num_lines"]
@@ -79,6 +87,29 @@ class FilePlezTiO(DataFile):
 
     def __iter__(self):
         return iter(self.lines)
+
+    def get_numpy_array(self):
+        """Returns a np array with named fields, same names as in PlezTiOLine"""
+
+        dtype = [("lambda_", float),
+                 ("gf", float),
+                 ("Elow", float),
+                 ("vlow", int),
+                 ("Jlow", float),
+                 ("Nlow", float),
+                 ("symlow", int),
+                 ("Eup", float),
+                 ("vup", int),
+                 ("Jup", float),
+                 ("Nup", float),
+                 ("symup", int),
+                 ("gamrad", float),
+                 ("mol", '|S3'),
+                 ("trans0", '|S1'),
+                 ("trans1", '|S1'),
+                 ("branch", '|S6'), ]
+
+        return np.array(self.lines, dtype=dtype)
 
     def _do_load(self, filename):
         def strip(s): return s.decode("ascii").strip()

@@ -161,29 +161,62 @@ class FileMolDB(FileSQLiteDB):
 
         print(tabulate.tabulate(data, header))
 
-    def load_transitions(self):
+    def get_transition_dict(self):
+        """
+        Generates a dictionary where (molecule, trans0, tran1) can be searched to retrieve state rows
+
+        """
         rm = self.query_molecule()
-        for rowm in rm:
-            rs = self.query_state(id_molecule=rowm["id"])
-            for rows in rs:
-                t = rows["Trans"]
-                key = (rowm["formula"], )
+        ret = {}
+        for row_molecule in rm:
+            rs = self.query_state(id_molecule=row_molecule["id"])
+            for row_state in rs:
+                row_state.None_to_zero()
+                try:
+                    trans_ = row_state["Trans"]
+                    if trans_ is None or trans_ == 0:
+                        continue
+                    keys = self._formula_trans_to_tuples(row_molecule["formula"], trans_)
+
+                except Exception as e:
+                    raise RuntimeError("OLLLLLLLLLLLLLHA O TRANSSS: {}".format(trans_)) from e
+
+                if keys is None:
+                    continue
+                for key in keys:
+                    ret[key] = row_state
+        return ret
+
 
     @staticmethod
-    def _formula_trans_to_keys(formula, trans):
-        lr = [re.split(" ", x.strip()) for x in re.split("[↔←→]", trans)]
-        if "→" in trans:
-            from_ = lr[0]
-            to = lr[1]
-        elif "←" in trans:
-            to = lr[0]
-            from_ = lr[1]
-        else:
-            from_ = to = lr[0]+lr[1]
+    def _formula_trans_to_tuples(formula, trans):
+        """Generates several tuples (formula, trans0, trans1)
 
-        pairs = [(f, t) for t in to for f in from_ if t != f]
+        Args:
+            formula: chemical formula, such as "TiO". This must be the same formula found in a
+                     the 'molecule' table
+            trans: string such as "A ↔ X R", "D ← X R", "B → A R"
 
-        for pair in pairs:
-            key = (formula,)+pair
-            print(key)
+        Returns: list of tuples [(formula, to, from), ...]
+                 Example:  [('TiO', 'A', 'B'), ('TiO', 'R', 'B')]
 
+        """
+
+        try:
+            lr = [re.split(" ", x.strip()) for x in re.split("[↔←→]", trans)]
+            if "→" in trans:
+                from_ = lr[0]
+                to = lr[1]
+            elif "←" in trans:
+                to = lr[0]
+                from_ = lr[1]
+            else:
+                from_ = to = lr[0]+lr[1]
+
+            pairs = [(t, f) for t in to for f in from_ if t != f]
+
+            ret = [(formula,)+pair for pair in pairs]
+        except IndexError:
+            ret = None
+
+        return ret

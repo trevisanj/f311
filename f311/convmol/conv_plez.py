@@ -9,31 +9,43 @@ import a99
 from .convlog import *
 from collections import OrderedDict
 import sys
+import numpy as np
+
 
 __all__ = ["plez_to_sols"]
 
 
 
 def plez_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False, flag_normhlf=False,
-                   flag_fcf=False, flag_quiet=False):
+                   flag_fcf=False, flag_quiet=False, filemoldb=None):
     """
     Converts Plez molecular lines data to PFANT "sets of lines"
+
+    **Note** state_row is ignored
 
     Args:
         mol_row: dict-like,
                  molecule-wide constants,
                  keys: same as as field names in 'moldb:molecule' table
+
         state_row: dict-like,
                    state-wide constants,
                    keys: same as field names in 'moldb:state' table
-        fileobj: FileVald3 instance with only one species
+
+        fileobj: FilePlezTiO instance
+
         qgbd_calculator: callable that can calculate "qv", "gv", "bv", "dv",
                          e.g., calc_qbdg_tio_like()
+
         flag_hlf: Whether to calculate the gf's using Honl-London factors or
-                  use Kurucz's loggf instead
+                  use Plez's gf instead
 
         flag_normhlf: Whether to multiply calculated gf's by normalization factor
+
         flag_quiet: Will not log exceptions when a molecular line fails
+
+        filemoldb: FileMolDB instance
+
 
     Returns: (a list of ftpyfant.SetOfLines objects, a MolConversionLog object)
 
@@ -54,11 +66,16 @@ def plez_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False, f
     # C     HL: Honl-London factor
     # C     FR: oscillator strength
 
-    if not isinstance(fileobj, ft.FileKuruczMolecule):
+    if not isinstance(fileobj, ft.FilePlezTiO):
         raise TypeError("Invalid type for argument 'fileobj': {}".format(type(fileobj).__name__))
 
-    lines = fileobj.lines
-    n = len(lines)
+    transition_dict = filemoldb.get_transition_dict()
+    linedata = fileobj.get_numpy_array()
+
+    trcols = linedata[["vup", "vlow", "trans1", "trans0"]]
+    trset = np.unique(trcols)
+    sols = []
+
 
     S = mol_row["s"]
     DELTAK = mol_row["cro"]
@@ -70,77 +87,65 @@ def plez_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False, f
 
     if flag_hlf:
         formulas = ph.doublet.get_honllondon_formulas(LAML, LAM2L)
-    sols = OrderedDict()  # one item per (vl, v2l) pair
-    log = MolConversionLog(n)
+    log = MolConversionLog(len(fileobj))
 
-
-    # This factor allows to reproduce the Hônl-London factors in `moleculagrade.dat` for OH blue,
-    # first set-of-lines
-    scale_factor = 730.485807466/2
-
-    for i, line in enumerate(lines):
-        assert isinstance(line, ft.KuruczMolLine)
-        # TODO is it spin 2l?
-        branch = ph.doublet.quanta_to_branch(line.Jl, line.J2l, line.spin2l)
+    for tr in trset:
+        trans1 = tr["trans1"].decode("ascii")
+        trans0 = tr["trans0"].decode("ascii")
         try:
-            # TODO take this outta here, for now just to filter to match others
-            # fcf = cm.get_fcf_oh(line.vl, line.v2l)
-
-            wl = line.lambda_
-
-            # Normaliza = 1/((2.0*line.J2l+1)*(2.0*S+1)*(2.0-DELTAK))
-
-            if flag_normhlf:
-                # k = 2 / ((2.0*line.J2l+1)*(2.0*S+1)*(2.0-DELTAK))
-                # k = 2 / ((2.0*line.J2l+1))
-                k = 2/ ((2*S+1) * (2*line.J2l+1) * (2-DELTAK))
-                # k = (2.0*line.J2l+1)
-                # k = (2*S+1) * (2*line.J2l+1) * (2-DELTAK)
-            else:
-                k = 1
-
-#            k *= fe
-
-            if flag_hlf:
-                hlf = formulas[branch](line.J2l)
-                gf_pfant = hlf*k
-
-            else:
-                # Normaliza = scale_factor * k
-                gf_pfant = k*10**line.loggf
-
-            if flag_fcf:
-                fcf = cm.get_fcf_oh(line.vl, line.v2l)
-
-                gf_pfant *= fcf
-
-                # if branch[0] == "P":
-                #     gf_pfant *= 3.651E-2 * (1 + 4.309E-6 * x + 1.86E-10 * (x ** 2)) ** 2
-                # elif branch[0] == "Q":
-                #     gf_pfant *= 3.674E-2 * (1 + 6.634E-6 * x + 1.34E-10 * (x ** 2)) ** 2
-                # elif branch[0] == "R":
-                #     gf_pfant *= 3.698E-2 * (1 + 1.101E-5 * x + 7.77E-11 * (x ** 2)) ** 2
-                # else:
-                #     raise RuntimeError("Shouldn't fall in here (branch ie neither P/Q/R)")
-
-            J2l_pfant = line.J2l
-        except Exception as e:
-            msg = "#{}{} line: {}".format(i + 1, a99.ordinal_suffix(i + 1), a99.str_exc(e))
+            state_row = transition_dict[(mol_row["formula"], trans1, trans0)]
+        except KeyError as e:
+            msg = "Will have to skip transition: '{}'".format(a99.str_exc(e))
             log.errors.append(msg)
             if not flag_quiet:
                 a99.get_python_logger().exception(msg)
             continue
 
-        sol_key = "%3d%3d" % (line.vl, line.v2l)  # (v', v'') transition (v_sup, v_inf)
-        if sol_key not in sols:
-            qgbd = qgbd_calculator(state_row, line.v2l)
-            qqv = qgbd["qv"]
-            ggv = qgbd["gv"]
-            bbv = qgbd["bv"]
-            ddv = qgbd["dv"]
-            sols[sol_key] = ft.SetOfLines(line.vl, line.v2l, qqv, ggv, bbv, ddv, 1.)
+        qgbd = qgbd_calculator(state_row, tr["vlow"])
+        qqv = qgbd["qv"]
+        ggv = qgbd["gv"]
+        bbv = qgbd["bv"]
+        ddv = qgbd["dv"]
+        sol = ft.SetOfLines(tr["vup"], tr["vlow"], qqv, ggv, bbv, ddv, 1., trans1, trans0)
+        sols.append(sol)
 
-        sol = sols[sol_key]
-        sol.append_line(wl, gf_pfant, J2l_pfant, branch)
+        mask = trcols == tr  # Boolean mask for linedata
+        for i, line in enumerate(linedata[mask]):
+            try:
+                wl = line["lambda_"]
+                J2l = line["Jlow"]
+                branch = line["branch"].decode("ascii")
+                gf = line["gf"]
 
-    return (list(sols.values()), log)
+                if flag_normhlf:
+                    k = 2./ ((2*S+1) * (2*J2l+1) * (2-DELTAK))
+                else:
+                    k = 1.
+
+                if flag_hlf:
+                    raise NotImplementedError("Hönl-London factors not implemented for Plez molecular lines file conversion")
+
+                    # hlf = formulas[branch](line.J2l)
+                    # gf_pfant = hlf*k
+
+                else:
+                    gf_pfant = k*gf
+
+                if flag_fcf:
+                    raise RuntimeError("Franck-Condon factors not implemented for Plez molecular lines file conversion")
+
+                    # fcf = cm.get_fcf_oh(line.vl, line.v2l)
+                    # gf_pfant *= fcf
+
+                sol.append_line(wl, gf_pfant, J2l, branch)
+
+
+            except Exception as e:
+                msg = "#{}{} line: {}".format(i + 1, a99.ordinal_suffix(i + 1), a99.str_exc(e))
+                log.errors.append(msg)
+                if not flag_quiet:
+                    a99.get_python_logger().exception(msg)
+                continue
+
+
+    return (sols, log)
