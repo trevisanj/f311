@@ -1,4 +1,4 @@
-__all__ = ["FileMolecules", "Molecule", "SetOfLines", ]
+__all__ = ["FileMolecules", "Molecule", "SetOfLines", "mol_row_to_molecule"]
 
 
 
@@ -107,11 +107,11 @@ class SetOfLines(a99.AttrsPart):
         self._lmbdam, self._sj, self._jj, self._branch = l, s, j, b
 
     def append_line(self, lmbdam, sj, jj, branch):
+        if isinstance(branch, str):
+            branch = branch_to_iz(branch)
         self._lmbdam.append(lmbdam)
         self._sj.append(sj)
         self._jj.append(jj)
-        if isinstance(branch, str):
-            branch = branch_to_iz(branch)
         self._branch.append(branch)
 
     def sort(self):
@@ -314,6 +314,17 @@ class FileMolecules(DataFile):
     def __getitem__(self, *args):
         return self.molecules.__getitem__(*args)
 
+    def cut(self, lzero, lfin):
+        """Reduces the number of lines to only the ones whose lmbdam is inside [lzero, lfin]"""
+
+        for i in reversed(list(range(len(self)))):
+            m = self.molecules[i]
+            m.cut(lzero, lfin)
+            if len(m) == 0:
+                del self.molecules[i]
+
+
+
     def _do_load(self, filename):
         """Clears internal lists and loads from file."""
 
@@ -444,15 +455,6 @@ class FileMolecules(DataFile):
                 raise type(e)(("Error around %d%s row of file '%s'" %
                     (r+1, a99.a99.ordinal_suffix(r+1), filename))+": "+str(e)).with_traceback(sys.exc_info()[2])
 
-    def cut(self, lzero, lfin):
-        """Reduces the number of lines to only the ones whose lmbdam is inside [lzero, lfin]"""
-
-        for i in reversed(list(range(len(self)))):
-            m = self.molecules[i]
-            m.cut(lzero, lfin)
-            if len(m) == 0:
-                del self.molecules[i]
-
     def _do_save_as(self, filename):
         with open(filename, "w") as h:
             a99.write_lf(h, str(len(self.molecules)))
@@ -488,7 +490,34 @@ class FileMolecules(DataFile):
                 num_sol = len(m.sol)
                 for i, s in enumerate(m.sol):
                     num_lines = len(s)  # number of lines for current set-of-lines
-                    for j in range(num_lines):
-                        numlin = 0 if j < num_lines-1 else 9 if i == num_sol-1 else 1
-                        a99.write_lf(h, "%.10g %.10g %.10g %s %d" % (s.lmbdam[j], s.sj[j], s.jj[j],
-                                                                 s.branch[j], numlin))
+                    try:
+                        for j in range(num_lines):
+                            numlin = 0 if j < num_lines-1 else 9 if i == num_sol-1 else 1
+                            a99.write_lf(h, "%.10g %.10g %.10g %s %d" % (s.lmbdam[j], s.sj[j], s.jj[j],
+                                                                     s.branch[j], numlin))
+                    except:
+                        print("oooooooooooooooo")
+
+def mol_row_to_molecule(mol_row):
+    """Assembles a Molecule object from record from a FileMolDB database
+
+    Args:
+        mol_row: MyDBRow object representing row from 'molecules' table in a FileMolDB database.
+                 A dict-like object with keys "name", "formula", "fe", "do", "am", "am", "bm", "ua",
+                 "ub", "te", "cro", "s"
+    """
+
+    mol = Molecule()
+    mol.description = "{name} ({formula})".format(**mol_row)
+    mol.symbols = [mol_row["symbol_a"], mol_row["symbol_b"]]
+    mol.fe = mol_row["fe"]
+    mol.do = mol_row["do"]
+    mol.mm = mol_row["am"] + mol_row["bm"]
+    mol.am = mol_row["am"]
+    mol.bm = mol_row["bm"]
+    mol.ua = mol_row["ua"]
+    mol.ub = mol_row["ub"]
+    mol.te = mol_row["te"]
+    mol.cro = mol_row["cro"]
+    mol.s = mol_row["s"]
+    return mol
