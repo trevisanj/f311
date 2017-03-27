@@ -17,6 +17,8 @@ class FileFits(DataFile):
     HDUList.readall()
     """
 
+    # Take this out of explorer.py, too generic
+    flag_collect = False
     flag_txt = False
     attrs = ["hdulist"]
 

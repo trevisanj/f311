@@ -78,7 +78,7 @@ def _collect_classes(m):
         classes.extend([class_ for class_ in newclasses if class_ not in classes])
         # classes.extend(newclasses)
 
-    file_classes = a99.get_classes_in_module(m, ft.DataFile)
+    file_classes = [class_ for class_ in a99.get_classes_in_module(m, ft.DataFile) if class_.flag_collect]
 
     # Classes to consider when attempts to load a text file (see load_any_file())
     _extend(_classes_txt, [class_ for class_ in file_classes if class_.flag_txt])

@@ -460,7 +460,8 @@ class FileMolecules(DataFile):
             a99.write_lf(h, str(len(self.molecules)))
             a99.write_lf(h, self.titm)
             a99.write_lf(h, " ".join([str(x.nv) for x in self.molecules]))
-            for m in self.molecules:
+            for i_m, m in enumerate(self.molecules):
+                print("Saving '{}': molecule {}/{}".format(filename, i_m+1, len(self.molecules)))
 
                 # # Assembles "titulo"
                 # ## Transitions
@@ -490,13 +491,11 @@ class FileMolecules(DataFile):
                 num_sol = len(m.sol)
                 for i, s in enumerate(m.sol):
                     num_lines = len(s)  # number of lines for current set-of-lines
-                    try:
-                        for j in range(num_lines):
-                            numlin = 0 if j < num_lines-1 else 9 if i == num_sol-1 else 1
-                            a99.write_lf(h, "%.10g %.10g %.10g %s %d" % (s.lmbdam[j], s.sj[j], s.jj[j],
-                                                                     s.branch[j], numlin))
-                    except:
-                        print("oooooooooooooooo")
+                    for j in range(num_lines):
+                        numlin = 0 if j < num_lines-1 else 9 if i == num_sol-1 else 1
+                        a99.write_lf(h, "%.10g %.10g %.10g %s %d" %
+                                     (s._lmbdam[j], s._sj[j], s._jj[j], s._branch[j], numlin))
+
 
 def mol_row_to_molecule(mol_row):
     """Assembles a Molecule object from record from a FileMolDB database
