@@ -8,21 +8,27 @@ import a99
 from .. import DataFile, adjust_atomic_symbol, branch_to_iz, iz_to_branch, description_to_symbols
 import re
 
-# TODO figure out trans0, trans1
+# TODO figure out state_from, state_to
 
 @a99.froze_it
 class SetOfLines(a99.AttrsPart):
     """
 
     Args:
-        trans1=None: Transition letter; however I am not sure whether this is the lower or upper,
-                     but I suspect this is the upper one.
-        trans0=None: Transition letter; however I am not sure whether this is the lower or upper,
+        vl=None: upper vibrational state (v')
+        v2l=None: lower vibrational state (v")
+        qqv=None: Franck-Condon Factor
+        ggv=None: TODO ?doc? (calculated from diatomic molecular constants)
+        bbv=None: TODO ?doc? (calculated from diatomic molecular constants)
+        ddv=None: TODO ?doc? (calculated from diatomic molecular constants)
+        fact=None: TODO ?doc? (usually =1.)
+        state_from=None: Transition letter; however I am not sure whether this is the lower or upper,
                      but I suspect this is the lower one.
-
+        state_to=None: Transition letter; however I am not sure whether this is the lower or upper,
+                     but I suspect this is the upper one.
     """
 
-    attrs = ["vl", "v2l", "qqv", "ggv", "bbv", "ddv", "fact", "num_lines", "trans1", "trans0"]
+    attrs = ["vl", "v2l", "qqv", "ggv", "bbv", "ddv", "fact", "num_lines", "state_from", "state_to"]
 
     @property
     def lmbdam(self):
@@ -56,7 +62,7 @@ class SetOfLines(a99.AttrsPart):
     def branch(self, value):
         self._branch = value
 
-    def __init__(self, vl=None, v2l=None, qqv=None, ggv=None, bbv=None, ddv=None, fact=None, trans1=None, trans0=None):
+    def __init__(self, vl=None, v2l=None, qqv=None, ggv=None, bbv=None, ddv=None, fact=None, state_from=None, state_to=None):
         a99.AttrsPart.__init__(self)
 
         self.vl = vl
@@ -66,8 +72,10 @@ class SetOfLines(a99.AttrsPart):
         self.bbv = bbv
         self.ddv = ddv
         self.fact = fact
-        self.trans1 = trans1
-        self.trans0 = trans0
+        # # Transitional information (not stored in PFANT molecular lines file)
+        # Example: 'A', 'X'
+        self.state_from = state_from
+        self.state_to = state_to
 
         # Vectors are keps as lists in order to .append_line() to work
         self._lmbdam = []

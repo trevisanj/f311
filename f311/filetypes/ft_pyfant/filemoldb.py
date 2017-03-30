@@ -163,7 +163,7 @@ class FileMolDB(FileSQLiteDB):
 
     def get_transition_dict(self):
         """
-        Generates a dictionary where (molecule, trans0, tran1) can be searched to retrieve state rows
+        Generates a dictionary where (molecule, state_from, tran1) can be searched to retrieve state rows
 
         """
         rm = self.query_molecule()
@@ -190,14 +190,14 @@ class FileMolDB(FileSQLiteDB):
 
     @staticmethod
     def _formula_trans_to_tuples(formula, trans):
-        """Generates several tuples (formula, trans0, trans1)
+        """Generates several tuples (formula, state_from, state_to)
 
         Args:
             formula: chemical formula, such as "TiO". This must be the same formula found in a
                      the 'molecule' table
             trans: string such as "A ↔ X R", "D ← X R", "B → A R"
 
-        Returns: list of tuples [(formula, to, from), ...]
+        Returns: list of tuples [(formula, state_from, state_to), ...]
                  Example:  [('TiO', 'A', 'B'), ('TiO', 'R', 'B')]
 
         """
@@ -213,7 +213,7 @@ class FileMolDB(FileSQLiteDB):
             else:
                 from_ = to = lr[0]+lr[1]
 
-            pairs = [(t, f) for t in to for f in from_ if t != f]
+            pairs = [(f, t) for t in to for f in from_ if t != f]
 
             ret = [(formula,)+pair for pair in pairs]
         except IndexError:

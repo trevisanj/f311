@@ -38,7 +38,7 @@ _symbols = [
 
 
 PlezTiOLine = namedtuple("PlezTiOLine", ["lambda_", "gf", "Elow", "vlow", "Jlow",
-    "Nlow", "symlow", "Eup", "vup", "Jup", "Nup", "symup", "gamrad", "mol", "trans0", "trans1", "branch"])
+    "Nlow", "symlow", "Eup", "vup", "Jup", "Nup", "symup", "gamrad", "mol", "state_from", "state_to", "branch"])
 PlezTiOLine.__doc__ = """Represents one Plez molecular line
 
 Field names were maintained as in Plez 'ReadmeTiO' file with slight changes.
@@ -88,9 +88,31 @@ class FilePlezTiO(DataFile):
     def __iter__(self):
         return iter(self.lines)
 
+
+
     def get_numpy_array(self):
         """Returns a np array with named fields, same names as in PlezTiOLine"""
+        dtype = self._get_dtype()
+        return np.array(self.lines, dtype=dtype)
 
+    def _get_dtype(self):
+        # dtype = [("lambda_", float),
+        #          ("gf", float),
+        #          ("Elow", float),
+        #          ("vlow", int),
+        #          ("Jlow", float),
+        #          ("Nlow", float),
+        #          ("symlow", int),
+        #          ("Eup", float),
+        #          ("vup", int),
+        #          ("Jup", float),
+        #          ("Nup", float),
+        #          ("symup", int),
+        #          ("gamrad", float),
+        #          ("mol", '|S3'),
+        #          ("state_from", '|S1'),
+        #          ("state_to", '|S1'),
+        #          ("branch", '|S6'), ]
         dtype = [("lambda_", float),
                  ("gf", float),
                  ("Elow", float),
@@ -105,11 +127,10 @@ class FilePlezTiO(DataFile):
                  ("symup", int),
                  ("gamrad", float),
                  ("mol", '|S3'),
-                 ("trans0", '|S1'),
-                 ("trans1", '|S1'),
+                 ("state_from", '|S1'),
+                 ("state_to", '|S1'),
                  ("branch", '|S6'), ]
-
-        return np.array(self.lines, dtype=dtype)
+        return dtype
 
     def _do_load(self, filename):
         def strip(s): return s.decode("ascii").strip()

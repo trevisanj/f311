@@ -72,8 +72,26 @@ def plez_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False, f
     transition_dict = filemoldb.get_transition_dict()
     linedata = fileobj.get_numpy_array()
 
-    trcols = linedata[["vup", "vlow", "trans1", "trans0"]]
-    trset = np.unique(trcols)
+    trcols = linedata[["vup", "vlow", "state_from", "state_to"]]
+    trset = trcols.drop_duplicates()
+    trset["id_state"] = 0
+
+
+    for _, tr in trset.iterrows():
+        state_from = tr["state_from"].decode("ascii")
+        state_to = tr["state_to"].decode("ascii")
+        try:
+            state_row = transition_dict[(mol_row["formula"], state_from, state_to)]
+            tr["id_state"] = state_row["id"]
+        except KeyError as e:
+            msg = "Will have to skip transition: '{}'".format(a99.str_exc(e))
+            log.errors.append(msg)
+            if not flag_quiet:
+                a99.get_python_logger().exception(msg)
+            continue
+
+
+
     sols = []
 
 
@@ -90,10 +108,10 @@ def plez_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False, f
     log = MolConversionLog(len(fileobj))
 
     for tr in trset:
-        trans1 = tr["trans1"].decode("ascii")
-        trans0 = tr["trans0"].decode("ascii")
+        state_from = tr["state_from"].decode("ascii")
+        state_to = tr["state_to"].decode("ascii")
         try:
-            state_row = transition_dict[(mol_row["formula"], trans1, trans0)]
+            state_row = transition_dict[(mol_row["formula"], state_from, state_to)]
         except KeyError as e:
             msg = "Will have to skip transition: '{}'".format(a99.str_exc(e))
             log.errors.append(msg)
@@ -106,7 +124,7 @@ def plez_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False, f
         ggv = qgbd["gv"]
         bbv = qgbd["bv"]
         ddv = qgbd["dv"]
-        sol = ft.SetOfLines(tr["vup"], tr["vlow"], qqv, ggv, bbv, ddv, 1., trans1, trans0)
+        sol = ft.SetOfLines(tr["vup"], tr["vlow"], qqv, ggv, bbv, ddv, 1., state_from, state_to)
         sols.append(sol)
 
         mask = trcols == tr  # Boolean mask for linedata
