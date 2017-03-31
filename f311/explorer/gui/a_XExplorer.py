@@ -388,12 +388,14 @@ class XExplorer(QMainWindow):
         if self.__flag_loading:
             return
 
+        from f311 import explorer as ex
+
         self.__flag_loading = True
         self.__set_status_text("Collecting errors, please wait...")
         try:
             k = a99.ErrorCollector()
             k.collect_errors(self.dir)
-            w = a99.XHTML(self, k.get_html(), "Errors in '{0!s}' and subdirectories".format(self.dir))
+            w = ex.XHTML(self, k.get_html(), "Errors in '{0!s}' and subdirectories".format(self.dir))
             w.show()
         except Exception as e:
             MSG = "Could not collect errors"

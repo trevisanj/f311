@@ -14,7 +14,6 @@ import subprocess
 from threading import Lock
 import a99
 from .. import filetypes as ft
-#from .. import pyfant as pf
 
 
 # Indexes to use in Conf.sequence property
@@ -346,7 +345,7 @@ class Conf(object):
 
         if opt is None:
             opt = self.__opt
-        if opt.flprefix is not None:
+        if opt.fwhm is not None:
             return opt.fwhm
         if self.file_main is not None:
             return self.file_main.fwhm
@@ -380,7 +379,7 @@ class Conf(object):
             flprefix = self.get_flprefix()
             # True or None evaluates to "norm"
             ext = ("spec" if self.__opt.norm == False else "norm") + \
-                  ".nulbad.{:5.3f}".format(self.get_fwhm())
+                  (".nulbad.{:5.3f}".format(self.get_fwhm()))
             filename = flprefix+"."+ext
         return filename
 

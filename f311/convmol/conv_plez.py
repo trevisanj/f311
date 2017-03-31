@@ -73,22 +73,23 @@ def plez_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False, f
     linedata = fileobj.get_numpy_array()
 
     trcols = linedata[["vup", "vlow", "state_from", "state_to"]]
-    trset = trcols.drop_duplicates()
-    trset["id_state"] = 0
-
-
-    for _, tr in trset.iterrows():
-        state_from = tr["state_from"].decode("ascii")
-        state_to = tr["state_to"].decode("ascii")
-        try:
-            state_row = transition_dict[(mol_row["formula"], state_from, state_to)]
-            tr["id_state"] = state_row["id"]
-        except KeyError as e:
-            msg = "Will have to skip transition: '{}'".format(a99.str_exc(e))
-            log.errors.append(msg)
-            if not flag_quiet:
-                a99.get_python_logger().exception(msg)
-            continue
+    trset = np.unique(trcols)
+    # trset = trcols.drop_duplicates()
+    # trset["id_state"] = 0
+    #
+    #
+    # for _, tr in trset.iterrows():
+    #     state_from = tr["state_from"].decode("ascii")
+    #     state_to = tr["state_to"].decode("ascii")
+    #     try:
+    #         state_row = transition_dict[(mol_row["formula"], state_from, state_to)]
+    #         tr["id_state"] = state_row["id"]
+    #     except KeyError as e:
+    #         msg = "Will have to skip transition: '{}'".format(a99.str_exc(e))
+    #         log.errors.append(msg)
+    #         if not flag_quiet:
+    #             a99.get_python_logger().exception(msg)
+    #         continue
 
 
 
