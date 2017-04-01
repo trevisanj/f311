@@ -35,6 +35,11 @@ def draw_15_tiles(hdulist, image_width=1000):
         matplotlib figure
     """
 
+    band_names = "ugriz"
+    row_names = ["Image", "Model", "Residual"]
+
+    # TODO fine-tune axis positions (not with tight_layout())
+
 
     fig = plt.figure()
     for i, hdu in enumerate(hdulist[1:16]):
@@ -49,10 +54,27 @@ def draw_15_tiles(hdulist, image_width=1000):
         im[im < 0] =  0
         # Transforms color values to something that will enhance small values
         image_data = np.power(im, 0.2)
+        hei, wid = image_data.shape
 
         plt.imshow(image_data, cmap='gray')
-        plt.ylim([0, image_data.shape[0] - 1])
-        plt.ylim([0, image_data.shape[1] - 1])
+        plt.ylim([0, hei - 1])
+        plt.xlim([0, wid - 1])
+
+        if i < 5:
+            # First row, will indicate band on top
+            plt.gca().text(wid/2, hei+4, band_names[i],
+                    horizontalalignment='center',
+                    verticalalignment='bottom')
+            # plt.title(band_names[i])
+        if i % 5 == 4:
+            # Last column, will
+            # plt.gca().yaxis.set_label_position("right")
+            # plt.ylabel(row_names[int(i/5)])
+            plt.gca().text(wid+4, hei/2, row_names[int(i/5)],
+                    horizontalalignment='left',
+                    verticalalignment='center',
+                    rotation=90)
+
 
 
     a99.set_figure_size(fig, image_width, image_width/5*3)

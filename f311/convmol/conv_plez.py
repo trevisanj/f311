@@ -95,7 +95,6 @@ def plez_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False, f
 
     sols = []
 
-
     S = mol_row["s"]
     DELTAK = mol_row["cro"]
     fe = mol_row["fe"]
