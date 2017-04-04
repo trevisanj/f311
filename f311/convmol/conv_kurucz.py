@@ -74,10 +74,6 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
     log = MolConversionLog(n)
 
 
-    # This factor allows to reproduce the Hônl-London factors in `moleculagrade.dat` for OH blue,
-    # first set-of-lines
-    scale_factor = 730.485807466/2
-
     for i, line in enumerate(lines):
         assert isinstance(line, ft.KuruczMolLine)
         # TODO is it spin 2l?
@@ -106,13 +102,12 @@ def kurucz_to_sols(mol_row, state_row, fileobj, qgbd_calculator, flag_hlf=False,
                 gf_pfant = hlf*k
 
             else:
-                # Normaliza = scale_factor * k
                 gf_pfant = k*10**line.loggf
 
             if flag_fcf:
                 fcf = cm.get_fcf_oh(line.vl, line.v2l)
 
-                gf_pfant *= fcf
+                gf_pfant /= fcf
 
                 # if branch[0] == "P":
                 #     gf_pfant *= 3.651E-2 * (1 + 4.309E-6 * x + 1.86E-10 * (x ** 2)) ** 2
