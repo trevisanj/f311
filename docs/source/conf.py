@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+#*#*#*#
+# -JT- Made changes to increase the maximum width of the reading area
+# -JT- http://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs
+# -JT- Files _templates/layout.html and _static/style.css are part of this solution
+#*#*#*#
+
 #
 # f311 documentation build configuration file, created by
 # sphinx-quickstart on Wed Dec 21 16:20:55 2016.
@@ -38,7 +45,7 @@ from recommonmark.parser import CommonMarkParser
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon']
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['ntemplates']
+templates_path = ['_templates']
 
 
 # The suffix(es) of source filenames.
@@ -93,7 +100,20 @@ todo_include_todos = False
 
 # html_theme = 'alabaster'
 # html_theme = 'sphinxdoc'
-html_theme = 'haiku'
+# html_theme = 'haiku'
+# html_theme = 'graphite'
+# html_theme_path = ["/home/j/Documents/projects/astro/github/f311/docs"]
+
+
+# import sphinx_readable_theme
+# html_theme_path = [sphinx_readable_theme.get_html_theme_path()]
+# html_theme = 'readable'
+
+import sphinx_rtd_theme
+html_theme = "sphinx_rtd_theme"
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -104,7 +124,7 @@ html_theme = 'haiku'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['nstatic']
+html_static_path = ['_static']
 
 
 # -- Options for HTMLHelp output ------------------------------------------

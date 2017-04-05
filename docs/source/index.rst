@@ -1,22 +1,12 @@
-Project *f311*
-==============
+f311 -- Python Astronomy resources
+==================================
 
-Collection of Astronomy-related packages written in Python.
+Project f311 is a collection of Astronomy-related packages and standalone applications written in Python.
 
-Spectral synthesis example:
+This project started in 2015 at IAG-USP (Institute of Astronomy, Geophysics and Atmospheric Sciences at University of São Paulo, Brazil).
+It has grown based on our daily needs, so we don't intend to be throughout in any of the topics covered, but we hope that you will find it useful.
 
-.. code:: python
-
-   import f311.pyfant as pf
-   import f311.explorer as ex
-   obj = pf.Pfant()
-   obj.run()
-   obj.load_result()
-   ex.plot_spectra([obj.result["cont"], obj.result["spec"], obj.result["norm"]])
-
-
-Sub-packages
---------
+Here is a list of f311 subpackages and their topics. 
 
 .. toctree::
    :maxdepth: 1
@@ -31,35 +21,13 @@ Sub-packages
 Installation
 ------------
 
-Required Software
-~~~~~~~~~~~~~~~~~
+f311 requires Python 3.x (Python 2 no longer supported due to maintainability issues, sorry).
 
-- Python 3.xx
+Knowing the mess with different ecosystems and extant package versions, we provide four different installation methods.
 
-Python packages
-^^^^^^^^^^^^^^^
-- a99
-- matplotlib
-- scipy
-- numpy
-- astropy
-- configobj
-- tabulate
-- fortranformat
+Method 1
 
-Optional packages (functionality will be limited without them):
-
-- PyQt5
-- bs4
-- robobrowser
-- requests
-- rows
-
-Install
-~~~~~~~
-
-Method 1 (prefer _pip_, use _apt_ package as alternative)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Try to install everything with pip:
 
 .. code:: shell
 
@@ -68,18 +36,22 @@ Method 1 (prefer _pip_, use _apt_ package as alternative)
    pip install f311
 
 
-**Note** You may need superuser rights (``sudo``) to install the packages above.
-
-**Note** You may have to replace ``pip`` with ``pip3`` depending on your environment.
-
-If _PyQt5_ fails to install with _pip_:
+If pyqt5 fails to install with pip, an alternative is to use apt-get:
 
 .. code:: shell
 
    sudo apt-get install python3-PyQt5
 
-Method 2 (prefer _apt_, use _pip_ if no _apt_ package available)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Note** You may need superuser rights (``sudo``) to install the packages above.
+
+**Note** You may have to replace ``pip`` with ``pip3`` depending on your environment.
+
+
+Method 2
+^^^^^^^^
+
+Use this method if you prefer to use Debian-based Linux packaging.
 
 .. code:: shell
 
@@ -87,13 +59,14 @@ Method 2 (prefer _apt_, use _pip_ if no _apt_ package available)
    sudo pip3 install a99 configobj robobrowser fortranformat tabulate # Requirements not in apt repository rows
    sudo pip3 install f311
 
-Method 3 (virtual environment with _conda_)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Method 3
+^^^^^^^^
 
-This may be an alternative if you want to work with a separate installation of Python and related packages.
-Here you need to have _Anaconda_ or _Miniconda_ installed.
+This method uses a **conda** virtual environment. It works with a separate installation of Python and related packages.
 
-Create a new virtual environment called "astroenv" (or any name you like):
+First you will need to have Anaconda or Miniconda installed. If you have none of these installed yet, just install Miniconda.
+
+Once Anaconda/Miniconda is installed, create a new virtual environment called "astroenv" (or any name you like):
 
 .. code:: shell
 
@@ -105,7 +78,7 @@ Activate this new virtual environment:
 
    source activate astroenv
 
-Now you should be able to install _f311_ from _pip_:
+Now you should be able to install everything using pip:
 
 .. code:: shell
 
@@ -124,10 +97,14 @@ To deactivate the environment:
 
    source deactivate
 
-Method 4 (development mode)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Method 4 (developer mode)
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Clone repository:
+This method is intended for developers or if you would like to pull overnight f311 versions instead of the pip version.
+
+First install all required packages using either Method 1/2/3 above (but do not install f311).
+
+To install f311 package, clone the GitHub repository:
 
 .. code:: shell
 
@@ -139,16 +116,21 @@ or
 
    git clone http://github.com/trevisanj/f311
 
-Install in **developer** mode:
+Then, install in **developer** mode:
 
 .. code:: shell
 
    cd f311
-   sudo python3 setup.py develop
+   python setup.py develop
+   
+**Note** The command above may vary having the ``sudo`` and/or ``python3`` flavor.
 
 
-Installation troubleshooting
+Troubleshooting installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MatPlotLib and PyQt5
+^^^^^^^^^^^^^^^^^^^^
 
 .. code:: shell
 
@@ -158,7 +140,10 @@ Installation troubleshooting
 
 **Solution**: update Matplotlib to version 1.4 or later
 
+Problems with package bs4
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
+TODO
 
 
 More
@@ -168,3 +153,23 @@ More
 * :ref:`modindex` (whole *f311* package tree)
 * :ref:`search`
 * :doc:`license`
+
+How to contribute
+-----------------
+
+There are several ways in which you can contribute to this project:
+
+* Report a bug
+* Give some suggestions feedback
+* Write documentation
+* Send examples
+* Contribute with coding
+
+If you would like to contribute to this project, please create a pull request on GitHub and/or drop an e-mail to juliotrevisan@gmail.com
+
+
+Funding
+-------
+
+Funded by FAPESP - Research Support Foundation of the State of São Paulo, Brazil (2015-2017).
+

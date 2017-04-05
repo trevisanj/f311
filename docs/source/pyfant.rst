@@ -20,6 +20,18 @@ fashion.
 Quick start
 -----------
 
+The following example Spectral synthesis example:
+
+.. code:: python
+
+   import f311.pyfant as pf
+   import f311.explorer as ex
+   obj = pf.Pfant()
+   obj.run()
+   obj.load_result()
+   ex.plot_spectra([obj.result["cont"], obj.result["spec"], obj.result["norm"]])
+
+
 Using *pyfant* applications
 ---------------------------
 
