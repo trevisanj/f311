@@ -13,7 +13,6 @@ import numpy as np
 import a99
 import f311.filetypes as ft
 
-
 __all__ = ["plot_spectra", "plot_spectra_overlapped", "plot_spectra_pieces_pdf",
  "plot_spectra_pages_pdf", "draw_spectra", "PlotSpectrumSetup"]
 
@@ -144,6 +143,8 @@ def plot_spectra_pieces_pdf(ss, aint=10, pdf_filename='pieces.pdf', setup=_defau
     **Note** overrides setup.fmt_xlabel; leaves y-labell and title blank
     """
 
+    import f311.explorer as ex
+
     xmin, xmax, ymin_, ymax, _, yspan = _calc_max_min(ss)
     ymin = ymin_ if setup.ymin is None else setup.ymin
 
@@ -161,7 +162,7 @@ def plot_spectra_pieces_pdf(ss, aint=10, pdf_filename='pieces.pdf', setup=_defau
         lambda1 = lambda0+aint
         logger.info("Printing page {0:d}/{1:d} ([{2:g}, {3:g}])".format(h+1, num_pages, lambda0, lambda1))
         for i, s in enumerate(ss):
-            s_cut = a99.cut_spectrum(s, lambda0, lambda1)
+            s_cut = ex.cut_spectrum(s, lambda0, lambda1)
             ax = plt.gca()
             ax.plot(s_cut.x, s_cut.y, label=s.title)
         plt.xlabel('Wavelength (interval: [{0:g}, {1:g}])'.format(lambda0, lambda1))
@@ -252,6 +253,7 @@ def draw_spectra(ss, title=None, num_rows=None, setup=_default_setup):
     xmax = -1e38
     i, j = -1, num_cols
     xunit, yunit = None, None
+    any_span = False
     for s in ss:
         j += 1
         if j >= num_cols:
@@ -270,7 +272,9 @@ def draw_spectra(ss, title=None, num_rows=None, setup=_default_setup):
         _set_plot(ax.set_ylabel, setup.fmt_ylabel, s)
         _set_plot(ax.set_title, setup.fmt_title, s)
 
-        xmin, xmax = min(min(s.x), xmin), max(max(s.x), xmax)
+        if len(s.x) > 0:
+            xmin, xmax = min(min(s.x), xmin), max(max(s.x), xmax)
+            any_span = True
 
         if xunit is None:
             xunit = s.xunit
@@ -284,8 +288,9 @@ def draw_spectra(ss, title=None, num_rows=None, setup=_default_setup):
             if yunit != s.yunit:
                 raise RuntimeError("Spectra x-units do not match")
 
-    span = xmax - xmin
-    ax.set_xlim([xmin - span * _T, xmax + span * _T])
+    if any_span:
+        span = xmax - xmin
+        ax.set_xlim([xmin - span * _T, xmax + span * _T])
     for j in range(num_cols):
         ax = axarr[num_rows - 1, j]
         _set_plot(ax.set_xlabel, setup.fmt_xlabel, s)

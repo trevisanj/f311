@@ -12,12 +12,15 @@ import a99
 __all__ = ["cut_spectrum", "crop_splist",]
 def cut_spectrum(sp, l0, lf):
     """
-    Cuts spectrum given a wavelength interval
+    Cuts spectrum given a wavelength interval, leaving origina intact
 
     Args:
         sp: Spectrum instance
         l0: initial wavelength
         lf: final wavelength
+
+    Returns:
+        Spectrum: cut spectrum
     """
 
     if l0 >= lf:

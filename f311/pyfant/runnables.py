@@ -508,7 +508,7 @@ class Combo(Runnable):
         # Executables to run
         # order is irrelevant (will be sorted anyway).
         self.__sequence = [FOR_INNEWMARCS, FOR_HYDRO2, FOR_PFANT, FOR_NULBAD] \
-            if sequence is None else sequence
+            if sequence is None else translate_sequence(sequence)
 
         # ** Executable instances
         self.__innewmarcs = Innewmarcs()

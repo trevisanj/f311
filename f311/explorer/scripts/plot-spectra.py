@@ -39,6 +39,8 @@ import f311.filetypes as ft
 a99.logging_level = logging.INFO
 a99.flag_log_file = True
 
+DEFAULT_FN_OUTPUT = '(plot-spectra-<xxxx>.pdf)'
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
      description=__doc__,
@@ -63,8 +65,8 @@ if __name__ == "__main__":
     #  'one spectrum per page', action="store_true")
     parser.add_argument('--aint', type=float, nargs='?', default=10,
      help='length of each piece-plot in wavelength units (used only if --pieces)')
-    parser.add_argument('--fn_output', nargs='?', default='plot-spectra.pdf', type=str,
-     help='PDF output file name (used only if --pieces)')
+    parser.add_argument('--fn_output', nargs='?', default=DEFAULT_FN_OUTPUT, type=str,
+                        help='PDF output file name (used only if --pieces)')
     parser.add_argument('--ymin', nargs='?', default='(automatic)', type=str,
      help='Minimum value for y-axis')
     parser.add_argument('-r', '--num_rows', nargs='?', default='(automatic)', type=str,
@@ -96,16 +98,31 @@ if __name__ == "__main__":
             print("... successfully read using reader {0!s}.".format(f.__class__.__name__))
             ss.append(f.spectrum)
 
+
+    # # Making name for output file
+    if args.fn_output == DEFAULT_FN_OUTPUT:
+        if len(ss) == 1:
+            # If there is only one spectrum, makes output PDF filename using spectrum name
+            prefix = "plot-spectra-"+ss[0].filename
+        else:
+            prefix = "plot-spectra"
+        fn_output = a99.new_filename(prefix, "pdf")
+    else:
+        fn_output = args.fn_output
+
     if len(ss) == 0:
         a99.print_error("Nothing to plot!")
     else:
         setup = ex.PlotSpectrumSetup(ymin=ymin)
+        if len(ss) == 1:
+            # No need for legend in plot if there is only one spectrum.
+            # Spectrum filename will be part of PDF filename anyway
+            setup.flag_legend = False
 
         if args.pieces:
-            ex.plot_spectra_pieces_pdf(ss, aint=args.aint,
-                                    pdf_filename=args.fn_output, setup=setup)
+            ex.plot_spectra_pieces_pdf(ss, aint=args.aint, pdf_filename=fn_output, setup=setup)
         elif args.pages:
-            ex.plot_spectra_pages_pdf(ss, pdf_filename=args.fn_output, setup=setup)
+            ex.plot_spectra_pages_pdf(ss, pdf_filename=fn_output, setup=setup)
         else:
             if args.ovl:
                 ex.plot_spectra_overlapped(ss, "", setup=setup)

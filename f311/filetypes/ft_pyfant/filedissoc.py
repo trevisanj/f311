@@ -56,6 +56,8 @@ class FileDissoc(DataFile):
             fr = ff.FortranRecordReader('(a2, 2x, i6, f10.3, 2i5, f10.5)')
             for i in range(self.nmetal):
                 symbol_, nelemx, ip, ig0, ig1, cclog = fr.read(h.readline())
+                if len(symbol_.strip()) == 0:
+                    raise RuntimeError("Doesn't seem to be a FileDissoc")
 
                 self.elems.append(adjust_atomic_symbol(symbol_))
                 self.nelemx.append(nelemx)
@@ -63,6 +65,11 @@ class FileDissoc(DataFile):
                 self.ig0.append(ig0)
                 self.ig1.append(ig1)
                 self.cclog.append(cclog)
+
+            if len(self.elems) == 0:
+                raise RuntimeError("Doesn't seem to be a FileDissoc")
+            print("%%%%%%%%%%%%%%%%%%%%%%%%%%% {}".format(len(self.elems)))
+
 
             # molecules part (remaining lines)
             self.mol, self.c, self.mmax, self.nelem, self.natom = [], [], [], [], []
@@ -80,6 +87,7 @@ class FileDissoc(DataFile):
                 self.nelem.append(vars[7::2][:mmax])
                 self.natom.append(vars[8::2][:mmax])
             self.nmol = len(self.mol)
+
 
 
 

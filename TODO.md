@@ -1,10 +1,18 @@
 # TODO list
 
+# Explorer
+
+- Enhance explorer.py with options for spectra: save as... (have to figure out practical save as)
+
+# x.py
+
+- Throw new buttons in Abundances widget to expose export dissoc and export turbospectrum
 
 ## WSpectrumCollection
 
 - ~~OPEN IN NEW WINDOW NOT COPYING EVERYTHIGN!!!!!~~
 - Add spectrum when in Cube Editor: handle pixel-x and pixel-y properly
+- Add export to SpectrumCollection: save as... (have to figure out practical save as)
 
 
 ## GENERAL

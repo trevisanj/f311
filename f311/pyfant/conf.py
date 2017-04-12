@@ -4,7 +4,7 @@ executables.
 """
 
 __all__ = ["Conf", "FOR_INNEWMARCS", "FOR_HYDRO2", "FOR_PFANT",
-           "FOR_NULBAD", "IdMaker", "SID"]
+           "FOR_NULBAD", "IdMaker", "SID", "translate_sequence"]
 
 
 import shutil
@@ -22,6 +22,12 @@ FOR_HYDRO2 = 1
 FOR_PFANT = 2
 FOR_NULBAD = 3
 
+_sequence_dict = {"innewmarcs": FOR_INNEWMARCS, "hydro2": FOR_HYDRO2, "pfant": FOR_PFANT, "nulbad": FOR_NULBAD}
+
+def translate_sequence(sequence):
+    """Convenience/tolerance function to convert strings with executable names to FOR_*"""
+    ret = []
+    return [_sequence_dict[x] if isinstance(x, str) else x for x in sequence]
 
 @a99.froze_it
 class SID(object):

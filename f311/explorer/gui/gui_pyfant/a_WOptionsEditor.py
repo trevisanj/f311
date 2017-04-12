@@ -668,10 +668,11 @@ class WOptionsEditor(QWidget):
         self.__update_gui_visible_options()
 
     def on_preview(self):
+        from f311 import explorer as ex
         args = self.f.get_args()
         print(args)
         line = "fortran-binary-xxxx " + (" ".join(args))
-        w = a99.XText(self, line, "Command line")
+        w = ex.XText(self, line, "Command line")
         w.show()
 
     def on_filter(self):

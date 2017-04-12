@@ -13,6 +13,10 @@ import re
 @a99.froze_it
 class SetOfLines(a99.AttrsPart):
     """
+    Represents a "Set-Of-Lines" (vibrational transition with unique (vl, v2l))
+
+    **Attention** Some properties return numpy arrays despite internally the data is stored as lists.
+                  This was a bad idea but I won't change this anymore to avoid breaking client code
 
     Args:
         vl=None: upper vibrational state (v')
@@ -32,6 +36,7 @@ class SetOfLines(a99.AttrsPart):
 
     @property
     def lmbdam(self):
+        """**Attention** Returns numpy array"""
         return np.array(self._lmbdam)
 
     @lmbdam.setter
@@ -40,6 +45,7 @@ class SetOfLines(a99.AttrsPart):
 
     @property
     def sj(self):
+        """**Attention** Returns numpy array"""
         return np.array(self._sj)
 
     @sj.setter
@@ -48,6 +54,7 @@ class SetOfLines(a99.AttrsPart):
 
     @property
     def jj(self):
+        """**Attention** Returns numpy array"""
         return np.array(self._jj)
 
     @jj.setter
@@ -56,13 +63,15 @@ class SetOfLines(a99.AttrsPart):
 
     @property
     def branch(self):
+        """**Attention** Returns numpy array"""
         return np.array(self._branch)
 
     @branch.setter
     def branch(self, value):
         self._branch = value
 
-    def __init__(self, vl=None, v2l=None, qqv=None, ggv=None, bbv=None, ddv=None, fact=None, state_from=None, state_to=None):
+    def __init__(self, vl=None, v2l=None, qqv=None, ggv=None, bbv=None, ddv=None, fact=None,
+                 state_from=None, state_to=None):
         a99.AttrsPart.__init__(self)
 
         self.vl = vl
@@ -136,6 +145,22 @@ class SetOfLines(a99.AttrsPart):
 class Molecule(a99.AttrsPart):
     attrs = ["description", "symbols", "fe", "do", "mm", "am", "bm", "ua", "ub",
              "te", "cro", "s", "nv", "num_lines"]
+
+    @property
+    def lmbdam(self):
+        return np.hstack([x.lmbdam for x in self.sol])
+
+    @property
+    def sj(self):
+        return np.hstack([x.sj for x in self.sol])
+
+    @property
+    def jj(self):
+        return np.hstack([x.jj for x in self.sol])
+
+    @property
+    def branch(self):
+        return np.hstack([x.branch for x in self.sol])
 
     @property
     def nv(self):
@@ -243,6 +268,10 @@ class FileMolecules(DataFile):
     @property
     def jj(self):
         return np.hstack([np.hstack([x.jj for x in m.sol]) for m in self.molecules])
+
+    @property
+    def branch(self):
+        return np.hstack([np.hstack([x.branch for x in m.sol]) for m in self.molecules])
 
     @property
     def qqv(self):

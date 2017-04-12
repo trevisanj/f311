@@ -64,7 +64,6 @@ class SB_AddNoise(SpectrumBlock):
         return output
 
 
-
 class SB_ElementWise(SpectrumBlock):
     """
     Applies specified function to spectrum flux
@@ -350,6 +349,7 @@ class SB_MulByLambda(SpectrumBlock):
         out = self._copy_input(inp)
         out.y *= out.x
         return out
+
 
 class SB_DivByLambda(SpectrumBlock):
     """Divides each y-point by its wavelength"""
