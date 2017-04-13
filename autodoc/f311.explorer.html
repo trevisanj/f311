@@ -1,47 +1,165 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>f311.explorer package &mdash; f311 17.1.28 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
     
-    <title>f311.explorer package &#8212; f311 17.1.28 documentation</title>
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="f311 17.1.28 documentation" href="../index.html"/>
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
     
-    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '17.1.28',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
-  </head>
-  <body role="document">
-      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
-          <span>f311 17.1.28 documentation</span></a></h1>
-        <h2 class="heading"><span>f311.explorer package</span></h2>
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> f311
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                17.1.28
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../pyfant.html"><em>f311.pyfant</em>: spectral synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../convmol.html"><em>f311.convmol</em>: Conversion of molecular spectral lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explorer.html"><em>f311.explorer</em>: browse, read, write, visualize, edit files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filetypes.html"><em>f311.filetypes</em>: file handling API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics.html"><em>f311.physics</em>: Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aosss.html"><em>f311.aosss</em>: Adaptive Optics Systems Simulation Support</a></li>
+</ul>
+
+            
+          
+        </div>
       </div>
-      <div class="topnav" role="navigation" aria-label="top navigation">
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
       
-        <p>
-        <a class="uplink" href="../index.html">Contents</a>
-        </p>
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">f311</a>
+        
+      </nav>
 
-      </div>
-      <div class="content">
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
         
+      <li>f311.explorer package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
         
+            
+            <a href="../_sources/autodoc/f311.explorer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
   <div class="section" id="f311-explorer-package">
 <h1>f311.explorer package<a class="headerlink" href="#f311-explorer-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="subpackages">
@@ -70,7 +188,7 @@
 <li class="toctree-l4"><a class="reference internal" href="f311.explorer.gui.gui_aosss.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="f311.explorer.gui.gui_aosss.html#module-f311.explorer.gui.gui_aosss.a_WFileSparseCube">f311.explorer.gui.gui_aosss.a_WFileSparseCube module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="f311.explorer.gui.gui_aosss.html#module-f311.explorer.gui.gui_aosss.a_WFileSpectrumList">f311.explorer.gui.gui_aosss.a_WFileSpectrumList module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="f311.explorer.gui.gui_aosss.html#module-f311.explorer.gui.gui_aosss.a_WSpectrumCollection">f311.explorer.gui.gui_aosss.a_WSpectrumCollection module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="f311.explorer.gui.gui_aosss.html#f311-explorer-gui-gui-aosss-a-wspectrumcollection-module">f311.explorer.gui.gui_aosss.a_WSpectrumCollection module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="f311.explorer.gui.gui_aosss.html#module-f311.explorer.gui.gui_aosss.a_XFileSparseCube">f311.explorer.gui.gui_aosss.a_XFileSparseCube module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="f311.explorer.gui.gui_aosss.html#module-f311.explorer.gui.gui_aosss.a_XFileSpectrumList">f311.explorer.gui.gui_aosss.a_XFileSpectrumList module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="f311.explorer.gui.gui_aosss.html#module-f311.explorer.gui.gui_aosss.a_XGroupSpectra">f311.explorer.gui.gui_aosss.a_XGroupSpectra module</a></li>
@@ -148,19 +266,10 @@
 <div class="section" id="module-f311.explorer.classcatalog">
 <span id="f311-explorer-classcatalog-module"></span><h2>f311.explorer.classcatalog module<a class="headerlink" href="#module-f311.explorer.classcatalog" title="Permalink to this headline">¶</a></h2>
 <p>&#8220;Collaboration&#8221; with other packages</p>
-<p>&#8220;Collaborator&#8221; packages should have a method &#8216;_setup_astroapi()&#8217;,
-which adds entries to the _* variables in this module</p>
 <dl class="function">
 <dt id="f311.explorer.classcatalog.classes_vis">
 <code class="descclassname">f311.explorer.classcatalog.</code><code class="descname">classes_vis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.classcatalog.classes_vis" title="Permalink to this definition">¶</a></dt>
 <dd><p>All known Vis* classes</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="f311.explorer.classcatalog.collaborators">
-<code class="descclassname">f311.explorer.classcatalog.</code><code class="descname">collaborators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.classcatalog.collaborators" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a dictionary of packages scanned to populate _classes_*</p>
-<p>Example: {&#8220;f311.explorer&#8221;: f311.explorer, }</p>
 </dd></dl>
 
 <dl class="function">
@@ -181,7 +290,7 @@ which adds entries to the _* variables in this module</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>-- file-like object</strong><strong>, </strong><strong>e.g.</strong><strong>, </strong><strong>returned by open</strong><strong>(</strong><strong></strong><strong>)</strong><strong></strong> (<em>file_obj</em>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_obj</strong> &#8211; file-like object, e.g., returned by open()</td>
 </tr>
 </tbody>
 </table>
@@ -197,16 +306,22 @@ which adds entries to the _* variables in this module</p>
 <dl class="function">
 <dt id="f311.explorer.util.cut_spectrum">
 <code class="descclassname">f311.explorer.util.</code><code class="descname">cut_spectrum</code><span class="sig-paren">(</span><em>sp</em>, <em>l0</em>, <em>lf</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.util.cut_spectrum" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cuts spectrum given a wavelength interval</p>
+<dd><p>Cuts spectrum given a wavelength interval, leaving origina intact</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>-- Spectrum instance</strong> (<em>sp</em>) &#8211; </li>
-<li><strong>-- initial wavelength</strong> (<a class="reference internal" href="f311.physics.html#f311.physics.photometry.Bandpass.l0" title="f311.physics.photometry.Bandpass.l0"><em>l0</em></a>) &#8211; </li>
-<li><strong>-- final wavelength</strong> (<a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.spectrum.Spectrum.lf" title="f311.filetypes.ft_basic.spectrum.Spectrum.lf"><em>lf</em></a>) &#8211; </li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sp</strong> &#8211; Spectrum instance</li>
+<li><strong>l0</strong> &#8211; initial wavelength</li>
+<li><strong>lf</strong> &#8211; final wavelength</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">cut spectrum</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.spectrum.Spectrum" title="f311.filetypes.ft_basic.spectrum.Spectrum">Spectrum</a></p>
 </td>
 </tr>
 </tbody>
@@ -242,18 +357,66 @@ which adds entries to the _* variables in this module</p>
 </div>
 
 
-      </div>
-      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
-      
-        <p>
-        <a class="uplink" href="../index.html">Contents</a>
-        </p>
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
 
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, JT.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
       </div>
 
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2015-2017, JT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
-    </div>
-  </body>
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'17.1.28',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
 </html>
