@@ -1,12 +1,12 @@
-f311 -- Python Astronomy resources
-==================================
+f311 -- Python resources for Astronomy
+======================================
 
-Project f311 is a collection of Astronomy-related packages and standalone applications written in Python.
+Welcome to the f311 documentation! f311 is an open-source project containing packages, command-line
+and graphical applications written in Python that can be useful to perform Astronomy-related tasks.
 
-This project started in 2015 at IAG-USP (Institute of Astronomy, Geophysics and Atmospheric Sciences at University of São Paulo, Brazil).
-It has grown based on our daily needs, so we don't intend to be throughout in any of the topics covered, but we hope that you will find it useful.
+The project started in 2015 at IAG-USP (Institute of Astronomy, Geophysics and Atmospheric Sciences at University of São Paulo, Brazil).
 
-Here is a list of f311 subpackages and their topics. 
+Here is a list of f311 subpackages and their topics:
 
 .. toctree::
    :maxdepth: 1
@@ -18,16 +18,22 @@ Here is a list of f311 subpackages and their topics.
    physics
    aosss
 
+Although we don't intend to be throughout in of the topics covered, the code is faily organized, documented, and expandable.
+We hope that you will find it useful!
+
+
 Installation
 ------------
 
-f311 requires Python 3.x (Python 2 no longer supported due to maintainability issues, sorry).
+f311 requires Python 3.x (Python 2 no longer supported due to maintainability issues, sorry). It also depends on other packages, but
+the installation of these is included in the instructions below.
 
-Knowing the mess with different ecosystems and extant package versions, we provide four different installation methods.
+Four different installation methods are described below:
 
-Method 1
+Method 1: Using pip
+^^^^^^^^^^^^^^^^^^^
 
-Try to install everything with pip:
+To install f311 with pip, run:
 
 .. code:: shell
 
@@ -35,8 +41,7 @@ Try to install everything with pip:
    pip install pyqt5
    pip install f311
 
-
-If pyqt5 fails to install with pip, an alternative is to use apt-get:
+If pyqt5 fails to install with pip, an alternative is to use ``apt-get``:
 
 .. code:: shell
 
@@ -48,8 +53,8 @@ If pyqt5 fails to install with pip, an alternative is to use apt-get:
 **Note** You may have to replace ``pip`` with ``pip3`` depending on your environment.
 
 
-Method 2
-^^^^^^^^
+Method 2: Using apt-get
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Use this method if you prefer to use Debian-based Linux packaging.
 
@@ -59,8 +64,8 @@ Use this method if you prefer to use Debian-based Linux packaging.
    sudo pip3 install a99 configobj robobrowser fortranformat tabulate # Requirements not in apt repository rows
    sudo pip3 install f311
 
-Method 3
-^^^^^^^^
+Method 3: Using Anaconda
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 This method uses a **conda** virtual environment. It works with a separate installation of Python and related packages.
 
@@ -97,8 +102,8 @@ To deactivate the environment:
 
    source deactivate
 
-Method 4 (developer mode)
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Method 4: Developer mode
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 This method is intended for developers or if you would like to pull overnight f311 versions instead of the pip version.
 
