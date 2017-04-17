@@ -10,12 +10,16 @@ Software <http://github.com/trevisanj/PFANT>`__ for Astronomy.
 
 - write your own spectral synthesis scripts using the ``f311.pyfant`` package
 
-Spectral Synthesis Softwares (SSS) have several applications in
-Astronomy. Spectral synthesis is a crucial step in optimization
-algorithms, in which the synthetic spectrum is compared with the measure
-spectrum of a star, in order to determine stellar properties -- such as
-temperature, metallicity, and chemical abundances -- in an iterative
-fashion.
+Spectral synthesis softwares have a fundamental role in Astronomy.
+Spectral synthesis is a crucial step in determining stellar properties
+- such as temperature, metallicity, and chemical abundances -
+in which the synthetic spectrum (or a combination of several of these) is compared with the
+measured spectrum of a star or a whole stellar population either by the full spectrum fitting,
+spectral energy distribution or specific spectral lines and regions.
+It is of great interest that the software has a comprehensive and intuitive user interface and
+easiness of parameter input and its multiple variations, and also tools for incorporating data
+like atomic/molecular lines, atmospheric models, etc.
+
 
 Quick start
 -----------
