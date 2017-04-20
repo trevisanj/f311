@@ -1,167 +1,226 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Project f311 &#8212; f311 17.1.28 documentation</title>
-    
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '17.1.28',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="f311.pyfant: spectral synthesis" href="pyfant.html" /> 
-  </head>
-  <body role="document">
-      <div class="header" role="banner"><h1 class="heading"><a href="#">
-          <span>f311 17.1.28 documentation</span></a></h1>
-        <h2 class="heading"><span>Project f311</span></h2>
-      </div>
-      <div class="topnav" role="navigation" aria-label="top navigation">
-      
-        <p>
-        <a class="uplink" href="#">Contents</a>
-        &#160;&#160;::&#160;&#160;
-        <a href="pyfant.html"><em>f311.pyfant</em>: spectral synthesis</a>&#160;&#160;»
-        </p>
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>f311 – Python resources for Astronomy &mdash; f311 17.1.28 documentation</title>
+  
 
-      </div>
-      <div class="content">
-        
-        
-  <div class="section" id="project-f311">
-<h1>Project <em>f311</em><a class="headerlink" href="#project-f311" title="Permalink to this headline">¶</a></h1>
-<p>Collection of Astronomy-related packages written in Python.</p>
-<p>Spectral synthesis example:</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
-<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
-<span class="n">obj</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Pfant</span><span class="p">()</span>
-<span class="n">obj</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="n">obj</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
-<span class="n">ex</span><span class="o">.</span><span class="n">plot_spectra</span><span class="p">([</span><span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;cont&quot;</span><span class="p">],</span> <span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;spec&quot;</span><span class="p">],</span> <span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;norm&quot;</span><span class="p">]])</span>
-</pre></div>
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="f311 17.1.28 documentation" href="#"/>
+        <link rel="next" title="f311 Installation" href="install.html"/>
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> f311
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                17.1.28
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
-<div class="section" id="sub-packages">
-<h2>Sub-packages<a class="headerlink" href="#sub-packages" title="Permalink to this headline">¶</a></h2>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">f311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filetypes.html">File handling API (<code class="docutils literal"><span class="pre">f311.filetypes</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Selected topics on Physics (<code class="docutils literal"><span class="pre">f311.physics</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">f311</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>f311 &#8211; Python resources for Astronomy</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="f311-python-resources-for-astronomy">
+<h1>f311 &#8211; Python resources for Astronomy<a class="headerlink" href="#f311-python-resources-for-astronomy" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the f311 documentation!</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="pyfant.html"><em>f311.pyfant</em>: spectral synthesis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convmol.html"><em>f311.convmol</em>: Conversion of molecular spectral lines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="explorer.html"><em>f311.explorer</em>: browse, read, write, visualize, edit files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="filetypes.html"><em>f311.filetypes</em>: file handling API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="physics.html"><em>f311.physics</em>: Physics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="aosss.html"><em>f311.aosss</em>: Adaptive Optics Systems Simulation Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">f311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filetypes.html">File handling API (<code class="docutils literal"><span class="pre">f311.filetypes</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Selected topics on Physics (<code class="docutils literal"><span class="pre">f311.physics</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
 </ul>
 </div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>f311 is another - but <em>not</em> just another - Python open-source project for Astronomy. It contains many
+graphical and command-line standalone applications, and we think that some of them are cool!</p>
+<p>The code is organized in sub-packages, each one containing scripts (applications) and API related
+to some topic.
+To get a listing of all scripts available at once, simply type on your shell:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">programs</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
 </div>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="required-software">
-<h3>Required Software<a class="headerlink" href="#required-software" title="Permalink to this headline">¶</a></h3>
+<p>This will print a listing such as <a class="reference internal" href="programs-py-listing.html"><span class="doc">this one</span></a>.</p>
+<p><code class="docutils literal"><span class="pre">explorer.py</span></code> (<a class="reference internal" href="explorer-py-screenshot.html"><span class="doc">screenshot</span></a>) is perhaps the application of broadest interest.
+It is a file browser that allows you to visualize and edit many file formats used in Astronomy. Its file-handling abilities can be
+easily expanded.</p>
+<p>To use the APIs to write your own code, the f311 subpackages that can be imported like this:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.convmol</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+<span class="kn">import</span> <span class="nn">f311.physics</span> <span class="k">as</span> <span class="nn">ph</span>
+<span class="kn">import</span> <span class="nn">f311.aosss</span> <span class="k">as</span> <span class="nn">ao</span>
+</pre></div>
+</div>
+<p>Although the code is not throughout on the topics covered, some parts of the code were structured
+to be comprehensively and easily expanded.</p>
+<p>The project started in 2015 at IAG-USP (Institute of Astronomy, Geophysics and Atmospheric Sciences
+at University of São Paulo, Brazil).</p>
+</div>
+<div class="section" id="how-to-contribute">
+<h2>How to contribute<a class="headerlink" href="#how-to-contribute" title="Permalink to this headline">¶</a></h2>
+<p>There are several ways in which you can contribute to this project:</p>
 <ul class="simple">
-<li>Python 3.xx</li>
+<li>Report a bug</li>
+<li>Give some suggestions feedback</li>
+<li>Write documentation</li>
+<li>Send examples</li>
+<li>Contribute with coding</li>
 </ul>
-<div class="section" id="python-packages">
-<h4>Python packages<a class="headerlink" href="#python-packages" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li>a99</li>
-<li>matplotlib</li>
-<li>scipy</li>
-<li>numpy</li>
-<li>astropy</li>
-<li>configobj</li>
-<li>tabulate</li>
-<li>fortranformat</li>
-</ul>
-<p>Optional packages (functionality will be limited without them):</p>
-<ul class="simple">
-<li>PyQt5</li>
-<li>bs4</li>
-<li>robobrowser</li>
-<li>requests</li>
-</ul>
+<p>If you would like to contribute to this project, please create a pull request on GitHub and/or drop an e-mail to <a class="reference external" href="mailto:juliotrevisan&#37;&#52;&#48;gmail&#46;com">juliotrevisan<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
 </div>
-</div>
-<div class="section" id="install">
-<h3>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="method-1-prefer-pip-use-apt-package-as-alternative">
-<h4>Method 1 (prefer _pip_, use _apt_ package as alternative)<a class="headerlink" href="#method-1-prefer-pip-use-apt-package-as-alternative" title="Permalink to this headline">¶</a></h4>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">a99</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">pyqt5</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="c1"># requirements</span>
-<span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">f311</span>
-</pre></div>
-</div>
-<p>If _PyQt5_ fails to install with _pip_:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">PyQt5</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="method-2-prefer-apt-use-pip-if-no-apt-package-available">
-<h4>Method 2 (prefer _apt_, use _pip_ if no _apt_ package available)<a class="headerlink" href="#method-2-prefer-apt-use-pip-if-no-apt-package-available" title="Permalink to this headline">¶</a></h4>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">matplotlib</span> <span class="n">python3</span><span class="o">-</span><span class="n">scipy</span> <span class="n">python3</span><span class="o">-</span><span class="n">PyQt5</span> <span class="n">python3</span><span class="o">-</span><span class="n">astropy</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">python3</span><span class="o">-</span><span class="n">bs4</span>
-<span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">a99</span> <span class="n">configobj</span> <span class="n">robobrowser</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="c1"># Requirements not in apt repository</span>
-<span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">f311</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="method-3-virtual-environment-with-conda">
-<h4>Method 3 (virtual environment with _conda_)<a class="headerlink" href="#method-3-virtual-environment-with-conda" title="Permalink to this headline">¶</a></h4>
-<p>This may be an alternative if you want to work with a separate installation of Python and related packages.
-Here you need to have _Anaconda_ or _Miniconda_ installed.</p>
-<p>Create a new virtual environment called &#8220;astroenv&#8221; (or any name you like):</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">astroenv</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.5</span>
-</pre></div>
-</div>
-<p>Activate this new virtual environment:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">astroenv</span>
-</pre></div>
-</div>
-<p>Now you should be able to install _f311_ from _pip_:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">a99</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">pyqt5</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span>  <span class="c1"># requirements</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">f311</span>
-</pre></div>
-</div>
-<p><strong>Note</strong> Every time you want to work with _f311_, you will need to activate the environment:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">astroenv</span>
-</pre></div>
-</div>
-<p>To deactivate the environment:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">deactivate</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="method-4-development-mode">
-<h4>Method 4 (development mode)<a class="headerlink" href="#method-4-development-mode" title="Permalink to this headline">¶</a></h4>
-<p>Clone repository:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">ssh</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">trevisanj</span><span class="o">/</span><span class="n">f311</span><span class="o">.</span><span class="n">git</span>
-</pre></div>
-</div>
-<p>or</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">trevisanj</span><span class="o">/</span><span class="n">f311</span>
-</pre></div>
-</div>
-<p>Install in <strong>developer</strong> mode:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">f311</span>
-<span class="n">sudo</span> <span class="n">python3</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
-</pre></div>
-</div>
-</div>
-</div>
+<div class="section" id="funding">
+<h2>Funding<a class="headerlink" href="#funding" title="Permalink to this headline">¶</a></h2>
+<p>Funded by FAPESP - Research Support Foundation of the State of São Paulo, Brazil (2015-2017).</p>
 </div>
 <div class="section" id="more">
 <h2>More<a class="headerlink" href="#more" title="Permalink to this headline">¶</a></h2>
@@ -175,20 +234,73 @@ Here you need to have _Anaconda_ or _Miniconda_ installed.</p>
 </div>
 
 
-      </div>
-      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <p>
-        <a class="uplink" href="#">Contents</a>
-        &#160;&#160;::&#160;&#160;
-        <a href="pyfant.html"><em>f311.pyfant</em>: spectral synthesis</a>&#160;&#160;»
-        </p>
+        <a href="install.html" class="btn btn-neutral float-right" title="f311 Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
 
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, JT.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
       </div>
 
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2015-2017, JT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
-    </div>
-  </body>
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'17.1.28',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
 </html>

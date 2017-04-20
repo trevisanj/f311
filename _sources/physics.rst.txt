@@ -1,5 +1,5 @@
-*f311.physics*: Physics
-=======================
+Selected topics on Physics (``f311.physics``)
+=============================================
 
 Introduction
 ------------
@@ -10,7 +10,7 @@ Selected Physics-related resources:
 
 - Spectrum-to-RGB (red, green, blue) color conversion
 
-- Air-to-vacuum and vice versa wavelenght conversion
+- Air-to-vacuum (& vice versa) wavelenght conversion
 
 - Calculation of Hönl-London factors according to formulas in Kovács' 1969 [1]
 
@@ -18,7 +18,10 @@ Selected Physics-related resources:
 Examples
 --------
 
-**Air-to-vacuum (& vice versa) wavelength conversion**. The following code reproduces the figure
+Air-to-vacuum (& vice versa) wavelength conversion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following code reproduces the figure
 shown in VALD3 Wiki (http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion)
 ("comparison of the Morton and the inverse transformation by NP between 2000 Å and 100000 Å.")
 
@@ -37,9 +40,12 @@ shown in VALD3 Wiki (http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion)
     plt.tight_layout()
     plt.show()
 
-![](air-vac.png)
+|image0|
 
-### Flux-to-magnitude conversion
+.. |image0| image:: img/air-vac.png
+
+Calculate the magnitude of a spectrum
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following example compares flux-to-magnitude conversion of the Vega spectrum
 for different magnitude systems.
@@ -54,6 +60,9 @@ for different magnitude systems.
     rows = [([band]+[ph.calc_mag(sp, band, system) for system in systems]) for band in bands]
     print(tabulate.tabulate(rows, ["band"]+systems))
 
+
+This code results in the following table:
+
 ::
 
     band        stdflux          ab    vega
@@ -66,6 +75,30 @@ for different magnitude systems.
     J       -0.0150993    0.874666       -0
     H        0.0315447    1.34805        -0
     K        0.0246046    1.85948        -0
+
+
+Calculate Hönl-London factors for doublets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In the following examples, a normalization factor is applied to the Hönl-London factors (HLF),
+such that all HLFs for a given J must add up to 1.0:
+
+.. code:: python
+
+    from f311 import physics as ph
+    S, DELTAK = 0.5, 0  # spin, delta Kronecker
+    J = 1.5
+    factor = 2/((2*J+1)*(2*S+1)*(2-DELTAK))
+    normalized = [f(J)*factor for f in ph.doublet.get_honllondon_formulas(0, 1).values()]
+    print(sum(normalized))
+
+This code should output:
+
+::
+
+    1.0
+
+The formulas for the HLFs were taken from the book *Istvan Kovacs, "Rotational Structure in the spectra of diatomic molecules. American Elsevier, 1969*
 
 API reference
 -------------

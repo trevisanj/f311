@@ -1,12 +1,14 @@
-*f311.convmol*: Conversion of molecular spectral lines
-======================================================
+Conversion of molecular spectral lines (``f311.convmol``)
+=========================================================
 
 Introduction
 ------------
 
-*convmol* provides resources to convert between different molecular spectral lines formats.
+.. note:: This package is currently under construction (2017-04-18)
 
-**This package is currently under development (2017-01-28)**
+Package convmol contains an application to perform conversion between different molecular
+spectral lines formats, some command-line tools, and an API based on which the applications
+were constructed.
 
 Conversion sources:
 
@@ -24,20 +26,24 @@ Applications
 
 Graphical applications:
 
-- ``convmol.py`` -- Converion of molecular lines data to PFANT format
-
+- ``convmol.py`` -- Conversion of molecular lines data to PFANT format
 
 Command-line tools:
 
-- ``download-hitran.py`` -- Downloads molecular lines from HITRAN database (using "HITRAN API" backend)
-
-- ``show-nist.py`` -- Downloads and prints molecular constants from NIST Web Book for a particular molecule
+- ``hitran-scraper.py`` -- Retrieves molecular lines from the HITRAN database
 
 
-All the programs above can be called with the ``--help`` or ``-h``
-option for more information.
+- ``nist-scraper.py`` -- Retrieves molecular constants from NIST Web Book for a particular molecule
+
+Usage Examples
+--------------
+
+- :doc:`hitran-scraper`
+- :doc:`nist-scraper`
+- :doc:`convmol-gui`
+
 
 API reference
 -------------
 
-:doc:`autodoc/f311.aosss`
+:doc:`autodoc/f311.convmol`

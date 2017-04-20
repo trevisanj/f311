@@ -1,145 +1,75 @@
-Project *f311*
-==============
+f311 -- Python resources for Astronomy
+======================================
 
-Collection of Astronomy-related packages written in Python.
-
-Spectral synthesis example:
-
-.. code:: python
-
-   import f311.pyfant as pf
-   import f311.explorer as ex
-   obj = pf.Pfant()
-   obj.run()
-   obj.load_result()
-   ex.plot_spectra([obj.result["cont"], obj.result["spec"], obj.result["norm"]])
-
-
-Sub-packages
---------
+Welcome to the f311 documentation!
 
 .. toctree::
    :maxdepth: 1
 
+   install
    pyfant
    convmol
    explorer
    filetypes
    physics
    aosss
+   cheat
 
-Installation
+Introduction
 ------------
 
-Required Software
-~~~~~~~~~~~~~~~~~
+f311 is another - but *not* just another - Python open-source project for Astronomy. It contains many
+graphical and command-line standalone applications, and we think that some of them are cool!
 
-- Python 3.xx
-
-Python packages
-^^^^^^^^^^^^^^^
-- a99
-- matplotlib
-- scipy
-- numpy
-- astropy
-- configobj
-- tabulate
-- fortranformat
-
-Optional packages (functionality will be limited without them):
-
-- PyQt5
-- bs4
-- robobrowser
-- requests
-
-Install
-~~~~~~~
-
-Method 1 (prefer _pip_, use _apt_ package as alternative)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The code is organized in sub-packages, each one containing scripts (applications) and API related
+to some topic.
+To get a listing of all scripts available at once, simply type on your shell:
 
 .. code:: shell
 
-   sudo pip3 install a99 numpy scipy matplotlib astropy configobj pyqt5 bs4 robobrowser requests fortranformat tabulate # requirements
-   sudo pip3 install f311
+   programs.py
+
+This will print a listing such as :doc:`this one <programs-py-listing>`.
+
+``explorer.py`` (:doc:`screenshot <explorer-py-screenshot>`) is perhaps the application of broadest interest.
+It is a file browser that allows you to visualize and edit many file formats used in Astronomy. Its file-handling abilities can be
+easily expanded.
+
+To use the APIs to write your own code, the f311 subpackages that can be imported like this:
+
+.. code::
+
+    import f311.pyfant as pf
+    import f311.convmol as cm
+    import f311.explorer as ex
+    import f311.filetypes as ft
+    import f311.physics as ph
+    import f311.aosss as ao
+
+Although the code is not throughout on the topics covered, some parts of the code were structured
+to be comprehensively and easily expanded.
+
+The project started in 2015 at IAG-USP (Institute of Astronomy, Geophysics and Atmospheric Sciences
+at University of São Paulo, Brazil).
+
+How to contribute
+-----------------
+
+There are several ways in which you can contribute to this project:
+
+* Report a bug
+* Give some suggestions feedback
+* Write documentation
+* Send examples
+* Contribute with coding
+
+If you would like to contribute to this project, please create a pull request on GitHub and/or drop an e-mail to juliotrevisan@gmail.com
 
 
-If _PyQt5_ fails to install with _pip_:
+Funding
+-------
 
-.. code:: shell
-
-   sudo apt-get install python3-PyQt5
-
-Method 2 (prefer _apt_, use _pip_ if no _apt_ package available)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: shell
-
-   sudo apt-get install python3-matplotlib python3-scipy python3-PyQt5 python3-astropy python3-pip python3-bs4
-   sudo pip3 install a99 configobj robobrowser fortranformat tabulate # Requirements not in apt repository
-   sudo pip3 install f311
-
-Method 3 (virtual environment with _conda_)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This may be an alternative if you want to work with a separate installation of Python and related packages.
-Here you need to have _Anaconda_ or _Miniconda_ installed.
-
-Create a new virtual environment called "astroenv" (or any name you like):
-
-.. code:: shell
-
-   conda create --name astroenv python=3.5
-
-Activate this new virtual environment:
-
-.. code:: shell
-
-   source activate astroenv
-
-Now you should be able to install _f311_ from _pip_:
-
-.. code:: shell
-
-   pip install a99 numpy scipy matplotlib astropy configobj pyqt5 bs4 robobrowser requests fortranformat tabulate  # requirements
-   pip install f311
-
-**Note** Every time you want to work with _f311_, you will need to activate the environment:
-
-.. code:: shell
-
-   source activate astroenv
-
-To deactivate the environment:
-
-.. code:: shell
-
-   source deactivate
-
-Method 4 (development mode)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Clone repository:
-
-.. code:: shell
-
-   git clone ssh://git@github.com/trevisanj/f311.git
-
-or
-
-.. code:: shell
-
-   git clone http://github.com/trevisanj/f311
-
-Install in **developer** mode:
-
-.. code:: shell
-
-   cd f311
-   sudo python3 setup.py develop
-
+Funded by FAPESP - Research Support Foundation of the State of São Paulo, Brazil (2015-2017).
 
 More
 ----
