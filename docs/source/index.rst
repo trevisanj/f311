@@ -1,163 +1,56 @@
 f311 -- Python resources for Astronomy
 ======================================
 
-Welcome to the f311 documentation! f311 is an open-source project containing packages, command-line
-and graphical applications written in Python that can be useful to perform Astronomy-related tasks.
-
-The project started in 2015 at IAG-USP (Institute of Astronomy, Geophysics and Atmospheric Sciences at University of São Paulo, Brazil).
-
-Here is a list of f311 subpackages and their topics:
+Welcome to the f311 documentation!
 
 .. toctree::
    :maxdepth: 1
 
+   install
    pyfant
    convmol
    explorer
    filetypes
    physics
    aosss
+   cheat
 
-Although we don't intend to be throughout in of the topics covered, the code is faily organized, documented, and expandable.
-We hope that you will find it useful!
-
-
-Installation
+Introduction
 ------------
 
-f311 requires Python 3.x (Python 2 no longer supported due to maintainability issues, sorry). It also depends on other packages, but
-the installation of these is included in the instructions below.
+f311 is another - but *not* just another - Python open-source project for Astronomy. It contains many
+graphical and command-line standalone applications, and we think that some of them are cool!
 
-Four different installation methods are described below:
-
-Method 1: Using pip
-^^^^^^^^^^^^^^^^^^^
-
-To install f311 with pip, run:
+The code is organized in sub-packages, each one containing scripts (applications) and API related
+to some topic.
+To get a listing of all scripts available at once, simply type on your shell:
 
 .. code:: shell
 
-   pip install a99 numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows
-   pip install pyqt5
-   pip install f311
+   programs.py
 
-If pyqt5 fails to install with pip, an alternative is to use ``apt-get``:
+This will print a listing such as :doc:`this one <programs-py-listing>`.
 
-.. code:: shell
+``explorer.py`` (:doc:`screenshot <explorer-py-screenshot>`) is perhaps the application of broadest interest.
+It is a file browser that allows you to visualize and edit many file formats used in Astronomy. Its file-handling abilities can be
+easily expanded.
 
-   sudo apt-get install python3-PyQt5
+To use the APIs to write your own code, the f311 subpackages that can be imported like this:
 
+.. code::
 
-**Note** You may need superuser rights (``sudo``) to install the packages above.
+    import f311.pyfant as pf
+    import f311.convmol as cm
+    import f311.explorer as ex
+    import f311.filetypes as ft
+    import f311.physics as ph
+    import f311.aosss as ao
 
-**Note** You may have to replace ``pip`` with ``pip3`` depending on your environment.
+Although the code is not throughout on the topics covered, some parts of the code were structured
+to be comprehensively and easily expanded.
 
-
-Method 2: Using apt-get
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Use this method if you prefer to use Debian-based Linux packaging.
-
-.. code:: shell
-
-   sudo apt-get install python3-matplotlib python3-scipy python3-PyQt5 python3-astropy python3-pip python3-bs4
-   sudo pip3 install a99 configobj robobrowser fortranformat tabulate # Requirements not in apt repository rows
-   sudo pip3 install f311
-
-Method 3: Using Anaconda
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-This method uses a **conda** virtual environment. It works with a separate installation of Python and related packages.
-
-First you will need to have Anaconda or Miniconda installed. If you have none of these installed yet, just install Miniconda.
-
-Once Anaconda/Miniconda is installed, create a new virtual environment called "astroenv" (or any name you like):
-
-.. code:: shell
-
-   conda create --name astroenv python=3.5
-
-Activate this new virtual environment:
-
-.. code:: shell
-
-   source activate astroenv
-
-Now you should be able to install everything using pip:
-
-.. code:: shell
-
-   pip install a99 numpy scipy matplotlib astropy configobj pyqt5 bs4 robobrowser requests fortranformat tabulate rows
-   pip install f311
-
-**Note** Every time you want to work with _f311_, you will need to activate the environment:
-
-.. code:: shell
-
-   source activate astroenv
-
-To deactivate the environment:
-
-.. code:: shell
-
-   source deactivate
-
-Method 4: Developer mode
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-This method is intended for developers or if you would like to pull overnight f311 versions instead of the pip version.
-
-First install all required packages using either Method 1/2/3 above (but do not install f311).
-
-To install f311 package, clone the GitHub repository:
-
-.. code:: shell
-
-   git clone ssh://git@github.com/trevisanj/f311.git
-
-or
-
-.. code:: shell
-
-   git clone http://github.com/trevisanj/f311
-
-Then, install in **developer** mode:
-
-.. code:: shell
-
-   cd f311
-   python setup.py develop
-   
-**Note** The command above may vary having the ``sudo`` and/or ``python3`` flavor.
-
-
-Troubleshooting installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MatPlotLib and PyQt5
-^^^^^^^^^^^^^^^^^^^^
-
-.. code:: shell
-
-   ValueError: Unrecognized backend string "qt5agg": valid strings are ['GTKAgg', 'template', 'pdf',
-   'GTK3Agg', 'cairo', 'TkAgg', 'pgf', 'MacOSX', 'GTK', 'WX', 'GTKCairo', 'Qt4Agg', 'svg', 'agg',
-   'ps', 'emf', 'WebAgg', 'gdk', 'WXAgg', 'CocoaAgg', 'GTK3Cairo']
-
-**Solution**: update Matplotlib to version 1.4 or later
-
-Problems with package bs4
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-TODO
-
-
-More
-----
-
-* :ref:`genindex` (all symbols listed alphabetically)
-* :ref:`modindex` (whole *f311* package tree)
-* :ref:`search`
-* :doc:`license`
+The project started in 2015 at IAG-USP (Institute of Astronomy, Geophysics and Atmospheric Sciences
+at University of São Paulo, Brazil).
 
 How to contribute
 -----------------
@@ -178,3 +71,12 @@ Funding
 
 Funded by FAPESP - Research Support Foundation of the State of São Paulo, Brazil (2015-2017).
 
+More
+----
+
+* :ref:`genindex` (all symbols listed alphabetically)
+* :ref:`modindex` (whole f311 package tree)
+* :ref:`search`
+* :doc:`license`
+
+.. todo:: Bring more examples and find a way to organize them both in the code and in the documentation

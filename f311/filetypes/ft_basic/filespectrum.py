@@ -18,6 +18,7 @@ import numpy as np
 
 class FileSpectrum(DataFile):
     attrs = ['spectrum']
+    editors = ["splisted.py"]
 
     def __init__(self):
         DataFile.__init__(self)

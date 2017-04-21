@@ -251,6 +251,7 @@ class FileMolecules(DataFile):
 
     default_filename = "molecules.dat"
     attrs = ["titm", "num_lines"]
+    editors = ["mled.py"]
 
     @property
     def num_lines(self):

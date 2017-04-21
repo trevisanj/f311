@@ -42,7 +42,7 @@
 from recommonmark.parser import CommonMarkParser
 
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon']
+extensions = ['sphinx.ext.todo', 'sphinx.ext.autodoc', 'sphinx.ext.napoleon']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -89,7 +89,7 @@ exclude_patterns = []
 pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = False
+todo_include_todos = True
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -184,4 +184,12 @@ texinfo_documents = [
 ]
 
 
+numfig = True
+numfig_format = {'figure': 'Figure %s',
+                 'table': 'Table %s',
+                 'code-block': 'Listing %s',
+                 'section': 'Section %s'
+                 }
 
+def setup(app):
+    app.add_stylesheet('custom.css')

@@ -1,5 +1,5 @@
-*f311.physics*: Physics
-=======================
+Selected topics on Physics (``f311.physics``)
+=============================================
 
 Introduction
 ------------

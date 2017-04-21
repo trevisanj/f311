@@ -100,6 +100,7 @@ class FileAtoms(DataFile):
 
     default_filename = "atoms.dat"
     attrs = ["atoms", "num_lines"]
+    editors = ["ated.py"]
 
     @property
     def num_lines(self):

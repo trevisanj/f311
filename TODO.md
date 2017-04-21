@@ -1,5 +1,9 @@
 # TODO list
 
+# Filetypes
+
+- new script to print filetypes as table
+
 # Explorer
 
 - Enhance explorer.py with options for spectra: save as... (have to figure out practical save as)
@@ -37,9 +41,6 @@
   - treat sqlite DB as config file (can wait)
 
 ## pyfant
-
-  - **SEE WHY PYFANT SETUP IS MESSING ASTROGEAR!!!!!!**
-
   
   - Fill origin when converting from FileFullCube to FileSpectrumList (somehow)
   - XHelpDialog is too ugly

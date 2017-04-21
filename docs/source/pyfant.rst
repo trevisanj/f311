@@ -1,17 +1,14 @@
-*f311.pyfant*: spectral synthesis
-=================================
+Spectral synthesis (``f311.pyfant``)
+====================================
 
 Welcome!!
 
 pyfant is a Python interface for the `PFANT Spectral Synthesis
-Software <http://github.com/trevisanj/PFANT>`__ for Astronomy.
+Software <http://trevisanj.github.io/PFANT>`__ for Astronomy.
 
-- run several spectral synthesis "jobs" in parallel using ``x.py``
-
-- write your own spectral synthesis scripts using the ``f311.pyfant`` package
 
 Spectral synthesis softwares have a fundamental role in Astronomy.
-Spectral synthesis is a crucial step in determining stellar properties
+It is a crucial step in determining stellar properties
 - such as temperature, metallicity, and chemical abundances -
 in which the synthetic spectrum (or a combination of several of these) is compared with the
 measured spectrum of a star or a whole stellar population either by the full spectrum fitting,
@@ -20,11 +17,33 @@ It is of great interest that the software has a comprehensive and intuitive user
 easiness of parameter input and its multiple variations, and also tools for incorporating data
 like atomic/molecular lines, atmospheric models, etc.
 
+Applications
+------------
 
-Quick start
------------
+The applications related to package f311.pyfant are listed below. For them to work, you need to
+`install PFANT <http://trevisanj.github.io/PFANT/install.html>`.
 
-The following example Spectral synthesis example:
+The `PFANT Quick Start <http://trevisanj.github.io/PFANT/quick.html>` serves as a guide to
+using these applications.
+
+Graphical applications
+~~~~~~~~~~~~~~~~~~~~~~
+
+- ``x.py`` -- PFANT Launcher -- Graphical Interface for Spectral Synthesis
+
+Command-line tools
+~~~~~~~~~~~~~~~~~~
+
+- ``copy-star.py`` -- Copies stellar data files (such as main.dat, abonds.dat, dissoc.dat) to local directory
+- ``link.py`` -- Creates symbolic links to PFANT data files as an alternative to copying these (sometimes large) files into local directory
+- ``run4.py`` -- Runs the four Fortran binaries in sequence: ``innewmarcs``, ``hydro2``, ``pfant``, ``nulbad``
+- ``save-pdf.py`` -- Looks for files "*.norm" inside directories session-* and saves one figure per page in a PDF file
+
+
+Coding using the API
+--------------------
+
+Spectral synthesis example:
 
 .. code:: python
 
@@ -35,14 +54,7 @@ The following example Spectral synthesis example:
    obj.load_result()
    ex.plot_spectra([obj.result["cont"], obj.result["spec"], obj.result["norm"]])
 
-
-Using *pyfant* applications
----------------------------
-
-The *pyfant* application guide is currently part of the PFANT manual at
-http://github.com/trevisanj/PFANT
-
-
+.. todo:: More examples
 
 API reference
 -------------

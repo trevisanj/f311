@@ -21,6 +21,7 @@ class FileOptions(FilePy):
     description = "command-line options"
     default_filename = "options.py"
     attrs = []
+    editors = ["x.py"]
 
     def __init__(self):
         FilePy.__init__(self)
