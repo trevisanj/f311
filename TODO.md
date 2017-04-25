@@ -3,6 +3,7 @@
 # Filetypes
 
 - new script to print filetypes as table
+- actually it is better to specify max total width and wrap description accordingly
 
 # Explorer
 
