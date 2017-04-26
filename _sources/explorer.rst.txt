@@ -4,17 +4,29 @@ Browse, read, write, visualize, edit files (``f311.explorer``)
 Introduction
 ------------
 
-*explorer* provides applications and an API to handle many file formats used in Astronomy.
+Package f311.explorer concentrates most of the code in the f311 project, as this package contains many
+resources to visualize and edit several file formats used in Astronomy.
 
-Most resources are accessible through ``explorer.py`` (file-explorer-like application)
+Most resources are accessible through ``explorer.py`` (:numref:`figexplorer`).
+
+.. _figexplorer:
+
+.. figure:: img/explorer.png
+   :align: center
+
+    -- ``explorer.py`` screenshot.
+
+Many applications are used in the context of spectral synthesis, so they are mentioned in the
+`PFANT documentation <http://trevisanj.github.io/PFANT>`_.
 
 Applications
 ------------
 
+You can list anytime the applications available in package f311.explorer by typing in your shell:
+
 .. code:: shell
 
-    programs.py -p explorer markdown-list
-
+    programs.py -p explorer
 
 Graphical applications:
 
@@ -55,5 +67,10 @@ option for more information.
 
 API reference
 -------------
+
+The bulk of the f311.explorer API consists of GUIs written using the PyQt5 library.
+
+Besides, the package has a "block" framework allowing one to build pipelines to process
+:class:`Spectrum <f311.filetypes.ft_basic.spectrum.Spectrum>` objects.
 
 :doc:`autodoc/f311.explorer`

@@ -20,6 +20,12 @@ like atomic/molecular lines, atmospheric models, etc.
 Applications
 ------------
 
+The applications related to package f311.pyfant are listed below. For them to work, you need to
+`install PFANT <http://trevisanj.github.io/PFANT/install.html>`.
+
+The `PFANT Quick Start <http://trevisanj.github.io/PFANT/quick.html>` serves as a guide to
+using these applications.
+
 Graphical applications
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -34,10 +40,10 @@ Command-line tools
 - ``save-pdf.py`` -- Looks for files "*.norm" inside directories session-* and saves one figure per page in a PDF file
 
 
-Quick start
------------
+Coding using the API
+--------------------
 
-The following example Spectral synthesis example:
+Spectral synthesis example:
 
 .. code:: python
 
@@ -48,14 +54,7 @@ The following example Spectral synthesis example:
    obj.load_result()
    ex.plot_spectra([obj.result["cont"], obj.result["spec"], obj.result["norm"]])
 
-
-Using *pyfant* applications
----------------------------
-
-The *pyfant* application guide is currently part of the PFANT manual at
-http://github.com/trevisanj/PFANT
-
-
+.. todo:: More examples
 
 API reference
 -------------

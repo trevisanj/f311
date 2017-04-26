@@ -102,8 +102,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#command-line-tools">Command-line tools</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick start</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-pyfant-applications">Using <em>pyfant</em> applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coding-using-the-api">Coding using the API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#api-reference">API reference</a></li>
 </ul>
 </li>
@@ -191,6 +190,10 @@ easiness of parameter input and its multiple variations, and also tools for inco
 like atomic/molecular lines, atmospheric models, etc.</p>
 <div class="section" id="applications">
 <h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>The applications related to package f311.pyfant are listed below. For them to work, you need to
+<cite>install PFANT &lt;http://trevisanj.github.io/PFANT/install.html&gt;</cite>.</p>
+<p>The <cite>PFANT Quick Start &lt;http://trevisanj.github.io/PFANT/quick.html&gt;</cite> serves as a guide to
+using these applications.</p>
 <div class="section" id="graphical-applications">
 <h3>Graphical applications<a class="headerlink" href="#graphical-applications" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -207,9 +210,9 @@ like atomic/molecular lines, atmospheric models, etc.</p>
 </ul>
 </div>
 </div>
-<div class="section" id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
-<p>The following example Spectral synthesis example:</p>
+<div class="section" id="coding-using-the-api">
+<h2>Coding using the API<a class="headerlink" href="#coding-using-the-api" title="Permalink to this headline">¶</a></h2>
+<p>Spectral synthesis example:</p>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
 <span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
 <span class="n">obj</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Pfant</span><span class="p">()</span>
@@ -218,11 +221,10 @@ like atomic/molecular lines, atmospheric models, etc.</p>
 <span class="n">ex</span><span class="o">.</span><span class="n">plot_spectra</span><span class="p">([</span><span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;cont&quot;</span><span class="p">],</span> <span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;spec&quot;</span><span class="p">],</span> <span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;norm&quot;</span><span class="p">]])</span>
 </pre></div>
 </div>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">More examples</p>
 </div>
-<div class="section" id="using-pyfant-applications">
-<h2>Using <em>pyfant</em> applications<a class="headerlink" href="#using-pyfant-applications" title="Permalink to this headline">¶</a></h2>
-<p>The <em>pyfant</em> application guide is currently part of the PFANT manual at
-<a class="reference external" href="http://github.com/trevisanj/PFANT">http://github.com/trevisanj/PFANT</a></p>
 </div>
 <div class="section" id="api-reference">
 <h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>

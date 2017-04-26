@@ -174,12 +174,19 @@
 <h1>Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)<a class="headerlink" href="#browse-read-write-visualize-edit-files-f311-explorer" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p><em>explorer</em> provides applications and an API to handle many file formats used in Astronomy.</p>
-<p>Most resources are accessible through <code class="docutils literal"><span class="pre">explorer.py</span></code> (file-explorer-like application)</p>
+<p>Package f311.explorer concentrates most of the code in the f311 project, as this package contains many
+resources to visualize and edit several file formats used in Astronomy.</p>
+<p>Most resources are accessible through <code class="docutils literal"><span class="pre">explorer.py</span></code> (<a class="reference internal" href="#figexplorer"><span class="std std-numref">Figure 1</span></a>).</p>
+<div class="figure align-center" id="figexplorer">
+<img alt="_images/explorer.png" src="_images/explorer.png" />
+</div>
+<p>Many applications are used in the context of spectral synthesis, so they are mentioned in the
+<a class="reference external" href="http://trevisanj.github.io/PFANT">PFANT documentation</a>.</p>
 </div>
 <div class="section" id="applications">
 <h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">programs</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">p</span> <span class="n">explorer</span> <span class="n">markdown</span><span class="o">-</span><span class="nb">list</span>
+<p>You can list anytime the applications available in package f311.explorer by typing in your shell:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">programs</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">p</span> <span class="n">explorer</span>
 </pre></div>
 </div>
 <p>Graphical applications:</p>
@@ -207,6 +214,9 @@ option for more information.</p>
 </div>
 <div class="section" id="api-reference">
 <h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
+<p>The bulk of the f311.explorer API consists of GUIs written using the PyQt5 library.</p>
+<p>Besides, the package has a &#8220;block&#8221; framework allowing one to build pipelines to process
+<a class="reference internal" href="autodoc/f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.spectrum.Spectrum" title="f311.filetypes.ft_basic.spectrum.Spectrum"><code class="xref py py-class docutils literal"><span class="pre">Spectrum</span></code></a> objects.</p>
 <p><a class="reference internal" href="autodoc/f311.explorer.html"><span class="doc">f311.explorer package</span></a></p>
 </div>
 </div>
