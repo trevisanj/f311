@@ -1,5 +1,11 @@
 # TODO list
 
+
+
+
+- Enhance programs.py to sort alphabetically, generate single table (with word wrap). BTW it does not list itself
+  Who cares which package. But I can filter in or out packages
+
 # Explorer
 
 - Enhance explorer.py with options for spectra: save as... (have to figure out practical save as)
@@ -16,7 +22,9 @@
 
 
 ## GENERAL
+
   
+  - See why data files are not installing properly with pip setup.py install
   
 - Documentation: **Get some inspiration** (read lots of shit)!!!!
 - **Template project**
@@ -27,7 +35,9 @@
 
 ## Convmol
 
-- Figure out Kurucz
+
+
+
 
 ## astrogear
 
@@ -59,3 +69,11 @@
   - ~~Get rid of WSpectrumList "More..." tab (make sure everything is implemented as blocks)~~
   - ~~**Normalize("1") cause re-sampling, sth is not right**~~
   - ~~Resolve branches for other molecules~~ HITRAN OK
+
+
+
+
+
+# Future suggestions
+
+  - Find a way to obtain *any* Franck-Condon Factor needed

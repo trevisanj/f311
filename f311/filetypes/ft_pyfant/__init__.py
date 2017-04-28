@@ -15,6 +15,7 @@ from .filemoldb import *
 from .filehitrandb import *
 from .filekuruczmol import *
 from .filepleztio import *
+from .filefcf import *
 
 
 # from . import filemod

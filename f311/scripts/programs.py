@@ -76,7 +76,7 @@ if __name__ == "__main__":
     formatter_class=a99.SmartFormatter
     )
     parser.add_argument('format', type=str, help='Print format', nargs="?", default="text",
-                        choices=["text", "markdown-list", "markdown-table"])
+                        choices=["text", "markdown-list", "markdown-table", "rest-list"])
     parser.add_argument('-p', '--pkgname', type=str, help='List programs from this package only', default="(all)")
     parser.add_argument('-l', '--list-packages', action="store_true", help='Lists all sub-packages of f311')
     args = parser.parse_args()
@@ -93,4 +93,5 @@ if __name__ == "__main__":
     allinfo = _get_programs_dict(pkgname_only)
     strlist = _format_programs_dict(allinfo, args.format)
     print("\n".join(strlist))
+    print("http://github.com/trevisanj/f311\n")
 

@@ -47,6 +47,10 @@ class FileMolDB(FileSQLiteDB):
     def _create_schema(self):
         conn = self.get_conn()
         c = conn.cursor()
+        # TODO revisit each of these variables and see
+        # TODO where they are used in PFANT
+        # TODO what they are
+        # TODO if they repeat somewhere
         c.execute("""create table molecule (id integer primary key,
                                             formula text unique,
                                             name text,
@@ -60,9 +64,10 @@ class FileMolDB(FileSQLiteDB):
                                             ub real,
                                             te real,
                                             cro real,
-                                            s real
+                                            s real,
+                                            comments text
                                            )""")
-        # Note that it has no primary key
+
         c.execute("""create table state (id integer primary key,
                                          id_molecule integer,
                                          State text,
@@ -78,12 +83,39 @@ class FileMolDB(FileSQLiteDB):
                                          r_e real,
                                          Trans text,
                                          nu_00 real,
-                                         s_label text,
-                                         s_multiplicity integer,
-                                         s_spdf integer,
-                                         s_parity text,
-
+                                         comments text
                                         )""")
+                                         # s_label text,
+                                         # s_multiplicity integer,
+                                         # s_spdf integer,
+                                         # s_parity text
+
+
+        # A     2            Sigma
+        # label multiplicity spdf
+        #
+        # spdf:
+        #     Sigma: 0
+        #     Pi: 1
+        #     Delta: 2
+        #     Phi: 3
+        c.execute("""create table system
+                     (id integer primary key,
+                      id_molecule integer,
+                      from_label text,
+                      from_mult integer,
+                      from_spdf integer,
+                      to_label text,
+                      to_mult integer,
+                      to_spdf integer
+                      )""")
+
+        c.execute("""create table fcf (id integer primary key,
+                                       id_system integer,
+                                       vl integer,
+                                       v2l integer,
+                                       value real
+                                       )""")
 
         conn.commit()
         conn.close()
