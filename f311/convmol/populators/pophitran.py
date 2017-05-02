@@ -1,3 +1,4 @@
+# TODO outta here to new build-hitrandb.py
 import a99
 from .. import get_hitran_molecules, get_hitran_isotopologues
 import f311.filetypes as ft

@@ -20,7 +20,10 @@ class FileMolDB(FileSQLiteDB):
     default_filename = "moldb.sqlite"
     gui_data = {
         "molecule": {
-            "name": [None, "name of molecule, <i>e.g.</i>, 'OH'"],
+            "formula": [None, "formula of molecule, <i>e.g.</i>, 'OH'"],
+        },
+        "pfantmol": {
+            'description': [None, "free text"],
             "symbol_a": ["Symbol A", "symbol of first element"],
             "symbol_b": ["Symbol B", "symbol of second element"],
             "fe": [None, "oscillator strength"],
@@ -32,7 +35,7 @@ class FileMolDB(FileSQLiteDB):
             "te": [None, "electronic term"],
             "cro": [None, "delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)"],
             "s": [None, "?doc?"]
-      },
+        },
         "state": {
     "omega_e": ["ω<sub>e</sub>", "vibrational constant – first term (cm<sup>-1</sup>)"],
     "omega_ex_e": ["ω<sub>e</sub>x<sub>e</sub>", "vibrational constant – second term (cm<sup>-1</sup>)"],
@@ -44,6 +47,27 @@ class FileMolDB(FileSQLiteDB):
       }
     }
 
+    @staticmethod
+    def symbols_to_formula(symbols):
+        """Converts two symbols to a formula as recorded in the 'molecule' table
+
+        Args:
+            symbols: 2-element list as returned by f311.filetypes.basic.description_to_symbols()
+
+        Returns:
+            str: examples: 'MgH', 'C2', 'CH'
+
+        Formulas in the 'molecule' table have no isotope information
+        """
+        rec = re.compile("[a-zA-Z]+")
+        symbols_ = [rec.search(x).group().capitalize() for x in symbols]
+        symbols_ = ["C" if x == "A" else x for x in symbols_]
+        if symbols_[0] == symbols_[1]:
+            return "{}{}".format(symbols_[0], "2")
+        else:
+            return "".join(symbols_)
+
+
     def _create_schema(self):
         conn = self.get_conn()
         c = conn.cursor()
@@ -53,7 +77,22 @@ class FileMolDB(FileSQLiteDB):
         # TODO if they repeat somewhere
         c.execute("""create table molecule (id integer primary key,
                                             formula text unique,
-                                            name text,
+                                            name text
+                                           )""")
+
+
+        # I decided that I won't try to track down all the Physics to determine which of the
+        # molecule-wide "constants" in PFANT molecular lines file (e.g. 'molecules.dat') are
+        # dependent on the molecule, a (vl, v2l) transition thereof etc.
+        #
+        # Instead, it seems to be historically sensible to reproduce the structure found in that
+        # file, i.e., create a table with the same fields found in the molecule header of the PFANT
+        # molecular lines file (e.g. 'molecules.dat'), **no less, no more**
+        #
+        # **Note** 'symbol_a', 'symbol_b' matches element symbols found in 'dissoc.dat'
+        c.execute("""create table pfantmol (id integer primary key,
+                                            id_molecule integer,
+                                            description text,
                                             symbol_a text,
                                             symbol_b text,
                                             fe real,
@@ -68,6 +107,11 @@ class FileMolDB(FileSQLiteDB):
                                             comments text
                                            )""")
 
+        # This "state" information comes from NIST Chemistry Web Book.
+        #
+        # The field names are exactly as extracted from the header rows of the tables of diatomic
+        # molecular constants in that book
+        #
         c.execute("""create table state (id integer primary key,
                                          id_molecule integer,
                                          State text,
@@ -110,6 +154,13 @@ class FileMolDB(FileSQLiteDB):
                       to_spdf integer
                       )""")
 
+        # Franck-Condon Factors table
+        #
+        # Something that I noticed from Bruno Castilho's directory at ATMOS/wrk4/Mole: both CH and
+        # 13CH use the same Franck-Condon factors (files 'sjalist.txt', 'sjblist.txt' etc).
+        # Therefore, the 'fcf' table below have a N-1 relation to table 'system', not to table
+        # 'pfantmol' (the latter is where there is a distinction between 13CH and CH)
+        #
         c.execute("""create table fcf (id integer primary key,
                                        id_system integer,
                                        vl integer,

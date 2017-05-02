@@ -39,7 +39,6 @@ _SOURCES = OrderedDict([[name, _DataSource(name)] for name in _NAMES])
 class _WSource(a99.WBase):
     """Lists sources for molecular lines data"""
 
-
     @property
     def index(self):
         return self._get_index()
