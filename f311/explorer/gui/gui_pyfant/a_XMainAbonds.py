@@ -415,7 +415,15 @@ class XMainAbonds(QMainWindow):
         text = self.open_texts[index]
         cls = self.clss[index]
         label = self.labels_fn[index]
-        wild = self.wilds[index]
+
+        # makes wildcard options a list and adds "*" if not present
+        SEP = ";;"
+        __wild = self.wilds[index]
+        _wild = [x.strip() for x in __wild.split(SEP)]
+        if "*" not in _wild or "*.*" not in _wild:
+            _wild.append("*")
+        wild = SEP.join(_wild)
+
         try:
             d = self.load_dir if self.load_dir is not None \
                 else self.save_dir if self.save_dir is not None \

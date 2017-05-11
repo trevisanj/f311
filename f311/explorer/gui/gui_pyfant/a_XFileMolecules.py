@@ -398,19 +398,20 @@ class XFileMolecules(QMainWindow):
 
     def set_molecule(self, i):
         self.mol_index = i
-        m = self.mol = self.f.molecules[i]
+        m = self.mol = self.f.molecules[i] if len(self.f.molecules) > i else None
 
         self.update_mol_info()
 
         w = self.listWidgetSol
         w.clear()
 
-        for i, sol in enumerate(m.sol):
-            item = QListWidgetItem(self.get_sol_string(i, sol))
-            w.addItem(item)
+        if m is not None:
+            for i, sol in enumerate(m.sol):
+                item = QListWidgetItem(self.get_sol_string(i, sol))
+                w.addItem(item)
 
-        if len(m) > 0:
-            w.setCurrentRow(0)
+            if len(m) > 0:
+                w.setCurrentRow(0)
 
     def set_sol(self, j):
         self.sol_index = j

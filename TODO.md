@@ -3,6 +3,8 @@
 
 ## General
 
+- **IMPORTANT** installing throguth pip not delivering the default data properly!!
+
 - Enhance programs.py to sort alphabetically, generate single table (with word wrap). BTW it does not list itself
   Who cares which package. But I can filter in or out packages
 
@@ -15,6 +17,7 @@
 # Explorer
 
 - Enhance explorer.py with options for spectra: save as... (have to figure out practical save as)
+- mled.py: handle and test molecule and sol deletion
 
 # x.py
 
