@@ -29,6 +29,8 @@ class DataFile(a99.AttrsPart):
     flag_txt = True
     # Whether or not to be considered by load_any_file()
     flag_collect = True
+    # List of script names that can edit this file type
+    editors = None
 
     def __init__(self):
         a99.AttrsPart.__init__(self)

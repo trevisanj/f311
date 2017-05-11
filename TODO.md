@@ -13,6 +13,10 @@
 
   - Filter Kurucz
 
+# Filetypes
+
+- new script to print filetypes as table
+- actually it is better to specify max total width and wrap description accordingly
 
 # Explorer
 
@@ -50,7 +54,11 @@
   - treat sqlite DB as config file (can wait)
 
 ## pyfant
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 590abc6a0bb65f1ccf50d31bcfe4315f9ce68c5a
   - Fill origin when converting from FileFullCube to FileSpectrumList (somehow)
   - XHelpDialog is too ugly
   - Investigate what this a_XAtomsHistogram is about

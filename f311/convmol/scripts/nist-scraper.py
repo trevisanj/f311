@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
+"""
+Retrieves and prints a table of molecular constants from the NIST Chemistry Web Book.
 
+To do so, it uses web scraping to navigate through several pages and parse the desired information
+from the book web pages.
 
-"""Downloads and prints molecular constants from NIST Web Book for a particular molecule
+It does not provide a way to list the molecules yet, but will give an error if the molecule is not
+found in the NIST web book.
 
 Example:
 

@@ -14,6 +14,7 @@ class FileAbonds(DataFile):
     description = "chemical abundances"
     default_filename = "abonds.dat"
     attrs = ["ele", "abol", "notes"]
+    editors = ["abed.py", "x.py"]
 
     def __init__(self):
         DataFile.__init__(self)

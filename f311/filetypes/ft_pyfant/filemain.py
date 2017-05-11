@@ -22,6 +22,7 @@ class FileMain(DataFile):
     attrs = ["titrav", "pas", "fwhm", "ivtot", "vvt", "tolv",
              "teff", "glog", "asalog", "nhe", "ptdisk", "mu",
              "flprefix", "llzero", "llfin", "aint"]
+    editors = ["mained.py", "x.py"]
 
     def __init__(self):
         DataFile.__init__(self)

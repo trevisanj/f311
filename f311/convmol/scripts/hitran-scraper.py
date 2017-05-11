@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 
 """
-Downloads molecular lines from HITRAN database
+Retrieves molecular lines from the HITRAN database
+
+This script uses web scraping and the HAPI to save locally molecular lines from the HITRAN database.
+
+While the HAPI provides the downloading facility, web scraping is used to get the lists of molecules
+and isotopologues from the HITRAN webpages and get the IDs required to run the HAPI query.
+
+The script is typically invoked several times, each time with an additional argument
 """
 
 import argparse

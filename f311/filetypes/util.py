@@ -6,12 +6,16 @@ import logging
 import a99
 # from f311 import filetypes as ft
 from astropy.io import fits
+import tabulate
+from collections import namedtuple, OrderedDict
+import textwrap
 
 # TODO usage example for list_data_types(), or even a script
 
 __all__ = [
-    "load_any_file", "load_spectrum", "load_spectrum_fits_messed_x", "list_data_types",
-    "load_with_classes", "load"]
+    "load_any_file", "load_spectrum", "load_spectrum_fits_messed_x",
+    "load_with_classes", "load", "get_filetypes_info",
+    "filetypes_info_to_rows_header", "tabulate_filetypes_rest"]
 
 
 def load(filename, class_):
@@ -131,21 +135,106 @@ def load_spectrum_fits_messed_x(filename, sp_ref=None):
     return ret
 
 
-def list_data_types():
+
+FILE_TYPE_INFO_ATTRS = OrderedDict(zip(["description", "default_filename", "classname", "editors"],
+                                       ["Description", "Default filename", "Class name", "Editors"]))
+
+def get_filetypes_info(editor_quote="`"):
     """
-    Returns a list with all data types, in Markdown table format
+    Reports available data types
+
+    Args:
+        editor_quote: character to put the editors between
+
+    Returns:
+        list: list of FileTypeInfo
     """
+    NONE_REPL = ""
     from f311 import filetypes as ft
-    ll = []  # [(description, default filename), ...]
+    data = []  # [FileTypeInfo, ...]
 
     for attr in ft.classes_file():
         doc = attr.__doc__
         doc = attr.__name__ if doc is None else doc.strip().split("\n")[0]
 
-        def_ = attr.default_filename
-        def_ = def_ if def_ is not None else "-"
-        ll.append((doc, def_))
+        def_ = NONE_REPL if attr.default_filename is None else attr.default_filename
+        ee = attr.editors
+        if ee is None:
+            ee = NONE_REPL
+        else:
+            # Example: "``mained.py``, ``x.py``"
+            ee = ", ".join(["{0}{1}{0}".format(editor_quote, x, editor_quote) for x in ee])
 
-    ll.sort(key=lambda x: x[0])
+        data.append({"description": doc, "default_filename": def_, "classname": attr.__name__,
+                     "editors": ee})
 
-    return a99.markdown_table(("File type", "Default filename (for all purposes)"), ll)
+    data.sort(key=lambda x: x["description"])
+
+    return data
+
+
+def filetypes_info_to_rows_header(infos, attrnames=None, header=None, flag_wrap_description=False,
+                                  description_width=40):
+    """
+    Converts filetype information to a (multiline_rows, header) tuple that can be more easily be tabulated
+
+
+    Args:
+        infos: list of FileTypeInfo
+        attrnames: list of attribute names (keys of FILE_TYPE_INFO_ATTRS).
+                   Defaults to all attributes
+        header: list of strings containing headers. If not passed, uses default names
+        flag_wrap_description: whether to wrap the description text
+        description_width: width to wrap the description text (effective only if
+                           flag_wrap_description is True)
+
+    Returns:
+        tuple: (rows, header): rows is a list of lists
+    """
+
+    if attrnames is None:
+        attrnames = FILE_TYPE_INFO_ATTRS.keys()
+    if header is None:
+        header = [FILE_TYPE_INFO_ATTRS[key] for key in attrnames]
+
+    if flag_wrap_description:
+        wr = textwrap.TextWrapper(width=description_width, subsequent_indent=" ")
+
+    data = []
+    for i, info in enumerate(infos):
+        row = []
+        for j, attrname in enumerate(attrnames):
+            if attrname != "description" or not flag_wrap_description:
+                row.append(info[attrname])
+            else:
+                row.append(wr.wrap(info[attrname]))
+        data.append(row)
+
+    return data, header
+
+
+
+#
+#     return tabulate.tabulate(data, header)
+# a99.markdown_table(("File type description", "Default filen
+
+
+def tabulate_filetypes_rest(attrnames=None, header=None, flag_wrap_description=True, description_width=40):
+    """
+    Generates a reST multirow table
+
+    Args:
+        attrnames: list of attribute names (keys of FILE_TYPE_INFO_ATTRS).
+                   Defaults to all attributes
+        header: list of strings containing headers. If not passed, uses default names
+        flag_wrap_description: whether to wrap the description text
+        description_width: width to wrap the description text (effective only if
+                           flag_wrap_description is True)
+
+    """
+
+    infos = get_filetypes_info(editor_quote="``")
+    rows, header = filetypes_info_to_rows_header(infos, attrnames, header, flag_wrap_description,
+                                                 description_width)
+    ret = a99.rest_table(rows, header)
+    return ret

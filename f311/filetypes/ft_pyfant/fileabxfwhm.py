@@ -41,6 +41,7 @@ conv = [0.08, 0.6,  0.04]
     description = "abundances X FWHM's"
     default_filename = "abxfwhm.py"
     attrs = ["ab", "conv"]
+    editors = ["x.py"]
 
     @property
     def ab(self):

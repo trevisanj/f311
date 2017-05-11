@@ -26,7 +26,8 @@ _conv_sup = {1: "\u2071",
 class FileMolDB(FileSQLiteDB):
     description = "Database of Molecular Constants"
     default_filename = "moldb.sqlite"
-    gui_info = {
+    editors = ["convmol.py"]
+    gui_data = {
         "molecule": {
             "formula": [None, "formula of molecule, <i>e.g.</i>, 'OH'"],
         },
@@ -206,7 +207,7 @@ class FileMolDB(FileSQLiteDB):
 
     def get_transition_dict(self):
         """
-        Generates a dictionary where (molecule, state_from, tran1) can be searched to retrieve state rows
+        Generates a dictionary where (molecule, state_from, state_to) can be searched to retrieve state rows
 
         """
         rm = self.query_molecule()
@@ -215,14 +216,11 @@ class FileMolDB(FileSQLiteDB):
             rs = self.query_state(id_molecule=row_molecule["id"])
             for row_state in rs:
                 row_state.None_to_zero()
-                try:
-                    trans_ = row_state["Trans"]
-                    if trans_ is None or trans_ == 0:
-                        continue
-                    keys = self._formula_trans_to_tuples(row_molecule["formula"], trans_)
 
-                except Exception as e:
-                    raise RuntimeError("OLLLLLLLLLLLLLHA O TRANSSS: {}".format(trans_)) from e
+                trans_ = row_state["Trans"]
+                if trans_ is None or trans_ == 0:
+                    continue
+                keys = self._formula_trans_to_tuples(row_molecule["formula"], trans_)
 
                 if keys is None:
                     continue
