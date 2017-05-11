@@ -106,17 +106,13 @@ __CLASS_MAP = (
 _CLASS_DICT = dict(sum([[(mol, callable_) for mol in mols] for mols, callable_ in __CLASS_MAP], []))
 
 
-def hitran_to_sols(mol_row, state_row, lines, qgbd_calculator):
+def hitran_to_sols(mol_consts, lines, qgbd_calculator):
     """
     Converts HITRAN molecular lines data to PFANT "sets of lines"
 
     Args:
-        mol_row: dict-like,
-                 molecule-wide constants,
-                 keys: same as as field names in 'moldb:molecule' table
-        state_row: dict-like,
-                   state-wide constants,
-                   keys: same as field names in 'moldb:state' table
+        mol_consts: a dict-like object combining field values from tables 'molecule', 'state',
+                    'pfantmol', and 'system' from a FileMolDB database
         lines: item from rom hapi.LOCAL_TABLE_CACHE (a dictionary)
         qgbd_calculator: callable that can calculate "qv", "gv", "bv", "dv",
                          e.g., calc_qbdg_tio_like()
@@ -139,9 +135,9 @@ def hitran_to_sols(mol_row, state_row, lines, qgbd_calculator):
     header = lines["header"]
     data = lines["data"]
 
-    S = mol_row["s"]
-    DELTAK = mol_row["cro"]
-    formula = mol_row["formula"]
+    S = mol_consts["s"]
+    DELTAK = mol_consts["cro"]
+    formula = mol_consts["formula"]
 
     n = header["number_of_rows"]
     log = MolConversionLog(n)
@@ -192,7 +188,7 @@ def hitran_to_sols(mol_row, state_row, lines, qgbd_calculator):
 
         sol_key = (V, V_)  # (v', v'') transition (v_sup, v_inf)
         if sol_key not in sols:
-            qgbd = qgbd_calculator(state_row, sol_key[1])
+            qgbd = qgbd_calculator(mol_consts, sol_key[1])
             qqv = qgbd["qv"]
             ggv = qgbd["gv"]
             bbv = qgbd["bv"]

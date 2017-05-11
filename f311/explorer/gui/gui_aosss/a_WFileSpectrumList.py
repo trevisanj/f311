@@ -88,7 +88,7 @@ class WFileSpectrumList(a99.WBase):
         # lwex.addWidget(keep_ref(QLabel("<b>Existing spectra</b>")))
         ###
         w = self.wsptable = WSpectrumList(self.parent_form)
-        w.edited.connect(self.on_spectra_edited)
+        w.changed.connect(self.on_spectra_edited)
         lwex.addWidget(w)
 
         # ##### Finally...
@@ -245,7 +245,7 @@ class WFileSpectrumList(a99.WBase):
             self.add_log_error(a99.str_exc(E), True)
             raise
         if flag_emit:
-            self.edited.emit()
+            self.changed.emit()
 
     def header_revert(self):
         self.__update_gui_header()
@@ -273,14 +273,14 @@ class WFileSpectrumList(a99.WBase):
         if flag_changed_header:
             self.__update_gui_header()
         self.__update_gui_vis()
-        self.edited.emit()
+        self.changed.emit()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Internal gear
 
     def __emit_if(self):
         if self.flag_process_changes:
-            self.edited.emit()
+            self.changed.emit()
 
     def __update_gui(self, flag_header=False):
         """Updates GUI to reflect what is in self.f"""

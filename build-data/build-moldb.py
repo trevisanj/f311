@@ -32,7 +32,6 @@ def insert_molecules(moldb):
     conn = moldb.get_conn()
     conn.executemany("insert into molecule (formula, name) values (?,?)", MOLECULES)
     conn.commit()
-    conn.close()
 
 
 def insert_pfantmol_data(moldb):
@@ -49,15 +48,13 @@ def insert_pfantmol_data(moldb):
     for m in filemol:
         id_molecule = conn.execute("select id from molecule where formula = ? ",
                                    (moldb.symbols_to_formula(m.symbols),)).fetchone()["id"]
-        symbol_a, symbol_b = m.symbols
 
         conn.execute("insert into pfantmol "
-            "(id_molecule, description, symbol_a, symbol_b, fe, do, am, bm, ua, ub, te, cro, s) "
-            "values (?,?,?,?,?,?,?,?,?,?,?,?,?)",
-            (id_molecule, m.description, symbol_a, symbol_b, m.fe, m.do, m.am, m.bm, m.ua, m.ub, m.te,
+            "(id_molecule, description, fe, do, am, bm, ua, ub, te, cro, s) "
+            "values (?,?,?,?,?,?,?,?,?,?,?)",
+            (id_molecule, m.description, m.fe, m.do, m.am, m.bm, m.ua, m.ub, m.te,
             m.cro, m.s))
-
-    conn.close()
+    conn.commit()
 
 
 def insert_nist_data(moldb):
@@ -83,8 +80,7 @@ def insert_nist_data(moldb):
 
         except:
             a99.get_python_logger().exception("Failed for molecule '{}'".format(formula))
-
-    conn.close()
+    conn.commit()
 
 
 def load_list_file(filename):
@@ -144,13 +140,7 @@ def insert_franck_condon_factors(moldb):
         for (vl, v2l), fcf in fcf_dict.items():
             conn.execute("insert into fcf (id_system, vl, v2l, value) values (?,?,?,?)",
                          (id_system, vl, v2l, fcf))
-
-
-
-
-
-
-
+    conn.commit()
 
 if __name__ == "__main__":
 

@@ -18,7 +18,7 @@ class WSpectrumList(WSpectrumCollectionBase):
     """Editor for SpectrumList objects"""
 
     # argument0: flag_changed_header
-    edited = pyqtSignal(bool)
+    changed = pyqtSignal(bool)
 
     def __init__(self, parent):
         WSpectrumCollectionBase.__init__(self, parent, True)
@@ -213,7 +213,7 @@ class WSpectrumList(WSpectrumCollectionBase):
             raise
 
         if flag_emit:
-            self.edited.emit(True)
+            self.changed.emit(True)
 
     def on_add_spectra(self):
         flag_emit = False
@@ -267,7 +267,7 @@ class WSpectrumList(WSpectrumCollectionBase):
             report.extend(failed)
 
         if flag_emit:
-            self.edited.emit(False)
+            self.changed.emit(False)
 
         a99.show_message("<br>".join(report))
 

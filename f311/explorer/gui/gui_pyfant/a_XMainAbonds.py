@@ -134,7 +134,7 @@ class XMainAbonds(QMainWindow):
         # #### Main file editor widget
         me = self.me = WFileMain()
         l0.addWidget(me)
-        me.edited.connect(self.on_main_edited)
+        me.changed.connect(self.on_main_edited)
 
         # ### Abundances tab
         w0 = self.c10101 = QWidget()
@@ -154,7 +154,7 @@ class XMainAbonds(QMainWindow):
         ae = self.ae = WFileAbonds()
         l0.addWidget(ae)
 
-        ae.edited.connect(self.on_abonds_edited)
+        ae.changed.connect(self.on_abonds_edited)
 
         # ### Command-line options tab
         w0 = QWidget()
@@ -171,7 +171,7 @@ class XMainAbonds(QMainWindow):
         l1.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
         oe = self.oe = WOptionsEditor()
-        oe.edited.connect(self.on_options_edited)
+        oe.changed.connect(self.on_options_edited)
         l0.addWidget(oe)
         #        tt.tabBar()
 
@@ -287,18 +287,18 @@ class XMainAbonds(QMainWindow):
     # Slots for signals emited by ftpyfant widgets
 
     def on_main_edited(self):
-        self._on_edited()
+        self._on_changed()
 
     def on_abonds_edited(self):
-        self._on_edited()
+        self._on_changed()
 
     def on_options_edited(self):
-        self._on_edited()
+        self._on_changed()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # Protected methods to be overriden or used by descendant classes
 
-    def _on_edited(self):
+    def _on_changed(self):
         index = self.__get_index()
         self.flags_changed[index] = True
         self.__update_tab_texts()

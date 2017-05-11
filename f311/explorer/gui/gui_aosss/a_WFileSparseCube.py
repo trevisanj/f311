@@ -88,7 +88,7 @@ class WFileSparseCube(a99.WBase):
         a99.set_margin(lwex, 3)
         ###
         w = self.wsptable = WSparseCube(self.parent_form)
-        w.edited.connect(self.on_spectra_edited)
+        w.changed.connect(self.on_spectra_edited)
         lwex.addWidget(w)
 
         # ##### Finally...
@@ -334,7 +334,7 @@ class WFileSparseCube(a99.WBase):
 
     def on_spectra_edited(self):
         self.__update_gui_vis()
-        self.edited.emit()
+        self.changed.emit()
 
     def on_place_spectrum_edited(self):
         # could only update the obj_square but this is easier
@@ -443,7 +443,7 @@ class WFileSparseCube(a99.WBase):
 
     def __emit_if(self):
         if self.flag_process_changes:
-            self.edited.emit()
+            self.changed.emit()
 
     def __update_gui(self, flag_header=False):
         """Updates GUI to reflect what is in self.f"""

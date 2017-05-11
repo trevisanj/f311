@@ -18,7 +18,7 @@ class WSparseCube(WSpectrumCollectionBase):
     """Editor for SparseCube objects"""
 
     # argument0: flag_changed_header
-    edited = pyqtSignal(bool)
+    changed = pyqtSignal(bool)
 
     def __init__(self, parent):
         WSpectrumCollectionBase.__init__(self, parent, True)
@@ -272,7 +272,7 @@ class WSparseCube(WSpectrumCollectionBase):
             report.extend(failed)
 
         if flag_emit:
-            self.edited.emit(False)
+            self.changed.emit(False)
 
         a99.show_message("<br>".join(report))
 

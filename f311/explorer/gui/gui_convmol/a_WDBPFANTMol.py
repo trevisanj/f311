@@ -5,15 +5,15 @@ from a99 import WDBRegistry
 import a99
 
 
-__all__ = ["WDBState"]
+__all__ = ["WDBPFANTMol"]
 
 
 # Field names to leave out of table widget
 _FIELDNAMES_OUT = ("id_molecule",)
 
 
-class WDBState(WDBRegistry):
-    """Registry for table 'state'"""
+class WDBPFANTMol(WDBRegistry):
+    """Registry for table 'pfantmol'"""
 
     def __init__(self, *args):
         WDBRegistry.__init__(self, *args)
@@ -46,8 +46,8 @@ class WDBState(WDBRegistry):
             curr_idx = self.tableWidget.currentRow()
 
             t = self.tableWidget
-            rows = a99.cursor_to_rows(self._f.query_state(id_molecule=self._id_molecule))
-            ti = self._f.get_table_info("state")
+            rows = a99.cursor_to_rows(self._f.query_pfantmol(id_molecule=self._id_molecule))
+            ti = self._f.get_table_info("pfantmol")
             fieldnames = [name for name in ti if name not in _FIELDNAMES_OUT]
             # unfortunately QTableWidget is not prepared to show HTML col_names = [row["caption"] or row["name"] for row in ti if not row["name"] in FIELDNAMES_OUT]
             col_names = fieldnames
@@ -74,7 +74,7 @@ class WDBState(WDBRegistry):
 
     def _get_edit_params(self):
         """Returns a Parameters object containing information about the fields that may be edited"""
-        ti = self._f.get_table_info("state")
+        ti = self._f.get_table_info("pfantmol")
         params = a99.table_info_to_parameters(ti)
         params = [p for p in params if not p.name.startswith("id")]
         return params
@@ -87,12 +87,12 @@ class WDBState(WDBRegistry):
 
     def _do_on_insert(self):
         params = self._get_edit_params()
-        form = a99.XParametersEditor(specs=params, title="Insert Molecular State")
+        form = a99.XParametersEditor(specs=params, title="Insert PFANT Molecule")
         r = form.exec_()
         if r == QDialog.Accepted:
             kwargs = form.get_kwargs()
             conn = self._f.get_conn()
-            s = "insert into state (id_molecule, {}) values ({}, {})".\
+            s = "insert into pfantmol (id_molecule, {}) values ({}, {})".\
                 format(", ".join([p.name for p in params]),
                        self._id_molecule,
                        ", ".join(["?"]*len(params)))
@@ -104,11 +104,11 @@ class WDBState(WDBRegistry):
             return True
 
     def _do_on_edit(self):
-        r, form = a99.show_edit_form(self.row, self._get_edit_field_names(), "Edit Molecular State")
+        r, form = a99.show_edit_form(self.row, self._get_edit_field_names(), "Edit PFANT Molecule")
         if r == QDialog.Accepted:
             kwargs = form.get_kwargs()
             id_ = self.row["id"]
-            s = "update state set {} where id = {}".format(
+            s = "update pfantmol set {} where id = {}".format(
                 ", ".join(["{} = '{}'".format(a, b) for a, b in kwargs.items()]), id_)
             conn = self._f.get_conn()
             conn.execute(s)
@@ -118,13 +118,14 @@ class WDBState(WDBRegistry):
             return True
 
     def _do_on_delete(self):
-        r = QMessageBox.question(None, "Delete Molecular State",
+        r = QMessageBox.question(None, "Delete PFANT Molecule",
                                  "Are you sure?",
                                  QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if r == QMessageBox.Yes:
             conn = self._f.get_conn()
             id_ = self.row["id"]
-            conn.execute("delete from state where id = ?", [id_])
+            conn.execute("delete from pfantmol where id = ?", [id_])
             conn.commit()
+
             self._populate("index")
             return True

@@ -4,9 +4,7 @@ from PyQt5.QtWidgets import *
 import a99
 # from a_WState import WState
 # import moldb as db
-from .a_WStateConst import WStateConst
-from .a_WMolConst import WMolConst
-from .a_WFileMolDB import *
+from ...explorer.gui.gui_convmol.a_WMolecularConstants import *
 from ... import hapi
 import os
 import datetime
@@ -368,6 +366,9 @@ class _WVald3Panel(a99.WBase):
             self.add_log_error("Error reading contents of file '{}': '{}'".format(self.w_file.value, a99.str_exc(e)), True)
             raise
 
+        else:
+            self.clear_log()
+
         finally:
             self._flag_populating = False
             # self._wanna_emit_id_changed()
@@ -394,10 +395,19 @@ class _WKuruczPanel(a99.WBase):
     def flag_fcf(self):
         return self.checkbox_fcf.isChecked()
 
+    @property
+    def iso(self):
+        idx = self.combobox_isotope.currentIndex()
+        if idx == 0:
+            return None
+        return self._isotopes[idx-1]
+
     def __init__(self, *args):
         a99.WBase.__init__(self, *args)
 
         self._f = None  # FileKuruczMolecule
+        # list of integers, filled when file is loaded
+        self._isotopes = []
 
         lw = QVBoxLayout()
         self.setLayout(lw)
@@ -407,44 +417,69 @@ class _WKuruczPanel(a99.WBase):
         lg = QGridLayout()
         lw.addLayout(lg)
 
+        i_row = 0
         a = self.keep_ref(QLabel("Kurucz molecular lines file"))
         w = self.w_file = a99.WSelectFile(self.parent_form)
         w.valueChanged.connect(self.file_changed)
-        lg.addWidget(a, 0, 0)
-        lg.addWidget(w, 0, 1)
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
 
-        a = self.keep_ref(QLabel("Calculate 'gf' based on Hönl-London factors (HLFs)"))
+        a = self.keep_ref(QLabel("Isotope"))
+        w = self.combobox_isotope = QComboBox()
+        # w.valueChanged.connect(self.file_changed)
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
+
+        a = self.keep_ref(QLabel("Calculate 'gf' based on\n"
+                                 "Hönl-London factors (HLFs)"))
         w = self.checkbox_hlf = QCheckBox()
         w.setToolTip("If selected, will ignore 'loggf' from Kurucz file and\n"
                      "calculate 'gf' using Hönl-London factors formulas taken from Kovacz (1969)")
-        lg.addWidget(a, 1, 0)
-        lg.addWidget(w, 1, 1)
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
 
-        a = self.keep_ref(QLabel("Apply normalization factor for HLFs to add up to 1 (for fixed J)"))
+        a = self.keep_ref(QLabel("Apply normalization factor\n"
+                                 "for HLFs to add up to 1 (for fixed J)"))
         w = self.checkbox_normhlf = QCheckBox()
         w.setToolTip("If selected, calculated 'gf's will be multiplied by\n"
                      "2 / ((2 * J2l + 1) * (2 * S + 1)*(2 - DELTAK))")
-        lg.addWidget(a, 2, 0)
-        lg.addWidget(w, 2, 1)
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
 
-        a = self.keep_ref(QLabel("Multiply calculated 'gf' by Franck-Condon factor"))
+        a = self.keep_ref(QLabel("Multiply calculated 'gf' by\n"
+                                 "Franck-Condon factor"))
         w = self.checkbox_fcf = QCheckBox()
         w.setToolTip("If selected, incorporates internally calculated Franck-Condon factor"
                      "into the calculated 'gf'")
-        lg.addWidget(a, 3, 0)
-        lg.addWidget(w, 3, 1)
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
 
 
         lw.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
     def file_changed(self):
+        cb = self.combobox_isotope
         try:
             f = self._f = ft.FileKuruczMolecule()
             f.load(self.w_file.value)
+            self._isotopes = list(set([line.iso for line in f]))
+            self._isotopes.sort()
+            cb.clear()
+            cb.addItem("(all)")
+            cb.addItems([str(x) for x in self._isotopes])
         except Exception as e:
             self._f = None
-            self.add_log_error("Error reading contents of file '{}': '{}'".format(self.w_file.value, a99.str_exc(e)), True)
-            raise
+            self._isotopes = []
+            cb.clear()
+            msg = "Error reading contents of file '{}': '{}'".format(self.w_file.value,
+                                                                              a99.str_exc(e))
+            self.add_log_error(msg, True)
+            a99.get_python_logger().exception(msg)
 
 
 class _WTurboSpectrumPanel(a99.WBase):
@@ -477,9 +512,9 @@ class XConvMol(ex.XFileMainWindow):
 
 
         lv = self.keep_ref(QVBoxLayout(self.gotting))
-        me = self.moldb_editor = WFileMolDB(self)
+        me = self.w_moldb = WMolecularConstants(self)
         lv.addWidget(me)
-        me.edited.connect(self._on_edited)
+        me.changed.connect(self._on_changed)
         self.editors[0] = me
 
 
@@ -542,17 +577,6 @@ class XConvMol(ex.XFileMainWindow):
         b.clicked.connect(self.open_mol_clicked)
         lmn.addWidget(b)
 
-
-        # # # Log facilities
-        #
-        # sb = self.statusBar()
-        # l = self.label_last_log = QLabel()
-        # sb.addWidget(l)
-        #
-        # w = self.textEdit_log = QTextEdit()
-        # w.setReadOnly(True)
-        # tw0.addTab(w, "Log messages (Alt+&L)")
-        #
         # # Final adjustments
 
         tw0.setCurrentIndex(0)
@@ -570,10 +594,13 @@ class XConvMol(ex.XFileMainWindow):
 
     def eventFilter(self, obj_focused, event):
         if event.type() == QEvent.KeyPress:
-            # To help my debugging
+            # To help my debugging: Configures for Kurucz OH conversion
             if event.key() == Qt.Key_F12:
-                self.moldb_editor.w_mol.tableWidget.setCurrentCell(6, 0)
-                self.moldb_editor.w_state.tableWidget.setCurrentCell(5, 0)
+                self.w_moldb.combobox_select_molecule.setCurrentIndex(7)
+                self.w_moldb.combobox_select_pfantmol.setCurrentIndex(1)
+                self.w_moldb.combobox_select_state.setCurrentIndex(6)
+                self.w_moldb.combobox_select_system.setCurrentIndex(0)
+                self.w_moldb.None_to_zero()
                 self.w_source._buttons[2].setChecked(True)
                 self.source_changed()
                 self.w_kurucz.w_file.edit.setText("ohaxupdate.asc")
@@ -594,42 +621,29 @@ class XConvMol(ex.XFileMainWindow):
         self.w_out.value = filename
 
 
-    # def on_fill_missing(self):
-    #     self.w_mol.None_to_zero()
-    #     self.w_state.None_to_zero()
-
     def source_changed(self):
         idx = self.w_source.index
         for i, ds in enumerate(_SOURCES.values()):
             ds.widget.setVisible(i == idx)
             # print("Widget", ds.widget, "is visible?", ds.widget.isVisible())
 
-    # def mol_id_changed(self):
-    #     id_ = self.w_mol.w_mol.id
-    #     row = self.w_mol.w_mol.row
-    #     self.w_state.set_id_molecule(id_)
-    #     s = "States (no molecule selected)" if not row else "Select a State for molecule '{}'".format(row["formula"])
-    #     self.title_state.setText(a99.format_title0(s))
-
     def convert_clicked(self):
         from f311 import convmol as cm
         try:
-            errors = []
+            # # Extraction of data from GUI, and their
             name = self.w_source.source.name
-            w_mol = self.moldb_editor.w_mol
-            w_state = self.moldb_editor.w_state
-            mol_row = w_mol.row
-            mol_consts = mol_row
-            state_consts = w_state.row
+            # This is a merge of fields table 'molecule' and 'pfantmol' in a FileMolDB database
+            mol_consts = self.w_moldb.constants
+            fcfs = self.w_moldb.fcfs
             filename = self.w_out.value
-            if not mol_row:
+
+            # Validation of data
+            errors = []
+            if self.w_moldb.id_molecule is None:
                 errors.append("Molecule not selected")
             elif any([x is None for x in mol_consts.values()]):
-                errors.append("There are empty molecule-wide constants")
-            if not state_consts:
-                errors.append("State not selected")
-            elif any([x is None for x in state_consts.values()]):
-                errors.append("There are empty state-wide constants")
+                s_none = ", ".join(["'{}'".format(key) for key, value in mol_consts.items() if value is None])
+                errors.append("There are empty molecular constants: {}".format(s_none))
             if not self.w_out.validate():
                 errors.append("Output filename is invalid")
 
@@ -637,24 +651,32 @@ class XConvMol(ex.XFileMainWindow):
             if len(errors) == 0:
                 # Source-dependant calculation of "sets of lines"
                 if name == "HITRAN":
-                    lines = self.w_hitran.data
+                    errors.append("HITRAN conversion not implemented yet!")
+                    if False:
+                        lines = self.w_hitran.data
 
-                    if lines is None:
-                        errors.append("HITRAN table not selected")
-                    else:
-                        sols_calculator = cm.hitran_to_sols
+                        if lines is None:
+                            errors.append("HITRAN table not selected")
+                        else:
+                            conv = cm.ConvHitran()
                 elif name == "VALD3":
-                    if not self.w_vald3.is_molecule:
-                        errors.append("Need a VALD3 molecule")
-                    else:
-                        lines = self.w_vald3.data
-                        sols_calculator = cm.vald3_to_sols
+                    errors.append("VALD3 conversion not implemented yet!")
+                    if False:
+                        if not self.w_vald3.is_molecule:
+                            errors.append("Need a VALD3 molecule")
+                        else:
+                            lines = self.w_vald3.data
+                            conv = cm.ConvVald3()
                 elif name == "Kurucz":
-                    lines = self.w_kurucz.data
+                    w = self.w_kurucz
 
-                    sols_calculator = lambda *args: cm.kurucz_to_sols(*args,
-                        flag_hlf=self.w_kurucz.flag_hlf, flag_normhlf=self.w_kurucz.flag_normhlf,
-                        flag_fcf=self.w_kurucz.flag_fcf)
+                    if w.flag_fcf and fcfs is None:
+                        errors.append("Cannot multiply gf's by Franck-Condon Factors, as these are not available in molecular configuration")
+                    else:
+
+                        conv = cm.ConvKurucz(flag_hlf=w.flag_hlf, flag_normhlf=w.flag_normhlf,
+                                             flag_fcf=w.flag_fcf, iso=w.iso)
+                        lines = w.data
                 else:
                     a99.show_message("{}-to-PFANT conversion not implemented yet, sorry".
                                     format(name))
@@ -662,11 +684,9 @@ class XConvMol(ex.XFileMainWindow):
 
             if len(errors) == 0:
                 # Finally the conversion to PFANT molecular lines file
-
-                # TODO **MAYBE NOT TIO-LIKE***
-                mol_row.update(mol_consts)  # replaces possibly changed values for "fe", "do" etc.
-                f, log = cm.make_file_molecules(mol_row, state_consts, lines,
-                                                cm.calc_qgbd_tio_like, sols_calculator)
+                conv.mol_consts = mol_consts
+                conv.fcfs = fcfs
+                f, log = conv.make_file_molecules(lines)
                 ne = len(log.errors)
                 if ne > 0:
                     self.add_log("Error messages:")
@@ -675,13 +695,19 @@ class XConvMol(ex.XFileMainWindow):
 
                 if log.flag_ok:
                     f.save_as(filename)
+                    if log.num_lines_skipped > 0:
+                        self.add_log(
+                            "Lines filtered out: {}".format(log.num_lines_skipped))
+                    ne = log.num_lines-log.num_lines_skipped-f.num_lines
+                    if ne > 0:
+                        self.add_log(
+                            "Lines not converted because of error: {}".format(ne))
                     self.add_log(
-                        "Lines converted: {}/{}".format(f.num_lines, log.num_lines_in))
+                        "Lines converted: {}/{}".format(f.num_lines, log.num_lines))
 
                     self.add_log("File '{}' generated successfully".format(filename))
                 else:
                     self.add_log_error("Conversion was not possible")
-
             else:
                 self.add_log_error("Cannot convert:\n  - " + ("\n  - ".join(errors)), True)
 

@@ -19,7 +19,7 @@ class WFileMain(QWidget):
     """
 
     # Emitted whenever any value changes
-    edited = pyqtSignal()
+    changed = pyqtSignal()
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
@@ -290,7 +290,7 @@ class WFileMain(QWidget):
     def on_edited(self):
         if self.flag_process_changes:
             self.__update_file_main()
-            self.edited.emit()
+            self.changed.emit()
 
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #

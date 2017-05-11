@@ -23,7 +23,7 @@ def test_filemolkurucz():
     h = _fake_file()
     f = ft.FileKuruczMolecule()
     f._do_load_h(h, "_fake_file")
-    assert repr(f.lines[0]) == "KuruczMolLine(2045.126, -7.917, 2.5, 83.925, 2.5, 48964.99, 1, 8, 'X', 0, 'f', 1, 'A', 7, 'e', 1, 6)"
+    assert repr(f.lines[0]) == "KuruczMolLine(lambda_=2045.126, loggf=-7.917, J2l=2.5, E2l=83.925, Jl=2.5, El=48964.99, atomn0=1, atomn1=8, state2l='X', v2l=0, lambda_doubling2l='f', spin2l=1, statel='A', vl=7, lambda_doublingl='e', spinl=1, iso=16)"
 
 
 def test_conv_kurucz(tmpdir):
@@ -32,12 +32,19 @@ def test_conv_kurucz(tmpdir):
     db = ft.FileMolDB()
     db.init_default()
     # conn = db.get_conn()
-    mol_row = db.query_molecule(id=7).fetchone()  # supposed to be OH
-    state_row = db.query_state(**{"state.id": 97}).fetchone()  # supposed to be "X ²Pi_i"
+
+    mol_consts = db.get_mol_consts(id_pfantmol=12, id_state=119, id_system=5)
+    mol_consts.None_to_zero()
 
     h = _fake_file()
     fileobj = ft.FileKuruczMolecule()
     fileobj._do_load_h(h, "_fake_file")
 
-    sols, log = cm.kurucz_to_sols(mol_row, state_row, fileobj,
-        cm.calc_qgbd_tio_like, flag_hlf=True, flag_fcf=True)
+    conv = cm.ConvKurucz(mol_consts=mol_consts,
+                         flag_hlf=False, flag_normhlf=False, flag_fcf=False, flag_quiet=False,
+                         fcfs=None, iso=None)
+
+    f, log = conv.make_file_molecules(fileobj)
+
+    assert f.num_lines == 5
+

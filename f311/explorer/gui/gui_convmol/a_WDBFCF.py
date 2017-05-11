@@ -5,32 +5,25 @@ from a99 import WDBRegistry
 import a99
 
 
-__all__ = ["WDBState"]
+__all__ = ["WDBFCF"]
 
 
 # Field names to leave out of table widget
-_FIELDNAMES_OUT = ("id_molecule",)
+_FIELDNAMES_OUT = ("id", "id_system",)
 
 
-class WDBState(WDBRegistry):
-    """Registry for table 'state'"""
+class WDBFCF(WDBRegistry):
+    """Registry for table 'fcf'"""
 
     def __init__(self, *args):
         WDBRegistry.__init__(self, *args)
 
-        self._id_molecule = None
+        self._id_system = None
 
-    def set_id_molecule(self, id_):
+    def set_id_system(self, id_):
         """Sets molecule id and re-populates table"""
-        self._id_molecule = id_
+        self._id_system = id_
         self._populate()
-
-    def find_formula(self, formula):
-        """Moves to row where formula is (if found, otherwise does nothing)"""
-        for i, row in enumerate(self._data):
-            if row["formula"] == formula:
-                self.tableWidget.setCurrentCell(i, 0)
-                break
 
     def _populate(self, restore_mode=None):
         """
@@ -46,8 +39,8 @@ class WDBState(WDBRegistry):
             curr_idx = self.tableWidget.currentRow()
 
             t = self.tableWidget
-            rows = a99.cursor_to_rows(self._f.query_state(id_molecule=self._id_molecule))
-            ti = self._f.get_table_info("state")
+            rows = a99.cursor_to_rows(self._f.query_fcf(id_system=self._id_system))
+            ti = self._f.get_table_info("fcf")
             fieldnames = [name for name in ti if name not in _FIELDNAMES_OUT]
             # unfortunately QTableWidget is not prepared to show HTML col_names = [row["caption"] or row["name"] for row in ti if not row["name"] in FIELDNAMES_OUT]
             col_names = fieldnames
@@ -74,7 +67,7 @@ class WDBState(WDBRegistry):
 
     def _get_edit_params(self):
         """Returns a Parameters object containing information about the fields that may be edited"""
-        ti = self._f.get_table_info("state")
+        ti = self._f.get_table_info("fcf")
         params = a99.table_info_to_parameters(ti)
         params = [p for p in params if not p.name.startswith("id")]
         return params
@@ -86,15 +79,17 @@ class WDBState(WDBRegistry):
         return ret
 
     def _do_on_insert(self):
+        if self._id_system is None:
+            return
         params = self._get_edit_params()
-        form = a99.XParametersEditor(specs=params, title="Insert Molecular State")
+        form = a99.XParametersEditor(specs=params, title="Insert Franck-Condon Factor")
         r = form.exec_()
         if r == QDialog.Accepted:
             kwargs = form.get_kwargs()
             conn = self._f.get_conn()
-            s = "insert into state (id_molecule, {}) values ({}, {})".\
+            s = "insert into fcf (id_system, {}) values ({}, {})".\
                 format(", ".join([p.name for p in params]),
-                       self._id_molecule,
+                       self._id_system,
                        ", ".join(["?"]*len(params)))
             cursor = conn.execute(s, list(kwargs.values()))
             id_ = cursor.lastrowid
@@ -104,11 +99,11 @@ class WDBState(WDBRegistry):
             return True
 
     def _do_on_edit(self):
-        r, form = a99.show_edit_form(self.row, self._get_edit_field_names(), "Edit Molecular State")
+        r, form = a99.show_edit_form(self.row, self._get_edit_field_names(), "Edit Franck-Condon Factor")
         if r == QDialog.Accepted:
             kwargs = form.get_kwargs()
             id_ = self.row["id"]
-            s = "update state set {} where id = {}".format(
+            s = "update fcf set {} where id = {}".format(
                 ", ".join(["{} = '{}'".format(a, b) for a, b in kwargs.items()]), id_)
             conn = self._f.get_conn()
             conn.execute(s)
@@ -118,13 +113,14 @@ class WDBState(WDBRegistry):
             return True
 
     def _do_on_delete(self):
-        r = QMessageBox.question(None, "Delete Molecular State",
+        r = QMessageBox.question(None, "Delete Franck-Condon Factor",
                                  "Are you sure?",
                                  QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if r == QMessageBox.Yes:
             conn = self._f.get_conn()
             id_ = self.row["id"]
-            conn.execute("delete from state where id = ?", [id_])
+            conn.execute("delete from fcf where id = ?", [id_])
             conn.commit()
+
             self._populate("index")
             return True

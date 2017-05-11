@@ -74,7 +74,7 @@ class XMulti(XPFANT):
         # ### Editor for multi setup
 
         editor = self.multi_editor = ex.WFileAbXFwhm()
-        editor.edited.connect(self.on_multi_edited)
+        editor.changed.connect(self.on_multi_changed)
         l.addWidget(editor)
 
         # ## Registers data in a_XMainAbonds lists to automatically perform Load/Save/Save as
@@ -161,8 +161,8 @@ class XMulti(XPFANT):
         XPFANT.on_abonds_edited(self)
         self.multi_editor.file_abonds = self.ae.f
 
-    def on_multi_edited(self):
-        self._on_edited()
+    def on_multi_changed(self):
+        self._on_changed()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # Slots for signals emited by ftpyfant widgets

@@ -26,7 +26,7 @@ class XFileAbonds(QMainWindow):
         self.save_dir = "."
         me = self.editor = a_WFileAbonds.WFileAbonds()
         me.setFont(a99.MONO_FONT)
-        me.edited.connect(self.on_edited)
+        me.changed.connect(self.on_edited)
         me.setFocus()
         # self.setWindowTitle(title)
         self.setCentralWidget(me)

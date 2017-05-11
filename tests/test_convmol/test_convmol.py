@@ -1,5 +1,5 @@
 import f311.convmol as cm
-
+import f311.explorer as ex
 import a99
 
 
@@ -11,30 +11,20 @@ def test_MolConversionLog():
 
 def test_WDBRegistry():
     app = a99.get_QApplication()
-    w = cm.WDBRegistry(a99.XLogMainWindow())
+    w = a99.WDBRegistry(a99.XLogMainWindow())
 
 
-def test_WDBState():
+def test_WMolecularConstants():
     app = a99.get_QApplication()
-    w = cm.WDBState(a99.XLogMainWindow())
+    w = ex.WMolecularConstants(a99.XLogMainWindow())
 
 
-# def test_WMolConst():
+# def test_XConvMol():
 #     app = a99.get_QApplication()
-#     w = cm.WMolConst(a99.XLogMainWindow())
-#
-#
-# def test_WStateConst():
-#     app = a99.get_QApplication()
-#     w = cm.WStateConst(a99.XLogMainWindow())
-
-
-def test_XConvMol():
-    app = a99.get_QApplication()
-    w = cm.XConvMol()
+#     w = cm.XConvMol()
 
 
 def test_XFileMolDB():
     app = a99.get_QApplication()
-    w = cm.XFileMolDB()
+    w = ex.XFileMolDB()
 

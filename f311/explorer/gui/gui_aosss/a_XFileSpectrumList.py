@@ -37,7 +37,7 @@ class XFileSpectrumList(XFileMainWindow):
         lv = keep_ref(QVBoxLayout(self.gotting))
         ce = self.ce = WFileSpectrumList(self)
         lv.addWidget(ce)
-        ce.edited.connect(self.on_tab0_file_edited)
+        ce.changed.connect(self.on_tab0_file_edited)
         self.editors[0] = ce
 
         # # Adds spectrum collection actions to menu
@@ -94,12 +94,12 @@ class XFileSpectrumList(XFileMainWindow):
     #         self._manager_form.activateWindow()
 
     def on_tab0_file_edited(self):
-        self._on_edited()
+        self._on_changed()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # Protected methods to be overriden or used by descendant classes
 
-    def _on_edited(self):
+    def _on_changed(self):
         index = self._get_tab_index()
         self.flags_changed[index] = True
         self._update_tab_texts()

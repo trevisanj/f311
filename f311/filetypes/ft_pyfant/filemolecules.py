@@ -1,4 +1,4 @@
-__all__ = ["FileMolecules", "Molecule", "SetOfLines", "mol_row_to_molecule"]
+__all__ = ["FileMolecules", "Molecule", "SetOfLines", "mol_consts_to_molecule"]
 
 
 
@@ -360,8 +360,6 @@ class FileMolecules(DataFile):
             if len(m) == 0:
                 del self.molecules[i]
 
-
-
     def _do_load(self, filename):
         """Clears internal lists and loads from file."""
 
@@ -534,26 +532,25 @@ class FileMolecules(DataFile):
                                      (s._lmbdam[j], s._sj[j], s._jj[j], s._branch[j], numlin))
 
 
-def mol_row_to_molecule(mol_row):
+def mol_consts_to_molecule(mol_consts):
     """Assembles a Molecule object from record from a FileMolDB database
 
     Args:
-        mol_row: MyDBRow object representing row from 'molecules' table in a FileMolDB database.
-                 A dict-like object with keys "name", "formula", "fe", "do", "am", "am", "bm", "ua",
-                 "ub", "te", "cro", "s"
+        mol_consts: a dict-like object combining field values from tables 'molecule', 'state',
+                    'pfantmol', and 'system' from a FileMolDB database
     """
 
     mol = Molecule()
-    mol.description = "{name} ({formula})".format(**mol_row)
-    mol.symbols = [mol_row["symbol_a"], mol_row["symbol_b"]]
-    mol.fe = mol_row["fe"]
-    mol.do = mol_row["do"]
-    mol.mm = mol_row["am"] + mol_row["bm"]
-    mol.am = mol_row["am"]
-    mol.bm = mol_row["bm"]
-    mol.ua = mol_row["ua"]
-    mol.ub = mol_row["ub"]
-    mol.te = mol_row["te"]
-    mol.cro = mol_row["cro"]
-    mol.s = mol_row["s"]
+    mol.description = "{name} ({formula})".format(**mol_consts)
+    mol.symbols = description_to_symbols(mol_consts["formula"])
+    mol.fe = mol_consts["fe"]
+    mol.do = mol_consts["do"]
+    mol.mm = mol_consts["am"] + mol_consts["bm"]
+    mol.am = mol_consts["am"]
+    mol.bm = mol_consts["bm"]
+    mol.ua = mol_consts["ua"]
+    mol.ub = mol_consts["ub"]
+    mol.te = mol_consts["te"]
+    mol.cro = mol_consts["cro"]
+    mol.s = mol_consts["s"]
     return mol

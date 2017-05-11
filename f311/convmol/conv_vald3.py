@@ -15,17 +15,13 @@ __all__ = ["vald3_to_sols"]
 
 
 
-def vald3_to_sols(mol_row, state_row, file_vald3, qgbd_calculator):
+def vald3_to_sols(mol_consts, file_vald3, qgbd_calculator):
     """
     Converts HITRAN molecular lines data to PFANT "sets of lines"
 
     Args:
-        mol_row: dict-like,
-                 molecule-wide constants,
-                 keys: same as as field names in 'moldb:molecule' table
-        state_row: dict-like,
-                   state-wide constants,
-                   keys: same as field names in 'moldb:state' table
+        mol_consts: a dict-like object combining field values from tables 'molecule', 'state',
+                    and 'pfantmol' from a FileMolDB database
         file_vald3: FileVald3 instance with only one species
         qgbd_calculator: callable that can calculate "qv", "gv", "bv", "dv",
                          e.g., calc_qbdg_tio_like()
@@ -53,8 +49,8 @@ def vald3_to_sols(mol_row, state_row, file_vald3, qgbd_calculator):
     lines = file_vald3.speciess[0].lines
     n = len(lines)
 
-    S = mol_row["s"]
-    DELTAK = mol_row["cro"]
+    S = mol_consts["s"]
+    DELTAK = mol_consts["cro"]
 
     sols = OrderedDict()  # one item per (vl, v2l) pair
     log = MolConversionLog(n)
@@ -85,7 +81,7 @@ def vald3_to_sols(mol_row, state_row, file_vald3, qgbd_calculator):
 
         sol_key = "%3d%3d" % (line.vl, line.v2l)  # (v', v'') transition (v_sup, v_inf)
         if sol_key not in sols:
-            qgbd = qgbd_calculator(state_row, line.v2l)
+            qgbd = qgbd_calculator(mol_consts, line.v2l)
             qqv = qgbd["qv"]
             ggv = qgbd["gv"]
             bbv = qgbd["bv"]

@@ -40,7 +40,7 @@ if __name__ == "__main__":
         m.load(args.fn)
     app = a99.get_QApplication([])
     form = ex.XFileMolDB(None, m)
-    form.show()
+    form.showMaximized()
     sys.exit(app.exec_())
 
 

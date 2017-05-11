@@ -23,7 +23,7 @@ class WFileAbXFwhm(QWidget):
     """
 
     # Emitted whenever any value changes
-    edited = pyqtSignal()
+    changed = pyqtSignal()
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
@@ -124,7 +124,7 @@ class WFileAbXFwhm(QWidget):
             return
         self.editor.document().setModified(False)
         self.__update_data()
-        self.edited.emit()
+        self.changed.emit()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Internal gear

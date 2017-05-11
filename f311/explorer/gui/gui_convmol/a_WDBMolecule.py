@@ -14,7 +14,6 @@ class WDBMolecule(WDBRegistry):
     def __init__(self, *args):
         WDBRegistry.__init__(self, *args)
 
-
     # # Override
 
     def _f_changed(self):
@@ -95,11 +94,13 @@ class WDBMolecule(WDBRegistry):
             kwargs = form.get_kwargs()
             conn = self._f.get_conn()
             s = "insert into molecule({}) values ({})".format(", ".join([p.name for p in params]),
-                                                              ", ".join(["?"*len(params)]))
-            conn.execute(s, list(kwargs.values()))
+                                                              ", ".join(["?"]*len(params)))
+            cursor = conn.execute(s, list(kwargs.values()))
+            id_ = cursor.lastrowid
             conn.commit()
             self._populate(False)
-            self._find_formula(kwargs["formula"])
+            self._find_id(id_)
+            return True
 
 
     def _do_on_edit(self):
@@ -113,17 +114,24 @@ class WDBMolecule(WDBRegistry):
             conn.commit()
             self._populate()
             self._find_formula(kwargs["formula"])
+            return True
 
 
     def _do_on_delete(self):
         r = QMessageBox.question(None, "Delete molecule",
-                                 "This will also delete all States associated to this molecule!\n\nAre you sure?",
+                                 "This will also delete all States, Systems, and PFANT molecules associated to this molecule!\n\nAre you sure?",
                                  QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if r == QMessageBox.Yes:
             conn = self._f.get_conn()
             id_ = self.row["id"]
+
+            for row in conn.execute("select id from system where id_molecule = ?", [id_]):
+                conn.execute("delete from fcf where id_system = ?", [row["id"]])
             conn.execute("delete from molecule where id = ?", [id_])
             conn.execute("delete from state where id_molecule = ?", [id_])
+            conn.execute("delete from system where id_molecule = ?", [id_])
+            conn.execute("delete from pfantmol where id_molecule = ?", [id_])
             conn.commit()
 
             self._populate("index")
+            return True

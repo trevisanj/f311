@@ -125,6 +125,8 @@ class SB_Extend(SpectrumBlock):
         self.fill_mode = fill_mode
 
     def _do_use(self, inp):
+        from f311 import explorer as ex
+
         # TODO work with delta_lambda not constant
         output = self._copy_input(inp)
 

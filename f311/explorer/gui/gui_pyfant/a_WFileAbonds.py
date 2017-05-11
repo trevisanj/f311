@@ -26,7 +26,7 @@ class WFileAbonds(QWidget):
     """
 
     # Emitted whenever any value changes
-    edited = pyqtSignal()
+    changed = pyqtSignal()
     # Emitted whenever a new file is loaded
     loaded = pyqtSignal()
 
@@ -189,19 +189,19 @@ class WFileAbonds(QWidget):
 
             self._update_file_abonds()
             self._update_file_abonds()
-            self.edited.emit()
+            self.changed.emit()
 
     def on_sort_a(self):
         self.f.sort_a()
         self._update_from_file_abonds()
         self._update_file_abonds()
-        self.edited.emit()
+        self.changed.emit()
 
     def on_sort_z(self):
         not_found = self.f.sort_z()
         self._update_from_file_abonds()
         self._update_file_abonds()
-        self.edited.emit()
+        self.changed.emit()
         if len(not_found) > 0:
             a99.show_message("Symbols not found in the periodic table:\n\n"+
                             str([x.strip() for x in not_found])+"\n\n"+
@@ -224,7 +224,7 @@ class WFileAbonds(QWidget):
                 self._update_file_abonds()
             finally:
                 self.flag_process_changes = True
-            self.edited.emit()
+            self.changed.emit()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Internal gear
@@ -244,7 +244,7 @@ class WFileAbonds(QWidget):
             self._update_file_abonds()
         finally:
             self.flag_process_changes = True
-        self.edited.emit()
+        self.changed.emit()
 
     def _set_error_text(self, x):
         """Sets text of textEditError."""

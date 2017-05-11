@@ -158,7 +158,7 @@ class WSpectrumCollectionBase(a99.WBase):
                 if source == self.twSpectra:
                     n_deleted = self._delete_spectra()
                     if n_deleted > 0:
-                        self.edited.emit(False)
+                        self.changed.emit(False)
         return False
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
@@ -234,7 +234,7 @@ class WSpectrumCollectionBase(a99.WBase):
 
         if flag_update:
             self._update_gui()
-            self.edited.emit(False)
+            self.changed.emit(False)
 
     def on_twSpectra_customContextMenuRequested(self, position):
         """Mounts, shows popupmenu for the tableWidget control, and takes action."""
@@ -247,10 +247,10 @@ class WSpectrumCollectionBase(a99.WBase):
         if action == act_del:
             n_deleted = self._delete_spectra()
             if n_deleted > 0:
-                self.edited.emit(False)
+                self.changed.emit(False)
 
         if flag_update:
-            self.edited.emit(False)
+            self.changed.emit(False)
             self._update_gui()
 
     def on_all_to_scalar(self):
@@ -283,7 +283,7 @@ class WSpectrumCollectionBase(a99.WBase):
             raise
 
         if flag_emit:
-            self.edited.emit(True)
+            self.changed.emit(True)
 
 
     def on_plot_xy(self):
@@ -341,7 +341,7 @@ class WSpectrumCollectionBase(a99.WBase):
             raise
 
         if flag_emit:
-            self.edited.emit(True)
+            self.changed.emit(True)
 
 
     def on_sel_plot_stacked(self):
@@ -389,7 +389,7 @@ class WSpectrumCollectionBase(a99.WBase):
     def on_sel_delete(self):
         n = self._delete_spectra()
         if n > 0:
-            self.edited.emit(False)
+            self.changed.emit(False)
 
 
     def on_curr_scale(self):
@@ -406,11 +406,11 @@ class WSpectrumCollectionBase(a99.WBase):
             if k != 1:
                 sp.y *= k
                 self._update_gui()
-                self.edited.emit(False)
+                self.changed.emit(False)
 
 
     def on_twSpectra_cellChanged(self, row, column):
-        """Cell has been edited manually: commit to self.collection"""
+        """Cell has been changed manually: commit to self.collection"""
         if self.flag_process_changes:
             flag_emit = False
             text = None
@@ -451,7 +451,7 @@ class WSpectrumCollectionBase(a99.WBase):
                 self.flag_process_changes = True
 
             if flag_emit:
-                self.edited.emit(False)
+                self.changed.emit(False)
 
 
     def on_twSpectra_itemSelectionChanged(self):

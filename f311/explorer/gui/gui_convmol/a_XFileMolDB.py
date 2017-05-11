@@ -33,9 +33,10 @@ class XFileMolDB(XFileMainWindow):
         lv = self.keep_ref(QVBoxLayout(self.gotting))
         me = self.moldb_editor = WFileMolDB(self)
         lv.addWidget(me)
-        me.edited.connect(self._on_edited)
+        me.changed.connect(self._on_changed)
         self.editors[0] = me
 
+        self.setWindowTitle("Molecular information database editor")
 
         if fileobj is not None:
             self.load(fileobj)
@@ -70,3 +71,15 @@ class XFileMolDB(XFileMainWindow):
     # # Override
     #   ========
 
+    def _on_changed(self):
+        """Overriden to commit automatically. "(changed)" will not appear
+
+        Changes should be committed by the method that executed queries, but it is so easy to
+        reinforce this... just in case.
+        """
+        index = self._get_tab_index()
+        if index == 0:
+            self.moldb_editor.f.get_conn().commit()  # Just in case
+        else:
+            self.flags_changed[index] = True
+            self._update_tab_texts()

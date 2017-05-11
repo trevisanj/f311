@@ -1,10 +1,16 @@
 # TODO list
 
 
-
+## General
 
 - Enhance programs.py to sort alphabetically, generate single table (with word wrap). BTW it does not list itself
   Who cares which package. But I can filter in or out packages
+
+
+## Convmol
+
+  - Filter Kurucz
+
 
 # Explorer
 
@@ -33,12 +39,6 @@
 - & update explorer list_file_types() example
 
 
-## Convmol
-
-
-
-
-
 ## astrogear
 
   - Installation of other packages could write in f311 config file (or not)!!
@@ -48,9 +48,6 @@
 
 ## pyfant
 
-  - **SEE WHY PYFANT SETUP IS MESSING ASTROGEAR!!!!!!**
-
-  
   - Fill origin when converting from FileFullCube to FileSpectrumList (somehow)
   - XHelpDialog is too ugly
   - Investigate what this a_XAtomsHistogram is about
@@ -77,3 +74,4 @@
 # Future suggestions
 
   - Find a way to obtain *any* Franck-Condon Factor needed
+  

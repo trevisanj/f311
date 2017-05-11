@@ -20,7 +20,7 @@ class WSpectrumCollection(a99.WBase):
     """Editor for SpectrumCollection objects"""
 
     # argument0: flag_changed_header
-    edited = pyqtSignal(bool)
+    changed = pyqtSignal(bool)
 
     def __init__(self, parent):
         a99.WBase.__init__(self, parent)
@@ -271,7 +271,7 @@ class WSpectrumCollection(a99.WBase):
                 if source == self.twSpectra:
                     n_deleted = self.__delete_spectra()
                     if n_deleted > 0:
-                        self.edited.emit(False)
+                        self.changed.emit(False)
         return False
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
@@ -347,7 +347,7 @@ class WSpectrumCollection(a99.WBase):
 
         if flag_update:
             self.__update_gui()
-            self.edited.emit(False)
+            self.changed.emit(False)
 
 
     def on_twSpectra_customContextMenuRequested(self, position):
@@ -361,10 +361,10 @@ class WSpectrumCollection(a99.WBase):
         if action == act_del:
             n_deleted = self.__delete_spectra()
             if n_deleted > 0:
-                self.edited.emit(False)
+                self.changed.emit(False)
 
         if flag_update:
-            self.edited.emit(False)
+            self.changed.emit(False)
             self.__update_gui()
 
 
@@ -392,7 +392,7 @@ class WSpectrumCollection(a99.WBase):
             raise
 
         if flag_emit:
-            self.edited.emit(True)
+            self.changed.emit(True)
 
     #
     # def on_all_use_spectrum_block(self):
@@ -422,7 +422,7 @@ class WSpectrumCollection(a99.WBase):
     #         raise
     #
     #     if flag_emit:
-    #         self.edited.emit(True)
+    #         self.changed.emit(True)
 
 
     def on_all_to_scalar(self):
@@ -455,7 +455,7 @@ class WSpectrumCollection(a99.WBase):
             raise
 
         if flag_emit:
-            self.edited.emit(True)
+            self.changed.emit(True)
 
 
     def on_plot_xy(self):
@@ -513,7 +513,7 @@ class WSpectrumCollection(a99.WBase):
             raise
 
         if flag_emit:
-            self.edited.emit(True)
+            self.changed.emit(True)
 
 
     def on_sel_plot_stacked(self):
@@ -561,7 +561,7 @@ class WSpectrumCollection(a99.WBase):
     def on_sel_delete(self):
         n = self.__delete_spectra()
         if n > 0:
-            self.edited.emit(False)
+            self.changed.emit(False)
 
 
     def on_curr_scale(self):
@@ -578,11 +578,11 @@ class WSpectrumCollection(a99.WBase):
             if k != 1:
                 sp.y *= k
                 self.__update_gui()
-                self.edited.emit(False)
+                self.changed.emit(False)
 
 
     def on_twSpectra_cellChanged(self, row, column):
-        """Cell has been edited manually: commit to self.collection"""
+        """Cell has been changed manually: commit to self.collection"""
         if self.flag_process_changes:
             flag_emit = False
             text = None
@@ -610,7 +610,7 @@ class WSpectrumCollection(a99.WBase):
                 self.collection.spectra[spectrum_index].more_headers[name] = value
 
                 flag_emit = True
-                # replaces edited text with eventually cleaner version, e.g. decimals from integers are discarded
+                # replaces changed text with eventually cleaner version, e.g. decimals from integers are discarded
                 item.setText(str(value))
 
             except Exception as E:
@@ -623,7 +623,7 @@ class WSpectrumCollection(a99.WBase):
                 self.flag_process_changes = True
 
             if flag_emit:
-                self.edited.emit(False)
+                self.changed.emit(False)
 
 
     def on_twSpectra_itemSelectionChanged(self):
@@ -683,7 +683,7 @@ class WSpectrumCollection(a99.WBase):
             report.extend(failed)
 
         if flag_emit:
-            self.edited.emit(False)
+            self.changed.emit(False)
 
         a99.show_message("<br>".join(report))
 
@@ -706,7 +706,7 @@ class WSpectrumCollection(a99.WBase):
     #         raise
     #
     #     if flag_emit:
-    #         self.edited.emit(False)
+    #         self.changed.emit(False)
     #
 
 

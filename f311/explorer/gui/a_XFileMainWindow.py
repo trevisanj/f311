@@ -103,6 +103,8 @@ class XFileMainWindow(a99.XLogMainWindow):
 
         # ## "Last Log" label
         x = self.label_last_log = QLabel(self)
+        # http://stackoverflow.com/questions/6721149/enable-qlabel-to-shrink-even-if-it-truncates-text
+        x.setSizePolicy(QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Fixed))
         lantanide.addWidget(x)
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
@@ -243,7 +245,7 @@ class XFileMainWindow(a99.XLogMainWindow):
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # Protected methods to be overriden or used by descendant classes
 
-    def _on_edited(self):
+    def _on_changed(self):
         index = self._get_tab_index()
         self.flags_changed[index] = True
         self._update_tab_texts()

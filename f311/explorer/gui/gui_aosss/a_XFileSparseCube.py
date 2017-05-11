@@ -41,7 +41,7 @@ class XFileSparseCube(XFileMainWindow):
         lv = keep_ref(QVBoxLayout(self.gotting))
         ce = self.ce = WFileSparseCube(self)
         lv.addWidget(ce)
-        ce.edited.connect(self.on_tab0_file_edited)
+        ce.changed.connect(self.on_tab0_file_edited)
         self.editors[0] = ce
 
         # # # Loads default file by default ... SQN
@@ -96,7 +96,7 @@ class XFileSparseCube(XFileMainWindow):
 
 
     def on_tab0_file_edited(self):
-        self._on_edited()
+        self._on_changed()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # Protected methods to be overriden or used by descendant classes

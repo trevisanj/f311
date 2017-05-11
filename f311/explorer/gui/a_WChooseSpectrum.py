@@ -20,7 +20,7 @@ class WChooseSpectrum(QWidget):
     """
 
     # Emitted whenever any value changes
-    edited = pyqtSignal()
+    changed = pyqtSignal()
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
@@ -72,7 +72,7 @@ class WChooseSpectrum(QWidget):
         pass
         # if self.flag_process_changes:
             # self.__update_f()
-            # self.edited.emit()
+            # self.changed.emit()
 
     def b_clicked(self):
         # index = self.__get_index()

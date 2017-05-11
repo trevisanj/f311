@@ -76,11 +76,15 @@ class FileSQLiteDB(DataFile):
         self._get_table_names()  # tests if it is really a database
 
     def _do_save_as(self, filename):
-        """Closes connection, copies DB file, and opens again pointing to new file"""
-        self._ensure_filename()
-        self._close_if_open()
-        shutil.copyfile(self.filename, filename)
-        self.__get_conn(filename=filename)
+        """Closes connection, copies DB file, and opens again pointing to new file
+
+        **Note** if filename equals current filename, does nothing!
+        """
+        if filename != self.filename:
+            self._ensure_filename()
+            self._close_if_open()
+            shutil.copyfile(self.filename, filename)
+            self.__get_conn(filename=filename)
 
     def _close_if_open(self):
         if self._conn_is_open():

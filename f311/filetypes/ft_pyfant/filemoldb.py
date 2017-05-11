@@ -7,25 +7,31 @@ import tabulate
 import re
 
 
-__all__ = ["FileMolDB"]
+__all__ = ["FileMolDB", "SPDF"]
 
 #
 # __fileobj = None
 # def get_conn():
 #     return a99.get_conn(__ALIAS)
 
+SPDF = ["Σ", "Π", "Δ", "Φ"]
+
+# superscript numbers
+_conv_sup = {1: "\u2071",
+             2: "\u00b2",
+             3: "\u00b3",
+             4: "\u2074"}
+
 
 class FileMolDB(FileSQLiteDB):
     description = "Database of Molecular Constants"
     default_filename = "moldb.sqlite"
-    gui_data = {
+    gui_info = {
         "molecule": {
             "formula": [None, "formula of molecule, <i>e.g.</i>, 'OH'"],
         },
         "pfantmol": {
             'description': [None, "free text"],
-            "symbol_a": ["Symbol A", "symbol of first element"],
-            "symbol_b": ["Symbol B", "symbol of second element"],
             "fe": [None, "oscillator strength"],
             "do": [None, "dissociation constant (eV)"],
             "am": [None, "mass of first element"],
@@ -37,14 +43,21 @@ class FileMolDB(FileSQLiteDB):
             "s": [None, "?doc?"]
         },
         "state": {
-    "omega_e": ["ω<sub>e</sub>", "vibrational constant – first term (cm<sup>-1</sup>)"],
-    "omega_ex_e": ["ω<sub>e</sub>x<sub>e</sub>", "vibrational constant – second term (cm<sup>-1</sup>)"],
-    "omega_ey_e": ["ω<sub>e</sub>y<sub>e</sub>", " vibrational constant – third term (cm<sup>-1</sup>)"],
-    "B_e": ["B<sub>e</sub>", "rotational constant in equilibrium position (cm<sup>-1</sup>)"],
-    "alpha_e": ["α<sub>e</sub>", "rotational constant – first term (cm<sup>-1</sup>)"],
-    "D_e": ["D<sub>e</sub>", "centrifugal distortion constant (cm<sup>-1</sup>)"],
-    "beta_e": ["β<sub>e</sub>", "rotational constant – first term, centrifugal force (cm<sup>-1</sup>)"],
-      }
+        "omega_e": ["ω<sub>e</sub>", "vibrational constant – first term (cm<sup>-1</sup>)"],
+        "omega_ex_e": ["ω<sub>e</sub>x<sub>e</sub>", "vibrational constant – second term (cm<sup>-1</sup>)"],
+        "omega_ey_e": ["ω<sub>e</sub>y<sub>e</sub>", " vibrational constant – third term (cm<sup>-1</sup>)"],
+        "B_e": ["B<sub>e</sub>", "rotational constant in equilibrium position (cm<sup>-1</sup>)"],
+        "alpha_e": ["α<sub>e</sub>", "rotational constant – first term (cm<sup>-1</sup>)"],
+        "D_e": ["D<sub>e</sub>", "centrifugal distortion constant (cm<sup>-1</sup>)"],
+        "beta_e": ["β<sub>e</sub>", "rotational constant – first term, centrifugal force (cm<sup>-1</sup>)"],
+          },
+        "system": {
+            "from_label": ["State'", None],
+            "from_spdf": ["Λ'", "0/1/2/3 meaning Σ/Π/Δ/Φ"],
+            "to_label": ['State"', None],
+            "to_spdf": ['Λ"', "0/1/2/3 meaning Σ/Π/Δ/Φ"]
+        }
+
     }
 
     @staticmethod
@@ -67,6 +80,155 @@ class FileMolDB(FileSQLiteDB):
         else:
             return "".join(symbols_)
 
+    @staticmethod
+    def get_system_short(row):
+        """Converts a 'system' row to its superscript and Greek letters notation"""
+        return "{}{}{} - {}{}{}".format(row["from_label"], _conv_sup[row["from_mult"]],
+            SPDF[row["from_spdf"]], row["to_label"], _conv_sup[row["to_mult"]], SPDF[row["to_spdf"]])
+
+    def get_mol_consts(self, id_pfantmol, id_state, id_system):
+        """Returns dict-like with field values from tables 'molecule', 'state', 'pfantmol', 'system'"""
+        conn = self.get_conn()
+        ret = conn.execute("select * from pfantmol where id = ?", (id_pfantmol,)).fetchone()
+        ret.update(conn.execute("select * from state where id = ?", (id_state,)).fetchone())
+        ret.update(conn.execute("select * from system where id = ?", (id_system,)).fetchone())
+        ret.update(conn.execute("select * from molecule where id = ?", (ret["id_molecule"],)).fetchone())
+        return ret
+
+    def query_molecule(self, **kwargs):
+        """Convenience function to query 'molecule' table
+
+        Args:
+            **kwargs: filter fieldname=value pairs to be passed to WHERE clause
+
+        Returns: sqlite3 cursor
+        """
+        where = ""
+        if len(kwargs) > 0:
+            where = " where " + " and ".join([key + " = ?" for key in kwargs])
+        conn = self.get_conn()
+        sql = """select * from molecule{} order by formula""".format(where)
+        r = conn.execute(sql, list(kwargs.values()))
+        return r
+
+    def query_state(self, **kwargs):
+        """Convenience function to query 'state' table (joins with table molecule)
+
+        Args, Returns: see query_molecule
+        """
+        where = ""
+        if len(kwargs) > 0:
+            where = " where " + " and ".join([key + " = ?" for key in kwargs])
+        conn = self.get_conn()
+        sql = """select molecule.formula, state.* from state
+                 join molecule on state.id_molecule = molecule.id{}""".format(where)
+        r = conn.execute(sql, list(kwargs.values()))
+        return r
+
+    def query_pfantmol(self, **kwargs):
+        """Convenience function to query 'pfantmol' table (joins with table molecule)
+
+        Args, Returns: see query_molecule
+        """
+        where = ""
+        if len(kwargs) > 0:
+            where = " where " + " and ".join([key + " = ?" for key in kwargs])
+        conn = self.get_conn()
+        sql = """select molecule.formula, pfantmol.* from pfantmol
+                 join molecule on pfantmol.id_molecule = molecule.id{}""".format(where)
+        r = conn.execute(sql, list(kwargs.values()))
+        return r
+
+    def query_system(self, **kwargs):
+        """Convenience function to query 'system' table (joins with table molecule)
+
+        Args, Returns: see query_molecule
+        """
+        where = ""
+        if len(kwargs) > 0:
+            where = " where " + " and ".join([key + " = ?" for key in kwargs])
+        conn = self.get_conn()
+        sql = """select molecule.formula, system.* from system
+                 join molecule on system.id_molecule = molecule.id{}""".format(where)
+        r = conn.execute(sql, list(kwargs.values()))
+        return r
+
+    def query_fcf(self, **kwargs):
+        """Convenience function to query 'fcf' table
+
+        Args, Returns: see query_molecule
+        """
+        where = ""
+        if len(kwargs) > 0:
+            where = " where " + " and ".join([key + " = ?" for key in kwargs])
+        conn = self.get_conn()
+        sql = """select * from fcf{} order by vl, v2l""".format(where)
+        r = conn.execute(sql, list(kwargs.values()))
+        return r
+
+    def test_query_state(self):
+        """
+        Test function
+
+        Example:
+
+        >>> f = FileMolDB()
+        >>> f.init_default()
+        >>> conn = f.get_conn()
+        >>> cursor = conn.execute("select * from state where id = 10")
+        >>> row = cursor.fetchone()
+        >>> print(row)
+        MyDBRow([('id', 10), ('id_molecule', 2), ('State', 'F ⁱPi_u'), ('T_e', 75456.9), ('omega_e', 1557.5), ('omega_ex_e', None), ('omega_ey_e', None), ('B_e', 1.645), ('alpha_e', 0.019), ('gamma_e', None), ('D_e', 6e-06), ('beta_e', None), ('r_e', 1.307), ('Trans', 'F ← X R'), ('nu_00', 74532.9)])
+        """
+
+    def print_states(self, **kwargs):
+        """
+        Prints states table in console
+
+        Args:
+            **kwargs: arguments passed to query_state()
+
+        Example:
+
+        >>> f = FileMolDB()
+        >>> f.init_default()
+        >>> f.print_states(formula="OH")
+        """
+        r = self.query_state(**kwargs)
+        data, header0 = a99.cursor_to_data_header(r)
+
+        # ti = a99.get_table_info(_ALIAS, "state")
+        # header = [(ti[name]["caption"] or name) if ti.get(name) else name for name in header0]
+
+        header = header0
+
+        print(tabulate.tabulate(data, header))
+
+    def get_transition_dict(self):
+        """
+        Generates a dictionary where (molecule, state_from, tran1) can be searched to retrieve state rows
+
+        """
+        rm = self.query_molecule()
+        ret = {}
+        for row_molecule in rm:
+            rs = self.query_state(id_molecule=row_molecule["id"])
+            for row_state in rs:
+                row_state.None_to_zero()
+                try:
+                    trans_ = row_state["Trans"]
+                    if trans_ is None or trans_ == 0:
+                        continue
+                    keys = self._formula_trans_to_tuples(row_molecule["formula"], trans_)
+
+                except Exception as e:
+                    raise RuntimeError("OLLLLLLLLLLLLLHA O TRANSSS: {}".format(trans_)) from e
+
+                if keys is None:
+                    continue
+                for key in keys:
+                    ret[key] = row_state
+        return ret
 
     def _create_schema(self):
         conn = self.get_conn()
@@ -93,8 +255,6 @@ class FileMolDB(FileSQLiteDB):
         c.execute("""create table pfantmol (id integer primary key,
                                             id_molecule integer,
                                             description text,
-                                            symbol_a text,
-                                            symbol_b text,
                                             fe real,
                                             do real,
                                             am real,
@@ -151,7 +311,8 @@ class FileMolDB(FileSQLiteDB):
                       from_spdf integer,
                       to_label text,
                       to_mult integer,
-                      to_spdf integer
+                      to_spdf integer,
+                      comments text
                       )""")
 
         # Franck-Condon Factors table
@@ -165,111 +326,12 @@ class FileMolDB(FileSQLiteDB):
                                        id_system integer,
                                        vl integer,
                                        v2l integer,
-                                       value real
+                                       value real,
+                                       comments text
                                        )""")
 
         conn.commit()
         conn.close()
-
-
-
-    def query_molecule(self, **kwargs):
-        """Convenience function to query 'molecule' table
-
-        Args:
-            **kwargs: filter fieldname=value pairs to be passed to WHERE clause
-
-        Returns: sqlite3 cursor
-        """
-        where = ""
-        if len(kwargs) > 0:
-            where = " where " + " and ".join([key + " = ?" for key in kwargs])
-        conn = self.get_conn()
-        sql = """select * from molecule{} order by formula""".format(where)
-        r = conn.execute(sql, list(kwargs.values()))
-        return r
-
-
-    def query_state(self, **kwargs):
-        """Convenience function to query 'state' table
-
-        Args, Returns: see query_molecule
-        """
-        where = ""
-        if len(kwargs) > 0:
-            where = " where " + " and ".join([key + " = ?" for key in kwargs])
-        conn = self.get_conn()
-        sql = """select molecule.formula, state.* from state
-                 join molecule on state.id_molecule = molecule.id{}""".format(where)
-        r = conn.execute(sql, list(kwargs.values()))
-        return r
-
-
-    def test_query_state(self):
-        """
-        Test function
-
-        Example:
-
-        >>> f = FileMolDB()
-        >>> f.init_default()
-        >>> conn = f.get_conn()
-        >>> cursor = conn.execute("select * from state where id = 10")
-        >>> row = cursor.fetchone()
-        >>> print(row)
-        MyDBRow([('id', 10), ('id_molecule', 2), ('State', 'F ⁱPi_u'), ('T_e', 75456.9), ('omega_e', 1557.5), ('omega_ex_e', None), ('omega_ey_e', None), ('B_e', 1.645), ('alpha_e', 0.019), ('gamma_e', None), ('D_e', 6e-06), ('beta_e', None), ('r_e', 1.307), ('Trans', 'F ← X R'), ('nu_00', 74532.9)])
-        """
-
-
-    def print_states(self, **kwargs):
-        """
-        Prints states table in console
-
-        Args:
-            **kwargs: arguments passed to query_state()
-
-        Example:
-
-        >>> f = FileMolDB()
-        >>> f.init_default()
-        >>> f.print_states(formula="OH")
-        """
-        r = self.query_state(**kwargs)
-        data, header0 = a99.cursor_to_data_header(r)
-
-        # ti = a99.get_table_info(_ALIAS, "state")
-        # header = [(ti[name]["caption"] or name) if ti.get(name) else name for name in header0]
-
-        header = header0
-
-        print(tabulate.tabulate(data, header))
-
-    def get_transition_dict(self):
-        """
-        Generates a dictionary where (molecule, state_from, tran1) can be searched to retrieve state rows
-
-        """
-        rm = self.query_molecule()
-        ret = {}
-        for row_molecule in rm:
-            rs = self.query_state(id_molecule=row_molecule["id"])
-            for row_state in rs:
-                row_state.None_to_zero()
-                try:
-                    trans_ = row_state["Trans"]
-                    if trans_ is None or trans_ == 0:
-                        continue
-                    keys = self._formula_trans_to_tuples(row_molecule["formula"], trans_)
-
-                except Exception as e:
-                    raise RuntimeError("OLLLLLLLLLLLLLHA O TRANSSS: {}".format(trans_)) from e
-
-                if keys is None:
-                    continue
-                for key in keys:
-                    ret[key] = row_state
-        return ret
-
 
     @staticmethod
     def _formula_trans_to_tuples(formula, trans):

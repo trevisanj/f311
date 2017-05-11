@@ -121,9 +121,6 @@ class FileKuruczMolecule(DataFile):
             self._do_load_h(h, filename, num_lines)
 
     def _do_load_h(self, h, filename, num_lines=0):
-        # Thank you Kurucz
-        fr = ff.FortranRecordReader(
-            '(F10.4,F7.3,F5.1,F10.3,F5.1,F11.3,I2,I2,A1,I2,A1,I1,3X,A1,I2,A1,I1,3X,I2)')
         r = 0  # counts rows of file
         ii = 0
         try:
@@ -187,7 +184,7 @@ class FileKuruczMolecule(DataFile):
                     int(s[61:63]),
                     s[63:64],
                     int(s[64:65]),
-                    s[69:71], )
+                    int(s[68:70]), )
 
 
                 self.lines.append(line)

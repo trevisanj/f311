@@ -126,7 +126,7 @@ class WOptionsEditor(QWidget):
     """
 
     # Emitted whenever any value changes
-    edited = pyqtSignal()
+    changed = pyqtSignal()
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
@@ -650,13 +650,13 @@ class WOptionsEditor(QWidget):
         self.flag_process_changes = True
         option.flag_never_used = False
         self.__update_data()
-        self.edited.emit()
+        self.changed.emit()
 
     def on_in_use_checkbox_clicked(self):
         if not self.flag_process_changes:
             return
         self.__update_data()
-        self.edited.emit()
+        self.changed.emit()
 
     def on_checkbox_exe_clicked(self):
         self.__update_gui_visible_options()
