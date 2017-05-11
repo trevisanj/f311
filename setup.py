@@ -27,7 +27,7 @@ setup(
     name='f311',
     packages=find_packages(),
     include_package_data=True,
-    version='0.17.5.11a',
+    version='0.17.5.11b',
     license='GNU GPLv3',
     platforms='any',
     description='Collection of Astronomy-related libraries and applications in Python',

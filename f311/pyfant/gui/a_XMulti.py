@@ -62,7 +62,7 @@ class XMulti(XPFANT):
         w = self.buttonSubmit = QPushButton("&Submit multi-job")
         w.clicked.connect(self.on_run_multi)
         l1.addWidget(w)
-        w = self.checkbox_multi_custom_id = QCheckBox("Custom multi-session id")
+        w = self.checkbox_multi_custom_id = QCheckBox("Custom multi-session directory")
         w.stateChanged.connect(self.on_checkbox_multi_custom_id_state_changed)
         l1.addWidget(w)
         w = self.lineEdit_multi_custom_id = QLineEdit()
@@ -121,7 +121,7 @@ class XMulti(XPFANT):
             if len(s) == 0:
                 errors.append("Please inform custom session id.")
             elif len(errors) == 0: # will only offer to remove directory if everything is ok so far
-                dirname = pf.MULTISESSION_PREFIX+s
+                dirname = _get_custom_dirname(s)
                 if os.path.isdir(dirname):
                     r = QMessageBox.question(self, "Directory exists",
                      "Directory '%s' already exists.\n\nWould you like to remove it?" % dirname,
@@ -183,6 +183,10 @@ class XMulti(XPFANT):
         from f311 import pyfant as pf
         r = pf.MultiRunnable(self.me.f, self.ae.f, self.oe.f, self.multi_editor.f)
         if self.checkbox_multi_custom_id.isChecked():
+            custom_id = self.__get_multi_custom_session_id()
+            if _get_custom_dirname(custom_id) == custom_id:
+                # Understands that session dirname prefix must be cleared
+                r.sid.id_maker.session_prefix_singular = ""
             r.sid.id = self.__get_multi_custom_session_id()
         self._rm.add_runnables([r])
 
@@ -197,3 +201,10 @@ class XMulti(XPFANT):
             w = item.widget()
             if w:
                 w.setEnabled(flag_enabled)
+
+
+# This sector defines how custom directory name is made up
+
+def _get_custom_dirname(session_id):
+    # return pf.MULTISESSION_PREFIX+session_id
+    return session_id

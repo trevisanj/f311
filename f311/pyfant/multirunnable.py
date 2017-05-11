@@ -125,8 +125,7 @@ class MultiRunnable(runnables.Runnable):
         # multi-session directory.
         # It will replace the Pfant's default id maker
         custom_id_maker = pf.IdMaker()
-        custom_id_maker.session_prefix_singular = \
-         os.path.join(self.__sid.dir, "session-")
+        custom_id_maker.session_prefix_singular = os.path.join(self.__sid.dir, "session-")
 
 
         # # Runs innewmarcs and hydro2

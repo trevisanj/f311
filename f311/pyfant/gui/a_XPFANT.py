@@ -33,7 +33,7 @@ class XPFANT(ex.XMainAbonds):
         w = self.buttonSubmit = QPushButton("&Submit job")
         w.clicked.connect(self.on_submit)
         l.addWidget(w)
-        w = self.checkbox_custom_id = QCheckBox("Custom session id")
+        w = self.checkbox_custom_id = QCheckBox("Custom session directory")
         w.stateChanged.connect(self.on_checkbox_custom_id_state_changed)
         l.addWidget(w)
         w = self.lineEdit_custom_id = QLineEdit()
@@ -70,7 +70,7 @@ class XPFANT(ex.XMainAbonds):
                 if len(s) == 0:
                     errors.append("Please inform custom session id.")
                 elif len(errors) == 0: # will only offer to remove directory if everything is ok so far
-                    dirname = pf.SESSION_PREFIX_SINGULAR+s
+                    dirname = _get_custom_dirname(s)
                     if os.path.isdir(dirname):
                         r = QMessageBox.question(self, "Directory exists",
                          "Directory '%s' already exists.\n\n"
@@ -113,7 +113,12 @@ class XPFANT(ex.XMainAbonds):
         from f311 import pyfant as pf
         r = pf.Combo()
         if self.checkbox_custom_id.isChecked():
-            r.conf.sid.id = self.__get_custom_session_id()
+            custom_id = self.__get_custom_session_id()
+            r.conf.sid.id = custom_id
+            if _get_custom_dirname(custom_id) == custom_id:
+                # Understands that session dirname prefix must be cleared
+                r.sid.id_maker.session_prefix_singular = ""
+
         r.conf.opt = copy.copy(self.oe.f)
         r.conf.file_main = self.me.f
         r.conf.file_abonds = self.ae.f
@@ -123,3 +128,11 @@ class XPFANT(ex.XMainAbonds):
 
     def __update_lineEdit_custom_id(self):
         self.lineEdit_custom_id.setEnabled(self.checkbox_custom_id.isChecked())
+
+
+# This sector defines how custom directory name is made up
+
+def _get_custom_dirname(session_id):
+    from f311 import pyfant as pf
+    # return pf.SESSION_PREFIX_SINGULAR+session_id
+    return session_id
