@@ -11,7 +11,22 @@
 
 ## Convmol
 
-  - Filter Kurucz
+    - moldbed.py:
+    
+        * equip with build-moldb.py
+        
+
+    - WMolecularConstants: system comes first, state to be searched automatically!
+    
+    
+    - FileMolDB: some tables still don't have the comment field??
+    
+    - Building database: fill in the state_label automatically, or maybe just search using the first letter
+      (figure out if there is a "LIKE 'A%' as in MySQL) (no need to worry about speed here, we'll pre-compile the info for conversion)
+      
+     - NIST scraper: I can actually go after the "A" because it follows some pattern: points to footnote and there it is
+       (this part is what I normally enjoy doing, so should enjoy)
+
 
 # Filetypes
 
@@ -70,15 +85,6 @@
   - documentation: illustrate another case
 
   
-
-## Done
-  - ~~Make sun Grevesse 1998 as default sun for pyfant~~
-  - ~~nulbad load_result~~
-  - ~~Get rid of WSpectrumList "More..." tab (make sure everything is implemented as blocks)~~
-  - ~~**Normalize("1") cause re-sampling, sth is not right**~~
-  - ~~Resolve branches for other molecules~~ HITRAN OK
-
-
 
 
 

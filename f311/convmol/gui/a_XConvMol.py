@@ -380,7 +380,7 @@ class _WKuruczPanel(a99.WBase):
 
     @property
     def data(self):
-        """Returns FileKuruczMolecule or None"""
+        """Returns FileKuruczMoleculeBase or None"""
         return self._f
 
     @property
@@ -409,7 +409,7 @@ class _WKuruczPanel(a99.WBase):
     def __init__(self, *args):
         a99.WBase.__init__(self, *args)
 
-        self._f = None  # FileKuruczMolecule
+        self._f = None  # FileKuruczMoleculeBase
         # list of integers, filled when file is loaded
         self._isotopes = []
 
@@ -477,13 +477,9 @@ class _WKuruczPanel(a99.WBase):
     def file_changed(self):
         cb = self.combobox_isotope
         try:
-            f = self._f = ft.FileKuruczMolecule()
-            f.load(self.w_file.value)
-            self._isotopes = list(set([line.iso for line in f]))
-            self._isotopes.sort()
-            cb.clear()
-            cb.addItem("(all)")
-            cb.addItems([str(x) for x in self._isotopes])
+            f = self._f = ft.load_kurucz_mol(self.w_file.value)
+
+            self.update_gui_iso(cb, f)
         except Exception as e:
             self._f = None
             self._isotopes = []
@@ -492,6 +488,18 @@ class _WKuruczPanel(a99.WBase):
                                                                               a99.str_exc(e))
             self.add_log_error(msg, True)
             a99.get_python_logger().exception(msg)
+
+    def update_gui_iso(self, cb, f):
+        """Updates Isotope combobox"""
+        cb = self.combobox_isotope
+        cb.clear()
+        if f.__class__ == ft.FileKuruczMoleculeOld:
+            cb.addItem("(all (file is old-format))")
+        else:
+            self._isotopes = list(set([line.iso for line in f]))
+            self._isotopes.sort()
+            cb.addItem("(all)")
+            cb.addItems([str(x) for x in self._isotopes])
 
 
 class _WTurboSpectrumPanel(a99.WBase):

@@ -46,7 +46,7 @@ def insert_pfantmol_data(moldb):
     # bysym = dict([(tuple(m.symbols), m) for m in filemol])
 
     for m in filemol:
-        id_molecule = conn.execute("select id from molecule where formula = ? ",
+        id_molecule = conn.execute("select id from molecule where formula = ?",
                                    (moldb.symbols_to_formula(m.symbols),)).fetchone()["id"]
 
         conn.execute("insert into pfantmol "
@@ -63,10 +63,9 @@ def insert_nist_data(moldb):
 
     conn = moldb.get_conn()
 
-    for row in conn.execute("select formula from molecule"):
-        formula = row["formula"]
-        id_molecule = conn.execute("select id from molecule where formula = ?",
-                                   (formula,)).fetchone()["id"]
+    for row in conn.execute("select id, formula from molecule order by id").fetchall():
+        id_molecule, formula = row["id"], row["formula"]
+        a99.get_python_logger().info("Molecule '{}'...".format(formula))
         try:
             data, _, _ = cm.get_nist_webbook_constants(formula)
 
@@ -164,7 +163,7 @@ if __name__ == "__main__":
     my_info("Inserting molecule header information from '{}'...".
           format(pf.get_pfant_data_path("common", "molecules.dat")))
     insert_pfantmol_data(f)
-    my_info("Inserting data from NIST Chemistry Web Book...")
+    my_info("Inserting data from NIST Chemistry Web Book online...")
     insert_nist_data(f)
     # populate_moldb(f)
     # insert_franck_condon_factors(f)

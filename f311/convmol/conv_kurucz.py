@@ -15,6 +15,10 @@ class ConvKurucz(Conv):
             flag_hlf: Whether to calculate the gf's using Honl-London factors or
                       use Kurucz's loggf instead
 
+                      ***Note** old format (FileKuruczMoleculeOld) does not have loggf information,
+                                therefore the only way to work with the latter file type is
+                                flag_hlf==True
+
             flag_normhlf: Whether to multiply calculated gf's by normalization factor
 
             flag_fcf: Whether to multiply calculated gf's by Franck-Condon Factor
@@ -32,7 +36,11 @@ class ConvKurucz(Conv):
 
             iso: (int or None) isotope. If specified as int, only that isotope will be filtered;
                  otherwise, all isotopes in file will be included. Isotope is
-                 field KuruczMolLine.iso (see KuruczMolLine, FileKuruczMol)
+                 field KuruczMolLine.iso (see KuruczMolLine, FileKuruczMol).
+
+                 **Note** old Kurucz file format does not have the isotope information, therefore,
+                          iso must be None or the thing will not work
+
     """
 
     def __init__(self, flag_hlf=False, flag_normhlf=False, flag_fcf=False, flag_quiet=False,
@@ -51,8 +59,10 @@ class ConvKurucz(Conv):
         def append_error(msg):
             log.errors.append("#{}{} line: {}".format(i + 1, a99.ordinal_suffix(i + 1), str(msg)))
 
-        if not isinstance(lines, ft.FileKuruczMolecule):
+        if not isinstance(lines, ft.FileKuruczMoleculeBase):
             raise TypeError("Invalid type for argument 'fileobj': {}".format(type(lines).__name__))
+        assert self.flag_hlf or isinstance(lines, ft.FileKuruczMolecule), \
+               "Old-format file does not contain loggf, must activate Hönl-London factors"
 
         lines = lines.lines
         n = len(lines)
@@ -71,8 +81,6 @@ class ConvKurucz(Conv):
         log = MolConversionLog(n)
 
         for i, line in enumerate(lines):
-            assert isinstance(line, ft.KuruczMolLine)
-
             if self.iso and line.iso != self.iso:
                 log.skip_reasons["Isotope {}".format(line.iso)] += 1
                 continue
