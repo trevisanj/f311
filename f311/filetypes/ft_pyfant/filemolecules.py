@@ -124,8 +124,6 @@ class SetOfLines(a99.AttrsPart):
         self._lmbdam, self._sj, self._jj, self._branch = l, s, j, b
 
     def append_line(self, lmbdam, sj, jj, branch):
-        if isinstance(branch, str):
-            branch = branch_to_iz(branch)
         self._lmbdam.append(lmbdam)
         self._sj.append(sj)
         self._jj.append(jj)
@@ -459,7 +457,8 @@ class FileMolecules(DataFile):
                         lmbdam = float(temp[0])
                         sj = float(temp[1])
                         jj = float(temp[2])
-                        iz = int(temp[3])
+                        # Alphanumeric now iz = int(temp[3])
+                        iz = temp[3]
                         numlin = int(temp[4])
 
                         r += 1
@@ -474,13 +473,6 @@ class FileMolecules(DataFile):
                                 break
                             o = next(sol_iter)
 
-
-
-                    # o.lmbdam = _lmbdam
-                    # o.sj = _sj
-                    # o.jj = _jj
-                    # o.branch = _branch
-
                     a99.get_python_logger().info("Loading '{}': {}".format(filename, a99.format_progress(im+1, num_mol)))
 
                     if im+1 == num_mol:
@@ -489,7 +481,7 @@ class FileMolecules(DataFile):
                     # im += 1
             except Exception as e:
                 raise type(e)(("Error around %d%s row of file '%s'" %
-                    (r+1, a99.a99.ordinal_suffix(r+1), filename))+": "+str(e)).with_traceback(sys.exc_info()[2])
+                    (r+1, a99.ordinal_suffix(r+1), filename))+": "+str(e)).with_traceback(sys.exc_info()[2])
 
     def _do_save_as(self, filename):
         with open(filename, "w") as h:

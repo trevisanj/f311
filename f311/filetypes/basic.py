@@ -9,7 +9,7 @@ import sys
 
 
 __all__ = ["adjust_atomic_symbol", "description_to_symbols", "iz_to_branch", "branch_to_iz",
-           "get_default_data_path"]
+           "get_default_data_path", "iz_to_branch_alt", "branch_to_iz_alt"]
 
 
 def adjust_atomic_symbol(x):
@@ -71,15 +71,55 @@ _iz_to_branch_map = {"1": "P", "2": "Q", "3": "R", "4": "P1", "5": "Q1", "6": "R
 _branch_to_iz_map = dict(((value, key) for key, value in _iz_to_branch_map.items()))
 
 
+# alternative mapping
+_iz_to_branch_map_alt = {"1": "P1","2": "P12","3": "P21","4": "P2","5": "Q1","6": "Q12",
+                         "7": "Q21","8": "Q2","9 ": "R1","10": "R12","11": "R21","12": "R2",}
+_branch_to_iz_map_alt = dict(((value, key) for key, value in _iz_to_branch_map_alt.items()))
+
+
+
 def iz_to_branch(iz):
-    """Converts BLB's 'iz' code to string P/Q/R/P1 ... (see pfantlib.90:read_molecules()"""
+    """Converts BLB's 'iz' code to string P/Q/R/P1. Inverse of branch_to_iz()
+
+    (see pfantlib.90:read_molecules())"""
     return _iz_to_branch_map[str(iz)]
 
 
 def branch_to_iz(br):
-    """Converts branch P/Q/R/P1, etc. into BLB's 'iz' code"""
+    """Converts branch P/Q/R/P1, etc. into BLB's 'iz' code
+
+    Args:
+        branch: str, [P/Q/R][/1/2/3], for example "P", "P1"
+
+    Returns:
+        str: from "1" to "12"
+    """
     return _branch_to_iz_map[br]
 
+
+def iz_to_branch_alt(iz):
+    """Alternative mapping used by Bruno Castilho's CH. Inverse of branch_to_iz_alt()
+
+    This is the mapping found in Bruno Castilho's work for molecule CH
+    (directory ATMOS/wrk4/bruno/Mole/CH, check file, e.g., sja000.dat and source selech.f)
+    """
+    return _iz_to_branch_map_alt[str(iz)]
+
+
+def branch_to_iz_alt(br):
+    """
+    Alternative mapping used by Bruno Castilho's CH
+
+    Args:
+        branch: str, [P/Q/R][1/12/21/2], for example "P1", "Q21"
+
+    Returns:
+        str: from "1" to "12"
+
+    This is the mapping found in Bruno Castilho's work for molecule CH
+    (directory ATMOS/wrk4/bruno/Mole/CH, check file, e.g., sja000.dat and source selech.f)
+    """
+    return _branch_to_iz_map_alt[br]
 
 def get_default_data_path(*args, module=None, class_=None):
     """

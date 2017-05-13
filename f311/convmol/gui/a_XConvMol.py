@@ -156,7 +156,7 @@ class _WSelectSaveFile(a99.WBase):
             path_ = self.dialog_path
         res = QFileDialog.getSaveFileName(self, self.dialog_title, path_, self.dialog_wild)[0]
         if res:
-            res = res[0]
+            # res = res[0]
             self.edit.setText(res)
             self.dialog_path = res
 
@@ -396,6 +396,10 @@ class _WKuruczPanel(a99.WBase):
         return self.checkbox_fcf.isChecked()
 
     @property
+    def flag_spinl(self):
+        return self.checkbox_spinl.isChecked()
+
+    @property
     def iso(self):
         idx = self.combobox_isotope.currentIndex()
         if idx == 0:
@@ -455,6 +459,14 @@ class _WKuruczPanel(a99.WBase):
         w = self.checkbox_fcf = QCheckBox()
         w.setToolTip("If selected, incorporates internally calculated Franck-Condon factor"
                      "into the calculated 'gf'")
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
+
+        a = self.keep_ref(QLabel("Use spin' for branch determination\n"
+                                 "(spin'' is always used)"))
+        w = self.checkbox_spinl = QCheckBox()
+        w.setToolTip("If you tick this box, branches P12, P21, Q12, Q21, R21, R12 (i.e., with two numbers) become possible")
         lg.addWidget(a, i_row, 0)
         lg.addWidget(w, i_row, 1)
         i_row += 1
@@ -573,7 +585,7 @@ class XConvMol(ex.XFileMainWindow):
         b = self.button_convert = QPushButton("&Run Conversion")
         b.clicked.connect(self.convert_clicked)
         lmn.addWidget(b)
-        b = self.button_convert = QPushButton("&Open file")
+        b = self.button_convert = QPushButton("&Open result in mled.py")
         b.clicked.connect(self.open_mol_clicked)
         lmn.addWidget(b)
 
@@ -675,7 +687,7 @@ class XConvMol(ex.XFileMainWindow):
                     else:
 
                         conv = cm.ConvKurucz(flag_hlf=w.flag_hlf, flag_normhlf=w.flag_normhlf,
-                                             flag_fcf=w.flag_fcf, iso=w.iso)
+                                             flag_fcf=w.flag_fcf, flag_spinl=w.flag_spinl, iso=w.iso)
                         lines = w.data
                 else:
                     a99.show_message("{}-to-PFANT conversion not implemented yet, sorry".
@@ -698,6 +710,11 @@ class XConvMol(ex.XFileMainWindow):
                     if log.num_lines_skipped > 0:
                         self.add_log(
                             "Lines filtered out: {}".format(log.num_lines_skipped))
+                        self.add_log("    Reasons:")
+                        kv = list(log.skip_reasons.items())
+                        kv.sort(key=lambda x: x[0])
+                        for key, value in kv:
+                            self.add_log("      - {}: {}".format(key, value))
                     ne = log.num_lines-log.num_lines_skipped-f.num_lines
                     if ne > 0:
                         self.add_log(

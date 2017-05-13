@@ -246,21 +246,23 @@ __all__ = ["get_honllondon_formulas", "quanta_to_branch"]
 
 
 
-def quanta_to_branch(Jl, J2l, spin):
+def quanta_to_branch(Jl, J2l, spinl=None, spin2l=None):
     """
     Singlet only has branches P/Q/R
 
     Args:
         Jl: J upper or J'
         J2l: J lower or  J''
+        spinl:
+        spin2l: (cannot be None)
 
     Returns: branch letter: "P"/"Q"/"R"
 
-    >>> quanta_to_branch(10.5, 11.5, 1)
+    >>> quanta_to_branch(10.5, 11.5, spin2l=1)
     'P1'
-    >>> quanta_to_branch(11.5, 10.5, 2)
+    >>> quanta_to_branch(11.5, 10.5, spin2l=2)
     'R2'
-    >>> quanta_to_branch(10.5, 10.5, 1)
+    >>> quanta_to_branch(10.5, 10.5, spin2l=1)
     'Q1'
 
     """
@@ -270,7 +272,15 @@ def quanta_to_branch(Jl, J2l, spin):
         br =  "Q"
     else:
         br = "P"
-    ret = "{}{:1d}".format(br, spin)
+
+    if spinl is None:
+        ret = "{}{:1d}".format(br, spin2l)
+    else:
+        assert spin2l is not None, "spin2l cannot be None"
+        if spinl == spin2l:
+            ret = "{}{:1d}".format(br, spin2l)
+        else:
+            ret = "{}{:1d}{:1d}".format(br, spinl, spin2l)
     return ret
 
 
@@ -442,9 +452,9 @@ def formula5(J, LBIG, LSMALL):
 
 def formula6(J, LBIG, LSMALL):
     """Formula for P21(J) or R21(J-1)"""
-    return (((J-LSMALL-1.5)*(J-LSMALL-0.5))/(8*J*CMINUSL(J-1, LBIG)*
-    CPLUS2L(J, LSMALL)))*((UMINUSL(J-1, LBIG)*UPLUS2L(J, LSMALL) -
-    4*(J-LSMALL+0.5)*(J+LSMALL+0.5))**2.)
+    return (((J-LSMALL-1.5)*(J-LSMALL-0.5))/
+           (8*J*CMINUSL(J-1, LBIG)*CPLUS2L(J, LSMALL)))*\
+           ((UMINUSL(J-1, LBIG)*UPLUS2L(J, LSMALL) - 4*(J-LSMALL+0.5)*(J+LSMALL+0.5))**2.)
 
 
 def formula7(J, LBIG, LSMALL):

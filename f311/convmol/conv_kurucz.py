@@ -1,7 +1,3 @@
-"""
-"""
-
-
 import f311.physics as ph
 import f311.filetypes as ft
 import a99
@@ -25,18 +21,28 @@ class ConvKurucz(Conv):
 
             flag_quiet: Will not log exceptions when a molecular line fails
 
+            flag_spinl: Whether or not to use the spinl of the Kurucz line list
+                        for branch determination (spin2l is always used). Effect:
+
+                - True: possible branches are P1, P12, P21, P2 and repeat for Q, R
+                        (12 possibilities in total)
+
+                - False: possible branches are P1, P2 and repeat for Q, R
+                         (6 possibilities in total)
+
             iso: (int or None) isotope. If specified as int, only that isotope will be filtered;
                  otherwise, all isotopes in file will be included. Isotope is
                  field KuruczMolLine.iso (see KuruczMolLine, FileKuruczMol)
     """
 
     def __init__(self, flag_hlf=False, flag_normhlf=False, flag_fcf=False, flag_quiet=False,
-                 fcfs=None, iso=None, *args, **kwargs):
+                 flag_spinl=False, fcfs=None, iso=None, *args, **kwargs):
         Conv.__init__(self, *args, **kwargs)
         self.flag_hlf = flag_hlf
         self.flag_normhlf = flag_normhlf
         self.flag_fcf = flag_fcf
         self.flag_quiet = flag_quiet
+        self.flag_spinl = flag_spinl
         self.fcfs = fcfs
         self.iso = iso
 
@@ -50,13 +56,12 @@ class ConvKurucz(Conv):
 
         lines = lines.lines
         n = len(lines)
-        n_skipped = 0
 
         S = self.mol_consts["s"]
         DELTAK = self.mol_consts["cro"]
         FE = self.mol_consts["fe"]
-        LAML = self.mol_consts["from_spdf"]
-        LAM2L = self.mol_consts["to_spdf"]
+        LAML = 0  #self.mol_consts["from_spdf"]
+        LAM2L = 1  #self.mol_consts["to_spdf"]
         STATEL = self.mol_consts["from_label"]
         STATE2L = self.mol_consts["to_label"]
 
@@ -69,38 +74,49 @@ class ConvKurucz(Conv):
             assert isinstance(line, ft.KuruczMolLine)
 
             if self.iso and line.iso != self.iso:
-                n_skipped += 1
+                log.skip_reasons["Isotope {}".format(line.iso)] += 1
                 continue
 
             if line.statel != STATEL or line.state2l != STATE2L:
-                n_skipped += 1
+                log.skip_reasons["Transition {}-{}".format(line.statel, line.state2l)] += 1
                 continue
 
-            branch = ph.doublet.quanta_to_branch(line.Jl, line.J2l, line.spin2l)
+            if self.flag_fcf:
+                try:
+                    fcf = self.fcfs[(line.vl, line.v2l)]
+                except KeyError as e:
+                    log.skip_reasons["FCF not available for (vl, v2l) = ({}, {})".format(line.vl, line.v2l)] += 1
+                    continue
+
+            branch = ph.doublet.quanta_to_branch(line.Jl, line.J2l,
+                spinl=None if not self.flag_spinl else line.spinl, spin2l=line.spin2l)
             try:
                 wl = line.lambda_
 
                 if self.flag_normhlf:
                     # k = 2 / ((2.0*line.J2l+1)*(2.0*S+1)*(2.0-DELTAK))
                     # k = 2 / ((2.0*line.J2l+1))
-                    k = 2/ ((2*S+1) * (2*line.J2l+1) * (2-DELTAK))
+                    k = 2./ ((2*S+1) * (2*line.J2l+1) * (2-DELTAK))
                     # k = (2.0*line.J2l+1)
                     # k = (2*S+1) * (2*line.J2l+1) * (2-DELTAK)
                 else:
-                    k = 1
+                    k = 1.
 
     #            k *= fe
 
                 if self.flag_hlf:
-                    hlf = formulas[branch](line.J2l)
+                    try:
+                        hlf = formulas[branch](line.J2l)
+                    except ZeroDivisionError:
+                        log.skip_reasons["Division by zero calculating HLF"] += 1
+                        continue
                     gf_pfant = hlf*k
 
                 else:
                     gf_pfant = k*10**line.loggf
 
                 if self.flag_fcf:
-                    fcf = self.fcfs[(line.vl, line.v2l)]
-                    gf_pfant /= fcf
+                    gf_pfant *= fcf
 
                 J2l_pfant = line.J2l
             except Exception as e:
@@ -118,7 +134,5 @@ class ConvKurucz(Conv):
 
             sol = sols[sol_key]
             sol.append_line(wl, gf_pfant, J2l_pfant, branch)
-
-        log.num_lines_skipped = n_skipped
 
         return (list(sols.values()), log)

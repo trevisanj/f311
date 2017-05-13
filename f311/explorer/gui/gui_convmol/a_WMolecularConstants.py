@@ -34,7 +34,6 @@ class WMolecularConstants(a99.WBase):
             ret[fieldname] = self[fieldname]
         ret["name"] = self.name
         ret["formula"] = self.formula
-        print("RRRRRRRRRRRRRRRRRRRRRRRRRR", ret)
         return ret
 
     @property

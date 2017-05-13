@@ -39,9 +39,13 @@ class Conv(object):
         """
         from f311 import filetypes as ft
 
+        # Runs specific conversor to SetOfLines
         sols, log = self._make_sols(lines)
         assert isinstance(sols, list)
         assert isinstance(log, MolConversionLog)
+
+        sols.sort(key= lambda sol: sol.vl*1000+sol.v2l)
+
 
         mol = ft.mol_consts_to_molecule(self.mol_consts)
         mol.sol = sols
