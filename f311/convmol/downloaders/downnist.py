@@ -73,7 +73,6 @@ f_str_or_none = lambda x: _nonify(_html_formula_to_unicode(x))
 functions = [f_state]+[f_float_or_none]*10+[f_str_or_none, f_float_or_none]
 
 
-
 def get_nist_webbook_constants(formula):
     """
     Navigates through NIST webbook pages to retrieve a table of molecular constants
@@ -128,8 +127,13 @@ def get_nist_webbook_constants(formula):
             # If no columns found, we assume it is the header row
             cols = row.find_all("th")
             header = [f_header(ele) for ele in cols]
+
+            header.append("A")
+
         elif len(cols) == 13:
+
             row = [function(ele) for function, ele in zip(functions, cols)]
+            row.append( parse_A(browser, cols[1]))
             data.append(row)
             n += 1
 
@@ -138,3 +142,35 @@ def get_nist_webbook_constants(formula):
     # print(rows_table)
 
     return data, header, title
+
+
+def parse_A(browser, tag):
+    """
+    Parses the "A" information (A is the "coupling constant")
+
+    The cell in column "Te" sometimes cites a reference; the anchor tag has an Id like "Dia19";
+    the value we are looking for is in (roughly in the form "A = some_number"
+
+    """
+    for item in tag.children:
+        if item.name == "a":
+            try:
+                id_ = re.match("#(Dia\d+)", item.get("href")).groups()[0]
+                a = browser.find("a", id=id_)
+                if a is not None:
+                    td = a.next_element.next_element
+                    # print("OOOOOOOOOOOOO", str(td))
+                    try:
+                        return float(re.match("<td>\s*A.*?=\s*([\+\-]{0,1}[0-9]+\.[0-9]+)", str(td)).groups()[0])
+                    except AttributeError:
+                        # no match
+                        return None
+                    except ValueError:
+                        # match, but no valid float
+                        return None
+
+            except AttributeError:
+                pass
+
+
+    return None

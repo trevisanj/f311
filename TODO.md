@@ -84,9 +84,6 @@
 
   - documentation: illustrate another case
 
-  
-
-
 
 # Future suggestions
 

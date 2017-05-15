@@ -51,6 +51,7 @@ class FileMolDB(FileSQLiteDB):
         "alpha_e": ["α<sub>e</sub>", "rotational constant – first term (cm<sup>-1</sup>)"],
         "D_e": ["D<sub>e</sub>", "centrifugal distortion constant (cm<sup>-1</sup>)"],
         "beta_e": ["β<sub>e</sub>", "rotational constant – first term, centrifugal force (cm<sup>-1</sup>)"],
+        "A": [None, "Coupling counstant (cm<sup>-1</sup>)"],
           },
         "system": {
             "from_label": ["State'", None],
@@ -285,6 +286,7 @@ class FileMolDB(FileSQLiteDB):
                                          r_e real,
                                          Trans text,
                                          nu_00 real,
+                                         A real,
                                          comments text
                                         )""")
                                          # s_label text,
