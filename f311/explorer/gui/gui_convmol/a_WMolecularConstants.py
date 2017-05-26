@@ -22,13 +22,17 @@ class WMolecularConstants(a99.WBase):
     def f(self, f):
         self.load(f)
 
-    # @property
-    # def fieldnames(self):
-    #     return self._state_fieldnames
-
     @property
     def constants(self):
-        """Returns a dictionary that combines field values from tables 'molecule', 'state', 'pfantmol'"""
+        """Returns a dictionary that combines several records (see details):
+
+        - one record from table 'molecule'
+        - one record from table 'system'
+        - one record from table 'pfantmol'
+        - two records from table 'state', for state' and state''
+            * keys for state' values start with "statel_"
+            * keys for state'' values start with "state2l_"
+        """
         ret = {}
         for fieldname in self._fieldnames:
             ret[fieldname] = self[fieldname]
@@ -77,7 +81,7 @@ class WMolecularConstants(a99.WBase):
         self._fieldnames_pfantmol = ["fe", "do", "am", "bm", "ua", "ub", "te", "cro", "s", ]
         # Fields of interest from table 'state'
         self._fieldnames_state = ["omega_e", "omega_ex_e", "omega_ey_e", "B_e", "alpha_e", "D_e",
-                                 "beta_e", ]
+                                 "beta_e", "A"]
         # Fields of interest from table 'system'
         self._fieldnames_system = ["from_label", "from_spdf", "to_label", "to_spdf"]
         self._flag_built_edits = False
@@ -93,7 +97,8 @@ class WMolecularConstants(a99.WBase):
         # dictionary {(field name): (edit object), }
         # (will be populated later below together with edit widgets creation)
         self._edit_map = {}
-        self._edit_map_state = {}
+        self._edit_map_statel = {}
+        self._edit_map_state2l = {}
         self._edit_map_pfantmol = {}
         self._edit_map_system = {}
 
@@ -101,7 +106,7 @@ class WMolecularConstants(a99.WBase):
         self._ids_molecule = []
         # id from table 'pfantmol'. In sync with combobox_select_pfantmol
         self._ids_pfantmol = []
-        # id from table 'state'. In sync with combobox_select_state
+        # id from table 'state'. In sync with combobox_select_statel and combobox_state2l
         self._ids_state = []
         # id from table 'system'. In sync with combobox_select_system
         self._ids_system = []
@@ -150,28 +155,6 @@ class WMolecularConstants(a99.WBase):
         lg = self.layout_grid_pfantmol = QGridLayout()
         l1.addLayout(lg)
 
-        # ## Frame with the NIST diatomic molecular constants fields
-
-        fr = self.frame_state = a99.get_frame()
-        l.addWidget(fr)
-        l1 = self.layout_frame_state = QVBoxLayout(fr)
-
-        # ### Select state combobox
-        l2 = self.layout_select_state = QHBoxLayout()
-        l1.addLayout(l2)
-        l2.setSpacing(3)
-        la = self.label_select_state = QLabel("<b>Electronic state</b>")
-        la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
-        l2.addWidget(la)
-        cb = self.combobox_select_state = QComboBox()
-        cb.currentIndexChanged.connect(self.combobox_select_state_currentIndexChanged)
-        l2.addWidget(cb)
-
-        # ### PFANT Molecular constants edit fields
-
-        lg = self.layout_grid_state = QGridLayout()
-        l1.addLayout(lg)
-
         # ## Frame with the combobox to select the "system"
 
         fr = self.frame_system = a99.get_frame()
@@ -197,6 +180,62 @@ class WMolecularConstants(a99.WBase):
 
         lg = self.layout_grid_system = QGridLayout()
         l1.addLayout(lg)
+
+        # #### Frame for Diatomic molecular constants for statel
+
+        fr = self.frame_statel = a99.get_frame()
+        l1.addWidget(fr)
+        l3 = self.layout_frame_statel = QVBoxLayout(fr)
+
+        # ##### Select statel combobox
+        l4 = self.layout_select_statel = QHBoxLayout()
+        l3.addLayout(l4)
+        l4.setSpacing(3)
+        la = self.label_select_statel = QLabel("<b>Diatomic molecular constants for state'</b>")
+        la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+        l4.addWidget(la)
+        cb = self.combobox_select_statel = QComboBox()
+        cb.currentIndexChanged.connect(self.combobox_select_statel_currentIndexChanged)
+        l4.addWidget(cb)
+
+        # ##### State' edit fields
+
+        lg = self.layout_grid_statel = QGridLayout()
+        l3.addLayout(lg)
+
+
+
+
+
+        # #### Frame for Diatomic molecular constants for state2l
+
+        fr = self.frame_state2l = a99.get_frame()
+        l1.addWidget(fr)
+        l3 = self.layout_frame_state2l = QVBoxLayout(fr)
+
+        # ##### Select state2l combobox
+        l4 = self.layout_select_state2l = QHBoxLayout()
+        l3.addLayout(l4)
+        l4.setSpacing(3)
+        la = self.label_select_state2l = QLabel("<b>Diatomic molecular constants for state''</b>")
+        la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+        l4.addWidget(la)
+        cb = self.combobox_select_state2l = QComboBox()
+        cb.currentIndexChanged.connect(self.combobox_select_state2l_currentIndexChanged)
+        l4.addWidget(cb)
+
+        # ##### State' edit fields
+
+        lg = self.layout_grid_state2l = QGridLayout()
+        l3.addLayout(lg)
+
+
+
+
+
+
+
+
 
         a99.nerdify(self)
 
@@ -229,18 +268,6 @@ class WMolecularConstants(a99.WBase):
             if len(edit.text().strip()) == 0:
                 edit.setText("0")
 
-    # def validate(self):
-    #     """Returns True if all edit fields can be converted to float, otherwise False"""
-    #     ret = True
-    #     for fieldname in self._fieldnames_state:
-    #         try:
-    #             _ = float(self[fieldname])
-    #         except ValueError:
-    #             self.add_log_error("Failed converting field '{}' to float".format(fieldname))
-    #             ret = False
-    #             break
-    #     return ret
-
     ################################################################################################
     # # Slots
 
@@ -250,8 +277,11 @@ class WMolecularConstants(a99.WBase):
     def combobox_select_pfantmol_currentIndexChanged(self):
         self._fill_edits_pfantmol()
 
-    def combobox_select_state_currentIndexChanged(self):
-        self._fill_edits_state()
+    def combobox_select_statel_currentIndexChanged(self):
+        self._fill_edits_statel()
+
+    def combobox_select_state2l_currentIndexChanged(self):
+        self._fill_edits_state2l()
 
     def combobox_select_system_currentIndexChanged(self):
         self._fill_edits_system()
@@ -272,8 +302,14 @@ class WMolecularConstants(a99.WBase):
             return self._ids_pfantmol[idx-1]
         return None
 
-    def _get_id_state(self):
-        idx = self.combobox_select_state.currentIndex()
+    def _get_id_statel(self):
+        idx = self.combobox_select_statel.currentIndex()
+        if idx > 0:
+            return self._ids_state[idx-1]
+        return None
+
+    def _get_id_state2l(self):
+        idx = self.combobox_select_state2l.currentIndex()
         if idx > 0:
             return self._ids_state[idx-1]
         return None
@@ -324,15 +360,23 @@ class WMolecularConstants(a99.WBase):
         self._fill_edits_pfantmol()
 
     def _populate_combobox_select_state(self):
-        cb = self.combobox_select_state
-        cb.clear()
         self._ids_state = []
         data = self._f.query_state(id_molecule=self._get_id_molecule()).fetchall()
+        cb = self.combobox_select_statel
+        cb.clear()
         cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
         for row in data:
             cb.addItem("{}".format(row["State"]))
             self._ids_state.append(row["id"])
-        self._fill_edits_state()
+
+        cb = self.combobox_select_state2l
+        cb.clear()
+        cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
+        for row in data:
+            cb.addItem("{}".format(row["State"]))
+
+        self._fill_edits_statel()
+        self._fill_edits_state2l()
 
     def _populate_combobox_select_system(self):
         cb = self.combobox_select_system
@@ -346,6 +390,36 @@ class WMolecularConstants(a99.WBase):
             self._ids_system.append(row["id"])
         self._fill_edits_system()
         self._update_label_fcf()
+
+
+    def __build_edits_generic(self, lg, fn, nc, ti, em):
+        """Populates a grid layout with edit fields
+
+        Args:
+            lg: QGridLayout
+            fn: field names
+            nc: number of columns
+            ti: dict-like object with information about fields
+            em: edit map
+        """
+        n = len(fn)
+        for j in range(nc):
+            # ### One grid layout for each column of fields
+            ii = range(j, n, nc)
+            for i in range(len(ii)):
+                fieldname = fn[ii[i]]
+                info = ti[fieldname]
+                caption = info["caption"] or fieldname
+                a = QLabel(caption)
+                e = QLineEdit("")
+                tooltip = info["tooltip"]
+                if tooltip:
+                    a.setToolTip(tooltip)
+                    e.setToolTip(tooltip)
+                self._edit_map[fieldname] = e
+                em[fieldname] = e
+                lg.addWidget(a, i, j * 2)
+                lg.addWidget(e, i, j * 2 + 1)
 
     def _build_edits(self):
         # pfantmol fields
@@ -367,28 +441,6 @@ class WMolecularConstants(a99.WBase):
                     e.setToolTip(tooltip)
                 self._edit_map[fieldname] = e
                 self._edit_map_pfantmol[fieldname] = e
-                lg.addWidget(a, i, j * 2)
-                lg.addWidget(e, i, j * 2 + 1)
-
-        # state fields
-        nr, nc, n = 3, 3, len(self._fieldnames_state)
-        ti = self._f.get_table_info("state")
-        lg = self.layout_grid_state
-        for j in range(nc):
-            # ### One grid layout for each column of fields
-            ii = range(j, n, nc)
-            for i in range(len(ii)):
-                fieldname = self._fieldnames_state[ii[i]]
-                info = ti[fieldname]
-                caption = info["caption"] or fieldname
-                a = QLabel(caption)
-                e = QLineEdit("")
-                tooltip = info["tooltip"]
-                if tooltip:
-                    a.setToolTip(tooltip)
-                    e.setToolTip(tooltip)
-                self._edit_map[fieldname] = e
-                self._edit_map_state[fieldname] = e
                 lg.addWidget(a, i, j * 2)
                 lg.addWidget(e, i, j * 2 + 1)
 
@@ -414,6 +466,51 @@ class WMolecularConstants(a99.WBase):
                 lg.addWidget(a, i, j * 2)
                 lg.addWidget(e, i, j * 2 + 1)
 
+        # statel fields
+        nr, nc, n = 3, 3, len(self._fieldnames_state)
+        ti = self._f.get_table_info("state")
+        lg = self.layout_grid_statel
+        for j in range(nc):
+            # ### One grid layout for each column of fields
+            ii = range(j, n, nc)
+            for i in range(len(ii)):
+                fieldname = self._fieldnames_state[ii[i]]
+                info = ti[fieldname]
+                caption = info["caption"] or fieldname
+                a = QLabel(caption)
+                e = QLineEdit("")
+                tooltip = info["tooltip"]
+                if tooltip:
+                    a.setToolTip(tooltip)
+                    e.setToolTip(tooltip)
+                self._edit_map["statel_"+fieldname] = e
+                self._edit_map_statel[fieldname] = e
+                lg.addWidget(a, i, j * 2)
+                lg.addWidget(e, i, j * 2 + 1)
+
+        # statel fields
+        nr, nc, n = 3, 3, len(self._fieldnames_state)
+        ti = self._f.get_table_info("state")
+        lg = self.layout_grid_state2l
+        for j in range(nc):
+            # ### One grid layout for each column of fields
+            ii = range(j, n, nc)
+            for i in range(len(ii)):
+                fieldname = self._fieldnames_state[ii[i]]
+                info = ti[fieldname]
+                caption = info["caption"] or fieldname
+                a = QLabel(caption)
+                e = QLineEdit("")
+                tooltip = info["tooltip"]
+                if tooltip:
+                    a.setToolTip(tooltip)
+                    e.setToolTip(tooltip)
+                self._edit_map["state2l_"+fieldname] = e
+                self._edit_map_state2l[fieldname] = e
+                lg.addWidget(a, i, j * 2)
+                lg.addWidget(e, i, j * 2 + 1)
+
+
         self._flag_built_edits = True
 
     def _fill_edits_pfantmol(self):
@@ -424,13 +521,22 @@ class WMolecularConstants(a99.WBase):
                 v = row[fieldname]
                 e.setText(str(v) if v is not None else "")
 
-    def _fill_edits_state(self):
-        id_ = self._get_id_state()
+    def _fill_edits_statel(self):
+        id_ = self._get_id_statel()
         if id_ is not None:
             row = self._f.query_state(**{"state.id": id_}).fetchone()
-            for fieldname, e in self._edit_map_state.items():
+            for fieldname, e in self._edit_map_statel.items():
                 v = row[fieldname]
                 e.setText(str(v) if v is not None else "")
+
+    def _fill_edits_state2l(self):
+        id_ = self._get_id_state2l()
+        if id_ is not None:
+            row = self._f.query_state(**{"state.id": id_}).fetchone()
+            for fieldname, e in self._edit_map_state2l.items():
+                v = row[fieldname]
+                e.setText(str(v) if v is not None else "")
+
 
     def _fill_edits_system(self):
         id_ = self._get_id_system()

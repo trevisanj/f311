@@ -27,7 +27,7 @@ class FileMolDB(FileSQLiteDB):
     description = "Database of Molecular Constants"
     default_filename = "moldb.sqlite"
     editors = ["convmol.py"]
-    gui_data = {
+    gui_info = {
         "molecule": {
             "formula": [None, "formula of molecule, <i>e.g.</i>, 'OH'"],
         },
