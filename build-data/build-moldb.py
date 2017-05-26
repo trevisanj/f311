@@ -72,7 +72,7 @@ def insert_nist_data(moldb):
             for state in data:
                 # **Note** assumes that the columns in data match the
                 # (number of columns in the state table - 2) and their order
-                conn.execute("insert into state values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                conn.execute("insert into state values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                              [None, id_molecule] + state + [""])
 
             conn.commit()

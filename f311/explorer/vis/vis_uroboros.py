@@ -36,19 +36,18 @@ def draw_galfit_tiles(filegalfit, image_width=1000):
 
     num_rows = len(filegalfit.kind_names)
     num_cols = len(filegalfit.band_names)
-    fig, axarr = plt.subplots(num_rows, num_cols, squeeze=False)
+    fig, axarr = plt.subplots(num_rows+1, num_cols, squeeze=False)
     for i, kind_name in enumerate(filegalfit.kind_names):
         for j, band_name in enumerate(filegalfit.band_names):
             ax = axarr[i, j]
             hdu = filegalfit.get_frame(kind_name, band_name)
 
-            # http://stackoverflow.com/questions/12998430/remove-xticks-in-a-matplot-lib-plot
-            ax.xaxis.set_major_locator(plt.NullLocator())
-            ax.yaxis.set_major_locator(plt.NullLocator())
+            remove_ticks(ax)
 
             im = hdu.data
             # Clips negative values
             im[im < 0] =  0
+
             # Transforms color values to something that will enhance small values
             image_data = np.power(im, 0.2)
             hei, wid = image_data.shape
@@ -71,24 +70,41 @@ def draw_galfit_tiles(filegalfit, image_width=1000):
                         verticalalignment='center',
                         rotation=90)
 
-    a99.set_figure_size(fig, image_width, image_width/num_cols*3)
+    if True:
+        for j, band_name in enumerate(filegalfit.band_names):
+            ax = axarr[3, j]
+            hdu = filegalfit.get_frame("MODEL", band_name)
+
+
+
+            for x in ["top", "left", "right", "bottom"]:
+                ax.spines[x].set_visible(False)
+            # ax.set_box("off")
+            remove_ticks(ax)
+
+            im = hdu.data
+            hei, wid = hdu.data.shape
+
+            ax.set_ylim([0, hei - 1])
+            ax.set_xlim([0, wid - 1])
+
+            CHI2NU = "\n\nCHI2NU={:g}".format(hdu.header["CHI2NU"]) if j == 0 else ""
+            RE = hdu.header["2_RE_{}".format(band_name.upper())]
+            N = hdu.header["2_N_{}".format(band_name.upper())]
+            RS = hdu.header["3_RS_{}".format(band_name.upper())]
+            ax.text(2, hei - 1, "RE={}\nN={}\nRS={}{}".format(RE, N, RS, CHI2NU),
+                    horizontalalignment='left',
+                    verticalalignment='top', fontsize=7, color='red',
+                    bbox={'facecolor': 'white', 'alpha': 0.8, 'pad': 2})
+
+    a99.set_figure_size(fig, image_width, image_width/num_cols*4)
     plt.tight_layout()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def remove_ticks(ax):
+    # http://stackoverflow.com/questions/12998430/remove-xticks-in-a-matplot-lib-plot
+    ax.xaxis.set_major_locator(plt.NullLocator())
+    ax.yaxis.set_major_locator(plt.NullLocator())
 
 #
 # class VisGalfitFig(Vis):
@@ -113,7 +129,7 @@ def draw_galfit_tiles(filegalfit, image_width=1000):
 #                  Frames from 2nd to 16th will be used
 #         image_width=1000: image width in pixels
 #
-#     Returns:
+#     Returns:!
 #         matplotlib figure
 #     """
 #
