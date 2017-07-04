@@ -120,6 +120,11 @@ class RunnableManager(QObject, threading.Thread):
         with self.__lock:
             return self.__time_per_runnable
 
+    @property
+    def max_simultaneous(self):
+        """Maximum runnables running simultaneously. Default is multiprocessing.cpu_count()"""
+        return self.__max_simultaneous
+
     def __init__(self, *args, **kwargs):
         self.__max_simultaneous = kwargs.pop("max_simultaneous", None)
         self.__flag_auto_clean = kwargs.pop("flag_auto_clean", False)

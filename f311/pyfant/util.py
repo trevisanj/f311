@@ -23,15 +23,14 @@ __all__ = [
 # Terminal-based interface
 
 
-# TODO TEST run_parallel
-def run_parallel(rr, max_simultaneous=None, flag_console=True, runnable_manager=None):
+def run_parallel(rr, max_simultaneous=None, flag_console=True, runnable_manager=None, flag_verbose=False):
     """
     Args:
-      rr: list of Runnable instances
-      max_simultaneous: (optional, default is RunnableManager default)
-       maximum number of simultaneous processes.
-      runnable_manager=None: (optional) if passed, will use passed;
-       if not, will create new.
+        rr: list of Runnable instances
+        max_simultaneous: (defaults to RunnableManager.max_simultaneous)
+            maximum number of simultaneous processes.
+        runnable_manager: if passed, will use passed; if not, will create new.
+        flag_verbose: whether of not to log any messages (besides console)
 
     Returns: the RunnableManager object
     """
@@ -79,10 +78,11 @@ def run_parallel(rr, max_simultaneous=None, flag_console=True, runnable_manager=
         if flag_had_to_start:
             rm.exit()
 
-    a99.get_python_logger().info(
-        ("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + (" ALIVE" if rm.is_alive() else " DEAD")))
-    a99.get_python_logger().info("test-tm2 [SUPPOSED TO HAVE] EXITED")
-    a99.get_python_logger().info(rm)
+    if flag_verbose:
+        a99.get_python_logger().info(
+            ("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + (" ALIVE" if rm.is_alive() else " DEAD")))
+        a99.get_python_logger().info("test-tm2 [SUPPOSED TO HAVE] EXITED")
+        a99.get_python_logger().info(rm)
 
     return rm
 
