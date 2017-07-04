@@ -125,9 +125,24 @@ class RunnableManager(QObject, threading.Thread):
         """Maximum runnables running simultaneously. Default is multiprocessing.cpu_count()"""
         return self.__max_simultaneous
 
+    @max_simultaneous.setter
+    def max_simultaneous(self, x):
+        self.__max_simultaneous = x
+
+    @property
+    def flag_verbose(self):
+        """Whether to log progress-related messages"""
+        return self.__max_simultaneous
+
+    @flag_verbose.setter
+    def flag_verbose(self, x):
+        self.__flag_verbose = x
+
+
     def __init__(self, *args, **kwargs):
         self.__max_simultaneous = kwargs.pop("max_simultaneous", None)
         self.__flag_auto_clean = kwargs.pop("flag_auto_clean", False)
+        self.__flag_verbose = kwargs.pop("flag_verbose", False)
         if self.__max_simultaneous is None: self.__max_simultaneous = multiprocessing.cpu_count()
         QObject.__init__(self)
         threading.Thread.__init__(self, *args, **kwargs)
@@ -265,7 +280,8 @@ class RunnableManager(QObject, threading.Thread):
             if self.flag_finished:
                 self.exit()
                 break
-            self.__logger.info("\n".join(self.get_summary_report()))
+            if self.__flag_verbose:
+                self.__logger.info("\n".join(self.get_summary_report()))
             time.sleep(1)
 
 
@@ -307,7 +323,6 @@ class RunnableManager(QObject, threading.Thread):
         flag_sleep = False
         it = 0  # thread index
         self.__logger.debug("Will run %d runnables" % len(self.__runnables))
-
         while True:
             if self.__flag_exit:
                 for runner in self.__runners:

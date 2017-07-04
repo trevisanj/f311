@@ -42,7 +42,7 @@ def run_parallel(rr, max_simultaneous=None, flag_console=True, runnable_manager=
         assert isinstance(runnable_manager, pf.RunnableManager)
         rm = runnable_manager
     else:
-        rm = pf.RunnableManager(max_simultaneous=max_simultaneous)
+        rm = pf.RunnableManager(max_simultaneous=max_simultaneous, flag_verbose=flag_verbose)
     flag_had_to_start = False
     if not rm.flag_start_called:
         rm.start()
