@@ -75,6 +75,8 @@ More
 ----
 
 * :ref:`genindex` (all symbols listed alphabetically)
-* :ref:`modindex` (whole *f311* package tree)
+* :ref:`modindex` (whole f311 package tree)
 * :ref:`search`
 * :doc:`license`
+
+.. todo:: Bring more examples and find a way to organize them both in the code and in the documentation

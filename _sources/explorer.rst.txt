@@ -71,6 +71,8 @@ API reference
 The bulk of the f311.explorer API consists of GUIs written using the PyQt5 library.
 
 Besides, the package has a "block" framework allowing one to build pipelines to process
-:class:`Spectrum <f311.filetypes.ft_basic.spectrum.Spectrum>` objects.
+:class:`Spectrum <f311.filetypes.ft_basic.spectrum.Spectrum>` and
+:class:`SpectrumList <f311.filetypes.ft_basic.splist.SpectrumList>` objects. These blocks are used in
+``splisted.py`` and ``cubeed.py``
 
 :doc:`autodoc/f311.explorer`

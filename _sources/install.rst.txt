@@ -13,9 +13,7 @@ To install f311 with pip, run:
 
 .. code:: shell
 
-   pip install a99 numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows
-   pip install pyqt5
-   pip install f311
+   pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99 f311
 
 If pyqt5 fails to install with pip, an alternative is to use ``apt-get``:
 
@@ -40,8 +38,8 @@ Use this method if you prefer to use Debian-based Linux packaging.
    sudo pip3 install a99 configobj robobrowser fortranformat tabulate # Requirements not in apt repository rows
    sudo pip3 install f311
 
-Method 3: Using Anaconda
-------------------------
+Method 3: Using Anaconda virtual environment
+--------------------------------------------
 
 This method uses a **conda** virtual environment. It works with a separate installation of Python and related packages.
 
@@ -51,7 +49,7 @@ Once Anaconda/Miniconda is installed, create a new virtual environment called "a
 
 .. code:: shell
 
-   conda create --name astroenv python=3.5
+   conda create --name astroenv python=3.5 # or 3.6
 
 Activate this new virtual environment:
 
@@ -59,12 +57,11 @@ Activate this new virtual environment:
 
    source activate astroenv
 
-Now you should be able to install everything using pip:
+Now you should be able to install all the packages using pip:
 
 .. code:: shell
 
-   pip install a99 numpy scipy matplotlib astropy configobj pyqt5 bs4 robobrowser requests fortranformat tabulate rows
-   pip install f311
+   pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99 f311
 
 **Note** Every time you want to work with _f311_, you will need to activate the environment:
 
@@ -78,12 +75,33 @@ To deactivate the environment:
 
    source deactivate
 
-Method 4: Developer mode
+Method 4: Using Anaconda without virtual environment
+----------------------------------------------------
+
+This will make Anaconda's Python 3 the default Python for your user account. Make sure you are OK with this.
+
+When you install Anaconda/Miniconda, answer yes to this (or similar) question::
+
+    Do you wish the installer to prepend the Miniconda3 install location
+    to PATH in your /home/j/.bashrc ? [yes|no]
+
+
+After Anaconda/Miniconda installation, close the terminal and open it again so that your PATH is updated.
+**Or if your shell is bash**, you can just type ``source ~/.bashrc`` on the terminal.
+
+Now the packages:
+
+.. code:: shell
+
+   pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99 f311
+
+
+Method 5: Developer mode
 ------------------------
 
 This method is intended for developers or if you would like to pull overnight f311 versions instead of the pip version.
 
-First install all required packages using either Method 1/2/3 above (but do not install f311).
+First install all required packages using either Method 1/2/3/4 above (but do not install f311).
 
 To install f311 package, clone the GitHub repository:
 
