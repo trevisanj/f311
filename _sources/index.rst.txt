@@ -1,7 +1,7 @@
-f311 -- Python resources for Astronomy
+F311 -- Python resources for Astronomy
 ======================================
 
-Welcome to the f311 documentation!
+Welcome to the F311 documentation!
 
 .. toctree::
    :maxdepth: 1
@@ -18,11 +18,11 @@ Welcome to the f311 documentation!
 Introduction
 ------------
 
-f311 is another - but *not* just another - Python open-source project for Astronomy. It contains many
-graphical and command-line standalone applications, and we think that some of them are cool!
+F311 is a collection of Python 3 libraries, command-line and graphical applications for Astronomy.
 
-The code is organized in sub-packages, each one containing scripts (applications) and API related
+The code is organized in sub-packages, each one containing scripts (applications) and an API related
 to some topic.
+
 To get a listing of all scripts available at once, simply type on your shell:
 
 .. code:: shell

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>f311 Installation &mdash; f311 17.1.28 documentation</title>
+  <title>F311 Installation &mdash; f311 17.1.28 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="f311 17.1.28 documentation" href="index.html"/>
         <link rel="next" title="Spectral synthesis (f311.pyfant)" href="pyfant.html"/>
-        <link rel="prev" title="f311 – Python resources for Astronomy" href="index.html"/>
+        <link rel="prev" title="F311 – Python resources for Astronomy" href="index.html"/>
     <link href="_static/style.css" rel="stylesheet" type="text/css">
 
 
@@ -95,12 +95,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">f311 Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#method-1-using-pip">Method 1: Using pip</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#method-2-using-apt-get">Method 2: Using apt-get</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#method-3-using-anaconda-virtual-environment">Method 3: Using Anaconda virtual environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#method-4-using-anaconda-without-virtual-environment">Method 4: Using Anaconda without virtual environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#method-5-developer-mode">Method 5: Developer mode</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">F311 Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#method-1-using-anaconda-without-virtual-environment">Method 1: Using Anaconda without virtual environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#method-2-using-anaconda-virtual-environment">Method 2: Using Anaconda virtual environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#method-3-developer-mode">Method 3: Developer mode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting-installation">Troubleshooting installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#matplotlib-and-pyqt5">MatPlotLib and PyQt5</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#problems-with-package-bs4">Problems with package bs4</a></li>
@@ -159,7 +157,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>f311 Installation</li>
+      <li>F311 Installation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -179,34 +177,29 @@
            <div itemprop="articleBody">
             
   <div class="section" id="f311-installation">
-<h1>f311 Installation<a class="headerlink" href="#f311-installation" title="Permalink to this headline">¶</a></h1>
+<h1>F311 Installation<a class="headerlink" href="#f311-installation" title="Permalink to this headline">¶</a></h1>
 <p>f311 requires Python 3.x. It also depends on other packages, but
 the installation of these is included in the instructions below.</p>
 <p>Four different installation methods are described below:</p>
-<div class="section" id="method-1-using-pip">
-<h2>Method 1: Using pip<a class="headerlink" href="#method-1-using-pip" title="Permalink to this headline">¶</a></h2>
-<p>To install f311 with pip, run:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span> <span class="n">pyqt5</span> <span class="n">a99</span> <span class="n">f311</span>
+<div class="section" id="method-1-using-anaconda-without-virtual-environment">
+<h2>Method 1: Using Anaconda without virtual environment<a class="headerlink" href="#method-1-using-anaconda-without-virtual-environment" title="Permalink to this headline">¶</a></h2>
+<p>This will make Anaconda&#8217;s Python 3 the default <code class="docutils literal"><span class="pre">python</span></code> command for your user account. Make sure you don&#8217;t mind. this.</p>
+<p>First install Anaconda or Miniconda. When you do so, please make sure that you <strong>answer &#8220;yes&#8221; to this (or similar) question</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Do you wish the installer to prepend the Miniconda3 install location
+to PATH in your /home/j/.bashrc ? [yes|no]
 </pre></div>
 </div>
-<p>If pyqt5 fails to install with pip, an alternative is to use <code class="docutils literal"><span class="pre">apt-get</span></code>:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">PyQt5</span>
+<p>After Anaconda/Miniconda installation, close the terminal and open it again so that your PATH is updated.
+<strong>Or if your shell is bash</strong>, you can just type <code class="docutils literal"><span class="pre">source</span> <span class="pre">~/.bashrc</span></code> on the terminal.</p>
+<p>Now install some packages using pip:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="p">::</span> <span class="n">shell</span>
 </pre></div>
 </div>
-<p><strong>Note</strong> You may need superuser rights (<code class="docutils literal"><span class="pre">sudo</span></code>) to install the packages above.</p>
-<p><strong>Note</strong> You may have to replace <code class="docutils literal"><span class="pre">pip</span></code> with <code class="docutils literal"><span class="pre">pip3</span></code> depending on your environment.</p>
+<blockquote>
+<div>pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99 f311</div></blockquote>
 </div>
-<div class="section" id="method-2-using-apt-get">
-<h2>Method 2: Using apt-get<a class="headerlink" href="#method-2-using-apt-get" title="Permalink to this headline">¶</a></h2>
-<p>Use this method if you prefer to use Debian-based Linux packaging.</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">matplotlib</span> <span class="n">python3</span><span class="o">-</span><span class="n">scipy</span> <span class="n">python3</span><span class="o">-</span><span class="n">PyQt5</span> <span class="n">python3</span><span class="o">-</span><span class="n">astropy</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">python3</span><span class="o">-</span><span class="n">bs4</span>
-<span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">a99</span> <span class="n">configobj</span> <span class="n">robobrowser</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="c1"># Requirements not in apt repository rows</span>
-<span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">f311</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="method-3-using-anaconda-virtual-environment">
-<h2>Method 3: Using Anaconda virtual environment<a class="headerlink" href="#method-3-using-anaconda-virtual-environment" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="method-2-using-anaconda-virtual-environment">
+<h2>Method 2: Using Anaconda virtual environment<a class="headerlink" href="#method-2-using-anaconda-virtual-environment" title="Permalink to this headline">¶</a></h2>
 <p>This method uses a <strong>conda</strong> virtual environment. It works with a separate installation of Python and related packages.</p>
 <p>First you will need to have Anaconda or Miniconda installed. If you have none of these installed yet, just install Miniconda.</p>
 <p>Once Anaconda/Miniconda is installed, create a new virtual environment called &#8220;astroenv&#8221; (or any name you like):</p>
@@ -230,26 +223,14 @@ the installation of these is included in the instructions below.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="method-4-using-anaconda-without-virtual-environment">
-<h2>Method 4: Using Anaconda without virtual environment<a class="headerlink" href="#method-4-using-anaconda-without-virtual-environment" title="Permalink to this headline">¶</a></h2>
-<p>This will make Anaconda&#8217;s Python 3 the default Python for your user account. Make sure you are OK with this.</p>
-<p>When you install Anaconda/Miniconda, answer yes to this (or similar) question:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>Do you wish the installer to prepend the Miniconda3 install location
-to PATH in your /home/j/.bashrc ? [yes|no]
+<div class="section" id="method-3-developer-mode">
+<h2>Method 3: Developer mode<a class="headerlink" href="#method-3-developer-mode" title="Permalink to this headline">¶</a></h2>
+<p>This method is intended for developers or if you would like to pull overnight f311 versions directly from GitHub.</p>
+<p>First, follow Method 1/2 above, <strong>but do not install f311</strong>, <em>i.e.</em>, the pip command should be:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span> <span class="n">pyqt5</span> <span class="n">a99</span>
 </pre></div>
 </div>
-<p>After Anaconda/Miniconda installation, close the terminal and open it again so that your PATH is updated.
-<strong>Or if your shell is bash</strong>, you can just type <code class="docutils literal"><span class="pre">source</span> <span class="pre">~/.bashrc</span></code> on the terminal.</p>
-<p>Now the packages:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span> <span class="n">pyqt5</span> <span class="n">a99</span> <span class="n">f311</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="method-5-developer-mode">
-<h2>Method 5: Developer mode<a class="headerlink" href="#method-5-developer-mode" title="Permalink to this headline">¶</a></h2>
-<p>This method is intended for developers or if you would like to pull overnight f311 versions instead of the pip version.</p>
-<p>First install all required packages using either Method 1/2/3/4 above (but do not install f311).</p>
-<p>To install f311 package, clone the GitHub repository:</p>
+<p>Second, clone the f311 GitHub repository:</p>
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">ssh</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">trevisanj</span><span class="o">/</span><span class="n">f311</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
@@ -257,12 +238,11 @@ to PATH in your /home/j/.bashrc ? [yes|no]
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">trevisanj</span><span class="o">/</span><span class="n">f311</span>
 </pre></div>
 </div>
-<p>Then, install in <strong>developer</strong> mode:</p>
+<p>Finally, install F311 in <strong>developer</strong> mode:</p>
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">f311</span>
 <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
 </pre></div>
 </div>
-<p><strong>Note</strong> The command above may vary having the <code class="docutils literal"><span class="pre">sudo</span></code> and/or <code class="docutils literal"><span class="pre">python3</span></code> flavor.</p>
 </div>
 <div class="section" id="troubleshooting-installation">
 <h2>Troubleshooting installation<a class="headerlink" href="#troubleshooting-installation" title="Permalink to this headline">¶</a></h2>
@@ -298,7 +278,7 @@ to PATH in your /home/j/.bashrc ? [yes|no]
         <a href="pyfant.html" class="btn btn-neutral float-right" title="Spectral synthesis (f311.pyfant)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="f311 – Python resources for Astronomy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="F311 – Python resources for Astronomy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
