@@ -1,15 +1,13 @@
 F311 Installation
 =================
 
-f311 requires Python 3.x. It also depends on other packages, but
-the installation of these is included in the instructions below.
-
-Four different installation methods are described below:
+Python 3 version required: Python 3.4.6+, Python 3.5.3+, or Python 3.6+ (https://packaging.python.org/guides/migrating-to-pypi-org/)
 
 Method 1: Using Anaconda without virtual environment
 ----------------------------------------------------
 
-This will make Anaconda's Python 3 the default ``python`` command for your user account. Make sure you don't mind. this.
+This will make Anaconda's Python 3 the default ``python`` command for your user account.
+Make sure you don't mind this, otherwise follow Method 2.
 
 First install Anaconda or Miniconda. When you do so, please make sure that you **answer "yes" to this (or similar) question**::
 
