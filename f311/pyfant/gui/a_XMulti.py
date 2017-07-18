@@ -121,7 +121,7 @@ class XMulti(XPFANT):
             if len(s) == 0:
                 errors.append("Please inform custom session id.")
             elif len(errors) == 0: # will only offer to remove directory if everything is ok so far
-                dirname = _get_custom_dirname(s)
+                dirname = get_custom_multisession_dirname(s)
                 if os.path.isdir(dirname):
                     r = QMessageBox.question(self, "Directory exists",
                      "Directory '%s' already exists.\n\nWould you like to remove it?" % dirname,
@@ -184,10 +184,10 @@ class XMulti(XPFANT):
         r = pf.MultiRunnable(self.me.f, self.ae.f, self.oe.f, self.multi_editor.f)
         if self.checkbox_multi_custom_id.isChecked():
             custom_id = self.__get_multi_custom_session_id()
-            if _get_custom_dirname(custom_id) == custom_id:
+            if pf.get_custom_multisession_dirname(custom_id) == custom_id:
                 # Understands that session dirname prefix must be cleared
                 r.sid.id_maker.session_prefix_singular = ""
-            r.sid.id = self.__get_multi_custom_session_id()
+            r.sid.id = custom_id
         self._rm.add_runnables([r])
 
     def __update_lineEdit_multi_custom_id(self):
@@ -201,10 +201,3 @@ class XMulti(XPFANT):
             w = item.widget()
             if w:
                 w.setEnabled(flag_enabled)
-
-
-# This sector defines how custom directory name is made up
-
-def _get_custom_dirname(session_id):
-    # return pf.MULTISESSION_PREFIX+session_id
-    return session_id

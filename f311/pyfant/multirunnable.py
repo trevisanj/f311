@@ -55,8 +55,7 @@ class MultiRunnable(runnables.Runnable):
     Differential abundances X FWHM's runnable.
     """
 
-    def __init__(self, file_main, file_abonds, options, file_abxfwhm,
-                 custom_id=None):
+    def __init__(self, file_main, file_abonds, options, file_abxfwhm, custom_id=None):
         from f311 import pyfant as pf
         pf.Runnable.__init__(self)
         assert isinstance(file_main, ft.FileMain)

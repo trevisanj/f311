@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Organizes simulation directory (creates folders, moves files, creates 'index.html')

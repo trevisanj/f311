@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Converts VALD3 atomic/molecular lines file to PFANT atomic lines file.
 

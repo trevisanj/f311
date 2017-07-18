@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Lists all programs available
@@ -35,7 +35,7 @@ def _get_scripts_path(pkgname):
     return os.path.join(os.path.dirname(f311.__file__), pkgname, "scripts")
 
 
-def _get_programs_dict(pkgname_only=None):
+def _get_programs_dict(pkgname_only, flag_protected):
     """Returns dictionary {(package description): [ExeInfo0, ...], ...}"""
 
     allinfo = OrderedDict()
@@ -43,7 +43,7 @@ def _get_programs_dict(pkgname_only=None):
     for pkgname in _get_subpackage_names():
         if pkgname_only is not None and pkgname != pkgname_only:
                 continue
-        allinfo["Package '{}'".format(pkgname)] = a99.get_exe_info(_get_scripts_path(pkgname))
+        allinfo["Package '{}'".format(pkgname)] = a99.get_exe_info(_get_scripts_path(pkgname), flag_protected)
         pkgnames.append(pkgname)
 
     # This can be called (without much shame) a "gambiarra"
@@ -79,6 +79,7 @@ if __name__ == "__main__":
                         choices=["text", "markdown-list", "markdown-table", "rest-list"])
     parser.add_argument('-p', '--pkgname', type=str, help='List programs from this package only', default="(all)")
     parser.add_argument('-l', '--list-packages', action="store_true", help='Lists all sub-packages of f311')
+    parser.add_argument('-_', '--protected', action="store_true", help="Includes protected scripts (starting with '_')_")
     args = parser.parse_args()
 
     if args.list_packages:
@@ -90,7 +91,7 @@ if __name__ == "__main__":
 
 
 
-    allinfo = _get_programs_dict(pkgname_only)
+    allinfo = _get_programs_dict(pkgname_only, args.protected)
     strlist = _format_programs_dict(allinfo, args.format)
     print("\n".join(strlist))
     print("http://github.com/trevisanj/f311\n")

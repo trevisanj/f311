@@ -27,7 +27,7 @@ setup(
     name='f311',
     packages=find_packages(),
     include_package_data=True,
-    version='0.17.5.11b',
+    version='0.17.7.18',
     license='GNU GPLv3',
     platforms='any',
     description='Collection of Astronomy-related libraries and applications in Python',
@@ -36,7 +36,7 @@ setup(
     url='https://github.com/trevisanj/f311', # use the URL to the github repo
     keywords= ['astronomy', "fits", "spectroscopy", "spectral synthesis", "photometry",
                "honl-london", "nist", "hitran", "multiplicity"],
-    install_requires=[],
+    install_requires=["a99>=0.17.7.17"],
     scripts=scripts
 )
 

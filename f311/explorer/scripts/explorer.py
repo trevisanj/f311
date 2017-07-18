@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """F311 Explorer --  list, visualize, and edit data files (_à la_ File Manager)"""
 

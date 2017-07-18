@@ -312,18 +312,41 @@ class Conf(object):
             self.__popen_text_dest.close()
 
     def get_file_main(self, opt=None):
-        """Returns either self.file_main, or if None, tries to open file and
-        return a new FileMain object.
+        """Tries to figure out a FileMain from current context (i.e., directory contents and command-line options)
+
+        Precedence: self.file_main > (file specified by opt.fn_main) > (f311's default data file)
+
+        Args:
+            opt: FileOptions or None
+
+        Returns:
+            FileMain or None
+        """
+        return self.get_file_generic("main", opt)
+
+    def get_file_abonds(self, opt=None):
+        """Analogous to get_file_main()"""
+        return self.get_file_generic("abonds", opt)
+
+    def get_file_generic(self, name, opt=None):
+        """
+        Returns new File<sth> object, depending on name
+
+        Args:
+            name: string
+            opt: FileOptions object
         """
         if opt is None:
             opt = self.__opt
-        if self.file_main is not None:
-            return self.file_main
-        file_ = ft.FileMain()
-        if opt.fn_main is None:
+        selfattr = self.__getattribute__("file_"+name)
+        optattr = opt.__getattribute__("fn_"+name)
+        if selfattr is not None:
+            return selfattr
+        file_ = getattr(ft, "File"+name.capitalize())()
+        if optattr is None:
             file_.load()  # will try to load default file
         else:
-            file_.load(opt.fn_main)
+            file_.load(optattr)
         return file_
 
     def get_flprefix(self, _flag_skip_opt=False, opt=None):

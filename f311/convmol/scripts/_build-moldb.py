@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+# coding: utf8
 """
 Script to put together the file moldb.sqlite
 """
@@ -150,6 +151,11 @@ if __name__ == "__main__":
             os.unlink(filename)
         else:
             sys.exit()
+
+    yn = a99.yesno("Will now create file '{}'. Continue".format(filename), True)
+
+    if not yn:
+        sys.exit()
 
     f = ft.FileMolDB()
     f.filename = filename

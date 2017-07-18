@@ -4,7 +4,7 @@
 
 ## GENERAL
 
-- **IMPORTANT** pip install not delivering the default data properly!!
+- ~~**IMPORTANT** pip install not delivering the default data properly!!~~
 
 - Enhance programs.py to sort alphabetically, generate single table (with word wrap). BTW it does not list itself
   Who cares which package. But I can filter in or out packages

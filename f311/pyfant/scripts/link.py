@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Creates symbolic links to PFANT data files as an alternative to copying these (sometimes large) files into local directory
 
