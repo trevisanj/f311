@@ -13,14 +13,13 @@ First install Anaconda or Miniconda. When you do so, please make sure that you *
 
     Do you wish the installer to prepend the Miniconda3 install location
     to PATH in your /home/j/.bashrc ? [yes|no]
+    >> yes
 
 
 After Anaconda/Miniconda installation, close the terminal and open it again so that your PATH is updated.
 **Or if your shell is bash**, you can just type ``source ~/.bashrc`` on the terminal.
 
 Now install some packages using pip::
-
-.. code:: shell
 
    pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99 f311
 
@@ -43,13 +42,13 @@ Activate this new virtual environment:
 
    source activate astroenv
 
-Now you should be able to install all the packages using pip:
+Now install the packages:
 
 .. code:: shell
 
    pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99 f311
 
-**Note** Every time you want to work with _f311_, you will need to activate the environment:
+**Note** Every time you want to work with F311, you will need to activate the environment:
 
 .. code:: shell
 
@@ -64,9 +63,9 @@ To deactivate the environment:
 Method 3: Developer mode
 ------------------------
 
-This method is intended for developers or if you would like to pull overnight f311 versions directly from GitHub.
+This allows you to pull the most recent version of the code directly from GitHub.
 
-First, follow Method 1/2 above, **but do not install f311**, *i.e.*, the pip command should be::
+First, follow Method 1 or 2 above, **but do not install f311**, *i.e.*, the pip command should be::
 
     pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99
 
@@ -107,4 +106,4 @@ MatPlotLib and PyQt5
 Problems with package bs4
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo:: There is an error that occurs with package bs4 of easy fix, let's write it here at next chance to observe it.
+.. todo:: write solution wodn next time

@@ -186,16 +186,15 @@ Make sure you don&#8217;t mind this, otherwise follow Method 2.</p>
 <p>First install Anaconda or Miniconda. When you do so, please make sure that you <strong>answer &#8220;yes&#8221; to this (or similar) question</strong>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>Do you wish the installer to prepend the Miniconda3 install location
 to PATH in your /home/j/.bashrc ? [yes|no]
+&gt;&gt; yes
 </pre></div>
 </div>
 <p>After Anaconda/Miniconda installation, close the terminal and open it again so that your PATH is updated.
 <strong>Or if your shell is bash</strong>, you can just type <code class="docutils literal"><span class="pre">source</span> <span class="pre">~/.bashrc</span></code> on the terminal.</p>
 <p>Now install some packages using pip:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="p">::</span> <span class="n">shell</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span> <span class="n">pyqt5</span> <span class="n">a99</span> <span class="n">f311</span>
 </pre></div>
 </div>
-<blockquote>
-<div>pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99 f311</div></blockquote>
 </div>
 <div class="section" id="method-2-using-anaconda-virtual-environment">
 <h2>Method 2: Using Anaconda virtual environment<a class="headerlink" href="#method-2-using-anaconda-virtual-environment" title="Permalink to this headline">¶</a></h2>
@@ -209,11 +208,11 @@ to PATH in your /home/j/.bashrc ? [yes|no]
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">astroenv</span>
 </pre></div>
 </div>
-<p>Now you should be able to install all the packages using pip:</p>
+<p>Now install the packages:</p>
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span> <span class="n">pyqt5</span> <span class="n">a99</span> <span class="n">f311</span>
 </pre></div>
 </div>
-<p><strong>Note</strong> Every time you want to work with _f311_, you will need to activate the environment:</p>
+<p><strong>Note</strong> Every time you want to work with F311, you will need to activate the environment:</p>
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">astroenv</span>
 </pre></div>
 </div>
@@ -224,8 +223,8 @@ to PATH in your /home/j/.bashrc ? [yes|no]
 </div>
 <div class="section" id="method-3-developer-mode">
 <h2>Method 3: Developer mode<a class="headerlink" href="#method-3-developer-mode" title="Permalink to this headline">¶</a></h2>
-<p>This method is intended for developers or if you would like to pull overnight f311 versions directly from GitHub.</p>
-<p>First, follow Method 1/2 above, <strong>but do not install f311</strong>, <em>i.e.</em>, the pip command should be:</p>
+<p>This allows you to pull the most recent version of the code directly from GitHub.</p>
+<p>First, follow Method 1 or 2 above, <strong>but do not install f311</strong>, <em>i.e.</em>, the pip command should be:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span> <span class="n">pyqt5</span> <span class="n">a99</span>
 </pre></div>
 </div>
@@ -258,7 +257,7 @@ to PATH in your /home/j/.bashrc ? [yes|no]
 <h3>Problems with package bs4<a class="headerlink" href="#problems-with-package-bs4" title="Permalink to this headline">¶</a></h3>
 <div class="admonition-todo admonition" id="index-0">
 <p class="first admonition-title">Todo</p>
-<p class="last">There is an error that occurs with package bs4 of easy fix, let&#8217;s write it here at next chance to observe it.</p>
+<p class="last">write solution wodn next time</p>
 </div>
 </div>
 </div>
