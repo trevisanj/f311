@@ -4,12 +4,12 @@
 
 ## GENERAL
 
-- **IMPORTANT** pip install not delivering the default data properly!!
+
+- Introduce "comments" field for main.dat and abonds.dat
 
 - Enhance programs.py to sort alphabetically, generate single table (with word wrap). BTW it does not list itself
   Who cares which package. But I can filter in or out packages
  
-- See why data files are not installing properly with pip setup.py install
   
 - Documentation: **Get some inspiration** (read lots of shit)!!!!
 - **Template project**
@@ -26,11 +26,9 @@
 
     - WMolecularConstants: system comes first, state to be searched automatically!   
     
-    - FileMolDB: some tables still don't have the comment field??
     
     - Building database: fill in the state_label automatically, or maybe just search using the first letter
-      (figure out if there is a "LIKE 'A%' as in MySQL) (no need to worry about speed here, we'll pre-compile the info for conversion)
-      
+      (figure out if there is a "LIKE 'A%' as in MySQL) (no need to worry about speed here, we'll pre-compile the info for conversion)    
 
 
 # Filetypes
@@ -86,3 +84,9 @@
 
 
 - ~~FileSPectrumPfant not loading properly anymore!!~~
+
+- ~~**IMPORTANT** pip install not delivering the default data properly!!~~
+
+- ~~See why data files are not installing properly with pip setup.py install~~
+
+    - ~~FileMolDB: some tables still don't have the comment field??~~

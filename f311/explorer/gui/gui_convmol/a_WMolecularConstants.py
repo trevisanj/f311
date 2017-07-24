@@ -77,6 +77,9 @@ class WMolecularConstants(a99.WBase):
 
         # # Internal state
 
+        # FileMolDB object, I guess
+        self._f = None
+
         # Fields of interest from table 'pfantmol'
         self._fieldnames_pfantmol = ["fe", "do", "am", "bm", "ua", "ub", "te", "cro", "s", ]
         # Fields of interest from table 'state'
@@ -257,6 +260,10 @@ class WMolecularConstants(a99.WBase):
         """Loads a FileMolDB object"""
         import f311.filetypes as ft
         assert isinstance(f, ft.FileMolDB)
+
+
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa")
+
         self._f = f
         if f is not None:
             self._populate()
