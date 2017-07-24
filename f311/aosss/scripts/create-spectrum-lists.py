@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Create several .splist (spectrum list) files from WebSim-COMPASS output files; groups spectra that share same wavelength vector

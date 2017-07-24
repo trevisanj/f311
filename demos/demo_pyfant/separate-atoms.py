@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Runs pfant for each atom isolated from the others, and no molecular lines.

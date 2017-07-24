@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Copies stellar data files (such as main.dat, abonds.dat, dissoc.dat) to local directory
 

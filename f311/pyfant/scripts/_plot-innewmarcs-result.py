@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Plots interpolated atmospheric model curve (hopefully) in the middle of the curves
 used by innewmarcs for interpolation.

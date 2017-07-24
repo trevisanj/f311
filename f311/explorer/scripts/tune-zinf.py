@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Tunes the "zinf" parameter for each atomic line in atomic lines file
 

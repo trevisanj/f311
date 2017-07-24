@@ -10,6 +10,11 @@ SESSION_PREFIX_SINGULAR = 'session-'
 SESSION_PREFIX_PLURAL = 'session-'
 MULTISESSION_PREFIX = 'multi-session-'
 
+def get_custom_multisession_dirname(session_id):
+    """This defines how custom directory name is made up"""
+    # return pf.MULTISESSION_PREFIX+session_id
+    return session_id
+
 
 # # Imports
 #   =======

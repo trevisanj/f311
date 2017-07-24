@@ -4,8 +4,12 @@
 
 ## GENERAL
 
+<<<<<<< HEAD
 
 - Introduce "comments" field for main.dat and abonds.dat
+=======
+- ~~**IMPORTANT** pip install not delivering the default data properly!!~~
+>>>>>>> 75d30cbf6a26c659e3634cab43bd42c42219c05f
 
 - Enhance programs.py to sort alphabetically, generate single table (with word wrap). BTW it does not list itself
   Who cares which package. But I can filter in or out packages

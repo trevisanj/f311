@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Merges several atmospheric models into a single file (_i.e._, the "grid")

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Looks for files "*.norm" inside directories session-* and saves one figure per page in a PDF file

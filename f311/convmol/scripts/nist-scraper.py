@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Retrieves and prints a table of molecular constants from the NIST Chemistry Web Book.
 
