@@ -261,9 +261,6 @@ class WMolecularConstants(a99.WBase):
         import f311.filetypes as ft
         assert isinstance(f, ft.FileMolDB)
 
-
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa")
-
         self._f = f
         if f is not None:
             self._populate()

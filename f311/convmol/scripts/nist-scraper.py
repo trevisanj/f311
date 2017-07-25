@@ -12,6 +12,8 @@ Example:
 
     print-nist.py OH
 
+**Disclaimer** This script may stop working if the NIST people update the Chemistry Web Book.
+
 """
 
 

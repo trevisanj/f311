@@ -4,12 +4,14 @@
 
 ## GENERAL
 
-<<<<<<< HEAD
+- File .spec taking too long to open
+
+
+- Custom session directory: when types, select the ckechbox automatically
+
+- abed: Element Abundance (A(X)(ref)) (A(X)) [X/Fe]; A(X) is the current informationz    
 
 - Introduce "comments" field for main.dat and abonds.dat
-=======
-- ~~**IMPORTANT** pip install not delivering the default data properly!!~~
->>>>>>> 75d30cbf6a26c659e3634cab43bd42c42219c05f
 
 - Enhance programs.py to sort alphabetically, generate single table (with word wrap). BTW it does not list itself
   Who cares which package. But I can filter in or out packages
@@ -94,3 +96,5 @@
 - ~~See why data files are not installing properly with pip setup.py install~~
 
     - ~~FileMolDB: some tables still don't have the comment field??~~
+
+- ~~NIST scrapper no longer working for all molecules~~

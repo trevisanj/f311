@@ -22,7 +22,6 @@ def find_scripts(pkgnames):
 pkgs = find_packages()
 scripts = find_scripts(["f311"])
 
-
 setup(
     name='f311',
     packages=find_packages(),
