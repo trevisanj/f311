@@ -138,7 +138,6 @@ def get_nist_webbook_constants(formula):
             # If no columns found, we assume it is the header row
             cols = row.find_all("th")
             header = [f_header(ele) for ele in cols]
-
             header.append("A")
 
         elif len(cols) == 13:
@@ -171,8 +170,11 @@ def parse_A(browser, tag):
                 if a is not None:
                     td = a.next_element.next_element
                     # print("OOOOOOOOOOOOO", str(td))
+                    stemp = re.match("<td>\s*A.*?=\s*([\(\)\+\-]*[0-9]+\.[0-9]+)", str(td)).groups()[0]
+                    if stemp is None:
+                        return None
                     try:
-                        return float(re.match("<td>\s*A.*?=\s*([\+\-]{0,1}[0-9]+\.[0-9]+)", str(td)).groups()[0])
+                        return float(stemp.replace("(", "").replace(")", ""))
                     except AttributeError:
                         # no match
                         return None

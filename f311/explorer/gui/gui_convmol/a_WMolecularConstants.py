@@ -93,9 +93,9 @@ class WMolecularConstants(a99.WBase):
             assert fn not in self._fieldnames_system
         for fn in self._fieldnames_pfantmol:
             assert fn not in self._fieldnames_system
-        self._fieldnames = copy.copy(self._fieldnames_pfantmol)
-        self._fieldnames.extend(self._fieldnames_state)
-        self._fieldnames.extend(self._fieldnames_system)
+        self._fieldnames = []  # will be filled in later copy.copy(self._fieldnames_pfantmol)
+        # self._fieldnames.extend(self._fieldnames_state)
+        # self._fieldnames.extend(self._fieldnames_system)
 
         # dictionary {(field name): (edit object), }
         # (will be populated later below together with edit widgets creation)
@@ -246,8 +246,9 @@ class WMolecularConstants(a99.WBase):
         """Allows dict-like access of molecular constants of interest. Returns float value or None"""
         if fieldname in self._fieldnames:
             text = self._edit_map[fieldname].text()
-            if fieldname in ("from_label", "to_label"):
-                # Only two fields to be strings
+            if "_label" in fieldname:
+                # Fields with "_label" in their names are treated as strings,
+                # otherwise they are considered numeric
                 return text.upper()
             else:
                 try:
@@ -443,6 +444,7 @@ class WMolecularConstants(a99.WBase):
                 if tooltip:
                     a.setToolTip(tooltip)
                     e.setToolTip(tooltip)
+                self._fieldnames.append(fieldname)
                 self._edit_map[fieldname] = e
                 self._edit_map_pfantmol[fieldname] = e
                 lg.addWidget(a, i, j * 2)
@@ -465,6 +467,7 @@ class WMolecularConstants(a99.WBase):
                 if tooltip:
                     a.setToolTip(tooltip)
                     e.setToolTip(tooltip)
+                self._fieldnames.append(fieldname)
                 self._edit_map[fieldname] = e
                 self._edit_map_system[fieldname] = e
                 lg.addWidget(a, i, j * 2)
@@ -487,7 +490,9 @@ class WMolecularConstants(a99.WBase):
                 if tooltip:
                     a.setToolTip(tooltip)
                     e.setToolTip(tooltip)
-                self._edit_map["statel_"+fieldname] = e
+                fieldname_all = "statel_" + fieldname
+                self._fieldnames.append(fieldname_all)
+                self._edit_map[fieldname_all] = e
                 self._edit_map_statel[fieldname] = e
                 lg.addWidget(a, i, j * 2)
                 lg.addWidget(e, i, j * 2 + 1)
@@ -509,7 +514,9 @@ class WMolecularConstants(a99.WBase):
                 if tooltip:
                     a.setToolTip(tooltip)
                     e.setToolTip(tooltip)
-                self._edit_map["state2l_"+fieldname] = e
+                fieldname_all = "state2l_" + fieldname
+                self._fieldnames.append(fieldname_all)
+                self._edit_map[fieldname_all] = e
                 self._edit_map_state2l[fieldname] = e
                 lg.addWidget(a, i, j * 2)
                 lg.addWidget(e, i, j * 2 + 1)
