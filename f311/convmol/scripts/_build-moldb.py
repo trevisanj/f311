@@ -2,6 +2,9 @@
 # coding: utf8
 """
 Script to put together the file moldb.sqlite
+
+**Note** This script is protected, but is very important to put to put together a lot of information
+needed for molecular lines conversion (``convmol.py``)
 """
 
 from f311 import filetypes as ft
@@ -106,40 +109,46 @@ def load_list_file(filename):
 
 
 
-
-# Correspondence between Franck-Condon Factors files and transitions
-# Transition information taken from
-# B.V. Castilho et al.: Beryllium abundance in lithium-rich giants, Astron. Astrophys. 345, 249–255 (1999)
+# Electronic systems
 #
-# The .txt files were copied from Bruno's ATMOS:/wrk4/bruno/Mole/*. Their names were renamed to
-# have the formula
-FCF_MAP = (
-("CH", "CH-sjalist.txt", "A", 2, 2, "X", 2, 1),  # A2Delta - X2Pi
-("CH", "CH-sjblist.txt", "B", 2, 2, "X", 2, 1),  # B2Delta - X2Pi
-("CH", "CH-sjclist.txt", "C", 2, 0, "X", 2, 1),  # C2Sigma - X2Pi
-("NH", "NH-sjlist.txt", "A", 3, 1, "X", 3, 0),  # A3Pi - X3Sigma
-("OH", "OH-sjlist.txt", "A", 2, 0, "X", 2, 1),  # A2Sigma - X2Pi
+# # TODO calculate FCFs for Tio, FeH, C2, CO
+SYSTEMS_MAP = (
+("CH", "cha.out", "A", 2, 2, "X", 2, 1, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),  # A2Delta - X2Pi
+("CH", "chb.out", "B", 2, 2, "X", 2, 1, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
+("CH", "chc.out", "C", 2, 0, "X", 2, 1, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
+("CN", "cnb.out", "B", 2, 0, "X", 2, 0, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
+("NH", "nha.out", "A", 3, 1, "X", 3, 0, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),  # A3Pi - X3Sigma
+("OH", "oha.out", "A", 2, 0, "X", 2, 1, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),  # A2Sigma - X2Pi
+("MgH", "mgha.out", "A", 2, 1, "X", 2, 0, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
+("MgH", "mghb.out", "B", 2, 0, "X", 2, 0, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
 )
 
 def my_info(s):
     a99.get_python_logger().info("[build-moldb] {}".format(s))
 
-def insert_franck_condon_factors(moldb):
+def insert_systems_and_franck_condon_factors(moldb):
     conn = moldb.get_conn()
     assert isinstance(conn, sqlite3.Connection)
 
-    for formula, filename, from_label, from_mult, from_spdf, to_label, to_mult, to_spdf in FCF_MAP:
+    for formula, filename, from_label, from_mult, from_spdf, to_label, to_mult, to_spdf, comments in SYSTEMS_MAP:
         id_molecule = conn.execute("select id from molecule where formula = ?",
                                    (formula,)).fetchone()["id"]
         cursor = conn.execute("""insert into system (id_molecule, from_label, from_mult, from_spdf,
-           to_label, to_mult, to_spdf) values (?, ?, ?, ?, ?, ?, ?)""",
-           (id_molecule, from_label, from_mult, from_spdf, to_label, to_mult, to_spdf))
+           to_label, to_mult, to_spdf, comments) values (?, ?, ?, ?, ?, ?, ?, ?)""",
+           (id_molecule, from_label, from_mult, from_spdf, to_label, to_mult, to_spdf, comments))
         id_system = cursor.lastrowid
 
-        fcf_dict = load_list_file(filename)
-        for (vl, v2l), fcf in fcf_dict.items():
-            conn.execute("insert into fcf (id_system, vl, v2l, value) values (?,?,?,?)",
-                         (id_system, vl, v2l, fcf))
+        if filename is not None:
+            # Can handle two different file formats
+            try:
+                a = ft.FileFCF()
+                a.load(filename)
+                fcf_dict = a.fcfs
+            except:
+                fcf_dict = load_list_file(filename)
+            for (vl, v2l), fcf in fcf_dict.items():
+                conn.execute("insert into fcf (id_system, vl, v2l, value) values (?,?,?,?)",
+                             (id_system, vl, v2l, fcf))
     conn.commit()
 
 if __name__ == "__main__":
@@ -165,7 +174,7 @@ if __name__ == "__main__":
     my_info("Inserting molecules...")
     insert_molecules(f)
     my_info("Inserting Franck-Condon Factors from Bruno Castilho's work...")
-    insert_franck_condon_factors(f)
+    insert_systems_and_franck_condon_factors(f)
     my_info("Inserting molecule header information from '{}'...".
           format(pf.get_pfant_data_path("common", "molecules.dat")))
     insert_pfantmol_data(f)

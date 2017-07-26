@@ -86,8 +86,8 @@
 # DONE
 
 - ~~OPEN IN NEW WINDOW NOT COPYING EVERYTHIGN!!!!!~~
-- NIST scraper: I can actually go after the "A" because it follows some pattern: points to footnote and there it is (this part is what I normally enjoy doing, so should enjoy)
 
+- NIST scraper: I can actually go after the "A" because it follows some pattern: points to footnote and there it is (this part is what I normally enjoy doing, so should enjoy)
 
 - ~~FileSPectrumPfant not loading properly anymore!!~~
 
@@ -95,6 +95,6 @@
 
 - ~~See why data files are not installing properly with pip setup.py install~~
 
-    - ~~FileMolDB: some tables still don't have the comment field??~~
+- ~~FileMolDB: some tables still don't have the comment field??~~
 
 - ~~NIST scrapper no longer working for all molecules~~
