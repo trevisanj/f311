@@ -68,7 +68,6 @@ class FileDissoc(DataFile):
 
             if len(self.elems) == 0:
                 raise RuntimeError("Doesn't seem to be a FileDissoc")
-            print("%%%%%%%%%%%%%%%%%%%%%%%%%%% {}".format(len(self.elems)))
 
 
             # molecules part (remaining lines)

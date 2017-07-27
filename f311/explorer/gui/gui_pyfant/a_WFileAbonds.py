@@ -9,8 +9,8 @@ import a99
 import f311.filetypes as ft
 
 
-ABONDS_HEADERS = ["Element", "Abundance", "Notes"]
-NOTES_COLUMN_WIDTH = 200
+ABONDS_HEADERS = ["Element", "Abundance", "Comments"]
+COMMENTS_COLUMN_WIDTH = 200
 
 
 def _format_error(row_index, message):
@@ -80,10 +80,28 @@ class WFileAbonds(QWidget):
         l.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
 
-        # # Splitter containing the table and the errors area
+        # # Splitter comments box; the table; and the errors area
 
         sp = self.splitter = QSplitter(Qt.Vertical)
         la.addWidget(sp)
+
+        # # Edit box for the comments
+
+        w = self.c3f1x2 = QWidget()
+        sp.addWidget(w)
+        l = self.c114_2 = QHBoxLayout(w)
+        a99.set_margin(l, 0)
+        l.setSpacing(4)
+        label = self.c33_1 = QLabel("&Comments")
+        l.addWidget(label)
+        edit = self.textEditComments = QPlainTextEdit()
+        edit.textChanged.connect(self.on_textEditComments_textChanged)
+        l.addWidget(edit)
+        label.setBuddy(edit)
+        T = "Use this space to write annotations such as references"
+        label.setToolTip(T)
+        edit.setToolTip(T)
+
 
         # ## The table widget
 
@@ -116,8 +134,9 @@ class WFileAbonds(QWidget):
         # ## Splitter stretch factors
         # These need to be set a posteriori otherwise they do
         # not work properly.
-        sp.setStretchFactor(0, 1)
-        sp.setStretchFactor(1, 0)
+        sp.setStretchFactor(0, 0)
+        sp.setStretchFactor(1, 1)
+        sp.setStretchFactor(2, 0)
 
         # finally...
         self.setEnabled(False)  # Disabled until load() is called
@@ -184,10 +203,6 @@ class WFileAbonds(QWidget):
             finally:
                 self.flag_process_changes = True
 
-
-
-
-            self._update_file_abonds()
             self._update_file_abonds()
             self.changed.emit()
 
@@ -226,6 +241,11 @@ class WFileAbonds(QWidget):
                 self.flag_process_changes = True
             self.changed.emit()
 
+    def on_textEditComments_textChanged(self):
+        if self.flag_process_changes:
+            self._update_file_abonds()
+            self.changed.emit()
+
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Internal gear
 
@@ -260,14 +280,16 @@ class WFileAbonds(QWidget):
 
             # list with the vectors themselves
 
-            attrs = [o.__getattribute__(x) for x in ["ele", "abol", "notes"]]
+            attrs = [o.__getattribute__(x) for x in ["ele", "abol", "comments_per_ele"]]
 
             for i in range(len(o)):
                 for j, attr in enumerate(attrs):
                     item = QTableWidgetItem(str(attr[i]).strip())
                     t.setItem(i, j, item)
             t.resizeColumnsToContents()
-            t.setColumnWidth(2, NOTES_COLUMN_WIDTH)  # Make room for notes
+            t.setColumnWidth(2, COMMENTS_COLUMN_WIDTH)  # Make room for comments for element
+
+            self.textEditComments.setPlainText(o.comments)
         finally:
             self.flag_process_changes = True
 
@@ -298,7 +320,7 @@ class WFileAbonds(QWidget):
         o, t = self.f, self.tableWidget
         assert isinstance(t, QTableWidget)
         n = t.rowCount()
-        ele, abol, notes = [], [], []
+        ele, abol, comments_per_ele = [], [], []
 
         for i in range(n):
             # # Element
@@ -321,10 +343,10 @@ class WFileAbonds(QWidget):
             abol.append(x)
             item.setText(str(x))
 
-            # # Notes (no validation required)
+            # # Comments per element (no validation required)
             item = t.item(i, 2)
             x = str((item.text())).strip()
-            notes.append(x)
+            comments_per_ele.append(x)
 
         d = self.__default_dissoc
         for elem, cclog in zip(d.elems, d.cclog):
@@ -336,7 +358,8 @@ class WFileAbonds(QWidget):
 
         o.ele = ele
         o.abol = abol
-        o.notes = notes
+        o.comments_per_ele = comments_per_ele
+        o.comments = self.textEditComments.toPlainText()
         self.flag_valid = len(errors) == 0
         emsg = ""
         if len(errors) > 0 or len(warnings) > 0:

@@ -13,32 +13,37 @@ class FileAbonds(DataFile):
 
     description = "chemical abundances"
     default_filename = "abonds.dat"
-    attrs = ["ele", "abol", "notes"]
+    attrs = ["comments", "ele", "abol", "comments_per_ele"]
     editors = ["abed.py", "x.py"]
 
     def __init__(self):
         DataFile.__init__(self)
-        self.ele = []   # list of atomic symbols
-        self.abol = []  # corresponding abundances
-        self.notes = []  # ignored by pfant
+        # list of atomic symbols
+        self.ele = []
+        # corresponding abundances
+        self.abol = []
+        # notes per element, ignored by pfant
+        self.comments_per_ele = []
+        # overall
+        self.comments = ""
 
     def __str__(self):
-        data = zip(self.ele, self.abol, self.notes)
+        data = zip(self.ele, self.abol, self.comments_per_ele)
         headers = ["El", "Abund", "Notes"]
         return tabulate.tabulate(data, headers)
-        # nn = max(0 if x is None else len(x) for x in self.notes)
+        # nn = max(0 if x is None else len(x) for x in self.comments_per_ele)
         # return "\n".join(
         #  ["El  Abund Notes",
         #   "-- ------ "+"-"*nn]+
         #  ["{:>2s} {:>6.2f} {}".format(a, b, c)
-        #   for a, b, c in zip(self.ele, self.abol, self.notes)])
+        #   for a, b, c in zip(self.ele, self.abol, self.comments_per_ele)])
 
     def __len__(self):
         """Returns length of "ele" attribute."""
         return len(self.ele)
 
     def _do_load(self, filename):
-        self.abol, self.ele, self.notes = [], [], []
+        self.abol, self.ele, self.comments_per_ele = [], [], []
 
         ostr = struct.Struct("1x 2s 6s")
         with open(filename, "r") as h:
@@ -49,6 +54,8 @@ class FileAbonds(DataFile):
                             # We need at least one element in order increase the amount of
                             # file validation
                             raise RuntimeError("'EOF' marker found at beginning of file, I need at least one element")
+
+                        self.comments = s[2:-1].replace("<br>", "\n")
                         break
                 [ele, abol, notes] = s[1:3], s[3:9], s[10:]
 
@@ -57,7 +64,7 @@ class FileAbonds(DataFile):
 
                 self.ele.append(adjust_atomic_symbol(ele))
                 self.abol.append(float(abol))
-                self.notes.append(notes.strip())
+                self.comments_per_ele.append(notes.strip())
 
     def get_file_dissoc(self):
         """Creates a new FileDissoc object.
@@ -120,7 +127,7 @@ class FileAbonds(DataFile):
         indexes = sorted(list(range(len(self))), key=lambda k: self.ele[k].strip())
         self.ele = [self.ele[i] for i in indexes]
         self.abol = [self.abol[i] for i in indexes]
-        self.notes = [self.notes[i] for i in indexes]
+        self.comments_per_ele = [self.comments_per_ele[i] for i in indexes]
 
     def sort_z(self):
         """
@@ -146,7 +153,7 @@ class FileAbonds(DataFile):
         indexes = sorted(list(range(len(atomic_numbers))), key=lambda k: atomic_numbers[k])
         self.ele = [self.ele[i] for i in indexes]
         self.abol = [self.abol[i] for i in indexes]
-        self.notes = [self.notes[i] for i in indexes]
+        self.comments_per_ele = [self.comments_per_ele[i] for i in indexes]
 
         return not_found
 
@@ -183,7 +190,8 @@ class FileAbonds(DataFile):
 
     def _do_save_as(self, filename):
         with open(filename, "w") as h:
-            h.writelines([' %-2s%6.2f %s\n' % (self.ele[i], self.abol[i], self.notes[i])
+            h.writelines([' %-2s%6.2f %s\n' % (self.ele[i], self.abol[i], self.comments_per_ele[i])
                           for i in range(len(self))])
-            h.writelines(['1\n', '1\n'])
+            c = " "+self.comments.replace("\n", "<br>") if len(self.comments) > 0 else ""
+            h.writelines(['1'+c+'\n', '1\n'])
 
