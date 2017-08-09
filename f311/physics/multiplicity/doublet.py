@@ -9,7 +9,7 @@ __all__ = ["get_honllondon_formulas", "quanta_to_branch"]
 
 def quanta_to_branch(Jl, J2l, spinl=None, spin2l=None):
     """
-    Singlet only has branches P/Q/R
+    Converts quanta to branch
 
     Args:
         Jl: J upper or J'
@@ -17,7 +17,9 @@ def quanta_to_branch(Jl, J2l, spinl=None, spin2l=None):
         spinl:
         spin2l: (cannot be None)
 
-    Returns: branch letter: "P"/"Q"/"R"
+    Returns: 
+        str: if spinl is None or equals spin2l, (letter)(number), 
+             otherwise (letter)(number)(number)
 
     >>> quanta_to_branch(10.5, 11.5, spin2l=1)
     'P1'
@@ -37,7 +39,9 @@ def quanta_to_branch(Jl, J2l, spinl=None, spin2l=None):
     if spinl is None:
         ret = "{}{:1d}".format(br, spin2l)
     else:
-        assert spin2l is not None, "spin2l cannot be None"
+        if spin2l is None:
+          raise ValueError("spin2l cannot be None")
+
         if spinl == spin2l:
             ret = "{}{:1d}".format(br, spin2l)
         else:

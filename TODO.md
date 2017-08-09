@@ -19,6 +19,9 @@
 
 ## Convmol
 
+    - Conferir o DELTAK com a Beatriz!!!
+
+
     - moldbed.py:
     
         * equip with build-moldb.py

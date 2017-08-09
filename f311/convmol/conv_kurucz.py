@@ -70,8 +70,8 @@ class ConvKurucz(Conv):
         S = self.mol_consts["s"]
         DELTAK = self.mol_consts["cro"]
         FE = self.mol_consts["fe"]
-        LAML = 0  #self.mol_consts["from_spdf"]
-        LAM2L = 1  #self.mol_consts["to_spdf"]
+        LAML = self.mol_consts["from_spdf"]
+        LAM2L = self.mol_consts["to_spdf"]
         STATEL = self.mol_consts["from_label"]
         STATE2L = self.mol_consts["to_label"]
 
@@ -135,6 +135,7 @@ class ConvKurucz(Conv):
                 continue
 
             sol_key = "%3d%3d" % (line.vl, line.v2l)  # (v', v'') transition (v_sup, v_inf)
+            raise RuntimeError("Como que o calculate_qgbd esta fazendo, sendo que o dicionario mol_consts agora tem prefixos to e from?")
             if sol_key not in sols:
                 qgbd = self._calculate_qgbd(line.v2l)
                 sols[sol_key] = ft.SetOfLines(line.vl, line.v2l,
