@@ -138,6 +138,7 @@ def get_honllondon_formulas(LAML, LAM2L):
 
     return ret
 
+# This may be wrong, this thing with LBIG or SMALL, gotta check again
 
 def UPLUSL(J, LBIG):
     return 2. * (J - LBIG + 0.5)

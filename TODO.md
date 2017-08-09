@@ -6,7 +6,6 @@
 
 - File .spec taking too long to open
 
-
 - Custom session directory: when types, select the ckechbox automatically
 
 - abed: Element Abundance (A(X)(ref)) (A(X)) [X/Fe]; A(X) is the current informationz    
@@ -25,19 +24,22 @@
 
 ## Convmol
 
-    - Conferir o DELTAK com a Beatriz!!!
+- Review doublet: This may be wrong, this thing with LBIG or SMALL, gotta check again
 
 
-    - moldbed.py:
-    
-        * equip with build-moldb.py
-        
+- Conferir o DELTAK com a Beatriz!!!
 
-    - WMolecularConstants: system comes first, state to be searched automatically!   
+
+- moldbed.py:
+
+    * equip with build-moldb.py
     
-    
-    - Building database: fill in the state_label automatically, or maybe just search using the first letter
-      (figure out if there is a "LIKE 'A%' as in MySQL) (no need to worry about speed here, we'll pre-compile the info for conversion)    
+
+- WMolecularConstants: system comes first, state to be searched automatically!   
+
+
+- Building database: fill in the state_label automatically, or maybe just search using the first letter
+  (figure out if there is a "LIKE 'A%' as in MySQL) (no need to worry about speed here, we'll pre-compile the info for conversion)    
 
 
 # Filetypes
