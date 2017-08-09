@@ -33,13 +33,13 @@ def calc_qgbd_tio_like(mol_consts, v_lo):
             "qv", "gv", "bv", "dv", "gzero"
     """
 
-    omega_e = mol_consts["omega_e"]
-    omega_ex_e = mol_consts["omega_ex_e"]
-    omega_ey_e = mol_consts["omega_ey_e"]
-    B_e = mol_consts["B_e"]
-    D_e = mol_consts["D_e"]
-    alpha_e = mol_consts["alpha_e"]
-    beta_e = mol_consts["beta_e"]
+    omega_e = mol_consts["state2l_omega_e"]
+    omega_ex_e = mol_consts["state2l_omega_ex_e"]
+    omega_ey_e = mol_consts["state2l_omega_ey_e"]
+    B_e = mol_consts["state2l_B_e"]
+    D_e = mol_consts["state2l_D_e"]
+    alpha_e = mol_consts["state2l_alpha_e"]
+    beta_e = mol_consts["state2l_beta_e"]
 
     if int(v_lo) != v_lo:
         raise ValueError("Argument 'v_lo' must be an integer")

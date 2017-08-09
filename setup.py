@@ -22,12 +22,11 @@ def find_scripts(pkgnames):
 pkgs = find_packages()
 scripts = find_scripts(["f311"])
 
-
 setup(
     name='f311',
     packages=find_packages(),
     include_package_data=True,
-    version='0.17.7.18',
+    version='0.17.7.27',
     license='GNU GPLv3',
     platforms='any',
     description='Collection of Astronomy-related libraries and applications in Python',

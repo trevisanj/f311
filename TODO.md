@@ -4,12 +4,18 @@
 
 ## GENERAL
 
-- ~~**IMPORTANT** pip install not delivering the default data properly!!~~
+- File .spec taking too long to open
+
+
+- Custom session directory: when types, select the ckechbox automatically
+
+- abed: Element Abundance (A(X)(ref)) (A(X)) [X/Fe]; A(X) is the current informationz    
+
+- Introduce "comments" field for main.dat and abonds.dat
 
 - Enhance programs.py to sort alphabetically, generate single table (with word wrap). BTW it does not list itself
   Who cares which package. But I can filter in or out packages
  
-- See why data files are not installing properly with pip setup.py install
   
 - Documentation: **Get some inspiration** (read lots of shit)!!!!
 - **Template project**
@@ -29,11 +35,9 @@
 
     - WMolecularConstants: system comes first, state to be searched automatically!   
     
-    - FileMolDB: some tables still don't have the comment field??
     
     - Building database: fill in the state_label automatically, or maybe just search using the first letter
-      (figure out if there is a "LIKE 'A%' as in MySQL) (no need to worry about speed here, we'll pre-compile the info for conversion)
-      
+      (figure out if there is a "LIKE 'A%' as in MySQL) (no need to worry about speed here, we'll pre-compile the info for conversion)    
 
 
 # Filetypes
@@ -85,7 +89,15 @@
 # DONE
 
 - ~~OPEN IN NEW WINDOW NOT COPYING EVERYTHIGN!!!!!~~
+
 - NIST scraper: I can actually go after the "A" because it follows some pattern: points to footnote and there it is (this part is what I normally enjoy doing, so should enjoy)
 
-
 - ~~FileSPectrumPfant not loading properly anymore!!~~
+
+- ~~**IMPORTANT** pip install not delivering the default data properly!!~~
+
+- ~~See why data files are not installing properly with pip setup.py install~~
+
+- ~~FileMolDB: some tables still don't have the comment field??~~
+
+- ~~NIST scrapper no longer working for all molecules~~

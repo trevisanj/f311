@@ -81,6 +81,9 @@ def get_nist_webbook_constants(formula):
         formula: example: "OH"
 
     Returns: tuple: table (list of lists), header (list of strings), name of molecule
+
+    **Disclaimer** This scraper matches a specific version of the Chemistry Web Book. Therefore,
+    it may stop working if the NIST web site is updated.
     """
     browser = RoboBrowser(history=True, parser="lxml")
     browser.open("http://webbook.nist.gov/chemistry/form-ser.html")
@@ -95,9 +98,17 @@ def get_nist_webbook_constants(formula):
 
     if text is None:
         # # Probably fell in this page showing possible choices
-        link0 = browser.find("a")  # follows first link
+        # In this case, clicks on the first choice
+
+        ol = browser.find("ol")
+
+        if not ol:
+            raise RuntimeError("Constants of diatomic molecules not found for '{}'".format(formula))
+
+        link0 = ol.find("a")
+
         if not link0:
-            raise RuntimeError("Search for '{}' gave no results".format(formula))
+            raise RuntimeError("Constants of diatomic molecules not found for '{}'".format(formula))
         browser.follow_link(link0)
 
         # # Molecule park page
@@ -127,7 +138,6 @@ def get_nist_webbook_constants(formula):
             # If no columns found, we assume it is the header row
             cols = row.find_all("th")
             header = [f_header(ele) for ele in cols]
-
             header.append("A")
 
         elif len(cols) == 13:
@@ -160,8 +170,11 @@ def parse_A(browser, tag):
                 if a is not None:
                     td = a.next_element.next_element
                     # print("OOOOOOOOOOOOO", str(td))
+                    stemp = re.match("<td>\s*A.*?=\s*([\(\)\+\-]*[0-9]+\.[0-9]+)", str(td)).groups()[0]
+                    if stemp is None:
+                        return None
                     try:
-                        return float(re.match("<td>\s*A.*?=\s*([\+\-]{0,1}[0-9]+\.[0-9]+)", str(td)).groups()[0])
+                        return float(stemp.replace("(", "").replace(")", ""))
                     except AttributeError:
                         # no match
                         return None

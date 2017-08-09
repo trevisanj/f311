@@ -3,6 +3,7 @@ __all__ = ["FileFCF"]
 from .. import DataFile
 from collections import OrderedDict
 import re
+import a99
 
 class FileFCF(DataFile):
     """
@@ -96,7 +97,7 @@ class FileFCF(DataFile):
         EXP_DATA = 2 # Expecting data, "1*" or blank line
 
         # regular expression for extraction the data
-        rec = re.compile("\s*(\d)+\s*(\d+)\s*([\deE\.\+\-]+)")
+        rec = re.compile("\s*(\d+)\s*(\d+)\s*([\deE\.\+\-]+)")
 
 
         with open(filename, "r") as h:
@@ -124,6 +125,10 @@ class FileFCF(DataFile):
                             vl, v2l, fcf = m.groups()
                             vl = int(vl)
                             v2l = int(v2l)
+
+                            if (vl, v2l) in self.fcfs:
+                                a99.get_python_logger().warning("Repeated (vl, v2l): ({}, {})".format(vl, v2l))
+
                             fcf = float(fcf)
                             self.fcfs[(vl, v2l)] = fcf
             except Exception as e:
