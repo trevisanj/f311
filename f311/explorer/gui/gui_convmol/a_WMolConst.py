@@ -23,8 +23,9 @@ class WMolConst(a99.WBase):
 
     @property
     def constants(self):
-        """Returns a dictionary with all molecular constants"""
-        ret = {}
+        """Returns a MolConsts object with all molecular constants"""
+        from f311 import MolConsts
+        ret = MolConsts()
         for fieldname in self._fieldnames:
             ret[fieldname] = self[fieldname]
         return ret

@@ -24,4 +24,3 @@ class MolConversionLog(object):
         #
         self.skip_reasons = Counter()
 
-    

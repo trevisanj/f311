@@ -20,33 +20,30 @@ Note: This package will preserve the namespace hierarchy because there are repea
 #     return _J2L_MAP[br[0]]
 
 
-from collections import defaultdict
-class honllondon_defaultdict(defaultdict):
+from ..molconsts import MolConsts
+
+class honllondon_dict(dict):
     """
-    Subclass of defaultdict to pass (the missing key, mol_consts) to the default factory
+    Subclass of dict to deal with keys as (vl, v2l, J, branch)
 
-    Note: the missing key must be (vl, v2l, J), i.e., vibrational levels and rotational level
-          (J = J2l)
-
-    Usage:
-
-        d = honllondon_keydefaultdict(C)
-        d[x] # returns C(x, state_const)
-
-    Source: solution by Rochen Ritzel at https://stackoverflow.com/questions/2912231/is-there-a-clever-way-to-pass-the-key-to-defaultdicts-default-factory
+    References:
+        Based on solution by Rochen Ritzel at
+        https://stackoverflow.com/questions/2912231/is-there-a-clever-way-to-pass-the-key-to-defaultdicts-default-factory
     """
 
-    def __init__(self, mol_consts, *args, **kwargs):
-        defaultdict.__init__(self, *args, **kwargs)
+    def __init__(self, mol_consts):
+        if not isinstance(mol_consts, MolConsts):
+            raise TypeError("mol_consts must be a MolConsts")
+        dict.__init__(self)
         self._mol_consts = mol_consts
 
     def __missing__(self, key):
-        if self.default_factory is None:
-            raise KeyError(key)
-        else:
-            ret = self[key] = self.default_factory(key, self._mol_consts)
-            return ret
-# del defaultdict
+        self._populate_with_key(key)
+        return self[key]
+
+    def _populate_with_key(self, key):
+        """Must be inherited and populate self with all branches for given (vl, v2l, J)"""
+        raise NotImplementedError()
 
 
 from . import singlet

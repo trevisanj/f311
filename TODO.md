@@ -22,6 +22,12 @@
 - & update explorer list_file_types() example
 
 
+### Documentation
+
+- I think it is better to write tests, then see some of them becoming examples. Yeah there is no way to avoid all redundance.
+  But strategies can be drawn.
+
+
 ## Convmol
 
 - Review doublet: This may be wrong, this thing with LBIG or SMALL, gotta check again
