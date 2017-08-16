@@ -18,22 +18,15 @@ Welcome to the F311 documentation!
 Introduction
 ------------
 
-F311 is a collection of Python 3 libraries, command-line and graphical applications for Astronomy.
+F311 is an Astronomy-related API, command-line tools, and windowed applications for Python 3.
 
-The code is organized in sub-packages, each one containing scripts (applications) and an API related
-to some topic.
+Sub-packages: see menu on the left.
 
-To get a listing of all scripts available at once, simply type on your shell:
+For a list of scripts (the following will print something :doc:`like this <programs-py-listing>`):
 
 .. code:: shell
 
    programs.py
-
-This will print a listing such as :doc:`this one <programs-py-listing>`.
-
-``explorer.py`` (:doc:`screenshot <explorer-py-screenshot>`) is perhaps the application of broadest interest.
-It is a file browser that allows you to visualize and edit many file formats used in Astronomy. Its file-handling abilities can be
-easily expanded.
 
 To use the APIs to write your own code, the f311 subpackages that can be imported like this:
 

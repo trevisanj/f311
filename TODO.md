@@ -1,7 +1,6 @@
 # TODO list
 
 
-
 ## GENERAL
 
 - File .spec taking too long to open
@@ -23,6 +22,13 @@
 
 
 ### Documentation
+
+- Write something useful instead of this. Put screenshots at front, better
+
+    ``explorer.py`` (:doc:`screenshot <explorer-py-screenshot>`) is perhaps the application of broadest interest.
+    It is a file browser that allows you to visualize and edit many file formats used in Astronomy. Its file-handling abilities can be
+    easily expanded.
+
 
 - I think it is better to write tests, then see some of them becoming examples. Yeah there is no way to avoid all redundance.
   But strategies can be drawn.
