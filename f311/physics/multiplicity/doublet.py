@@ -1,3 +1,8 @@
+# TODO remake doublet
+# TODO add reference U, C formulas come from 2.1.3-6
+# TODO sort or add note for the "inverted terms" thing on page 126 (best if there is another example in Fortran )
+# TODO test
+
 """
 Hönl-London factors for doublets, formulas from Kovacs 1969 p130
 """
@@ -17,8 +22,8 @@ def quanta_to_branch(Jl, J2l, spinl=None, spin2l=None):
         spinl:
         spin2l: (cannot be None)
 
-    Returns: 
-        str: if spinl is None or equals spin2l, (letter)(number), 
+    Returns:
+        str: if spinl is None or equals spin2l, (letter)(number),
              otherwise (letter)(number)(number)
 
     >>> quanta_to_branch(10.5, 11.5, spin2l=1)
@@ -47,6 +52,9 @@ def quanta_to_branch(Jl, J2l, spinl=None, spin2l=None):
         else:
             ret = "{}{:1d}{:1d}".format(br, spinl, spin2l)
     return ret
+
+
+
 
 
 def get_honllondon_formulas(LAML, LAM2L):
@@ -138,7 +146,7 @@ def get_honllondon_formulas(LAML, LAM2L):
 
     return ret
 
-# This may be wrong, this thing with LBIG or SMALL, gotta check again
+# TODO This may be wrong, this thing with LBIG or SMALL, gotta check again
 
 def UPLUSL(J, LBIG):
     return 2. * (J - LBIG + 0.5)
