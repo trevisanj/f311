@@ -104,7 +104,7 @@ class honllondon(honllondon_dict):
         LMIN = min(LAML, LAM2L)
 
 
-        _P1 = lambda J:\
+        _P1 = lambda J: \
             ((J-LMIN-1)*(J-LMIN))/(32*J*C1L(J-1)*C12L(J))* \
             (((J-LMIN+1)*(J+LMIN)*U1PLUSL(J-1)*U1PLUS2L(J)+
             (J-LMIN-2)*(J+LMIN+1)*U1MINUSL(J-1)*U1MINUS2L(J)+
@@ -335,3 +335,27 @@ class honllondon(honllondon_dict):
 
 
             # TODO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
