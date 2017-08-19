@@ -6,7 +6,6 @@ from .. import FileSQLiteDB
 import tabulate
 import re
 
-
 __all__ = ["FileMolDB", "SPDF"]
 
 #
@@ -88,6 +87,7 @@ class FileMolDB(FileSQLiteDB):
         return "{}{}{} - {}{}{}".format(row["from_label"], _conv_sup[row["from_mult"]],
             SPDF[row["from_spdf"]], row["to_label"], _conv_sup[row["to_mult"]], SPDF[row["to_spdf"]])
 
+    # TODO see if this is still used, perhaps now only MolConsts.populate_from_db()
     def get_mol_consts(self, id_pfantmol, id_state, id_system):
         """Returns dict-like with field values from tables 'molecule', 'state', 'pfantmol', 'system'"""
         conn = self.get_conn()

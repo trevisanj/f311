@@ -524,6 +524,10 @@ class WMolecularConstants(a99.WBase):
 
         self._flag_built_edits = True
 
+        print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+        for fn in self._fieldnames:
+            print(fn)
+
     def _fill_edits_pfantmol(self):
         id_ = self._get_id_pfantmol()
         if id_ is not None:
