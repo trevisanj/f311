@@ -1,22 +1,11 @@
 """
 Hönl-London factors for triplets.
-
-Only the case for Delta Lambda = +-1 implemented.
-Formulas from Kovacs 1969 p136, p137, and formula 2.1.4-8
-
-Original comments in Portuguese were quoted from ATMOS/wrk4/bruno/Mole/NH/sjnh.f
-
-Routines in uppercase are adapted code from Fortran
-
-- `YL`, `U*L` refer to the superior state
-- `Y2l`, `U*2L` refer to the inferior state 
-
 """
 
 from collections import OrderedDict
 import a99
 from . import doublet
-from . import honllondon_dict
+from . import HonlLondonDict
 import math
 
 
@@ -26,7 +15,18 @@ __all__ = ["honllondon", "quanta_to_branch"]
 quanta_to_branch = doublet.quanta_to_branch
 
 
-class honllondon(honllondon_dict):
+class HLTriplet1(HonlLondonDict):
+    """
+    Hönl-London factors for (triplet, Delta Lambda = +-1)
+
+    Formulas: Table 3.10 (p136-p137); Formulas 2.1.4-8 to 2.1.4-10 (p69-p70)
+
+    Adapted from Fortran code: ATMOS/wrk4/bruno/Mole/NH/sjnh.f
+    """
+
+    DeltaLambda = (1, -1)
+    multiplicity = 3
+
     def _populate_with_key(self, key):
         vl, v2l, J, branch = key
         cc = self._mol_consts

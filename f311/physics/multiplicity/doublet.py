@@ -22,11 +22,11 @@ Routines in uppercase are adapted code from Fortran
 
 from collections import OrderedDict
 import a99
-from . import honllondon_dict
+from . import HonlLondonDict
 import math
 
 
-__all__ = ["honllondon", "quanta_to_branch"]
+__all__ = ["HLDoublet1", "quanta_to_branch"]
 
 
 
@@ -72,7 +72,18 @@ def quanta_to_branch(Jl, J2l, spinl=None, spin2l=None):
     return ret
 
 
-class honllondon(honllondon_dict):
+class HLDoublet1(HonlLondonDict):
+    """
+    Hönl-London factors for (doublet, Delta Lambda = +-1)
+
+    Formulas: Table 3.7 (p120); Formula 2.1.3-6 (p61)
+
+    Adapted from Fortran code: ATMOS/wrk4/bruno/Mole/OH/sjoh.f
+    """
+
+    DeltaLambda = (1, -1)
+    multiplicity = 2
+
     def _populate_with_key(self, key):
         vl, v2l, J, branch = key
         cc = self._mol_consts
@@ -191,7 +202,7 @@ class honllondon(honllondon_dict):
             4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
 
 
-        # Resolves the Delta Lambda
+        # Resolves the Delta Lambda = LAML - LAM2L
 
         if LAML > LAM2L:
             self.update(

@@ -9,21 +9,17 @@ _KEYS = ["fe", "bm", "te", "do", "ua", "cro", "am", "ub", "s",
          "state2l_A", "state2l_omega_ey_e", "state2l_D_e",]
 
 
-
 class MolConsts(dict):
     """Dict subclass that will hold several molecular constants
 
     The dictionary keys match field names in tables ("pfantmol", "state", "system") in a FileMolDB.
     Keys "statel_*" and "state2l_*" have these prefixes to indicate initial and final state.
-
     """
 
     def __init__(self, *args, **kwargs):
         dict.__init__(self, *args, **kwargs)
-
         for key in _KEYS:
             self[key] = None
-
 
     def populate_from_db(self, db, idpfantmol, idsystem, idstatel, idstate2l):
         """
