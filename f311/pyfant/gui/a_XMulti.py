@@ -121,7 +121,7 @@ class XMulti(XPFANT):
             if len(s) == 0:
                 errors.append("Please inform custom session id.")
             elif len(errors) == 0: # will only offer to remove directory if everything is ok so far
-                dirname = get_custom_multisession_dirname(s)
+                dirname = pf.get_custom_multisession_dirname(s)
                 if os.path.isdir(dirname):
                     r = QMessageBox.question(self, "Directory exists",
                      "Directory '%s' already exists.\n\nWould you like to remove it?" % dirname,

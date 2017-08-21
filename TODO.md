@@ -33,6 +33,8 @@
 - I think it is better to write tests, then see some of them becoming examples. Yeah there is no way to avoid all redundance.
   But strategies can be drawn.
 
+- Bring more examples and find a way to organize them both in the code and in the documentation
+
 
 ## Convmol
 

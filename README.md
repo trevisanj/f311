@@ -1,6 +1,8 @@
-# f311
+# F311
 
-Collection of Astronomy-related packages written in Python.
+[](docs/source/art/key-white.png)
+
+Astronomy-related API, command-line tools, and windowed applications
 
 Sub-packages:
 
@@ -11,11 +13,6 @@ Sub-packages:
   - _f311.physics_: some physics (photometry, Hönl-London factors, etc.)
   - _f311.aosss_: Adaptive Optics Systems Simulation Support
 
-
-## Installation
-
-Installation instructions: [_f311_ documentation website](http://trevisanj.github.io/f311) or
-[here](docs/source/index.rst)
 
 ## Documentation
 

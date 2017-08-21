@@ -1,5 +1,5 @@
-F311 -- Python resources for Astronomy
-======================================
+F311 -- Astronomy-related API, command-line tools, and windowed applications
+============================================================================
 
 Welcome to the F311 documentation!
 
@@ -18,7 +18,7 @@ Welcome to the F311 documentation!
 Introduction
 ------------
 
-F311 is an Astronomy-related API, command-line tools, and windowed applications for Python 3.
+F311 is an Astronomy-related API, command-line tools, and windowed applications written in Python 3.
 
 Sub-packages: see menu on the left.
 
@@ -72,4 +72,3 @@ More
 * :ref:`search`
 * :doc:`license`
 
-.. todo:: Bring more examples and find a way to organize them both in the code and in the documentation
