@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HITRAN Scraper &mdash; F311 17.9.27.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> F311
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                17.9.27.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">HITRAN Scraper</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">F311</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>HITRAN Scraper</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/hitran-scraper.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hitran-scraper">
+<h1>HITRAN Scraper<a class="headerlink" href="#hitran-scraper" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal"><span class="pre">hitran-scraper.py</span></code> uses <cite>web scraping &lt;https://en.wikipedia.org/wiki/Web_scraping&gt;</cite>
+and the <cite>HAPI &lt;http://hitran.org/hapi&gt;</cite> to save locally molecular lines from the HITRAN database.</p>
+<p>While the HAPI provides the downloading facility, web scraping is used to get the lists of molecules
+and isotopologues from the HITRAN webpages and get the IDs required to run the HAPI query.</p>
+<p>The script is typically invoked several times, each time with an additional argument:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span>$ hitran-scraper.py
+
+List of all HITRAN molecules
+============================
+
+  ID  Formula    Name
+----  ---------  --------------------
+   1  H2O        Water
+   2  CO2        Carbon Dioxide
+   3  O3         Ozone
+   4  N2O        Nitrous Oxide
+   5  CO         Carbon Monoxide
+   6  CH4        Methane
+   7  O2         Molecular Oxygen
+   8  NO         Nitric Oxide
+   9  SO2        Sulfur Dioxide
+  10  NO2        Nitrogen Dioxide
+  11  NH3        Ammonia
+  12  HNO3       Nitric Acid
+  13  OH         Hydroxyl Radical
+  14  HF         Hydrogen Fluoride
+  15  HCl        Hydrogen Chloride
+  16  HBr        Hydrogen Bromide
+  17  HI         Hydrogen Iodide
+  18  ClO        Chlorine Monoxide
+  19  OCS        Carbonyl Sulfide
+  20  H2CO       Formaldehyde
+  21  HOCl       Hypochlorous Acid
+  22  N2         Molecular Nitrogen
+  23  HCN        Hydrogen Cyanide
+  24  CH3Cl      Methyl Chloride
+  25  H2O2       Hydrogen Peroxide
+  26  C2H2       Acetylene
+  27  C2H6       Ethane
+  28  PH3        Phosphine
+  29  COF2       Carbonyl Fluoride
+  31  H2S        Hydrogen Sulfide
+  32  HCOOH      Formic Acid
+  33  HO2        Hydroperoxyl Radical
+  34  O          Oxygen Atom
+  36  NO+        Nitric Oxide Cation
+  37  HOBr       Hypobromous Acid
+  38  C2H4       Ethylene
+  39  CH3OH      Methanol
+  40  CH3Br      Methyl Bromide
+  41  CH3CN      Methyl Cyanide
+  43  C4H2       Diacetylene
+  44  HC3N       Cyanoacetylene
+  45  H2         Molecular Hydrogen
+  46  CS         Carbon Monosulfide
+  47  SO3        Sulfur trioxide
+
+Now, to list isotopologues for a given molecule, please type:
+
+    hitran-scraper.py &lt;molecule ID&gt;
+
+where &lt;molecule ID&gt; is one of the IDs listed above.
+</pre></div>
+</div>
+<p>Now suppose we want the molecule OH molecule:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span>$ hitran-scraper.py 13
+
+List of all isotopologues for molecule &#39;OH&#39; (Hydroxyl Radical)
+==============================================================
+
+m_formula      ID    ID_molecule  Formula      AFGL_Code  Abundance
+-----------  ----  -------------  ---------  -----------  ---------------
+OH              1             13  (16)OH              61  0.997473
+OH              2             13  (18)OH              81  0.002
+OH              3             13  (16)OD              62  1.553710?נ10-4
+
+Now, to download lines, please type:
+
+    hitran-scraper.py 13 &lt;isotopologue ID&gt; &lt;llzero&gt; &lt;llfin&gt;
+
+where &lt;isotopologue ID&gt; is one the numbers from the &#39;ID&#39; column above,
+
+and [&lt;llzero&gt;, &lt;llfin&gt;] defines the wavelength interval in Angstrom.
+</pre></div>
+</div>
+<p>Now selecting the first isotopologue and specifying the visible wavelength range:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span>$ hitran-scraper.py 13 1 3000 7000
+
+Isotopologue selected:
+======================
+
+Field name    Value
+------------  --------
+m_formula     OH
+ID            1
+ID_molecule   13
+Formula       (16)OH
+AFGL_Code     61
+Abundance     0.997473
+
+Wavelength interval (air): [3000.0, 7000.0] Angstrom
+Wavenumber interval (vacuum): [14289.61969369552, 33342.42546386186] cm**-1
+Table name: &#39;(16)OH&#39;
+
+Fetching data...
+===
+=== BEGIN messages from HITRAN API ===
+===
+BEGIN DOWNLOAD: (16)OH
+  65536 bytes written to ./(16)OH.data
+  65536 bytes written to ./(16)OH.data
+  65536 bytes written to ./(16)OH.data
+  65536 bytes written to ./(16)OH.data
+  65536 bytes written to ./(16)OH.data
+  65536 bytes written to ./(16)OH.data
+  65536 bytes written to ./(16)OH.data
+  65536 bytes written to ./(16)OH.data
+  65536 bytes written to ./(16)OH.data
+  65536 bytes written to ./(16)OH.data
+Header written to ./(16)OH.header
+END DOWNLOAD
+                     Lines parsed: 3855
+PROCESSED
+===
+=== END messages from HITRAN API ===
+===
+...done
+Please check files &#39;(16)OH.header&#39;, &#39;(16)OH.data&#39;
+</pre></div>
+</div>
+<p><strong>Hint</strong> The files created (&#8216;(16)OH.header&#8217;, &#8216;(16)OH.data&#8217;) can be opened using the <cite>HAPI &lt;http://hitran.org/hapi&gt;</cite>.
+They are also accessed by the application <code class="docutils literal"><span class="pre">convmol.py</span></code>.</p>
+<p>The HAPI can be downloaded, but one version is also included with the f311 package. The following
+is an example of how the HITRAN data could be accessed from the Python console:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">f311</span> <span class="k">import</span> <span class="n">hapi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hapi</span><span class="o">.</span><span class="n">loadCache</span><span class="p">()</span>
+<span class="go">Using .</span>
+<span class="go">(16)OH</span>
+<span class="go">                     Lines parsed: 3855</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oh_data</span> <span class="o">=</span> <span class="n">hapi</span><span class="o">.</span><span class="n">LOCAL_TABLE_CACHE</span><span class="p">[</span><span class="s2">&quot;(16)OH&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oh_data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go">dict_keys([&#39;data&#39;, &#39;header&#39;])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oh_data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go">dict_keys([&#39;ierr&#39;, &#39;gpp&#39;, &#39;molec_id&#39;, &#39;global_lower_quanta&#39;, &#39;sw&#39;, &#39;gamma_self&#39;, &#39;n_air&#39;, &#39;elower&#39;, &#39;line_mixing_flag&#39;, &#39;local_lower_quanta&#39;, &#39;gp&#39;, &#39;global_upper_quanta&#39;, &#39;gamma_air&#39;, &#39;local_upper_quanta&#39;, &#39;iref&#39;, &#39;local_iso_id&#39;, &#39;delta_air&#39;, &#39;nu&#39;, &#39;a&#39;])</span>
+</pre></div>
+</div>
+<p>To work properly with these data, you should have a look at the HAPI source code and manual, as this library is
+superbly documented.</p>
+<p>Within f311, the code in <a class="reference internal" href="autodoc/f311.convmol.html#f311.convmol.conv_hitran.hitran_to_sols" title="f311.convmol.conv_hitran.hitran_to_sols"><code class="xref py py-meth docutils literal"><span class="pre">f311.convmol.conv_hitran.hitran_to_sols()</span></code></a> contains a usage example of HITRAN data.</p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, JT.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'17.9.27.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

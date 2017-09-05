@@ -1,20 +1,25 @@
-*f311.explorer*: browse, read, write, visualize, edit files
-===========================================================
+Browse, read, write, visualize, edit files (``f311.explorer``)
+==============================================================
 
 Introduction
 ------------
 
-*explorer* provides applications and an API to handle many file formats used in Astronomy.
+File edit & visualization, including file-explorer-like ``explorer.py`` (:numref:`figexplorer`).
 
-Most resources are accessible through ``explorer.py`` (file-explorer-like application)
+.. _figexplorer:
 
-Applications
-------------
+.. figure:: img/explorer.png
+   :align: center
+
+    -- ``explorer.py`` screenshot.
+
+
+List of applications
+--------------------
 
 .. code:: shell
 
-    programs.py -p explorer markdown-list
-
+    programs.py -p explorer
 
 Graphical applications:
 
@@ -49,9 +54,6 @@ Command-line tools:
 
 - ``vald3-to-atoms.py`` -- Converts VALD3 atomic/molecular lines file to PFANT atomic lines file.
 
-
-All the programs above can be called with the ``--help`` or ``-h``
-option for more information.
 
 API reference
 -------------

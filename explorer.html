@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>f311.explorer: browse, read, write, visualize, edit files &mdash; f311 17.1.28 documentation</title>
+  <title>Browse, read, write, visualize, edit files (f311.explorer) &mdash; F311 17.9.27.0 documentation</title>
   
 
   
@@ -30,14 +30,16 @@
   
 
   
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="f311 17.1.28 documentation" href="index.html"/>
-        <link rel="next" title="f311.filetypes: file handling API" href="filetypes.html"/>
-        <link rel="prev" title="f311.convmol: Conversion of molecular spectral lines" href="convmol.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
+        <link rel="next" title="File handling API (f311.filetypes)" href="filetypes.html"/>
+        <link rel="prev" title="Conversion of molecular spectral lines (f311.convmol)" href="convmol.html"/>
     <link href="_static/style.css" rel="stylesheet" type="text/css">
 
 
@@ -58,7 +60,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> f311
+            <a href="index.html" class="icon icon-home"> F311
           
 
           
@@ -68,7 +70,7 @@
             
             
               <div class="version">
-                17.1.28
+                17.9.27.0
               </div>
             
           
@@ -93,17 +95,19 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="pyfant.html"><em>f311.pyfant</em>: spectral synthesis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convmol.html"><em>f311.convmol</em>: Conversion of molecular spectral lines</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#"><em>f311.explorer</em>: browse, read, write, visualize, edit files</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#applications">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-of-applications">List of applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#api-reference">API reference</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="filetypes.html"><em>f311.filetypes</em>: file handling API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="physics.html"><em>f311.physics</em>: Physics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="aosss.html"><em>f311.aosss</em>: Adaptive Optics Systems Simulation Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filetypes.html">File handling API (<code class="docutils literal"><span class="pre">f311.filetypes</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Selected topics on Physics (<code class="docutils literal"><span class="pre">f311.physics</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat.html">Project <code class="docutils literal"><span class="pre">f311</span></code> Cheat Sheet</a></li>
 </ul>
 
             
@@ -118,7 +122,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">f311</a>
+          <a href="index.html">F311</a>
         
       </nav>
 
@@ -148,7 +152,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li><em>f311.explorer</em>: browse, read, write, visualize, edit files</li>
+      <li>Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -167,16 +171,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="f311-explorer-browse-read-write-visualize-edit-files">
-<h1><em>f311.explorer</em>: browse, read, write, visualize, edit files<a class="headerlink" href="#f311-explorer-browse-read-write-visualize-edit-files" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="browse-read-write-visualize-edit-files-f311-explorer">
+<h1>Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)<a class="headerlink" href="#browse-read-write-visualize-edit-files-f311-explorer" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p><em>explorer</em> provides applications and an API to handle many file formats used in Astronomy.</p>
-<p>Most resources are accessible through <code class="docutils literal"><span class="pre">explorer.py</span></code> (file-explorer-like application)</p>
+<p>File edit &amp; visualization, including file-explorer-like <code class="docutils literal"><span class="pre">explorer.py</span></code> (<a class="reference internal" href="#figexplorer"><span class="std std-numref">Figure 1</span></a>).</p>
+<div class="figure align-center" id="figexplorer">
+<img alt="_images/explorer.png" src="_images/explorer.png" />
 </div>
-<div class="section" id="applications">
-<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">programs</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">p</span> <span class="n">explorer</span> <span class="n">markdown</span><span class="o">-</span><span class="nb">list</span>
+</div>
+<div class="section" id="list-of-applications">
+<h2>List of applications<a class="headerlink" href="#list-of-applications" title="Permalink to this headline">¶</a></h2>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">programs</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">p</span> <span class="n">explorer</span>
 </pre></div>
 </div>
 <p>Graphical applications:</p>
@@ -199,8 +205,6 @@
 <li><code class="docutils literal"><span class="pre">plot-spectra.py</span></code> &#8211; Plots spectra on screen or creates PDF file</li>
 <li><code class="docutils literal"><span class="pre">vald3-to-atoms.py</span></code> &#8211; Converts VALD3 atomic/molecular lines file to PFANT atomic lines file.</li>
 </ul>
-<p>All the programs above can be called with the <code class="docutils literal"><span class="pre">--help</span></code> or <code class="docutils literal"><span class="pre">-h</span></code>
-option for more information.</p>
 </div>
 <div class="section" id="api-reference">
 <h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
@@ -218,10 +222,10 @@ option for more information.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="filetypes.html" class="btn btn-neutral float-right" title="f311.filetypes: file handling API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="filetypes.html" class="btn btn-neutral float-right" title="File handling API (f311.filetypes)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="convmol.html" class="btn btn-neutral" title="f311.convmol: Conversion of molecular spectral lines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="convmol.html" class="btn btn-neutral" title="Conversion of molecular spectral lines (f311.convmol)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -252,7 +256,7 @@ option for more information.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'17.1.28',
+            VERSION:'17.9.27.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

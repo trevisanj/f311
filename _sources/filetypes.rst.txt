@@ -1,5 +1,5 @@
-*f311.filetypes*: file handling API
-===================================
+File handling API (``f311.filetypes``)
+======================================
 
 Introduction
 ------------

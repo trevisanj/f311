@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>f311.filetypes package &mdash; f311 17.1.28 documentation</title>
+  <title>f311.filetypes package &mdash; F311 17.9.27.0 documentation</title>
   
 
   
@@ -30,12 +30,14 @@
   
 
   
+    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="f311 17.1.28 documentation" href="../index.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="../index.html"/>
     <link href="../_static/style.css" rel="stylesheet" type="text/css">
 
 
@@ -56,7 +58,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> f311
+            <a href="../index.html" class="icon icon-home"> F311
           
 
           
@@ -66,7 +68,7 @@
             
             
               <div class="version">
-                17.1.28
+                17.9.27.0
               </div>
             
           
@@ -90,15 +92,19 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../pyfant.html"><em>f311.pyfant</em>: spectral synthesis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../convmol.html"><em>f311.convmol</em>: Conversion of molecular spectral lines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../explorer.html"><em>f311.explorer</em>: browse, read, write, visualize, edit files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../filetypes.html"><em>f311.filetypes</em>: file handling API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../physics.html"><em>f311.physics</em>: Physics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../aosss.html"><em>f311.aosss</em>: Adaptive Optics Systems Simulation Support</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">f311.filetypes package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-f311.filetypes.basic">f311.filetypes.basic module</a></li>
+<li><a class="reference internal" href="#module-f311.filetypes.classcatalog">f311.filetypes.classcatalog module</a></li>
+<li><a class="reference internal" href="#module-f311.filetypes.util">f311.filetypes.util module</a></li>
+<li><a class="reference internal" href="#module-f311.filetypes">Module contents</a></li>
 </ul>
-
+</li>
+</ul>
+</div>
             
           
         </div>
@@ -111,7 +117,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">f311</a>
+          <a href="../index.html">F311</a>
         
       </nav>
 
@@ -254,13 +260,26 @@ after the first &#8220;#&#8221; in the molecule &#8216;titulo&#8217;</p>
 <dl class="function">
 <dt id="f311.filetypes.basic.iz_to_branch">
 <code class="descclassname">f311.filetypes.basic.</code><code class="descname">iz_to_branch</code><span class="sig-paren">(</span><em>iz</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.iz_to_branch" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts BLB&#8217;s &#8216;iz&#8217; code to string P/Q/R/P1 ... (see pfantlib.90:read_molecules()</p>
+<dd><p>Converts BLB&#8217;s &#8216;iz&#8217; code to string P/Q/R/P1. Inverse of branch_to_iz()</p>
+<p>(see pfantlib.90:read_molecules())</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="f311.filetypes.basic.branch_to_iz">
 <code class="descclassname">f311.filetypes.basic.</code><code class="descname">branch_to_iz</code><span class="sig-paren">(</span><em>br</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.branch_to_iz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts branch P/Q/R/P1, etc. into BLB&#8217;s &#8216;iz&#8217; code</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>branch</strong> &#8211; str, [P/Q/R][/1/2/3], for example &#8220;P&#8221;, &#8220;P1&#8221;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">from &#8220;1&#8221; to &#8220;12&#8221;</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -285,6 +304,34 @@ it will be expected that the class &#8220;root&#8221; package will have a subpac
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.filetypes.basic.iz_to_branch_alt">
+<code class="descclassname">f311.filetypes.basic.</code><code class="descname">iz_to_branch_alt</code><span class="sig-paren">(</span><em>iz</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.iz_to_branch_alt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alternative mapping used by Bruno Castilho&#8217;s CH. Inverse of branch_to_iz_alt()</p>
+<p>This is the mapping found in Bruno Castilho&#8217;s work for molecule CH
+(directory ATMOS/wrk4/bruno/Mole/CH, check file, e.g., sja000.dat and source selech.f)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.filetypes.basic.branch_to_iz_alt">
+<code class="descclassname">f311.filetypes.basic.</code><code class="descname">branch_to_iz_alt</code><span class="sig-paren">(</span><em>br</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.branch_to_iz_alt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alternative mapping used by Bruno Castilho&#8217;s CH</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>branch</strong> &#8211; str, [P/Q/R][1/12/21/2], for example &#8220;P1&#8221;, &#8220;Q21&#8221;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">from &#8220;1&#8221; to &#8220;12&#8221;</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p>This is the mapping found in Bruno Castilho&#8217;s work for molecule CH
+(directory ATMOS/wrk4/bruno/Mole/CH, check file, e.g., sja000.dat and source selech.f)</p>
 </dd></dl>
 
 </div>
@@ -361,12 +408,6 @@ if the file canonot be loaded</td>
 </dd></dl>
 
 <dl class="function">
-<dt id="f311.filetypes.util.list_data_types">
-<code class="descclassname">f311.filetypes.util.</code><code class="descname">list_data_types</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.util.list_data_types" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list with all data types, in Markdown table format</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="f311.filetypes.util.load_with_classes">
 <code class="descclassname">f311.filetypes.util.</code><code class="descname">load_with_classes</code><span class="sig-paren">(</span><em>filename</em>, <em>classes</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.util.load_with_classes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attempts to load file by trial-and-error using a given list of classes.</p>
@@ -405,6 +446,75 @@ because <em>all exceptions will be silenced!</em></p>
 </tbody>
 </table>
 <p>Returns: DataFile object if loaded successfully, or None if not.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.filetypes.util.get_filetypes_info">
+<code class="descclassname">f311.filetypes.util.</code><code class="descname">get_filetypes_info</code><span class="sig-paren">(</span><em>editor_quote='`'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.util.get_filetypes_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports available data types</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>editor_quote</strong> &#8211; character to put the editors between</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of FileTypeInfo</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.filetypes.util.filetypes_info_to_rows_header">
+<code class="descclassname">f311.filetypes.util.</code><code class="descname">filetypes_info_to_rows_header</code><span class="sig-paren">(</span><em>infos</em>, <em>attrnames=None</em>, <em>header=None</em>, <em>flag_wrap_description=False</em>, <em>description_width=40</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.util.filetypes_info_to_rows_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts filetype information to a (multiline_rows, header) tuple that can be more easily be tabulated</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>infos</strong> &#8211; list of FileTypeInfo</li>
+<li><strong>attrnames</strong> &#8211; list of attribute names (keys of FILE_TYPE_INFO_ATTRS).
+Defaults to all attributes</li>
+<li><strong>header</strong> &#8211; list of strings containing headers. If not passed, uses default names</li>
+<li><strong>flag_wrap_description</strong> &#8211; whether to wrap the description text</li>
+<li><strong>description_width</strong> &#8211; width to wrap the description text (effective only if
+flag_wrap_description is True)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">(rows, header): rows is a list of lists</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.filetypes.util.tabulate_filetypes_rest">
+<code class="descclassname">f311.filetypes.util.</code><code class="descname">tabulate_filetypes_rest</code><span class="sig-paren">(</span><em>attrnames=None</em>, <em>header=None</em>, <em>flag_wrap_description=True</em>, <em>description_width=40</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.util.tabulate_filetypes_rest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a reST multirow table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attrnames</strong> &#8211; list of attribute names (keys of FILE_TYPE_INFO_ATTRS).
+Defaults to all attributes</li>
+<li><strong>header</strong> &#8211; list of strings containing headers. If not passed, uses default names</li>
+<li><strong>flag_wrap_description</strong> &#8211; whether to wrap the description text</li>
+<li><strong>description_width</strong> &#8211; width to wrap the description text (effective only if
+flag_wrap_description is True)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -449,7 +559,7 @@ because <em>all exceptions will be silenced!</em></p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'17.1.28',
+            VERSION:'17.9.27.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

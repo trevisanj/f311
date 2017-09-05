@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>f311.aosss: Adaptive Optics Systems Simulation Support &mdash; f311 17.1.28 documentation</title>
+  <title>Adaptive Optics Systems Simulation Support (f311.aosss) &mdash; F311 17.9.27.0 documentation</title>
   
 
   
@@ -30,13 +30,14 @@
   
 
   
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="f311 17.1.28 documentation" href="index.html"/>
-        <link rel="prev" title="f311.physics: Physics" href="physics.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
     <link href="_static/style.css" rel="stylesheet" type="text/css">
 
 
@@ -57,7 +58,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> f311
+            <a href="index.html" class="icon icon-home"> F311
           
 
           
@@ -67,7 +68,7 @@
             
             
               <div class="version">
-                17.1.28
+                17.9.27.0
               </div>
             
           
@@ -91,32 +92,28 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="pyfant.html"><em>f311.pyfant</em>: spectral synthesis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convmol.html"><em>f311.convmol</em>: Conversion of molecular spectral lines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="explorer.html"><em>f311.explorer</em>: browse, read, write, visualize, edit files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="filetypes.html"><em>f311.filetypes</em>: file handling API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="physics.html"><em>f311.physics</em>: Physics</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#"><em>f311.aosss</em>: Adaptive Optics Systems Simulation Support</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#list-aosss-applications">List <em>aosss</em> applications</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#find-wavelength-region-for-simulation">Find wavelength region for simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#download-simulation-results">Download simulation results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#organize-simulation-results">Organize simulation results</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#group-resulting-spectra-in-a-single-file">Group resulting spectra in a single file</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#create-reports-optional">Create reports (optional)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#organize-the-directory">Organize the directory</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a><ul>
+<li><a class="reference internal" href="#quick-start">Quick Start</a><ul>
+<li><a class="reference internal" href="#list-aosss-applications">List <em>aosss</em> applications</a></li>
+<li><a class="reference internal" href="#find-wavelength-region-for-simulation">Find wavelength region for simulation</a></li>
+<li><a class="reference internal" href="#download-simulation-results">Download simulation results</a></li>
+<li><a class="reference internal" href="#organize-simulation-results">Organize simulation results</a><ul>
+<li><a class="reference internal" href="#group-resulting-spectra-in-a-single-file">Group resulting spectra in a single file</a></li>
+<li><a class="reference internal" href="#create-reports-optional">Create reports (optional)</a></li>
+<li><a class="reference internal" href="#organize-the-directory">Organize the directory</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#browse-through-reports">Browse through reports</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#edit-spectrum-list-file">Edit Spectrum List file</a></li>
+<li><a class="reference internal" href="#browse-through-reports">Browse through reports</a></li>
+<li><a class="reference internal" href="#edit-spectrum-list-file">Edit Spectrum List file</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#api-reference">API reference</a></li>
+<li><a class="reference internal" href="#api-reference">API reference</a></li>
 </ul>
 </li>
 </ul>
-
+</div>
             
           
         </div>
@@ -129,7 +126,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">f311</a>
+          <a href="index.html">F311</a>
         
       </nav>
 
@@ -159,7 +156,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li><em>f311.aosss</em>: Adaptive Optics Systems Simulation Support</li>
+      <li>Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -178,8 +175,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="f311-aosss-adaptive-optics-systems-simulation-support">
-<h1><em>f311.aosss</em>: Adaptive Optics Systems Simulation Support<a class="headerlink" href="#f311-aosss-adaptive-optics-systems-simulation-support" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="adaptive-optics-systems-simulation-support-f311-aosss">
+<h1>Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)<a class="headerlink" href="#adaptive-optics-systems-simulation-support-f311-aosss" title="Permalink to this headline">¶</a></h1>
 <p>The <em>aosss</em> package helps to automatize the simulation of Adaptive Optics Systems.</p>
 <div class="section" id="quick-start">
 <h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
@@ -357,13 +354,6 @@ Continue (Y/n)?
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="physics.html" class="btn btn-neutral" title="f311.physics: Physics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
@@ -391,7 +381,7 @@ Continue (Y/n)?
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'17.1.28',
+            VERSION:'17.9.27.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

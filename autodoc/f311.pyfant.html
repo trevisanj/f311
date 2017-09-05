@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>f311.pyfant package &mdash; f311 17.1.28 documentation</title>
+  <title>f311.pyfant package &mdash; F311 17.9.27.0 documentation</title>
   
 
   
@@ -30,12 +30,14 @@
   
 
   
+    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="f311 17.1.28 documentation" href="../index.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="../index.html"/>
     <link href="../_static/style.css" rel="stylesheet" type="text/css">
 
 
@@ -56,7 +58,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> f311
+            <a href="../index.html" class="icon icon-home"> F311
           
 
           
@@ -66,7 +68,7 @@
             
             
               <div class="version">
-                17.1.28
+                17.9.27.0
               </div>
             
           
@@ -90,15 +92,23 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../pyfant.html"><em>f311.pyfant</em>: spectral synthesis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../convmol.html"><em>f311.convmol</em>: Conversion of molecular spectral lines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../explorer.html"><em>f311.explorer</em>: browse, read, write, visualize, edit files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../filetypes.html"><em>f311.filetypes</em>: file handling API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../physics.html"><em>f311.physics</em>: Physics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../aosss.html"><em>f311.aosss</em>: Adaptive Optics Systems Simulation Support</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">f311.pyfant package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-f311.pyfant.conf">f311.pyfant.conf module</a></li>
+<li><a class="reference internal" href="#module-f311.pyfant.errors">f311.pyfant.errors module</a></li>
+<li><a class="reference internal" href="#module-f311.pyfant.multirunnable">f311.pyfant.multirunnable module</a></li>
+<li><a class="reference internal" href="#module-f311.pyfant.paths">f311.pyfant.paths module</a></li>
+<li><a class="reference internal" href="#module-f311.pyfant.rm">f311.pyfant.rm module</a></li>
+<li><a class="reference internal" href="#module-f311.pyfant.runnables">f311.pyfant.runnables module</a></li>
+<li><a class="reference internal" href="#module-f311.pyfant.util">f311.pyfant.util module</a></li>
+<li><a class="reference internal" href="#module-f311.pyfant">Module contents</a></li>
 </ul>
-
+</li>
+</ul>
+</div>
             
           
         </div>
@@ -111,7 +121,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">f311</a>
+          <a href="../index.html">F311</a>
         
       </nav>
 
@@ -239,10 +249,44 @@ if it has been called before and skip most operations if so.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="f311.pyfant.conf.Conf.get_file_abonds">
+<code class="descname">get_file_abonds</code><span class="sig-paren">(</span><em>opt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.Conf.get_file_abonds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to get_file_main()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.pyfant.conf.Conf.get_file_generic">
+<code class="descname">get_file_generic</code><span class="sig-paren">(</span><em>name</em>, <em>opt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.Conf.get_file_generic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns new File&lt;sth&gt; object, depending on name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; string</li>
+<li><strong>opt</strong> &#8211; FileOptions object</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="f311.pyfant.conf.Conf.get_file_main">
 <code class="descname">get_file_main</code><span class="sig-paren">(</span><em>opt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.Conf.get_file_main" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns either self.file_main, or if None, tries to open file and
-return a new FileMain object.</p>
+<dd><p>Tries to figure out a FileMain from current context (i.e., directory contents and command-line options)</p>
+<p>Precedence: self.file_main &gt; (file specified by opt.fn_main) &gt; (f311&#8217;s default data file)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>opt</strong> &#8211; FileOptions or None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">FileMain or None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -619,6 +663,12 @@ directory as soon as a runnable has finished</li>
 <dd><p>Success is defined as nothing left to run and no fails.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="f311.pyfant.rm.RunnableManager.flag_verbose">
+<code class="descname">flag_verbose</code><a class="headerlink" href="#f311.pyfant.rm.RunnableManager.flag_verbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to log progress-related messages</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="f311.pyfant.rm.RunnableManager.get_runnables_copy">
 <code class="descname">get_runnables_copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.rm.RunnableManager.get_runnables_copy" title="Permalink to this definition">¶</a></dt>
@@ -652,7 +702,8 @@ the actual thread objects.</p>
 <dl class="attribute">
 <dt id="f311.pyfant.rm.RunnableManager.max_simultaneous">
 <code class="descname">max_simultaneous</code><a class="headerlink" href="#f311.pyfant.rm.RunnableManager.max_simultaneous" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Maximum runnables running simultaneously. Default is multiprocessing.cpu_count()</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="f311.pyfant.rm.RunnableManager.num_failed">
@@ -1064,17 +1115,17 @@ pfant and nulbad, for example, you can pass [e_pfant, e_nulbad]</td>
 <p>Rule: only &#8216;gui/&#8217; modules can import util!!!</p>
 <dl class="function">
 <dt id="f311.pyfant.util.run_parallel">
-<code class="descclassname">f311.pyfant.util.</code><code class="descname">run_parallel</code><span class="sig-paren">(</span><em>rr</em>, <em>max_simultaneous=None</em>, <em>flag_console=True</em>, <em>runnable_manager=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.run_parallel" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.pyfant.util.</code><code class="descname">run_parallel</code><span class="sig-paren">(</span><em>rr</em>, <em>max_simultaneous=None</em>, <em>flag_console=True</em>, <em>runnable_manager=None</em>, <em>flag_verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.run_parallel" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>rr</strong> &#8211; list of Runnable instances</li>
-<li><strong>max_simultaneous</strong> &#8211; (optional, default is RunnableManager default)
+<li><strong>max_simultaneous</strong> &#8211; (defaults to RunnableManager.max_simultaneous)
 maximum number of simultaneous processes.</li>
-<li><strong>runnable_manager=None</strong> &#8211; (optional) if passed, will use passed;
-if not, will create new.</li>
+<li><strong>runnable_manager</strong> &#8211; if passed, will use passed; if not, will create new.</li>
+<li><strong>flag_verbose</strong> &#8211; whether of not to log any messages (besides console)</li>
 </ul>
 </td>
 </tr>
@@ -1162,6 +1213,12 @@ if not, will create new.</li>
 <dd><p>Returns PyfantConfigObj object that corresponds to file ~/.ftpyfant.conf</p>
 </dd></dl>
 
+<dl class="function">
+<dt id="f311.pyfant.get_custom_multisession_dirname">
+<code class="descclassname">f311.pyfant.</code><code class="descname">get_custom_multisession_dirname</code><span class="sig-paren">(</span><em>session_id</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.get_custom_multisession_dirname" title="Permalink to this definition">¶</a></dt>
+<dd><p>This defines how custom directory name is made up</p>
+</dd></dl>
+
 </div>
 </div>
 
@@ -1200,7 +1257,7 @@ if not, will create new.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'17.1.28',
+            VERSION:'17.9.27.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

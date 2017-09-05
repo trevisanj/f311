@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>f311.pyfant: spectral synthesis &mdash; f311 17.1.28 documentation</title>
+  <title>Spectral synthesis (f311.pyfant) &mdash; F311 17.9.27.0 documentation</title>
   
 
   
@@ -30,14 +30,14 @@
   
 
   
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="f311 17.1.28 documentation" href="index.html"/>
-        <link rel="next" title="f311.convmol: Conversion of molecular spectral lines" href="convmol.html"/>
-        <link rel="prev" title="f311 – Python Astronomy resources" href="index.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
     <link href="_static/style.css" rel="stylesheet" type="text/css">
 
 
@@ -58,7 +58,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> f311
+            <a href="index.html" class="icon icon-home"> F311
           
 
           
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                17.1.28
+                17.9.27.0
               </div>
             
           
@@ -92,20 +92,20 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#"><em>f311.pyfant</em>: spectral synthesis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick start</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-pyfant-applications">Using <em>pyfant</em> applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#api-reference">API reference</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a><ul>
+<li><a class="reference internal" href="#applications">Applications</a><ul>
+<li><a class="reference internal" href="#graphical-applications">Graphical applications</a></li>
+<li><a class="reference internal" href="#command-line-tools">Command-line tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="convmol.html"><em>f311.convmol</em>: Conversion of molecular spectral lines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="explorer.html"><em>f311.explorer</em>: browse, read, write, visualize, edit files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="filetypes.html"><em>f311.filetypes</em>: file handling API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="physics.html"><em>f311.physics</em>: Physics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="aosss.html"><em>f311.aosss</em>: Adaptive Optics Systems Simulation Support</a></li>
+<li><a class="reference internal" href="#coding-using-the-api">Coding using the API</a></li>
+<li><a class="reference internal" href="#api-reference">API reference</a></li>
 </ul>
-
+</li>
+</ul>
+</div>
             
           
         </div>
@@ -118,7 +118,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">f311</a>
+          <a href="index.html">F311</a>
         
       </nav>
 
@@ -148,7 +148,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li><em>f311.pyfant</em>: spectral synthesis</li>
+      <li>Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -167,24 +167,45 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="f311-pyfant-spectral-synthesis">
-<h1><em>f311.pyfant</em>: spectral synthesis<a class="headerlink" href="#f311-pyfant-spectral-synthesis" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="spectral-synthesis-f311-pyfant">
+<h1>Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)<a class="headerlink" href="#spectral-synthesis-f311-pyfant" title="Permalink to this headline">¶</a></h1>
 <p>Welcome!!</p>
-<p>pyfant is a Python interface for the <a class="reference external" href="http://github.com/trevisanj/PFANT">PFANT Spectral Synthesis
+<p>pyfant is a Python interface for the <a class="reference external" href="http://trevisanj.github.io/PFANT">PFANT Spectral Synthesis
 Software</a> for Astronomy.</p>
+<p>Spectral synthesis softwares have a fundamental role in Astronomy.
+It is a crucial step in determining stellar properties
+- such as temperature, metallicity, and chemical abundances -
+in which the synthetic spectrum (or a combination of several of these) is compared with the
+measured spectrum of a star or a whole stellar population either by the full spectrum fitting,
+spectral energy distribution or specific spectral lines and regions.
+It is of great interest that the software has a comprehensive and intuitive user interface and
+easiness of parameter input and its multiple variations, and also tools for incorporating data
+like atomic/molecular lines, atmospheric models, etc.</p>
+<div class="section" id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>The applications related to package f311.pyfant are listed below. For them to work, you need to
+<cite>install PFANT &lt;http://trevisanj.github.io/PFANT/install.html&gt;</cite>.</p>
+<p>The <cite>PFANT Quick Start &lt;http://trevisanj.github.io/PFANT/quick.html&gt;</cite> serves as a guide to
+using these applications.</p>
+<div class="section" id="graphical-applications">
+<h3>Graphical applications<a class="headerlink" href="#graphical-applications" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>run several spectral synthesis &#8220;jobs&#8221; in parallel using <code class="docutils literal"><span class="pre">x.py</span></code></li>
-<li>write your own spectral synthesis scripts using the <code class="docutils literal"><span class="pre">f311.pyfant</span></code> package</li>
+<li><code class="docutils literal"><span class="pre">x.py</span></code> &#8211; PFANT Launcher &#8211; Graphical Interface for Spectral Synthesis</li>
 </ul>
-<p>Spectral Synthesis Softwares (SSS) have several applications in
-Astronomy. Spectral synthesis is a crucial step in optimization
-algorithms, in which the synthetic spectrum is compared with the measure
-spectrum of a star, in order to determine stellar properties &#8211; such as
-temperature, metallicity, and chemical abundances &#8211; in an iterative
-fashion.</p>
-<div class="section" id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
-<p>The following example Spectral synthesis example:</p>
+</div>
+<div class="section" id="command-line-tools">
+<h3>Command-line tools<a class="headerlink" href="#command-line-tools" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">copy-star.py</span></code> &#8211; Copies stellar data files (such as main.dat, abonds.dat, dissoc.dat) to local directory</li>
+<li><code class="docutils literal"><span class="pre">link.py</span></code> &#8211; Creates symbolic links to PFANT data files as an alternative to copying these (sometimes large) files into local directory</li>
+<li><code class="docutils literal"><span class="pre">run4.py</span></code> &#8211; Runs the four Fortran binaries in sequence: <code class="docutils literal"><span class="pre">innewmarcs</span></code>, <code class="docutils literal"><span class="pre">hydro2</span></code>, <code class="docutils literal"><span class="pre">pfant</span></code>, <code class="docutils literal"><span class="pre">nulbad</span></code></li>
+<li><code class="docutils literal"><span class="pre">save-pdf.py</span></code> &#8211; Looks for files &#8220;<em>.norm&#8221; inside directories session-</em> and saves one figure per page in a PDF file</li>
+</ul>
+</div>
+</div>
+<div class="section" id="coding-using-the-api">
+<h2>Coding using the API<a class="headerlink" href="#coding-using-the-api" title="Permalink to this headline">¶</a></h2>
+<p>Spectral synthesis example:</p>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
 <span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
 <span class="n">obj</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Pfant</span><span class="p">()</span>
@@ -193,11 +214,10 @@ fashion.</p>
 <span class="n">ex</span><span class="o">.</span><span class="n">plot_spectra</span><span class="p">([</span><span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;cont&quot;</span><span class="p">],</span> <span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;spec&quot;</span><span class="p">],</span> <span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;norm&quot;</span><span class="p">]])</span>
 </pre></div>
 </div>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">More examples</p>
 </div>
-<div class="section" id="using-pyfant-applications">
-<h2>Using <em>pyfant</em> applications<a class="headerlink" href="#using-pyfant-applications" title="Permalink to this headline">¶</a></h2>
-<p>The <em>pyfant</em> application guide is currently part of the PFANT manual at
-<a class="reference external" href="http://github.com/trevisanj/PFANT">http://github.com/trevisanj/PFANT</a></p>
 </div>
 <div class="section" id="api-reference">
 <h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
@@ -212,15 +232,6 @@ fashion.</p>
            </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="convmol.html" class="btn btn-neutral float-right" title="f311.convmol: Conversion of molecular spectral lines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral" title="f311 – Python Astronomy resources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -249,7 +260,7 @@ fashion.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'17.1.28',
+            VERSION:'17.9.27.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
