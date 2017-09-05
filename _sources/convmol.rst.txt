@@ -6,13 +6,7 @@ Introduction
 
 .. note:: This package is currently under construction (2017-04-18)
 
-<<<<<<< HEAD
 Cconversion between different formats of files containing molecular spectral lines data.
-=======
-Package convmol contains an application to perform conversion between different molecular
-spectral lines formats, some command-line tools, and an API based on which the applications
-were constructed.
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
 
 Conversion sources:
 

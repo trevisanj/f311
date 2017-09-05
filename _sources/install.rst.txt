@@ -106,13 +106,9 @@ MatPlotLib and PyQt5
 Problems with package bs4
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-<<<<<<< HEAD
 .. code:: shell
 
   bs4.FeatureNotFound: Couldn't find a tree builder with the features you requested: lxml. Do you need to install a parser library?
 
 **Solution**: install package "lxml": ``pip install lxml``
 
-=======
-.. todo:: write solution wodn next time
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76

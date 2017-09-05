@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 F311 -- Python 3 Astronomy-related API and scripts
 ==================================================
-=======
-F311 -- Python resources for Astronomy
-======================================
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
 
 Welcome to the F311 documentation!
 
@@ -23,7 +18,6 @@ Welcome to the F311 documentation!
 Introduction
 ------------
 
-<<<<<<< HEAD
 ``f311`` is a Python 3 package containing an Astronomy-related API and several scripts.
 
 `Project F311 on GitHub <https://github.com/trevisanj/f311>`__
@@ -169,67 +163,3 @@ More
 * :doc:`license`
 
 .. image:: art/key-white.png
-=======
-F311 is a collection of Python 3 libraries, command-line and graphical applications for Astronomy.
-
-The code is organized in sub-packages, each one containing scripts (applications) and an API related
-to some topic.
-
-To get a listing of all scripts available at once, simply type on your shell:
-
-.. code:: shell
-
-   programs.py
-
-This will print a listing such as :doc:`this one <programs-py-listing>`.
-
-``explorer.py`` (:doc:`screenshot <explorer-py-screenshot>`) is perhaps the application of broadest interest.
-It is a file browser that allows you to visualize and edit many file formats used in Astronomy. Its file-handling abilities can be
-easily expanded.
-
-To use the APIs to write your own code, the f311 subpackages that can be imported like this:
-
-.. code::
-
-    import f311.pyfant as pf
-    import f311.convmol as cm
-    import f311.explorer as ex
-    import f311.filetypes as ft
-    import f311.physics as ph
-    import f311.aosss as ao
-
-Although the code is not throughout on the topics covered, some parts of the code were structured
-to be comprehensively and easily expanded.
-
-The project started in 2015 at IAG-USP (Institute of Astronomy, Geophysics and Atmospheric Sciences
-at University of São Paulo, Brazil).
-
-How to contribute
------------------
-
-There are several ways in which you can contribute to this project:
-
-* Report a bug
-* Give some suggestions feedback
-* Write documentation
-* Send examples
-* Contribute with coding
-
-If you would like to contribute to this project, please create a pull request on GitHub and/or drop an e-mail to juliotrevisan@gmail.com
-
-
-Funding
--------
-
-Funded by FAPESP - Research Support Foundation of the State of São Paulo, Brazil (2015-2017).
-
-More
-----
-
-* :ref:`genindex` (all symbols listed alphabetically)
-* :ref:`modindex` (whole f311 package tree)
-* :ref:`search`
-* :doc:`license`
-
-.. todo:: Bring more examples and find a way to organize them both in the code and in the documentation
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
