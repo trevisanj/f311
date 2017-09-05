@@ -1,4 +1,4 @@
-#F311
+# F311
 
 Astronomy-related API, command-line tools, and windowed applications.
 
@@ -10,7 +10,6 @@ Sub-packages:
   - _f311.filetypes_: file handling API
   - _f311.physics_: some physics (photometry, Hönl-London factors, etc.)
   - _f311.aosss_: Adaptive Optics Systems Simulation Support
-
 
 ## Documentation
 
