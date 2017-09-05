@@ -93,7 +93,11 @@
             
             
               <ul>
+<<<<<<< HEAD
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+=======
+<li class="toctree-l1"><a class="reference internal" href="../install.html">f311 Installation</a></li>
+>>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -172,8 +176,85 @@
 <div class="section" id="f311-physics-multiplicity-doublet-module">
 <h2>f311.physics.multiplicity.doublet module<a class="headerlink" href="#f311-physics-multiplicity-doublet-module" title="Permalink to this headline">¶</a></h2>
 </div>
+<<<<<<< HEAD
 <div class="section" id="f311-physics-multiplicity-singlet-module">
 <h2>f311.physics.multiplicity.singlet module<a class="headerlink" href="#f311-physics-multiplicity-singlet-module" title="Permalink to this headline">¶</a></h2>
+=======
+<p><strong>Sanity check examples</strong>. In the following examples, the sum of all &#8220;normalized&#8221; Hönl-London
+factors (HLF) for a given J must be 1 (&#8220;higher-order&#8221; branches are not considered because their
+HLFs are negligible.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="p">,</span> <span class="n">DELTAK</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span>  <span class="c1"># spin, delta Kronecker</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">J</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">J</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">S</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">DELTAK</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalized</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">J</span><span class="p">)</span><span class="o">*</span><span class="n">factor</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">get_honllondon_formulas</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalized</span>
+<span class="go">[0.14583333333333334, 0.23809523809523808, 0.10044642857142856, 0.011904761904761906, 0.003720238095238095, 0.0, 0.0, 0.006696428571428571, 0.008928571428571428, 0.13392857142857142, 0.24107142857142855, 0.109375]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">normalized</span><span class="p">)</span>
+<span class="go">0.9999999999999998</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="p">,</span> <span class="n">DELTAK</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span>  <span class="c1"># spin, delta Kronecker</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">J</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">J</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">S</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">DELTAK</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalized</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">J</span><span class="p">)</span><span class="o">*</span><span class="n">factor</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">get_honllondon_formulas</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">normalized</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.physics.multiplicity.doublet.quanta_to_branch">
+<code class="descclassname">f311.physics.multiplicity.doublet.</code><code class="descname">quanta_to_branch</code><span class="sig-paren">(</span><em>Jl</em>, <em>J2l</em>, <em>spinl=None</em>, <em>spin2l=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.multiplicity.doublet.quanta_to_branch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Singlet only has branches P/Q/R</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>Jl</strong> &#8211; J upper or J&#8217;</li>
+<li><strong>J2l</strong> &#8211; J lower or  J&#8217;&#8216;</li>
+<li><strong>spinl</strong> &#8211; </li>
+<li><strong>spin2l</strong> &#8211; (cannot be None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns: branch letter: &#8220;P&#8221;/&#8221;Q&#8221;/&#8221;R&#8221;</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quanta_to_branch</span><span class="p">(</span><span class="mf">10.5</span><span class="p">,</span> <span class="mf">11.5</span><span class="p">,</span> <span class="n">spin2l</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;P1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quanta_to_branch</span><span class="p">(</span><span class="mf">11.5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="n">spin2l</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">&#39;R2&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quanta_to_branch</span><span class="p">(</span><span class="mf">10.5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="n">spin2l</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;Q1&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.physics.multiplicity.singlet">
+<span id="f311-physics-multiplicity-singlet-module"></span><h2>f311.physics.multiplicity.singlet module<a class="headerlink" href="#module-f311.physics.multiplicity.singlet" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="f311.physics.multiplicity.singlet.quanta_to_branch">
+<code class="descclassname">f311.physics.multiplicity.singlet.</code><code class="descname">quanta_to_branch</code><span class="sig-paren">(</span><em>Jl</em>, <em>J2l</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.multiplicity.singlet.quanta_to_branch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Singlet only has branches P/Q/R</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>Jl</strong> &#8211; J upper or J&#8217;</li>
+<li><strong>J2l</strong> &#8211; J lower or  J&#8217;&#8216;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns: branch letter: &#8220;P&#8221;/&#8221;Q&#8221;/&#8221;R&#8221;</p>
+</dd></dl>
+
+>>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
 </div>
 <div class="section" id="module-f311.physics.multiplicity">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.physics.multiplicity" title="Permalink to this headline">¶</a></h2>

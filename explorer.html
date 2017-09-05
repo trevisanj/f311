@@ -8,7 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+<<<<<<< HEAD
   <title>Browse, read, write, visualize, edit files (f311.explorer) &mdash; F311 17.9.27.0 documentation</title>
+=======
+  <title>Browse, read, write, visualize, edit files (f311.explorer) &mdash; f311 17.1.28 documentation</title>
+>>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
   
 
   
@@ -37,7 +41,11 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
+<<<<<<< HEAD
     <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
+=======
+    <link rel="top" title="f311 17.1.28 documentation" href="index.html"/>
+>>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
         <link rel="next" title="File handling API (f311.filetypes)" href="filetypes.html"/>
         <link rel="prev" title="Conversion of molecular spectral lines (f311.convmol)" href="convmol.html"/>
     <link href="_static/style.css" rel="stylesheet" type="text/css">
@@ -95,7 +103,11 @@
             
             
               <ul class="current">
+<<<<<<< HEAD
 <li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
+=======
+<li class="toctree-l1"><a class="reference internal" href="install.html">f311 Installation</a></li>
+>>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
 <li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a><ul>
@@ -175,6 +187,7 @@
 <h1>Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)<a class="headerlink" href="#browse-read-write-visualize-edit-files-f311-explorer" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<<<<<<< HEAD
 <p>File edit &amp; visualization, including file-explorer-like <code class="docutils literal"><span class="pre">explorer.py</span></code> (<a class="reference internal" href="#figexplorer"><span class="std std-numref">Figure 1</span></a>).</p>
 <div class="figure align-center" id="figexplorer">
 <img alt="_images/explorer.png" src="_images/explorer.png" />
@@ -182,6 +195,20 @@
 </div>
 <div class="section" id="list-of-applications">
 <h2>List of applications<a class="headerlink" href="#list-of-applications" title="Permalink to this headline">¶</a></h2>
+=======
+<p>Package f311.explorer concentrates most of the code in the f311 project, as this package contains many
+resources to visualize and edit several file formats used in Astronomy.</p>
+<p>Most resources are accessible through <code class="docutils literal"><span class="pre">explorer.py</span></code> (<a class="reference internal" href="#figexplorer"><span class="std std-numref">Figure 1</span></a>).</p>
+<div class="figure align-center" id="figexplorer">
+<img alt="_images/explorer.png" src="_images/explorer.png" />
+</div>
+<p>Many applications are used in the context of spectral synthesis, so they are mentioned in the
+<a class="reference external" href="http://trevisanj.github.io/PFANT">PFANT documentation</a>.</p>
+</div>
+<div class="section" id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>You can list anytime the applications available in package f311.explorer by typing in your shell:</p>
+>>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">programs</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">p</span> <span class="n">explorer</span>
 </pre></div>
 </div>
@@ -208,6 +235,11 @@
 </div>
 <div class="section" id="api-reference">
 <h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
+<p>The bulk of the f311.explorer API consists of GUIs written using the PyQt5 library.</p>
+<p>Besides, the package has a &#8220;block&#8221; framework allowing one to build pipelines to process
+<a class="reference internal" href="autodoc/f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.spectrum.Spectrum" title="f311.filetypes.ft_basic.spectrum.Spectrum"><code class="xref py py-class docutils literal"><span class="pre">Spectrum</span></code></a> and
+<code class="xref py py-class docutils literal"><span class="pre">SpectrumList</span></code> objects. These blocks are used in
+<code class="docutils literal"><span class="pre">splisted.py</span></code> and <code class="docutils literal"><span class="pre">cubeed.py</span></code></p>
 <p><a class="reference internal" href="autodoc/f311.explorer.html"><span class="doc">f311.explorer package</span></a></p>
 </div>
 </div>

@@ -8,11 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-<<<<<<< HEAD
-  <title>Project f311 Cheat Sheet &mdash; F311 17.9.27.0 documentation</title>
-=======
-  <title>Project f311 Cheat Sheet &mdash; f311 17.1.28 documentation</title>
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
+  <title>NIST Scraper &mdash; f311 17.1.28 documentation</title>
   
 
   
@@ -41,12 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-<<<<<<< HEAD
-    <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
-=======
     <link rel="top" title="f311 17.1.28 documentation" href="index.html"/>
-        <link rel="prev" title="Adaptive Optics Systems Simulation Support (f311.aosss)" href="aosss.html"/>
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
     <link href="_static/style.css" rel="stylesheet" type="text/css">
 
 
@@ -67,11 +58,7 @@
           
 
           
-<<<<<<< HEAD
-            <a href="index.html" class="icon icon-home"> F311
-=======
             <a href="index.html" class="icon icon-home"> f311
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
           
 
           
@@ -81,11 +68,7 @@
             
             
               <div class="version">
-<<<<<<< HEAD
-                17.9.27.0
-=======
                 17.1.28
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
               </div>
             
           
@@ -109,14 +92,7 @@
               
             
             
-<<<<<<< HEAD
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Project <code class="docutils literal"><span class="pre">f311</span></code> Cheat Sheet</a></li>
-</ul>
-</div>
-=======
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">f311 Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
@@ -124,10 +100,8 @@
 <li class="toctree-l1"><a class="reference internal" href="filetypes.html">File handling API (<code class="docutils literal"><span class="pre">f311.filetypes</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="physics.html">Selected topics on Physics (<code class="docutils literal"><span class="pre">f311.physics</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Project <code class="docutils literal"><span class="pre">f311</span></code> Cheat Sheet</a></li>
 </ul>
 
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
             
           
         </div>
@@ -140,11 +114,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-<<<<<<< HEAD
-          <a href="index.html">F311</a>
-=======
           <a href="index.html">f311</a>
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
         
       </nav>
 
@@ -174,13 +144,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Project <code class="docutils literal"><span class="pre">f311</span></code> Cheat Sheet</li>
+      <li>NIST Scraper</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/cheat.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/nist-scrapper.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -193,11 +163,60 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="project-f311-cheat-sheet">
-<h1>Project <code class="docutils literal"><span class="pre">f311</span></code> Cheat Sheet<a class="headerlink" href="#project-f311-cheat-sheet" title="Permalink to this headline">¶</a></h1>
-<p>List applications available:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">programs</span><span class="o">.</span><span class="n">py</span>
-<span class="n">programs</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="n">packagename</span><span class="o">&gt;</span>
+  <div class="section" id="nist-scraper">
+<h1>NIST Scraper<a class="headerlink" href="#nist-scraper" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal"><span class="pre">nist-scraper.py</span></code> retrieves and prints a table of molecular constants from the</p>
+<p>NIST Chemistry Web Book for a particular molecule.</p>
+<p>To do so, it uses web scraping to navigate through several pages and parse the desired information
+from the book web pages.</p>
+<p>It does not provide a way to list the molecules yet, but will give an error if the molecule is not
+found in the NIST web book.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This script was designed to work with <strong>diatomic molecules</strong> and may not work with other
+molecules.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The table contents online contains small typos (such as an underscore instead of a minus
+signal to indicate a negative number), many of which we attempted to fix in the parsing
+process. However, inconsistencies may occur in the result printed by this script.</p>
+</div>
+<p>Usage examples:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">nist</span><span class="o">-</span><span class="n">scraper</span><span class="o">.</span><span class="n">py</span> <span class="n">TiO</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>*** titanium oxide ***
+
+State       T_e            omega_e    omega_ex_e    omega_ey_e      B_e    alpha_e    gamma_e       D_e    beta_e      r_e  Trans.       nu_00
+----------  -----------  ---------  ------------  ------------  -------  ---------  ---------  --------  --------  -------  --------  --------
+D           31920.0        1040                                                                                             D ? X     31940
+e ?Sigma?   a + 26598.1     845.2          4.2                  0.4892     0.0023              4.7e-07             1.695    e ? d R   24297.5
+f ?Delta    (a + 19132)     890                                 0.50221                        6.4e-07             1.67292  f ? a R   19068.9
+c ?Phi      a + 17890.2     909.6          4.19                 0.523      0.00313             3.9e-07             1.6393   c ? a R   17840.6
+C ?Delta_r  19617.0         838.26         4.76         0.047   0.48989    0.00306   -3e-05    6.7e-07             1.69383  C ? X R   19334
+B ?Pi_r     16331.3         875            5                    0.50617                        6.86e-07            1.66636  B ? X R   16066.7
+b ?Pi       a+11322.0_3     911.2          3.72                 0.51337    0.00291             6.1e-07             1.65464  b ? d R    9054.02
+A ?Phi_r    14431.0         867.78         3.942                0.50739    0.00315   -1e-05    6.92e-07     2e-09  1.66436  A ? X R   14163
+E ?Pi       12025.0         924.2          5.1                                                                              E ? X     11871
+d ?Sigma?   a + 2215.6     1014.6          4.64                 0.54922    0.00337             6e-07               1.59972
+a ?Delta    a              1009.3          3.93                 0.5376     0.00298             5.9e-07             1.61692
+X ?Delta_r  197.5          1009.02         4.498       -0.0107  0.53541    0.00301   -1.1e-05  6.03e-07     3e-09  1.62022
+</pre></div>
+</div>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">nist</span><span class="o">-</span><span class="n">scraper</span><span class="o">.</span><span class="n">py</span> <span class="n">OH</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>*** Hydroxyl radical ***
+
+State          T_e    omega_e    omega_ex_e  omega_ey_e        B_e    alpha_e    gamma_e       D_e  beta_e        r_e  Trans.        nu_00
+---------  -------  ---------  ------------  ------------  -------  ---------  ---------  --------  --------  -------  ---------  --------
+C ?Sigma?  89459.1    1232.9        19.1                    4.247      0.078              0.0002              2.0461   C ? A R    55820.7
+C ?Sigma?                                                                                                              (C ? X)    88223
+D ?Sigma?  82130      2954                                 15.2179                        0.001616            1.08093  D ? X R    81759.8
+B ?Sigma?  69774       660                                  5.086                         0.000929            1.8698   B ? A R    35965.5
+A ?Sigma?  32684.1    3178.86       92.917                 17.358      0.7868     -0.016  0.002039            1.0121   A ? X R    32402.4
+X ?Pi_i        0      3737.76       84.8813                18.9108     0.7242             0.001938            0.96966  1/2 ? 3/2    126.23
 </pre></div>
 </div>
 </div>
@@ -210,16 +229,6 @@
           </div>
           <footer>
   
-<<<<<<< HEAD
-=======
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="aosss.html" class="btn btn-neutral" title="Adaptive Optics Systems Simulation Support (f311.aosss)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
 
   <hr/>
 
@@ -247,11 +256,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-<<<<<<< HEAD
-            VERSION:'17.9.27.0',
-=======
             VERSION:'17.1.28',
->>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

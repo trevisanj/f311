@@ -4,7 +4,15 @@ Browse, read, write, visualize, edit files (``f311.explorer``)
 Introduction
 ------------
 
+<<<<<<< HEAD
 File edit & visualization, including file-explorer-like ``explorer.py`` (:numref:`figexplorer`).
+
+.. _figexplorer:
+=======
+Package f311.explorer concentrates most of the code in the f311 project, as this package contains many
+resources to visualize and edit several file formats used in Astronomy.
+
+Most resources are accessible through ``explorer.py`` (:numref:`figexplorer`).
 
 .. _figexplorer:
 
@@ -13,12 +21,28 @@ File edit & visualization, including file-explorer-like ``explorer.py`` (:numref
 
     -- ``explorer.py`` screenshot.
 
+Many applications are used in the context of spectral synthesis, so they are mentioned in the
+`PFANT documentation <http://trevisanj.github.io/PFANT>`_.
+>>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
+
+.. figure:: img/explorer.png
+   :align: center
+
+    -- ``explorer.py`` screenshot.
+
+<<<<<<< HEAD
 
 List of applications
 --------------------
 
 .. code:: shell
 
+=======
+You can list anytime the applications available in package f311.explorer by typing in your shell:
+
+.. code:: shell
+
+>>>>>>> ccfcb3f73c1ec412e1e5b4806ef25d4e3a009d76
     programs.py -p explorer
 
 Graphical applications:
@@ -57,5 +81,12 @@ Command-line tools:
 
 API reference
 -------------
+
+The bulk of the f311.explorer API consists of GUIs written using the PyQt5 library.
+
+Besides, the package has a "block" framework allowing one to build pipelines to process
+:class:`Spectrum <f311.filetypes.ft_basic.spectrum.Spectrum>` and
+:class:`SpectrumList <f311.filetypes.ft_basic.splist.SpectrumList>` objects. These blocks are used in
+``splisted.py`` and ``cubeed.py``
 
 :doc:`autodoc/f311.explorer`
