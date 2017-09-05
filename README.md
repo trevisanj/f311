@@ -1,6 +1,6 @@
-![](docs/source/art/key-white.png)
+#F311
 
-Astronomy-related API, command-line tools, and windowed applications
+Astronomy-related API, command-line tools, and windowed applications.
 
 Sub-packages:
 
@@ -16,4 +16,4 @@ Sub-packages:
 
 http://trevisanj.github.io/f311
 
- 
+![](docs/source/art/key-white.png)
