@@ -1,6 +1,4 @@
-# F311
-
-[](docs/source/art/key-white.png)
+![](docs/source/art/key-white.png)
 
 Astronomy-related API, command-line tools, and windowed applications
 
