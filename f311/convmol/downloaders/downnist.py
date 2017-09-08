@@ -169,7 +169,6 @@ def parse_A(browser, tag):
                 a = browser.find("a", id=id_)
                 if a is not None:
                     td = a.next_element.next_element
-                    # print("OOOOOOOOOOOOO", str(td))
                     stemp = re.match("<td>\s*A.*?=\s*([\(\)\+\-]*[0-9]+\.[0-9]+)", str(td)).groups()[0]
                     if stemp is None:
                         return None

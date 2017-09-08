@@ -9,6 +9,7 @@ References:
 """
 
 
+import math
 from .molconsts import MolConsts
 
 
@@ -109,7 +110,7 @@ class _MultiplicityToolbox(dict):
     absDeltaLambda = None
     # 1 for singlet; 2 for doublet; 3 for triplet
     multiplicity = None
-    # Method to convert quantum information to branch (string)
+    # Method to convert quantum information to branch. **Use staticmethod()**!
     quanta_to_branch = None
 
     def __init__(self, mol_consts):
@@ -143,7 +144,7 @@ class _MultiplicityToolbox(dict):
 class _MTSinglet(_MultiplicityToolbox):
     absDeltaLambda = "all"
     multiplicity = 1
-    quanta_to_branch = _quanta_to_branch_singlet
+    quanta_to_branch = staticmethod(_quanta_to_branch_singlet)
 
 
 ####################################################################################################
@@ -159,7 +160,7 @@ class _MTDoublet1(_MultiplicityToolbox):
 
     absDeltaLambda = 1
     multiplicity = 2
-    quanta_to_branch = _quanta_to_branch_same_multiplicity
+    quanta_to_branch = staticmethod(_quanta_to_branch_same_multiplicity)
 
     def _populate_with_key(self, key):
         vl, v2l, J, branch = key
@@ -282,7 +283,7 @@ class _MTDoublet1(_MultiplicityToolbox):
         # Resolves the Delta Lambda = LAML - LAM2L
 
         if LAML > LAM2L:
-            self.update(
+            self.update((((vl, v2l, J, x), y) for x, y in
                 (
                     ("P1", _P1(J)),
                     ("Q1", _Q1(J)),
@@ -296,10 +297,10 @@ class _MTDoublet1(_MultiplicityToolbox):
                     ("P2", _P2(J)),
                     ("Q2", _Q2(J)),
                     ("R2", _R2(J)),
-                ))
+                )))
 
         elif LAML < LAM2L:
-            self.update(
+            self.update((((vl, v2l, J, x), y) for x, y in
                 (
                     ("P1", _R1(J-1)),
                     ("Q1", _Q1(J)),
@@ -313,7 +314,7 @@ class _MTDoublet1(_MultiplicityToolbox):
                     ("P2", _R2(J-1)),
                     ("Q2", _Q2(J)),
                     ("R2", _P2(J+1)),
-                ))
+                )))
 
 
 ####################################################################################################
@@ -329,7 +330,7 @@ class _MTTriplet1(_MultiplicityToolbox):
 
     absDeltaLambda = 1
     multiplicity = 3
-    quanta_to_branch = _quanta_to_branch_same_multiplicity
+    quanta_to_branch = staticmethod(_quanta_to_branch_same_multiplicity)
 
     def _populate_with_key(self, key):
         vl, v2l, J, branch = key
@@ -366,7 +367,7 @@ class _MTTriplet1(_MultiplicityToolbox):
 
         # Original comment:
         #
-        #     cálculo das contantes U1+, U1-, U3+, U3-,
+        #     cï¿½lculo das contantes U1+, U1-, U3+, U3-,
         #     C1+, C2+, C3+, dependentes de J para o estado
         #     eletronico superior( A 3PI, lambda=1)
         #     formulas para casos intermediarios entre os casos A( Y>>J(J+1) )
@@ -571,7 +572,7 @@ class _MTTriplet1(_MultiplicityToolbox):
         # Resolves the Delta Lambda
 
         if LAML > LAM2L:
-            self.update(
+            self.update((((vl, v2l, J, x), y) for x, y in
                 (
                     ("P1", _P1(J)),
                     ("Q1", _Q1(J)),
@@ -600,11 +601,11 @@ class _MTTriplet1(_MultiplicityToolbox):
                     ("P3", _P3(J)),
                     ("Q3", _Q3(J)),
                     ("R3", _R3(J)),
-                ))
+                )))
 
 
         elif LAML < LAM2L:
-            self.update(
+            self.update((((vl, v2l, J, x), y) for x, y in
                 (
                     ("P1", _R1(J-1)),
                     ("Q1", _Q1(J)),
@@ -633,7 +634,7 @@ class _MTTriplet1(_MultiplicityToolbox):
                     ("P3", _R3(J-1)),
                     ("Q3", _Q3(J)),
                     ("R3", _P3(J+1)),
-                ))
+                )))
 
 
 def multiplicity_toolbox(mol_consts):

@@ -168,6 +168,7 @@ class FileMolDB(FileSQLiteDB):
         r = conn.execute(sql, list(kwargs.values()))
         return r
 
+
     def test_query_state(self):
         """
         Test function
@@ -227,6 +228,15 @@ class FileMolDB(FileSQLiteDB):
                     continue
                 for key in keys:
                     ret[key] = row_state
+        return ret
+
+    def get_fcf_dict(self, id_system):
+        """Returns a dictionary indexed by (vl, v2l) and FCFs as values"""
+
+        _ret = self.query_fcf(id_system=id_system).fetchall()
+        ret = {}
+        for r in _ret:
+            ret[(r["vl"], r["v2l"])] = r["value"]
         return ret
 
     def _create_schema(self):

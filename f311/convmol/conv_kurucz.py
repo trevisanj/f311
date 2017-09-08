@@ -54,6 +54,8 @@ class ConvKurucz(Conv):
         self.fcfs = fcfs
         self.iso = iso
 
+    # TODO looks like this routine is kindda generic
+    # TODO could dismember this later
     def _make_sols(self, lines):
 
         def append_error(msg):
@@ -75,9 +77,10 @@ class ConvKurucz(Conv):
         STATEL = self.mol_consts["from_label"]
         STATE2L = self.mol_consts["to_label"]
 
-        if self.flag_hlf:
-            formulas = ph.doublet.get_honllondon_formulas(LAML, LAM2L)
-        sols = OrderedDict()  # one item per (vl, v2l) pair
+        mtools = self.multiplicity_toolbox()
+
+        # Prepares result
+        sols = ConvSols(self.qgbd_calculator, self.mol_consts)
         log = MolConversionLog(n)
 
         for i, line in enumerate(lines):
@@ -96,52 +99,53 @@ class ConvKurucz(Conv):
                     log.skip_reasons["FCF not available for (vl, v2l) = ({}, {})".format(line.vl, line.v2l)] += 1
                     continue
 
-            branch = ph.doublet.quanta_to_branch(line.Jl, line.J2l,
-                spinl=None if not self.flag_spinl else line.spinl, spin2l=line.spin2l)
+            branch = mtools.quanta_to_branch(line.Jl, line.J2l,
+                spinl=(None if not self.flag_spinl else line.spinl), spin2l=line.spin2l)
+
             try:
-                wl = line.lambda_
+                gf_pfant = 1.
 
                 if self.flag_normhlf:
+                    k = 2./ ((2*S+1) * (2*line.J2l+1) * (2-DELTAK))
                     # k = 2 / ((2.0*line.J2l+1)*(2.0*S+1)*(2.0-DELTAK))
                     # k = 2 / ((2.0*line.J2l+1))
-                    k = 2./ ((2*S+1) * (2*line.J2l+1) * (2-DELTAK))
                     # k = (2.0*line.J2l+1)
                     # k = (2*S+1) * (2*line.J2l+1) * (2-DELTAK)
-                else:
-                    k = 1.
-
-    #            k *= fe
+                    gf_pfant *= k
 
                 if self.flag_hlf:
                     try:
-                        hlf = formulas[branch](line.J2l)
+                        hlf = mtools[(line.vl, line.v2l, line.J2l, branch)]
                     except ZeroDivisionError:
                         log.skip_reasons["Division by zero calculating HLF"] += 1
                         continue
-                    gf_pfant = hlf*k
+                    gf_pfant *= hlf
 
                 else:
-                    gf_pfant = k*10**line.loggf
+                    gf_pfant *= 10**line.loggf
 
                 if self.flag_fcf:
                     gf_pfant *= fcf
 
-                J2l_pfant = line.J2l
             except Exception as e:
-                msg = "#{}{} line: {}".format(i + 1, a99.ordinal_suffix(i + 1), a99.str_exc(e))
+                reason = a99.str_exc(e)
+                log.skip_reasons[reason] += 1
+                msg = "#{}{} line: {}".format(i + 1, a99.ordinal_suffix(i + 1), reason)
                 log.errors.append(msg)
                 if not self.flag_quiet:
                     a99.get_python_logger().exception(msg)
                 continue
 
-            sol_key = "%3d%3d" % (line.vl, line.v2l)  # (v', v'') transition (v_sup, v_inf)
-            raise RuntimeError("Como que o calculate_qgbd esta fazendo, sendo que o dicionario mol_consts agora tem prefixos to e from?")
-            if sol_key not in sols:
-                qgbd = self._calculate_qgbd(line.v2l)
-                sols[sol_key] = ft.SetOfLines(line.vl, line.v2l,
-                                              qgbd["qv"], qgbd["gv"], qgbd["bv"], qgbd["dv"], 1.)
+            sols.append_line(line, gf_pfant, branch)
 
-            sol = sols[sol_key]
-            sol.append_line(wl, gf_pfant, J2l_pfant, branch)
+            # sol_key = "%3d%3d" % (line.vl, line.v2l)  # (v', v'') transition (v_sup, v_inf)
+            # raise RuntimeError("Como que o calculate_qgbd esta fazendo, sendo que o dicionario mol_consts agora tem prefixos to e from?")
+            # if sol_key not in sols:
+            #     qgbd = self._calculate_qgbd(line.v2l)
+            #     sols[sol_key] = ft.SetOfLines(line.vl, line.v2l,
+            #                                   qgbd["qv"], qgbd["gv"], qgbd["bv"], qgbd["dv"], 1.)
+            #
+            # sol = sols[sol_key]
+            # sol.append_line(wl, gf_pfant, J2l_pfant, branch)
 
-        return (list(sols.values()), log)
+        return sols, log

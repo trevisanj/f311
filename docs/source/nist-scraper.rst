@@ -14,9 +14,10 @@ found in the NIST web book.
 .. note:: This script was designed to work with **diatomic molecules** and may not work with other
           molecules.
 
-.. warning:: The table contents online contains small typos (such as an underscore instead of a minus
-             signal to indicate a negative number), many of which we attempted to fix in the parsing
-             process. However, inconsistencies may occur in the result printed by this script.
+.. warning:: The source material online was known to contain mistakes (such as an underscore instead of a minus
+             signal to indicate a negative number). We have identified a few of these, and build
+             some workarounds. However, we recommend a close look at the information parsed
+             before use.
 
 Usage examples:
 

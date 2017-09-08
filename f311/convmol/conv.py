@@ -1,9 +1,34 @@
+import f311.physics as ph
+import f311.filetypes as ft
 from .calc_qgbd import *
 from .convlog import *
 import datetime
+from collections import OrderedDict
 
-__all__ = ["Conv"]
+__all__ = ["Conv", "ConvSols"]
 
+
+_DEFAULT_QGBD_CALCULATOR = calc_qgbd_tio_like
+
+
+class ConvSols(OrderedDict):
+    """Stores (vl, v2l) as keys, SetOfLines as values"""
+
+    def __init__(self, qgbd_calculator, mol_consts):
+        OrderedDict.__init__(self)
+        self.qgbd_calculator = qgbd_calculator if qgbd_calculator else _DEFAULT_QGBD_CALCULATOR
+        self.mol_consts = mol_consts
+
+    def append_line(self, line, gf_pfant, branch):
+        """Use to append line to object"""
+        sol_key = (line.vl, line.v2l)
+
+        if sol_key not in self:
+            qgbd = self.qgbd_calculator(self.mol_consts, line.v2l)
+            self[sol_key] = ft.SetOfLines(line.vl, line.v2l,
+                                          qgbd["qv"], qgbd["gv"], qgbd["bv"], qgbd["dv"], 1.)
+
+        self[sol_key].append_line(line.lambda_, gf_pfant, line.J2l, branch)
 
 
 class Conv(object):
@@ -41,19 +66,24 @@ class Conv(object):
 
         # Runs specific conversor to SetOfLines
         sols, log = self._make_sols(lines)
-        assert isinstance(sols, list)
+
+        assert isinstance(sols, ConvSols)
         assert isinstance(log, MolConversionLog)
 
-        sols.sort(key= lambda sol: sol.vl*1000+sol.v2l)
-
+        sols_list = list(sols.values())
+        sols_list.sort(key= lambda sol: sol.vl*1000+sol.v2l)
 
         mol = ft.mol_consts_to_molecule(self.mol_consts)
-        mol.sol = sols
+        mol.sol = sols_list
         f = ft.FileMolecules()
         now = datetime.datetime.now()
-        f.titm = "Created by ftpyfant.make_file_molecules() @ {}".format(now.isoformat())
+        f.titm = "Created by f311.convmol.Conv.make_file_molecules() @ {}".format(now.isoformat())
         f.molecules = [mol]
         return f, log
+
+    def multiplicity_toolbox(self):
+        """Wraps f311.physics.multiplicity.multiplicity_toolbox()"""
+        return ph.multiplicity_toolbox(self.mol_consts)
 
     # Must reimplement thig
     def _make_sols(self, lines):
@@ -63,7 +93,7 @@ class Conv(object):
             lines: see make_file_molecules()
 
         Returns:
-            sols, log: list of SefOfLines object, MolConversionLog object
+            sols, log: ConvSols, MolConversionLog
         """
         raise NotImplementedError()
 

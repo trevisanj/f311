@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import *
 import a99
 from .a_WDBState import WDBState
 import copy
+import f311.physics as ph
+
 
 __all__ = ["WMolecularConstants"]
 
@@ -33,7 +35,7 @@ class WMolecularConstants(a99.WBase):
             * keys for state' values start with "statel_"
             * keys for state'' values start with "state2l_"
         """
-        ret = {}
+        ret = ph.MolConsts()
         for fieldname in self._fieldnames:
             ret[fieldname] = self[fieldname]
         ret["name"] = self.name
@@ -59,7 +61,7 @@ class WMolecularConstants(a99.WBase):
     @property
     def fcfs(self):
         """Returns a dictionary of Franck-Condon Factors (key is (vl, v2l)), or None"""
-        return self._get_fcfs()
+        return self._get_fcf_dict()
 
     @property
     def id_molecule(self):
@@ -324,14 +326,8 @@ class WMolecularConstants(a99.WBase):
             return self._ids_system[self.combobox_select_system.currentIndex()]
         return None
 
-    def _get_fcfs(self):
-        ret, id_ = None, self._get_id_system()
-        if id_ is not None:
-            _ret = self._f.query_fcf(id_system=id_).fetchall()
-            ret = {}
-            for r in _ret:
-                ret[(r["vl"], r["v2l"])] = r["value"]
-        return ret
+    def _get_fcf_dict(self):
+        return self._f.get_fcf_dict(self._get_id_system())
 
     def _populate(self):
         if not self._flag_built_edits:
@@ -521,12 +517,8 @@ class WMolecularConstants(a99.WBase):
                 lg.addWidget(a, i, j * 2)
                 lg.addWidget(e, i, j * 2 + 1)
 
-
         self._flag_built_edits = True
 
-        print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
-        for fn in self._fieldnames:
-            print(fn)
 
     def _fill_edits_pfantmol(self):
         id_ = self._get_id_pfantmol()
@@ -562,7 +554,7 @@ class WMolecularConstants(a99.WBase):
                 e.setText(str(v) if v is not None else "")
 
     def _update_label_fcf(self):
-        n, fcfs = 0, self._get_fcfs()
+        n, fcfs = 0, self._get_fcf_dict()
         if fcfs is not None:
             n = len(fcfs)
         s = '<font color="{}">Franck-Condon Factors (FCFs) for {} vibrational transition{}</font>'.\
