@@ -1,8 +1,6 @@
 # F311
 
-[](docs/source/art/key-white.png)
-
-Astronomy-related API, command-line tools, and windowed applications
+Astronomy-related API, command-line tools, and windowed applications.
 
 Sub-packages:
 
@@ -13,9 +11,8 @@ Sub-packages:
   - _f311.physics_: some physics (photometry, Hönl-London factors, etc.)
   - _f311.aosss_: Adaptive Optics Systems Simulation Support
 
-
 ## Documentation
 
 http://trevisanj.github.io/f311
 
- 
+![](docs/source/art/key-white.png)
