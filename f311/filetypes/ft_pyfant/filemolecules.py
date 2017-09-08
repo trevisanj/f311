@@ -387,9 +387,11 @@ class FileMolecules(DataFile):
                     parts = [s.strip() for s in m.titulo.split("#")]
                     m.description = parts[0]
                     if len(parts) > 1:
+                        # Found 'structure' in m.titulo
                         m.symbols = [adjust_atomic_symbol(s) for s in
                                      [s.strip() for s in parts[1].split(" ") if len(s.strip()) > 0]]
                     else:
+                        # Will try to guess molecule by m.titulo's contents
                         temp = description_to_symbols(parts[0])
                         m.symbols = temp or []
                     transitions = []

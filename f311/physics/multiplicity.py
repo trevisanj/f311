@@ -158,7 +158,8 @@ class _MTDoublet1(_MultiplicityToolbox):
     """
 
     absDeltaLambda = 1
-    multiplicity = 2
+    multiplicityl = 2
+    multiplicity2l = 2
     quanta_to_branch = _quanta_to_branch_same_multiplicity
 
     def _populate_with_key(self, key):
@@ -328,7 +329,8 @@ class _MTTriplet1(_MultiplicityToolbox):
     """
 
     absDeltaLambda = 1
-    multiplicity = 3
+    multiplicityl = 3
+    multiplicity2l = 3
     quanta_to_branch = _quanta_to_branch_same_multiplicity
 
     def _populate_with_key(self, key):

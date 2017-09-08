@@ -421,60 +421,64 @@ class XFileMolecules(QMainWindow):
         self.set_editor_sol()
 
     def plot_lines(self):
-        self.clear_markers()
-        o = self.sol
-        if o is not None:
-            self.figure.clear()
+        try:
+            self.clear_markers()
+            o = self.sol
+            if o is not None:
+                self.figure.clear()
 
-            n = sum([info.flag for info in self.plot_info])  # number of subplots (0, 1 or 2)
-            # map to reuse plotting routine, contains what differs between each plot
+                n = sum([info.flag for info in self.plot_info])  # number of subplots (0, 1 or 2)
+                # map to reuse plotting routine, contains what differs between each plot
 
-            map_ = [(SOL_HEADERS_PLOT[i], o.__getattribute__(SOL_ATTR_NAMES[i]))
-                    for i in range(1, len(SOL_HEADERS_PLOT))]
+                map_ = [(SOL_HEADERS_PLOT[i], o.__getattribute__(SOL_ATTR_NAMES[i]))
+                        for i in range(1, len(SOL_HEADERS_PLOT))]
 
-            i_subplot = 1
-            for i in range(len(map_)):
-                y_label = map_[i][0]
-                pi = self.plot_info[i]
-                pi.y_vector = _y = map_[i][1]
+                i_subplot = 1
+                for i in range(len(map_)):
+                    y_label = map_[i][0]
+                    pi = self.plot_info[i]
+                    pi.y_vector = _y = map_[i][1]
 
-                if pi.flag:
-                    if not self.flag_sort:
-                        x = o.lmbdam
-                        y = _y
-                    else:
-                        _x = np.array(o.lmbdam)
-                        _y = np.array(_y)
-                        ii = np.argsort(_x)
-                        x = _x[ii]
-                        y = _y[ii]
+                    if pi.flag:
+                        if not self.flag_sort:
+                            x = o.lmbdam
+                            y = _y
+                        else:
+                            _x = np.array(o.lmbdam)
+                            _y = np.array(_y)
+                            ii = np.argsort(_x)
+                            x = _x[ii]
+                            y = _y[ii]
 
-                    a99.format_BLB()
+                        a99.format_BLB()
 
-                    self.figure.add_subplot(n, 1, i_subplot)
-                    pi.axis = ax = self.figure.gca()
-                    ax.clear()
-                    ax.plot(x, y, 'k'+('' if len(x) > 1 else 'x'))
-                    ax.set_xlabel('Wavelength ($\AA$)')
-                    ax.set_ylabel(y_label)
+                        self.figure.add_subplot(n, 1, i_subplot)
+                        pi.axis = ax = self.figure.gca()
+                        ax.clear()
+                        ax.plot(x, y, 'k'+('' if len(x) > 1 else 'x'))
+                        ax.set_xlabel('Wavelength ($\AA$)')
+                        ax.set_ylabel(y_label)
 
-                    # x-limits
-                    xmin, xmax = min(x), max(x)
-                    k = .02*(xmax-xmin)
-                    ax.set_xlim([xmin-k, xmax+k])
+                        # x-limits
+                        xmin, xmax = min(x), max(x)
+                        k = .02*(xmax-xmin)
+                        ax.set_xlim([xmin-k, xmax+k])
 
-                    # y-limits
-                    ymin, ymax = min(y), max(y)
-                    k = .02*(ymax-ymin)
-                    ax.set_ylim([ymin-k, ymax+k])
+                        # y-limits
+                        ymin, ymax = min(y), max(y)
+                        k = .02*(ymax-ymin)
+                        ax.set_ylim([ymin-k, ymax+k])
 
-                    i_subplot += 1
+                        i_subplot += 1
 
-            if i_subplot > 1:
-                plt.tight_layout()
+                if i_subplot > 1:
+                    plt.tight_layout()
 
-            self.canvas.draw()
-            self.draw_markers()
+                self.canvas.draw()
+                self.draw_markers()
+        except Exception as e:
+            a99.show_error("Error drawing plots: {}".format(str(e)))
+
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
 

@@ -1,5 +1,5 @@
 import f311.filetypes as ft
-
+import re
 
 _KEYS = ["fe", "bm", "te", "do", "ua", "cro", "am", "ub", "s",
          "from_label", "to_label", "from_spdf", "to_spdf",
@@ -26,6 +26,7 @@ class MolConsts(dict):
         Assembles a MolConsts object containig information specified by arguments
 
         Args:
+            db: FileMolDB object
             idpfantmol: id in table "pfantmol"
             idsystem: id in table "system"
             idstatel: id in table "state" for the initial state
@@ -49,3 +50,36 @@ class MolConsts(dict):
                     self[prefix + fieldname] = row[fieldname]
 
 
+    def parse_str(self, db, string):
+        """
+        Populates object taking string such as "OH [A 2 Sigma - X 2 Pi]"
+
+        Returns:
+
+        """
+
+
+        # Gets molecule name
+        groups = re.match("\w+", string)
+        if groups is not None:
+            name = groups[0]
+
+        # Parses system
+        expr = re.compile("\[\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)\s*-+\s*\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)\s*\]")
+        groups = expr.search(string)
+        if groups is not None:
+            from_label,
+            from_mult,
+            from_spdf,
+            to_label,
+            to_mult,
+            to_spdf = [groups[i] for i in range(1, 7)]
+
+
+
+
+        else:
+            # TODO try other regexp
+
+            if groups is None:
+                raise ValueError("Could not understand str '{}'".format(string))
