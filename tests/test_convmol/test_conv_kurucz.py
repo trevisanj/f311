@@ -2,6 +2,7 @@ import os
 import io
 import f311.filetypes as ft
 import f311.convmol as cm
+import f311.physics as ph
 
 
 def _fake_file():
@@ -33,7 +34,9 @@ def test_conv_kurucz(tmpdir):
     db.init_default()
     # conn = db.get_conn()
 
-    mol_consts = db.get_mol_consts(id_pfantmol=12, id_state=119, id_system=5)
+
+    mol_consts = ph.MolConsts()
+    mol_consts.populate_from_db(db, id_system=6, id_pfantmol=12, id_statel=96, id_state2l=97)
     mol_consts.None_to_zero()
 
     h = _fake_file()

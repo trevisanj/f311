@@ -51,7 +51,7 @@ def insert_pfantmol_data(moldb):
 
     for m in filemol:
         id_molecule = conn.execute("select id from molecule where formula = ?",
-                                   (moldb.symbols_to_formula(m.symbols),)).fetchone()["id"]
+                                   (ft.symbols_to_formula(m.symbols),)).fetchone()["id"]
 
         conn.execute("insert into pfantmol "
             "(id_molecule, description, fe, do, am, bm, ua, ub, te, cro, s) "

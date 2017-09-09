@@ -139,7 +139,7 @@ Now selecting the first isotopologue and specifying the visible wavelength range
     ...done
     Please check files '(16)OH.header', '(16)OH.data'
 
-The files created ('(16)OH.header', '(16)OH.data') can be opened using the `HAPI <http://hitran.org/hapi>`.
+**Hint** The files created ('(16)OH.header', '(16)OH.data') can be opened using the `HAPI <http://hitran.org/hapi>`.
 They are also accessed by the application ``convmol.py``.
 
 The HAPI can be downloaded, but one version is also included with the f311 package. The following

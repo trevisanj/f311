@@ -8,4 +8,4 @@ def test_populate_from_db(tmpdir):
     db.init_default()
 
     consts = ph.MolConsts()
-    consts.populate_from_db(db, 12, 6, 96, 97)
+    consts.populate_from_db(db, id_system=6, id_pfantmol=12, id_statel=96, id_state2l=97)

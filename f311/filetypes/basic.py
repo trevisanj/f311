@@ -8,7 +8,8 @@ import shutil
 import sys
 
 
-__all__ = ["adjust_atomic_symbol", "description_to_symbols", "iz_to_branch", "branch_to_iz",
+__all__ = ["adjust_atomic_symbol", "description_to_symbols", "symbols_to_formula",
+           "iz_to_branch", "branch_to_iz",
            "get_default_data_path", "iz_to_branch_alt", "branch_to_iz_alt"]
 
 
@@ -64,6 +65,26 @@ def description_to_symbols(descr):
             return [adjust_atomic_symbol(x) for x in symbols]
     return None
     # raise RuntimeError("Could not find a valid formula in description '{}'".format(descr))
+
+
+def symbols_to_formula(symbols):
+    """Converts two symbols to a formula as recorded in the 'molecule' table
+
+    Args:
+        symbols: 2-element list as returned by f311.filetypes.basic.description_to_symbols()
+
+    Returns:
+        str: examples: 'MgH', 'C2', 'CH'
+
+    Formulas in the 'molecule' table have no isotope information
+    """
+    rec = re.compile("[a-zA-Z]+")
+    symbols_ = [rec.search(x).group().capitalize() for x in symbols]
+    symbols_ = ["C" if x == "A" else x for x in symbols_]
+    if symbols_[0] == symbols_[1]:
+        return "{}{}".format(symbols_[0], "2")
+    else:
+        return "".join(symbols_)
 
 
 _iz_to_branch_map = {"1": "P", "2": "Q", "3": "R", "4": "P1", "5": "Q1", "6": "R1", "7": "P2",

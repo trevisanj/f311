@@ -1,5 +1,5 @@
-F311 -- Astronomy-related API, command-line tools, and windowed applications
-============================================================================
+F311 -- Python 3 Astronomy-related API and scripts
+==================================================
 
 Welcome to the F311 documentation!
 
@@ -18,17 +18,122 @@ Welcome to the F311 documentation!
 Introduction
 ------------
 
-F311 is an Astronomy-related API, command-line tools, and windowed applications written in Python 3.
+``f311`` is a Python 3 package containing an Astronomy-related API and several scripts.
 
-Sub-packages: see menu on the left.
+`Project F311 on GitHub <https://github.com/trevisanj/f311>`__
 
-For a list of scripts (the following will print something :doc:`like this <programs-py-listing>`):
+List of scripts
+---------------
 
 .. code:: shell
 
-   programs.py
+Running ``programs.py`` on the shell will print something like this::
 
-To use the APIs to write your own code, the f311 subpackages that can be imported like this:
+    Package 'aosss'
+    ===============
+
+      Graphical applications
+      ----------------------
+
+        wavelength-chart.py ......... Draws chart showing spectral lines of
+                                      interest, spectrograph wavelength ranges, ESO
+                                      atmospheric model, etc.
+
+      Command-line tools
+      ------------------
+
+        create-simulation-reports.py  Creates HTML reports from WebSim-COMPASS
+                                      output files
+        create-spectrum-lists.py .... Create several .splist (spectrum list) files
+                                      from WebSim-COMPASS output files; groups
+                                      spectra that share same wavelength vector
+        get-compass.py .............. Downloads WebSim-COMPASS simulations
+        list-mosaic-modes.py ........ Lists MOSAIC Spectrograph modes
+        organize-directory.py ....... Organizes simulation directory (creates
+                                      folders, moves files, creates 'index.html')
+
+    Package 'convmol'
+    =================
+
+      Graphical applications
+      ----------------------
+
+        convmol.py ........ Conversion of molecular lines data to PFANT format
+
+      Command-line tools
+      ------------------
+
+        download-hitran.py  Downloads molecular lines from HITRAN database
+        print-nist.py ..... Downloads and prints molecular constants from NIST Web
+                            Book for a particular molecule
+
+    Package 'explorer'
+    ==================
+
+      Graphical applications
+      ----------------------
+
+        abed.py .......... Abundances file editor
+        ated.py .......... Atomic lines file editor
+        cubeed.py ........ Data Cube Editor, import/export WebSim-COMPASS data cubes
+        explorer.py ...... F311 Explorer --  list, visualize, and edit data files
+                           (_à la_ File Manager)
+        mained.py ........ Main configuration file editor.
+        mled.py .......... Molecular lines file editor.
+        splisted.py ...... Spectrum List Editor
+        tune-zinf.py ..... Tunes the "zinf" parameter for each atomic line in atomic
+                           lines file
+
+      Command-line tools
+      ------------------
+
+        create-grid.py ... Merges several atmospheric models into a single file
+                           (_i.e._, the "grid")
+        cut-atoms.py ..... Cuts atomic lines file to wavelength interval specified
+        cut-molecules.py . Cuts molecular lines file to wavelength interval
+                           specified
+        cut-spectrum.py .. Cuts spectrum file to wavelength interval specified
+        plot-spectra.py .. Plots spectra on screen or creates PDF file
+        vald3-to-atoms.py  Converts VALD3 atomic/molecular lines file to PFANT
+                           atomic lines file.
+
+    Package 'pyfant'
+    ================
+
+      Graphical applications
+      ----------------------
+
+        x.py ........ PFANT Launcher -- Graphical Interface for Spectral Synthesis
+
+      Command-line tools
+      ------------------
+
+        copy-star.py  Copies stellar data files (such as main.dat, abonds.dat,
+                      dissoc.dat) to local directory
+        link.py ..... Creates symbolic links to PFANT data files as an alternative
+                      to copying these (sometimes large) files into local directory
+        run4.py ..... Runs the four Fortran binaries in sequence: `innewmarcs`,
+                      `hydro2`, `pfant`, `nulbad`
+        save-pdf.py . Looks for files "*.norm" inside directories session-* and
+                      saves one figure per page in a PDF file
+
+    PFANT Fortran binaries
+    ======================
+
+        innewmarcs  found
+        hydro2 .... found
+        pfant ..... found
+        nulbad .... found
+
+
+
+Sub-packages
+------------
+
+When f311 is installed, several sub-packages are made available (see left menu).
+Each sub-package contains its own API.
+
+One possible way to import these sub-packages is as follows:
 
 .. code::
 
@@ -39,30 +144,15 @@ To use the APIs to write your own code, the f311 subpackages that can be importe
     import f311.physics as ph
     import f311.aosss as ao
 
-Although the code is not throughout on the topics covered, some parts of the code were structured
-to be comprehensively and easily expanded.
+For usage and examples, see the sub-packages pages.
+
+Acknowledgement
+---------------
 
 The project started in 2015 at IAG-USP (Institute of Astronomy, Geophysics and Atmospheric Sciences
 at University of São Paulo, Brazil).
 
-How to contribute
------------------
-
-There are several ways in which you can contribute to this project:
-
-* Report a bug
-* Give some suggestions feedback
-* Write documentation
-* Send examples
-* Contribute with coding
-
-If you would like to contribute to this project, please create a pull request on GitHub and/or drop an e-mail to juliotrevisan@gmail.com
-
-
-Funding
--------
-
-Funded by FAPESP - Research Support Foundation of the State of São Paulo, Brazil (2015-2017).
+Partially funded by FAPESP - Research Support Foundation of the State of São Paulo, Brazil (2015-2017).
 
 More
 ----
@@ -72,3 +162,4 @@ More
 * :ref:`search`
 * :doc:`license`
 
+.. image:: art/key-white.png

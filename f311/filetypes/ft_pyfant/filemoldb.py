@@ -5,8 +5,11 @@ from .. import FileSQLiteDB
 # import sqlite3
 import tabulate
 import re
+import os
 
-__all__ = ["FileMolDB", "SPDF"]
+
+
+__all__ = ["FileMolDB", "SPDF", "MolConsts", "some_mol_consts", "PopulateError"]
 
 #
 # __fileobj = None
@@ -62,30 +65,9 @@ class FileMolDB(FileSQLiteDB):
     }
 
     @staticmethod
-    def symbols_to_formula(symbols):
-        """Converts two symbols to a formula as recorded in the 'molecule' table
-
-        Args:
-            symbols: 2-element list as returned by f311.filetypes.basic.description_to_symbols()
-
-        Returns:
-            str: examples: 'MgH', 'C2', 'CH'
-
-        Formulas in the 'molecule' table have no isotope information
-        """
-        rec = re.compile("[a-zA-Z]+")
-        symbols_ = [rec.search(x).group().capitalize() for x in symbols]
-        symbols_ = ["C" if x == "A" else x for x in symbols_]
-        if symbols_[0] == symbols_[1]:
-            return "{}{}".format(symbols_[0], "2")
-        else:
-            return "".join(symbols_)
-
-    @staticmethod
     def get_system_short(row):
         """Converts a 'system' row to its superscript and Greek letters notation"""
-        return "{}{}{} - {}{}{}".format(row["from_label"], _conv_sup[row["from_mult"]],
-            SPDF[row["from_spdf"]], row["to_label"], _conv_sup[row["to_mult"]], SPDF[row["to_spdf"]])
+        return _format_system(row)
 
     # TODO see if this is still used, perhaps now only MolConsts.populate_from_db()
     def get_mol_consts(self, id_pfantmol, id_state, id_system):
@@ -229,6 +211,51 @@ class FileMolDB(FileSQLiteDB):
                     ret[key] = row_state
         return ret
 
+    def get_fcf_dict(self, id_system):
+        """Returns a dictionary indexed by (vl, v2l) and FCFs as values"""
+
+        _ret = self.query_fcf(id_system=id_system).fetchall()
+        ret = {}
+        for r in _ret:
+            ret[(r["vl"], r["v2l"])] = r["value"]
+        return ret
+
+    def find_id_system(self, mol_consts):
+        """Returns id_system or None"""
+
+        ff = ["from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf"]
+        one = self.get_conn().execute("select id from system where id_molecule = ? and "+
+                           " and ".join(["{} = ?".format(x) for x in ff]),
+                           [mol_consts["id_molecule"]]+[mol_consts[x] for x in ff]).fetchone()
+        if one is None:
+            return None
+        return one["id"]
+
+
+
+    def insert_system_if_does_not_exist(self, mol_consts, comments=""):
+        """
+        Inserts system if does not exist yet
+
+        Args:
+            mol_consts: a MolConsts
+            comments: table system.comments value, in case of new record
+        """
+
+        id_ = self.find_id_system(mol_consts)
+
+        if id_ is not None:
+            return id_
+
+        ff = ("id_molecule", "from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf")
+        values = [mol_consts[x] for x in ff]+[comments]
+        ff.append("comments")
+        cursor = conn.execute("""insert into system ({}) values ({})""".format(", ".join(ff),
+            ", ".join(["?"]*len(ff))), values)
+        id_ = cursor.lastrowid
+        return id_
+
+
     def _create_schema(self):
         conn = self.get_conn()
         c = conn.cursor()
@@ -365,3 +392,198 @@ class FileMolDB(FileSQLiteDB):
             ret = None
 
         return ret
+
+
+
+####################################################################################################
+# old f311.physics.molconsts
+
+
+_KEYS = ["fe", "bm", "te", "do", "ua", "cro", "am", "ub", "s",
+         "from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf",
+         "statel_omega_e", "statel_B_e", "statel_beta_e", "statel_omega_ex_e", "statel_alpha_e",
+         "statel_A", "statel_omega_ey_e", "statel_D_e",
+         "state2l_omega_e", "state2l_B_e", "state2l_beta_e", "state2l_omega_ex_e", "state2l_alpha_e",
+         "state2l_A", "state2l_omega_ey_e", "state2l_D_e", "name", "formula",
+         "id_molecule", "id_pfantmol", "id_system", "id_statel", "id_state2l"]
+
+
+class MolConsts(dict):
+    """Dict subclass that will hold several molecular constants
+
+    The dictionary keys match field names in tables ("pfantmol", "state", "system") in a FileMolDB.
+    Keys "statel_*" and "state2l_*" have these prefixes to indicate initial and final state.
+    """
+
+    def __init__(self, *args, **kwargs):
+        dict.__init__(self, *args, **kwargs)
+        for key in _KEYS:
+            self[key] = None
+
+    def populate_from_db(self, db, id_system, id_pfantmol, id_statel, id_state2l):
+        """
+        Assembles a MolConsts object containig information specified by arguments
+
+        Args:
+            db: FileMolDB object
+            id_system: id in table "system"
+            id_pfantmol: id in table "pfantmol"
+            id_statel: id in table "state" for the initial state
+            id_state2l: id in table "state" for the final state
+
+        TODO: idstatel, idstate2l are redundant: this could be retrieved from the system (check if there are repetitions in the NIST table). Paramneters may be optional. I could use the same _map, but update it manually if (statel, state2l) not passed
+        """
+        assert isinstance(db, FileMolDB)
+
+        id_molecule = db.get_conn().execute("select id_molecule from system where id = ?",
+                                            (id_system,)).fetchone()["id_molecule"]
+
+        # key name, id, table name, prefix for key in dictionary
+        _map = [("id_system", id_system, "system", ""),
+                ("id_pfantmol", id_pfantmol, "pfantmol", ""),
+                ("id_statel", id_statel, "state", "statel_"),
+                ("id_state2l", id_state2l, "state", "state2l_"),
+                ("id_molecule", id_molecule, "molecule", ""),
+                ]
+
+        for keyname, id_, tablename, prefix in _map:
+            ti = db.get_table_info(tablename)
+            row = db.get_conn().execute("select * from {} where id = ?".format(tablename),
+                                        (id_,)).fetchone()
+            for fieldname in ti:
+                if not fieldname.startswith("id"):
+                    self[prefix + fieldname] = row[fieldname]
+
+            self[keyname] = id_
+
+    def None_to_zero(self):
+        """Replaces None values with zero"""
+
+        for key in self:
+            if self[key] is None:
+                self[key] = 0.
+
+    def populate_parse_str(self, db, string):
+        """
+        Populates (from_*) and (to_*) taking string such as "OH [A 2 Sigma - X 2 Pi]
+        """
+
+        # Gets molecule name
+
+        groups = re.match("\w+", string)
+        if groups is not None:
+            self["formula"] = groups[0]
+
+        # Parses system
+        expr = re.compile("\[\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)\s*-+\s*\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)\s*\]")
+        groups = expr.search(string)
+        if groups is not None:
+            self.update(zip(
+                ["from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf"],
+                [groups[i] for i in range(1, 7)]))
+        else:
+            # TODO try other regexp
+
+            if groups is None:
+                raise ValueError("Could not understand str '{}'".format(string))
+
+    def populate_ids(self, db):
+        """Populates (id_*) with values found using (molecule name) and (from_*) and (to_*)."""
+
+        ff = ("id_molecule", "id_system", "id_pfantmol", "id_statel", "id_state2l")
+        methods = (self.populate_id_molecule, self.populate_id_system,
+                   self.populate_id_pfantmol, self.populate_ids_state)
+
+        for f in ff:
+            self[f] = None
+
+        for m in methods:
+            try:
+                m(db)
+            except PopulateError:
+                pass
+
+    def populate_id_molecule(self, db):
+        # id_molecule ...
+        one = db.get_conn().execute("select id from molecule where formula = ?",
+                                    (self["formula"],)).fetchone()
+        self["id_molecule"] = one["id"] if one is not None else None
+
+    def populate_id_system(self, db):
+        need = ("id_molecule", "from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf")
+        if any((self[x] is None for x in need)):
+            raise PopulateError("I need ({})".format(", ".join(need)))
+        self["id_system"] = db.find_id_system(self)
+
+    def populate_ids_state(self, db):
+        """Populates id_statel and id_state2l"""
+
+        need = ("id_molecule", "from_label", "to_label")
+        if any((self[x] is None for x in need)):
+            raise PopulateError("I need ({})".format(", ".join(need)))
+
+        _map = [("from_label", "id_statel"), ("to_label", "id_state2l")]
+        for fn_to_match, fn_dest in _map:
+            one = db.get_conn().execute("select id from state where id_molecule = ? and "
+                                        "State like \"{}%\"".format(self[fn_to_match]),
+                                        (self["id_molecule"],)).fetchone()
+            self[fn_dest] = one["id"] if one is not None else None
+
+    def populate_id_pfantmol(self, db):
+        """Populates id_pfantmol"""
+
+        need = ("id_molecule", "from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf")
+        if any((self[x] is None for x in need)):
+            raise PopulateError("I need ({})".format(", ".join(need)))
+
+        # TODO to be continued...
+
+def some_mol_consts():
+    """
+    Returns a MolConsts object populated with 'OH A2Sigma-X2Pi' information
+
+    **Note** Creates new moldb.xxxx.sqlite file every time it is run, then deletes it
+    """
+
+    db = FileMolDB()
+    db.init_default()
+
+    ret = MolConsts()
+    ret.populate_from_db(db, id_system=6, id_pfantmol=12, id_statel=96, id_state2l=97)
+
+    # Finally deletes file
+    db.get_conn().close()
+    os.unlink(db.filename)
+
+    return ret
+
+
+class PopulateError(Exception):
+    pass
+
+
+_PLAIN = -1
+_GREEK = 0
+
+
+def _mol_consts_to_system_str(mol_consts, style=_GREEK):
+    """Compiles system information into string
+
+    Args:
+        mol_consts: dict-like containing the from_* and to_* values
+        style: rendering style
+
+    Returns:
+        str
+    """
+
+    if style == _PLAIN:
+        fmult = lambda x: x
+        fspdf = lambda x: x
+    elif style == _GREEK:
+        fmult = lambda x: _conv_sup[x]
+        fspdf = lambda x: SPDF[x]
+
+    return "{}{}{} - {}{}{}".format(row["from_label"], fmult(row["from_mult"]),
+                                    fspdf(row["from_spdf"]), row["to_label"],
+                                    fmult(row["to_mult"]), fspdf(row["to_spdf"]))

@@ -6,16 +6,14 @@ Introduction
 
 .. note:: This package is currently under construction (2017-04-18)
 
-Package convmol contains an application to perform conversion between different molecular
-spectral lines formats, some command-line tools, and an API based on which the applications
-were constructed.
+Cconversion between different formats of files containing molecular spectral lines data.
 
 Conversion sources:
 
-- HITRAN Online database
-- Robert Kurucz molecular line lists
-- VALD3
-- TurboSpectrum
+- Robert Kurucz molecular line lists (fully implemented (old and new Kurucz format))
+- HITRAN Online database (partially implemented)
+- VALD3 (to do)
+- TurboSpectrum (to do)
 
 Conversion destination:
 
