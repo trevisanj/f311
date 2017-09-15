@@ -24,8 +24,8 @@ def test_populate_parse_str():
     consts = ft.MolConsts()
     consts.populate_parse_str("MgH [A 2 sigma - x 3 pi]")
     assert(consts["formula"] == "MgH")
-    assert(consts["from_label"] == "A" and consts["from_mult"] == 2 and consts["from_spdf"] == "SIGMA")
-    assert(consts["to_label"] == "x" and consts["to_mult"] == 3 and consts["to_spdf"] == "PI")
+    assert(consts["from_label"] == "A" and consts["from_mult"] == 2 and consts["from_spdf"] == 0)
+    assert(consts["to_label"] == "x" and consts["to_mult"] == 3 and consts["to_spdf"] == 1)
 
 
 def test_populate_all_using_str(tmpdir):
