@@ -47,4 +47,3 @@ def test_parse_pfantmol_descriptions(tmpdir):
     for row in cursor:
         mc = ft.MolConsts()
         mc.populate_parse_str(row["description"])
-        print(ft.mol_consts_to_system_str(mc))

@@ -23,6 +23,11 @@
 
 ### Documentation
 
+- Examples/demos: I think that a good way is to write tests first, each "def test_*()" who wishes to become a demo will have to have a nice docstring,
+and I am pretty sure I can write a script to replace the "def test_<sthsth>(...)" with a "if __name__ == '__main__'" ... and so on; and I guess that I can make these appear in sphinx doc too... 
+further investigation required
+
+
 - Write something useful instead of this. Put screenshots at front, better
 
     ``explorer.py`` (:doc:`screenshot <explorer-py-screenshot>`) is perhaps the application of broadest interest.
