@@ -74,7 +74,7 @@ class FileMolDB(FileSQLiteDB):
     @staticmethod
     def get_system_short(row):
         """Converts a 'system' row to its superscript and Greek letters notation"""
-        return _format_system(row)
+        return mol_consts_to_system_str(row)
 
     # TODO see if this is still used, perhaps now only MolConsts.populate_from_db()
     def get_mol_consts(self, id_pfantmol, id_state, id_system):
@@ -511,6 +511,13 @@ class MolConsts(dict):
         if id_pfantmol is None: id_pfantmol = self["id_pfantmol"]
         if id_statel is None: id_statel = self["id_statel"]
         if id_state2l is None: id_state2l = self["id_state2l"]
+
+        if id_molecule is None: raise ValueError("Both argument and dictionary value 'id_molecule' are None")
+        if id_system is None: raise ValueError("Both argument and dictionary value 'id_system' are None")
+        if id_pfantmol is None: raise ValueError("Both argument and dictionary value 'id_pfantmol' are None")
+        if id_statel is None: raise ValueError("Both argument and dictionary value 'id_statel' are None")
+        if id_state2l is None: raise ValueError("Both argument and dictionary value 'id_state2l' are None")
+
 
         # key name, id, table name, prefix for key in dictionary
         _map = [("id_molecule", id_molecule, "molecule", ""),

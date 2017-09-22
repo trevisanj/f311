@@ -4,8 +4,7 @@ from PyQt5.QtWidgets import *
 import a99
 from .a_WDBState import WDBState
 import copy
-import f311.physics as ph
-
+import f311.filetypes as ft
 
 __all__ = ["WMolecularConstants"]
 
@@ -35,7 +34,7 @@ class WMolecularConstants(a99.WBase):
             * keys for state' values start with "statel_"
             * keys for state'' values start with "state2l_"
         """
-        ret = ph.MolConsts()
+        ret = ft.MolConsts()
         for fieldname in self._fieldnames:
             ret[fieldname] = self[fieldname]
         ret["name"] = self.name
@@ -88,7 +87,7 @@ class WMolecularConstants(a99.WBase):
         self._fieldnames_state = ["omega_e", "omega_ex_e", "omega_ey_e", "B_e", "alpha_e", "D_e",
                                  "beta_e", "A"]
         # Fields of interest from table 'system'
-        self._fieldnames_system = ["from_label", "from_spdf", "to_label", "to_spdf"]
+        self._fieldnames_system = ["from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf"]
         self._flag_built_edits = False
         for fn in self._fieldnames_state:
             assert fn not in self._fieldnames_pfantmol

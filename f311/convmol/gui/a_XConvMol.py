@@ -659,10 +659,14 @@ class XConvMol(ex.XFileMainWindow):
 
             # Validation of data
             errors = []
+            mol_consts_fieldnames_ignore = ["id_molecule", "id_pfantmol", "id_system", "id_statel", "id_state2l"]
             if self.w_moldb.id_molecule is None:
                 errors.append("Molecule not selected")
-            elif any([x is None for x in mol_consts.values()]):
-                s_none = ", ".join(["'{}'".format(key) for key, value in mol_consts.items() if value is None])
+
+            elif any([value is None for name, value in mol_consts.items()
+                      if name not in mol_consts_fieldnames_ignore]):
+                s_none = ", ".join(["'{}'".format(name) for name, value in mol_consts.items()
+                                    if value is None and name not in mol_consts_fieldnames_ignore])
                 errors.append("There are empty molecular constants: {}".format(s_none))
             if not self.w_out.validate():
                 errors.append("Output filename is invalid")

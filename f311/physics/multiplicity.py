@@ -109,12 +109,13 @@ class _MultiplicityToolbox(dict):
     #
     absDeltaLambda = None
     # 1 for singlet; 2 for doublet; 3 for triplet
-    multiplicity = None
+    multiplicityl = None
+    multiplicity2l = None
     # Method to convert quantum information to branch. **Use staticmethod()**!
     quanta_to_branch = None
 
     def __init__(self, mol_consts):
-        if not isinstance(mol_consts, MolConsts):
+        if not isinstance(mol_consts, ft.MolConsts):
             raise TypeError("mol_consts must be a MolConsts")
         dict.__init__(self)
         self._mol_consts = mol_consts
@@ -126,9 +127,9 @@ class _MultiplicityToolbox(dict):
         if abs(LAML - LAM2L) != self.absDeltaLambda:
             raise ValueError("Invalid Delta Lambda {}. abs(Delta Lambda) must be {}". \
                              format(LAML-LAM2L, self.absDeltaLambda))
-        if 2*S+1 != self.multiplicity:
-            raise ValueError("Class {} expects 2*S+1 = {}, got 2*S+1 = {} instead". \
-                             format(self.multiplicity, 2*S+1))
+        if 2*S+1 != self.multiplicity2l:
+            raise ValueError("**Sanity check fail**: Class {} expects multiplicity2l = 2*S+1 = {}, got instead". \
+                             format(self.multiplicity2l, 2*S+1))
 
     def __missing__(self, key):
         self._populate_with_key(key)
@@ -143,7 +144,8 @@ class _MultiplicityToolbox(dict):
 
 class _MTSinglet(_MultiplicityToolbox):
     absDeltaLambda = "all"
-    multiplicity = 1
+    multiplicityl = 1
+    multiplicity2l = 1
     quanta_to_branch = staticmethod(_quanta_to_branch_singlet)
 
 

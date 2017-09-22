@@ -35,8 +35,8 @@ def test_conv_kurucz(tmpdir):
     # conn = db.get_conn()
 
 
-    mol_consts = ph.MolConsts()
-    mol_consts.populate_all_using_ids(db, id_system=6, id_pfantmol=12, id_statel=96, id_state2l=97)
+    mol_consts = ft.MolConsts()
+    mol_consts.populate_all_using_ids(db, id_molecule=4, id_system=6, id_pfantmol=12, id_statel=96, id_state2l=97)
     mol_consts.None_to_zero()
 
     h = _fake_file()
