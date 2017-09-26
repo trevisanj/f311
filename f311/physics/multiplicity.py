@@ -128,8 +128,8 @@ class _MultiplicityToolbox(dict):
             raise ValueError("Invalid Delta Lambda {}. abs(Delta Lambda) must be {}". \
                              format(LAML-LAM2L, self.absDeltaLambda))
         if 2*S+1 != self.multiplicity2l:
-            raise ValueError("**Sanity check fail**: Class {} expects multiplicity2l = 2*S+1 = {}, got instead". \
-                             format(self.multiplicity2l, 2*S+1))
+            raise ValueError("**Sanity check fail**: Class {} expects multiplicity2l = 2*S+1 = {}, got {} instead". \
+                             format(self.__class__.__name__, self.multiplicity2l, 2*S+1))
 
     def __missing__(self, key):
         self._populate_with_key(key)

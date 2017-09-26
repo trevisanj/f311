@@ -1,6 +1,9 @@
 F311 -- Python 3 Astronomy-related API and scripts
 ==================================================
 
+.. literalinclude:: ../../examples/pyfant/photometry0.py
+
+
 Welcome to the F311 documentation!
 
 .. toctree::

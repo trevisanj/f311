@@ -66,7 +66,13 @@ def get_fortrans(max_len=None):
     """
 
     ret = []
-    bindir = os.path.join(get_pfant_path(), "fortran", "bin")
+
+    flag_bindir = True
+    try:
+        bindir = os.path.join(get_pfant_path(), "fortran", "bin")
+    except:
+        flag_bindir = False
+
     ihpn = ["innewmarcs", "hydro2", "pfant", "nulbad"]
     if max_len is None:
         max_len = max(len(x) for x in ihpn)
@@ -79,7 +85,7 @@ def get_fortrans(max_len=None):
             return os.path.isfile(os.path.join(bindir, x))
     for name in ihpn:
         status = "not found"
-        if has_it(name):
+        if flag_bindir and has_it(name):
             status = "found"
 
         ret.append(a99.ExeInfo(name, status, flag_gui=None))
