@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 from a99 import WDBRegistry
 import a99
 from .a_WDBFCF import *
+from .a_WDBPFANTMol import *
 from .a_WDBSystem import *
 
 __all__ = ["WDBSystemFCF"]
@@ -54,20 +55,45 @@ class WDBSystemFCF(a99.WBase):
         l0.addWidget(w)
 
         # ## Second widget of splitter
-        w1 = self.keep_ref(QWidget())
-        l1 = QVBoxLayout(w1)
-        a99.set_margin(l1, 0)
-        l1.setSpacing(2)
+        sp1 = self.keep_ref(QSplitter(Qt.Vertical))
+
+        # ### widget 1.1
+
+        w10 = self.keep_ref(QWidget())
+        l10 = QVBoxLayout(w10)
+        a99.set_margin(l10, 0)
+        l10.setSpacing(2)
+
+        a = self.title_state = self.keep_ref(QLabel(a99.format_title1("PFANT molecules")))
+        l10.addWidget(a)
+
+        w = self.w_pfantmol = WDBPFANTMol(self.parent_form)
+        w.changed.connect(self.changed)
+        l10.addWidget(w)
+
+        # ### widget 1.1
+
+        w11 = self.keep_ref(QWidget())
+        l11 = QVBoxLayout(w11)
+        a99.set_margin(l11, 0)
+        l11.setSpacing(2)
 
         a = self.title_state = self.keep_ref(QLabel(a99.format_title1("Franck-Condon Factors")))
-        l1.addWidget(a)
+        l11.addWidget(a)
 
         w = self.w_fcf = WDBFCF(self.parent_form)
         w.changed.connect(self.changed)
-        l1.addWidget(w)
+        l11.addWidget(w)
+
+
+        # ## Adds widgets to splitters
+
+        sp1.addWidget(w10)
+        sp1.addWidget(w11)
 
         sp.addWidget(w0)
-        sp.addWidget(w1)
+        sp.addWidget(sp1)
+
         lmain.addWidget(sp)
 
         # # Final adjustments
@@ -80,4 +106,6 @@ class WDBSystemFCF(a99.WBase):
         # self._populate()
 
     def id_system_changed(self):
+        self.w_pfantmol.set_id_system(self.w_system.id)
         self.w_fcf.set_id_system(self.w_system.id)
+

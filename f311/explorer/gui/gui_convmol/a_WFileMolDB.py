@@ -5,7 +5,7 @@ import a99
 from .a_WDBMolecule import WDBMolecule
 from .a_WDBState import WDBState
 from .a_WDBPFANTMol import *
-from .a_WDBSystemFCF import *
+from .a_WDBSystemPfantmolFCF import *
 import os
 
 
@@ -70,18 +70,12 @@ class WFileMolDB(a99.WBase):
         # ## Second widget of splitter: tab widget containing the rest
         w1 = self.tabWidget = QTabWidget(self)
 
-        # ### First tab: molecule headers frmo PFANT molecular lines file
-        w = self.w_pfantmol = WDBPFANTMol(self.parent_form)
-        w.changed.connect(self.changed)
-        w1.addTab(self.w_pfantmol, "PFANT molecules (Alt+&P)")
-        # a99.set_margin(w10, 0)
-
-        # ### Second tab: systems and Franck-Condon factors
+        # ### First tab: systems, PFANT molecules, and Franck-Condon factors
         w = self.w_system = WDBSystemFCF(self.parent_form)
         w.changed.connect(self.changed)
         w1.addTab(self.w_system, "Electronic systems (Alt+&E)")
 
-        # ### Thirs tab: NIST Chemistry Web Book data
+        # ### Second tab: NIST Chemistry Web Book data
         w = self.w_state = WDBState(self.parent_form)
         w.changed.connect(self.changed)
         w1.addTab(self.w_state, "States from NIST (Alt+&S)")
@@ -99,18 +93,16 @@ class WFileMolDB(a99.WBase):
     def load(self, x):
         self._f = x
         self.w_mol.f = x
-        self.w_state.f = x
-        self.w_pfantmol.f = x
         self.w_system.f = x
+        self.w_state.f = x
         self.update_gui_label_fn()
 
 
     def mol_id_changed(self):
         id_ = self.w_mol.id
         row = self.w_mol.row
-        self.w_pfantmol.set_id_molecule(id_)
-        self.w_state.set_id_molecule(id_)
         self.w_system.set_id_molecule(id_)
+        self.w_state.set_id_molecule(id_)
 
 
     # # Override

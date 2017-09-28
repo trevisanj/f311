@@ -17,10 +17,17 @@ import sys
 from f311 import convmol as cm
 from f311 import pyfant as pf
 
+# FileMolecules
+filemol = None
+moldb = None
 
-def insert_molecules(moldb):
+
+def my_info(s):
+    a99.get_python_logger().info("[build-moldb] {}".format(s))
+
+
+def insert_molecules():
     """Inserts data into the 'molecule' table"""
-    assert isinstance(moldb, ft.FileMolDB)
 
     # Molecules present in PFANT molecules.dat
     MOLECULES = [("MgH", "Magnesium monohydride"),
@@ -33,39 +40,73 @@ def insert_molecules(moldb):
                  ("FeH", "Iron hydride"),
                  ("TiO", "Titanium oxide")]
 
-    conn = moldb.get_conn()
     conn.executemany("insert into molecule (formula, name) values (?,?)", MOLECULES)
     conn.commit()
 
 
-def insert_pfantmol_data(moldb):
-    """Inserts molecular header information 'PFANT/data/common/molecules.dat'"""
-    assert isinstance(moldb, ft.FileMolDB)
+def insert_systems():
+    """Parses the systems out of the molecules descriptions in the PFANT molecular lines file"""
 
-    conn = moldb.get_conn()
+
+    # Collects PFANT systems
+    # Iterates through the PFANT molecules to retrieve its systems.
+    # Information is stored as MolConsts objects in which only the formula and system information are set
+    rows = []
+    for molecule in filemol:
+        row = ft.MolConsts()
+        row.populate_parse_str(molecule.description)
+
+        print("FORMULA {}".format(row["formula"]))
+
+        id_molecule = conn.execute("select id from molecule where formula = ?",
+                                   (row["formula"],)).fetchone()["id"]
+
+        # Inserts data into the 'system' table
+        row_id = conn.execute("""select id from system where id_molecule = ? and from_label = ? and
+           from_mult = ? and from_spdf = ? and to_label = ? and to_mult = ? and to_spdf = ?""",
+                              (id_molecule, row["from_label"], row["from_mult"], row["from_spdf"],
+                               row["to_label"], row["to_mult"], row["to_spdf"])).fetchone()
+        if row_id is not None:
+            id_system = row_id["id"]
+        else:
+            cursor = conn.execute("""insert into system (id_molecule, from_label, from_mult, from_spdf,
+               to_label, to_mult, to_spdf, comments) values (?, ?, ?, ?, ?, ?, ?, ?)""",
+                                  (id_molecule, row["from_label"], row["from_mult"], row["from_spdf"], row["to_label"],
+            row["to_mult"], row["to_spdf"], ""))
+            id_system = cursor.lastrowid
+
+        # Inserts data into the 'pfantmol' table
+        conn.execute("insert into pfantmol "
+                     "(id_system, description, fe, do, am, bm, ua, ub, te, cro, s) "
+                     "values (?,?,?,?,?,?,?,?,?,?,?)",
+                     (id_molecule, molecule.description, molecule.fe, molecule.do, molecule.am,
+                      molecule.bm, molecule.ua, molecule.ub, molecule.te,
+                      molecule.cro, molecule.s))
+
+    conn.commit()
+
+
+def insert_pfantmol_data():
+    """Inserts molecular header information 'PFANT/data/common/molecules.dat'"""
 
     # Uses PFANT/data/common/molecules.dat to retrieve "fe", "do", "am", etc.
-    filemol = ft.FileMolecules()
-    filemol.load(pf.get_pfant_data_path("common", "molecules.dat"))
+
     # bysym = dict([(tuple(m.symbols), m) for m in filemol])
 
-    for m in filemol:
+    for molecule in filemol:
         id_molecule = conn.execute("select id from molecule where formula = ?",
-                                   (ft.symbols_to_formula(m.symbols),)).fetchone()["id"]
+                                   (ft.symbols_to_formula(molecule.symbols),)).fetchone()["id"]
 
         conn.execute("insert into pfantmol "
             "(id_molecule, description, fe, do, am, bm, ua, ub, te, cro, s) "
             "values (?,?,?,?,?,?,?,?,?,?,?)",
-            (id_molecule, m.description, m.fe, m.do, m.am, m.bm, m.ua, m.ub, m.te,
-            m.cro, m.s))
+            (id_molecule, molecule.description, molecule.fe, molecule.do, molecule.am, molecule.bm, molecule.ua, molecule.ub, molecule.te,
+            molecule.cro, molecule.s))
     conn.commit()
 
 
-def insert_nist_data(moldb):
+def insert_nist_data():
     """Tries to download data from NIST Web Book online"""
-    assert isinstance(moldb, ft.FileMolDB)
-
-    conn = moldb.get_conn()
 
     for row in conn.execute("select id, formula from molecule order by id").fetchall():
         id_molecule, formula = row["id"], row["formula"]
@@ -109,6 +150,11 @@ def load_list_file(filename):
 
 
 
+
+
+
+
+
 # Electronic systems
 #
 # # TODO calculate FCFs for Tio, FeH, C2, CO
@@ -123,12 +169,8 @@ SYSTEMS_MAP = (
 ("MgH", "mghb.out", "B", 2, 0, "X", 2, 0, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
 )
 
-def my_info(s):
-    a99.get_python_logger().info("[build-moldb] {}".format(s))
 
-def insert_systems_and_franck_condon_factors(moldb):
-    conn = moldb.get_conn()
-    assert isinstance(conn, sqlite3.Connection)
+def insert_systems_and_franck_condon_factors():
 
     for formula, filename, from_label, from_mult, from_spdf, to_label, to_mult, to_spdf, comments in SYSTEMS_MAP:
         id_molecule = conn.execute("select id from molecule where formula = ?",
@@ -151,6 +193,7 @@ def insert_systems_and_franck_condon_factors(moldb):
                              (id_system, vl, v2l, fcf))
     conn.commit()
 
+
 if __name__ == "__main__":
 
     filename = ft.FileMolDB.default_filename
@@ -166,20 +209,27 @@ if __name__ == "__main__":
     if not yn:
         sys.exit()
 
-    f = ft.FileMolDB()
-    f.filename = filename
-    my_info("Creating schema...")
-    f.create_schema()
-    my_info("New filename: '{}'".format(f.filename))
-    my_info("Inserting molecules...")
-    insert_molecules(f)
-    my_info("Inserting Franck-Condon Factors from Bruno Castilho's work...")
-    insert_systems_and_franck_condon_factors(f)
-    my_info("Inserting molecule header information from '{}'...".
-          format(pf.get_pfant_data_path("common", "molecules.dat")))
-    insert_pfantmol_data(f)
-    my_info("Inserting data from NIST Chemistry Web Book online...")
-    insert_nist_data(f)
-    # populate_moldb(f)
-    # insert_franck_condon_factors(f)
+    filemol = ft.FileMolecules()
+    filemol.load(pf.get_pfant_data_path("common", "molecules.dat"))
 
+    moldb = ft.FileMolDB()
+    moldb.filename = filename
+    my_info("Creating schema...")
+    moldb.create_schema()
+
+    conn = moldb.get_conn()
+    assert isinstance(conn, sqlite3.Connection)
+
+
+    my_info("New filename: '{}'".format(moldb.filename))
+    my_info("Inserting molecules...")
+    insert_molecules()
+    my_info("Inserting systems...")
+    insert_systems()
+    # my_info("Inserting Franck-Condon Factors from Bruno Castilho's work...")
+    # insert_systems_and_franck_condon_factors(moldb)
+    # my_info("Inserting molecule header information from '{}'...".
+    #       format(pf.get_pfant_data_path("common", "molecules.dat")))
+    # insert_pfantmol_data(moldb)
+    # my_info("Inserting data from NIST Chemistry Web Book online...")
+    # insert_nist_data(moldb)

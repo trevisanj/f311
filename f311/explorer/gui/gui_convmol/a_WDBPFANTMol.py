@@ -9,7 +9,7 @@ __all__ = ["WDBPFANTMol"]
 
 
 # Field names to leave out of table widget
-_FIELDNAMES_OUT = ("id_molecule",)
+_FIELDNAMES_OUT = ("id_system",)
 
 
 class WDBPFANTMol(WDBRegistry):
@@ -18,11 +18,11 @@ class WDBPFANTMol(WDBRegistry):
     def __init__(self, *args):
         WDBRegistry.__init__(self, *args)
 
-        self._id_molecule = None
+        self._id_system = None
 
-    def set_id_molecule(self, id_):
+    def set_id_system(self, id_):
         """Sets molecule id and re-populates table"""
-        self._id_molecule = id_
+        self._id_system = id_
         self._populate()
 
     def find_formula(self, formula):
@@ -46,7 +46,7 @@ class WDBPFANTMol(WDBRegistry):
             curr_idx = self.tableWidget.currentRow()
 
             t = self.tableWidget
-            rows = a99.cursor_to_rows(self._f.query_pfantmol(id_molecule=self._id_molecule))
+            rows = a99.cursor_to_rows(self._f.query_pfantmol(id_system=self._id_system))
             ti = self._f.get_table_info("pfantmol")
             fieldnames = [name for name in ti if name not in _FIELDNAMES_OUT]
             # unfortunately QTableWidget is not prepared to show HTML col_names = [row["caption"] or row["name"] for row in ti if not row["name"] in FIELDNAMES_OUT]
@@ -92,9 +92,9 @@ class WDBPFANTMol(WDBRegistry):
         if r == QDialog.Accepted:
             kwargs = form.get_kwargs()
             conn = self._f.get_conn()
-            s = "insert into pfantmol (id_molecule, {}) values ({}, {})".\
+            s = "insert into pfantmol (id_system, {}) values ({}, {})".\
                 format(", ".join([p.name for p in params]),
-                       self._id_molecule,
+                       self._id_system,
                        ", ".join(["?"]*len(params)))
             cursor = conn.execute(s, list(kwargs.values()))
             id_ = cursor.lastrowid

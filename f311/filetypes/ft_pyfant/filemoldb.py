@@ -7,6 +7,7 @@ Represents SQLite database of molecular constants
 
 import a99
 from .. import FileSQLiteDB
+from .. import basic
 # import sqlite3
 import tabulate
 import re
@@ -286,7 +287,7 @@ class FileMolDB(FileSQLiteDB):
         #
         # **Note** 'symbol_a', 'symbol_b' matches element symbols found in 'dissoc.dat'
         c.execute("""create table pfantmol (id integer primary key,
-                                            id_molecule integer,
+                                            id_system integer,
                                             description text,
                                             fe real,
                                             do real,
@@ -460,9 +461,9 @@ class MolConsts(dict):
                       lambda x: x, lambda x: int(x), SPDF_to_int,]
 
         # Formula
-        groups = re.match("\w+", string)
-        if groups is not None:
-            self["formula"] = groups[0]
+        symbols = basic.description_to_symbols(string)
+        if symbols is not None:
+            self["formula"] = basic.symbols_to_formula(symbols)
 
         # Parses system
         expr = re.compile("\[\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)[+-]{0,1}\s*-+\s*\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)[+-]{0,1}\s*\]")
