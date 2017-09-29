@@ -77,7 +77,7 @@ class Conv(object):
         mol.sol = sols_list
         f = ft.FileMolecules()
         now = datetime.datetime.now()
-        f.titm = "Created by f311.convmol.Conv.make_file_molecules() @ {}".format(now.isoformat())
+        f.titm = "PFANT molecular lines file. Created by f311.convmol.Conv.make_file_molecules() @ {}".format(now.isoformat())
         f.molecules = [mol]
         return f, log
 

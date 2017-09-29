@@ -3,11 +3,14 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from a99 import WDBRegistry
 import a99
-from .a_WDBFCF import *
+import f311.filetypes as ft
 
 
 __all__ = ["WDBSystem"]
 
+
+# style for table widget column "system"
+SYSTEMSTYLE = ft.SS_ALL_SPECIAL  #ft.SS_SUPERSCRIPT
 
 # Field names to leave out of table widget
 _FIELDNAMES_OUT = ("id_molecule",)
@@ -24,6 +27,7 @@ class WDBSystem(WDBRegistry):
         """Sets molecule id and re-populates table"""
         self._id_molecule = id_
         self._populate()
+        self._move_to_first()
 
     def _populate(self, restore_mode=None):
         """
@@ -34,6 +38,15 @@ class WDBSystem(WDBRegistry):
                 - "index": tries to restore same row index
                 - anything else: does not re-position
         """
+
+        if self._f is None:
+            return
+
+
+        ff = [lambda row: ft.mol_consts_to_system_str(row, SYSTEMSTYLE),
+              lambda row: row["notes"]]
+        hh = ["system", "notes"]
+
         self._flag_populating = True
         try:
             curr_idx = self.tableWidget.currentRow()
@@ -41,18 +54,18 @@ class WDBSystem(WDBRegistry):
             t = self.tableWidget
             rows = a99.cursor_to_rows(self._f.query_system(id_molecule=self._id_molecule))
             ti = self._f.get_table_info("system")
-            fieldnames = [name for name in ti if name not in _FIELDNAMES_OUT]
+            # fieldnames = [name for name in ti if name not in _FIELDNAMES_OUT]
             # unfortunately QTableWidget is not prepared to show HTML col_names = [row["caption"] or row["name"] for row in ti if not row["name"] in FIELDNAMES_OUT]
-            col_names = fieldnames
-            nr, nc = len(rows), len(fieldnames)
+            col_names = hh
+            nr, nc = len(rows), len(hh)
 
             a99.reset_table_widget(t, nr, nc)
             t.setHorizontalHeaderLabels(col_names)
 
             if nr > 0:
                 for i, row in enumerate(rows):
-                    for j, fieldname in enumerate(fieldnames):
-                        cell = row[fieldname]
+                    for j, f in enumerate(ff):
+                        cell = f(row)
                         item = QTableWidgetItem("" if cell is None else str(cell))
                         t.setItem(i, j, item)
             t.resizeColumnsToContents()

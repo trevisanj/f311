@@ -18,6 +18,7 @@ class WDBMolecule(WDBRegistry):
 
     def _f_changed(self):
         self._populate()
+#        self._move_to_first()
 
     def _find_formula(self, formula):
         """Moves to row where formula is (if found, otherwise does nothing)"""
@@ -36,6 +37,10 @@ class WDBMolecule(WDBRegistry):
                 "index": tries to restore same row index
                 anything else: does not re-position
         """
+
+        if self._f is None:
+            return
+
         self._flag_populating = True
         try:
             t = self.tableWidget

@@ -69,7 +69,7 @@ class ConvKurucz(Conv):
         lines = lines.lines
         n = len(lines)
 
-        S = self.mol_consts["s"]
+        S = self.mol_consts.get_S2l()
         DELTAK = self.mol_consts["cro"]
         FE = self.mol_consts["fe"]
         LAML = self.mol_consts["from_spdf"]
@@ -125,7 +125,7 @@ class ConvKurucz(Conv):
                     gf_pfant *= 10**line.loggf
 
                 if self.flag_fcf:
-                    gf_pfant *= fcf
+                    gf_pfant *= fcf  * 0.005257
 
             except Exception as e:
                 reason = a99.str_exc(e)

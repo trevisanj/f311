@@ -30,13 +30,14 @@ def test_filemolkurucz():
 def test_conv_kurucz(tmpdir):
     pass
     os.chdir(str(tmpdir))
+
     db = ft.FileMolDB()
     db.init_default()
     # conn = db.get_conn()
 
 
     mol_consts = ft.MolConsts()
-    mol_consts.populate_all_using_ids(db, id_molecule=4, id_system=6, id_pfantmol=12, id_statel=96, id_state2l=97)
+    mol_consts.populate_all_using_str(db, "OH [A 2 Sigma - X 2 Pi]")
     mol_consts.None_to_zero()
 
     h = _fake_file()
@@ -44,7 +45,7 @@ def test_conv_kurucz(tmpdir):
     fileobj._do_load_h(h, "_fake_file")
 
     conv = cm.ConvKurucz(mol_consts=mol_consts,
-                         flag_hlf=False, flag_normhlf=False, flag_fcf=False, flag_quiet=False,
+                         flag_hlf=True, flag_normhlf=True, flag_fcf=False, flag_quiet=False,
                          fcfs=None, iso=None)
 
     f, log = conv.make_file_molecules(fileobj)

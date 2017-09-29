@@ -9,8 +9,8 @@ import a99
 import f311.filetypes as ft
 
 
-ABONDS_HEADERS = ["Element", "Abundance", "Comments"]
-COMMENTS_COLUMN_WIDTH = 200
+ABONDS_HEADERS = ["Element", "Abundance", "Notes"]
+NOTES_COLUMN_WIDTH = 200
 
 
 def _format_error(row_index, message):
@@ -80,22 +80,22 @@ class WFileAbonds(QWidget):
         l.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
 
-        # # Splitter comments box; the table; and the errors area
+        # # Splitter notes box; the table; and the errors area
 
         sp = self.splitter = QSplitter(Qt.Vertical)
         la.addWidget(sp)
 
-        # # Edit box for the comments
+        # # Edit box for the notes
 
         w = self.c3f1x2 = QWidget()
         sp.addWidget(w)
         l = self.c114_2 = QHBoxLayout(w)
         a99.set_margin(l, 0)
         l.setSpacing(4)
-        label = self.c33_1 = QLabel("&Comments")
+        label = self.c33_1 = QLabel("&Notes")
         l.addWidget(label)
-        edit = self.textEditComments = QPlainTextEdit()
-        edit.textChanged.connect(self.on_textEditComments_textChanged)
+        edit = self.textEditNotes = QPlainTextEdit()
+        edit.textChanged.connect(self.on_textEditNotes_textChanged)
         l.addWidget(edit)
         label.setBuddy(edit)
         T = "Use this space to write annotations such as references"
@@ -241,7 +241,7 @@ class WFileAbonds(QWidget):
                 self.flag_process_changes = True
             self.changed.emit()
 
-    def on_textEditComments_textChanged(self):
+    def on_textEditNotes_textChanged(self):
         if self.flag_process_changes:
             self._update_file_abonds()
             self.changed.emit()
@@ -280,16 +280,16 @@ class WFileAbonds(QWidget):
 
             # list with the vectors themselves
 
-            attrs = [o.__getattribute__(x) for x in ["ele", "abol", "comments_per_ele"]]
+            attrs = [o.__getattribute__(x) for x in ["ele", "abol", "notes_per_ele"]]
 
             for i in range(len(o)):
                 for j, attr in enumerate(attrs):
                     item = QTableWidgetItem(str(attr[i]).strip())
                     t.setItem(i, j, item)
             t.resizeColumnsToContents()
-            t.setColumnWidth(2, COMMENTS_COLUMN_WIDTH)  # Make room for comments for element
+            t.setColumnWidth(2, NOTES_COLUMN_WIDTH)  # Make room for notes for element
 
-            self.textEditComments.setPlainText(o.comments)
+            self.textEditNotes.setPlainText(o.notes)
         finally:
             self.flag_process_changes = True
 
@@ -320,7 +320,7 @@ class WFileAbonds(QWidget):
         o, t = self.f, self.tableWidget
         assert isinstance(t, QTableWidget)
         n = t.rowCount()
-        ele, abol, comments_per_ele = [], [], []
+        ele, abol, notes_per_ele = [], [], []
 
         for i in range(n):
             # # Element
@@ -343,10 +343,10 @@ class WFileAbonds(QWidget):
             abol.append(x)
             item.setText(str(x))
 
-            # # Comments per element (no validation required)
+            # # Notes per element (no validation required)
             item = t.item(i, 2)
             x = str((item.text())).strip()
-            comments_per_ele.append(x)
+            notes_per_ele.append(x)
 
         d = self.__default_dissoc
         for elem, cclog in zip(d.elems, d.cclog):
@@ -358,8 +358,8 @@ class WFileAbonds(QWidget):
 
         o.ele = ele
         o.abol = abol
-        o.comments_per_ele = comments_per_ele
-        o.comments = self.textEditComments.toPlainText()
+        o.notes_per_ele = notes_per_ele
+        o.notes = self.textEditNotes.toPlainText()
         self.flag_valid = len(errors) == 0
         emsg = ""
         if len(errors) > 0 or len(warnings) > 0:

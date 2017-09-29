@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import *
 import a99
 from .a_WDBMolecule import WDBMolecule
 from .a_WDBState import WDBState
-from .a_WDBPFANTMol import *
 from .a_WDBSystemPfantmolFCF import *
 import os
 
@@ -71,7 +70,7 @@ class WFileMolDB(a99.WBase):
         w1 = self.tabWidget = QTabWidget(self)
 
         # ### First tab: systems, PFANT molecules, and Franck-Condon factors
-        w = self.w_system = WDBSystemFCF(self.parent_form)
+        w = self.w_system = WDBSystemPFANTMolFCF(self.parent_form)
         w.changed.connect(self.changed)
         w1.addTab(self.w_system, "Electronic systems (Alt+&E)")
 
@@ -90,6 +89,7 @@ class WFileMolDB(a99.WBase):
         # # Final adjustments
         a99.nerdify(self)
 
+
     def load(self, x):
         self._f = x
         self.w_mol.f = x
@@ -97,6 +97,7 @@ class WFileMolDB(a99.WBase):
         self.w_state.f = x
         self.update_gui_label_fn()
 
+        self.w_mol._move_to_first()
 
     def mol_id_changed(self):
         id_ = self.w_mol.id

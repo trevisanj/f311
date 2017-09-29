@@ -6,8 +6,9 @@ import bs4
 import re
 
 
-__all__ = ["get_nist_webbook_constants"]
+__all__ = ["get_nist_webbook_constants", "NIST_URL"]
 
+NIST_URL = "http://webbook.nist.gov/chemistry/form-ser.html"
 
 _conv_sup = {"1": "\u2071",
              "2": "\u00b2",

@@ -49,7 +49,7 @@ def vald3_to_sols(mol_consts, file_vald3, qgbd_calculator):
     lines = file_vald3.speciess[0].lines
     n = len(lines)
 
-    S = mol_consts["s"]
+    S = mol_consts.get_S2l()
     DELTAK = mol_consts["cro"]
 
     sols = OrderedDict()  # one item per (vl, v2l) pair

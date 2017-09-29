@@ -71,7 +71,7 @@ class ConvPlez(Conv):
 
         sols = []
 
-        S = mol_consts["s"]
+        S = mol_consts.get_S2l()
         DELTAK = mol_consts["cro"]
         fe = mol_consts["fe"]
 

@@ -122,7 +122,7 @@ class _MultiplicityToolbox(dict):
 
         LAML = mol_consts["from_spdf"]
         LAM2L = mol_consts["to_spdf"]
-        S = mol_consts["s"]
+        S = mol_consts.get_S2l()
         # if LAML-LAM2L not in self.absDeltaLambda:
         if abs(LAML - LAM2L) != self.absDeltaLambda:
             raise ValueError("Invalid Delta Lambda {}. abs(Delta Lambda) must be {}". \
@@ -169,7 +169,7 @@ class _MTDoublet1(_MultiplicityToolbox):
         vl, v2l, J, branch = key
         cc = self._mol_consts
 
-        S = cc["s"]
+        S = cc.get_S2l()
         DELTAK = cc["cro"]
         FE = cc["fe"]
         LAML = cc["from_spdf"]
@@ -340,7 +340,7 @@ class _MTTriplet1(_MultiplicityToolbox):
         vl, v2l, J, branch = key
         cc = self._mol_consts
 
-        S = cc["s"]
+        S = cc.get_S2l()
         DELTAK = cc["cro"]
         FE = cc["fe"]
         LAML = cc["from_spdf"]

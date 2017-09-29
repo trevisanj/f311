@@ -1,5 +1,9 @@
 # TODO list
 
+## Ask BLB
+
+- Conferir o DELTAK com a Beatriz!!!
+
 
 ## GENERAL
 
@@ -9,19 +13,21 @@
 
 - abed: Element Abundance (A(X)(ref)) (A(X)) [X/Fe]; A(X) is the current informationz    
 
-- Introduce "comments" field for main.dat and abonds.dat
+- Introduce "notes" field for main.dat
+
 
 - Enhance programs.py to sort alphabetically, generate single table (with word wrap). BTW it does not list itself
   Who cares which package. But I can filter in or out packages
  
   
-- Documentation: **Get some inspiration** (read lots of shit)!!!!
 - **Template project**
 - Programs and file types listings: implement rst rendering
 - & update explorer list_file_types() example
 
 
 ### Documentation
+
+- Release notes: roughly what has been done since the beginning
 
 - Examples/demos: I think that a good way is to write tests first, each "def test_*()" who wishes to become a demo will have to have a nice docstring,
 and I am pretty sure I can write a script to replace the "def test_<sthsth>(...)" with a "if __name__ == '__main__'" ... and so on; and I guess that I can make these appear in sphinx doc too... 
@@ -43,18 +49,11 @@ further investigation required
 
 ## Convmol
 
-- Review doublet: This may be wrong, this thing with LBIG or SMALL, gotta check again
-
-
-- Conferir o DELTAK com a Beatriz!!!
-
-
 - moldbed.py:
 
     * equip with build-moldb.py
     
 
-- WMolecularConstants: system comes first, state to be searched automatically!   
 
 
 - Building database: fill in the state_label automatically, or maybe just search using the first letter
@@ -68,6 +67,7 @@ further investigation required
 
 # Explorer
 
+- programs.py: verbose collection of programs; show paths
 - Enhance explorer.py with options for spectra: save as... (have to figure out practical save as)
 - mled.py: handle and test molecule and sol deletion
 
@@ -111,7 +111,7 @@ further investigation required
 
 - ~~OPEN IN NEW WINDOW NOT COPYING EVERYTHIGN!!!!!~~
 
-- NIST scraper: I can actually go after the "A" because it follows some pattern: points to footnote and there it is (this part is what I normally enjoy doing, so should enjoy)
+- ~~NIST scraper: I can actually go after the "A" because it follows some pattern: points to footnote and there it is (this part is what I normally enjoy doing, so should enjoy)~~
 
 - ~~FileSPectrumPfant not loading properly anymore!!~~
 
@@ -122,3 +122,9 @@ further investigation required
 - ~~FileMolDB: some tables still don't have the comment field??~~
 
 - ~~NIST scrapper no longer working for all molecules~~
+
+- ~~Introduce "notes" field for abonds.dat~~
+
+- ~~Review doublet: This may be wrong, this thing with LBIG or SMALL, gotta check again~~
+
+- ~~WMolecularConstants: system comes first, state to be searched automatically!~~   

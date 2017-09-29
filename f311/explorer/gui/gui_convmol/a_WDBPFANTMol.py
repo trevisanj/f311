@@ -24,6 +24,7 @@ class WDBPFANTMol(WDBRegistry):
         """Sets molecule id and re-populates table"""
         self._id_system = id_
         self._populate()
+        self._move_to_first()
 
     def find_formula(self, formula):
         """Moves to row where formula is (if found, otherwise does nothing)"""
@@ -41,6 +42,10 @@ class WDBPFANTMol(WDBRegistry):
                 - "index": tries to restore same row index
                 - anything else: does not re-position
         """
+
+        if self._f is None:
+            return
+
         self._flag_populating = True
         try:
             curr_idx = self.tableWidget.currentRow()

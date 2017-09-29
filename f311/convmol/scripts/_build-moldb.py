@@ -16,10 +16,12 @@ import os
 import sys
 from f311 import convmol as cm
 from f311 import pyfant as pf
+from f311.convmol import NIST_URL
 
 # FileMolecules
 filemol = None
 moldb = None
+
 
 
 def my_info(s):
@@ -61,25 +63,17 @@ def insert_systems():
         id_molecule = conn.execute("select id from molecule where formula = ?",
                                    (row["formula"],)).fetchone()["id"]
 
+        row["id_molecule"] = id_molecule
+
         # Inserts data into the 'system' table
-        row_id = conn.execute("""select id from system where id_molecule = ? and from_label = ? and
-           from_mult = ? and from_spdf = ? and to_label = ? and to_mult = ? and to_spdf = ?""",
-                              (id_molecule, row["from_label"], row["from_mult"], row["from_spdf"],
-                               row["to_label"], row["to_mult"], row["to_spdf"])).fetchone()
-        if row_id is not None:
-            id_system = row_id["id"]
-        else:
-            cursor = conn.execute("""insert into system (id_molecule, from_label, from_mult, from_spdf,
-               to_label, to_mult, to_spdf, comments) values (?, ?, ?, ?, ?, ?, ?, ?)""",
-                                  (id_molecule, row["from_label"], row["from_mult"], row["from_spdf"], row["to_label"],
-            row["to_mult"], row["to_spdf"], ""))
-            id_system = cursor.lastrowid
+        id_system = moldb.insert_system_if_does_not_exist(row, "by _build-moldb.insert_systems()")
 
         # Inserts data into the 'pfantmol' table
+        # TODO "s" is redundand, make sure I am not using it
         conn.execute("insert into pfantmol "
                      "(id_system, description, fe, do, am, bm, ua, ub, te, cro, s) "
                      "values (?,?,?,?,?,?,?,?,?,?,?)",
-                     (id_molecule, molecule.description, molecule.fe, molecule.do, molecule.am,
+                     (id_system, molecule.description, molecule.fe, molecule.do, molecule.am,
                       molecule.bm, molecule.ua, molecule.ub, molecule.te,
                       molecule.cro, molecule.s))
 
@@ -160,7 +154,7 @@ def load_list_file(filename):
 # # TODO calculate FCFs for Tio, FeH, C2, CO
 SYSTEMS_MAP = (
 ("CH", "cha.out", "A", 2, 2, "X", 2, 1, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),  # A2Delta - X2Pi
-("CH", "chb.out", "B", 2, 2, "X", 2, 1, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
+("CH", "chb.out", "B", 2, 0, "X", 2, 1, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
 ("CH", "chc.out", "C", 2, 0, "X", 2, 1, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
 ("CN", "cnb.out", "B", 2, 0, "X", 2, 0, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
 ("NH", "nha.out", "A", 3, 1, "X", 3, 0, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),  # A3Pi - X3Sigma
@@ -170,15 +164,23 @@ SYSTEMS_MAP = (
 )
 
 
-def insert_systems_and_franck_condon_factors():
+def insert_franck_condon_factors():
 
-    for formula, filename, from_label, from_mult, from_spdf, to_label, to_mult, to_spdf, comments in SYSTEMS_MAP:
+    for formula, filename, from_label, from_mult, from_spdf, to_label, to_mult, to_spdf, notes in SYSTEMS_MAP:
+
+        my_info("FCFs for system ({}, {}, {}, {}, {}, {}, {})".format(formula, from_label, from_mult, from_spdf, to_label, to_mult, to_spdf))
+
         id_molecule = conn.execute("select id from molecule where formula = ?",
                                    (formula,)).fetchone()["id"]
-        cursor = conn.execute("""insert into system (id_molecule, from_label, from_mult, from_spdf,
-           to_label, to_mult, to_spdf, comments) values (?, ?, ?, ?, ?, ?, ?, ?)""",
-           (id_molecule, from_label, from_mult, from_spdf, to_label, to_mult, to_spdf, comments))
-        id_system = cursor.lastrowid
+
+
+        mol_consts = ft.MolConsts()
+        mol_consts.update(id_molecule = id_molecule, from_label = from_label,
+         from_mult = from_mult, from_spdf = from_spdf, to_label = to_label,
+         to_mult = to_mult, to_spdf = to_spdf)
+
+        id_system = moldb.insert_system_if_does_not_exist(mol_consts,
+         notes="by _build-moldb.insert_franck_condon_factors()")
 
         if filename is not None:
             # Can handle two different file formats
@@ -209,13 +211,17 @@ if __name__ == "__main__":
     if not yn:
         sys.exit()
 
-    filemol = ft.FileMolecules()
-    filemol.load(pf.get_pfant_data_path("common", "molecules.dat"))
 
     moldb = ft.FileMolDB()
     moldb.filename = filename
     my_info("Creating schema...")
     moldb.create_schema()
+
+
+
+    filemol = ft.FileMolecules()
+    filemol.load(pf.get_pfant_data_path("common", "molecules.dat"))
+
 
     conn = moldb.get_conn()
     assert isinstance(conn, sqlite3.Connection)
@@ -226,10 +232,8 @@ if __name__ == "__main__":
     insert_molecules()
     my_info("Inserting systems...")
     insert_systems()
-    # my_info("Inserting Franck-Condon Factors from Bruno Castilho's work...")
-    # insert_systems_and_franck_condon_factors(moldb)
-    # my_info("Inserting molecule header information from '{}'...".
-    #       format(pf.get_pfant_data_path("common", "molecules.dat")))
-    # insert_pfantmol_data(moldb)
-    # my_info("Inserting data from NIST Chemistry Web Book online...")
-    # insert_nist_data(moldb)
+    my_info("Inserting Franck-Condon Factors from Bruno Castilho's work...")
+    insert_franck_condon_factors()
+
+    my_info("Inserting data from NIST Chemistry Web Book ({})...".format(NIST_URL))
+    insert_nist_data()

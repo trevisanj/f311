@@ -6,11 +6,22 @@ import re
 import os
 import shutil
 import sys
+import a99
 
 
 __all__ = ["adjust_atomic_symbol", "description_to_symbols", "symbols_to_formula",
            "iz_to_branch", "branch_to_iz",
-           "get_default_data_path", "iz_to_branch_alt", "branch_to_iz_alt"]
+           "get_default_data_path", "iz_to_branch_alt", "branch_to_iz_alt",
+           "mol_consts_to_system_str", "greek_to_spdf", "spdf_to_greek",
+           "SS_PLAIN", "SS_ALL_SPECIAL", "SS_RAW", "SS_SUPERSCRIPT"
+           ]
+
+
+# **        ****                ******        ****                ******        ****
+#   **    **    ******    ******      **    **    ******    ******      **    **    ******    ******
+#     ****            ****              ****            ****              ****            ****
+#
+# Conversion and formatting routines: Atomic symbols and formulas
 
 
 def adjust_atomic_symbol(x):
@@ -86,6 +97,12 @@ def symbols_to_formula(symbols):
     else:
         return "".join(symbols_)
 
+# **        ****                ******        ****                ******        ****
+#   **    **    ******    ******      **    **    ******    ******      **    **    ******    ******
+#     ****            ****              ****            ****              ****            ****
+#
+# Conversion and formatting routines: Branch-related
+#
 
 _iz_to_branch_map = {"1": "P", "2": "Q", "3": "R", "4": "P1", "5": "Q1", "6": "R1", "7": "P2",
                      "8": "Q2", "9": "R2", "10": "P3", "11": "Q3", "12": "R3", }
@@ -98,11 +115,17 @@ _iz_to_branch_map_alt = {"1": "P1","2": "P12","3": "P21","4": "P2","5": "Q1","6"
 _branch_to_iz_map_alt = dict(((value, key) for key, value in _iz_to_branch_map_alt.items()))
 
 
-
 def iz_to_branch(iz):
     """Converts BLB's 'iz' code to string P/Q/R/P1. Inverse of branch_to_iz()
 
-    (see pfantlib.90:read_molecules())"""
+    (see pfantlib.90:read_molecules())
+
+    **Note** iz-to-branch conversion cannot be trusted because different molecules use different
+             conventions. To solve this in the future, new PFANT molecular lines .dat files will
+             have branch saved as string.
+
+    TODO note above is important
+    """
     return _iz_to_branch_map[str(iz)]
 
 
@@ -141,6 +164,7 @@ def branch_to_iz_alt(br):
     (directory ATMOS/wrk4/bruno/Mole/CH, check file, e.g., sja000.dat and source selech.f)
     """
     return _branch_to_iz_map_alt[br]
+
 
 def get_default_data_path(*args, module=None, class_=None):
     """
@@ -184,4 +208,79 @@ def copy_default_data_file(filename, module=None):
 def __get_filetypes_module():
     from f311 import filetypes as ft
     return ft
+
+
+# **        ****                ******        ****                ******        ****
+#   **    **    ******    ******      **    **    ******    ******      **    **    ******    ******
+#     ****            ****              ****            ****              ****            ****
+#
+# Multiplicity- and spdf-related conversion and formatting routines
+
+# # System styles
+# Example: "A 2 SIGMA - X 2 PI"
+SS_PLAIN = -1
+# multiplicity as superscript, spdf as Greek letter name
+SS_SUPERSCRIPT = 2
+# multiplicity as superscript, spdf as Greek letter
+SS_ALL_SPECIAL = 0
+# Does not convert SPDF to string. Example: "A 2 0 - X 2 1"
+SS_RAW = 1
+
+# superscript numbers
+_INT_TO_SUPERSCRIPT = {1: "\u2071",
+                       2: "\u00b2",
+                       3: "\u00b3",
+                       4: "\u2074"}
+
+
+__A = ["Sigma", "Pi", "Delta", "Phi"]
+
+_SPDF_TO_GREEK = dict(zip(range(len(__A)), __A))
+_GREEK_TO_SPDF = dict(zip(__A, range(len(__A))))
+
+def greek_to_spdf(greek):
+    """Converts Greek letter name (e.g., "sigma", "Sigma" (case **sensitive**)) to int value in [0, 1, 2, 3]"""
+    try:
+        ret = _GREEK_TO_SPDF[greek]
+    except KeyError:
+        raise ValueError("Invalid SPDF: '{}' (possible values: {})".format(greek, _SPDF_TO_GREEK))
+    return ret
+
+def spdf_to_greek(number):
+    """Converts int value in [0, 1, 2, 3] to the name of a Greek letter (all uppercase)"""
+    return _SPDF_TO_GREEK[number]
+
+
+def mol_consts_to_system_str(mol_consts, style=SS_ALL_SPECIAL):
+    """Compiles electronic system information into string
+
+    Args:
+        mol_consts: dict-like containing keys 'from_label', 'from_mult', 'from_spdf', 'to_label',
+                    'to_mult', 'to_spdf'
+
+        style: rendering style: one of SS_*
+
+    Returns:
+        str
+    """
+
+    if style == SS_PLAIN:
+        fmult = lambda x: x
+        fspdf = lambda x:spdf_to_greek(x)
+    elif style == SS_ALL_SPECIAL:
+        fmult = lambda x: _INT_TO_SUPERSCRIPT[x]
+        fspdf = lambda x: a99.greek_to_unicode(spdf_to_greek(x).capitalize())
+    elif style == SS_RAW:
+        fmult = lambda x: x
+        fspdf = lambda x: x
+    elif style == SS_SUPERSCRIPT:
+        fmult = lambda x: _INT_TO_SUPERSCRIPT[x]
+        fspdf = lambda x:spdf_to_greek(x)
+    else:
+        raise ValueError("Invalid style: {}".format(style))
+
+    return "{} {} {} - {} {} {}".format(mol_consts["from_label"], fmult(mol_consts["from_mult"]),
+                                    fspdf(mol_consts["from_spdf"]), mol_consts["to_label"],
+                                    fmult(mol_consts["to_mult"]), fspdf(mol_consts["to_spdf"]))
+
 

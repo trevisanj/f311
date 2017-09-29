@@ -7,10 +7,10 @@ from .a_WDBFCF import *
 from .a_WDBPFANTMol import *
 from .a_WDBSystem import *
 
-__all__ = ["WDBSystemFCF"]
+__all__ = ["WDBSystemPFANTMolFCF"]
 
 
-class WDBSystemFCF(a99.WBase):
+class WDBSystemPFANTMolFCF(a99.WBase):
     """Master-slave widget to lodge System and FCF widgets"""
 
     # Emitted whenever the value of the 'id' property changes
@@ -30,6 +30,7 @@ class WDBSystemFCF(a99.WBase):
     def f(self, f):
         self.w_system.f = f
         self.w_fcf.f = f
+        self.w_pfantmol.f = f
 
     def __init__(self, *args):
         a99.WBase.__init__(self, *args)
@@ -98,6 +99,8 @@ class WDBSystemFCF(a99.WBase):
 
         # # Final adjustments
         a99.nerdify(self)
+
+        self.w_system._move_to_first()
 
 
     def set_id_molecule(self, id_):

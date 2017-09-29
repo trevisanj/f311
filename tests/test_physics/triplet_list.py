@@ -20,7 +20,7 @@ def test_adds_to_one0(tmpdir):
         try:
             mtools = ph.multiplicity_toolbox(consts)
 
-            k = 2./ ((2*consts["s"]+1) * (2*J2l+1) * (2-consts["cro"]))
+            k = 2./ ((2 * consts.get_S2l() + 1) * (2 * J2l + 1) * (2 - consts["cro"]))
 
             mtools[(0, 0, J2l, "P1")]  # to induce populating for J2l
             sum_ = sum([x*k for x in mtools.values()])

@@ -386,7 +386,7 @@ class WMolecularConstants(a99.WBase):
         if len(data) == 0:
             cb.addItem("(no data)")
         for row in data:
-            cb.addItem(self._f.get_system_short(row))
+            cb.addItem(ft.mol_consts_to_system_str(row, style=ft.SS_ALL_SPECIAL))
             self._ids_system.append(row["id"])
         self._fill_edits_system()
         self._update_label_fcf()

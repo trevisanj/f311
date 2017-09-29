@@ -6,6 +6,7 @@ import sys
 import numpy as np
 import a99
 from .. import DataFile, adjust_atomic_symbol, branch_to_iz, iz_to_branch, description_to_symbols
+from .. import basic
 import re
 
 # TODO figure out state_from, state_to
@@ -534,9 +535,10 @@ def mol_consts_to_molecule(mol_consts):
         mol_consts: a dict-like object combining field values from tables 'molecule', 'state',
                     'pfantmol', and 'system' from a FileMolDB database
     """
+    mol_consts["system_str"] = mol_consts.get_system_str(basic.SS_PLAIN)
 
     mol = Molecule()
-    mol.description = "{name} ({formula})".format(**mol_consts)
+    mol.description = "{formula} [{system_str}]".format(**mol_consts)
     mol.symbols = description_to_symbols(mol_consts["formula"])
     mol.fe = mol_consts["fe"]
     mol.do = mol_consts["do"]
@@ -547,5 +549,5 @@ def mol_consts_to_molecule(mol_consts):
     mol.ub = mol_consts["ub"]
     mol.te = mol_consts["te"]
     mol.cro = mol_consts["cro"]
-    mol.s = mol_consts["s"]
+    mol.s = mol_consts.get_S2l()
     return mol

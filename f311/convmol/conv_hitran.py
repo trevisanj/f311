@@ -135,7 +135,7 @@ def hitran_to_sols(mol_consts, lines, qgbd_calculator):
     header = lines["header"]
     data = lines["data"]
 
-    S = mol_consts["s"]
+    S = mol_consts.get_S2l()
     DELTAK = mol_consts["cro"]
     formula = mol_consts["formula"]
 
