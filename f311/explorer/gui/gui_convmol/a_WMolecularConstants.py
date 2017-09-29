@@ -74,7 +74,18 @@ class WMolecularConstants(a99.WBase):
     def __init__(self, *args):
         a99.WBase.__init__(self, *args)
 
-        self.flag_populating = False  # activated when populating table
+        # activated when populating table
+        self._flag_populating = False
+        # # _flag_populating_* collection
+        self._flag_populating_molecule = False
+        self._flag_populating_system = False
+        self._flag_populating_states = False
+        self._flag_populating_pfantmol = False
+
+        # activated when searching for statel, state2l
+        self._flag_searching_states = False
+        # activated when searching for pfantmol
+        self._flag_searching_pfantmol = False
 
         # # Internal state
 
@@ -82,7 +93,7 @@ class WMolecularConstants(a99.WBase):
         self._f = None
 
         # Fields of interest from table 'pfantmol'
-        self._fieldnames_pfantmol = ["fe", "do", "am", "bm", "ua", "ub", "te", "cro", "s", ]
+        self._fieldnames_pfantmol = ["fe", "do", "am", "bm", "ua", "ub", "te", "cro", ]
         # Fields of interest from table 'state'
         self._fieldnames_state = ["omega_e", "omega_ex_e", "omega_ey_e", "B_e", "alpha_e", "D_e",
                                  "beta_e", "A"]
@@ -106,13 +117,13 @@ class WMolecularConstants(a99.WBase):
         self._edit_map_pfantmol = {}
         self._edit_map_system = {}
 
-        # id from table 'molecule'. In sync with combobox_select_molecule items
+        # id from table 'molecule'. In sync with combobox_molecule items
         self._ids_molecule = []
-        # id from table 'pfantmol'. In sync with combobox_select_pfantmol
+        # id from table 'pfantmol'. In sync with combobox_pfantmol
         self._ids_pfantmol = []
-        # id from table 'state'. In sync with combobox_select_statel and combobox_state2l
+        # id from table 'state'. In sync with combobox_statel and combobox_state2l
         self._ids_state = []
-        # id from table 'system'. In sync with combobox_select_system
+        # id from table 'system'. In sync with combobox_system
         self._ids_system = []
 
         # # GUI design
@@ -127,37 +138,17 @@ class WMolecularConstants(a99.WBase):
         l.addWidget(bb)
 
         # ## Select molecule combobox
-        l0 = self.layout_select_molecule = QHBoxLayout()
+        l0 = self.layout_molecule = QHBoxLayout()
         l.addLayout(l0)
         l0.setSpacing(3)
-        la = self.label_select_molecule = QLabel("<b>Molecule</b>")
+        la = self.label_molecule = QLabel()
         la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
         l0.addWidget(la)
-        cb = self.combobox_select_molecule = QComboBox()
-        cb.currentIndexChanged.connect(self.combobox_select_molecule_currentIndexChanged)
+        cb = self.combobox_molecule = QComboBox()
+        cb.currentIndexChanged.connect(self.combobox_molecule_currentIndexChanged)
         l0.addWidget(cb)
 
-        # ## Frame with the PFANT molecule-wide fields
-
-        fr = self.frame_pfantmol = a99.get_frame()
-        l.addWidget(fr)
-        l1 = self.layout_frame_pfantmol = QVBoxLayout(fr)
-
-        # ### Select pfantmol combobox
-        l2 = self.layout_select_pfantmol = QHBoxLayout()
-        l1.addLayout(l2)
-        l2.setSpacing(3)
-        la = self.label_select_pfantmol = QLabel("<b>PFANT molecule</b>")
-        la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
-        l2.addWidget(la)
-        cb = self.combobox_select_pfantmol = QComboBox()
-        cb.currentIndexChanged.connect(self.combobox_select_pfantmol_currentIndexChanged)
-        l2.addWidget(cb)
-
-        # ### PFANT Molecular constants edit fields
-
-        lg = self.layout_grid_pfantmol = QGridLayout()
-        l1.addLayout(lg)
+        la.setBuddy(cb)
 
         # ## Frame with the combobox to select the "system"
 
@@ -166,77 +157,107 @@ class WMolecularConstants(a99.WBase):
         l1 = self.layout_frame_system = QVBoxLayout(fr)
 
         # ### Select system combobox
-        l2 = self.layout_select_system = QHBoxLayout()
+        l2 = self.layout_system = QHBoxLayout()
         l1.addLayout(l2)
         l2.setSpacing(3)
-        la = self.label_select_system = QLabel("<b>Electronic system</b>")
+        la = self.label_system = QLabel()
         la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
         l2.addWidget(la)
-        cb = self.combobox_select_system = QComboBox()
-        cb.currentIndexChanged.connect(self.combobox_select_system_currentIndexChanged)
+        cb = self.combobox_system = QComboBox()
+        cb.currentIndexChanged.connect(self.combobox_system_currentIndexChanged)
         l2.addWidget(cb)
+
+        la.setBuddy(cb)
 
         la = self.label_fcf = QLabel()
         la.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
         l1.addWidget(la)
 
-        # ### System constants edit fields
+
+        # ### State constants edit fields
 
         lg = self.layout_grid_system = QGridLayout()
         l1.addLayout(lg)
 
+        # #### Frame for pfantmol combobox end edit fields
+
+
+
+        fr = self.frame_pfantmol = a99.get_frame()
+        l1.addWidget(fr)
+        l5 = self.layout_frame_pfantmol = QVBoxLayout(fr)
+        l5.setSpacing(3)
+
+        # ##### Label and combobox in H layout
+        l55 = self.layout_pfantmol = QHBoxLayout()
+        l5.addLayout(l55)
+        l55.setSpacing(3)
+
+        la = self.label_pfantmol = QLabel("<b>&PFANT molecule</b>")
+        la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+        l55.addWidget(la)
+
+        cb = self.combobox_pfantmol = QComboBox()
+        cb.currentIndexChanged.connect(self.combobox_pfantmol_currentIndexChanged)
+        l55.addWidget(cb)
+
+        la.setBuddy(cb)
+
+        # ##### PFANT Molecular constants edit fields
+        lg = self.layout_grid_pfantmol = QGridLayout()
+        l5.addLayout(lg)
+
+
+
         # #### Frame for Diatomic molecular constants for statel
 
         fr = self.frame_statel = a99.get_frame()
-        l1.addWidget(fr)
+        l.addWidget(fr)
         l3 = self.layout_frame_statel = QVBoxLayout(fr)
 
         # ##### Select statel combobox
-        l4 = self.layout_select_statel = QHBoxLayout()
+        l4 = self.layout_statel = QHBoxLayout()
         l3.addLayout(l4)
         l4.setSpacing(3)
-        la = self.label_select_statel = QLabel("<b>Diatomic molecular constants for state'</b>")
+        la = self.label_statel = QLabel("<b>Diatomic molecular constants for state'</b>")
         la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
         l4.addWidget(la)
-        cb = self.combobox_select_statel = QComboBox()
-        cb.currentIndexChanged.connect(self.combobox_select_statel_currentIndexChanged)
+        cb = self.combobox_statel = QComboBox()
+        cb.currentIndexChanged.connect(self.combobox_statel_currentIndexChanged)
         l4.addWidget(cb)
 
-        # ##### State' edit fields
+        la.setBuddy(cb)
+
+        # ##### Statel edit fields
 
         lg = self.layout_grid_statel = QGridLayout()
         l3.addLayout(lg)
 
 
 
-
-
         # #### Frame for Diatomic molecular constants for state2l
 
         fr = self.frame_state2l = a99.get_frame()
-        l1.addWidget(fr)
+        l.addWidget(fr)
         l3 = self.layout_frame_state2l = QVBoxLayout(fr)
 
         # ##### Select state2l combobox
-        l4 = self.layout_select_state2l = QHBoxLayout()
+        l4 = self.layout_state2l = QHBoxLayout()
         l3.addLayout(l4)
         l4.setSpacing(3)
-        la = self.label_select_state2l = QLabel("<b>Diatomic molecular constants for state''</b>")
+        la = self.label_state2l = QLabel("<b>Diatomic molecular constants for state''</b>")
         la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
         l4.addWidget(la)
-        cb = self.combobox_select_state2l = QComboBox()
-        cb.currentIndexChanged.connect(self.combobox_select_state2l_currentIndexChanged)
+        cb = self.combobox_state2l = QComboBox()
+        cb.currentIndexChanged.connect(self.combobox_state2l_currentIndexChanged)
         l4.addWidget(cb)
 
-        # ##### State' edit fields
+        la.setBuddy(cb)
+
+        # ##### State2l edit fields
 
         lg = self.layout_grid_state2l = QGridLayout()
         l3.addLayout(lg)
-
-
-
-
-
 
 
 
@@ -266,6 +287,7 @@ class WMolecularConstants(a99.WBase):
         self._f = f
         if f is not None:
             self._populate()
+            self._auto_search()
 
 
     def None_to_zero(self):
@@ -275,54 +297,83 @@ class WMolecularConstants(a99.WBase):
                 edit.setText("0")
 
     ################################################################################################
+    # # Qt override
+
+    def eventFilter(self, obj_focused, event):
+        if event.type() == QEvent.FocusIn:
+            if obj_focused in self._edit_map.values():
+                self.status(obj_focused.toolTip())
+        return False
+
+    ################################################################################################
     # # Slots
 
-    def combobox_select_molecule_currentIndexChanged(self):
-        self._populate_sub_comboboxes()
+    def combobox_molecule_currentIndexChanged(self):
+        if self._flag_populating_molecule:
+            return
 
-    def combobox_select_pfantmol_currentIndexChanged(self):
+        self._populate_sub_comboboxes()
+        self._auto_search()
+
+    def combobox_pfantmol_currentIndexChanged(self):
+        if self._flag_populating_pfantmol:
+            return
+
         self._fill_edits_pfantmol()
 
-    def combobox_select_statel_currentIndexChanged(self):
+    def combobox_statel_currentIndexChanged(self):
+        if self._flag_populating_states:
+            return
+
         self._fill_edits_statel()
 
-    def combobox_select_state2l_currentIndexChanged(self):
+    def combobox_state2l_currentIndexChanged(self):
+        if self._flag_populating_states:
+            return
+
         self._fill_edits_state2l()
 
-    def combobox_select_system_currentIndexChanged(self):
+    def combobox_system_currentIndexChanged(self):
+        if self._flag_populating_system:
+            return
+
         self._fill_edits_system()
         self._update_label_fcf()
 
+        self._populate_combobox_pfantmol()
+
+        self._auto_search_states()
+        self._auto_search_pfantmol()
 
     ################################################################################################
     # # Internal function
 
     def _get_id_molecule(self):
         if len(self._ids_molecule) > 0:
-            return self._ids_molecule[self.combobox_select_molecule.currentIndex()]
+            return self._ids_molecule[self.combobox_molecule.currentIndex()]
         return None
 
     def _get_id_pfantmol(self):
-        idx = self.combobox_select_pfantmol.currentIndex()
+        idx = self.combobox_pfantmol.currentIndex()
         if idx > 0:
             return self._ids_pfantmol[idx-1]
         return None
 
     def _get_id_statel(self):
-        idx = self.combobox_select_statel.currentIndex()
+        idx = self.combobox_statel.currentIndex()
         if idx > 0:
             return self._ids_state[idx-1]
         return None
 
     def _get_id_state2l(self):
-        idx = self.combobox_select_state2l.currentIndex()
+        idx = self.combobox_state2l.currentIndex()
         if idx > 0:
             return self._ids_state[idx-1]
         return None
 
     def _get_id_system(self):
         if len(self._ids_system) > 0:
-            return self._ids_system[self.combobox_select_system.currentIndex()]
+            return self._ids_system[self.combobox_system.currentIndex()]
         return None
 
     def _get_fcf_dict(self):
@@ -331,95 +382,104 @@ class WMolecularConstants(a99.WBase):
     def _populate(self):
         if not self._flag_built_edits:
             self._build_edits()
-        self._populate_combobox_select_molecule()
+        self._populate_combobox_molecule()
         self._populate_sub_comboboxes()
 
     def _populate_sub_comboboxes(self):
-        self._populate_combobox_select_pfantmol()
-        self._populate_combobox_select_state()
-        self._populate_combobox_select_system()
+        self._populate_combobox_system()
+        self._populate_combobox_pfantmol()
+        self._populate_combobox_state()
 
-    def _populate_combobox_select_molecule(self):
-        cb = self.combobox_select_molecule
-        cb.clear()
-        self._ids_molecule = []
-        cursor = self._f.query_molecule()
-        for row in cursor:
-            cb.addItem("{:10} {}".format(row["formula"], row["name"]))
-            self._ids_molecule.append(row["id"])
+    def _populate_combobox_molecule(self):
+        if self._flag_populating_molecule:
+            return
 
-    def _populate_combobox_select_pfantmol(self):
-        cb = self.combobox_select_pfantmol
-        cb.clear()
-        self._ids_pfantmol = []
-        data = self._f.query_pfantmol(id_molecule=self._get_id_molecule()).fetchall()
-        cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
-        for row in data:
-            cb.addItem("{}".format(row["description"]))
-            self._ids_pfantmol.append(row["id"])
-        self._fill_edits_pfantmol()
+        self._flag_populating_molecule = True
+        try:
+            cb = self.combobox_molecule
+            cb.clear()
+            self._ids_molecule = []
+            cursor = self._f.query_molecule()
+            for row in cursor:
+                cb.addItem("{:10} {}".format(row["formula"], row["name"]))
+                self._ids_molecule.append(row["id"])
+            self._set_caption_molecule()
 
-    def _populate_combobox_select_state(self):
-        self._ids_state = []
-        data = self._f.query_state(id_molecule=self._get_id_molecule()).fetchall()
-        cb = self.combobox_select_statel
-        cb.clear()
-        cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
-        for row in data:
-            cb.addItem("{}".format(row["State"]))
-            self._ids_state.append(row["id"])
+        finally:
+            self._flag_populating_molecule = False
 
-        cb = self.combobox_select_state2l
-        cb.clear()
-        cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
-        for row in data:
-            cb.addItem("{}".format(row["State"]))
+    def _populate_combobox_pfantmol(self):
+        if self._flag_populating_pfantmol:
+            return
 
-        self._fill_edits_statel()
-        self._fill_edits_state2l()
+        self._flag_populating_pfantmol = True
+        try:
+            cb = self.combobox_pfantmol
+            cb.clear()
+            self._ids_pfantmol = []
 
-    def _populate_combobox_select_system(self):
-        cb = self.combobox_select_system
-        cb.clear()
-        self._ids_system = []
-        data = self._f.query_system(id_molecule=self._get_id_molecule()).fetchall()
-        if len(data) == 0:
-            cb.addItem("(no data)")
-        for row in data:
-            cb.addItem(ft.mol_consts_to_system_str(row, style=ft.SS_ALL_SPECIAL))
-            self._ids_system.append(row["id"])
-        self._fill_edits_system()
-        self._update_label_fcf()
+            id_system = self._get_id_system()
 
+            if id_system is not None:
+                data = self._f.query_pfantmol(id_system=self._get_id_system()).fetchall()
+                cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
+                for row in data:
+                    cb.addItem("{}".format(row["description"]))
+                    self._ids_pfantmol.append(row["id"])
 
-    def __build_edits_generic(self, lg, fn, nc, ti, em):
-        """Populates a grid layout with edit fields
+            self._fill_edits_pfantmol()
+            self._set_caption_pfantmol()
+        finally:
+            self._flag_populating_pfantmol = False
 
-        Args:
-            lg: QGridLayout
-            fn: field names
-            nc: number of columns
-            ti: dict-like object with information about fields
-            em: edit map
-        """
-        n = len(fn)
-        for j in range(nc):
-            # ### One grid layout for each column of fields
-            ii = range(j, n, nc)
-            for i in range(len(ii)):
-                fieldname = fn[ii[i]]
-                info = ti[fieldname]
-                caption = info["caption"] or fieldname
-                a = QLabel(caption)
-                e = QLineEdit("")
-                tooltip = info["tooltip"]
-                if tooltip:
-                    a.setToolTip(tooltip)
-                    e.setToolTip(tooltip)
-                self._edit_map[fieldname] = e
-                em[fieldname] = e
-                lg.addWidget(a, i, j * 2)
-                lg.addWidget(e, i, j * 2 + 1)
+    def _populate_combobox_state(self):
+        if self._flag_populating_states:
+            return
+
+        self._flag_populating_states = True
+        try:
+            self._ids_state = []
+            data = self._f.query_state(id_molecule=self._get_id_molecule()).fetchall()
+            cb = self.combobox_statel
+            cb.clear()
+            cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
+            for row in data:
+                cb.addItem("{}".format(row["State"]))
+                self._ids_state.append(row["id"])
+
+            cb = self.combobox_state2l
+            cb.clear()
+            cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
+            for row in data:
+                cb.addItem("{}".format(row["State"]))
+
+            self._set_caption_state()
+
+        finally:
+            self._flag_populating_states = False
+
+    def _populate_combobox_system(self):
+        if self._flag_populating_system:
+            return
+
+        self._flag_populating_system = True
+        try:
+            cb = self.combobox_system
+            cb.clear()
+            self._ids_system = []
+            data = self._f.query_system(id_molecule=self._get_id_molecule()).fetchall()
+            if len(data) == 0:
+                cb.addItem("(no data)")
+            for row in data:
+                cb.addItem(ft.mol_consts_to_system_str(row, style=ft.SS_ALL_SPECIAL))
+                self._ids_system.append(row["id"])
+
+            self._fill_edits_system()
+            self._update_label_fcf()
+            self._set_caption_system()
+
+        finally:
+            self._flag_populating_system = False
 
     def _build_edits(self):
         # pfantmol fields
@@ -435,6 +495,7 @@ class WMolecularConstants(a99.WBase):
                 caption = info["caption"] or fieldname
                 a = QLabel(caption)
                 e = QLineEdit("")
+                e.installEventFilter(self)
                 tooltip = info["tooltip"]
                 if tooltip:
                     a.setToolTip(tooltip)
@@ -446,7 +507,7 @@ class WMolecularConstants(a99.WBase):
                 lg.addWidget(e, i, j * 2 + 1)
 
         # system fields
-        nr, nc, n = 2, 2, len(self._fieldnames_system)
+        nr, nc, n = 2, 3, len(self._fieldnames_system)
         ti = self._f.get_table_info("system")
         lg = self.layout_grid_system
         for j in range(nc):
@@ -458,6 +519,7 @@ class WMolecularConstants(a99.WBase):
                 caption = info["caption"] or fieldname
                 a = QLabel(caption)
                 e = QLineEdit("")
+                e.installEventFilter(self)
                 tooltip = info["tooltip"]
                 if tooltip:
                     a.setToolTip(tooltip)
@@ -481,6 +543,7 @@ class WMolecularConstants(a99.WBase):
                 caption = info["caption"] or fieldname
                 a = QLabel(caption)
                 e = QLineEdit("")
+                e.installEventFilter(self)
                 tooltip = info["tooltip"]
                 if tooltip:
                     a.setToolTip(tooltip)
@@ -505,6 +568,7 @@ class WMolecularConstants(a99.WBase):
                 caption = info["caption"] or fieldname
                 a = QLabel(caption)
                 e = QLineEdit("")
+                e.installEventFilter(self)
                 tooltip = info["tooltip"]
                 if tooltip:
                     a.setToolTip(tooltip)
@@ -560,3 +624,63 @@ class WMolecularConstants(a99.WBase):
             format("blue" if n != 0 else "red", n, "" if n == 1 else "s")
         self.label_fcf.setText(s)
 
+    def _auto_search(self):
+        self._auto_search_pfantmol()
+        self._auto_search_states()
+
+    def _auto_search_pfantmol(self):
+        if self._flag_populating_pfantmol or self._flag_searching_pfantmol:
+            return
+
+        self._flag_searching_pfantmol = True
+        try:
+            if len(self._ids_pfantmol) > 0:
+                self.combobox_pfantmol.setCurrentIndex(1)
+        finally:
+            self._flag_searching_pfantmol = False
+
+    def _auto_search_states(self):
+        if self._flag_populating_states or self._flag_searching_states:
+            return
+
+        self._flag_searching_states = True
+        try:
+            self.__auto_search_state("from_label")
+            self.__auto_search_state("to_label")
+            self._fill_edits_statel()
+            self._fill_edits_state2l()
+        finally:
+            self._flag_searching_states = False
+
+    def __auto_search_state(self, fieldname="from_label"):
+        cb = self.combobox_statel if fieldname == "from_label" else self.combobox_state2l
+        id_molecule = self._get_id_molecule()
+        if id_molecule is not None:
+            id_system = self._get_id_system()
+            if id_system is not None:
+                row_system = self._f.query_system(id=id_system).fetchone()
+
+                row_state = self._f.get_conn().execute("select * from state where id_molecule = ? "
+                 "and State like ?", (id_molecule, "{}%".format(row_system[fieldname]),)).fetchone()
+
+                if row_state is not None:
+                    try:
+                        cb.setCurrentIndex(self._ids_state.index(row_state["id"]) + 1)
+                    except ValueError:
+                        raise
+
+
+    def _set_caption_molecule(self):
+        self.label_molecule.setText("<b>&Molecule ({})</b>".format(len(self._ids_molecule)))
+
+
+    def _set_caption_system(self):
+        self.label_system.setText("<b>&Electronic system ({})</b>".format(len(self._ids_system)))
+
+
+    def _set_caption_state(self):
+        self.label_statel.setText("<b>State ' ({})</b>".format(len(self._ids_state)))
+        self.label_state2l.setText("<b>State '' ({})</b>".format(len(self._ids_state)))
+
+    def _set_caption_pfantmol(self):
+        self.label_pfantmol.setText("<b>&PFANT molecule ({})</b>".format(len(self._ids_pfantmol)))
