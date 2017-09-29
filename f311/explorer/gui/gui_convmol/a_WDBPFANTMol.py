@@ -9,7 +9,7 @@ __all__ = ["WDBPFANTMol"]
 
 
 # Field names to leave out of table widget
-_FIELDNAMES_OUT = ("id_system",)
+_FIELDNAMES_OUT = ("id_system", "s")
 
 
 class WDBPFANTMol(WDBRegistry):
@@ -81,7 +81,7 @@ class WDBPFANTMol(WDBRegistry):
         """Returns a Parameters object containing information about the fields that may be edited"""
         ti = self._f.get_table_info("pfantmol")
         params = a99.table_info_to_parameters(ti)
-        params = [p for p in params if not p.name.startswith("id")]
+        params = [p for p in params if not (p.name.startswith("id") or p.name in _FIELDNAMES_OUT)]
         return params
 
     def _get_edit_field_names(self):

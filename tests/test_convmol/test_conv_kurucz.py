@@ -51,4 +51,4 @@ def test_conv_kurucz(tmpdir):
     f, log = conv.make_file_molecules(fileobj)
 
     assert f.num_lines == 5
-
+    assert f[0].s == 0.5

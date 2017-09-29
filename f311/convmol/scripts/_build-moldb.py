@@ -71,31 +71,12 @@ def insert_systems():
         # Inserts data into the 'pfantmol' table
         # TODO "s" is redundand, make sure I am not using it
         conn.execute("insert into pfantmol "
-                     "(id_system, description, fe, do, am, bm, ua, ub, te, cro, s) "
-                     "values (?,?,?,?,?,?,?,?,?,?,?)",
+                     "(id_system, description, fe, do, am, bm, ua, ub, te, cro) "
+                     "values (?,?,?,?,?,?,?,?,?,?)",
                      (id_system, molecule.description, molecule.fe, molecule.do, molecule.am,
                       molecule.bm, molecule.ua, molecule.ub, molecule.te,
-                      molecule.cro, molecule.s))
+                      molecule.cro))
 
-    conn.commit()
-
-
-def insert_pfantmol_data():
-    """Inserts molecular header information 'PFANT/data/common/molecules.dat'"""
-
-    # Uses PFANT/data/common/molecules.dat to retrieve "fe", "do", "am", etc.
-
-    # bysym = dict([(tuple(m.symbols), m) for m in filemol])
-
-    for molecule in filemol:
-        id_molecule = conn.execute("select id from molecule where formula = ?",
-                                   (ft.symbols_to_formula(molecule.symbols),)).fetchone()["id"]
-
-        conn.execute("insert into pfantmol "
-            "(id_molecule, description, fe, do, am, bm, ua, ub, te, cro, s) "
-            "values (?,?,?,?,?,?,?,?,?,?,?)",
-            (id_molecule, molecule.description, molecule.fe, molecule.do, molecule.am, molecule.bm, molecule.ua, molecule.ub, molecule.te,
-            molecule.cro, molecule.s))
     conn.commit()
 
 

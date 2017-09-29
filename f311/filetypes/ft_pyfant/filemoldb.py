@@ -38,7 +38,6 @@ class FileMolDB(FileSQLiteDB):
             "ub": [None, "value of partition function for second element"],
             "te": [None, "electronic term"],
             "cro": [None, "delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)"],
-            "s": [None, "?doc?"]
         },
         "state": {
         "omega_e": ["ω<sub>e</sub>", "vibrational constant – first term (cm<sup>-1</sup>)"],
@@ -262,7 +261,6 @@ class FileMolDB(FileSQLiteDB):
         #
         # **Note** 'symbol_a', 'symbol_b' matches element symbols found in 'dissoc.dat'
         #
-        # **Note** (20170928) field 's' is ineffective
         c.execute("""create table pfantmol (id integer primary key,
                                             id_system integer,
                                             description text,
@@ -274,7 +272,6 @@ class FileMolDB(FileSQLiteDB):
                                             ub real,
                                             te real,
                                             cro real,
-                                            s real,
                                             notes text
                                            )""")
 
