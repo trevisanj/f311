@@ -15,12 +15,12 @@ __all__ = ["vald3_to_sols"]
 
 
 
-def vald3_to_sols(mol_consts, file_vald3, qgbd_calculator):
+def vald3_to_sols(molconsts, file_vald3, qgbd_calculator):
     """
     Converts HITRAN molecular lines data to PFANT "sets of lines"
 
     Args:
-        mol_consts: a dict-like object combining field values from tables 'molecule', 'state',
+        molconsts: a dict-like object combining field values from tables 'molecule', 'state',
                     and 'pfantmol' from a FileMolDB database
         file_vald3: FileVald3 instance with only one species
         qgbd_calculator: callable that can calculate "qv", "gv", "bv", "dv",
@@ -49,8 +49,8 @@ def vald3_to_sols(mol_consts, file_vald3, qgbd_calculator):
     lines = file_vald3.speciess[0].lines
     n = len(lines)
 
-    S = mol_consts.get_S2l()
-    DELTAK = mol_consts["cro"]
+    S = molconsts.get_S2l()
+    DELTAK = molconsts["cro"]
 
     sols = OrderedDict()  # one item per (vl, v2l) pair
     log = MolConversionLog(n)
@@ -81,7 +81,7 @@ def vald3_to_sols(mol_consts, file_vald3, qgbd_calculator):
 
         sol_key = "%3d%3d" % (line.vl, line.v2l)  # (v', v'') transition (v_sup, v_inf)
         if sol_key not in sols:
-            qgbd = qgbd_calculator(mol_consts, line.v2l)
+            qgbd = qgbd_calculator(molconsts, line.v2l)
             qqv = qgbd["qv"]
             ggv = qgbd["gv"]
             bbv = qgbd["bv"]

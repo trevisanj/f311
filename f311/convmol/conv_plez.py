@@ -58,8 +58,8 @@ class ConvPlez(Conv):
         #     state_from = tr["state_from"].decode("ascii")
         #     state_to = tr["state_to"].decode("ascii")
         #     try:
-        #         mol_consts = transition_dict[(mol_consts["formula"], state_from, state_to)]
-        #         tr["id_state"] = mol_consts["id_state"]
+        #         molconsts = transition_dict[(molconsts["formula"], state_from, state_to)]
+        #         tr["id_state"] = molconsts["id_state"]
         #     except KeyError as e:
         #         msg = "Will have to skip transition: '{}'".format(a99.str_exc(e))
         #         log.errors.append(msg)
@@ -71,9 +71,9 @@ class ConvPlez(Conv):
 
         sols = []
 
-        S = mol_consts.get_S2l()
-        DELTAK = mol_consts["cro"]
-        fe = mol_consts["fe"]
+        S = molconsts.get_S2l()
+        DELTAK = molconsts["cro"]
+        fe = molconsts["fe"]
 
         # TODO of course this hard-wire needs change; now just a text for OH A2Sigma-X2Pi
         LAML = 0  # Sigma
@@ -87,7 +87,7 @@ class ConvPlez(Conv):
             state_from = tr["state_from"].decode("ascii")
             state_to = tr["state_to"].decode("ascii")
             try:
-                mol_consts = transition_dict[(mol_consts["formula"], state_from, state_to)]
+                molconsts = transition_dict[(molconsts["formula"], state_from, state_to)]
             except KeyError as e:
                 msg = "Will have to skip transition: '{}'".format(a99.str_exc(e))
                 log.errors.append(msg)

@@ -69,18 +69,18 @@ class ConvKurucz(Conv):
         lines = lines.lines
         n = len(lines)
 
-        S = self.mol_consts.get_S2l()
-        DELTAK = self.mol_consts["cro"]
-        FE = self.mol_consts["fe"]
-        LAML = self.mol_consts["from_spdf"]
-        LAM2L = self.mol_consts["to_spdf"]
-        STATEL = self.mol_consts["from_label"]
-        STATE2L = self.mol_consts["to_label"]
+        S = self.molconsts.get_S2l()
+        DELTAK = self.molconsts["cro"]
+        FE = self.molconsts["fe"]
+        LAML = self.molconsts["from_spdf"]
+        LAM2L = self.molconsts["to_spdf"]
+        STATEL = self.molconsts["from_label"]
+        STATE2L = self.molconsts["to_label"]
 
         mtools = self.multiplicity_toolbox()
 
         # Prepares result
-        sols = ConvSols(self.qgbd_calculator, self.mol_consts)
+        sols = ConvSols(self.qgbd_calculator, self.molconsts)
         log = MolConversionLog(n)
 
         for i, line in enumerate(lines):
@@ -139,7 +139,7 @@ class ConvKurucz(Conv):
             sols.append_line(line, gf_pfant, branch)
 
             # sol_key = "%3d%3d" % (line.vl, line.v2l)  # (v', v'') transition (v_sup, v_inf)
-            # raise RuntimeError("Como que o calculate_qgbd esta fazendo, sendo que o dicionario mol_consts agora tem prefixos to e from?")
+            # raise RuntimeError("Como que o calculate_qgbd esta fazendo, sendo que o dicionario molconsts agora tem prefixos to e from?")
             # if sol_key not in sols:
             #     qgbd = self._calculate_qgbd(line.v2l)
             #     sols[sol_key] = ft.SetOfLines(line.vl, line.v2l,

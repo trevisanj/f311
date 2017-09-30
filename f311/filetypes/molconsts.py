@@ -2,9 +2,9 @@ from . import basic
 import re
 import os
 import inspect
+import a99
 
-
-__all__ = ["MolConsts", "some_mol_consts", "MolConstPopulateError",
+__all__ = ["MolConsts", "some_molconsts", "MolConstPopulateError",
 ]
 
 class MolConsts(dict):
@@ -21,10 +21,16 @@ class MolConsts(dict):
              "id_molecule", "id_pfantmol", "id_system", "id_statel", "id_state2l"]
 
     def __init__(self, *args, **kwargs):
-        for key in self._KEYS:
-            if key not in kwargs:
-                kwargs[key] = None
         dict.__init__(self, *args, **kwargs)
+
+        for key in self._KEYS:
+            self.setdefault(key, None)
+
+    def __repr__(self):
+        """Will generate sth like 'MolConsts({...})'"""
+        _code = "{}({})".format(self.__class__.__name__, dict.__repr__(self))
+        code = a99.make_code_readable(_code)
+        return code
 
     def None_to_zero(self):
         """Replaces None values with zero"""
@@ -42,7 +48,7 @@ class MolConsts(dict):
         need = ("formula", "from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf")
         self._i_need(need)
 
-        return "{} {}".format(self["formula"], basic.mol_consts_to_system_str(self, style))
+        return "{} {}".format(self["formula"], basic.molconsts_to_system_str(self, style))
 
     def get_system_str(self, style=basic.SS_PLAIN):
         """Returns string such as 'A 2 SIGMA - X 2 PI
@@ -53,7 +59,7 @@ class MolConsts(dict):
         need = ("from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf")
         self._i_need(need)
 
-        return basic.mol_consts_to_system_str(self, style)
+        return basic.molconsts_to_system_str(self, style)
 
     def get_S2l(self):
         """**Convention** returns S2l = (to_mult-1)/2"""
@@ -65,17 +71,27 @@ class MolConsts(dict):
         """
         Populates (from_*) and (to_*) taking string as input
 
-        String examples:
+        Args:
+            string: str following convention below
+
+        **Convention** formula-system string (FSS): "(formula) (ignored) [(system string)]".
+                       Formula at start of string, followed by ignored characters until square
+                       bracket.
+
+        **Convention** system string:
+
+            "from_label from_mult from_spdf_greek - from_label from_mult from_spdf_greek"
+            or
+            "label mult spdf_greek" (assumed initial and final state are the same).
+
+            **Note** (*spdf*) are Greek letter names, case-INsensitive;
+                     extra "+"/"-" (for example, in "SIGMA+") is ignored
+
+        FSS examples:
 
             "OH [A 2 Sigma - X 2 Pi]"
 
             "12C16O INFRARED [X 1 SIGMA+]"
-
-        **Note** *_spdf case is ignored and converted to int
-
-        **Note** If the SPDF has an additional "+"/"-", this will not be part of the SPDF.
-                 For example, in the string "CH BX [B2SIGMA- - X2PI]", initial SPDF considered will
-                 be "SIGMA", not "SIGMA-"
         """
 
         fieldnames = ["from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf"]
@@ -253,25 +269,40 @@ class MolConsts(dict):
                 method_name, need, fieldname))
 
 
-def some_mol_consts():
+def some_molconsts(db=None, s="OH [A 2 SIGMA - X 2 PI]"):
     """
-    Returns a MolConsts object populated with 'OH A2Sigma-X2Pi' information
+    Returns a MolConsts object completely populated
 
-    **Note** Creates new moldb.xxxx.sqlite file every time it is run, then deletes it
+    Args:
+        db: FileMolDB object.
+
+            **Note** If None, this function will attempt to create 'moldb.xxxx.sqlite',
+                     then attempt to delete it
+
+        s: parseable formula-and-system (refer to
     """
 
     import f311.filetypes as ft
 
-
-    db = ft.FileMolDB()
-    db.init_default()
+    flag_newdb = False
+    if db is None:
+        flag_newdb = True
+        db = ft.FileMolDB()
+        db.init_default()
 
     ret = MolConsts()
-    ret.populate_all_using_ids(db, id_system=6, id_pfantmol=12, id_statel=96, id_state2l=97)
+    try:
+        ret.populate_all_using_str(db, s)
 
-    # Finally deletes file
-    db.get_conn().close()
-    os.unlink(db.filename)
+    finally:
+        db.get_conn().close()
+        if flag_newdb:
+            try:
+                os.unlink(db.filename)
+            except FileNotFoundError:
+                pass
+
+    ret.None_to_zero()
 
     return ret
 

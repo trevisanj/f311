@@ -47,3 +47,22 @@ def test_parse_pfantmol_descriptions(tmpdir):
     for row in cursor:
         mc = ft.MolConsts()
         mc.populate_parse_str(row["description"])
+
+def test_some_molconsts(tmpdir):
+    """Reproduces all the steps in some_molconsts()"""
+    os.chdir(str(tmpdir))
+    db = ft.FileMolDB()
+    db.init_default()
+
+    s = "OH [A 2 SIGMA - X 2 PI]"
+
+
+    ret = ft.MolConsts()
+    ret.populate_all_using_str(db, s)
+
+    ret.populate_parse_str(s)
+    db.get_conn().close()
+    os.unlink(db.filename)
+    ret.None_to_zero()
+
+    return ret

@@ -19,7 +19,7 @@ class MyPage(object):
         return not isinstance(self.editor, NullEditor)
 
     def __init__(self, text_tab="", flag_changed=False, text_saveas="Save as...",
-                 text_load="Open...", cls_save=None, clss_load=(), wild="*.*", editor=None):
+                 text_load="Load...", cls_save=None, clss_load=(), wild="*.*", editor=None):
         if editor is None:
             editor = NullEditor()
 
@@ -36,6 +36,14 @@ class MyPage(object):
         self.editor = editor
 
         self.flag_changed = flag_changed
+
+    def make_text_load(self):
+        t = self.text_load
+        return t if t is not None else "Load {}...".format(self.cls_save.description)
+
+    def make_text_saveas(self):
+        t = self.text_saveas
+        return t if t is not None else "Save {} as...".format(self.cls_save.description)
 
 
 class XFileMainWindowBase(a99.XLogMainWindow):
@@ -110,7 +118,7 @@ class XFileMainWindowBase(a99.XLogMainWindow):
         m = self.menu_file = b.addMenu("&File")
         ac = m.addAction(a99.get_icon("document-open"), "&Open...")
         ac.setShortcut("Ctrl+O")
-        ac.triggered.connect(self.on_open)
+        ac.triggered.connect(self.on_load)
         m.addSeparator()
         ac = m.addAction(a99.get_icon("document-save"), "&Save")
         ac.setShortcut("Ctrl+S")
@@ -157,16 +165,13 @@ class XFileMainWindowBase(a99.XLogMainWindow):
         """
         if index is None:
             index = self._get_tab_index()
-        print("iiiiiiiiiiiiiiiiiiiiiiiiiiiindex {}".format(index))
         page = self.pages[index]
-        print(self.pages[1].text_tab)
 
         if not isinstance(fobj, page.clss_load):
             raise RuntimeError('Object to load must be in {0!s} (not a {1!s})'.format(
              [x.__name__ for x in page.clss_load], fobj.__class__.__name__))
 
-        editor = self.editors[index]
-        editor.load(fobj)
+        page.editor.load(fobj)
         self._update_gui_text_tabs()
 
     def load_filename(self, filename, index=None):
@@ -185,7 +190,7 @@ class XFileMainWindowBase(a99.XLogMainWindow):
         # Maybe this is set on purpose before loading attempt to leave new load_dir set (?)
         self.load_dir, _ = os.path.split(filename)
 
-        f = ft.load_with_classes(filename, page.load_classes)
+        f = ft.load_with_classes(filename, page.clss_load)
         if f is None:
             raise RuntimeError("Could not load '{0!s}'".format(filename))
 
@@ -196,8 +201,9 @@ class XFileMainWindowBase(a99.XLogMainWindow):
 
     def closeEvent(self, event):
         flag_exit, ff = True, []
-        for ed, flag_changed in zip(self.editors, self.flags_changed):
-            if ed and ed.f and flag_changed:
+        for page in self.pages:
+            ed = page.editor
+            if ed and ed.f and page.flag_changed:
                 ff.append(ed.f.description)
 
         if len(ff) > 0:
@@ -229,9 +235,9 @@ class XFileMainWindowBase(a99.XLogMainWindow):
 
     # All file operations
 
-    def on_open(self):
+    def on_load(self):
         if self._tab_is_op():
-            self.__generic_open()
+            self.__generic_load()
 
     def on_save(self):
         if self._tab_is_op():
@@ -281,8 +287,7 @@ class XFileMainWindowBase(a99.XLogMainWindow):
 
     def _get_tab_description(self):
         """Returns "description" of current tab (tab text without shortcut info)."""
-        idx = self._get_tab_index()
-        text = self.text_tabs[idx]
+        text = self._get_page().text_tab
         if "(" in text:
             text = text[:text.index("(") - 1]
         text = text[0].lower() + text[1:]
@@ -301,7 +306,7 @@ class XFileMainWindowBase(a99.XLogMainWindow):
         # index = self._get_tab_index()
         # editor, text, cls = self.editors[index], self.text_loads[index], \
         #                     self.clss[index]
-        fobj = page.cls()
+        fobj = page.cls_save()
         fobj.init_default()
         page.editor.load(fobj)
         # perhaps it is save to assume that the status is not 'changed' if there is a filename
@@ -344,7 +349,7 @@ class XFileMainWindowBase(a99.XLogMainWindow):
             d = os.path.join(self.save_dir if self.save_dir is not None \
                                  else self.load_dir if self.load_dir is not None \
                 else ".", page.editor.f.default_filename)
-        new_filename = QFileDialog.getSaveFileName(self, page.save_text, d, page.wild)[0]
+        new_filename = QFileDialog.getSaveFileName(self, page.make_text_saveas(), d, page.wild)[0]
         if new_filename:
             self.save_dir, _ = os.path.split(str(new_filename))
             try:
@@ -358,13 +363,13 @@ class XFileMainWindowBase(a99.XLogMainWindow):
                 raise
         return False
 
-    def __generic_open(self):
+    def __generic_load(self):
         page = self._get_page()
         try:
             d = self.load_dir if self.load_dir is not None \
                 else self.save_dir if self.save_dir is not None \
                 else "."
-            new_filename = QFileDialog.getOpenFileName(self, page.text_load, d, page.wild+";;*.*")[0]
+            new_filename = QFileDialog.getOpenFileName(self, page.make_text_load(), d, page.wild+";;*.*")[0]
             if new_filename:
                 self.load_filename(new_filename)
         except Exception as e:

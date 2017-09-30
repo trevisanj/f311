@@ -36,15 +36,15 @@ def test_conv_kurucz(tmpdir):
     # conn = db.get_conn()
 
 
-    mol_consts = ft.MolConsts()
-    mol_consts.populate_all_using_str(db, "OH [A 2 Sigma - X 2 Pi]")
-    mol_consts.None_to_zero()
+    molconsts = ft.MolConsts()
+    molconsts.populate_all_using_str(db, "OH [A 2 Sigma - X 2 Pi]")
+    molconsts.None_to_zero()
 
     h = _fake_file()
     fileobj = ft.FileKuruczMolecule()
     fileobj._do_load_h(h, "_fake_file")
 
-    conv = cm.ConvKurucz(mol_consts=mol_consts,
+    conv = cm.ConvKurucz(molconsts=molconsts,
                          flag_hlf=True, flag_normhlf=True, flag_fcf=False, flag_quiet=False,
                          fcfs=None, iso=None)
 

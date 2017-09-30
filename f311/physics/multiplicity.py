@@ -114,15 +114,15 @@ class _MultiplicityToolbox(dict):
     # Method to convert quantum information to branch. **Use staticmethod()**!
     quanta_to_branch = None
 
-    def __init__(self, mol_consts):
-        if not isinstance(mol_consts, ft.MolConsts):
-            raise TypeError("mol_consts must be a MolConsts")
+    def __init__(self, molconsts):
+        if not isinstance(molconsts, ft.MolConsts):
+            raise TypeError("molconsts must be a MolConsts")
         dict.__init__(self)
-        self._mol_consts = mol_consts
+        self._molconsts = molconsts
 
-        LAML = mol_consts["from_spdf"]
-        LAM2L = mol_consts["to_spdf"]
-        S = mol_consts.get_S2l()
+        LAML = molconsts["from_spdf"]
+        LAM2L = molconsts["to_spdf"]
+        S = molconsts.get_S2l()
         # if LAML-LAM2L not in self.absDeltaLambda:
         if abs(LAML - LAM2L) != self.absDeltaLambda:
             raise ValueError("Invalid Delta Lambda {}. abs(Delta Lambda) must be {}". \
@@ -167,7 +167,7 @@ class _MTDoublet1(_MultiplicityToolbox):
 
     def _populate_with_key(self, key):
         vl, v2l, J, branch = key
-        cc = self._mol_consts
+        cc = self._molconsts
 
         S = cc.get_S2l()
         DELTAK = cc["cro"]
@@ -338,7 +338,7 @@ class _MTTriplet1(_MultiplicityToolbox):
 
     def _populate_with_key(self, key):
         vl, v2l, J, branch = key
-        cc = self._mol_consts
+        cc = self._molconsts
 
         S = cc.get_S2l()
         DELTAK = cc["cro"]
@@ -641,17 +641,17 @@ class _MTTriplet1(_MultiplicityToolbox):
                 )))
 
 # TODO multiplicity is not the best term, should be sth more towards "transition"
-def multiplicity_toolbox(mol_consts):
-    """Factory function that returns a MultiplicityToolbox descendant appropriate to mol_consts"""
+def multiplicity_toolbox(molconsts):
+    """Factory function that returns a MultiplicityToolbox descendant appropriate to molconsts"""
 
     C = [_MTSinglet, _MTDoublet1, _MTTriplet1]
 
-    absDeltaLambda = abs(mol_consts["from_spdf"]-mol_consts["to_spdf"])
+    absDeltaLambda = abs(molconsts["from_spdf"]-molconsts["to_spdf"])
 
     for cls in C:
         if (cls.absDeltaLambda == "all" or cls.absDeltaLambda == absDeltaLambda) and \
-           cls.multiplicityl == mol_consts["from_mult"] and \
-           cls.multiplicity2l == mol_consts["to_mult"]:
-            return cls(mol_consts)
+           cls.multiplicityl == molconsts["from_mult"] and \
+           cls.multiplicity2l == molconsts["to_mult"]:
+            return cls(molconsts)
 
     raise ValueError("Could not find a suitable class for given molecular constants")

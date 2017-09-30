@@ -155,12 +155,12 @@ def insert_franck_condon_factors():
                                    (formula,)).fetchone()["id"]
 
 
-        mol_consts = ft.MolConsts()
-        mol_consts.update(id_molecule = id_molecule, from_label = from_label,
+        molconsts = ft.MolConsts()
+        molconsts.update(id_molecule = id_molecule, from_label = from_label,
          from_mult = from_mult, from_spdf = from_spdf, to_label = to_label,
          to_mult = to_mult, to_spdf = to_spdf)
 
-        id_system = moldb.insert_system_if_does_not_exist(mol_consts,
+        id_system = moldb.insert_system_if_does_not_exist(molconsts,
          notes="by _build-moldb.insert_franck_condon_factors()")
 
         if filename is not None:

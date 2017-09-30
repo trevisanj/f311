@@ -515,70 +515,16 @@ class _WTurboSpectrumPanel(a99.WBase):
 
 
 
-class XConvMol(ex.XFileMainWindow):
-    def __init__(self, parent=None, fileobj=None):
-        ex.XFileMainWindow.__init__(self, parent)
+class _WConv(a99.WBase):
 
-        lv = self.keep_ref(QVBoxLayout(self.gotting))
-        e0 = self.w_moldb = WFileMolDB(self)
-        lv.addWidget(e0)
-        e0.changed.connect(self._on_w_moldb_changed)
+    convert_clicked = pyqtSignal()
+    open_mol_clicked = pyqtSignal()
 
-        lv = self.keep_ref(QVBoxLayout(self.gotting))
-        e1 = self.w_molconsts = WFileMolConsts(self)
-        lv.addWidget(e1)
-        e1.changed.connect(self._on_w_molconsts_changed)
-        self.editors[1] = e1
-
-
-        # # Synchronized sequences
-        _VVV = ft.FileMolDB.description
-        "Save %s as..." % _VVV
-        self.pages.append(ex.MyPage(text_tab="", flag_changed=False, text_saveas="Save as...",
-                 text_load="Open...", cls_save=None, clss_load=(), wild="*.*", editor=None))
-
-
-        # # Synchronized sequences
-        _VVV = ft.FileMolDB.description
-        text_tab[0] =  "{} (Alt+&1)".format(_VVV)
-        tabWidget.setTabText(0, self.text_tab[0])
-        save_as_texts[0] = "Save %s as..." % _VVV
-        open_texts[0] = "Load %s" % _VVV
-        clss[0] = ft.FileMolDB
-        clsss[0] = (ft.FileMolDB,)
-        wilds[0] = "*.sqlite"
-
-
-
-
-
-
-
-
-
-        _WWW = ft.FileMolConsts.description
-        self.text_tab =  ["{} (Alt+&1)".format(_VVV), "{} (Alt+&2)".format(_WWW), "Conversion (Alt+&3)", "Log (Alt+&4)"]
-        self.flags_changed = [False, False, False, False]
-        self.save_as_texts = ["Save %s as..." % _VVV, "Save %s as..." % _WWW, None, None]
-        self.open_texts = ["Load %s" % _VVV, "Load %s" % _WWW, None, None]
-        self.clss = [ft.FileMolDB, ft.FileMolConsts, None, None]  # save class
-        self.clsss = [(ft.FileMolDB,), (ft.FileMolConsts,), None, None]  # accepted load classes
-        self.wilds = ["*.sqlite", "*.py", None, None]  # e.g. '*.fits'
-        self.editors = [ex.NullEditor(), ex.NullEditor(), ex.NullEditor(), ex.NullEditor()]  # editor widgets, must comply ...
-        tw0 = self.tabWidget
-        tw0.setTabText(1, self.text_tab[2])
-
-
-
-
-        # # Second tab: files
-
-        w = self.keep_ref(QWidget())
-        tw0.insertTab(1, w, self.text_tab[1])
-
+    def __init__(self, *args, **kwargs):
+        a99.WBase.__init__(self, *args, **kwargs)
 
         # ## Vertical layout: source and destination stacked
-        lsd = self.keep_ref(QVBoxLayout(w))
+        lsd = self.keep_ref(QVBoxLayout(self))
 
         # ### Horizontal layout: sources radio buttons, source-specific setup area
 
@@ -632,17 +578,67 @@ class XConvMol(ex.XFileMainWindow):
 
         # # Final adjustments
 
-        tw0.setCurrentIndex(0)
         # Forces only one of the source panels to visible
         self.w_source.index = 0
         self.source_changed()
+
+    def source_changed(self):
+        idx = self.w_source.index
+        for i, ds in enumerate(_SOURCES.values()):
+            ds.widget.setVisible(i == idx)
+            # print("Widget", ds.widget, "is visible?", ds.widget.isVisible())
+
+
+class XConvMol(ex.XFileMainWindow):
+    def __init__(self, parent=None, fileobj=None):
+        ex.XFileMainWindow.__init__(self, parent)
+
+        self._add_stuff(fileobj)
+
+    def _add_stuff(self, fileobj):
+        w0 = self.keep_ref(QWidget())
+        self.tabWidget.addTab(w0, "")
+        lv = self.keep_ref(QVBoxLayout(w0))
+        e0 = self.w_moldb = WFileMolDB(self)
+        lv.addWidget(e0)
+        e0.changed.connect(self._on_w_moldb_changed)
+        w1 = self.keep_ref(QWidget())
+        self.tabWidget.addTab(w1, "")
+        lv = self.keep_ref(QVBoxLayout(w1))
+        e1 = self.w_molconsts = WFileMolConsts(self)
+        lv.addWidget(e1)
+        e1.changed.connect(self._on_w_molconsts_changed)
+        w2 = self.keep_ref(QWidget())
+        self.tabWidget.addTab(w2, "")
+        lv = self.keep_ref(QVBoxLayout(w2))
+        e2 = self.w_conv = WFileMolConsts(self)
+        lv.addWidget(e2)
+        e2.changed.connect(self._on_w_conv_changed)
+        self.pages.append(ex.MyPage(text_tab="Molecular constants database (Alt+&1)",
+                                    cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,),
+                                    wild="*.sqlite", editor=e0))
+        self.pages.append(ex.MyPage(text_tab="Molecular constants (Alt+&2)",
+                                    cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,),
+                                    wild="*.py", editor=e1))
+        self.pages.append(ex.MyPage(text_tab="Conversion (Alt+&3)",
+                                    cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,),
+                                    wild="*.py", editor=e2))
+        _WWW = ft.FileMolConsts.description
+        self.text_tab = ["{} (Alt+&1)".format(_VVV), "{} (Alt+&2)".format(_WWW),
+                         "Conversion (Alt+&3)", "Log (Alt+&4)"]
+        self.flags_changed = [False, False, False, False]
+        self.save_as_texts = ["Save %s as..." % _VVV, "Save %s as..." % _WWW, None, None]
+        self.open_texts = ["Load %s" % _VVV, "Load %s" % _WWW, None, None]
+        self.clss = [ft.FileMolDB, ft.FileMolConsts, None, None]  # save class
+        self.clsss = [(ft.FileMolDB,), (ft.FileMolConsts,), None, None]  # accepted load classes
+        self.wilds = ["*.sqlite", "*.py", None, None]  # e.g. '*.fits'
+        self.editors = [ex.NullEditor(), ex.NullEditor(), ex.NullEditor(),
+                        ex.NullEditor()]  # editor widgets, must comply ...
+        tw0 = self.tabWidget
+        tw0.setTabText(1, self.text_tab[2])
+
+
         self.setWindowTitle("(to) PFANT Molecular Lines Converter")
-
-        a99.nerdify(self)
-
-        if fileobj is not None:
-            self.load(fileobj)
-
         self.installEventFilter(self)
 
     def eventFilter(self, obj_focused, event):
@@ -666,6 +662,9 @@ class XConvMol(ex.XFileMainWindow):
     def _on_w_molconsts_changed(self):
         print("CCCCCCCCCCCCCCCCCCCCCCCC111111111111111111111111111")
 
+    def _on_w_conv_changed(self):
+        print("CCCCCCCCCCCCCCCCCCCCCCCC111111111111111111111111111")
+
     def wants_auto(self):
         name = _NAMES[self.w_source.index]
         filename = None
@@ -679,33 +678,26 @@ class XConvMol(ex.XFileMainWindow):
             filename = a99.new_filename("mol", "dat")
         self.w_out.value = filename
 
-
-    def source_changed(self):
-        idx = self.w_source.index
-        for i, ds in enumerate(_SOURCES.values()):
-            ds.widget.setVisible(i == idx)
-            # print("Widget", ds.widget, "is visible?", ds.widget.isVisible())
-
     def convert_clicked(self):
         from f311 import convmol as cm
         try:
             # # Extraction of data from GUI, and their
             name = self.w_source.source.name
             # This is a merge of fields table 'molecule' and 'pfantmol' in a FileMolDB database
-            mol_consts = self.w_moldb.constants
+            molconsts = self.w_moldb.constants
             fcfs = self.w_moldb.fcfs
             filename = self.w_out.value
 
             # Validation of data
             errors = []
-            mol_consts_fieldnames_ignore = ["id_molecule", "id_pfantmol", "id_system", "id_statel", "id_state2l"]
+            molconsts_fieldnames_ignore = ["id_molecule", "id_pfantmol", "id_system", "id_statel", "id_state2l"]
             if self.w_moldb.id_molecule is None:
                 errors.append("Molecule not selected")
 
-            elif any([value is None for name, value in mol_consts.items()
-                      if name not in mol_consts_fieldnames_ignore]):
-                s_none = ", ".join(["'{}'".format(name) for name, value in mol_consts.items()
-                                    if value is None and name not in mol_consts_fieldnames_ignore])
+            elif any([value is None for name, value in molconsts.items()
+                      if name not in molconsts_fieldnames_ignore]):
+                s_none = ", ".join(["'{}'".format(name) for name, value in molconsts.items()
+                                    if value is None and name not in molconsts_fieldnames_ignore])
                 errors.append("There are empty molecular constants: {}".format(s_none))
             if not self.w_out.validate():
                 errors.append("Output filename is invalid")
@@ -747,7 +739,7 @@ class XConvMol(ex.XFileMainWindow):
 
             if len(errors) == 0:
                 # Finally the conversion to PFANT molecular lines file
-                conv.mol_consts = mol_consts
+                conv.molconsts = molconsts
                 conv.fcfs = fcfs
                 f, log = conv.make_file_molecules(lines)
                 ne = len(log.errors)

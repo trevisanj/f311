@@ -12,7 +12,7 @@ import a99
 __all__ = ["adjust_atomic_symbol", "description_to_symbols", "symbols_to_formula",
            "iz_to_branch", "branch_to_iz",
            "get_default_data_path", "iz_to_branch_alt", "branch_to_iz_alt",
-           "mol_consts_to_system_str", "greek_to_spdf", "spdf_to_greek",
+           "molconsts_to_system_str", "greek_to_spdf", "spdf_to_greek",
            "SS_PLAIN", "SS_ALL_SPECIAL", "SS_RAW", "SS_SUPERSCRIPT"
            ]
 
@@ -251,11 +251,11 @@ def spdf_to_greek(number):
     return _SPDF_TO_GREEK[number]
 
 
-def mol_consts_to_system_str(mol_consts, style=SS_ALL_SPECIAL):
+def molconsts_to_system_str(molconsts, style=SS_ALL_SPECIAL):
     """Compiles electronic system information into string
 
     Args:
-        mol_consts: dict-like containing keys 'from_label', 'from_mult', 'from_spdf', 'to_label',
+        molconsts: dict-like containing keys 'from_label', 'from_mult', 'from_spdf', 'to_label',
                     'to_mult', 'to_spdf'
 
         style: rendering style: one of SS_*
@@ -279,8 +279,8 @@ def mol_consts_to_system_str(mol_consts, style=SS_ALL_SPECIAL):
     else:
         raise ValueError("Invalid style: {}".format(style))
 
-    return "{} {} {} - {} {} {}".format(mol_consts["from_label"], fmult(mol_consts["from_mult"]),
-                                    fspdf(mol_consts["from_spdf"]), mol_consts["to_label"],
-                                    fmult(mol_consts["to_mult"]), fspdf(mol_consts["to_spdf"]))
+    return "{} {} {} - {} {} {}".format(molconsts["from_label"], fmult(molconsts["from_mult"]),
+                                    fspdf(molconsts["from_spdf"]), molconsts["to_label"],
+                                    fmult(molconsts["to_mult"]), fspdf(molconsts["to_spdf"]))
 
 

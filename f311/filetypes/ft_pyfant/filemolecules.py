@@ -1,4 +1,4 @@
-__all__ = ["FileMolecules", "Molecule", "SetOfLines", "mol_consts_to_molecule"]
+__all__ = ["FileMolecules", "Molecule", "SetOfLines", "molconsts_to_molecule"]
 
 
 
@@ -528,26 +528,26 @@ class FileMolecules(DataFile):
                                      (s._lmbdam[j], s._sj[j], s._jj[j], s._branch[j], numlin))
 
 
-def mol_consts_to_molecule(mol_consts):
+def molconsts_to_molecule(molconsts):
     """Assembles a Molecule object from record from a FileMolDB database
 
     Args:
-        mol_consts: a dict-like object combining field values from tables 'molecule', 'state',
+        molconsts: a dict-like object combining field values from tables 'molecule', 'state',
                     'pfantmol', and 'system' from a FileMolDB database
     """
-    mol_consts["system_str"] = mol_consts.get_system_str(basic.SS_PLAIN)
+    molconsts["system_str"] = molconsts.get_system_str(basic.SS_PLAIN)
 
     mol = Molecule()
-    mol.description = "{formula} [{system_str}]".format(**mol_consts)
-    mol.symbols = description_to_symbols(mol_consts["formula"])
-    mol.fe = mol_consts["fe"]
-    mol.do = mol_consts["do"]
-    mol.mm = mol_consts["am"] + mol_consts["bm"]
-    mol.am = mol_consts["am"]
-    mol.bm = mol_consts["bm"]
-    mol.ua = mol_consts["ua"]
-    mol.ub = mol_consts["ub"]
-    mol.te = mol_consts["te"]
-    mol.cro = mol_consts["cro"]
-    mol.s = mol_consts.get_S2l()
+    mol.description = "{formula} [{system_str}]".format(**molconsts)
+    mol.symbols = description_to_symbols(molconsts["formula"])
+    mol.fe = molconsts["fe"]
+    mol.do = molconsts["do"]
+    mol.mm = molconsts["am"] + molconsts["bm"]
+    mol.am = molconsts["am"]
+    mol.bm = molconsts["bm"]
+    mol.ua = molconsts["ua"]
+    mol.ub = molconsts["ub"]
+    mol.te = molconsts["te"]
+    mol.cro = molconsts["cro"]
+    mol.s = molconsts.get_S2l()
     return mol

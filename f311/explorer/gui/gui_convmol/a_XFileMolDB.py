@@ -14,7 +14,7 @@ __all__ = ["XFileMolDB"]
 class XFileMolDB(XFileMainWindow):
     def _add_stuff(self):
         XFileMainWindow._add_stuff(self)
-        
+
         import f311.filetypes as ft
         import f311.explorer as ex
 

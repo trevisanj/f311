@@ -197,39 +197,39 @@ class FileMolDB(FileSQLiteDB):
             ret[(r["vl"], r["v2l"])] = r["value"]
         return ret
 
-    def find_id_system(self, mol_consts):
+    def find_id_system(self, molconsts):
         """Returns id_system or None"""
 
         ff = ["from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf"]
         one = self.get_conn().execute("select id from system where id_molecule = ? and "+
                            " and ".join(["{} = ?".format(x) for x in ff]),
-                           [mol_consts["id_molecule"]]+[mol_consts[x] for x in ff]).fetchone()
+                           [molconsts["id_molecule"]]+[molconsts[x] for x in ff]).fetchone()
         if one is None:
             return None
         return one["id"]
 
 
 
-    def insert_system_if_does_not_exist(self, mol_consts, notes=""):
+    def insert_system_if_does_not_exist(self, molconsts, notes=""):
         """
         Inserts system if does not exist yet
 
         Args:
-            mol_consts: a MolConsts
+            molconsts: a MolConsts
             notes: table system.notes value, in case of new record
         """
         ff = ["id_molecule", "from_label", "from_mult", "from_spdf", "to_label", "to_mult",
               "to_spdf"]
 
-        mol_consts._i_need(ff)  # stay friendly, MolConsts
+        molconsts._i_need(ff)  # stay friendly, MolConsts
 
-        id_ = self.find_id_system(mol_consts)
+        id_ = self.find_id_system(molconsts)
 
         if id_ is not None:
             return id_
 
 
-        values = [mol_consts[x] for x in ff]+[notes]
+        values = [molconsts[x] for x in ff]+[notes]
         ff.append("notes")
         conn = self.get_conn()
         cursor = conn.execute("""insert into system ({}) values ({})""".format(", ".join(ff),

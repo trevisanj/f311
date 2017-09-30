@@ -11,14 +11,14 @@ from collections import OrderedDict
 __all__ = ["calc_qgbd_tio_like"]
 
 
-def calc_qgbd_tio_like(mol_consts, v_lo):
+def calc_qgbd_tio_like(molconsts, v_lo):
     """
     Calculates qv, gv, bv, dv in TiO-like fashion
 
     Based on Fortran source 'agrup.plez7.f'
 
     Args:
-        mol_consts: dict-like object with keys:
+        molconsts: dict-like object with keys:
             "omega_e"
             "omega_ex_e"
             "omega_ey_e"
@@ -33,13 +33,13 @@ def calc_qgbd_tio_like(mol_consts, v_lo):
             "qv", "gv", "bv", "dv", "gzero"
     """
 
-    omega_e = mol_consts["state2l_omega_e"]
-    omega_ex_e = mol_consts["state2l_omega_ex_e"]
-    omega_ey_e = mol_consts["state2l_omega_ey_e"]
-    B_e = mol_consts["state2l_B_e"]
-    D_e = mol_consts["state2l_D_e"]
-    alpha_e = mol_consts["state2l_alpha_e"]
-    beta_e = mol_consts["state2l_beta_e"]
+    omega_e = molconsts["state2l_omega_e"]
+    omega_ex_e = molconsts["state2l_omega_ex_e"]
+    omega_ey_e = molconsts["state2l_omega_ey_e"]
+    B_e = molconsts["state2l_B_e"]
+    D_e = molconsts["state2l_D_e"]
+    alpha_e = molconsts["state2l_alpha_e"]
+    beta_e = molconsts["state2l_beta_e"]
 
     if int(v_lo) != v_lo:
         raise ValueError("Argument 'v_lo' must be an integer")

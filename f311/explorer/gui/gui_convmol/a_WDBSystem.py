@@ -43,7 +43,7 @@ class WDBSystem(WDBRegistry):
             return
 
 
-        ff = [lambda row: ft.mol_consts_to_system_str(row, SYSTEMSTYLE),
+        ff = [lambda row: ft.molconsts_to_system_str(row, SYSTEMSTYLE),
               lambda row: row["notes"]]
         hh = ["system", "notes"]
 

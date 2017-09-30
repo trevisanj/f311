@@ -108,3 +108,5 @@ class DataFile(a99.AttrsPart):
         self.load(fullpath)
         self.filename = None
 
+    def validate(self):
+        a99.get_python_logger().info("******SOMEONE CALLED DATAFILE.VALIDATE***")

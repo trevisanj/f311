@@ -49,7 +49,7 @@ class WFileMolConsts(a99.WBase):
     def load(self, x):
         assert isinstance(x, ft.FileMolConsts)
         self.f = x
-        self.w_molconsts.f = x.mol_consts
+        self.w_molconsts.f = x.molconsts
         self.__update_gui()
         self.setEnabled(True)
         self.flag_valid = True
@@ -83,5 +83,5 @@ class WFileMolConsts(a99.WBase):
             self.flag_process_changes = True
 
     def __update_f(self):
-        self.f.mol_consts = self.w_molconsts.constants
+        self.f.molconsts = self.w_molconsts.constants
         self.flag_valid = True
