@@ -68,6 +68,7 @@ class _WSource(a99.WBase):
 
         for ds in _SOURCES.values():
             b = self.keep_ref(QRadioButton(ds.name))
+
             b.clicked.connect(self._button_clicked)
             self._buttons.append(b)
             lw.addWidget(b)
@@ -405,7 +406,7 @@ class _WKuruczPanel(a99.WBase):
     @property
     def iso(self):
         idx = self.combobox_isotope.currentIndex()
-        if idx == 0:
+        if idx <= 0:
             return None
         return self._isotopes[idx-1]
 
@@ -442,6 +443,7 @@ class _WKuruczPanel(a99.WBase):
         a = self.keep_ref(QLabel("Calculate 'gf' based on\n"
                                  "Hönl-London factors (HLFs)"))
         w = self.checkbox_hlf = QCheckBox()
+        w.setChecked(True)
         w.setToolTip("If selected, will ignore 'loggf' from Kurucz file and\n"
                      "calculate 'gf' using Hönl-London factors formulas taken from Kovacz (1969)")
         lg.addWidget(a, i_row, 0)
@@ -451,6 +453,7 @@ class _WKuruczPanel(a99.WBase):
         a = self.keep_ref(QLabel("Apply normalization factor\n"
                                  "for HLFs to add up to 1 (for fixed J)"))
         w = self.checkbox_normhlf = QCheckBox()
+        w.setChecked(True)
         w.setToolTip("If selected, calculated 'gf's will be multiplied by\n"
                      "2 / ((2 * J2l + 1) * (2 * S + 1)*(2 - DELTAK))")
         lg.addWidget(a, i_row, 0)
@@ -460,6 +463,7 @@ class _WKuruczPanel(a99.WBase):
         a = self.keep_ref(QLabel("Multiply calculated 'gf' by\n"
                                  "Franck-Condon factor"))
         w = self.checkbox_fcf = QCheckBox()
+        w.setChecked(True)
         w.setToolTip("If selected, incorporates internally calculated Franck-Condon factor"
                      "into the calculated 'gf'")
         lg.addWidget(a, i_row, 0)
@@ -469,6 +473,7 @@ class _WKuruczPanel(a99.WBase):
         a = self.keep_ref(QLabel("Use spin' for branch determination\n"
                                  "(spin'' is always used)"))
         w = self.checkbox_spinl = QCheckBox()
+        w.setChecked(True)
         w.setToolTip("If you tick this box, branches P12, P21, Q12, Q21, R21, R12 (i.e., with two numbers) become possible")
         lg.addWidget(a, i_row, 0)
         lg.addWidget(w, i_row, 1)
@@ -523,7 +528,7 @@ class _WConv(a99.WEditor):
     def __init__(self, parent_form):
         a99.WEditor.__init__(self, parent_form)
 
-        self.w_moldb = parent_form.w_moldb
+        self.w_molconsts = parent_form.w_molconsts
 
         # ## Vertical layout: source and destination stacked
         lsd = self.keep_ref(QVBoxLayout(self))
@@ -580,7 +585,7 @@ class _WConv(a99.WEditor):
         # # Final adjustments
 
         # Forces only one of the source panels to visible
-        self.w_source.index = 0
+        self.w_source.index = 2  # Kurucz
         self.source_changed()
 
     def source_changed(self):
@@ -611,7 +616,10 @@ class _WConv(a99.WEditor):
 
             if len(errors) == 0:
                 lines = self._get_lines()
+                if lines is None:
+                    errors.append("Molecular lines not specified")
 
+            if len(errors) == 0:
                 fobj, log = conv.make_file_molecules(lines)
 
                 self._report_conversion(fobj, log)
@@ -657,9 +665,9 @@ class _WConv(a99.WEditor):
         name = self.w_source.source.name
 
         # (Data source name, Conv class)
-        map = [("HITRAN", None),
+        map = dict([("HITRAN", None),
                ("VALD3", None),
-               ("Kurucz", cm.ConvKurucz)]
+               ("Kurucz", cm.ConvKurucz)])
 
         cls = None
         conv = None
@@ -675,8 +683,8 @@ class _WConv(a99.WEditor):
 
             conv = cls(flag_hlf=w.flag_hlf, flag_normhlf=w.flag_normhlf,
                        flag_fcf=w.flag_fcf, flag_spinl=w.flag_spinl, iso=w.iso)
-            conv.fcfs = self.w_moldb.fcfs
-            conv.molconsts = self.w_moldb.molconsts
+            conv.fcfs = self.w_molconsts.fcfs
+            conv.molconsts = self.w_molconsts.f.molconsts
 
         return conv, errors
 
@@ -687,17 +695,17 @@ class _WConv(a99.WEditor):
 
         widget_panel = self.w_source.source.widget
 
-        return widget_panel.lines
+        return widget_panel.data
 
     def _validate(self, ):
         """Validation of GUI. Returns errors"""
         errors = []
 
-        molconsts = self.w_moldb.molconsts
+        molconsts = self.w_molconsts.f.molconsts
 
         molconsts_fieldnames_ignore = ["id_molecule", "id_pfantmol", "id_system", "id_statel",
                                        "id_state2l"]
-        if self.w_moldb.id_molecule is None:
+        if molconsts["id_molecule"] is None:
             errors.append("Molecule not selected")
 
         elif any([value is None for name, value in molconsts.items()
@@ -721,7 +729,7 @@ class _WConv(a99.WEditor):
             # TODO FCFs general, not Kurucz only
             w = self.w_kurucz
 
-            if w.flag_fcf and self.w_moldb.fcfs is None:
+            if w.flag_fcf and self.w_molconsts.fcfs is None:
                 errors.append(
                     "Cannot multiply gf's by Franck-Condon Factors, as these are not available in molecular configuration")
 
@@ -795,11 +803,9 @@ class XConvMol(ex.XFileMainWindow):
         return False
 
     def _on_w_moldb_changed(self):
-        print("##############################################")
         self.w_molconsts.set_moldb(self.w_moldb.f)
 
     def _on_w_moldb_loaded(self):
-        print("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
         self.w_molconsts.set_moldb(self.w_moldb.f)
 
     def _on_w_molconsts_changed(self):

@@ -21,6 +21,12 @@ class WFileMolConsts(a99.WEditor):
     # Emitted whenever any value changes
     changed = pyqtSignal()
 
+    @property
+    def fcfs(self):
+        if self.w_molconsts is None:
+            return None
+        return self.w_molconsts.fcfs
+
     def __init__(self, *args, **kwargs):
         a99.WEditor.__init__(self, *args, **kwargs)
 

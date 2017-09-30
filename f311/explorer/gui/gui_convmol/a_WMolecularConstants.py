@@ -5,6 +5,13 @@ import a99
 from .a_WDBState import WDBState
 import copy
 import f311.filetypes as ft
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+import a99
+from .a_WDBState import WDBState
+import copy
+import f311.filetypes as ft
 
 __all__ = ["WMolecularConstants"]
 
@@ -308,9 +315,6 @@ class WMolecularConstants(a99.WBase):
 
 
     def set_moldb(self, fobj):
-
-        print("AEEEEEEEEEEEEEE SETTING MOLDB OF WMOLECULARCONSTANTS {}".format(fobj))
-
         import f311.filetypes as ft
         assert isinstance(fobj, ft.FileMolDB), "I dont want a {}".format(fobj)
 
