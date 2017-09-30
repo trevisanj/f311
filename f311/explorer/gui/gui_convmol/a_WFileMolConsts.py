@@ -10,7 +10,7 @@ import f311.filetypes as ft
 from .a_WMolecularConstants import *
 
 
-class WFileMolConsts(a99.WBase):
+class WFileMolConsts(a99.WEditor):
     """
     FileMolConsts editor widget.
 
@@ -22,12 +22,10 @@ class WFileMolConsts(a99.WBase):
     changed = pyqtSignal()
 
     def __init__(self, *args, **kwargs):
-        a99.WBase.__init__(self, *args, **kwargs)
-        # Whether all the values in the fields are valid or not
-        self.flag_valid = False
+        a99.WEditor.__init__(self, *args, **kwargs)
+
         # Internal flag to prevent taking action when some field is updated programatically
         self.flag_process_changes = False
-        self.f = None # FileMolConsts object
 
 
         # # Central layout
@@ -35,7 +33,11 @@ class WFileMolConsts(a99.WBase):
         a99.set_margin(l, 0)
         self.setLayout(l)
 
+        la = self.label_fn = QLabel()
+        l.addWidget(la)
+
         w = self.w_molconsts = WMolecularConstants(self.parent_form)
+        w.changed.connect(self._on_w_molconsts_changed)
         l.addWidget(w)
 
 
@@ -46,13 +48,17 @@ class WFileMolConsts(a99.WBase):
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Interface
 
-    def load(self, x):
-        assert isinstance(x, ft.FileMolConsts)
-        self.f = x
-        self.w_molconsts.f = x.molconsts
-        self.__update_gui()
+    def set_moldb(self, fobj):
+        self.w_molconsts.set_moldb(fobj)
+
+    def _do_load(self, fobj):
+        assert isinstance(fobj, ft.FileMolConsts)
+        self._f = fobj
+        self.w_molconsts.molconsts = fobj.molconsts
+        # self.w_molconsts.f = fobj.molconsts
+        # self.__update_gui()
         self.setEnabled(True)
-        self.flag_valid = True
+        self._flag_valid = True
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Qt override
@@ -65,23 +71,8 @@ class WFileMolConsts(a99.WBase):
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Slots
 
-    def on_edited(self):
+    def _on_w_molconsts_changed(self):
         if self.flag_process_changes:
-            self.__update_f()
+            self._flag_valid = self.w_molconsts.flag_valid
             self.changed.emit()
 
-
-    # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
-    # # Internal gear
-
-    def __update_gui(self):
-        self.flag_process_changes = False
-        try:
-            o = self.f
-            # self.lineEdit_titrav.setText(o.titrav)
-        finally:
-            self.flag_process_changes = True
-
-    def __update_f(self):
-        self.f.molconsts = self.w_molconsts.constants
-        self.flag_valid = True

@@ -17,7 +17,7 @@ import a99
 import f311.filetypes as ft
 
 
-class WFileSpectrumList(a99.WBase):
+class WFileSpectrumList(a99.WEditor):
     """
     FileSpectrumList editor widget.
 
@@ -30,14 +30,12 @@ class WFileSpectrumList(a99.WBase):
         return self.wsptable.menu_actions
 
     def __init__(self, parent):
-        a99.WBase.__init__(self, parent)
+        a99.WEditor.__init__(self, parent)
 
         def keep_ref(obj):
             self._refs.append(obj)
             return obj
 
-        # Whether __update_f() went ok
-        self.flag_valid = False
         # Internal flag to prevent taking action when some field is updated programatically
         self.flag_process_changes = False
         # Whether there is sth in yellow background in the Headers tab
@@ -173,7 +171,7 @@ class WFileSpectrumList(a99.WBase):
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Interface
 
-    def load(self, x):
+    def _do_load(self, x):
         assert isinstance(x, (ft.FileSpectrum, ft.FileSpectrumList, ft.FileFullCube))
 
         # Converts from FileFullCube to FileSpectrumList format, if necessary
@@ -192,7 +190,7 @@ class WFileSpectrumList(a99.WBase):
         self.f = x
         self.wsptable.set_collection(x.splist)
         self.__update_gui(True)
-        self.flag_valid = True  # assuming that file does not come with errors
+        self._flag_valid = True  # assuming that file does not come with errors
         self.setEnabled(True)
 
     def update_splist_headers(self, splist):
@@ -217,8 +215,6 @@ class WFileSpectrumList(a99.WBase):
             self.__emit_if()
         return not flag_error
 
-    def update_gui_label_fn(self):
-        self.__update_gui_label_fn()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Qt override
@@ -307,15 +303,6 @@ class WFileSpectrumList(a99.WBase):
         finally:
             self.flag_process_changes = True
 
-    def __update_gui_label_fn(self):
-        if not self.f:
-            text = "(not loaded)"
-        elif self.f.filename:
-            text = os.path.relpath(self.f.filename, ".")
-        else:
-            text = "(filename not set)"
-        self.label_fn.setText(text)
-
     def __update_gui_header(self):
         """Updates header controls only"""
         splist = self.f.splist
@@ -335,7 +322,7 @@ class WFileSpectrumList(a99.WBase):
                 a99.style_widget_changed(edit, False)
 
     def __update_f(self):
-        self.flag_valid = self.update_splist_headers(self.f.splist)
+        self._flag_valid = self.update_splist_headers(self.f.splist)
 
     def __new_window(self, clone):
         """Opens new FileSparseCube in new window"""

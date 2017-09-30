@@ -15,47 +15,54 @@ class WMolecularConstants(a99.WBase):
     """
 
     @property
-    def f(self):
-        """Object representing the file being edited (possibly a DataFile object)"""
-        return self.moldb
-
-    @f.setter
-    def f(self, f):
-        self.load(f)
+    def moldb(self):
+        return self._moldb
 
     @property
-    def constants(self):
-        """Returns a dictionary that combines several records (see details):
+    def molconsts(self):
+        # """Returns a dictionary that combines several records (see details):
+        #
+        # - one record from table 'molecule'
+        # - one record from table 'system'
+        # - one record from table 'pfantmol'
+        # - two records from table 'state', for state' and state''
+        #     * keys for state' values start with "statel_"
+        #     * keys for state'' values start with "state2l_"
+        # """
+        # ret = ft.MolConsts()
+        # for fieldname in self._fieldnames:
+        #     ret[fieldname] = self[fieldname]
+        # ret["name"] = self.name
+        # ret["formula"] = self.formula
+        # ret["id_molecule"] = self._get_id_molecule()
+        # ret["id_pfantmol"] = self._get_id_pfantmol()
+        # ret["id_statel"] = self._get_id_statel()
+        # ret["id_state2l"] = self._get_id_state2l()
+        # ret["id_system"] = self._get_id_system()
+        #
+        # return ret
+        return self._molconsts
 
-        - one record from table 'molecule'
-        - one record from table 'system'
-        - one record from table 'pfantmol'
-        - two records from table 'state', for state' and state''
-            * keys for state' values start with "statel_"
-            * keys for state'' values start with "state2l_"
-        """
-        ret = ft.MolConsts()
-        for fieldname in self._fieldnames:
-            ret[fieldname] = self[fieldname]
-        ret["name"] = self.name
-        ret["formula"] = self.formula
-        return ret
+    @molconsts.setter
+    def molconsts(self, molconsts):
+        self._molconsts = molconsts
+        self._update_gui()
 
-    @property
-    def name(self):
-        """Returns molecule 'name' (field from 'molecule' table)"""
-        ret, id_ = None, self._get_id_molecule()
-        if id_ is not None:
-            ret = self.moldb.get_conn().execute("select name from molecule where id = ?", (id_,)).fetchone()["name"]
-        return ret
+    # @property
+    # def name(self):
+    #     """Returns molecule 'name' (field from 'molecule' table)"""
+    #     ret, id_ = None, self._get_id_molecule()
+    #     if id_ is not None:
+    #         ret = self.moldb.get_conn().execute("select name from molecule where id = ?", (id_,)).fetchone()["name"]
+    #     return ret
 
-    @property
-    def formula(self):
-        """Returns molecule 'formula' (field from 'molecule' table)"""
-        ret, id_ = None, self._get_id_molecule()
-        if id_ is not None:
-            ret = self.moldb.get_conn().execute("select formula from molecule where id = ?", (id_,)).fetchone()["formula"]
-        return ret
+    # @property
+    # def formula(self):
+    #     """Returns molecule 'formula' (field from 'molecule' table)"""
+    #     ret, id_ = None, self._get_id_molecule()
+    #     if id_ is not None:
+    #         ret = self.moldb.get_conn().execute("select formula from molecule where id = ?", (id_,)).fetchone()["formula"]
+    #     return ret
 
     @property
     def fcfs(self):
@@ -66,6 +73,10 @@ class WMolecularConstants(a99.WBase):
     def id_molecule(self):
         return self._get_id_molecule()
 
+    @property
+    def flag_valid(self):
+        return self._flag_valid
+
     # @property
     # def row(self):
     #     """Wraps WDBMolecule.row"""
@@ -74,6 +85,9 @@ class WMolecularConstants(a99.WBase):
     def __init__(self, *args):
         a99.WBase.__init__(self, *args)
 
+        self._molconsts = ft.MolConsts()
+        self._flag_valid = True
+
         # activated when populating table
         self._flag_populating = False
         # # _flag_populating_* collection
@@ -81,6 +95,7 @@ class WMolecularConstants(a99.WBase):
         self._flag_populating_system = False
         self._flag_populating_states = False
         self._flag_populating_pfantmol = False
+        self._flag_updating_gui = False
 
         # activated when searching for statel, state2l
         self._flag_searching_states = False
@@ -89,8 +104,8 @@ class WMolecularConstants(a99.WBase):
 
         # # Internal state
 
-        # FileMolDB object, I guess
-        self.moldb = None
+        # FileMolDB object, auxiliary object needed for operations
+        self._moldb = None
 
         # Fields of interest from table 'pfantmol'
         self._fieldnames_pfantmol = ["fe", "do", "am", "bm", "ua", "ub", "te", "cro", ]
@@ -265,27 +280,38 @@ class WMolecularConstants(a99.WBase):
         a99.nerdify(self)
 
     def __getitem__(self, fieldname):
-        """Allows dict-like access of molecular constants of interest. Returns float value or None"""
-        if fieldname in self._fieldnames:
-            text = self._edit_map[fieldname].text()
-            if "_label" in fieldname:
-                # Fields with "_label" in their names are treated as strings,
-                # otherwise they are considered numeric
-                return text.upper()
-            else:
-                try:
-                    return float(text)
-                except ValueError:
-                    return None
+        return self.molconsts[fieldname]
+
+        # """Allows dict-like access of molecular constants of interest. Returns float value or None. TODO Does not work with id_* yet"""
+        # if fieldname in self._fieldnames:
+        #     text = self._edit_map[fieldname].text()
+        #     if "_label" in fieldname:
+        #         # Fields with "_label" in their names are treated as strings,
+        #         # otherwise they are considered numeric
+        #         return text.upper()
+        #     else:
+        #         try:
+        #             return float(text)
+        #         except ValueError:
+        #             return None
+
+    def __setitem__(self, fieldname, value):
+        """Can assign widget properties by key. TODO Does not work with id_* yet"""
+        if fieldname not in self._fieldnames:
+            raise KeyError("Invalid fieldname '{}'".format(fieldname))
+
+        widget = self._edit_map[fieldname]
+        text = str(value) if value is not None else ""
+        widget.setText(text)
 
 
-    def load(self, moldb):
-        """Loads a FileMolDB object"""
+    def set_moldb(self, fobj):
         import f311.filetypes as ft
-        assert isinstance(moldb, ft.FileMolDB)
+        assert isinstance(fobj, ft.FileMolDB), "I dont want a {}".format(fobj)
 
-        self.moldb = moldb
-        if moldb is not None:
+        self._moldb = fobj
+
+        if fobj is not None:
             self._populate()
             self._auto_search()
 
@@ -308,32 +334,54 @@ class WMolecularConstants(a99.WBase):
     ################################################################################################
     # # Slots
 
+    def _onTextEdited(self):
+        self._update_molconsts()
+        self.changed.emit()
+
     def combobox_molecule_currentIndexChanged(self):
+        if self._flag_updating_gui:
+            return
         if self._flag_populating_molecule:
             return
 
         self._populate_sub_comboboxes()
         self._auto_search()
+        self._update_molconsts()
+        self.changed.emit()
 
     def combobox_pfantmol_currentIndexChanged(self):
+        if self._flag_updating_gui:
+            return
         if self._flag_populating_pfantmol:
             return
 
         self._fill_edits_pfantmol()
+        self._update_molconsts()
+        self.changed.emit()
 
     def combobox_statel_currentIndexChanged(self):
+        if self._flag_updating_gui:
+            return
         if self._flag_populating_states:
             return
 
         self._fill_edits_statel()
+        self._update_molconsts()
+        self.changed.emit()
 
     def combobox_state2l_currentIndexChanged(self):
+        if self._flag_updating_gui:
+            return
         if self._flag_populating_states:
             return
 
         self._fill_edits_state2l()
+        self._update_molconsts()
+        self.changed.emit()
 
     def combobox_system_currentIndexChanged(self):
+        if self._flag_updating_gui:
+            return
         if self._flag_populating_system:
             return
 
@@ -344,13 +392,16 @@ class WMolecularConstants(a99.WBase):
 
         self._auto_search_states()
         self._auto_search_pfantmol()
+        self._update_molconsts()
+        self.changed.emit()
 
     ################################################################################################
     # # Internal function
 
     def _get_id_molecule(self):
-        if len(self._ids_molecule) > 0:
-            return self._ids_molecule[self.combobox_molecule.currentIndex()]
+        idx = self.combobox_molecule.currentIndex()
+        if idx > 0:
+            return self._ids_molecule[idx-1]
         return None
 
     def _get_id_pfantmol(self):
@@ -372,8 +423,9 @@ class WMolecularConstants(a99.WBase):
         return None
 
     def _get_id_system(self):
-        if len(self._ids_system) > 0:
-            return self._ids_system[self.combobox_system.currentIndex()]
+        idx = self.combobox_system.currentIndex()
+        if idx > 0:
+            return self._ids_system[idx - 1]
         return None
 
     def _get_fcf_dict(self):
@@ -399,10 +451,11 @@ class WMolecularConstants(a99.WBase):
             cb = self.combobox_molecule
             cb.clear()
             self._ids_molecule = []
-            cursor = self.moldb.query_molecule()
-            for row in cursor:
-                cb.addItem("{:10} {}".format(row["formula"], row["name"]))
-                self._ids_molecule.append(row["id"])
+            data = self.moldb.query_molecule().fetchall()
+            cb.addItem("(please select)" if len(data) > 0 else "(no data)")
+            for row in data:
+                    cb.addItem("{:10} {}".format(row["formula"], row["name"]))
+                    self._ids_molecule.append(row["id"])
             self._set_caption_molecule()
 
         finally:
@@ -422,7 +475,7 @@ class WMolecularConstants(a99.WBase):
 
             if id_system is not None:
                 data = self.moldb.query_pfantmol(id_system=self._get_id_system()).fetchall()
-                cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
+                cb.addItem("(please select)" if len(data) > 0 else "(no data)")
                 for row in data:
                     cb.addItem("{}".format(row["description"]))
                     self._ids_pfantmol.append(row["id"])
@@ -442,14 +495,14 @@ class WMolecularConstants(a99.WBase):
             data = self.moldb.query_state(id_molecule=self._get_id_molecule()).fetchall()
             cb = self.combobox_statel
             cb.clear()
-            cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
+            cb.addItem("(please select)" if len(data) > 0 else "(no data)")
             for row in data:
                 cb.addItem("{}".format(row["State"]))
                 self._ids_state.append(row["id"])
 
             cb = self.combobox_state2l
             cb.clear()
-            cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
+            cb.addItem("(please select)" if len(data) > 0 else "(no data)")
             for row in data:
                 cb.addItem("{}".format(row["State"]))
 
@@ -468,8 +521,7 @@ class WMolecularConstants(a99.WBase):
             cb.clear()
             self._ids_system = []
             data = self.moldb.query_system(id_molecule=self._get_id_molecule()).fetchall()
-            if len(data) == 0:
-                cb.addItem("(no data)")
+            cb.addItem("(please select)" if len(data) > 0 else "(no data)")
             for row in data:
                 cb.addItem(ft.molconsts_to_system_str(row, style=ft.SS_ALL_SPECIAL))
                 self._ids_system.append(row["id"])
@@ -495,6 +547,7 @@ class WMolecularConstants(a99.WBase):
                 caption = info["caption"] or fieldname
                 a = QLabel(caption)
                 e = QLineEdit("")
+                e.textEdited.connect(self._onTextEdited)
                 e.installEventFilter(self)
                 tooltip = info["tooltip"]
                 if tooltip:
@@ -519,6 +572,7 @@ class WMolecularConstants(a99.WBase):
                 caption = info["caption"] or fieldname
                 a = QLabel(caption)
                 e = QLineEdit("")
+                e.textEdited.connect(self._onTextEdited)
                 e.installEventFilter(self)
                 tooltip = info["tooltip"]
                 if tooltip:
@@ -543,6 +597,7 @@ class WMolecularConstants(a99.WBase):
                 caption = info["caption"] or fieldname
                 a = QLabel(caption)
                 e = QLineEdit("")
+                e.textEdited.connect(self._onTextEdited)
                 e.installEventFilter(self)
                 tooltip = info["tooltip"]
                 if tooltip:
@@ -568,6 +623,7 @@ class WMolecularConstants(a99.WBase):
                 caption = info["caption"] or fieldname
                 a = QLabel(caption)
                 e = QLineEdit("")
+                e.textEdited.connect(self._onTextEdited)
                 e.installEventFilter(self)
                 tooltip = info["tooltip"]
                 if tooltip:
@@ -664,10 +720,8 @@ class WMolecularConstants(a99.WBase):
                  "and State like ?", (id_molecule, "{}%".format(row_system[fieldname]),)).fetchone()
 
                 if row_state is not None:
-                    try:
-                        cb.setCurrentIndex(self._ids_state.index(row_state["id"]) + 1)
-                    except ValueError:
-                        raise
+                    cb.setCurrentIndex(self._ids_state.index(row_state["id"]) + 1)
+
 
 
     def _set_caption_molecule(self):
@@ -684,3 +738,97 @@ class WMolecularConstants(a99.WBase):
 
     def _set_caption_pfantmol(self):
         self.label_pfantmol.setText("<b>&PFANT molecule ({})</b>".format(len(self._ids_pfantmol)))
+
+
+    def _update_gui(self):
+        if self._flag_updating_gui:
+            return
+
+        def populate_two_comboboxes():
+            self._populate_combobox_system()
+            self._populate_combobox_state()
+
+
+        self._flag_updating_gui = True
+
+        try:
+            molconsts = self._molconsts
+
+            # map to update the comboboxes
+            _CB_MAP = [
+                ("id_molecule", self.combobox_molecule, lambda: self._ids_molecule,
+                 populate_two_comboboxes),
+                ("id_system", self.combobox_system, lambda: self._ids_system,
+                 self._populate_combobox_pfantmol),
+                ("id_pfantmol", self.combobox_pfantmol, lambda: self._ids_pfantmol, None),
+                ("id_statel", self.combobox_statel, lambda: self._ids_state, None),
+                ("id_state2l", self.combobox_state2l, lambda: self._ids_state, None),
+            ]
+
+            # # Stage 1/2: comboboxes
+            for fieldname, cb, f_ids, method_after in _CB_MAP:
+                value = molconsts[fieldname]
+                if value is not None:
+                    try:
+                        idx = f_ids().index(value)
+                        cb.setCurrentIndex(idx+1)
+
+                        if method_after is not None:
+                            method_after()
+
+                    except ValueError:
+                        pass  # nevermind, just won't position combobox properly
+
+
+            # # Stage 2/2: edits
+            for fieldname in self._fieldnames:
+                self[fieldname] = molconsts[fieldname]
+
+
+        finally:
+            self._flag_updating_gui = False
+
+    def _update_molconsts(self):
+        """Updates molconsts from GUI"""
+
+        emsg, flag_error = "", False
+        fieldname = None
+        try:
+            # edits
+            for fieldname in self._fieldnames:
+                text = self._edit_map[fieldname].text()
+                if "_label" in fieldname:
+                    # Fields with "_label" in their names are treated as strings,
+                    # otherwise they are considered numeric
+                    value = text.upper()
+                else:
+                    value = float(text)
+
+                self.molconsts[fieldname] = value
+
+            # comboboxes
+            _CB_MAP = [
+                ("id_molecule", self.combobox_molecule, lambda: self._ids_molecule),
+                ("id_system", self.combobox_system, lambda: self._ids_system),
+                ("id_pfantmol", self.combobox_pfantmol, lambda: self._ids_pfantmol),
+                ("id_statel", self.combobox_statel, lambda: self._ids_state),
+                ("id_state2l", self.combobox_state2l, lambda: self._ids_state),
+            ]
+
+            for fieldname, cb, f_ids in _CB_MAP:
+                idx = cb.currentIndex()
+                if idx > 0:
+                    self.molconsts[fieldname] = f_ids()[idx-1]
+
+        except Exception as E:
+            flag_error = True
+            if fieldname is not None:
+                emsg = "Field '{}': {}".format(fieldname, str(E))
+            else:
+                emsg = str(E)
+            self.add_log_error(emsg)
+
+        self._flag_valid = not flag_error
+        if not flag_error:
+            self.status("")
+

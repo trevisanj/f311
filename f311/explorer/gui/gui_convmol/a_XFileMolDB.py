@@ -63,5 +63,5 @@ class XFileMolDB(XFileMainWindow):
         if index == 0:
             self.moldb_editor.f.get_conn().commit()  # Just in case
         else:
-            self.flags_changed[index] = True
-            self._update_tab_texts()
+            self.pages[index].flag_changed = True
+            self._update_gui_text_tabs()

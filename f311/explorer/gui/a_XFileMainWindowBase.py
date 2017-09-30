@@ -95,19 +95,27 @@ class XFileMainWindowBase(a99.XLogMainWindow):
         # .
         # .
         # .
-        #
-        # self.setWindowTitle("oxoxoxoxoxoxo")
+
         a99.nerdify(self)
+
+        # Connects changed signals from all editor to keep track of changes
+        for page in self.pages:
+            page.editor.changed.connect(self._on_changed)
+
 
         # Loads file objects if passed
         if fobjs is not None:
             for index, (fobj, page) in enumerate(zip(fobjs, self.pages)):
-                if isinstance(fobj, ft.DataFile):
+                if fobj is None:
+                    continue
+                elif isinstance(fobj, ft.DataFile):
                     self.load(fobj, index)
                 elif isinstance(fobj, str):
                     self.load_filename(fobj, index)
                 else:
                     raise TypeError("Invalid object of class '{}'".format(fobj.__class__.__name__))
+
+        self._update_gui_text_tabs()
 
     def _add_stuff(self):
         """Responsible for adding menu options, widgets, and pages, setting window title etc"""
@@ -260,7 +268,6 @@ class XFileMainWindowBase(a99.XLogMainWindow):
 
     def on_reset(self):
         if self._tab_is_op():
-            print("AAAAAAAAAAAAAAAA")
             editor = self._get_page().editor
             flag_ok = True
             if editor.f:
@@ -276,6 +283,12 @@ class XFileMainWindowBase(a99.XLogMainWindow):
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # Gear
+
+
+    def _on_changed(self):
+        """Slot for changed events"""
+        self._get_page().flag_changed = True
+        self._update_gui_text_tabs()
 
     def _get_tab_index(self):
         """Returns index of current selected tab."""
@@ -326,6 +339,8 @@ class XFileMainWindowBase(a99.XLogMainWindow):
         if f.filename:
             try:
                 f.save_as()
+
+                self.add_log("Saved '{}'".format(f.filename))
                 page.flag_changed = False
                 self._update_gui_text_tabs()
 

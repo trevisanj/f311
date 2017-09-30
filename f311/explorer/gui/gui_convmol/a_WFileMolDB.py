@@ -11,23 +11,11 @@ import os
 __all__ = ["WFileMolDB"]
 
 
-class WFileMolDB(a99.WBase):
+class WFileMolDB(a99.WEditor):
 
-    @property
-    def f(self):
-        return self._f
-
-    # @f.setter
-    # def f(self, x):
-    #     self._f = x
-    #     self.w_mol.f = x
-    #     self.w_state.f = x
 
     def __init__(self, *args):
-        a99.WBase.__init__(self, *args)
-
-        self._f = None
-        self.flag_valid = True  # To keep XFileMainWindow happy
+        a99.WEditor.__init__(self, *args)
 
         # # Main layout & splitter
         lmain = self.keep_ref(QVBoxLayout(self))
@@ -89,15 +77,15 @@ class WFileMolDB(a99.WBase):
         # # Final adjustments
         a99.nerdify(self)
 
-
-    def load(self, x):
-        self._f = x
-        self.w_mol.f = x
-        self.w_system.f = x
-        self.w_state.f = x
-        self.update_gui_label_fn()
-
+    def load(self, fobj):
+        a99.WEditor.load(self, fobj)
         self.w_mol._move_to_first()
+
+    def _do_load(self, fobj):
+        self._f = fobj
+        self.w_mol.f = fobj
+        self.w_system.f = fobj
+        self.w_state.f = fobj
 
     def mol_id_changed(self):
         id_ = self.w_mol.id
@@ -106,14 +94,3 @@ class WFileMolDB(a99.WBase):
         self.w_state.set_id_molecule(id_)
 
 
-    # # Override
-    #   ========
-
-    def update_gui_label_fn(self):
-        if not self._f:
-            text = "(not loaded)"
-        elif self._f.filename:
-            text = os.path.relpath(self._f.filename, ".")
-        else:
-            text = "(filename not set)"
-        self.label_fn.setText(text)

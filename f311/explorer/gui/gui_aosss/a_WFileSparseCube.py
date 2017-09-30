@@ -22,7 +22,7 @@ _COLORS_SQ = [(.1, .6, .5), (.5, .1, .7)]
 _ITER_COLORS_SQ = cycle(_COLORS_SQ)
 
 
-class WFileSparseCube(a99.WBase):
+class WFileSparseCube(a99.WEditor):
     """
     FileSparseCube editor widget.
 
@@ -32,10 +32,8 @@ class WFileSparseCube(a99.WBase):
 
     def __init__(self, parent):
         from f311 import explorer as ex
-        a99.WBase.__init__(self, parent)
+        a99.WEditor.__init__(self, parent)
 
-        # Whether all the values in the fields are valid or not
-        self.flag_valid = False
         # Internal flag to prevent taking action when some field is updated programatically
         self.flag_process_changes = False
         # GUI update needed but cannot be applied immediately, e.g. visible range being edited
@@ -296,7 +294,7 @@ class WFileSparseCube(a99.WBase):
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Interface
 
-    def load(self, x):
+    def _do_load(self, x):
         assert isinstance(x, (ft.FileSparseCube, ft.FileFullCube))
 
         # Converts from FileFullCube to FileSparseCube format, if necessary"""
@@ -312,7 +310,7 @@ class WFileSparseCube(a99.WBase):
         self.f = x
         self.wsptable.set_collection(x.sparsecube)
         self.__update_gui(True)
-        self.flag_valid = True  # assuming that file does not come with errors
+        self._flag_valid = True  # assuming that file does not come with errors
         self.setEnabled(True)
 
     def update_gui_label_fn(self):
@@ -479,12 +477,7 @@ class WFileSparseCube(a99.WBase):
                 self.flag_update_pending[i] = True
 
     def __update_gui_label_fn(self):
-        if not self.f:
-            text = "(not loaded)"
-        elif self.f.filename:
-            text = os.path.relpath(self.f.filename, ".")
-        else:
-            text = "(filename not set)"
+        text = self._make_fn_text()
         self.label_fn_sky.setText(text)
 
     def __update_gui_header(self):
@@ -510,7 +503,7 @@ class WFileSparseCube(a99.WBase):
     def __update_f(self):
         o = self.f
         sky = self.f.sparsecube
-        self.flag_valid = self.__update_f_header(sky)
+        self._flag_valid = self.__update_f_header(sky)
 
     def __update_f_header(self, sky):
         """Updates headers of a SparseCube objects using contents of the Headers tab"""

@@ -273,6 +273,16 @@ class WFileMain(QWidget):
         """Sets focus to first field. Note: reason is ignored."""
         self.lineEdit_titrav.setFocus()
 
+    def eventFilter(self, obj_focused, event):
+        if event.type() == QEvent.FocusIn:
+            text = ""
+            for label, obj, name, short_descr, color, long_descr in self._map:
+                if obj_focused == obj:
+                    text = "%s<br><br>%s" % \
+                           (a99.enc_name(name.replace("&", ""), color), long_descr)
+                    break
+            self.__set_descr_text(text)
+        return False
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Slots

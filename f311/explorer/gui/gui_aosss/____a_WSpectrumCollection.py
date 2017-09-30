@@ -16,14 +16,14 @@ import f311.filetypes as ft
 _CONFIG_LEGEND = "/gui/WSpectrumCollection/plot_overlapped/flag_legend"
 
 
-class WSpectrumCollection(a99.WBase):
+class WSpectrumCollection(a99.WEditor):
     """Editor for SpectrumCollection objects"""
 
     # argument0: flag_changed_header
     changed = pyqtSignal(bool)
 
     def __init__(self, parent):
-        a99.WBase.__init__(self, parent)
+        a99.WEditor.__init__(self, parent)
 
         def keep_ref(obj):
             self._refs.append(obj)

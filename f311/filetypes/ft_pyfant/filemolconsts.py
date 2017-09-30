@@ -1,31 +1,8 @@
-"""FileMAbFwhm class (differential ABundances and FWHMs)"""
-
-
-__all__ = ["FileMolConsts"]
-
-
-from .. import FilePy, adjust_atomic_symbol
-import importlib
-import numpy as np
+from .. import FilePy
 import a99
 from ..molconsts import MolConsts
 
-
-
-def check_module(module_name):
-    """
-    Checks if module can be imported without actually
-    importing it
-
-    Source: https://www.blog.pythonlibrary.org/2016/05/27/python-201-an-intro-to-importlib/
-    """
-    module_spec = importlib.util.find_spec(module_name)
-    if module_spec is None:
-        print('Module: {} not found'.format(module_name))
-        return None
-    else:
-        print('Module: {} can be imported!'.format(module_name))
-        return module_spec
+__all__ = ["FileMolConsts"]
 
 @a99.froze_it
 class FileMolConsts(FilePy):
@@ -53,6 +30,3 @@ class FileMolConsts(FilePy):
         with open(filename, "w") as h:
             h.write("{}\nfrom f311.filetypes import MolConsts\n\n"
                     "molconsts = {}".format(self._get_header(), self.molconsts))
-
-
-

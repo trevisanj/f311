@@ -226,13 +226,6 @@ SS_ALL_SPECIAL = 0
 # Does not convert SPDF to string. Example: "A 2 0 - X 2 1"
 SS_RAW = 1
 
-# superscript numbers
-_INT_TO_SUPERSCRIPT = {1: "\u2071",
-                       2: "\u00b2",
-                       3: "\u00b3",
-                       4: "\u2074"}
-
-
 __A = ["Sigma", "Pi", "Delta", "Phi"]
 
 _SPDF_TO_GREEK = dict(zip(range(len(__A)), __A))
@@ -268,13 +261,13 @@ def molconsts_to_system_str(molconsts, style=SS_ALL_SPECIAL):
         fmult = lambda x: x
         fspdf = lambda x:spdf_to_greek(x)
     elif style == SS_ALL_SPECIAL:
-        fmult = lambda x: _INT_TO_SUPERSCRIPT[x]
+        fmult = lambda x: a99.int_to_superscript(x)
         fspdf = lambda x: a99.greek_to_unicode(spdf_to_greek(x).capitalize())
     elif style == SS_RAW:
         fmult = lambda x: x
         fspdf = lambda x: x
     elif style == SS_SUPERSCRIPT:
-        fmult = lambda x: _INT_TO_SUPERSCRIPT[x]
+        fmult = lambda x: a99.int_to_superscript(x)
         fspdf = lambda x:spdf_to_greek(x)
     else:
         raise ValueError("Invalid style: {}".format(style))

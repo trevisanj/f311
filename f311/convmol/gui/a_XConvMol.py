@@ -375,6 +375,7 @@ class _WVald3Panel(a99.WBase):
             self._flag_populating = False
             # self._wanna_emit_id_changed()
 
+
 class _WKuruczPanel(a99.WBase):
     """
     This panel allows to load a Kurucz molecular lines file
@@ -514,14 +515,15 @@ class _WTurboSpectrumPanel(a99.WBase):
         lw.addWidget(self.keep_ref(QLabel("TurboSpectrum")))
 
 
-
-class _WConv(a99.WBase):
+class _WConv(a99.WEditor):
 
     convert_clicked = pyqtSignal()
     open_mol_clicked = pyqtSignal()
 
-    def __init__(self, *args, **kwargs):
-        a99.WBase.__init__(self, *args, **kwargs)
+    def __init__(self, parent_form):
+        a99.WEditor.__init__(self, parent_form)
+
+        self.w_moldb = parent_form.w_moldb
 
         # ## Vertical layout: source and destination stacked
         lsd = self.keep_ref(QVBoxLayout(self))
@@ -538,7 +540,7 @@ class _WConv(a99.WBase):
 
         # ##### Source radio buttons
         lss.addWidget(self.keep_ref(QLabel("<b>Source</b>")))
-        w = self.w_source = _WSource(self)
+        w = self.w_source = _WSource(self.parent_form)
         w.index_changed.connect(self.source_changed)
         lss.addWidget(w)
         lss.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
@@ -548,19 +550,18 @@ class _WConv(a99.WBase):
         # Only one panel should be visible at a time
         # **Note** The order here doesn't matter
         panels = {}
-        panels["HITRAN"] = self.w_hitran = _WHitranPanel(self)
-        panels["VALD3"] = self.w_vald3 = _WVald3Panel(self)
-        panels["TurboSpectrum"] = self.w_turbo = _WTurboSpectrumPanel(self)
-        panels["Kurucz"] = self.w_kurucz = _WKuruczPanel(self)
+        panels["HITRAN"] = self.w_hitran = _WHitranPanel(self.parent_form)
+        panels["VALD3"] = self.w_vald3 = _WVald3Panel(self.parent_form)
+        panels["TurboSpectrum"] = self.w_turbo = _WTurboSpectrumPanel(self.parent_form)
+        panels["Kurucz"] = self.w_kurucz = _WKuruczPanel(self.parent_form)
         for name in _NAMES:
-            p = panels[name]
             ds = _SOURCES[name]
-            ds.widget = p
+            ds.widget = p = panels[name]
             lh.addWidget(p)
 
         # ### Output file specification
 
-        w0 = self.w_out = _WSelectSaveFile(self)
+        w0 = self.w_out = _WSelectSaveFile(self.parent_form)
         w0.wants_auto.connect(self.wants_auto)
         lsd.addWidget(w0)
 
@@ -570,10 +571,10 @@ class _WConv(a99.WBase):
         lsd.addLayout(lmn)
         lmn.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
         b = self.button_convert = QPushButton("&Run Conversion")
-        b.clicked.connect(self.convert_clicked)
+        b.clicked.connect(self._convert_clicked)
         lmn.addWidget(b)
         b = self.button_convert = QPushButton("&Open result in mled.py")
-        b.clicked.connect(self.open_mol_clicked)
+        b.clicked.connect(self._open_mol_clicked)
         lmn.addWidget(b)
 
         # # Final adjustments
@@ -588,55 +589,192 @@ class _WConv(a99.WBase):
             ds.widget.setVisible(i == idx)
             # print("Widget", ds.widget, "is visible?", ds.widget.isVisible())
 
+    def wants_auto(self):
+        name = _NAMES[self.w_source.index]
+        filename = None
+        if name == "HITRAN":
+            lines = self.w_hitran.data
+            if lines:
+                filename = "{}.dat".format(lines["header"]["table_name"])
+
+        if filename is None:
+            # Default
+            filename = a99.new_filename("mol", "dat")
+        self.w_out.value = filename
+
+    def _convert_clicked(self):
+        try:
+            errors = self._validate()
+
+            if len(errors) == 0:
+                conv, errors = self._get_conv(errors)
+
+            if len(errors) == 0:
+                lines = self._get_lines()
+
+                fobj, log = conv.make_file_molecules(lines)
+
+                self._report_conversion(fobj, log)
+
+                if log.flag_ok:
+                    fobj.save_as(self.w_out.value)
+                    self.add_log("File '{}' generated successfully".format(self.w_out.value))
+
+            else:
+                self.add_log_error("Cannot convert:\n  - " + ("\n  - ".join(errors)), True)
+
+        except Exception as e:
+            a99.get_python_logger().exception("Conversion failed")
+            self.add_log_error("Conversion failed: {}".format(a99.str_exc(e)), True)
+
+    def _report_conversion(self, fobj, log):
+        ne = len(log.errors)
+        if ne > 0:
+            self.add_log("Error messages:")
+            self.add_log("\n".join(log.errors))
+            self.add_log("{} error message{}".format(ne, "" if ne == 1 else "s"))
+        if log.flag_ok:
+            if log.num_lines_skipped > 0:
+                self.add_log(
+                    "Lines filtered out: {}".format(log.num_lines_skipped))
+                self.add_log("    Reasons:")
+                kv = list(log.skip_reasons.items())
+                kv.sort(key=lambda x: x[0])
+                for key, value in kv:
+                    self.add_log("      - {}: {}".format(key, value))
+            ne = log.num_lines - log.num_lines_skipped - fobj.num_lines
+            if ne > 0:
+                self.add_log(
+                    "Lines not converted because of error: {}".format(ne))
+            self.add_log(
+                "Lines converted: {}/{}".format(fobj.num_lines, log.num_lines))
+        else:
+            self.add_log_error("Conversion was not possible")
+
+    def _get_conv(self, errors):
+        import f311.convmol as cm
+
+        name = self.w_source.source.name
+
+        # (Data source name, Conv class)
+        map = [("HITRAN", None),
+               ("VALD3", None),
+               ("Kurucz", cm.ConvKurucz)]
+
+        cls = None
+        conv = None
+        try:
+            cls = map[name]
+        except KeyError:
+            pass
+
+        if cls is None:
+            errors.append("{}-to-PFANT conversion not implemented yet, sorry".format(name))
+        else:
+            w = self.w_source.source.widget
+
+            conv = cls(flag_hlf=w.flag_hlf, flag_normhlf=w.flag_normhlf,
+                       flag_fcf=w.flag_fcf, flag_spinl=w.flag_spinl, iso=w.iso)
+            conv.fcfs = self.w_moldb.fcfs
+            conv.molconsts = self.w_moldb.molconsts
+
+        return conv, errors
+
+    def _get_lines(self):
+        """Creates a Conv object and """
+
+        import f311.convmol as cm
+
+        widget_panel = self.w_source.source.widget
+
+        return widget_panel.lines
+
+    def _validate(self, ):
+        """Validation of GUI. Returns errors"""
+        errors = []
+
+        molconsts = self.w_moldb.molconsts
+
+        molconsts_fieldnames_ignore = ["id_molecule", "id_pfantmol", "id_system", "id_statel",
+                                       "id_state2l"]
+        if self.w_moldb.id_molecule is None:
+            errors.append("Molecule not selected")
+
+        elif any([value is None for name, value in molconsts.items()
+                  if name not in molconsts_fieldnames_ignore]):
+            s_none = ", ".join(["'{}'".format(name) for name, value in molconsts.items()
+                                if value is None and name not in molconsts_fieldnames_ignore])
+            errors.append("There are empty molecular constants: {}".format(s_none))
+        if not self.w_out.validate():
+            errors.append("Output filename is invalid")
+
+
+
+        # Data-source-specific validation
+
+        name = self.w_source.source.name
+
+        if name == "VALD3":
+            if not self.w_vald3.is_molecule:
+                errors.append("Need a VALD3 molecule")
+        elif name == "Kurucz":
+            # TODO FCFs general, not Kurucz only
+            w = self.w_kurucz
+
+            if w.flag_fcf and self.w_moldb.fcfs is None:
+                errors.append(
+                    "Cannot multiply gf's by Franck-Condon Factors, as these are not available in molecular configuration")
+
+        return errors
+
+    def _open_mol_clicked(self):
+        filename = self.w_out.value
+        if len(filename) > 0:
+            f = ft.FileMolecules()
+            f.load(filename)
+            vis = ex.VisMolecules()
+            vis.use(f)
+
+
 
 class XConvMol(ex.XFileMainWindow):
-    def __init__(self, parent=None, fileobj=None):
-        ex.XFileMainWindow.__init__(self, parent)
-
-        self._add_stuff(fileobj)
-
-    def _add_stuff(self, fileobj):
+    def _add_stuff(self):
+        # Qt stuff tab #0: FileMolDB editor
         w0 = self.keep_ref(QWidget())
         self.tabWidget.addTab(w0, "")
         lv = self.keep_ref(QVBoxLayout(w0))
         e0 = self.w_moldb = WFileMolDB(self)
         lv.addWidget(e0)
         e0.changed.connect(self._on_w_moldb_changed)
+        e0.loaded.connect(self._on_w_moldb_loaded)
+
+        # Qt stuff tab #1: FileMolConsts editor
         w1 = self.keep_ref(QWidget())
         self.tabWidget.addTab(w1, "")
         lv = self.keep_ref(QVBoxLayout(w1))
         e1 = self.w_molconsts = WFileMolConsts(self)
         lv.addWidget(e1)
         e1.changed.connect(self._on_w_molconsts_changed)
+
+        # Qt stuff tab #2: FileConv editor TODO FileConv does not exist yet self.conv a Conv
         w2 = self.keep_ref(QWidget())
         self.tabWidget.addTab(w2, "")
         lv = self.keep_ref(QVBoxLayout(w2))
-        e2 = self.w_conv = WFileMolConsts(self)
+        e2 = self.w_conv = _WConv(self)
+        # e2.convert_clicked.connect(self.convert_clicked)
+        # e2.open_mol_clicked.connect(self.open_mol_clicked)
         lv.addWidget(e2)
         e2.changed.connect(self._on_w_conv_changed)
-        self.pages.append(ex.MyPage(text_tab="Molecular constants database (Alt+&1)",
-                                    cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,),
-                                    wild="*.sqlite", editor=e0))
-        self.pages.append(ex.MyPage(text_tab="Molecular constants (Alt+&2)",
-                                    cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,),
-                                    wild="*.py", editor=e1))
-        self.pages.append(ex.MyPage(text_tab="Conversion (Alt+&3)",
-                                    cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,),
-                                    wild="*.py", editor=e2))
-        _WWW = ft.FileMolConsts.description
-        self.text_tab = ["{} (Alt+&1)".format(_VVV), "{} (Alt+&2)".format(_WWW),
-                         "Conversion (Alt+&3)", "Log (Alt+&4)"]
-        self.flags_changed = [False, False, False, False]
-        self.save_as_texts = ["Save %s as..." % _VVV, "Save %s as..." % _WWW, None, None]
-        self.open_texts = ["Load %s" % _VVV, "Load %s" % _WWW, None, None]
-        self.clss = [ft.FileMolDB, ft.FileMolConsts, None, None]  # save class
-        self.clsss = [(ft.FileMolDB,), (ft.FileMolConsts,), None, None]  # accepted load classes
-        self.wilds = ["*.sqlite", "*.py", None, None]  # e.g. '*.fits'
-        self.editors = [ex.NullEditor(), ex.NullEditor(), ex.NullEditor(),
-                        ex.NullEditor()]  # editor widgets, must comply ...
-        tw0 = self.tabWidget
-        tw0.setTabText(1, self.text_tab[2])
 
+
+        self.pages.append(ex.MyPage(text_tab="Molecular constants database (Alt+&1)",
+         cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,), wild="*.sqlite", editor=e0))
+
+        self.pages.append(ex.MyPage(text_tab="Molecular constants (Alt+&2)",
+         cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,), wild="*.py", editor=e1))
+
+        self.pages.append(ex.MyPage(text_tab="Conversion (Alt+&3)",
+         cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,), wild="*.py", editor=e2))
 
         self.setWindowTitle("(to) PFANT Molecular Lines Converter")
         self.installEventFilter(self)
@@ -657,129 +795,14 @@ class XConvMol(ex.XFileMainWindow):
         return False
 
     def _on_w_moldb_changed(self):
-        print("CCCCCCCCCCCCCCCCCCCCCCCC00000000000000000000000")
+        print("##############################################")
+
+    def _on_w_moldb_loaded(self):
+        self.w_molconsts.set_moldb(self.w_moldb.f)
 
     def _on_w_molconsts_changed(self):
-        print("CCCCCCCCCCCCCCCCCCCCCCCC111111111111111111111111111")
+        self.w_molconsts.set_moldb(self.w_moldb.f)
 
     def _on_w_conv_changed(self):
-        print("CCCCCCCCCCCCCCCCCCCCCCCC111111111111111111111111111")
+        print("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
 
-    def wants_auto(self):
-        name = _NAMES[self.w_source.index]
-        filename = None
-        if name == "HITRAN":
-            lines = self.w_hitran.data
-            if lines:
-                filename = "{}.dat".format(lines["header"]["table_name"])
-
-        if filename is None:
-            # Default
-            filename = a99.new_filename("mol", "dat")
-        self.w_out.value = filename
-
-    def convert_clicked(self):
-        from f311 import convmol as cm
-        try:
-            # # Extraction of data from GUI, and their
-            name = self.w_source.source.name
-            # This is a merge of fields table 'molecule' and 'pfantmol' in a FileMolDB database
-            molconsts = self.w_moldb.constants
-            fcfs = self.w_moldb.fcfs
-            filename = self.w_out.value
-
-            # Validation of data
-            errors = []
-            molconsts_fieldnames_ignore = ["id_molecule", "id_pfantmol", "id_system", "id_statel", "id_state2l"]
-            if self.w_moldb.id_molecule is None:
-                errors.append("Molecule not selected")
-
-            elif any([value is None for name, value in molconsts.items()
-                      if name not in molconsts_fieldnames_ignore]):
-                s_none = ", ".join(["'{}'".format(name) for name, value in molconsts.items()
-                                    if value is None and name not in molconsts_fieldnames_ignore])
-                errors.append("There are empty molecular constants: {}".format(s_none))
-            if not self.w_out.validate():
-                errors.append("Output filename is invalid")
-
-            lines, sols_calculator = None, None
-            if len(errors) == 0:
-                # Source-dependant calculation of "sets of lines"
-                if name == "HITRAN":
-                    errors.append("HITRAN conversion not implemented yet!")
-                    if False:
-                        lines = self.w_hitran.data
-
-                        if lines is None:
-                            errors.append("HITRAN table not selected")
-                        else:
-                            conv = cm.ConvHitran()
-                elif name == "VALD3":
-                    errors.append("VALD3 conversion not implemented yet!")
-                    if False:
-                        if not self.w_vald3.is_molecule:
-                            errors.append("Need a VALD3 molecule")
-                        else:
-                            lines = self.w_vald3.data
-                            conv = cm.ConvVald3()
-                elif name == "Kurucz":
-                    w = self.w_kurucz
-
-                    if w.flag_fcf and fcfs is None:
-                        errors.append("Cannot multiply gf's by Franck-Condon Factors, as these are not available in molecular configuration")
-                    else:
-
-                        conv = cm.ConvKurucz(flag_hlf=w.flag_hlf, flag_normhlf=w.flag_normhlf,
-                                             flag_fcf=w.flag_fcf, flag_spinl=w.flag_spinl, iso=w.iso)
-                        lines = w.data
-                else:
-                    a99.show_message("{}-to-PFANT conversion not implemented yet, sorry".
-                                    format(name))
-                    return
-
-            if len(errors) == 0:
-                # Finally the conversion to PFANT molecular lines file
-                conv.molconsts = molconsts
-                conv.fcfs = fcfs
-                f, log = conv.make_file_molecules(lines)
-                ne = len(log.errors)
-                if ne > 0:
-                    self.add_log("Error messages:")
-                    self.add_log("\n".join(log.errors))
-                    self.add_log("{} error message{}".format(ne, "" if ne == 1 else "s"))
-
-                if log.flag_ok:
-                    f.save_as(filename)
-                    if log.num_lines_skipped > 0:
-                        self.add_log(
-                            "Lines filtered out: {}".format(log.num_lines_skipped))
-                        self.add_log("    Reasons:")
-                        kv = list(log.skip_reasons.items())
-                        kv.sort(key=lambda x: x[0])
-                        for key, value in kv:
-                            self.add_log("      - {}: {}".format(key, value))
-                    ne = log.num_lines-log.num_lines_skipped-f.num_lines
-                    if ne > 0:
-                        self.add_log(
-                            "Lines not converted because of error: {}".format(ne))
-                    self.add_log(
-                        "Lines converted: {}/{}".format(f.num_lines, log.num_lines))
-
-                    self.add_log("File '{}' generated successfully".format(filename))
-                else:
-                    self.add_log_error("Conversion was not possible")
-            else:
-                self.add_log_error("Cannot convert:\n  - " + ("\n  - ".join(errors)), True)
-
-        except Exception as e:
-            a99.get_python_logger().exception("Conversion failed")
-            self.add_log_error("Conversion failed: {}".format(a99.str_exc(e)), True)
-
-
-    def open_mol_clicked(self):
-        filename = self.w_out.value
-        if len(filename) > 0:
-            f = ft.FileMolecules()
-            f.load(filename)
-            vis = ex.VisMolecules()
-            vis.use(f)

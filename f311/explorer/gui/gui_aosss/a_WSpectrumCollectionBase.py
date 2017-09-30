@@ -17,7 +17,7 @@ import f311.filetypes as ft
 _CONFIG_LEGEND = "/gui/WSpectrumCollectionBase/plot_overlapped/flag_legend"
 
 
-class WSpectrumCollectionBase(a99.WBase):
+class WSpectrumCollectionBase(a99.WEditor):
     """Base class for WSpectrumList and WSparseCube
 
     This class implements some operations that are the same for either WSpectrumList and WSparseCube
@@ -27,7 +27,7 @@ class WSpectrumCollectionBase(a99.WBase):
 
 
     def __init__(self, parent, flag_splist=True):
-        a99.WBase.__init__(self, parent)
+        a99.WEditor.__init__(self, parent)
 
         def keep_ref(obj):
             self._refs.append(obj)
