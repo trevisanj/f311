@@ -30,13 +30,13 @@ class XFileSparseCube(XFileMainWindow):
 
         # # Synchronized sequences
         _VVV = ft.FileSparseCube.description
-        self.tab_texts[0] =  "FileSparseCube editor (Alt+&1)"
-        self.tabWidget.setTabText(0, self.tab_texts[0])
-        self.save_as_texts[0] = "Save %s as..." % _VVV
-        self.open_texts[0] = "Load %s" % _VVV
-        self.clss[0] = ft.FileSparseCube
-        self.clsss[0] = (ft.FileSparseCube, ft.FileFullCube)  # file types that can be opened
-        self.wilds[0] = "*.fits"
+        self.text_tab[0] =  "FileSparseCube editor (Alt+&1)"
+        self.tabWidget.setTabText(0, self.text_tab[0])
+        text_save_as="Save %s as..." % _VVV
+        text_load="Load %s" % _VVV
+        cls=ft.FileSparseCube
+        clss(ft.FileSparseCube, ft.FileFullCube)  # file types that can be opened
+        wild="*.fits"
 
         lv = keep_ref(QVBoxLayout(self.gotting))
         ce = self.ce = WFileSparseCube(self)
@@ -96,19 +96,5 @@ class XFileSparseCube(XFileMainWindow):
 
 
     def on_tab0_file_edited(self):
-        self._on_changed()
+        self._on_me_changed()
 
-    # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
-    # Protected methods to be overriden or used by descendant classes
-
-    def _filter_on_load(self, f):
-        """Converts from FileFullCube to FileSparseCube format, if necessary"""
-        f1 = None
-        if isinstance(f, ft.FileFullCube):
-            f1 = ft.FileSparseCube()
-            f1.sparsecube.from_full_cube(f.wcube)
-        if f1:
-            f1.filename = a99.add_bits_to_path(f.filename, "imported-from-",
-                                           os.path.splitext(ft.FileSparseCube.default_filename)[1])
-            f = f1
-        return f

@@ -8,38 +8,32 @@ from .a_WFileMolDB import *
 import os
 from ..a_XFileMainWindow import *
 
-
 __all__ = ["XFileMolDB"]
 
 
 class XFileMolDB(XFileMainWindow):
-    def __init__(self, parent=None, fileobj=None):
-        XFileMainWindow.__init__(self, parent)
-
+    def _add_stuff(self):
+        XFileMainWindow._add_stuff(self)
+        
         import f311.filetypes as ft
-
-
-        # # Synchronized sequences
-        _VVV = ft.FileMolDB.description
-        self.tab_texts[0] =  "{} (Alt+&1)".format(_VVV)
-        self.tabWidget.setTabText(0, self.tab_texts[0])
-        self.save_as_texts[0] = "Save %s as..." % _VVV
-        self.open_texts[0] = "Load %s" % _VVV
-        self.clss[0] = ft.FileMolDB
-        self.clsss[0] = (ft.FileMolDB,)
-        self.wilds[0] = "*.sqlite"
-
+        import f311.explorer as ex
 
         lv = self.keep_ref(QVBoxLayout(self.gotting))
         me = self.moldb_editor = WFileMolDB(self)
         lv.addWidget(me)
-        me.changed.connect(self._on_changed)
-        self.editors[0] = me
+        me.changed.connect(self._on_me_changed)
+
+        # # Synchronized sequences
+        _VVV = ft.FileMolDB.description
+        self.pages.append(ex.MyPage(
+         text_tab="{} (Alt+&1)".format(_VVV),
+         text_saveas="Save %s as..." % _VVV,
+         text_load="Load %s" % _VVV,
+         cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,), wild="*.sqlite",
+         editor=me
+        ))
 
         self.setWindowTitle("Molecular information database editor")
-
-        if fileobj is not None:
-            self.load(fileobj)
 
     def wants_auto(self):
         idx = self.w_source.index
@@ -56,22 +50,10 @@ class XFileMolDB(XFileMainWindow):
         self.w_out.value = filename
 
 
-    def on_fill_missing(self):
-        self.w_mol.None_to_zero()
-        self.w_state.None_to_zero()
-
-    # def mol_id_changed(self):
-    #     id_ = self.w_mol.w_mol.id
-    #     row = self.w_mol.w_mol.row
-    #     self.w_state.set_id_molecule(id_)
-    #     s = "States (no molecule selected)" if not row else "Select a State for molecule '{}'".format(row["formula"])
-    #     self.title_state.setText(a99.format_title0(s))
-
-
     # # Override
     #   ========
 
-    def _on_changed(self):
+    def _on_me_changed(self):
         """Overriden to commit automatically. "(changed)" will not appear
 
         Changes should be committed by the method that executed queries, but it is so easy to

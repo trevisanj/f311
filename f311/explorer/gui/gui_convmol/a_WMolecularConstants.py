@@ -17,7 +17,7 @@ class WMolecularConstants(a99.WBase):
     @property
     def f(self):
         """Object representing the file being edited (possibly a DataFile object)"""
-        return self._f
+        return self.moldb
 
     @f.setter
     def f(self, f):
@@ -46,7 +46,7 @@ class WMolecularConstants(a99.WBase):
         """Returns molecule 'name' (field from 'molecule' table)"""
         ret, id_ = None, self._get_id_molecule()
         if id_ is not None:
-            ret = self._f.get_conn().execute("select name from molecule where id = ?", (id_,)).fetchone()["name"]
+            ret = self.moldb.get_conn().execute("select name from molecule where id = ?", (id_,)).fetchone()["name"]
         return ret
 
     @property
@@ -54,7 +54,7 @@ class WMolecularConstants(a99.WBase):
         """Returns molecule 'formula' (field from 'molecule' table)"""
         ret, id_ = None, self._get_id_molecule()
         if id_ is not None:
-            ret = self._f.get_conn().execute("select formula from molecule where id = ?", (id_,)).fetchone()["formula"]
+            ret = self.moldb.get_conn().execute("select formula from molecule where id = ?", (id_,)).fetchone()["formula"]
         return ret
 
     @property
@@ -90,7 +90,7 @@ class WMolecularConstants(a99.WBase):
         # # Internal state
 
         # FileMolDB object, I guess
-        self._f = None
+        self.moldb = None
 
         # Fields of interest from table 'pfantmol'
         self._fieldnames_pfantmol = ["fe", "do", "am", "bm", "ua", "ub", "te", "cro", ]
@@ -279,13 +279,13 @@ class WMolecularConstants(a99.WBase):
                     return None
 
 
-    def load(self, f):
+    def load(self, moldb):
         """Loads a FileMolDB object"""
         import f311.filetypes as ft
-        assert isinstance(f, ft.FileMolDB)
+        assert isinstance(moldb, ft.FileMolDB)
 
-        self._f = f
-        if f is not None:
+        self.moldb = moldb
+        if moldb is not None:
             self._populate()
             self._auto_search()
 
@@ -377,7 +377,7 @@ class WMolecularConstants(a99.WBase):
         return None
 
     def _get_fcf_dict(self):
-        return self._f.get_fcf_dict(self._get_id_system())
+        return self.moldb.get_fcf_dict(self._get_id_system())
 
     def _populate(self):
         if not self._flag_built_edits:
@@ -399,7 +399,7 @@ class WMolecularConstants(a99.WBase):
             cb = self.combobox_molecule
             cb.clear()
             self._ids_molecule = []
-            cursor = self._f.query_molecule()
+            cursor = self.moldb.query_molecule()
             for row in cursor:
                 cb.addItem("{:10} {}".format(row["formula"], row["name"]))
                 self._ids_molecule.append(row["id"])
@@ -421,7 +421,7 @@ class WMolecularConstants(a99.WBase):
             id_system = self._get_id_system()
 
             if id_system is not None:
-                data = self._f.query_pfantmol(id_system=self._get_id_system()).fetchall()
+                data = self.moldb.query_pfantmol(id_system=self._get_id_system()).fetchall()
                 cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
                 for row in data:
                     cb.addItem("{}".format(row["description"]))
@@ -439,7 +439,7 @@ class WMolecularConstants(a99.WBase):
         self._flag_populating_states = True
         try:
             self._ids_state = []
-            data = self._f.query_state(id_molecule=self._get_id_molecule()).fetchall()
+            data = self.moldb.query_state(id_molecule=self._get_id_molecule()).fetchall()
             cb = self.combobox_statel
             cb.clear()
             cb.addItem("(select to fill information below)" if len(data) > 0 else "(no data)")
@@ -467,7 +467,7 @@ class WMolecularConstants(a99.WBase):
             cb = self.combobox_system
             cb.clear()
             self._ids_system = []
-            data = self._f.query_system(id_molecule=self._get_id_molecule()).fetchall()
+            data = self.moldb.query_system(id_molecule=self._get_id_molecule()).fetchall()
             if len(data) == 0:
                 cb.addItem("(no data)")
             for row in data:
@@ -484,7 +484,7 @@ class WMolecularConstants(a99.WBase):
     def _build_edits(self):
         # pfantmol fields
         nr, nc, n = 3, 3, len(self._fieldnames_pfantmol)
-        ti = self._f.get_table_info("pfantmol")
+        ti = self.moldb.get_table_info("pfantmol")
         lg = self.layout_grid_pfantmol
         for j in range(nc):
             # ### One grid layout for each column of fields
@@ -508,7 +508,7 @@ class WMolecularConstants(a99.WBase):
 
         # system fields
         nr, nc, n = 2, 3, len(self._fieldnames_system)
-        ti = self._f.get_table_info("system")
+        ti = self.moldb.get_table_info("system")
         lg = self.layout_grid_system
         for j in range(nc):
             # ### One grid layout for each column of fields
@@ -532,7 +532,7 @@ class WMolecularConstants(a99.WBase):
 
         # statel fields
         nr, nc, n = 3, 3, len(self._fieldnames_state)
-        ti = self._f.get_table_info("state")
+        ti = self.moldb.get_table_info("state")
         lg = self.layout_grid_statel
         for j in range(nc):
             # ### One grid layout for each column of fields
@@ -557,7 +557,7 @@ class WMolecularConstants(a99.WBase):
 
         # statel fields
         nr, nc, n = 3, 3, len(self._fieldnames_state)
-        ti = self._f.get_table_info("state")
+        ti = self.moldb.get_table_info("state")
         lg = self.layout_grid_state2l
         for j in range(nc):
             # ### One grid layout for each column of fields
@@ -586,7 +586,7 @@ class WMolecularConstants(a99.WBase):
     def _fill_edits_pfantmol(self):
         id_ = self._get_id_pfantmol()
         if id_ is not None:
-            row = self._f.query_pfantmol(**{"pfantmol.id": id_}).fetchone()
+            row = self.moldb.query_pfantmol(**{"pfantmol.id": id_}).fetchone()
             for fieldname, e in self._edit_map_pfantmol.items():
                 v = row[fieldname]
                 e.setText(str(v) if v is not None else "")
@@ -594,7 +594,7 @@ class WMolecularConstants(a99.WBase):
     def _fill_edits_statel(self):
         id_ = self._get_id_statel()
         if id_ is not None:
-            row = self._f.query_state(**{"state.id": id_}).fetchone()
+            row = self.moldb.query_state(**{"state.id": id_}).fetchone()
             for fieldname, e in self._edit_map_statel.items():
                 v = row[fieldname]
                 e.setText(str(v) if v is not None else "")
@@ -602,7 +602,7 @@ class WMolecularConstants(a99.WBase):
     def _fill_edits_state2l(self):
         id_ = self._get_id_state2l()
         if id_ is not None:
-            row = self._f.query_state(**{"state.id": id_}).fetchone()
+            row = self.moldb.query_state(**{"state.id": id_}).fetchone()
             for fieldname, e in self._edit_map_state2l.items():
                 v = row[fieldname]
                 e.setText(str(v) if v is not None else "")
@@ -611,7 +611,7 @@ class WMolecularConstants(a99.WBase):
     def _fill_edits_system(self):
         id_ = self._get_id_system()
         if id_ is not None:
-            row = self._f.query_system(**{"system.id": id_}).fetchone()
+            row = self.moldb.query_system(**{"system.id": id_}).fetchone()
             for fieldname, e in self._edit_map_system.items():
                 v = row[fieldname]
                 e.setText(str(v) if v is not None else "")
@@ -658,9 +658,9 @@ class WMolecularConstants(a99.WBase):
         if id_molecule is not None:
             id_system = self._get_id_system()
             if id_system is not None:
-                row_system = self._f.query_system(id=id_system).fetchone()
+                row_system = self.moldb.query_system(id=id_system).fetchone()
 
-                row_state = self._f.get_conn().execute("select * from state where id_molecule = ? "
+                row_state = self.moldb.get_conn().execute("select * from state where id_molecule = ? "
                  "and State like ?", (id_molecule, "{}%".format(row_system[fieldname]),)).fetchone()
 
                 if row_state is not None:

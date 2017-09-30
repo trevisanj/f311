@@ -23,17 +23,19 @@ if __name__ == "__main__":
     description=__doc__,
     formatter_class=a99.SmartFormatter
     )
-    parser.add_argument('fn', type=str, help='Molecular constants database file name',
-                        default=deffn, nargs='?')
+    # parser.add_argument('fn_moldb', type=str, help='File name for molecular constants database',
+    #                     default=deffn, nargs='?')
+    # parser.add_argument('fn_molconsts', type=str, help='File name for molecular constants',
+    #                     default=deffn, nargs='?')
     args = parser.parse_args()
 
-    if args.fn == deffn and not os.path.isfile(deffn):
-        args.fn = None
+    # if args.fn == deffn and not os.path.isfile(deffn):
+    #     args.fn = None
 
     m = None
-    if args.fn is not None:
-        m = ft.FileMolDB()
-        m.load(args.fn)
+    # if args.fn is not None:
+    #     m = ft.FileMolDB()
+    #     m.load(args.fn)
     app = a99.get_QApplication([])
     form = cm.XConvMol(None, m)
     form.show()

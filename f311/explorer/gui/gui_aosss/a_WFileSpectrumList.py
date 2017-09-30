@@ -174,7 +174,21 @@ class WFileSpectrumList(a99.WBase):
     # # Interface
 
     def load(self, x):
-        assert isinstance(x, ft.FileSpectrumList)
+        assert isinstance(x, (ft.FileSpectrum, ft.FileSpectrumList, ft.FileFullCube))
+
+        # Converts from FileFullCube to FileSpectrumList format, if necessary
+        f1 = None
+        if isinstance(x, ft.FileFullCube):
+            x1 = ft.FileSpectrumList()
+            x1.splist.from_full_cube(x.wcube)
+        elif isinstance(x, ft.FileSpectrum):
+            x1 = ft.FileSpectrumList()
+            x1.splist.add_spectrum(x.spectrum)
+        if x1:
+            x1.filename = a99.add_bits_to_path(x.filename, "imported-from-",
+             os.path.splitext(ft.FileSpectrumList.default_filename)[1])
+            x = x1
+
         self.f = x
         self.wsptable.set_collection(x.splist)
         self.__update_gui(True)

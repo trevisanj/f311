@@ -12,6 +12,8 @@ from collections import OrderedDict
 import f311.filetypes as ft
 import f311.pyfant as pf
 import f311.explorer as ex
+from f311.explorer.gui.gui_convmol.a_WFileMolConsts import *
+from f311.explorer.gui.gui_convmol.a_WFileMolDB import *
 
 __all__ = ["XConvMol"]
 
@@ -517,31 +519,62 @@ class XConvMol(ex.XFileMainWindow):
     def __init__(self, parent=None, fileobj=None):
         ex.XFileMainWindow.__init__(self, parent)
 
-        # # Synchronized sequences
-        _VVV = ft.FileMolDB.description
-        self.tab_texts =  ["{} (Alt+&1)".format(_VVV), "Conversion (Alt+&2)", "Log (Alt+&3)"]
-        self.flags_changed = [False, False]
-        self.save_as_texts = ["Save %s as..." % _VVV, None, None]
-        self.open_texts = ["Load %s" % _VVV, None, None]
-        self.clss = [ft.FileMolDB, None, None]  # save class
-        self.clsss = [(ft.FileMolDB,), None, None]  # accepted load classes
-        self.wilds = ["*.sqlite", None, None]  # e.g. '*.fits'
-        self.editors = [ex.NullEditor(), ex.NullEditor(), ex.NullEditor()]  # editor widgets, must comply ...
-        tw0 = self.tabWidget
-        tw0.setTabText(1, self.tab_texts[2])
-
+        lv = self.keep_ref(QVBoxLayout(self.gotting))
+        e0 = self.w_moldb = WFileMolDB(self)
+        lv.addWidget(e0)
+        e0.changed.connect(self._on_w_moldb_changed)
 
         lv = self.keep_ref(QVBoxLayout(self.gotting))
-        me = self.w_moldb = WMolecularConstants(self)
-        lv.addWidget(me)
-        me.changed.connect(self._on_changed)
-        self.editors[0] = me
+        e1 = self.w_molconsts = WFileMolConsts(self)
+        lv.addWidget(e1)
+        e1.changed.connect(self._on_w_molconsts_changed)
+        self.editors[1] = e1
+
+
+        # # Synchronized sequences
+        _VVV = ft.FileMolDB.description
+        "Save %s as..." % _VVV
+        self.pages.append(ex.MyPage(text_tab="", flag_changed=False, text_saveas="Save as...",
+                 text_load="Open...", cls_save=None, clss_load=(), wild="*.*", editor=None))
+
+
+        # # Synchronized sequences
+        _VVV = ft.FileMolDB.description
+        text_tab[0] =  "{} (Alt+&1)".format(_VVV)
+        tabWidget.setTabText(0, self.text_tab[0])
+        save_as_texts[0] = "Save %s as..." % _VVV
+        open_texts[0] = "Load %s" % _VVV
+        clss[0] = ft.FileMolDB
+        clsss[0] = (ft.FileMolDB,)
+        wilds[0] = "*.sqlite"
+
+
+
+
+
+
+
+
+
+        _WWW = ft.FileMolConsts.description
+        self.text_tab =  ["{} (Alt+&1)".format(_VVV), "{} (Alt+&2)".format(_WWW), "Conversion (Alt+&3)", "Log (Alt+&4)"]
+        self.flags_changed = [False, False, False, False]
+        self.save_as_texts = ["Save %s as..." % _VVV, "Save %s as..." % _WWW, None, None]
+        self.open_texts = ["Load %s" % _VVV, "Load %s" % _WWW, None, None]
+        self.clss = [ft.FileMolDB, ft.FileMolConsts, None, None]  # save class
+        self.clsss = [(ft.FileMolDB,), (ft.FileMolConsts,), None, None]  # accepted load classes
+        self.wilds = ["*.sqlite", "*.py", None, None]  # e.g. '*.fits'
+        self.editors = [ex.NullEditor(), ex.NullEditor(), ex.NullEditor(), ex.NullEditor()]  # editor widgets, must comply ...
+        tw0 = self.tabWidget
+        tw0.setTabText(1, self.text_tab[2])
+
+
 
 
         # # Second tab: files
 
         w = self.keep_ref(QWidget())
-        tw0.insertTab(1, w, self.tab_texts[1])
+        tw0.insertTab(1, w, self.text_tab[1])
 
 
         # ## Vertical layout: source and destination stacked
@@ -626,6 +659,12 @@ class XConvMol(ex.XFileMainWindow):
                 self.w_kurucz.w_file.edit.setText("ohaxupdate.asc")
                 self.tabWidget.setCurrentIndex(1)
         return False
+
+    def _on_w_moldb_changed(self):
+        print("CCCCCCCCCCCCCCCCCCCCCCCC00000000000000000000000")
+
+    def _on_w_molconsts_changed(self):
+        print("CCCCCCCCCCCCCCCCCCCCCCCC111111111111111111111111111")
 
     def wants_auto(self):
         name = _NAMES[self.w_source.index]

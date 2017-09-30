@@ -297,7 +297,18 @@ class WFileSparseCube(a99.WBase):
     # # Interface
 
     def load(self, x):
-        assert isinstance(x, ft.FileSparseCube)
+        assert isinstance(x, (ft.FileSparseCube, ft.FileFullCube))
+
+        # Converts from FileFullCube to FileSparseCube format, if necessary"""
+        x1 = None
+        if isinstance(x, ft.FileFullCube):
+            x1 = ft.FileSparseCube()
+            x1.sparsecube.from_full_cube(x.wcube)
+        if x1:
+            x1.filename = a99.add_bits_to_path(x.filename, "imported-from-",
+             os.path.splitext(ft.FileSparseCube.default_filename)[1])
+            x = x1
+
         self.f = x
         self.wsptable.set_collection(x.sparsecube)
         self.__update_gui(True)

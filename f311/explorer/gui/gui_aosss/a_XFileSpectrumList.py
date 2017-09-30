@@ -25,14 +25,14 @@ class XFileSpectrumList(XFileMainWindow):
 
         # # Synchronized sequences
         _VVV = ft.FileSpectrumList.description
-        self.tab_texts[0] =  "FileSpectrumList editor (Alt+&1)"
-        self.tabWidget.setTabText(0, self.tab_texts[0])
-        self.save_as_texts[0] = "Save %s as..." % _VVV
-        self.open_texts[0] = "Load %s" % _VVV
-        self.clss[0] = ft.FileSpectrumList
-        self.clsss[0] = ft.classes_collection()  # file types that can be opened
-        self.clsss[0] = tuple([ft.FileSpectrumList, ft.FileFullCube]+ft.classes_sp())  # file types that can be opened
-        self.wilds[0] = "*.splist"
+        self.text_tab[0] =  "FileSpectrumList editor (Alt+&1)"
+        self.tabWidget.setTabText(0, self.text_tab[0])
+        text_save_as="Save %s as..." % _VVV
+        text_load="Load %s" % _VVV
+        cls=ft.FileSpectrumList
+        clssft.classes_collection()  # file types that can be opened
+        clsstuple([ft.FileSpectrumList, ft.FileFullCube]+ft.classes_sp())  # file types that can be opened
+        wild="*.splist"
 
         lv = keep_ref(QVBoxLayout(self.gotting))
         ce = self.ce = WFileSpectrumList(self)
@@ -94,29 +94,15 @@ class XFileSpectrumList(XFileMainWindow):
     #         self._manager_form.activateWindow()
 
     def on_tab0_file_edited(self):
-        self._on_changed()
+        self._on_me_changed()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # Protected methods to be overriden or used by descendant classes
 
-    def _on_changed(self):
+    def _on_me_changed(self):
         index = self._get_tab_index()
         self.flags_changed[index] = True
         self._update_tab_texts()
 
-    def _filter_on_load(self, f):
-        """Converts from FileFullCube to FileSpectrumList format, if necessary"""
-        f1 = None
-        if isinstance(f, ft.FileFullCube):
-            f1 = ft.FileSpectrumList()
-            f1.splist.from_full_cube(f.wcube)
-        elif isinstance(f, ft.FileSpectrum):
-            f1 = ft.FileSpectrumList()
-            f1.splist.add_spectrum(f.spectrum)
-        if f1:
-            f1.filename = a99.add_bits_to_path(f.filename, "imported-from-",
-                                           os.path.splitext(ft.FileSpectrumList.default_filename)[1])
-            f = f1
-        return f
 
 
