@@ -19,9 +19,9 @@ class XFileMolDB(XFileMainWindow):
         import f311.explorer as ex
 
         lv = self.keep_ref(QVBoxLayout(self.gotting))
-        me = self.moldb_editor = WFileMolDB(self)
+        me = self.w_moldb = WFileMolDB(self)
         lv.addWidget(me)
-        me.changed.connect(self._on_me_changed)
+        me.changed.connect(self._on_changed)
 
         # # Synchronized sequences
         _VVV = ft.FileMolDB.description
@@ -30,7 +30,7 @@ class XFileMolDB(XFileMainWindow):
          text_saveas="Save %s as..." % _VVV,
          text_load="Load %s" % _VVV,
          cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,), wild="*.sqlite",
-         editor=me
+         editor=me, flag_autosave=True
         ))
 
         self.setWindowTitle("Molecular information database editor")
@@ -48,20 +48,3 @@ class XFileMolDB(XFileMainWindow):
             filename = a99.new_filename("mol", "dat")
 
         self.w_out.value = filename
-
-
-    # # Override
-    #   ========
-
-    def _on_me_changed(self):
-        """Overriden to commit automatically. "(changed)" will not appear
-
-        Changes should be committed by the method that executed queries, but it is so easy to
-        reinforce this... just in case.
-        """
-        index = self._get_tab_index()
-        if index == 0:
-            self.moldb_editor.f.get_conn().commit()  # Just in case
-        else:
-            self.pages[index].flag_changed = True
-            self._update_gui_text_tabs()

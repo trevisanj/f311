@@ -241,7 +241,11 @@ def greek_to_spdf(greek):
 
 def spdf_to_greek(number):
     """Converts int value in [0, 1, 2, 3] to the name of a Greek letter (all uppercase)"""
-    return _SPDF_TO_GREEK[number]
+    try:
+        return _SPDF_TO_GREEK[number]
+    except KeyError:
+        # "?" is the "zero-element"
+        return "?"
 
 
 def molconsts_to_system_str(molconsts, style=SS_ALL_SPECIAL):

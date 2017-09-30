@@ -754,7 +754,7 @@ class XConvMol(ex.XFileMainWindow):
         lv = self.keep_ref(QVBoxLayout(w1))
         e1 = self.w_molconsts = WFileMolConsts(self)
         lv.addWidget(e1)
-        e1.changed.connect(self._on_w_molconsts_changed)
+        # e1.changed.connect(self._on_w_molconsts_changed)
 
         # Qt stuff tab #2: FileConv editor TODO FileConv does not exist yet self.conv a Conv
         w2 = self.keep_ref(QWidget())
@@ -768,7 +768,7 @@ class XConvMol(ex.XFileMainWindow):
 
 
         self.pages.append(ex.MyPage(text_tab="Molecular constants database (Alt+&1)",
-         cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,), wild="*.sqlite", editor=e0))
+         cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,), wild="*.sqlite", editor=e0, flag_autosave=True))
 
         self.pages.append(ex.MyPage(text_tab="Molecular constants (Alt+&2)",
          cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,), wild="*.py", editor=e1))
@@ -796,13 +796,24 @@ class XConvMol(ex.XFileMainWindow):
 
     def _on_w_moldb_changed(self):
         print("##############################################")
+        self.w_molconsts.set_moldb(self.w_moldb.f)
 
     def _on_w_moldb_loaded(self):
+        print("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
         self.w_molconsts.set_moldb(self.w_moldb.f)
 
     def _on_w_molconsts_changed(self):
-        self.w_molconsts.set_moldb(self.w_moldb.f)
+        print("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
 
     def _on_w_conv_changed(self):
         print("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
 
+
+    def _on_changed(self):
+        """Overriden so that "(changed)" will not appear in firts tab"""
+        page = self._get_page()
+        if page.editor == self.w_moldb:
+            self.w_moldb.f.get_conn().commit()  # Just in case
+        else:
+            page.flag_changed = True
+            self._update_gui_text_tabs()

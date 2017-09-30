@@ -19,7 +19,8 @@ class MyPage(object):
         return not isinstance(self.editor, NullEditor)
 
     def __init__(self, text_tab="", flag_changed=False, text_saveas="Save as...",
-                 text_load="Load...", cls_save=None, clss_load=(), wild="*.*", editor=None):
+                 text_load="Load...", cls_save=None, clss_load=(), wild="*.*", editor=None,
+                 flag_autosave=False):
         if editor is None:
             editor = NullEditor()
 
@@ -34,6 +35,8 @@ class MyPage(object):
         self.wild = wild
         # editor widgets
         self.editor = editor
+        # True if the editor saves the file automatically ("(changed)" will never be shown)
+        self.flag_autosave = flag_autosave
 
         self.flag_changed = flag_changed
 
@@ -102,8 +105,15 @@ class XFileMainWindowBase(a99.XLogMainWindow):
         for page in self.pages:
             page.editor.changed.connect(self._on_changed)
 
+        self.load_many(fobjs)
 
-        # Loads file objects if passed
+        self._update_gui_text_tabs()
+
+    def load_many(self, fobjs=None):
+        """Loads as many files as the number of pages
+
+        Args:
+            fobjs: [filename or DataFile obj, ...]"""
         if fobjs is not None:
             for index, (fobj, page) in enumerate(zip(fobjs, self.pages)):
                 if fobj is None:
@@ -114,8 +124,6 @@ class XFileMainWindowBase(a99.XLogMainWindow):
                     self.load_filename(fobj, index)
                 else:
                     raise TypeError("Invalid object of class '{}'".format(fobj.__class__.__name__))
-
-        self._update_gui_text_tabs()
 
     def _add_stuff(self):
         """Responsible for adding menu options, widgets, and pages, setting window title etc"""
@@ -287,8 +295,10 @@ class XFileMainWindowBase(a99.XLogMainWindow):
 
     def _on_changed(self):
         """Slot for changed events"""
-        self._get_page().flag_changed = True
-        self._update_gui_text_tabs()
+        page = self._get_page()
+        if not page.flag_autosave:
+            page.flag_changed = True
+            self._update_gui_text_tabs()
 
     def _get_tab_index(self):
         """Returns index of current selected tab."""

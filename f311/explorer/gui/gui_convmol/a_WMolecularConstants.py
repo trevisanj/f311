@@ -101,6 +101,8 @@ class WMolecularConstants(a99.WBase):
         self._flag_searching_states = False
         # activated when searching for pfantmol
         self._flag_searching_pfantmol = False
+        # activated when searching for system
+        self._flag_searching_system = False
 
         # # Internal state
 
@@ -306,6 +308,9 @@ class WMolecularConstants(a99.WBase):
 
 
     def set_moldb(self, fobj):
+
+        print("AEEEEEEEEEEEEEE SETTING MOLDB OF WMOLECULARCONSTANTS {}".format(fobj))
+
         import f311.filetypes as ft
         assert isinstance(fobj, ft.FileMolDB), "I dont want a {}".format(fobj)
 
@@ -313,7 +318,8 @@ class WMolecularConstants(a99.WBase):
 
         if fobj is not None:
             self._populate()
-            self._auto_search()
+            self._update_gui()
+            # self._auto_search()
 
 
     def None_to_zero(self):
@@ -354,6 +360,8 @@ class WMolecularConstants(a99.WBase):
             return
         if self._flag_populating_pfantmol:
             return
+        if self._flag_searching_pfantmol:
+            return
 
         self._fill_edits_pfantmol()
         self._update_molconsts()
@@ -363,6 +371,8 @@ class WMolecularConstants(a99.WBase):
         if self._flag_updating_gui:
             return
         if self._flag_populating_states:
+            return
+        if self._flag_searching_states:
             return
 
         self._fill_edits_statel()
@@ -374,6 +384,8 @@ class WMolecularConstants(a99.WBase):
             return
         if self._flag_populating_states:
             return
+        if self._flag_searching_states:
+            return
 
         self._fill_edits_state2l()
         self._update_molconsts()
@@ -383,6 +395,8 @@ class WMolecularConstants(a99.WBase):
         if self._flag_updating_gui:
             return
         if self._flag_populating_system:
+            return
+        if self._flag_searching_system:
             return
 
         self._fill_edits_system()
@@ -681,8 +695,21 @@ class WMolecularConstants(a99.WBase):
         self.label_fcf.setText(s)
 
     def _auto_search(self):
+        self._auto_search_system()
+        self._populate_combobox_pfantmol()
         self._auto_search_pfantmol()
         self._auto_search_states()
+
+    def _auto_search_system(self):
+        if self._flag_populating_system or self._flag_searching_system:
+            return
+
+        self._flag_searching_system = True
+        try:
+            if len(self._ids_system) > 0:
+                self.combobox_system.setCurrentIndex(1)
+        finally:
+            self._flag_searching_system = False
 
     def _auto_search_pfantmol(self):
         if self._flag_populating_pfantmol or self._flag_searching_pfantmol:
@@ -696,6 +723,7 @@ class WMolecularConstants(a99.WBase):
             self._flag_searching_pfantmol = False
 
     def _auto_search_states(self):
+
         if self._flag_populating_states or self._flag_searching_states:
             return
 
@@ -800,9 +828,12 @@ class WMolecularConstants(a99.WBase):
                 if "_label" in fieldname:
                     # Fields with "_label" in their names are treated as strings,
                     # otherwise they are considered numeric
-                    value = text.upper()
+                    value = text
                 else:
-                    value = float(text)
+                    if len(text.strip()) > 0:
+                        value = float(text)
+                    else:
+                        value = None
 
                 self.molconsts[fieldname] = value
 
