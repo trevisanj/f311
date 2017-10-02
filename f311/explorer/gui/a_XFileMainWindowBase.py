@@ -158,7 +158,7 @@ class XFileMainWindowBase(a99.XLogMainWindow):
     def _add_log_tab(self):
         """Adds element to pages and new tab"""
 
-        text_tab = "Log (Alt+&{}".format(len(self.pages)+1)
+        text_tab = "Log (Alt+&{})".format(len(self.pages)+1)
 
         self.pages.append(MyPage(text_tab=text_tab))
 

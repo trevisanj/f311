@@ -17,6 +17,7 @@ from .filekuruczmol import *
 from .filepleztio import *
 from .filefcf import *
 from .filemolconsts import *
+from .fileconfconvmol import *
 
 # from . import filemod
 # from . import filedissoc

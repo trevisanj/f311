@@ -6,14 +6,14 @@ import a99
 # import moldb as db
 from .a_WFileMolConsts import *
 import os
-from ..a_XFileMainWindow import *
+from ..a_XFileMainWindowBase import *
 
 __all__ = ["XFileMolConsts"]
 
 
-class XFileMolConsts(XFileMainWindow):
+class XFileMolConsts(XFileMainWindowBase):
     def __init__(self, *args, moldb=None, **kwargs):
-        XFileMainWindow.__init__(self, *args, **kwargs)
+        XFileMainWindowBase.__init__(self, *args, **kwargs)
         if moldb is not None:
             self.me.set_moldb(moldb)
 
@@ -21,14 +21,13 @@ class XFileMolConsts(XFileMainWindow):
         self.me.set_moldb(moldb)
 
     def _add_stuff(self):
-        XFileMainWindow._add_stuff(self)
 
         import f311.filetypes as ft
         import f311.explorer as ex
 
-        lv = self.keep_ref(QVBoxLayout(self.gotting))
+
         me = self.me = WFileMolConsts(self)
-        lv.addWidget(me)
+        self.tabWidget.addTab(me, "")
         # me.changed.connect(self._on_me_changed)
 
         # # Synchronized sequences

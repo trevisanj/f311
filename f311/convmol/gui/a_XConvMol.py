@@ -48,12 +48,19 @@ class _WSource(a99.WBase):
         self._buttons[x].setChecked(True)
 
     @property
-    def source(self):
-        """Returns _DataSource object or None"""
-        i = self._get_index()
-        if i < 0:
+    def sourcename(self):
+        source = self._get_source()
+        if source is None:
             return None
-        return _SOURCES[_NAMES[i]]
+        return source.name
+
+    @sourcename.setter
+    def sourcename(self, value):
+        source = self._get_source()
+        if source is None:
+            raise RuntimeError("Cannot set source name to '{}' because there is no source".format(value))
+        return None
+
 
     index_changed = pyqtSignal()
 
@@ -72,6 +79,16 @@ class _WSource(a99.WBase):
             b.clicked.connect(self._button_clicked)
             self._buttons.append(b)
             lw.addWidget(b)
+
+
+    def _get_source(self):
+        """Returns _DataSource object or None"""
+        i = self._get_index()
+        if i < 0:
+            return None
+        return _SOURCES[_NAMES[i]]
+
+
 
     def _button_clicked(self):
         i = self._get_index()
@@ -98,7 +115,7 @@ class _WSelectSaveFile(a99.WBase):
         self.edit.setText(x)
 
     # # Emitted whenever the valu property changes **to a valid value**
-    wants_auto = pyqtSignal()
+    wants_autofilename = pyqtSignal()
 
     def __init__(self, *args):
         a99.WBase.__init__(self, *args)
@@ -122,9 +139,9 @@ class _WSelectSaveFile(a99.WBase):
         lw.addWidget(e)
         # e.setReadOnly(True)
 
-        b = self.button_auto = QToolButton()
+        b = self.button_autofilename = QToolButton()
         lw.addWidget(b)
-        b.clicked.connect(self.wants_auto)
+        b.clicked.connect(self.wants_autofilename)
         b.setIcon(a99.get_icon("leaf-plant"))
         b.setToolTip("Make up file name")
         b.setFixedWidth(30)
@@ -520,22 +537,23 @@ class _WTurboSpectrumPanel(a99.WBase):
         lw.addWidget(self.keep_ref(QLabel("TurboSpectrum")))
 
 
-class _WConv(a99.WEditor):
+class _WConv(a99.WConfigEditor):
 
     convert_clicked = pyqtSignal()
     open_mol_clicked = pyqtSignal()
 
     def __init__(self, parent_form):
-        a99.WEditor.__init__(self, parent_form)
+        a99.WConfigEditor.__init__(self, parent_form)
 
         self.w_molconsts = parent_form.w_molconsts
 
         # ## Vertical layout: source and destination stacked
-        lsd = self.keep_ref(QVBoxLayout(self))
+        lsd = self.layout_editor
 
         # ### Horizontal layout: sources radio buttons, source-specific setup area
 
         lh = self.keep_ref(QHBoxLayout())
+        # a99.set_margin
         lsd.addLayout(lh)
 
         # #### Vertical layout: source radio group box
@@ -546,7 +564,7 @@ class _WConv(a99.WEditor):
         # ##### Source radio buttons
         lss.addWidget(self.keep_ref(QLabel("<b>Source</b>")))
         w = self.w_source = _WSource(self.parent_form)
-        w.index_changed.connect(self.source_changed)
+        w.index_changed.connect(self._source_changed)
         lss.addWidget(w)
         lss.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -567,7 +585,7 @@ class _WConv(a99.WEditor):
         # ### Output file specification
 
         w0 = self.w_out = _WSelectSaveFile(self.parent_form)
-        w0.wants_auto.connect(self.wants_auto)
+        w0.wants_autofilename.connect(self.wants_autofilename)
         lsd.addWidget(w0)
 
         # ### "Convert" button
@@ -582,19 +600,27 @@ class _WConv(a99.WEditor):
         b.clicked.connect(self._open_mol_clicked)
         lmn.addWidget(b)
 
+
+        # name, property
+        self._map = [
+            a99.CEMapItem("sourcename", self)
+        ]
+
+
+
         # # Final adjustments
 
         # Forces only one of the source panels to visible
         self.w_source.index = 2  # Kurucz
-        self.source_changed()
+        self._source_changed()
 
-    def source_changed(self):
+    def _source_changed(self):
         idx = self.w_source.index
         for i, ds in enumerate(_SOURCES.values()):
             ds.widget.setVisible(i == idx)
             # print("Widget", ds.widget, "is visible?", ds.widget.isVisible())
 
-    def wants_auto(self):
+    def wants_autofilename(self):
         name = _NAMES[self.w_source.index]
         filename = None
         if name == "HITRAN":
@@ -744,7 +770,6 @@ class _WConv(a99.WEditor):
             vis.use(f)
 
 
-
 class XConvMol(ex.XFileMainWindow):
     def _add_stuff(self):
         # Qt stuff tab #0: FileMolDB editor
@@ -757,23 +782,25 @@ class XConvMol(ex.XFileMainWindow):
         e0.loaded.connect(self._on_w_moldb_loaded)
 
         # Qt stuff tab #1: FileMolConsts editor
-        w1 = self.keep_ref(QWidget())
-        self.tabWidget.addTab(w1, "")
-        lv = self.keep_ref(QVBoxLayout(w1))
+        # w1 = self.keep_ref(QWidget())
         e1 = self.w_molconsts = WFileMolConsts(self)
-        lv.addWidget(e1)
+        self.tabWidget.addTab(e1, "")
+        # lv = self.keep_ref(QVBoxLayout(w1))
+        # lv.addWidget(e1)
         # e1.changed.connect(self._on_w_molconsts_changed)
 
         # Qt stuff tab #2: FileConv editor TODO FileConv does not exist yet self.conv a Conv
-        w2 = self.keep_ref(QWidget())
-        self.tabWidget.addTab(w2, "")
-        lv = self.keep_ref(QVBoxLayout(w2))
+        # w2 = self.keep_ref(QWidget())
+        # lv = self.keep_ref(QVBoxLayout(w2))
         e2 = self.w_conv = _WConv(self)
+        self.tabWidget.addTab(e2, "")
         # e2.convert_clicked.connect(self.convert_clicked)
         # e2.open_mol_clicked.connect(self.open_mol_clicked)
-        lv.addWidget(e2)
-        e2.changed.connect(self._on_w_conv_changed)
+        # lv.addWidget(e2)
+        # e2.changed.connect(self._on_w_conv_changed)
 
+
+        # TODO Many of these can be editor properties
 
         self.pages.append(ex.MyPage(text_tab="Molecular constants database (Alt+&1)",
          cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,), wild="*.sqlite", editor=e0, flag_autosave=True))
@@ -782,7 +809,7 @@ class XConvMol(ex.XFileMainWindow):
          cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,), wild="*.py", editor=e1))
 
         self.pages.append(ex.MyPage(text_tab="Conversion (Alt+&3)",
-         cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,), wild="*.py", editor=e2))
+         cls_save=ft.FileConfigConvMol, clss_load=(ft.FileConfigConvMol,), wild="*.py", editor=e2))
 
         self.setWindowTitle("(to) PFANT Molecular Lines Converter")
         self.installEventFilter(self)
@@ -813,7 +840,6 @@ class XConvMol(ex.XFileMainWindow):
 
     def _on_w_conv_changed(self):
         print("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
-
 
     def _on_changed(self):
         """Overriden so that "(changed)" will not appear in firts tab"""

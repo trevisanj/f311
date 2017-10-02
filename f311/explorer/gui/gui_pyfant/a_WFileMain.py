@@ -31,7 +31,7 @@ class WFileMain(QWidget):
 
 
         # # Central layout
-        la = self.centralLayout = QVBoxLayout()
+        la = self.layout_main = QVBoxLayout()
         a99.set_margin(la, 0)
         self.setLayout(la)
 

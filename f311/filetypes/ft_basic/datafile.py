@@ -13,12 +13,10 @@ class DataFile(a99.AttrsPart):
     """
     Class representing a file in disk
 
-    Inheriting this class:
-      - implement _do_load() if you want to make it loadable
-      - implement _do_save() if you would like to make it saveable
-      - implement some filetype check, either inheriting _test_magic() or within _do_load().
-        This is optional, but **strongly advised**, because this will lower the chance that the
-        automatic loader (see load_with_classes()) detects a wrong file type
+    **Attention** For subclasses, filetype check is **strongly advised**. Two ways of doing this:
+                      (a) inherit _test_magic() (recommended);
+                      (b) if there are no testable magic characters, test for absurd
+                          within _do_load(). Try to crash early.
     """
     # Description, e.g. "main configuration"
     # TODO investigate further, I think this attribute did not succeed

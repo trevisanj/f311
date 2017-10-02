@@ -33,7 +33,7 @@ class XHelpDialog(a99.XLogDialog):
         self.help_data = []
 
         # # Central layout
-        lymain = self.centralLayout = QVBoxLayout()
+        lymain = self.layout_main = QVBoxLayout()
         a99.set_margin(lymain, 0)
         self.setLayout(lymain)
 

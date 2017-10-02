@@ -60,7 +60,7 @@ class WSpectrumList(WSpectrumCollectionBase):
 
         # # Central layout
         # Will have a toolbox and a table. When the toolbox contracts, there is more space for the table
-        lwmain = self.centralLayout = QVBoxLayout()
+        lwmain = self.layout_editor
         a99.set_margin(lwmain, 0)
         self.setLayout(lwmain)
 

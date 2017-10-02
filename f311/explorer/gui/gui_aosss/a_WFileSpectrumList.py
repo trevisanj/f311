@@ -44,7 +44,7 @@ class WFileSpectrumList(a99.WEditor):
         self.obj_square = None
 
         # # Central layout
-        lantanide = self.centralLayout = QVBoxLayout()
+        lantanide = self.layout_editor
         a99.set_margin(lantanide, 0)
         self.setLayout(lantanide)
 

@@ -11,16 +11,12 @@ class FileMolConsts(FilePy):
     description = "molecular constants"
     default_filename = "molconsts.py"
     attrs = ["molconsts"]
-    editors = []
-
+    editors = ["mced.py"]
 
     def __init__(self):
         FilePy.__init__(self)
 
         self.molconsts = MolConsts()
-
-    # def validate(self):
-    #     pass
 
     def _do_load(self, filename):
         module = a99.import_module(filename)
@@ -28,5 +24,7 @@ class FileMolConsts(FilePy):
 
     def _do_save_as(self, filename):
         with open(filename, "w") as h:
-            h.write("{}\nfrom f311.filetypes import MolConsts\n\n"
-                    "molconsts = {}".format(self._get_header(), self.molconsts))
+            h.write("{}\n"
+                    "from f311.filetypes import MolConsts\n"
+                    "\n"
+                    "molconsts = {}\n".format(self._get_header(), self.molconsts))

@@ -37,7 +37,7 @@ class FilePy(DataFile):
 
         return "# -*- FilePy: {} -*-".format(self.classname)
 
-    def _copy_attr(self, module, varname, cls):
+    def _copy_attr(self, module, varname, cls, attrname=None):
         """
         Copies attribute from module object to self. Raises if object not of expected class
 
@@ -45,6 +45,7 @@ class FilePy(DataFile):
             module: module object
             varname: variable name
             cls: expected class of variable
+            attrname: attribute name of self. Falls back to varname
         """
 
         if not hasattr(module, varname):
@@ -56,4 +57,7 @@ class FilePy(DataFile):
             raise RuntimeError(
                 "Expecting fobj to be a {}, not a '{}'".format(cls.__name__, obj.__class__.__name__))
 
-        setattr(self, varname, obj)
+        if attrname is None:
+            attrname = varname
+
+        setattr(self, attrname, obj)

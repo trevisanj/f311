@@ -18,9 +18,6 @@ class WFileMolConsts(a99.WEditor):
       parent=None
     """
 
-    # Emitted whenever any value changes
-    changed = pyqtSignal()
-
     @property
     def fcfs(self):
         if self.w_molconsts is None:
@@ -35,16 +32,16 @@ class WFileMolConsts(a99.WEditor):
 
 
         # # Central layout
-        l = self.centralLayout = QVBoxLayout()
-        a99.set_margin(l, 0)
-        self.setLayout(l)
-
-        la = self.label_fn = QLabel()
-        l.addWidget(la)
+        l = self.layout_editor
 
         w = self.w_molconsts = WMolecularConstants(self.parent_form)
         w.changed.connect(self._on_w_molconsts_changed)
         l.addWidget(w)
+
+
+        # ## Adds vertically expanding spacer at bottom
+        l.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
+
 
 
         self.setEnabled(False)  # disabled until load() is called

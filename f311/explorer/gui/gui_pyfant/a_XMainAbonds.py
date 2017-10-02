@@ -101,7 +101,7 @@ class XMainAbonds(QMainWindow):
 
         cw = self.centralWidget = QWidget()
         self.setCentralWidget(cw)
-        la = self.centralLayout = QVBoxLayout(cw)
+        la = self.layout_main = QVBoxLayout(cw)
 
         # ## Main control bar
         # A layout is created and left blank for descendants to add

@@ -18,22 +18,9 @@ class WFileMolDB(a99.WEditor):
         a99.WEditor.__init__(self, *args)
 
         # # Main layout & splitter
-        lmain = self.keep_ref(QVBoxLayout(self))
-        a99.set_margin(lmain, 0)
+        lmain = self.layout_editor
+
         sp = self.splitter_bidon = QSplitter(Qt.Horizontal)
-
-        # ## Line showing the File Name
-        l1 = self.keep_ref(QHBoxLayout())
-        lmain.addLayout(l1)
-        a99.set_margin(l1, 0)
-        v = self.keep_ref(QLabel("<b>File:<b>"))
-        v.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
-        l1.addWidget(v)
-        w = self.label_fn = QLabel()
-        w.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
-        l1.addWidget(w)
-        l1.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
-
 
         # ## First widget of splitter: molecules
         w0 = self.keep_ref(QWidget())
