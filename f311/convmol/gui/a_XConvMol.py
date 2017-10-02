@@ -30,7 +30,6 @@ class _DataSource(a99.AttrsPart):
         return "{}('{}')".format(self.__class__.__name__, self.name)
 
 
-
 # This defines the order of the panels
 _NAMES = ["HITRAN", "VALD3", "Kurucz", "TurboSpectrum", ]
 _SOURCES = OrderedDict([[name, _DataSource(name)] for name in _NAMES])
@@ -56,12 +55,19 @@ class _WSource(a99.WBase):
 
     @sourcename.setter
     def sourcename(self, value):
-        source = self._get_source()
-        if source is None:
-            raise RuntimeError("Cannot set source name to '{}' because there is no source".format(value))
-        return None
+        index = -1
+        if value is not None:
+            index = _NAMES.index(value)
+        for i, b in enumerate(self._buttons):
+            b.setChecked(i == index)
+        self._check_index_changed(False)
+
+    @property
+    def source(self):
+        return self._get_source()
 
 
+    # Emitted if index changed by user, not programatically
     index_changed = pyqtSignal()
 
     def __init__(self, *args):
@@ -88,14 +94,15 @@ class _WSource(a99.WBase):
             return None
         return _SOURCES[_NAMES[i]]
 
-
-
     def _button_clicked(self):
+        self._check_index_changed()
+
+    def _check_index_changed(self, flag_emit=True):
         i = self._get_index()
         if i != self._last_index:
             self._last_index = i
-            self.index_changed.emit()
-
+            if flag_emit:
+                self.index_changed.emit()
 
     def _get_index(self):
         for i, b in enumerate(self._buttons):
@@ -114,8 +121,10 @@ class _WSelectSaveFile(a99.WBase):
     def value(self, x):
         self.edit.setText(x)
 
-    # # Emitted whenever the valu property changes **to a valid value**
+    # Emitted whenever the valu property changes **to a valid value**
     wants_autofilename = pyqtSignal()
+    # Emitted whenever text changes
+    changed = pyqtSignal()
 
     def __init__(self, *args):
         a99.WBase.__init__(self, *args)
@@ -134,7 +143,7 @@ class _WSelectSaveFile(a99.WBase):
         lw.addWidget(t)
 
         e = self.edit = QLineEdit()
-        e.textChanged.connect(self.edit_changed)
+        e.textEdited.connect(self.edit_changed)
         t.setBuddy(e)
         lw.addWidget(e)
         # e.setReadOnly(True)
@@ -154,16 +163,20 @@ class _WSelectSaveFile(a99.WBase):
         b.setFixedWidth(30)
 
         # Forces paint red if invalid
-        self.edit_changed()
+        self._update_style()
 
     def on_button_clicked(self, _):
         self._on_button_clicked()
 
     def edit_changed(self):
-        flag_valid = self.validate()
-        a99.style_widget_valid(self.edit, not flag_valid)
+        self._update_style()
+        self.changed.emit()
         # if flag_valid:
         #     self._wanna_emit()
+
+    def _update_style(self):
+        flag_valid = self.validate()
+        a99.style_widget_valid(self.edit, not flag_valid)
 
     def validate(self):
         """Returns True/False whether value is valid, i.e., existing file or directory"""
@@ -178,6 +191,7 @@ class _WSelectSaveFile(a99.WBase):
         if res:
             # res = res[0]
             self.edit.setText(res)
+            self.changed.emit()
             self.dialog_path = res
 
     # def _wanna_emit(self):
@@ -204,8 +218,10 @@ class _WHitranPanel(a99.WBase):
             return None
         return hapi.LOCAL_TABLE_CACHE[self.tableWidget.item(idx, 0).text()]
 
-    def __init__(self, *args):
-        a99.WBase.__init__(self, *args)
+    def __init__(self, parent):
+        a99.WBase.__init__(self, parent.parent_form)
+
+        self.w_conv = parent
 
         self._flag_populating = False
 
@@ -288,6 +304,7 @@ class _WHitranPanel(a99.WBase):
             # self._wanna_emit_id_changed()
 
 
+# TODO other panels must comply with Kurucz
 class _WVald3Panel(a99.WBase):
     """
     This panel allows to load a Vald3 file and browse through its species (molecules only)
@@ -313,8 +330,10 @@ class _WVald3Panel(a99.WBase):
         data = self.data
         return data is not None and data.speciess[0].formula not in a99.symbols
 
-    def __init__(self, *args):
-        a99.WBase.__init__(self, *args)
+    def __init__(self, parent):
+        a99.WBase.__init__(self, parent.parent_form)
+
+        self.w_conv = parent
 
         self._flag_populating = False
         self._f = None  # FileVald3
@@ -402,35 +421,54 @@ class _WKuruczPanel(a99.WBase):
     @property
     def data(self):
         """Returns FileKuruczMoleculeBase or None"""
-        return self._f
+        return self._flines
 
     @property
     def flag_hlf(self):
         return self.checkbox_hlf.isChecked()
 
+    @flag_hlf.setter
+    def flag_hlf(self, value):
+        self._set_flag(self.checkbox_hlf, value)
+
     @property
     def flag_normhlf(self):
         return self.checkbox_normhlf.isChecked()
+
+    @flag_normhlf.setter
+    def flag_normhlf(self, value):
+        self._set_flag(self.checkbox_normhlf, value)
 
     @property
     def flag_fcf(self):
         return self.checkbox_fcf.isChecked()
 
+    @flag_fcf.setter
+    def flag_fcf(self, value):
+        self._set_flag(self.checkbox_fcf, value)
+
     @property
     def flag_spinl(self):
         return self.checkbox_spinl.isChecked()
 
+    @flag_spinl.setter
+    def flag_spinl(self, value):
+        self._set_flag(self.checkbox_spinl, value)
+
     @property
     def iso(self):
-        idx = self.combobox_isotope.currentIndex()
-        if idx <= 0:
-            return None
-        return self._isotopes[idx-1]
+        return self._get_iso()
 
-    def __init__(self, *args):
-        a99.WBase.__init__(self, *args)
+    @iso.setter
+    def iso(self, value):
+        self._set_iso(value)
 
-        self._f = None  # FileKuruczMoleculeBase
+    def __init__(self, parent):
+        a99.WBase.__init__(self, parent.parent_form)
+
+        self.w_conv = parent
+
+        self._flines = None  # FileKuruczMoleculeBase
         # list of integers, filled when file is loaded
         self._isotopes = []
 
@@ -445,14 +483,14 @@ class _WKuruczPanel(a99.WBase):
         i_row = 0
         a = self.keep_ref(QLabel("Kurucz molecular lines file"))
         w = self.w_file = a99.WSelectFile(self.parent_form)
-        w.valueChanged.connect(self.file_changed)
+        w.valueChanged.connect(self._file_changed)
         lg.addWidget(a, i_row, 0)
         lg.addWidget(w, i_row, 1)
         i_row += 1
 
         a = self.keep_ref(QLabel("Isotope"))
         w = self.combobox_isotope = QComboBox()
-        # w.valueChanged.connect(self.file_changed)
+        w.currentIndexChanged.connect(self.changed)
         lg.addWidget(a, i_row, 0)
         lg.addWidget(w, i_row, 1)
         i_row += 1
@@ -460,7 +498,7 @@ class _WKuruczPanel(a99.WBase):
         a = self.keep_ref(QLabel("Calculate 'gf' based on\n"
                                  "Hönl-London factors (HLFs)"))
         w = self.checkbox_hlf = QCheckBox()
-        w.setChecked(True)
+        w.stateChanged.connect(self.changed)
         w.setToolTip("If selected, will ignore 'loggf' from Kurucz file and\n"
                      "calculate 'gf' using Hönl-London factors formulas taken from Kovacz (1969)")
         lg.addWidget(a, i_row, 0)
@@ -470,7 +508,7 @@ class _WKuruczPanel(a99.WBase):
         a = self.keep_ref(QLabel("Apply normalization factor\n"
                                  "for HLFs to add up to 1 (for fixed J)"))
         w = self.checkbox_normhlf = QCheckBox()
-        w.setChecked(True)
+        w.stateChanged.connect(self.changed)
         w.setToolTip("If selected, calculated 'gf's will be multiplied by\n"
                      "2 / ((2 * J2l + 1) * (2 * S + 1)*(2 - DELTAK))")
         lg.addWidget(a, i_row, 0)
@@ -480,7 +518,7 @@ class _WKuruczPanel(a99.WBase):
         a = self.keep_ref(QLabel("Multiply calculated 'gf' by\n"
                                  "Franck-Condon factor"))
         w = self.checkbox_fcf = QCheckBox()
-        w.setChecked(True)
+        w.stateChanged.connect(self.changed)
         w.setToolTip("If selected, incorporates internally calculated Franck-Condon factor"
                      "into the calculated 'gf'")
         lg.addWidget(a, i_row, 0)
@@ -490,46 +528,93 @@ class _WKuruczPanel(a99.WBase):
         a = self.keep_ref(QLabel("Use spin' for branch determination\n"
                                  "(spin'' is always used)"))
         w = self.checkbox_spinl = QCheckBox()
-        w.setChecked(True)
+        w.stateChanged.connect(self.changed)
         w.setToolTip("If you tick this box, branches P12, P21, Q12, Q21, R21, R12 (i.e., with two numbers) become possible")
         lg.addWidget(a, i_row, 0)
         lg.addWidget(w, i_row, 1)
         i_row += 1
 
-
         lw.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-    def file_changed(self):
-        cb = self.combobox_isotope
+    def _set_flag(self, w, value):
+        save = w.blockSignals(True)
         try:
-            f = self._f = ft.load_kurucz_mol(self.w_file.value)
+            w.setChecked(bool(value))
+        finally:
+            w.blockSignals(save)
 
-            self.update_gui_iso(cb, f)
+    def _set_iso(self, value):
+        if value is None:
+            idx = 0
+        else:
+            try:
+                idx = self._isotopes.index(value)+1
+            except ValueError:
+                idx = 0
+        cb = self.combobox_isotope
+        if cb.count() > 0:
+            save = cb.blockSignals(True)
+            cb.setCurrentIndex(idx)
+            cb.blockSignals(save)
+
+    def _get_iso(self):
+        idx = self.combobox_isotope.currentIndex()
+        if idx <= 0:
+            return None
+        return self._isotopes[idx - 1]
+
+    def _file_changed(self):
+        flag_valid = False
+
+        try:
+            f = self._load_lines()
+            flag_valid = True
+
         except Exception as e:
-            self._f = None
+            self._flines = None
             self._isotopes = []
-            cb.clear()
             msg = "Error reading contents of file '{}': '{}'".format(self.w_file.value,
                                                                               a99.str_exc(e))
             self.add_log_error(msg, True)
             a99.get_python_logger().exception(msg)
 
-    def update_gui_iso(self, cb, f):
+        # Tries to restore iso without much compromise
+        self._set_iso(self.w_conv.f.obj["iso"])
+        self.w_conv.f.obj["iso"] = self._get_iso()
+
+        self.w_file.flag_valid = flag_valid
+        self.changed.emit()
+
+    def _load_lines(self):
+        filename = self.w_file.value
+        f = self._flines = ft.load_kurucz_mol(filename) if os.path.isfile(filename) else None
+        self._update_gui_iso()
+        return f
+
+    def _update_gui_iso(self):
         """Updates Isotope combobox"""
+        f = self._flines
         cb = self.combobox_isotope
-        cb.clear()
-        if f.__class__ == ft.FileKuruczMoleculeOld:
-            cb.addItem("(all (file is old-format))")
-        else:
-            self._isotopes = list(set([line.iso for line in f]))
-            self._isotopes.sort()
-            cb.addItem("(all)")
-            cb.addItems([str(x) for x in self._isotopes])
+        save = cb.blockSignals(True)
+        try:
+            cb.clear()
+            if f is not None:
+                if f.__class__ == ft.FileKuruczMoleculeOld:
+                    cb.addItem("(all (file is old-format))")
+                else:
+                    self._isotopes = list(set([line.iso for line in f]))
+                    self._isotopes.sort()
+                    cb.addItem("(all)")
+                    cb.addItems([str(x) for x in self._isotopes])
+        finally:
+            cb.blockSignals(save)
 
 
 class _WTurboSpectrumPanel(a99.WBase):
-    def __init__(self, *args):
-        a99.WBase.__init__(self, *args)
+    def __init__(self, parent):
+        a99.WBase.__init__(self, parent.parent_form)
+
+        self.w_conv = parent
 
         lw = QVBoxLayout()
         self.setLayout(lw)
@@ -573,19 +658,21 @@ class _WConv(a99.WConfigEditor):
         # Only one panel should be visible at a time
         # **Note** The order here doesn't matter
         panels = {}
-        panels["HITRAN"] = self.w_hitran = _WHitranPanel(self.parent_form)
-        panels["VALD3"] = self.w_vald3 = _WVald3Panel(self.parent_form)
-        panels["TurboSpectrum"] = self.w_turbo = _WTurboSpectrumPanel(self.parent_form)
-        panels["Kurucz"] = self.w_kurucz = _WKuruczPanel(self.parent_form)
+        panels["HITRAN"] = self.w_hitran = _WHitranPanel(self)
+        panels["VALD3"] = self.w_vald3 = _WVald3Panel(self)
+        panels["TurboSpectrum"] = self.w_turbo = _WTurboSpectrumPanel(self)
+        panels["Kurucz"] = self.w_kurucz = _WKuruczPanel(self)
         for name in _NAMES:
             ds = _SOURCES[name]
             ds.widget = p = panels[name]
             lh.addWidget(p)
+            p.changed.connect(self._panel_changed)
 
         # ### Output file specification
 
         w0 = self.w_out = _WSelectSaveFile(self.parent_form)
-        w0.wants_autofilename.connect(self.wants_autofilename)
+        w0.wants_autofilename.connect(self._wants_autofilename)
+        w0.changed.connect(self._panel_changed)
         lsd.addWidget(w0)
 
         # ### "Convert" button
@@ -603,24 +690,56 @@ class _WConv(a99.WConfigEditor):
 
         # name, property
         self._map = [
-            a99.CEMapItem("sourcename", self)
+            a99.CEMapItem("sourcename", self.w_source),
+            a99.CEMapItem("fn_output", self.w_out, propertyname="value"),
+            a99.CEMapItem("kurucz_iso", self.w_kurucz, propertyname="iso"),
+            a99.CEMapItem("kurucz_fn_input", self.w_kurucz.w_file, propertyname="value"),
+            a99.CEMapItem("flag_hlf", self.w_kurucz),
+            a99.CEMapItem("flag_normhlf", self.w_kurucz),
+            a99.CEMapItem("flag_fcf", self.w_kurucz),
+            a99.CEMapItem("flag_spinl", self.w_kurucz),
         ]
 
 
 
-        # # Final adjustments
+        # # # Final adjustments
+        #
+        # # Forces only one of the source panels to visible
+        # self.w_source.index = 2  # Kurucz
+        # self._source_changed()
 
-        # Forces only one of the source panels to visible
-        self.w_source.index = 2  # Kurucz
-        self._source_changed()
+    def _do_load(self, fobj):
+        a99.WConfigEditor._do_load(self, fobj)
+        self.w_kurucz._load_lines()
+        # Redundant, but simplest way. After loading data, comboboxes will be positioned
+        self._update_gui()
 
-    def _source_changed(self):
+
+    def _update_gui(self):
+        a99.WConfigEditor._update_gui(self)
+
         idx = self.w_source.index
         for i, ds in enumerate(_SOURCES.values()):
             ds.widget.setVisible(i == idx)
-            # print("Widget", ds.widget, "is visible?", ds.widget.isVisible())
+        # self._source_changed()
 
-    def wants_autofilename(self):
+    def _panel_changed(self):
+        """Called when anything in any panel changes"""
+        self._update_fobj()
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATA")
+        self.changed.emit()
+
+    def _source_changed(self):
+        if self._flag_updating_gui:
+            print("PREVENTEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD STH BAD")
+            return
+
+            # print("Widget", ds.widget, "is visible?", ds.widget.isVisible())
+        self._update_fobj()
+        self._update_gui()
+        self.changed.emit()
+
+    def _wants_autofilename(self):
         name = _NAMES[self.w_source.index]
         filename = None
         if name == "HITRAN":
@@ -632,8 +751,11 @@ class _WConv(a99.WConfigEditor):
             # Default
             filename = a99.new_filename("mol", "dat")
         self.w_out.value = filename
+        self._update_fobj()
+        self.changed.emit()
 
     def _convert_clicked(self):
+        self.add_log("===BEGIN===")
         try:
             errors = self._validate()
 
@@ -660,6 +782,8 @@ class _WConv(a99.WConfigEditor):
         except Exception as e:
             a99.get_python_logger().exception("Conversion failed")
             self.add_log_error("Conversion failed: {}".format(a99.str_exc(e)), True)
+
+        self.add_log("===END===")
 
     def _report_conversion(self, fobj, log):
         ne = len(log.errors)
@@ -773,32 +897,18 @@ class _WConv(a99.WConfigEditor):
 class XConvMol(ex.XFileMainWindow):
     def _add_stuff(self):
         # Qt stuff tab #0: FileMolDB editor
-        w0 = self.keep_ref(QWidget())
-        self.tabWidget.addTab(w0, "")
-        lv = self.keep_ref(QVBoxLayout(w0))
         e0 = self.w_moldb = WFileMolDB(self)
-        lv.addWidget(e0)
         e0.changed.connect(self._on_w_moldb_changed)
         e0.loaded.connect(self._on_w_moldb_loaded)
+        self.tabWidget.addTab(e0, "")
 
         # Qt stuff tab #1: FileMolConsts editor
-        # w1 = self.keep_ref(QWidget())
         e1 = self.w_molconsts = WFileMolConsts(self)
         self.tabWidget.addTab(e1, "")
-        # lv = self.keep_ref(QVBoxLayout(w1))
-        # lv.addWidget(e1)
-        # e1.changed.connect(self._on_w_molconsts_changed)
 
         # Qt stuff tab #2: FileConv editor TODO FileConv does not exist yet self.conv a Conv
-        # w2 = self.keep_ref(QWidget())
-        # lv = self.keep_ref(QVBoxLayout(w2))
         e2 = self.w_conv = _WConv(self)
         self.tabWidget.addTab(e2, "")
-        # e2.convert_clicked.connect(self.convert_clicked)
-        # e2.open_mol_clicked.connect(self.open_mol_clicked)
-        # lv.addWidget(e2)
-        # e2.changed.connect(self._on_w_conv_changed)
-
 
         # TODO Many of these can be editor properties
 
@@ -841,11 +951,3 @@ class XConvMol(ex.XFileMainWindow):
     def _on_w_conv_changed(self):
         print("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
 
-    def _on_changed(self):
-        """Overriden so that "(changed)" will not appear in firts tab"""
-        page = self._get_page()
-        if page.editor == self.w_moldb:
-            self.w_moldb.f.get_conn().commit()  # Just in case
-        else:
-            page.flag_changed = True
-            self._update_gui_text_tabs()

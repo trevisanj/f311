@@ -39,4 +39,4 @@ class FileConfigConvMol(FilePy):
             h.write("{}\n"
                     "from f311.filetypes import ConfigConvMol\n"
                     "\n"
-                    "{} = {}\n".format(self._get_header(), self.varname, self.obj))
+                    "{} = {}\n".format(self._get_header(), self.varname, a99.make_code_readable(repr(self.obj))))

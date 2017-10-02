@@ -28,7 +28,6 @@ class XFileMolConsts(XFileMainWindowBase):
 
         me = self.me = WFileMolConsts(self)
         self.tabWidget.addTab(me, "")
-        # me.changed.connect(self._on_me_changed)
 
         # # Synchronized sequences
         _VVV = ft.FileMolConsts.description

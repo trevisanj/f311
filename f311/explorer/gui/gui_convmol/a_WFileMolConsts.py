@@ -58,9 +58,6 @@ class WFileMolConsts(a99.WEditor):
         assert isinstance(fobj, ft.FileMolConsts)
         self._f = fobj
         self.w_molconsts.molconsts = fobj.molconsts
-        # self.w_molconsts.f = fobj.molconsts
-        # self.__update_gui()
-        self.setEnabled(True)
         self._flag_valid = True
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #

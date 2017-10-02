@@ -27,9 +27,11 @@ if __name__ == "__main__":
                         default=ft.FileMolDB.default_filename, nargs='?')
     parser.add_argument('fn_molconsts', type=str, help='File name for {}'.format(ft.FileMolConsts.description),
                         default=ft.FileMolConsts.default_filename, nargs='?')
+    parser.add_argument('fn_config', type=str, help='File name for {}'.format(ft.FileConfigConvMol.description),
+                        default=ft.FileConfigConvMol.default_filename, nargs='?')
     args = parser.parse_args()
 
-    _fnfn = [args.fn_moldb, args.fn_molconsts, None]
+    _fnfn = [args.fn_moldb, args.fn_molconsts, args.fn_config]
     fnfn = [None if fn is None or not os.path.isfile(fn) else fn for fn in _fnfn]
 
 
