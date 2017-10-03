@@ -119,7 +119,18 @@ class _WSelectSaveFile(a99.WBase):
 
     @value.setter
     def value(self, x):
+        if x is None:
+            x = ""
         self.edit.setText(x)
+
+    @property
+    def flag_valid(self):
+        return self._flag_valid
+
+    @flag_valid.setter
+    def flag_valid(self, value):
+        self._flag_valid = value
+        self._update_gui()
 
     # Emitted whenever the valu property changes **to a valid value**
     wants_autofilename = pyqtSignal()
@@ -130,6 +141,7 @@ class _WSelectSaveFile(a99.WBase):
         a99.WBase.__init__(self, *args)
 
         self._last_value = None
+        self._flag_valid = None
 
         self._type = None
         self.dialog_title = "Save output as"
@@ -163,25 +175,16 @@ class _WSelectSaveFile(a99.WBase):
         b.setFixedWidth(30)
 
         # Forces paint red if invalid
-        self._update_style()
+        self._update_gui()
 
     def on_button_clicked(self, _):
         self._on_button_clicked()
 
     def edit_changed(self):
-        self._update_style()
         self.changed.emit()
-        # if flag_valid:
-        #     self._wanna_emit()
 
-    def _update_style(self):
-        flag_valid = self.validate()
-        a99.style_widget_valid(self.edit, not flag_valid)
-
-    def validate(self):
-        """Returns True/False whether value is valid, i.e., existing file or directory"""
-        value = self._get_value().strip()
-        return len(value) > 0 and not os.path.isdir(value)
+    def _update_gui(self):
+        a99.style_widget_valid(self.edit, self._flag_valid)
 
     def _on_button_clicked(self):
         path_ = self.edit.text().strip()
@@ -237,7 +240,7 @@ class _WHitranPanel(a99.WBase):
         a = self.keep_ref(QLabel("HITRAN 'data cache' directory"))
         w = self.w_dir = a99.WSelectDir(self.parent_form)
         a.setBuddy(w)
-        w.valueChanged.connect(self.dir_changed)
+        w.changed.connect(self.dir_changed)
         lg.addWidget(a, 0, 0)
         lg.addWidget(w, 0, 1)
 
@@ -349,7 +352,7 @@ class _WVald3Panel(a99.WBase):
         a = self.keep_ref(QLabel("VALD3 extended-format file"))
         w = self.w_file = a99.WSelectFile(self.parent_form)
         a.setBuddy(w)
-        w.valueChanged.connect(self.file_changed)
+        w.changed.connect(self.file_changed)
         lw.addWidget(w)
         lg.addWidget(a, 0, 0)
         lg.addWidget(w, 0, 1)
@@ -483,7 +486,7 @@ class _WKuruczPanel(a99.WBase):
         i_row = 0
         a = self.keep_ref(QLabel("Kurucz molecular lines file"))
         w = self.w_file = a99.WSelectFile(self.parent_form)
-        w.valueChanged.connect(self._file_changed)
+        w.changed.connect(self._file_changed)
         lg.addWidget(a, i_row, 0)
         lg.addWidget(w, i_row, 1)
         i_row += 1
@@ -564,11 +567,10 @@ class _WKuruczPanel(a99.WBase):
         return self._isotopes[idx - 1]
 
     def _file_changed(self):
-        flag_valid = False
 
+        f = None
         try:
             f = self._load_lines()
-            flag_valid = True
 
         except Exception as e:
             self._flines = None
@@ -582,12 +584,14 @@ class _WKuruczPanel(a99.WBase):
         self._set_iso(self.w_conv.f.obj["iso"])
         self.w_conv.f.obj["iso"] = self._get_iso()
 
-        self.w_file.flag_valid = flag_valid
+        self.w_file.flag_valid = f is not None
+        print("sETANDOOOOOOOOOOOOOOOOOOOOOOO ESSE {}".format(self.w_file.flag_valid))
         self.changed.emit()
 
     def _load_lines(self):
         filename = self.w_file.value
         f = self._flines = ft.load_kurucz_mol(filename) if os.path.isfile(filename) else None
+        self.w_file.flag_valid = f is not None
         self._update_gui_iso()
         return f
 
@@ -672,7 +676,7 @@ class _WConv(a99.WConfigEditor):
 
         w0 = self.w_out = _WSelectSaveFile(self.parent_form)
         w0.wants_autofilename.connect(self._wants_autofilename)
-        w0.changed.connect(self._panel_changed)
+        w0.changed.connect(self._fn_output_changed)
         lsd.addWidget(w0)
 
         # ### "Convert" button
@@ -714,20 +718,26 @@ class _WConv(a99.WConfigEditor):
         # Redundant, but simplest way. After loading data, comboboxes will be positioned
         self._update_gui()
 
-
     def _update_gui(self):
         a99.WConfigEditor._update_gui(self)
 
         idx = self.w_source.index
         for i, ds in enumerate(_SOURCES.values()):
             ds.widget.setVisible(i == idx)
+
+        self.w_out.flag_valid = self.w_out.value is not None and len(self.w_out.value) > 0
         # self._source_changed()
 
     def _panel_changed(self):
         """Called when anything in any panel changes"""
         self._update_fobj()
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATA")
         self.changed.emit()
+
+    def _fn_output_changed(self):
+        """Called when anything in any panel changes"""
+        self._update_fobj()
+        self.changed.emit()
+        self._update_gui()
 
     def _source_changed(self):
         if self._flag_updating_gui:

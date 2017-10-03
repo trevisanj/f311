@@ -154,7 +154,7 @@ class FileKuruczMolecule(FileKuruczMoleculeBase):
                 self.lines.append(line)
                 r += 1
                 ii += 1
-                if ii == 103:
+                if ii == 1030:
                     a99.get_python_logger().info(
                         "Loading '{}': {}".format(filename, a99.format_progress(r, num_lines)))
                     ii = 0
