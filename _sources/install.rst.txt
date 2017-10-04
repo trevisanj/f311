@@ -46,7 +46,7 @@ Now install the packages:
 
 .. code:: shell
 
-   pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99 f311
+   pip install numpy scipy matplotlib astropy configobj bs4 lxml robobrowser requests fortranformat tabulate rows pyqt5 a99 f311
 
 **Note** Every time you want to work with F311, you will need to activate the environment:
 
@@ -67,7 +67,7 @@ This allows you to pull the most recent version of the code directly from GitHub
 
 First, follow Method 1 or 2 above, **but do not install f311**, *i.e.*, the pip command should be::
 
-    pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99
+    pip install numpy scipy matplotlib astropy configobj bs4 lxml robobrowser requests fortranformat tabulate rows pyqt5 a99
 
 Second, clone the f311 GitHub repository:
 
@@ -106,4 +106,9 @@ MatPlotLib and PyQt5
 Problems with package bs4
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo:: write solution wodn next time
+.. code:: shell
+
+  bs4.FeatureNotFound: Couldn't find a tree builder with the features you requested: lxml. Do you need to install a parser library?
+
+**Solution**: install package "lxml": ``pip install lxml``
+

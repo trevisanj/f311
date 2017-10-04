@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>f311.filetypes package &mdash; f311 17.1.28 documentation</title>
+  <title>f311.filetypes package &mdash; F311 17.9.27.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="f311 17.1.28 documentation" href="../index.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="../index.html"/>
     <link href="../_static/style.css" rel="stylesheet" type="text/css">
 
 
@@ -58,7 +58,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> f311
+            <a href="../index.html" class="icon icon-home"> F311
           
 
           
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                17.1.28
+                17.9.27.0
               </div>
             
           
@@ -93,7 +93,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">f311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -115,7 +115,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">f311</a>
+          <a href="../index.html">F311</a>
         
       </nav>
 
@@ -256,10 +256,35 @@ after the first &#8220;#&#8221; in the molecule &#8216;titulo&#8217;</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="f311.filetypes.basic.symbols_to_formula">
+<code class="descclassname">f311.filetypes.basic.</code><code class="descname">symbols_to_formula</code><span class="sig-paren">(</span><em>symbols</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.symbols_to_formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts two symbols to a formula as recorded in the &#8216;molecule&#8217; table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>symbols</strong> &#8211; 2-element list as returned by f311.filetypes.basic.description_to_symbols()</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">examples: &#8216;MgH&#8217;, &#8216;C2&#8217;, &#8216;CH&#8217;</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p>Formulas in the &#8216;molecule&#8217; table have no isotope information</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="f311.filetypes.basic.iz_to_branch">
 <code class="descclassname">f311.filetypes.basic.</code><code class="descname">iz_to_branch</code><span class="sig-paren">(</span><em>iz</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.iz_to_branch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts BLB&#8217;s &#8216;iz&#8217; code to string P/Q/R/P1. Inverse of branch_to_iz()</p>
 <p>(see pfantlib.90:read_molecules())</p>
+<dl class="docutils">
+<dt><strong>Note</strong> iz-to-branch conversion cannot be trusted because different molecules use different</dt>
+<dd>conventions. To solve this in the future, new PFANT molecular lines .dat files will
+have branch saved as string.</dd>
+</dl>
+<p>TODO note above is important</p>
 </dd></dl>
 
 <dl class="function">
@@ -330,6 +355,40 @@ it will be expected that the class &#8220;root&#8221; package will have a subpac
 </table>
 <p>This is the mapping found in Bruno Castilho&#8217;s work for molecule CH
 (directory ATMOS/wrk4/bruno/Mole/CH, check file, e.g., sja000.dat and source selech.f)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.filetypes.basic.molconsts_to_system_str">
+<code class="descclassname">f311.filetypes.basic.</code><code class="descname">molconsts_to_system_str</code><span class="sig-paren">(</span><em>molconsts</em>, <em>style=0</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.molconsts_to_system_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compiles electronic system information into string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>molconsts</strong> &#8211; dict-like containing keys &#8216;from_label&#8217;, &#8216;from_mult&#8217;, &#8216;from_spdf&#8217;, &#8216;to_label&#8217;,
+&#8216;to_mult&#8217;, &#8216;to_spdf&#8217;</li>
+<li><strong>style</strong> &#8211; rendering style: one of SS_*</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.filetypes.basic.greek_to_spdf">
+<code class="descclassname">f311.filetypes.basic.</code><code class="descname">greek_to_spdf</code><span class="sig-paren">(</span><em>greek</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.greek_to_spdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts Greek letter name (e.g., &#8220;sigma&#8221;, &#8220;Sigma&#8221; (case <strong>sensitive</strong>)) to int value in [0, 1, 2, 3]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.filetypes.basic.spdf_to_greek">
+<code class="descclassname">f311.filetypes.basic.</code><code class="descname">spdf_to_greek</code><span class="sig-paren">(</span><em>number</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.spdf_to_greek" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts int value in [0, 1, 2, 3] to the name of a Greek letter (all uppercase)</p>
 </dd></dl>
 
 </div>
@@ -557,7 +616,7 @@ flag_wrap_description is True)</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'17.1.28',
+            VERSION:'17.9.27.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

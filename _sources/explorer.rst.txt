@@ -4,10 +4,7 @@ Browse, read, write, visualize, edit files (``f311.explorer``)
 Introduction
 ------------
 
-Package f311.explorer concentrates most of the code in the f311 project, as this package contains many
-resources to visualize and edit several file formats used in Astronomy.
-
-Most resources are accessible through ``explorer.py`` (:numref:`figexplorer`).
+File edit & visualization, including file-explorer-like ``explorer.py`` (:numref:`figexplorer`).
 
 .. _figexplorer:
 
@@ -16,13 +13,9 @@ Most resources are accessible through ``explorer.py`` (:numref:`figexplorer`).
 
     -- ``explorer.py`` screenshot.
 
-Many applications are used in the context of spectral synthesis, so they are mentioned in the
-`PFANT documentation <http://trevisanj.github.io/PFANT>`_.
 
-Applications
-------------
-
-You can list anytime the applications available in package f311.explorer by typing in your shell:
+List of applications
+--------------------
 
 .. code:: shell
 
@@ -62,17 +55,7 @@ Command-line tools:
 - ``vald3-to-atoms.py`` -- Converts VALD3 atomic/molecular lines file to PFANT atomic lines file.
 
 
-All the programs above can be called with the ``--help`` or ``-h``
-option for more information.
-
 API reference
 -------------
-
-The bulk of the f311.explorer API consists of GUIs written using the PyQt5 library.
-
-Besides, the package has a "block" framework allowing one to build pipelines to process
-:class:`Spectrum <f311.filetypes.ft_basic.spectrum.Spectrum>` and
-:class:`SpectrumList <f311.filetypes.ft_basic.splist.SpectrumList>` objects. These blocks are used in
-``splisted.py`` and ``cubeed.py``
 
 :doc:`autodoc/f311.explorer`

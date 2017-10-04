@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>f311.convmol package &mdash; f311 17.1.28 documentation</title>
+  <title>f311.convmol package &mdash; F311 17.9.27.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="f311 17.1.28 documentation" href="../index.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="../index.html"/>
     <link href="../_static/style.css" rel="stylesheet" type="text/css">
 
 
@@ -58,7 +58,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> f311
+            <a href="../index.html" class="icon icon-home"> F311
           
 
           
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                17.1.28
+                17.9.27.0
               </div>
             
           
@@ -115,7 +115,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">f311</a>
+          <a href="../index.html">F311</a>
         
       </nav>
 
@@ -209,7 +209,7 @@
 <p>[1] agrup.plez7.f</p>
 <dl class="function">
 <dt id="f311.convmol.calc_qgbd.calc_qgbd_tio_like">
-<code class="descclassname">f311.convmol.calc_qgbd.</code><code class="descname">calc_qgbd_tio_like</code><span class="sig-paren">(</span><em>state_consts</em>, <em>v_lo</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.calc_qgbd.calc_qgbd_tio_like" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.convmol.calc_qgbd.</code><code class="descname">calc_qgbd_tio_like</code><span class="sig-paren">(</span><em>molconsts</em>, <em>v_lo</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.calc_qgbd.calc_qgbd_tio_like" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates qv, gv, bv, dv in TiO-like fashion</p>
 <p>Based on Fortran source &#8216;agrup.plez7.f&#8217;</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -217,7 +217,7 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>state_consts</strong> &#8211; dict-like object with keys:
+<li><strong>molconsts</strong> &#8211; dict-like object with keys:
 &#8220;omega_e&#8221;
 &#8220;omega_ex_e&#8221;
 &#8220;omega_ey_e&#8221;
@@ -249,14 +249,14 @@
 <p>[2] extraehitran.f (First version: Jorge Melendez-Moreno, January 1999)</p>
 <dl class="function">
 <dt id="f311.convmol.conv_hitran.hitran_to_sols">
-<code class="descclassname">f311.convmol.conv_hitran.</code><code class="descname">hitran_to_sols</code><span class="sig-paren">(</span><em>mol_consts</em>, <em>lines</em>, <em>qgbd_calculator</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.conv_hitran.hitran_to_sols" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.convmol.conv_hitran.</code><code class="descname">hitran_to_sols</code><span class="sig-paren">(</span><em>molconsts</em>, <em>lines</em>, <em>qgbd_calculator</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.conv_hitran.hitran_to_sols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts HITRAN molecular lines data to PFANT &#8220;sets of lines&#8221;</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>mol_consts</strong> &#8211; a dict-like object combining field values from tables &#8216;molecule&#8217;, &#8216;state&#8217;,
+<li><strong>molconsts</strong> &#8211; a dict-like object combining field values from tables &#8216;molecule&#8217;, &#8216;state&#8217;,
 &#8216;pfantmol&#8217;, and &#8216;system&#8217; from a FileMolDB database</li>
 <li><strong>lines</strong> &#8211; item from rom hapi.LOCAL_TABLE_CACHE (a dictionary)</li>
 <li><strong>qgbd_calculator</strong> &#8211; callable that can calculate &#8220;qv&#8221;, &#8220;gv&#8221;, &#8220;bv&#8221;, &#8220;dv&#8221;,
@@ -331,14 +331,14 @@ field KuruczMolLine.iso (see KuruczMolLine, FileKuruczMol).</p>
 <p>VALD3-specific conversion</p>
 <dl class="function">
 <dt id="f311.convmol.conv_vald3.vald3_to_sols">
-<code class="descclassname">f311.convmol.conv_vald3.</code><code class="descname">vald3_to_sols</code><span class="sig-paren">(</span><em>mol_consts</em>, <em>file_vald3</em>, <em>qgbd_calculator</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.conv_vald3.vald3_to_sols" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.convmol.conv_vald3.</code><code class="descname">vald3_to_sols</code><span class="sig-paren">(</span><em>molconsts</em>, <em>file_vald3</em>, <em>qgbd_calculator</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.conv_vald3.vald3_to_sols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts HITRAN molecular lines data to PFANT &#8220;sets of lines&#8221;</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>mol_consts</strong> &#8211; a dict-like object combining field values from tables &#8216;molecule&#8217;, &#8216;state&#8217;,
+<li><strong>molconsts</strong> &#8211; a dict-like object combining field values from tables &#8216;molecule&#8217;, &#8216;state&#8217;,
 and &#8216;pfantmol&#8217; from a FileMolDB database</li>
 <li><strong>file_vald3</strong> &#8211; FileVald3 instance with only one species</li>
 <li><strong>qgbd_calculator</strong> &#8211; callable that can calculate &#8220;qv&#8221;, &#8220;gv&#8221;, &#8220;bv&#8221;, &#8220;dv&#8221;,
@@ -421,7 +421,7 @@ e.g., calc_qbdg_tio_like()</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'17.1.28',
+            VERSION:'17.9.27.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

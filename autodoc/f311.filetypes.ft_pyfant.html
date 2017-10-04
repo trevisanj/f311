@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>f311.filetypes.ft_pyfant package &mdash; f311 17.1.28 documentation</title>
+  <title>f311.filetypes.ft_pyfant package &mdash; F311 17.9.27.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="f311 17.1.28 documentation" href="../index.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="../index.html"/>
     <link href="../_static/style.css" rel="stylesheet" type="text/css">
 
 
@@ -58,7 +58,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> f311
+            <a href="../index.html" class="icon icon-home"> F311
           
 
           
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                17.1.28
+                17.9.27.0
               </div>
             
           
@@ -93,7 +93,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">f311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -115,7 +115,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">f311</a>
+          <a href="../index.html">F311</a>
         
       </nav>
 
@@ -178,7 +178,7 @@
 <p>PFANT Stellar Chemical Abundances</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.fileabonds.FileAbonds.attrs">
-<code class="descname">attrs</code><em class="property"> = ['ele', 'abol', 'notes']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileabonds.FileAbonds.attrs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">attrs</code><em class="property"> = ['notes', 'ele', 'abol', 'notes_per_ele']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileabonds.FileAbonds.attrs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -586,7 +586,7 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.gui_data">
-<code class="descname">gui_data</code><em class="property"> = {'molecule': {'fe': [None, 'oscillator strength'], 'bm': [None, 'mass of second element'], 'symbol_a': ['Symbol A', 'symbol of first element'], 's': [None, '?doc?'], 'ub': [None, 'value of partition function for second element'], 'ua': [None, 'value of partition function for first element'], 'do': [None, 'dissociation constant (eV)'], 'am': [None, 'mass of first element'], 'cro': [None, 'delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)'], 'name': [None, &quot;name of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;], 'symbol_b': ['Symbol B', 'symbol of second element'], 'te': [None, 'electronic term']}, 'state': {'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.gui_data" title="Permalink to this definition">¶</a></dt>
+<code class="descname">gui_data</code><em class="property"> = {'molecule': {'ua': [None, 'value of partition function for first element'], 'bm': [None, 'mass of second element'], 'cro': [None, 'delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)'], 'do': [None, 'dissociation constant (eV)'], 's': [None, '?doc?'], 'am': [None, 'mass of first element'], 'ub': [None, 'value of partition function for second element'], 'te': [None, 'electronic term'], 'symbol_a': ['Symbol A', 'symbol of first element'], 'fe': [None, 'oscillator strength'], 'symbol_b': ['Symbol B', 'symbol of second element'], 'name': [None, &quot;name of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;]}, 'state': {'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.gui_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -882,7 +882,7 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 <dt id="f311.filetypes.ft_pyfant.filekuruczmol.FileKuruczMoleculeOld">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.filekuruczmol.</code><code class="descname">FileKuruczMoleculeOld</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filekuruczmol.FileKuruczMoleculeOld" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_pyfant.filekuruczmol.FileKuruczMoleculeBase" title="f311.filetypes.ft_pyfant.filekuruczmol.FileKuruczMoleculeBase"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_pyfant.filekuruczmol.FileKuruczMoleculeBase</span></code></a></p>
-<p>Kurucz molecular lines file, old format</p>
+<p>Kurucz molecular lines file, old format #0</p>
 <p>This file format is Ssimilar to FileKuruczMol format, but contains less columns</p>
 <p>One example of file is: ATMOS/wrk4/bruno/Mole/CH/ch36.txt</p>
 </dd></dl>
@@ -1132,15 +1132,15 @@ attributes, except for redundant attributes, i.e.:</p>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.get_mol_consts">
-<code class="descname">get_mol_consts</code><span class="sig-paren">(</span><em>id_pfantmol</em>, <em>id_state</em>, <em>id_system</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.get_mol_consts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns dict-like with field values from tables &#8216;molecule&#8217;, &#8216;state&#8217;, &#8216;pfantmol&#8217;, &#8216;system&#8217;</p>
+<dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.find_id_system">
+<code class="descname">find_id_system</code><span class="sig-paren">(</span><em>molconsts</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.find_id_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns id_system or None</p>
 </dd></dl>
 
-<dl class="staticmethod">
-<dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.get_system_short">
-<em class="property">static </em><code class="descname">get_system_short</code><span class="sig-paren">(</span><em>row</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.get_system_short" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a &#8216;system&#8217; row to its superscript and Greek letters notation</p>
+<dl class="method">
+<dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.get_fcf_dict">
+<code class="descname">get_fcf_dict</code><span class="sig-paren">(</span><em>id_system</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.get_fcf_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary indexed by (vl, v2l) and FCFs as values</p>
 </dd></dl>
 
 <dl class="method">
@@ -1151,8 +1151,26 @@ attributes, except for redundant attributes, i.e.:</p>
 
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info">
-<code class="descname">gui_info</code><em class="property"> = {'system': {'to_spdf': ['Λ&quot;', '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'from_spdf': [&quot;Λ'&quot;, '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'to_label': ['State&quot;', None], 'from_label': [&quot;State'&quot;, None]}, 'molecule': {'formula': [None, &quot;formula of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;]}, 'state': {'A': [None, 'Coupling counstant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)']}, 'pfantmol': {'fe': [None, 'oscillator strength'], 'description': [None, 'free text'], 'ua': [None, 'value of partition function for first element'], 'bm': [None, 'mass of second element'], 'cro': [None, 'delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)'], 'am': [None, 'mass of first element'], 'do': [None, 'dissociation constant (eV)'], 'ub': [None, 'value of partition function for second element'], 's': [None, '?doc?'], 'te': [None, 'electronic term']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info" title="Permalink to this definition">¶</a></dt>
+<code class="descname">gui_info</code><em class="property"> = {'system': {'to_spdf': ['Λ&quot;', '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'from_label': [&quot;State'&quot;, None], 'to_label': ['State&quot;', None], 'from_spdf': [&quot;Λ'&quot;, '0/1/2/3 meaning Σ/Π/Δ/Φ']}, 'molecule': {'formula': [None, &quot;formula of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;]}, 'state': {'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'A': [None, 'Coupling counstant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)']}, 'pfantmol': {'te': [None, 'electronic term'], 'ua': [None, 'value of partition function for first element'], 'fe': [None, 'oscillator strength'], 'cro': [None, 'delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)'], 'do': [None, 'dissociation constant (eV)'], 'bm': [None, 'mass of second element'], 'am': [None, 'mass of first element'], 'ub': [None, 'value of partition function for second element'], 'description': [None, 'free text']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.insert_system_if_does_not_exist">
+<code class="descname">insert_system_if_does_not_exist</code><span class="sig-paren">(</span><em>molconsts</em>, <em>notes=''</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.insert_system_if_does_not_exist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts system if does not exist yet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>molconsts</strong> &#8211; a MolConsts</li>
+<li><strong>notes</strong> &#8211; table system.notes value, in case of new record</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.print_states">
@@ -1215,25 +1233,6 @@ attributes, except for redundant attributes, i.e.:</p>
 <code class="descname">query_system</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.query_system" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience function to query &#8216;system&#8217; table (joins with table molecule)</p>
 <p>Args, Returns: see query_molecule</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.symbols_to_formula">
-<em class="property">static </em><code class="descname">symbols_to_formula</code><span class="sig-paren">(</span><em>symbols</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.symbols_to_formula" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts two symbols to a formula as recorded in the &#8216;molecule&#8217; table</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>symbols</strong> &#8211; 2-element list as returned by f311.filetypes.basic.description_to_symbols()</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">examples: &#8216;MgH&#8217;, &#8216;C2&#8217;, &#8216;CH&#8217;</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
-</tr>
-</tbody>
-</table>
-<p>Formulas in the &#8216;molecule&#8217; table have no isotope information</p>
 </dd></dl>
 
 <dl class="method">
@@ -1544,14 +1543,14 @@ but I suspect this is the upper one.</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="f311.filetypes.ft_pyfant.filemolecules.mol_consts_to_molecule">
-<code class="descclassname">f311.filetypes.ft_pyfant.filemolecules.</code><code class="descname">mol_consts_to_molecule</code><span class="sig-paren">(</span><em>mol_consts</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.mol_consts_to_molecule" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.filetypes.ft_pyfant.filemolecules.molconsts_to_molecule">
+<code class="descclassname">f311.filetypes.ft_pyfant.filemolecules.</code><code class="descname">molconsts_to_molecule</code><span class="sig-paren">(</span><em>molconsts</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.molconsts_to_molecule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assembles a Molecule object from record from a FileMolDB database</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mol_consts</strong> &#8211; a dict-like object combining field values from tables &#8216;molecule&#8217;, &#8216;state&#8217;,
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>molconsts</strong> &#8211; a dict-like object combining field values from tables &#8216;molecule&#8217;, &#8216;state&#8217;,
 &#8216;pfantmol&#8217;, and &#8216;system&#8217; from a FileMolDB database</td>
 </tr>
 </tbody>
@@ -1832,7 +1831,7 @@ value: &#8220;sets of lines&#8221;, dict where</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'17.1.28',
+            VERSION:'17.9.27.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
