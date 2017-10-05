@@ -67,6 +67,22 @@ class MolConsts(dict):
 
         return float(self["to_mult"]-1)/2
 
+    def get_deltak(self):
+        """***Convention*** returns the Kronecker delta delta_K(0, Lambdal+Lambda2l)
+
+        delta_K(0, Lambdal+Lambda2l) =
+
+            1 if Lambda1+Lambda2 == 0 ([_ _ Sigma - _ _ Sigma ] transitions)
+
+            0 otherwise
+
+        TODO ask BLB This relates to pfantlib.f90 "cro" variable and I believe these to be the same.
+
+
+        This replaces using table pfantmol.cro field for the Honl-London factor normalization
+        """
+        return 1. if self["from_spdf"]+self["from_spdf"] == 0 else 0.
+
     def populate_parse_str(self, string):
         """
         Populates (from_*) and (to_*) taking string as input

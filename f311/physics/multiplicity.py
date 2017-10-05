@@ -11,7 +11,7 @@ References:
 
 import math
 from f311 import filetypes as ft
-
+import a99
 
 __all__ = ["multiplicity_toolbox"]
 
@@ -80,24 +80,63 @@ def _quanta_to_branch_same_multiplicity(Jl, J2l, spinl=None, spin2l=None):
     return ret
 
 
-class _MultiplicityToolbox(dict):
+# def _normalizer_honllondon(toolbox, J2l):
+#     """returns normalization factor: 2/((2S+1)*(2*J2l+1)*(2-delta_k))"""
+#     cc = toolbox.molconsts
+#
+#     return 2./((2*cc.get_S2l+1)*(2*J2l+1)*(2-cc.get_deltak()))
+#     DELTAK = self.molconsts["cro"]
+#     FE = self.molconsts["fe"]
+#     LAML = self.molconsts["from_spdf"]
+#     LAM2L = self.molconsts["to_spdf"]
+#     STATEL = self.molconsts["from_label"]
+#     STATE2L = self.molconsts["to_label"]
+#
+#     mtools = self.multiplicity_toolbox()
+#
+#     # Prepares result
+#     sols = ConvSols(self.qgbd_calculator, self.molconsts)
+#     log = MolConversionLog(n)
+#
+#     for i, line in enumerate(lines):
+#         if self.iso and line.iso != self.iso:
+#             log.skip_reasons["Isotope {}".format(line.iso)] += 1
+#             continue
+#
+#         if line.statel != STATEL or line.state2l != STATE2L:
+#             log.skip_reasons["Transition {}-{}".format(line.statel, line.state2l)] += 1
+#             continue
+#
+#         if self.flag_fcf:
+#             try:
+#                 fcf = self.fcfs[(line.vl, line.v2l)]
+#             except KeyError as e:
+#                 log.skip_reasons[
+#                     "FCF not available for (vl, v2l) = ({}, {})".format(line.vl, line.v2l)] += 1
+#                 continue
+#
+#         branch = mtools.quanta_to_branch(line.Jl, line.J2l,
+#                                          spinl=(None if not self.flag_spinl else line.spinl),
+#                                          spin2l=line.spin2l)
+#
+#         try:
+#             gf_pfant = 1.
+#
+#             if self.flag_normhlf:
+#                 k = 2. / ((2 * S + 1) * (2 * line.J2l + 1) * (2 - DELTAK))
+
+
+class _MultiplicityToolbox(object):
     """
-    Tools: Honl-London factors and quanta-to-branch conversion
+    Tools: Kovacz' "Line strength" and and quanta-to-branch conversion
 
     This class has descendants to handle specific cases. Basically, each descendant implements one
     table in Kovacs Chapter 3
 
     Usage:
 
-        - Honl-London factors: use object of this class as a dictionary passing (vl, v2l, J, branch)
-          as key, e.g., toolbox[(0, 1, 4, "P21")]
-
-        - convert quantum information to branch: use method quanta_to_branch()
-
-    References:
-        Based on solution by Rochen Ritzel at
-        https://stackoverflow.com/questions/2912231/is-there-a-clever-way-to-pass-the-key-to-defaultdicts-default-factory
-
+        - Line strength: method get_sj()
+        - convert quantum information to branch: method quanta_to_branch()
     """
 
     # # These values must be set at descendants
@@ -114,22 +153,40 @@ class _MultiplicityToolbox(dict):
     # Method to convert quantum information to branch. **Use staticmethod()**!
     quanta_to_branch = None
 
-    def __init__(self, molconsts):
+    def __init__(self, molconsts, flag_normalize=True):
         if not isinstance(molconsts, ft.MolConsts):
             raise TypeError("molconsts must be a MolConsts")
-        dict.__init__(self)
         self._molconsts = molconsts
 
         LAML = molconsts["from_spdf"]
         LAM2L = molconsts["to_spdf"]
         S = molconsts.get_S2l()
-        # if LAML-LAM2L not in self.absDeltaLambda:
+
         if abs(LAML - LAM2L) != self.absDeltaLambda:
             raise ValueError("Invalid Delta Lambda {}. abs(Delta Lambda) must be {}". \
                              format(LAML-LAM2L, self.absDeltaLambda))
+
         if 2*S+1 != self.multiplicity2l:
             raise ValueError("**Sanity check fail**: Class {} expects multiplicity2l = 2*S+1 = {}, got {} instead". \
                              format(self.__class__.__name__, self.multiplicity2l, 2*S+1))
+
+        self._sj = {}
+
+        #
+        self._normalizer = None
+
+    def get_sj(self, vl, v2l, J, branch):
+        """
+        Returns Kovacz' "Line Strength", normalized or not
+        """
+
+        key = (vl, v2l, int(J), branch)
+
+        if key not in self._sj:
+            self._populate_with_key(key)
+
+        return self._sj[key]
+
 
     def __missing__(self, key):
         self._populate_with_key(key)
@@ -142,6 +199,7 @@ class _MultiplicityToolbox(dict):
 
 ####################################################################################################
 
+# Incomplete class
 class _MTSinglet(_MultiplicityToolbox):
     absDeltaLambda = "all"
     multiplicityl = 1
@@ -153,7 +211,7 @@ class _MTSinglet(_MultiplicityToolbox):
 
 class _MTDoublet1(_MultiplicityToolbox):
     """
-    Honl-London factors for (doublet, Delta Lambda = +-1)
+    Line strengths for (doublet, Delta Lambda = +-1)
 
     Formulas: Table 3.7 (p120); Formula 2.1.3-6 (p61)
 
@@ -168,21 +226,6 @@ class _MTDoublet1(_MultiplicityToolbox):
     def _populate_with_key(self, key):
         vl, v2l, J, branch = key
         cc = self._molconsts
-
-        S = cc.get_S2l()
-        DELTAK = cc["cro"]
-        FE = cc["fe"]
-        LAML = cc["from_spdf"]
-        LAM2L = cc["to_spdf"]
-
-        # Original comment:
-        #
-        #     cada banda possue valores distintos de Y' e Y''
-        #     quando Y=A/B > 0, temos o termo normal, por isso
-        #     nao se modifica as formulas abaixo
-
-        # TODO link these names in the documentation, gui_info, caption, description, whatever
-
         LAML = cc["from_spdf"]
         LAM2L = cc["to_spdf"]
         AL = cc["statel_A"]
@@ -192,13 +235,17 @@ class _MTDoublet1(_MultiplicityToolbox):
         AE2L = cc["state2l_alpha_e"]
         BE2L = cc["state2l_B_e"]
 
+        # Original comment:
+        #
+        #     cada banda possue valores distintos de Y' e Y''
+        #     quando Y=A/B > 0, temos o termo normal, por isso
+        #     nao se modifica as formulas abaixo
+
         BL = BEL - AEL * (vl + 0.5)
         B2L = BE2L - AE2L * (v2l + 0.5)
 
         YL = AL / BL
         Y2L = A2L / B2L
-
-
 
         UPLUSL = lambda J: ((LAML**2.)*YL*(YL-4) + 4*((J+0.5)**2.))**0.5 + LAML*(YL-2)
         UMINUSL= lambda J: ((LAML**2.)*YL*(YL-4) + 4*((J+0.5)**2.))**0.5 - LAML*(YL-2)
@@ -286,7 +333,7 @@ class _MTDoublet1(_MultiplicityToolbox):
         # Resolves the Delta Lambda = LAML - LAM2L
 
         if LAML > LAM2L:
-            self.update((((vl, v2l, J, x), y) for x, y in
+            self._sj.update((((vl, v2l, J, x), y) for x, y in
                 (
                     ("P1", _P1(J)),
                     ("Q1", _Q1(J)),
@@ -303,7 +350,7 @@ class _MTDoublet1(_MultiplicityToolbox):
                 )))
 
         elif LAML < LAM2L:
-            self.update((((vl, v2l, J, x), y) for x, y in
+            self._sj.update((((vl, v2l, J, x), y) for x, y in
                 (
                     ("P1", _R1(J-1)),
                     ("Q1", _Q1(J)),
@@ -339,7 +386,6 @@ class _MTTriplet1(_MultiplicityToolbox):
     def _populate_with_key(self, key):
         vl, v2l, J, branch = key
         cc = self._molconsts
-
         S = cc.get_S2l()
         DELTAK = cc["cro"]
         FE = cc["fe"]
@@ -576,7 +622,7 @@ class _MTTriplet1(_MultiplicityToolbox):
         # Resolves the Delta Lambda
 
         if LAML > LAM2L:
-            self.update((((vl, v2l, J, x), y) for x, y in
+            self._sj.update((((vl, v2l, J, x), y) for x, y in
                 (
                     ("P1", _P1(J)),
                     ("Q1", _Q1(J)),
@@ -609,7 +655,7 @@ class _MTTriplet1(_MultiplicityToolbox):
 
 
         elif LAML < LAM2L:
-            self.update((((vl, v2l, J, x), y) for x, y in
+            self._sj.update((((vl, v2l, J, x), y) for x, y in
                 (
                     ("P1", _R1(J-1)),
                     ("Q1", _Q1(J)),

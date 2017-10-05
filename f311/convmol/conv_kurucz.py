@@ -115,7 +115,7 @@ class ConvKurucz(Conv):
 
                 if self.flag_hlf:
                     try:
-                        hlf = mtools[(line.vl, line.v2l, line.J2l, branch)]
+                        hlf = mtools.get_sj(line.vl, line.v2l, line.J2l, branch)
                     except ZeroDivisionError:
                         log.skip_reasons["Division by zero calculating HLF"] += 1
                         continue
@@ -125,7 +125,7 @@ class ConvKurucz(Conv):
                     gf_pfant *= 10**line.loggf
 
                 if self.flag_fcf:
-                    gf_pfant *= fcf  * 0.005257
+                    gf_pfant *= fcf
 
             except Exception as e:
                 reason = a99.str_exc(e)

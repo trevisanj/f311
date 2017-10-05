@@ -49,16 +49,7 @@ further investigation required
 
 ## Convmol
 
-- moldbed.py:
-
-    * equip with build-moldb.py
-    
-
-
-
-- Building database: fill in the state_label automatically, or maybe just search using the first letter
-  (figure out if there is a "LIKE 'A%' as in MySQL) (no need to worry about speed here, we'll pre-compile the info for conversion)    
-
+- get rid of "cro", because it is redundant, see pfantlib.f90 and perhaps http://www.kinetics.nsc.ru/chichinin/databases/Lifbase.pdf end of page 2    
 
 # Filetypes
 

@@ -741,7 +741,6 @@ class _WConv(a99.WConfigEditor):
 
     def _source_changed(self):
         if self._flag_updating_gui:
-            print("PREVENTEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD STH BAD")
             return
 
             # print("Widget", ds.widget, "is visible?", ds.widget.isVisible())
@@ -873,7 +872,7 @@ class _WConv(a99.WConfigEditor):
             s_none = ", ".join(["'{}'".format(name) for name, value in molconsts.items()
                                 if value is None and name not in molconsts_fieldnames_ignore])
             errors.append("There are empty molecular constants: {}".format(s_none))
-        if not self.w_out.validate():
+        if not self.w_out.flag_valid:
             errors.append("Output filename is invalid")
 
 
