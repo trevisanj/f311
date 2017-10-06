@@ -20,8 +20,8 @@ def test_adds_to_one0(tmpdir):
         try:
             k = 2./ ((2 * consts.get_S2l() + 1) * (2 * J2l + 1) * (2 - consts["cro"]))
 
-            mtools.get_sj(0, 0, J2l, "P1")  # to induce populating for J2l
-            sum_ = sum([x*k for x in mtools._sj.values()])
+            mtools.populate(0, 0, J2l)
+            sum_ = sum([x*k for x in mtools._dict_sj.values() if x > 0])
 
             print("J2l={:2}: sum={}".format(J2l, sum_))
         except ZeroDivisionError:

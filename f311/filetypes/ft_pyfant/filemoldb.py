@@ -37,7 +37,7 @@ class FileMolDB(FileSQLiteDB):
             "ua": [None, "value of partition function for first element"],
             "ub": [None, "value of partition function for second element"],
             "te": [None, "electronic term"],
-            "cro": [None, "delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)"],
+            "cro": [None, "delta Kronecker (1: Sigma-Sigma transitions; 0: non-Sigma transitions)"],
         },
         "state": {
         "omega_e": ["ω<sub>e</sub>", "vibrational constant – first term (cm<sup>-1</sup>)"],

@@ -13,6 +13,7 @@ from .a_WDBState import WDBState
 import copy
 import f311.filetypes as ft
 
+
 __all__ = ["WMolecularConstants"]
 
 # Spacing for grid layouts
@@ -31,7 +32,7 @@ _LAYSP_MAIN = 6
 # Margin for main layout
 _LAYMN_MAIN = 0
 # Spacing for toolbar
-_LAYSP_TOOLBAR = 2
+_LAYSP_TOOLBAR = 4
 # Margin for toolbar
 _LAYMN_TOOLBAR = 2
 # Spacing for frames that are inside frames
@@ -103,7 +104,8 @@ class WMolecularConstants(a99.WBase):
         self._moldb = None
 
         # Fields of interest from table 'pfantmol'
-        self._fieldnames_pfantmol = ["fe", "do", "am", "bm", "ua", "ub", "te", "cro", ]
+        # TODO cro disabled but still left to get rid of this field in the same way I got rid of pfantmol.s
+        self._fieldnames_pfantmol = ["fe", "do", "am", "bm", "ua", "ub", "te", ]
         # Fields of interest from table 'state'
         self._fieldnames_state = ["omega_e", "omega_ex_e", "omega_ey_e", "B_e", "alpha_e", "D_e",
                                  "beta_e", "A"]
@@ -314,6 +316,10 @@ class WMolecularConstants(a99.WBase):
         bb.clicked.connect(self.None_to_zero)
         ltb.addWidget(bb)
 
+        bb = self.button_zeros = QPushButton("View Hönl-London factors")
+        bb.clicked.connect(self.view_hlf)
+        ltb.addWidget(bb)
+
         a99.nerdify(self)
 
     def __getitem__(self, fieldname):
@@ -348,6 +354,46 @@ class WMolecularConstants(a99.WBase):
                 edit.setText("0")
 
         self._update_molconsts()
+
+    def view_hlf(self):
+        """Opens text window with HLFs on them"""
+
+        try:
+            import f311.explorer as ex
+            import f311.physics as ph
+            import tabulate
+
+            l_text = []
+
+            self.status("Calculating...")
+            molconsts = copy.deepcopy(self._molconsts)
+            molconsts.None_to_zero()
+            for vl in range(10):
+                for v2l in range(10):
+                    l_text.extend(a99.format_box("vl, v2l = ({}, {})".format(vl, v2l)))
+
+                    rows, header = [], None
+                    for J in range(40):
+                        mtools = ph.multiplicity_toolbox(molconsts, flag_normalize=True)
+                        mtools.populate(vl, v2l, J)
+
+                        if header is None:
+                            branches = [key[3] for key in mtools.dict_sj]
+                            header = ["J"]+branches+["Sum"]
+
+                        vv = mtools.dict_sj.values()
+                        total = sum([x for x in vv if x > 0])
+                        rows.append([J+.5]+["{:.5e}".format(x) if x > 0 else "-" for x in vv]+["{:.9g}".format(total)])
+
+                    l_text.append(tabulate.tabulate(rows, header))
+                    l_text.append("")
+
+            text = "\n".join(l_text)
+            form = ex.XText(self, text, "Hönl-London factors")
+            self.status("")
+            form.show()
+        except Exception as E:
+            self.add_log_error(a99.str_exc(E), True)
 
     ################################################################################################
     # # Qt override
@@ -464,6 +510,8 @@ class WMolecularConstants(a99.WBase):
         return None
 
     def _get_fcf_dict(self):
+        if self.moldb is None:
+            return None
         return self.moldb.get_fcf_dict(self._get_id_system())
 
     def _populate(self):

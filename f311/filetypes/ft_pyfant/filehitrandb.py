@@ -16,31 +16,6 @@ __all__ = ["FileHitranDB"]
 class FileHitranDB(FileSQLiteDB):
     description = "HITRAN Molecules Catalogue"
     default_filename = "hitrandb.sqlite"
-    gui_data = {
-        "molecule": {
-            "name": [None, "name of molecule, <i>e.g.</i>, 'OH'"],
-            "symbol_a": ["Symbol A", "symbol of first element"],
-            "symbol_b": ["Symbol B", "symbol of second element"],
-            "fe": [None, "oscillator strength"],
-            "do": [None, "dissociation constant (eV)"],
-            "am": [None, "mass of first element"],
-            "bm": [None, "mass of second element"],
-            "ua": [None, "value of partition function for first element"],
-            "ub": [None, "value of partition function for second element"],
-            "te": [None, "electronic term"],
-            "cro": [None, "delta Kronecker (0: sigma transitions; 1: non-Sigma transitions)"],
-            "s": [None, "?doc?"]
-      },
-        "state": {
-    "omega_e": ["ω<sub>e</sub>", "vibrational constant – first term (cm<sup>-1</sup>)"],
-    "omega_ex_e": ["ω<sub>e</sub>x<sub>e</sub>", "vibrational constant – second term (cm<sup>-1</sup>)"],
-    "omega_ey_e": ["ω<sub>e</sub>y<sub>e</sub>", " vibrational constant – third term (cm<sup>-1</sup>)"],
-    "B_e": ["B<sub>e</sub>", "rotational constant in equilibrium position (cm<sup>-1</sup>)"],
-    "alpha_e": ["α<sub>e</sub>", "rotational constant – first term (cm<sup>-1</sup>)"],
-    "D_e": ["D<sub>e</sub>", "centrifugal distortion constant (cm<sup>-1</sup>)"],
-    "beta_e": ["β<sub>e</sub>", "rotational constant – first term, centrifugal force (cm<sup>-1</sup>)"],
-      }
-    }
 
     def _create_schema(self):
         conn = self.get_conn()

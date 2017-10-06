@@ -70,7 +70,7 @@ class ConvKurucz(Conv):
         n = len(lines)
 
         S = self.molconsts.get_S2l()
-        DELTAK = self.molconsts["cro"]
+        DELTAK = self.molconsts.get_deltak()
         FE = self.molconsts["fe"]
         LAML = self.molconsts["from_spdf"]
         LAM2L = self.molconsts["to_spdf"]
@@ -116,8 +116,8 @@ class ConvKurucz(Conv):
                 if self.flag_hlf:
                     try:
                         hlf = mtools.get_sj(line.vl, line.v2l, line.J2l, branch)
-                    except ZeroDivisionError:
-                        log.skip_reasons["Division by zero calculating HLF"] += 1
+                    except ph.NoLineStrength:
+                        log.skip_reasons["Cannot calculate HLF"] += 1
                         continue
                     gf_pfant *= hlf
 

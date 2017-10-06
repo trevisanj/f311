@@ -548,6 +548,6 @@ def molconsts_to_molecule(molconsts):
     mol.ua = molconsts["ua"]
     mol.ub = molconsts["ub"]
     mol.te = molconsts["te"]
-    mol.cro = molconsts["cro"]
+    mol.cro = molconsts.get_deltak()
     mol.s = molconsts.get_S2l()
     return mol

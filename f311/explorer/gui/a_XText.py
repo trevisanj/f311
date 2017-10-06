@@ -19,6 +19,7 @@ class XText(QMainWindow):
         QMainWindow.__init__(self, parent)
 
         cw = self.centralWidget = QPlainTextEdit()
+        cw.setLineWrapMode(QPlainTextEdit.NoWrap)
         self.setCentralWidget(cw)
         cw.setReadOnly(True)  # allows copy but not editing
         cw.setFont(a99.MONO_FONT)

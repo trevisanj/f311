@@ -173,7 +173,7 @@ class XFileMainWindowBase(a99.XLogMainWindow):
 
     def load(self, fobj, index=None):
         """
-        Loads given DataFile object
+        Loads given DataFile object. **tolerant with None**
 
         Args:
             fobj: object of one of accepted classes
@@ -182,6 +182,10 @@ class XFileMainWindowBase(a99.XLogMainWindow):
         if index is None:
             index = self._get_tab_index()
         page = self.pages[index]
+
+        if fobj is None:
+            return
+
 
         if not isinstance(fobj, page.clss_load):
             raise RuntimeError('Object to load must be in {0!s} (not a {1!s})'.format(

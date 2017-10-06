@@ -1,3 +1,4 @@
+# coding: utf-8
 """
 Multiplicity (Chemistry)
 
@@ -15,6 +16,9 @@ import a99
 
 __all__ = ["multiplicity_toolbox"]
 
+
+# Code to signal that there is no HLF for combination (vl, v2l, J, branch)
+_NO_LINE_STRENGTH = -999999
 
 def _quanta_to_branch_singlet(Jl, J2l, spinl=None, spin2l=None):
     """
@@ -80,52 +84,6 @@ def _quanta_to_branch_same_multiplicity(Jl, J2l, spinl=None, spin2l=None):
     return ret
 
 
-# def _normalizer_honllondon(toolbox, J2l):
-#     """returns normalization factor: 2/((2S+1)*(2*J2l+1)*(2-delta_k))"""
-#     cc = toolbox.molconsts
-#
-#     return 2./((2*cc.get_S2l+1)*(2*J2l+1)*(2-cc.get_deltak()))
-#     DELTAK = self.molconsts["cro"]
-#     FE = self.molconsts["fe"]
-#     LAML = self.molconsts["from_spdf"]
-#     LAM2L = self.molconsts["to_spdf"]
-#     STATEL = self.molconsts["from_label"]
-#     STATE2L = self.molconsts["to_label"]
-#
-#     mtools = self.multiplicity_toolbox()
-#
-#     # Prepares result
-#     sols = ConvSols(self.qgbd_calculator, self.molconsts)
-#     log = MolConversionLog(n)
-#
-#     for i, line in enumerate(lines):
-#         if self.iso and line.iso != self.iso:
-#             log.skip_reasons["Isotope {}".format(line.iso)] += 1
-#             continue
-#
-#         if line.statel != STATEL or line.state2l != STATE2L:
-#             log.skip_reasons["Transition {}-{}".format(line.statel, line.state2l)] += 1
-#             continue
-#
-#         if self.flag_fcf:
-#             try:
-#                 fcf = self.fcfs[(line.vl, line.v2l)]
-#             except KeyError as e:
-#                 log.skip_reasons[
-#                     "FCF not available for (vl, v2l) = ({}, {})".format(line.vl, line.v2l)] += 1
-#                 continue
-#
-#         branch = mtools.quanta_to_branch(line.Jl, line.J2l,
-#                                          spinl=(None if not self.flag_spinl else line.spinl),
-#                                          spin2l=line.spin2l)
-#
-#         try:
-#             gf_pfant = 1.
-#
-#             if self.flag_normhlf:
-#                 k = 2. / ((2 * S + 1) * (2 * line.J2l + 1) * (2 - DELTAK))
-
-
 class _MultiplicityToolbox(object):
     """
     Tools: Kovacz' "Line strength" and and quanta-to-branch conversion
@@ -153,6 +111,10 @@ class _MultiplicityToolbox(object):
     # Method to convert quantum information to branch. **Use staticmethod()**!
     quanta_to_branch = None
 
+    @property
+    def dict_sj(self):
+        return self._dict_sj
+
     def __init__(self, molconsts, flag_normalize=True):
         if not isinstance(molconsts, ft.MolConsts):
             raise TypeError("molconsts must be a MolConsts")
@@ -170,29 +132,58 @@ class _MultiplicityToolbox(object):
             raise ValueError("**Sanity check fail**: Class {} expects multiplicity2l = 2*S+1 = {}, got {} instead". \
                              format(self.__class__.__name__, self.multiplicity2l, 2*S+1))
 
-        self._sj = {}
+        self._dict_sj = {}
 
         #
-        self._normalizer = None
+        self._flag_normalize = flag_normalize
+
+    def populate(self, vl, v2l, J):
+        """Populates self.dict_sj with keys (vl, v2l, J, (all branches))"""
+        data = self._get_populate_data(vl, v2l, J)
+        self.__update_with_data(vl, v2l, J, data)
 
     def get_sj(self, vl, v2l, J, branch):
         """
         Returns Kovacz' "Line Strength", normalized or not
+
+        Args:
+            vl:
+            v2l:
+            J: **integer**
+            branch: example: "P1"
         """
 
         key = (vl, v2l, int(J), branch)
 
-        if key not in self._sj:
-            self._populate_with_key(key)
+        if key not in self._dict_sj:
+            data = self._get_populate_data(vl, v2l, J)
+            self.__update_with_data(vl, v2l, J, data)
 
-        return self._sj[key]
+        value = self._dict_sj[key]
+
+        if value == _NO_LINE_STRENGTH:
+            raise NoLineStrength(
+             "Cannot calculate line strength for (vl={}, v2l={}, J={}, branch='{}')".format(*key))
+
+    def __update_with_data(self, vl, v2l, J, data):
+        normalization_factor = 1.
+        if self._flag_normalize:
+            cc = self._molconsts
+            normalization_factor = 2. / ((2 * cc.get_S2l() + 1) * (2 * J + 1) * (2 - cc.get_deltak()))
+
+        for branch, function in data:
+            try:
+                value = function(J) * normalization_factor
+
+                if isinstance(value, complex) or value < 0:
+                    value = _NO_LINE_STRENGTH
+
+            except ZeroDivisionError:
+                value = _NO_LINE_STRENGTH
+            self._dict_sj[(vl, v2l, J, branch)]  = value
 
 
-    def __missing__(self, key):
-        self._populate_with_key(key)
-        return self[key]
-
-    def _populate_with_key(self, key):
+    def _get_populate_data(self, vl, v2l, J):
         """Must be inherited and populate self with all branches for given (vl, v2l, J)"""
         raise NotImplementedError()
 
@@ -223,8 +214,7 @@ class _MTDoublet1(_MultiplicityToolbox):
     multiplicity2l = 2
     quanta_to_branch = staticmethod(_quanta_to_branch_same_multiplicity)
 
-    def _populate_with_key(self, key):
-        vl, v2l, J, branch = key
+    def _get_populate_data(self, vl, v2l, J):
         cc = self._molconsts
         LAML = cc["from_spdf"]
         LAM2L = cc["to_spdf"]
@@ -333,38 +323,36 @@ class _MTDoublet1(_MultiplicityToolbox):
         # Resolves the Delta Lambda = LAML - LAM2L
 
         if LAML > LAM2L:
-            self._sj.update((((vl, v2l, J, x), y) for x, y in
-                (
-                    ("P1", _P1(J)),
-                    ("Q1", _Q1(J)),
-                    ("R1", _R1(J)),
-                    ("P21", _P21(J)),
-                    ("Q21", _Q21(J)),
-                    ("R21", _R21(J)),
-                    ("P12", _P12(J)),
-                    ("Q12", _Q12(J)),
-                    ("R12", _R12(J)),
-                    ("P2", _P2(J)),
-                    ("Q2", _Q2(J)),
-                    ("R2", _R2(J)),
-                )))
+            return (
+             ("P1", _P1),
+             ("Q1", _Q1),
+             ("R1", _R1),
+             ("P21", _P21),
+             ("Q21", _Q21),
+             ("R21", _R21),
+             ("P12", _P12),
+             ("Q12", _Q12),
+             ("R12", _R12),
+             ("P2", _P2),
+             ("Q2", _Q2),
+             ("R2", _R2),
+            )
 
         elif LAML < LAM2L:
-            self._sj.update((((vl, v2l, J, x), y) for x, y in
-                (
-                    ("P1", _R1(J-1)),
-                    ("Q1", _Q1(J)),
-                    ("R1", _P1(J+1)),
-                    ("P21", _R12(J-1)),
-                    ("Q21", _Q12(J)),
-                    ("R21", _P12(J+1)),
-                    ("P12", _R21(J-1)),
-                    ("Q12", _Q21(J)),
-                    ("R12", _P21(J+1)),
-                    ("P2", _R2(J-1)),
-                    ("Q2", _Q2(J)),
-                    ("R2", _P2(J+1)),
-                )))
+            return (
+             ("P1", lambda J: _R1(J-1)),
+             ("Q1", _Q1),
+             ("R1", lambda J: _P1(J+1)),
+             ("P21", lambda J: _R12(J-1)),
+             ("Q21", _Q12),
+             ("R21", lambda J: _P12(J+1)),
+             ("P12", lambda J: _R21(J-1)),
+             ("Q12", _Q21),
+             ("R12", lambda J: _P21(J+1)),
+             ("P2", lambda J: _R2(J-1)),
+             ("Q2", _Q2),
+             ("R2", lambda J: _P2(J+1)),
+            )
 
 
 ####################################################################################################
@@ -383,11 +371,8 @@ class _MTTriplet1(_MultiplicityToolbox):
     multiplicity2l = 3
     quanta_to_branch = staticmethod(_quanta_to_branch_same_multiplicity)
 
-    def _populate_with_key(self, key):
-        vl, v2l, J, branch = key
+    def _get_populate_data(self, vl, v2l, J):
         cc = self._molconsts
-        S = cc.get_S2l()
-        DELTAK = cc["cro"]
         FE = cc["fe"]
         LAML = cc["from_spdf"]
         LAM2L = cc["to_spdf"]
@@ -417,7 +402,7 @@ class _MTTriplet1(_MultiplicityToolbox):
 
         # Original comment:
         #
-        #     c�lculo das contantes U1+, U1-, U3+, U3-,
+        #     cálculo das contantes U1+, U1-, U3+, U3-,
         #     C1+, C2+, C3+, dependentes de J para o estado
         #     eletronico superior( A 3PI, lambda=1)
         #     formulas para casos intermediarios entre os casos A( Y>>J(J+1) )
@@ -622,72 +607,70 @@ class _MTTriplet1(_MultiplicityToolbox):
         # Resolves the Delta Lambda
 
         if LAML > LAM2L:
-            self._sj.update((((vl, v2l, J, x), y) for x, y in
-                (
-                    ("P1", _P1(J)),
-                    ("Q1", _Q1(J)),
-                    ("R1", _R1(J)),
-                    ("P21", _P21(J)),
-                    ("Q21", _Q21(J)),
-                    ("R21", _R21(J)),
-                    ("P31", _P31(J)),
-                    ("Q31", _Q31(J)),
-                    ("R31", _R31(J)),
-                    ("P12", _P12(J)),
-                    ("Q12", _Q12(J)),
-                    ("R12", _R12(J)),
-                    ("P2", _P2(J)),
-                    ("Q2", _Q2(J)),
-                    ("R2", _R2(J)),
-                    ("P32", _P32(J)),
-                    ("Q32", _Q32(J)),
-                    ("R32", _R32(J)),
-                    ("P13", _P13(J)),
-                    ("Q13", _Q13(J)),
-                    ("R13", _R13(J)),
-                    ("P23", _P23(J)),
-                    ("Q23", _Q23(J)),
-                    ("R23", _R23(J)),
-                    ("P3", _P3(J)),
-                    ("Q3", _Q3(J)),
-                    ("R3", _R3(J)),
-                )))
-
+            return (
+             ("P1", _P1),
+             ("Q1", _Q1),
+             ("R1", _R1),
+             ("P21", _P21),
+             ("Q21", _Q21),
+             ("R21", _R21),
+             ("P31", _P31),
+             ("Q31", _Q31),
+             ("R31", _R31),
+             ("P12", _P12),
+             ("Q12", _Q12),
+             ("R12", _R12),
+             ("P2", _P2),
+             ("Q2", _Q2),
+             ("R2", _R2),
+             ("P32", _P32),
+             ("Q32", _Q32),
+             ("R32", _R32),
+             ("P13", _P13),
+             ("Q13", _Q13),
+             ("R13", _R13),
+             ("P23", _P23),
+             ("Q23", _Q23),
+             ("R23", _R23),
+             ("P3", _P3),
+             ("Q3", _Q3),
+             ("R3", _R3),
+            )
 
         elif LAML < LAM2L:
-            self._sj.update((((vl, v2l, J, x), y) for x, y in
-                (
-                    ("P1", _R1(J-1)),
-                    ("Q1", _Q1(J)),
-                    ("R1", _P1(J+1)),
-                    ("P21", _R12(J-1)),
-                    ("Q21", _Q12(J)),
-                    ("R21", _P12(J+1)),
-                    ("P31", _R13(J-1)),
-                    ("Q31", _Q13(J)),
-                    ("R31", _P13(J+1)),
-                    ("P12", _R21(J-1)),
-                    ("Q12", _Q21(J)),
-                    ("R12", _P21(J+1)),
-                    ("P2", _R2(J-1)),
-                    ("Q2", _Q2(J)),
-                    ("R2", _P2(J+1)),
-                    ("P32", _R23(J-1)),
-                    ("Q32", _Q23(J)),
-                    ("R32", _P23(J+1)),
-                    ("P13", _R31(J-1)),
-                    ("Q13", _Q31(J)),
-                    ("R13", _P31(J+1)),
-                    ("P23", _R32(J-1)),
-                    ("Q23", _Q32(J)),
-                    ("R23", _P32(J+1)),
-                    ("P3", _R3(J-1)),
-                    ("Q3", _Q3(J)),
-                    ("R3", _P3(J+1)),
-                )))
+            return (
+             ("P1", lambda J: _R1(J-1)),
+             ("Q1", _Q1),
+             ("R1", lambda J: _P1(J+1)),
+             ("P21", _R12(J-1)),
+             ("Q21", _Q12),
+             ("R21", lambda J: _P12(J+1)),
+             ("P31", lambda J: _R13(J-1)),
+             ("Q31", _Q13),
+             ("R31", lambda J: _P13(J+1)),
+             ("P12", lambda J: _R21(J-1)),
+             ("Q12", _Q21),
+             ("R12", lambda J: _P21(J+1)),
+             ("P2", lambda J: _R2(J-1)),
+             ("Q2", _Q2),
+             ("R2", lambda J: _P2(J+1)),
+             ("P32", lambda J: _R23(J-1)),
+             ("Q32", _Q23),
+             ("R32", lambda J: _P23(J+1)),
+             ("P13", lambda J: _R31(J-1)),
+             ("Q13", _Q31),
+             ("R13", lambda J: _P31(J+1)),
+             ("P23", lambda J: _R32(J-1)),
+             ("Q23", _Q32),
+             ("R23", lambda J: _P32(J+1)),
+             ("P3", lambda J: _R3(J-1)),
+             ("Q3", _Q3),
+             ("R3", lambda J: _P3(J+1)),
+            )
+
 
 # TODO multiplicity is not the best term, should be sth more towards "transition"
-def multiplicity_toolbox(molconsts):
+def multiplicity_toolbox(molconsts, flag_normalize=None):
     """Factory function that returns a MultiplicityToolbox descendant appropriate to molconsts"""
 
     C = [_MTSinglet, _MTDoublet1, _MTTriplet1]
@@ -698,6 +681,10 @@ def multiplicity_toolbox(molconsts):
         if (cls.absDeltaLambda == "all" or cls.absDeltaLambda == absDeltaLambda) and \
            cls.multiplicityl == molconsts["from_mult"] and \
            cls.multiplicity2l == molconsts["to_mult"]:
-            return cls(molconsts)
+            return cls(molconsts, flag_normalize)
 
     raise ValueError("Could not find a suitable class for given molecular constants")
+
+
+class NoLineStrength(Exception):
+    pass

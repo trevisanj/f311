@@ -136,7 +136,7 @@ def hitran_to_sols(molconsts, lines, qgbd_calculator):
     data = lines["data"]
 
     S = molconsts.get_S2l()
-    DELTAK = molconsts["cro"]
+    DELTAK = molconsts.get_deltak()
     formula = molconsts["formula"]
 
     n = header["number_of_rows"]

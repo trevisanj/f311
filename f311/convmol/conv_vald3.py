@@ -50,7 +50,7 @@ def vald3_to_sols(molconsts, file_vald3, qgbd_calculator):
     n = len(lines)
 
     S = molconsts.get_S2l()
-    DELTAK = molconsts["cro"]
+    DELTAK = molconsts.get_deltak()
 
     sols = OrderedDict()  # one item per (vl, v2l) pair
     log = MolConversionLog(n)

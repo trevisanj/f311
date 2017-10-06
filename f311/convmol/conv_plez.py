@@ -72,7 +72,7 @@ class ConvPlez(Conv):
         sols = []
 
         S = molconsts.get_S2l()
-        DELTAK = molconsts["cro"]
+        DELTAK = molconsts.get_deltak()
         fe = molconsts["fe"]
 
         # TODO of course this hard-wire needs change; now just a text for OH A2Sigma-X2Pi
