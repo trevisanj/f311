@@ -14,7 +14,7 @@ import math
 from f311 import filetypes as ft
 import a99
 
-__all__ = ["multiplicity_toolbox"]
+__all__ = ["multiplicity_toolbox", "NoLineStrength"]
 
 
 # Code to signal that there is no HLF for combination (vl, v2l, J, branch)
@@ -153,7 +153,9 @@ class _MultiplicityToolbox(object):
             branch: example: "P1"
         """
 
-        key = (vl, v2l, int(J), branch)
+        J = int(J)
+
+        key = (vl, v2l, J, branch)
 
         if key not in self._dict_sj:
             data = self._get_populate_data(vl, v2l, J)
@@ -164,6 +166,8 @@ class _MultiplicityToolbox(object):
         if value == _NO_LINE_STRENGTH:
             raise NoLineStrength(
              "Cannot calculate line strength for (vl={}, v2l={}, J={}, branch='{}')".format(*key))
+
+        return value
 
     def __update_with_data(self, vl, v2l, J, data):
         normalization_factor = 1.
@@ -373,7 +377,6 @@ class _MTTriplet1(_MultiplicityToolbox):
 
     def _get_populate_data(self, vl, v2l, J):
         cc = self._molconsts
-        FE = cc["fe"]
         LAML = cc["from_spdf"]
         LAM2L = cc["to_spdf"]
 

@@ -47,10 +47,6 @@ further investigation required
 - Bring more examples and find a way to organize them both in the code and in the documentation
 
 
-## Convmol
-
-- get rid of "cro", because it is redundant, see pfantlib.f90 and perhaps http://www.kinetics.nsc.ru/chichinin/databases/Lifbase.pdf end of page 2    
-
 # Filetypes
 
 - new script to print filetypes as table

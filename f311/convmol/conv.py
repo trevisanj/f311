@@ -4,6 +4,8 @@ from .calc_qgbd import *
 from .convlog import *
 import datetime
 from collections import OrderedDict
+import math
+
 
 __all__ = ["Conv", "ConvSols"]
 
@@ -45,10 +47,11 @@ class Conv(object):
         fcfs: Franck-Condon Factors (dictionary of floats indexed by (vl, v2l))
     """
 
-    def __init__(self, qgbd_calculator=None, molconsts=None, fcfs=None):
+    def __init__(self, qgbd_calculator=None, molconsts=None, flag_normhlf=True, fcfs=None):
         self.qgbd_calculator = qgbd_calculator if qgbd_calculator else calc_qgbd_tio_like
         self.molconsts = molconsts
         self.fcfs = fcfs
+        self.flag_normhlf = flag_normhlf
 
     def make_file_molecules(self, lines):
         """
@@ -83,7 +86,7 @@ class Conv(object):
 
     def multiplicity_toolbox(self):
         """Wraps f311.physics.multiplicity.multiplicity_toolbox()"""
-        return ph.multiplicity_toolbox(self.molconsts)
+        return ph.multiplicity_toolbox(self.molconsts, flag_normalize=self.flag_normhlf)
 
     # Must reimplement thig
     def _make_sols(self, lines):
@@ -97,5 +100,23 @@ class Conv(object):
         """
         raise NotImplementedError()
 
+    ######
+    # Gear
+
     def _calculate_qgbd(self, v2l):
         return self.qgbd_calculator(self.molconsts, v2l)
+
+    def _get_fcf(self, vl, v2l):
+        try:
+            fcf = self.fcfs[(vl, v2l)]
+
+            # TODO TEMPORARY, THROWING AWAY THE EXPONENT TO MIMIC BRUNO'S NH
+            try:
+                fcf = fcf * 10 ** -(math.floor(math.log10(fcf)) + 1)
+            except ValueError:
+                raise ValueError("Olha o FCF:::{}::::::{}::::::: {}".format(vl, v2l, fcf))
+
+
+        except KeyError as e:
+            raise KeyError("FCF not available for (vl, v2l) = ({}, {})".format(vl, v2l))
+        return fcf

@@ -865,7 +865,22 @@ class WMolecularConstants(a99.WBase):
             for fieldname, cb, f_ids in _CB_MAP:
                 idx = cb.currentIndex()
                 if idx > 0:
-                    self.molconsts[fieldname] = f_ids()[idx-1]
+                    self._molconsts[fieldname] = f_ids()[idx-1]
+
+
+            fieldname = None
+            # Values that must be in sync with some id's
+            id_ = self._molconsts["id_molecule"]
+            if id_ is not None:
+                row = self._moldb.query_molecule(id=id_).fetchone()
+                self._molconsts["formula"] = row["formula"]
+                self._molconsts["name"] = row["name"]
+
+            id_ = self._molconsts["id_pfantmol"]
+            if id_ is not None:
+                row = self._moldb.query_pfantmol(id=id_).fetchone()
+                self._molconsts["description"] = row["description"]
+
 
         except Exception as E:
             flag_error = True
@@ -873,7 +888,8 @@ class WMolecularConstants(a99.WBase):
                 emsg = "Field '{}': {}".format(fieldname, str(E))
             else:
                 emsg = str(E)
-            self.add_log_error(emsg)
+            self.add_log_error(emsg, E=E)
+
 
         self._flag_valid = not flag_error
         if not flag_error:

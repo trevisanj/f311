@@ -43,11 +43,10 @@ class ConvKurucz(Conv):
 
     """
 
-    def __init__(self, flag_hlf=False, flag_normhlf=False, flag_fcf=False, flag_quiet=False,
+    def __init__(self, flag_hlf=False, flag_fcf=False, flag_quiet=False,
                  flag_spinl=False, fcfs=None, iso=None, *args, **kwargs):
         Conv.__init__(self, *args, **kwargs)
         self.flag_hlf = flag_hlf
-        self.flag_normhlf = flag_normhlf
         self.flag_fcf = flag_fcf
         self.flag_quiet = flag_quiet
         self.flag_spinl = flag_spinl
@@ -69,11 +68,6 @@ class ConvKurucz(Conv):
         lines = lines.lines
         n = len(lines)
 
-        S = self.molconsts.get_S2l()
-        DELTAK = self.molconsts.get_deltak()
-        FE = self.molconsts["fe"]
-        LAML = self.molconsts["from_spdf"]
-        LAM2L = self.molconsts["to_spdf"]
         STATEL = self.molconsts["from_label"]
         STATE2L = self.molconsts["to_label"]
 
@@ -92,26 +86,18 @@ class ConvKurucz(Conv):
                 log.skip_reasons["Transition {}-{}".format(line.statel, line.state2l)] += 1
                 continue
 
-            if self.flag_fcf:
-                try:
-                    fcf = self.fcfs[(line.vl, line.v2l)]
-                except KeyError as e:
-                    log.skip_reasons["FCF not available for (vl, v2l) = ({}, {})".format(line.vl, line.v2l)] += 1
-                    continue
 
             branch = mtools.quanta_to_branch(line.Jl, line.J2l,
                 spinl=(None if not self.flag_spinl else line.spinl), spin2l=line.spin2l)
 
-            try:
-                gf_pfant = 1.
 
-                if self.flag_normhlf:
-                    k = 2./ ((2*S+1) * (2*line.J2l+1) * (2-DELTAK))
-                    # k = 2 / ((2.0*line.J2l+1)*(2.0*S+1)*(2.0-DELTAK))
-                    # k = 2 / ((2.0*line.J2l+1))
-                    # k = (2.0*line.J2l+1)
-                    # k = (2*S+1) * (2*line.J2l+1) * (2-DELTAK)
-                    gf_pfant *= k
+            # This was only a test, but filters like these may be useful if line.spin2l != line.spinl:
+            #     log.skip_reasons["Different spin"] += 1
+            #     continue
+
+
+            try:
+                sj = 1.
 
                 if self.flag_hlf:
                     try:
@@ -119,13 +105,13 @@ class ConvKurucz(Conv):
                     except ph.NoLineStrength:
                         log.skip_reasons["Cannot calculate HLF"] += 1
                         continue
-                    gf_pfant *= hlf
+                    sj *= hlf
 
                 else:
-                    gf_pfant *= 10**line.loggf
+                    sj *= 10**line.loggf
 
                 if self.flag_fcf:
-                    gf_pfant *= fcf
+                    sj *= self._get_fcf(line.vl, line.v2l)
 
             except Exception as e:
                 reason = a99.str_exc(e)
@@ -136,7 +122,7 @@ class ConvKurucz(Conv):
                     a99.get_python_logger().exception(msg)
                 continue
 
-            sols.append_line(line, gf_pfant, branch)
+            sols.append_line(line, sj, branch)
 
             # sol_key = "%3d%3d" % (line.vl, line.v2l)  # (v', v'') transition (v_sup, v_inf)
             # raise RuntimeError("Como que o calculate_qgbd esta fazendo, sendo que o dicionario molconsts agora tem prefixos to e from?")

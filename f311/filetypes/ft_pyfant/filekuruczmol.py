@@ -27,7 +27,7 @@ def load_kurucz_mol(filename):
         FileKuruczMoleculeBase: either FileKuruczMolecule or FileKuruczMoleculeOld
     """
     from f311 import filetypes as ft
-    return ft.load_with_classes(filename, [FileKuruczMolecule, FileKuruczMoleculeOld])
+    return ft.load_with_classes(filename, [FileKuruczMolecule, FileKuruczMoleculeOld,])
 
 
 class FileKuruczMoleculeBase(DataFile):
@@ -84,7 +84,7 @@ class FileKuruczMolecule(FileKuruczMoleculeBase):
         #   205.0652 -7.621  4.5   355.915  4.5  49105.280 108X00f1   A07e1   16
         #   205.0652 -7.621  4.5   355.915  4.5  49105.280 108X00f1   A07e1   16
         # 1         11     18   23        33   38         49          61      69 1-based
-        # 0         10     17   22        32   37         48          60      68 0-based (pythonic)
+        # 0         10     17   22        32   37         48          60      68 0-based
         #
         # FORMAT(F10.4.F7.3,F5.1,F10.3,F5.1,F11.3,I4,A1,I2,A1,I1,3X,A1,I2,A1,I1,3X,I2)
         # "
@@ -202,6 +202,82 @@ KuruczMolLineOld = namedtuple("KuruczMolLineOld",
                                "lambda_doubling2l", "spin2l", "statel", "vl", "lambda_doublingl",
                                "spinl", ])
 
+# @a99.froze_it
+# class FileKuruczMoleculeOld2(FileKuruczMoleculeBase):
+#     """
+#     Kurucz molecular lines file, old format #1
+#
+#     There is one file like this at ATMOS/wrk4/bruno/Mole/NH/nh36.txt
+#     """
+#
+#     def _do_load(self, filename):
+#         #
+#         # 107 14 A00 C00 E  E   2.0  1.0 3257.638
+#         # 107 14 A00 C00 E  E   2.0  3.0 3242.692
+#         # 107 14 A00 C00 E  E   3.0  2.0 3262.111
+#         # 107 14 A00 C00 E  E   3.0  4.0 3241.207
+#         # |         |         |         |
+#         # 0000000000111111111122222222223333333333
+#         # 0123456789012345678901234567890123456789
+#
+#
+#         # **Note** The variable names below are the ones found in ATMOS/wrk4/bruno/Mole/CH/selech.f
+#         #
+#         #       lamb   j2   j1     v2l
+#         #          |    |    |      | d2l s1l
+#         #          |    |    |      | |   |
+#         #          |    |    |      | |   | v1l
+#         #          |    |    |      | |   | | d1l
+#         #          |    |    |      | |   | | |
+#         #   3001.028 16.5 17.5 106X02F2   C03F2
+#         # 0         1         2         3
+#         # 0123456789012345678901234567890123456
+#
+#
+#         filesize = os.path.getsize(filename)
+#         num_lines = int(filesize/70)
+#
+#         with open(filename, "r") as h:
+#             self._do_load_h(h, filename, num_lines)
+#
+#     def _do_load_h(self, h, filename, num_lines=0):
+#         r = 0  # counts rows of file
+#         ii = 0
+#         try:
+#             self.lines = []
+#             while True:
+#                 s = h.readline().strip("\n")
+#                 if len(s) == 0:
+#                     break
+#
+#                 line = KuruczMolLineOld(
+#                     float(s[0:10]),
+#                     float(s[10:15]),
+#                     float(s[15:20]),
+#                     int(s[20:22]),
+#                     int(s[22:24]),
+#                     s[24:25],
+#                     int(s[25:27]),
+#                     s[27:28],
+#                     int(s[28:29]),
+#                     s[32:33],
+#                     int(s[33:35]),
+#                     s[35:36],
+#                     int(s[36:37]),
+#                     )
+#
+#                 self.lines.append(line)
+#                 r += 1
+#                 ii += 1
+#                 if ii == 103:
+#                     a99.get_python_logger().info(
+#                         "Loading '{}': {}".format(filename, a99.format_progress(r, num_lines)))
+#                     ii = 0
+#
+#         except Exception as e:
+#             raise RuntimeError("Error around %d%s row of file '%s': \"%s\"" %
+#                                (r + 1, a99.ordinal_suffix(r + 1), filename, a99.str_exc(e))) from e
+
 @a99.froze_it
 class FileKuruczMoleculeOld(FileKuruczMoleculeBase):
     """
@@ -228,7 +304,7 @@ class FileKuruczMoleculeOld(FileKuruczMoleculeBase):
 
 
         filesize = os.path.getsize(filename)
-        num_lines = int(filesize/70)
+        num_lines = int(filesize / 70)
 
         with open(filename, "r") as h:
             self._do_load_h(h, filename, num_lines)
@@ -257,19 +333,21 @@ class FileKuruczMoleculeOld(FileKuruczMoleculeBase):
                     int(s[33:35]),
                     s[35:36],
                     int(s[36:37]),
-                    )
+                )
 
                 self.lines.append(line)
                 r += 1
                 ii += 1
                 if ii == 103:
                     a99.get_python_logger().info(
-                        "Loading '{}': {}".format(filename, a99.format_progress(r, num_lines)))
+                        "Loading '{}': {}".format(filename,
+                                                  a99.format_progress(r, num_lines)))
                     ii = 0
 
         except Exception as e:
             raise RuntimeError("Error around %d%s row of file '%s': \"%s\"" %
-                               (r + 1, a99.ordinal_suffix(r + 1), filename, a99.str_exc(e))) from e
+                               (r + 1, a99.ordinal_suffix(r + 1), filename,
+                                a99.str_exc(e))) from e
 
 # @a99.froze_it
 # class FileKuruczMoleculeOld1(FileKuruczMoleculeBase):

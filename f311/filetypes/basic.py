@@ -115,6 +115,13 @@ _iz_to_branch_map_alt = {"1": "P1","2": "P12","3": "P21","4": "P2","5": "Q1","6"
 _branch_to_iz_map_alt = dict(((value, key) for key, value in _iz_to_branch_map_alt.items()))
 
 
+# another alternative mapping
+_iz_to_branch_map_alt2 = {"1": "P1","2": "Q1","3": "R1","4": "P2", "5": "Q2","6": "R2",
+                          "7": "P3","8": "Q3","9 ": "R3"}
+_branch_to_iz_map_alt2 = dict(((value, key) for key, value in _iz_to_branch_map_alt2.items()))
+
+
+
 def iz_to_branch(iz):
     """Converts BLB's 'iz' code to string P/Q/R/P1. Inverse of branch_to_iz()
 
@@ -164,6 +171,22 @@ def branch_to_iz_alt(br):
     (directory ATMOS/wrk4/bruno/Mole/CH, check file, e.g., sja000.dat and source selech.f)
     """
     return _branch_to_iz_map_alt[br]
+
+def branch_to_iz_alt2(br):
+    """
+    Still another alternative mapping (for triplets)
+
+    Args:
+        branch: str: P1/P2/P3/Q1/Q2/Q3/R1/R2/R3
+
+    Returns:
+        str: from "1" to "9"
+
+    This is the mapping found in Bruno Castilho's work for molecule NH
+    (directory ATMOS/wrk4/bruno/Mole/NH, check file, e.g., sj0000.dat)
+    """
+    return _branch_to_iz_map_alt2[br]
+
 
 
 def get_default_data_path(*args, module=None, class_=None):
@@ -276,8 +299,8 @@ def molconsts_to_system_str(molconsts, style=SS_ALL_SPECIAL):
     else:
         raise ValueError("Invalid style: {}".format(style))
 
-    return "{} {} {} - {} {} {}".format(molconsts["from_label"], fmult(molconsts["from_mult"]),
+    return "{} {} {} - {} {} {}".format(molconsts["from_label"], fmult(int(molconsts["from_mult"])),
                                     fspdf(molconsts["from_spdf"]), molconsts["to_label"],
-                                    fmult(molconsts["to_mult"]), fspdf(molconsts["to_spdf"]))
+                                    fmult(int(molconsts["to_mult"])), fspdf(molconsts["to_spdf"]))
 
 

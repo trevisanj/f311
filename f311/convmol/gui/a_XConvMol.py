@@ -585,7 +585,6 @@ class _WKuruczPanel(a99.WBase):
         self.w_conv.f.obj["iso"] = self._get_iso()
 
         self.w_file.flag_valid = f is not None
-        print("sETANDOOOOOOOOOOOOOOOOOOOOOOO ESSE {}".format(self.w_file.flag_valid))
         self.changed.emit()
 
     def _load_lines(self):
@@ -725,8 +724,11 @@ class _WConv(a99.WConfigEditor):
         for i, ds in enumerate(_SOURCES.values()):
             ds.widget.setVisible(i == idx)
 
-        self.w_out.flag_valid = self.w_out.value is not None and len(self.w_out.value) > 0
+        self._update_w_out_flag_valid()
         # self._source_changed()
+
+    def _update_w_out_flag_valid(self):
+        self.w_out.flag_valid = self.w_out.value is not None and len(self.w_out.value) > 0
 
     def _panel_changed(self):
         """Called when anything in any panel changes"""
@@ -737,7 +739,7 @@ class _WConv(a99.WConfigEditor):
         """Called when anything in any panel changes"""
         self._update_fobj()
         self.changed.emit()
-        self._update_gui()
+        self._update_w_out_flag_valid()
 
     def _source_changed(self):
         if self._flag_updating_gui:

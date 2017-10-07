@@ -11,7 +11,7 @@ class MolConsts(dict):
     """Dict subclass that will hold several molecular constants, e.g., a table join"""
 
     # dictionary keys already present (fallback to None) at __init__()
-    _KEYS = ["fe", "bm", "te", "do", "ua", "cro", "am", "ub",
+    _KEYS = ["fe", "bm", "te", "do", "ua", "am", "ub",
              "from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf",
              "statel_omega_e", "statel_B_e", "statel_beta_e", "statel_omega_ex_e", "statel_alpha_e",
              "statel_A", "statel_omega_ey_e", "statel_D_e",
@@ -81,7 +81,7 @@ class MolConsts(dict):
 
         This replaces using table pfantmol.cro field for the Honl-London factor normalization
         """
-        return 1. if self["from_spdf"]+self["from_spdf"] == 0 else 0.
+        return 1. if self["from_spdf"]+self["to_spdf"] == 0 else 0.
 
     def populate_parse_str(self, string):
         """

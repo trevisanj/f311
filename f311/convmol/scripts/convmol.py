@@ -23,11 +23,11 @@ if __name__ == "__main__":
     description=__doc__,
     formatter_class=a99.SmartFormatter
     )
-    parser.add_argument('fn_moldb', type=str, help='File name for {}'.format(ft.FileMolDB.description),
+    parser.add_argument('--fn_moldb', type=str, help='File name for {}'.format(ft.FileMolDB.description),
                         default=ft.FileMolDB.default_filename, nargs='?')
-    parser.add_argument('fn_molconsts', type=str, help='File name for {}'.format(ft.FileMolConsts.description),
+    parser.add_argument('--fn_molconsts', type=str, help='File name for {}'.format(ft.FileMolConsts.description),
                         default=ft.FileMolConsts.default_filename, nargs='?')
-    parser.add_argument('fn_config', type=str, help='File name for {}'.format(ft.FileConfigConvMol.description),
+    parser.add_argument('--fn_config', type=str, help='File name for {}'.format(ft.FileConfigConvMol.description),
                         default=ft.FileConfigConvMol.default_filename, nargs='?')
     args = parser.parse_args()
 
