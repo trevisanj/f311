@@ -191,10 +191,7 @@ class _MultiplicityToolbox(object):
         """Must be inherited and populate self with all branches for given (vl, v2l, J)"""
         raise NotImplementedError()
 
-
-####################################################################################################
-
-# Incomplete class
+# Incomplete class (provided as example here, so far)
 class _MTSinglet(_MultiplicityToolbox):
     absDeltaLambda = "all"
     multiplicityl = 1
@@ -202,7 +199,198 @@ class _MTSinglet(_MultiplicityToolbox):
     quanta_to_branch = staticmethod(_quanta_to_branch_singlet)
 
 
-####################################################################################################
+class _MTDoublet0(_MultiplicityToolbox):
+    """
+    Line strengths for (doublet, Delta Lambda = +-1)
+
+    Formulas: Table 3.7 (p120); Formula 2.1.3-6 (p61)
+
+    Adapted from Fortran code: ATMOS/wrk4/bruno/Mole/OH/sjoh.f
+    """
+
+    absDeltaLambda = 0
+    multiplicityl = 2
+    multiplicity2l = 2
+    quanta_to_branch = staticmethod(_quanta_to_branch_same_multiplicity)
+
+    def _get_populate_data(self, vl, v2l, J):
+        cc = self._molconsts
+        LAML = cc["from_spdf"]
+        LAM2L = cc["to_spdf"]
+        AL = cc["statel_A"]
+        AEL = cc["statel_alpha_e"]
+        BEL = cc["statel_B_e"]
+        A2L = cc["state2l_A"]
+        AE2L = cc["state2l_alpha_e"]
+        BE2L = cc["state2l_B_e"]
+
+
+        BL = BEL - AEL * (vl + 0.5)
+        B2L = BE2L - AE2L * (v2l + 0.5)
+
+        YL = AL / BL
+        Y2L = A2L / B2L
+
+        # p61: “[...] Y= A/B. The term is called normal if A > 0, and inverted if A < 0”
+        # p126: “in the case of inverted terms, Y is to be substituted with negative sign”
+
+        if YL < 0:
+            YL = -YL
+        if Y2L < 0:
+            Y2L = -Y2L
+
+        # Kovacs formula 2.1.3-6
+        UPLUSL = lambda J: ((LAML**2.)*YL*(YL-4) + 4*((J+0.5)**2.))**0.5 + LAML*(YL-2)
+        UMINUSL= lambda J: ((LAML**2.)*YL*(YL-4) + 4*((J+0.5)**2.))**0.5 - LAML*(YL-2)
+        CPLUSL = lambda J: 0.5*((UPLUSL(J)**2.) + 4*(((J+0.5)**2.) - LAML**2.))
+        CMINUSL = lambda J: 0.5*((UMINUSL(J)**2.) + 4*(((J+0.5)**2.) - LAML**2.))
+        UPLUS2L = lambda J: ((LAM2L**2.)*Y2L*(Y2L-4) + 4*((J+0.5)**2.))**0.5 + LAM2L*(Y2L-2)
+        UMINUS2L = lambda J: ((LAM2L**2.)*Y2L*(Y2L-4) + 4*((J+0.5)**2.))**0.5 - LAM2L*(Y2L-2)
+        CPLUS2L = lambda J: 0.5*((UPLUS2L(J)**2.) + 4*(((J+0.5)**2.)-LAM2L**2.))
+        CMINUS2L = lambda J: 0.5*((UMINUS2L(J)**2.)+4*(((J+0.5)**2.)-LAM2L**2.))
+
+
+        LAM = LAML  # remember, both LAML, LAM2L are the same
+
+
+        # Some lost lambdas
+        """
+        P1(J) = (((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CMINUSL(J-1)*CMINUS2L(J)))* \
+        ((UMINUSL(J-1)*UMINUS2L(J) + 4*(J-LAM+0.5)*(J+LAM-0.5))**2.)
+
+        Q1(J)=((J+0.5)/(2*J*(J+1)*
+        CMINUSL(J)*CMINUS2L(J)))*((0.5*UMINUSL(J)*UMINUS2L(J) +
+        4*(-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
+
+        R1(J)=(((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CMINUSL(J+1)*
+        CMINUS2L(J)))*((UMINUSL(J+1)*UMINUS2L(J) +
+        4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
+
+        P21(J)=(((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CPLUSL(J-1)*
+        CMINUS2L(J)))*((UPLUSL(J-1)*UMINUS2L(J) -
+        4*(J-LAM+0.5)*(J+LAM-0.5))**2)
+
+        Q21(J)=(((J+0.5))/(2*J*(J+1)*
+        CPLUSL(J)*CMINUS2L(J)))*(0.5*(UPLUSL(J)*UMINUS2L(J) -
+        4*(-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
+
+        R21(J)= (((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CPLUSL(J+1)*
+        CMINUS2L(J)))*((UPLUSL(J+1)*UMINUS2L(J) -
+        4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
+
+        P12(J)=(((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CMINUSL(J-1)*
+        CPLUS2L(J)))*((UMINUSL(J-1)*UPLUS2L(J) -
+        4*(J-LAM+0.5)*(J+LAM-0.5))**2.)
+
+        Q12(J)=(((J+0.5))/(2*J*(J+1)*
+        CMINUSL(J)*CPLUS2L(J)))*(0.5*(UMINUSL(J)*UPLUS2L(J) -
+        4*(-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
+
+        R12(J)= (((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CMINUSL(J+1)*
+        CPLUS2L(J)))*((UMINUSL(J+1)*UPLUS2L(J) -
+        4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
+
+        P2(J)=(((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CPLUSL(J-1)*
+        CPLUS2L(J)))*((UPLUSL(J-1)*UPLUS2L(J) +
+        4*(J-LAM+0.5)*(J+LAM-0.5))**2.)
+
+        Q2(J)=(((J+0.5))/(2*J*(J+1)*
+        CPLUSL(J)*CPLUS2L(J)))*(0.5*(UPLUSL(J)*UPLUS2L(J) +
+        4*(-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
+
+        R2(J)=(((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CPLUSL(J+1)*
+        CPLUS2L(J)))*((UPLUSL(J+1)*UPLUS2L(J) +
+        4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
+
+        """
+
+
+        LAM = LAML  # remember, both LAML, LAM2L are the same
+
+        _P1 = lambda J: \
+            (((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CMINUSL(J-1)*CMINUS2L(J)))* \
+            ((UMINUSL(J-1)*UMINUS2L(J) + 4*(J-LAM+0.5)*(J+LAM-0.5))**2.)
+
+
+        _Q1 = lambda J: \
+            (((J-LMIN-0.5)*(J+0.5)*(J+LMIN+1.5))/(4*J*(J+1)*
+            CMINUSL(J)*CMINUS2L(J)))*((UMINUSL(J)*UMINUS2L(J) +
+            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+
+
+        _R1 = lambda J: \
+            (((J+LMIN+1.5)*(J+LMIN+2.5))/(8*(J+1)*CMINUSL(J+1)*
+            CMINUS2L(J)))*((UMINUSL(J+1)*UMINUS2L(J) +
+            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+
+        _P21 = lambda J: \
+            (((J-LMIN-1.5)*(J-LMIN-0.5))/(8*J*CPLUSL(J-1)*
+            CMINUS2L(J)))*((UPLUSL(J-1)*UMINUS2L(J) -
+            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+
+        _Q21 = lambda J: \
+            (((J-LMIN-0.5)*(J+0.5)*(J+LMIN+1.5))/(4*J*(J+1)*
+            CPLUSL(J)*CMINUS2L(J)))*((UPLUSL(J)*UMINUS2L(J) -
+            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+
+
+        _R21 = lambda J: \
+            (((J+LMIN+1.5)*(J+LMIN+2.5))/(8*(J+1)*CPLUSL(J+1)*
+            CMINUS2L(J)))*((UPLUSL(J+1)*UMINUS2L(J) -
+            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+
+
+        _P12 = lambda J: \
+            (((J-LMIN-1.5)*(J-LMIN-0.5))/
+            (8*J*CMINUSL(J-1)*CPLUS2L(J)))*\
+            ((UMINUSL(J-1)*UPLUS2L(J) - 4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+
+
+        _Q12 = lambda J: \
+            (((J-LMIN-0.5)*(J+0.5)*(J+LMIN+1.5))/(4*J*(J+1)*
+            CMINUSL(J)*CPLUS2L(J)))*((UMINUSL(J)*UPLUS2L(J) -
+            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+
+
+        _R12 = lambda J: \
+            (((J+LMIN+1.5)*(J+LMIN+2.5))/(8*(J+1)*CMINUSL(J+1)*
+            CPLUS2L(J)))*((UMINUSL(J+1)*UPLUS2L(J) -
+            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+
+
+        _P2 = lambda J: \
+            (((J-LMIN-1.5)*(J-LMIN-0.5))/(8*J*CPLUSL(J-1)*
+            CPLUS2L(J)))*((UPLUSL(J-1)*UPLUS2L(J) +
+            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+
+
+        _Q2 = lambda J: \
+            (((J-LMIN-0.5)*(J+0.5)*(J+LMIN+1.5))/(4*J*(J+1)*
+            CPLUSL(J)*CPLUS2L(J)))*((UPLUSL(J)*UPLUS2L(J) +
+            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+
+
+        _R2 = lambda J: \
+            (((J+LMIN+1.5)*(J+LMIN+2.5))/(8*(J+1)*CPLUSL(J+1)*
+            CPLUS2L(J)))*((UPLUSL(J+1)*UPLUS2L(J) +
+            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+
+
+        return (
+         ("P1", _P1),
+         ("Q1", _Q1),
+         ("R1", _R1),
+         ("P21", _P21),
+         ("Q21", _Q21),
+         ("R21", _R21),
+         ("P12", _P12),
+         ("Q12", _Q12),
+         ("R12", _R12),
+         ("P2", _P2),
+         ("Q2", _Q2),
+         ("R2", _R2),
+        )
+
 
 class _MTDoublet1(_MultiplicityToolbox):
     """
@@ -234,6 +422,9 @@ class _MTDoublet1(_MultiplicityToolbox):
         #     cada banda possue valores distintos de Y' e Y''
         #     quando Y=A/B > 0, temos o termo normal, por isso
         #     nao se modifica as formulas abaixo
+
+
+        # TODO sort inverted term for Doublet1
 
         BL = BEL - AEL * (vl + 0.5)
         B2L = BE2L - AE2L * (v2l + 0.5)
@@ -358,8 +549,6 @@ class _MTDoublet1(_MultiplicityToolbox):
              ("R2", lambda J: _P2(J+1)),
             )
 
-
-####################################################################################################
 
 class _MTTriplet1(_MultiplicityToolbox):
     """
