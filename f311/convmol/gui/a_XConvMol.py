@@ -451,6 +451,14 @@ class _WKuruczPanel(a99.WBase):
         self._set_flag(self.checkbox_fcf, value)
 
     @property
+    def flag_special_fcf(self):
+        return self.checkbox_special_fcf.isChecked()
+
+    @flag_special_fcf.setter
+    def flag_special_fcf(self, value):
+        self._set_flag(self.checkbox_special_fcf, value)
+
+    @property
     def flag_spinl(self):
         return self.checkbox_spinl.isChecked()
 
@@ -527,6 +535,16 @@ class _WKuruczPanel(a99.WBase):
         lg.addWidget(a, i_row, 0)
         lg.addWidget(w, i_row, 1)
         i_row += 1
+
+        a = self.keep_ref(QLabel("Force 0.1 <= FCF < 1"))
+        w = self.checkbox_special_fcf = QCheckBox()
+        w.stateChanged.connect(self.changed)
+        w.setToolTip("If selected, makes 'fcf = fcf * 10 ** -(math.floor(math.log10(fcf)) + 1)'")
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
+
+
 
         a = self.keep_ref(QLabel("Use spin' for branch determination\n"
                                  "(spin'' is always used)"))
@@ -700,6 +718,7 @@ class _WConv(a99.WConfigEditor):
             a99.CEMapItem("flag_hlf", self.w_kurucz),
             a99.CEMapItem("flag_normhlf", self.w_kurucz),
             a99.CEMapItem("flag_fcf", self.w_kurucz),
+            a99.CEMapItem("flag_special_fcf", self.w_kurucz),
             a99.CEMapItem("flag_spinl", self.w_kurucz),
         ]
 
@@ -842,8 +861,10 @@ class _WConv(a99.WConfigEditor):
         else:
             w = self.w_source.source.widget
 
+            print("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSPECIAL {}".format(w.flag_special_fcf))
+
             conv = cls(flag_hlf=w.flag_hlf, flag_normhlf=w.flag_normhlf,
-                       flag_fcf=w.flag_fcf, flag_spinl=w.flag_spinl, iso=w.iso)
+                       flag_fcf=w.flag_fcf, flag_special_fcf=w.flag_special_fcf, flag_spinl=w.flag_spinl, iso=w.iso)
             conv.fcfs = self.w_molconsts.fcfs
             conv.molconsts = self.w_molconsts.f.molconsts
 

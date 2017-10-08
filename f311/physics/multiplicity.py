@@ -14,11 +14,11 @@ import math
 from f311 import filetypes as ft
 import a99
 
-__all__ = ["multiplicity_toolbox", "NoLineStrength"]
+__all__ = ["multiplicity_toolbox", "NoLineStrength", "NO_LINE_STRENGTH"]
 
 
 # Code to signal that there is no HLF for combination (vl, v2l, J, branch)
-_NO_LINE_STRENGTH = -999999
+NO_LINE_STRENGTH = -999999
 
 def _quanta_to_branch_singlet(Jl, J2l, spinl=None, spin2l=None):
     """
@@ -163,7 +163,7 @@ class _MultiplicityToolbox(object):
 
         value = self._dict_sj[key]
 
-        if value == _NO_LINE_STRENGTH:
+        if value == NO_LINE_STRENGTH:
             raise NoLineStrength(
              "Cannot calculate line strength for (vl={}, v2l={}, J={}, branch='{}')".format(*key))
 
@@ -179,11 +179,11 @@ class _MultiplicityToolbox(object):
             try:
                 value = function(J) * normalization_factor
 
-                if isinstance(value, complex) or value < 0:
-                    value = _NO_LINE_STRENGTH
+                if isinstance(value, complex):
+                    value = NO_LINE_STRENGTH
 
             except ZeroDivisionError:
-                value = _NO_LINE_STRENGTH
+                value = NO_LINE_STRENGTH
             self._dict_sj[(vl, v2l, J, branch)]  = value
 
 

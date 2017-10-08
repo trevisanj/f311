@@ -106,16 +106,12 @@ class Conv(object):
     def _calculate_qgbd(self, v2l):
         return self.qgbd_calculator(self.molconsts, v2l)
 
-    def _get_fcf(self, vl, v2l):
+    def _get_fcf(self, vl, v2l, flag_special=False):
         try:
             fcf = self.fcfs[(vl, v2l)]
 
-            # TODO TEMPORARY, THROWING AWAY THE EXPONENT TO MIMIC BRUNO'S NH
-            try:
+            if flag_special:
                 fcf = fcf * 10 ** -(math.floor(math.log10(fcf)) + 1)
-            except ValueError:
-                raise ValueError("Olha o FCF:::{}::::::{}::::::: {}".format(vl, v2l, fcf))
-
 
         except KeyError as e:
             raise KeyError("FCF not available for (vl, v2l) = ({}, {})".format(vl, v2l))

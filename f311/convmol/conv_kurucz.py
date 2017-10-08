@@ -43,13 +43,14 @@ class ConvKurucz(Conv):
 
     """
 
-    def __init__(self, flag_hlf=False, flag_fcf=False, flag_quiet=False,
+    def __init__(self, flag_hlf=False, flag_fcf=False, flag_quiet=False, flag_special_fcf=False,
                  flag_spinl=False, fcfs=None, iso=None, *args, **kwargs):
         Conv.__init__(self, *args, **kwargs)
         self.flag_hlf = flag_hlf
         self.flag_fcf = flag_fcf
         self.flag_quiet = flag_quiet
         self.flag_spinl = flag_spinl
+        self.flag_special_fcf = flag_special_fcf
         self.fcfs = fcfs
         self.iso = iso
 
@@ -105,13 +106,18 @@ class ConvKurucz(Conv):
                     except ph.NoLineStrength:
                         log.skip_reasons["Cannot calculate HLF"] += 1
                         continue
+
+                    if hlf < 0:
+                        log.skip_reasons["Negative SJ"] += 1
+                        continue
+
                     sj *= hlf
 
                 else:
                     sj *= 10**line.loggf
 
                 if self.flag_fcf:
-                    sj *= self._get_fcf(line.vl, line.v2l)
+                    sj *= self._get_fcf(line.vl, line.v2l, self.flag_special_fcf)
 
             except Exception as e:
                 reason = a99.str_exc(e)

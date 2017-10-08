@@ -32,7 +32,7 @@ _LAYSP_MAIN = 6
 # Margin for main layout
 _LAYMN_MAIN = 0
 # Spacing for toolbar
-_LAYSP_TOOLBAR = 4
+_LAYSP_TOOLBAR = 8
 # Margin for toolbar
 _LAYMN_TOOLBAR = 2
 # Spacing for frames that are inside frames
@@ -361,6 +361,7 @@ class WMolecularConstants(a99.WBase):
         try:
             import f311.explorer as ex
             import f311.physics as ph
+            import f311.convmol as cm
             import tabulate
 
             l_text = []
@@ -382,8 +383,8 @@ class WMolecularConstants(a99.WBase):
                             header = ["J"]+branches+["Sum"]
 
                         vv = mtools.dict_sj.values()
-                        total = sum([x for x in vv if x > 0])
-                        rows.append([J+.5]+["{:.5e}".format(x) if x > 0 else "-" for x in vv]+["{:.9g}".format(total)])
+                        total = sum([x for x in vv if x != ph.NO_LINE_STRENGTH])
+                        rows.append([J+.5]+["{:.5e}".format(x) if x != ph.NO_LINE_STRENGTH else "-" for x in vv]+["{:.9g}".format(total)])
 
                     l_text.append(tabulate.tabulate(rows, header))
                     l_text.append("")
