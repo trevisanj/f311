@@ -18,6 +18,16 @@ from f311.explorer.gui.gui_convmol.a_WFileMolDB import *
 __all__ = ["XConvMol"]
 
 
+# Spacing for grid layouts
+_LAYSP_GRID = 4
+# Margin for grid layouts
+_LAYMN_GRID = 0
+# Spacing for vertical layouts
+_LAYSP_V = 10
+# Margin for vertical layouts ((caption, combobox); grid)
+_LAYMN_V = 6
+
+
 class _DataSource(a99.AttrsPart):
     """Represents a data source for molecular lines"""
 
@@ -427,46 +437,6 @@ class _WKuruczPanel(a99.WBase):
         return self._flines
 
     @property
-    def flag_hlf(self):
-        return self.checkbox_hlf.isChecked()
-
-    @flag_hlf.setter
-    def flag_hlf(self, value):
-        self._set_flag(self.checkbox_hlf, value)
-
-    @property
-    def flag_normhlf(self):
-        return self.checkbox_normhlf.isChecked()
-
-    @flag_normhlf.setter
-    def flag_normhlf(self, value):
-        self._set_flag(self.checkbox_normhlf, value)
-
-    @property
-    def flag_fcf(self):
-        return self.checkbox_fcf.isChecked()
-
-    @flag_fcf.setter
-    def flag_fcf(self, value):
-        self._set_flag(self.checkbox_fcf, value)
-
-    @property
-    def flag_special_fcf(self):
-        return self.checkbox_special_fcf.isChecked()
-
-    @flag_special_fcf.setter
-    def flag_special_fcf(self, value):
-        self._set_flag(self.checkbox_special_fcf, value)
-
-    @property
-    def flag_spinl(self):
-        return self.checkbox_spinl.isChecked()
-
-    @flag_spinl.setter
-    def flag_spinl(self, value):
-        self._set_flag(self.checkbox_spinl, value)
-
-    @property
     def iso(self):
         return self._get_iso()
 
@@ -502,55 +472,6 @@ class _WKuruczPanel(a99.WBase):
         a = self.keep_ref(QLabel("Isotope"))
         w = self.combobox_isotope = QComboBox()
         w.currentIndexChanged.connect(self.changed)
-        lg.addWidget(a, i_row, 0)
-        lg.addWidget(w, i_row, 1)
-        i_row += 1
-
-        a = self.keep_ref(QLabel("Calculate 'gf' based on\n"
-                                 "Hönl-London factors (HLFs)"))
-        w = self.checkbox_hlf = QCheckBox()
-        w.stateChanged.connect(self.changed)
-        w.setToolTip("If selected, will ignore 'loggf' from Kurucz file and\n"
-                     "calculate 'gf' using Hönl-London factors formulas taken from Kovacz (1969)")
-        lg.addWidget(a, i_row, 0)
-        lg.addWidget(w, i_row, 1)
-        i_row += 1
-
-        a = self.keep_ref(QLabel("Apply normalization factor\n"
-                                 "for HLFs to add up to 1 (for fixed J)"))
-        w = self.checkbox_normhlf = QCheckBox()
-        w.stateChanged.connect(self.changed)
-        w.setToolTip("If selected, calculated 'gf's will be multiplied by\n"
-                     "2 / ((2 * J2l + 1) * (2 * S + 1)*(2 - DELTAK))")
-        lg.addWidget(a, i_row, 0)
-        lg.addWidget(w, i_row, 1)
-        i_row += 1
-
-        a = self.keep_ref(QLabel("Multiply calculated 'gf' by\n"
-                                 "Franck-Condon factor"))
-        w = self.checkbox_fcf = QCheckBox()
-        w.stateChanged.connect(self.changed)
-        w.setToolTip("If selected, incorporates internally calculated Franck-Condon factor"
-                     "into the calculated 'gf'")
-        lg.addWidget(a, i_row, 0)
-        lg.addWidget(w, i_row, 1)
-        i_row += 1
-
-        a = self.keep_ref(QLabel("Force 0.1 <= FCF < 1"))
-        w = self.checkbox_special_fcf = QCheckBox()
-        w.stateChanged.connect(self.changed)
-        w.setToolTip("If selected, makes 'fcf = fcf * 10 ** -(math.floor(math.log10(fcf)) + 1)'")
-        lg.addWidget(a, i_row, 0)
-        lg.addWidget(w, i_row, 1)
-        i_row += 1
-
-
-
-        a = self.keep_ref(QLabel("Use spin' for branch determination\n"
-                                 "(spin'' is always used)"))
-        w = self.checkbox_spinl = QCheckBox()
-        w.stateChanged.connect(self.changed)
-        w.setToolTip("If you tick this box, branches P12, P21, Q12, Q21, R21, R12 (i.e., with two numbers) become possible")
         lg.addWidget(a, i_row, 0)
         lg.addWidget(w, i_row, 1)
         i_row += 1
@@ -620,7 +541,7 @@ class _WKuruczPanel(a99.WBase):
         try:
             cb.clear()
             if f is not None:
-                if f.__class__ == ft.FileKuruczMoleculeOld:
+                if f.__class__ != ft.FileKuruczMolecule:
                     cb.addItem("(all (file is old-format))")
                 else:
                     self._isotopes = list(set([line.iso for line in f]))
@@ -647,6 +568,55 @@ class _WConv(a99.WConfigEditor):
 
     convert_clicked = pyqtSignal()
     open_mol_clicked = pyqtSignal()
+
+    @property
+    def flag_hlf(self):
+        return self.checkbox_hlf.isChecked()
+
+    @flag_hlf.setter
+    def flag_hlf(self, value):
+        self._set_flag(self.checkbox_hlf, value)
+
+    @property
+    def flag_normhlf(self):
+        return self.checkbox_normhlf.isChecked()
+
+    @flag_normhlf.setter
+    def flag_normhlf(self, value):
+        self._set_flag(self.checkbox_normhlf, value)
+
+    @property
+    def flag_fcf(self):
+        return self.checkbox_fcf.isChecked()
+
+    @flag_fcf.setter
+    def flag_fcf(self, value):
+        self._set_flag(self.checkbox_fcf, value)
+
+    @property
+    def flag_special_fcf(self):
+        return self.checkbox_special_fcf.isChecked()
+
+    @flag_special_fcf.setter
+    def flag_special_fcf(self, value):
+        self._set_flag(self.checkbox_special_fcf, value)
+
+    @property
+    def flag_spinl(self):
+        return self.checkbox_spinl.isChecked()
+
+    @flag_spinl.setter
+    def flag_spinl(self, value):
+        self._set_flag(self.checkbox_spinl, value)
+
+    @property
+    def flag_quiet(self):
+        return self.checkbox_quiet.isChecked()
+
+    @flag_quiet.setter
+    def flag_quiet(self, value):
+        self._set_flag(self.checkbox_quiet, value)
+
 
     def __init__(self, parent_form):
         a99.WConfigEditor.__init__(self, parent_form)
@@ -689,6 +659,88 @@ class _WConv(a99.WConfigEditor):
             lh.addWidget(p)
             p.changed.connect(self._panel_changed)
 
+        # ### Flags panel
+
+        fr = self.frame_flags = a99.get_frame()
+        lsd.addWidget(fr)
+        lfr = self.layout_flags = QVBoxLayout(fr)
+        lfr.setSpacing(_LAYSP_V)
+        a99.set_margin(lfr, _LAYMN_V)
+
+        la = self.label_flags = QLabel("<b>Flags</b>")
+        la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+        lfr.addWidget(la)
+
+        lg = QGridLayout()
+        lg.setSpacing(_LAYSP_GRID)
+        a99.set_margin(lg, _LAYMN_GRID)
+        lfr.addLayout(lg)
+
+        i_row = 0
+
+        a = self.keep_ref(QLabel("Calculate 'gf' based on\n"
+                                 "Hönl-London factors (HLFs)"))
+        w = self.checkbox_hlf = QCheckBox()
+        w.stateChanged.connect(self.changed)
+        w.setToolTip("If selected, will ignore 'loggf' from Kurucz file and\n"
+                     "calculate 'gf' using Hönl-London factors formulas taken from Kovacz (1969)")
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
+
+        a = self.keep_ref(QLabel("Apply normalization factor\n"
+                                 "for HLFs to add up to 1 (for fixed J)"))
+        w = self.checkbox_normhlf = QCheckBox()
+        w.stateChanged.connect(self.changed)
+        w.setToolTip("If selected, calculated 'gf's will be multiplied by\n"
+                     "2 / ((2 * J2l + 1) * (2 * S + 1)*(2 - DELTAK))")
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
+
+        a = self.keep_ref(QLabel("Multiply calculated 'gf' by\n"
+                                 "Franck-Condon factor"))
+        w = self.checkbox_fcf = QCheckBox()
+        w.stateChanged.connect(self.changed)
+        w.setToolTip("If selected, incorporates internally calculated Franck-Condon factor"
+                     "into the calculated 'gf'")
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
+
+        a = self.keep_ref(QLabel("Force 0.1 <= FCF < 1"))
+        w = self.checkbox_special_fcf = QCheckBox()
+        w.stateChanged.connect(self.changed)
+        w.setToolTip("(*temporary*) If selected, makes 'fcf = fcf * 10 ** -(math.floor(math.log10(fcf)) + 1)'")
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
+
+        a = self.keep_ref(QLabel("Use spin' for branch determination\n"
+                                 "(spin'' is always used)"))
+        w = self.checkbox_spinl = QCheckBox()
+        w.stateChanged.connect(self.changed)
+        w.setToolTip("If you tick this box, branches P12, P21, Q12, Q21, R21, R12 (i.e., with two numbers) become possible")
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
+
+        a = self.keep_ref(QLabel("Quiet conversion"))
+        w = self.checkbox_quiet = QCheckBox()
+        w.setChecked(True)
+        w.stateChanged.connect(self.changed)
+        w.setToolTip("If selected, will show less error messages")
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
+
+
+
+
+
+
+
+
         # ### Output file specification
 
         w0 = self.w_out = _WSelectSaveFile(self.parent_form)
@@ -715,20 +767,14 @@ class _WConv(a99.WConfigEditor):
             a99.CEMapItem("fn_output", self.w_out, propertyname="value"),
             a99.CEMapItem("kurucz_iso", self.w_kurucz, propertyname="iso"),
             a99.CEMapItem("kurucz_fn_input", self.w_kurucz.w_file, propertyname="value"),
-            a99.CEMapItem("flag_hlf", self.w_kurucz),
-            a99.CEMapItem("flag_normhlf", self.w_kurucz),
-            a99.CEMapItem("flag_fcf", self.w_kurucz),
-            a99.CEMapItem("flag_special_fcf", self.w_kurucz),
-            a99.CEMapItem("flag_spinl", self.w_kurucz),
+            a99.CEMapItem("flag_hlf", self),
+            a99.CEMapItem("flag_normhlf", self),
+            a99.CEMapItem("flag_fcf", self),
+            a99.CEMapItem("flag_special_fcf", self),
+            a99.CEMapItem("flag_spinl", self),
+            a99.CEMapItem("flag_quiet", self),
         ]
 
-
-
-        # # # Final adjustments
-        #
-        # # Forces only one of the source panels to visible
-        # self.w_source.index = 2  # Kurucz
-        # self._source_changed()
 
     def _do_load(self, fobj):
         a99.WConfigEditor._do_load(self, fobj)
@@ -860,11 +906,13 @@ class _WConv(a99.WConfigEditor):
             errors.append("{}-to-PFANT conversion not implemented yet, sorry".format(name))
         else:
             w = self.w_source.source.widget
-
-            print("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSPECIAL {}".format(w.flag_special_fcf))
-
-            conv = cls(flag_hlf=w.flag_hlf, flag_normhlf=w.flag_normhlf,
-                       flag_fcf=w.flag_fcf, flag_special_fcf=w.flag_special_fcf, flag_spinl=w.flag_spinl, iso=w.iso)
+            conv = cls(flag_hlf=self.flag_hlf,
+                       flag_normhlf=self.flag_normhlf,
+                       flag_fcf=self.flag_fcf,
+                       flag_special_fcf=self.flag_special_fcf,
+                       flag_quiet=self.flag_quiet,
+                       flag_spinl=self.flag_spinl,
+                       iso=w.iso)
             conv.fcfs = self.w_molconsts.fcfs
             conv.molconsts = self.w_molconsts.f.molconsts
 
@@ -904,16 +952,16 @@ class _WConv(a99.WConfigEditor):
 
         name = self.w_source.source.name
 
+        if self.flag_fcf and self.w_molconsts.fcfs is None:
+            errors.append(
+                "Cannot multiply gf's by Franck-Condon Factors, as these are not available in molecular configuration")
+
         if name == "VALD3":
             if not self.w_vald3.is_molecule:
                 errors.append("Need a VALD3 molecule")
         elif name == "Kurucz":
-            # TODO FCFs general, not Kurucz only
-            w = self.w_kurucz
+            pass
 
-            if w.flag_fcf and self.w_molconsts.fcfs is None:
-                errors.append(
-                    "Cannot multiply gf's by Franck-Condon Factors, as these are not available in molecular configuration")
 
         return errors
 
@@ -924,6 +972,13 @@ class _WConv(a99.WConfigEditor):
             f.load(filename)
             vis = ex.VisMolecules()
             vis.use(f)
+
+    def _set_flag(self, w, value):
+        save = w.blockSignals(True)
+        try:
+            w.setChecked(bool(value))
+        finally:
+            w.blockSignals(save)
 
 
 class XConvMol(ex.XFileMainWindow):

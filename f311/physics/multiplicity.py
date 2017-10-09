@@ -231,9 +231,9 @@ class _MTDoublet0(_MultiplicityToolbox):
         YL = AL / BL
         Y2L = A2L / B2L
 
+        # TODO Ask BLB below
         # p61: “[...] Y= A/B. The term is called normal if A > 0, and inverted if A < 0”
         # p126: “in the case of inverted terms, Y is to be substituted with negative sign”
-
         if YL < 0:
             YL = -YL
         if Y2L < 0:
@@ -254,127 +254,54 @@ class _MTDoublet0(_MultiplicityToolbox):
 
 
         # Some lost lambdas
-        """
-        P1(J) = (((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CMINUSL(J-1)*CMINUS2L(J)))* \
-        ((UMINUSL(J-1)*UMINUS2L(J) + 4*(J-LAM+0.5)*(J+LAM-0.5))**2.)
-
-        Q1(J)=((J+0.5)/(2*J*(J+1)*
-        CMINUSL(J)*CMINUS2L(J)))*((0.5*UMINUSL(J)*UMINUS2L(J) +
-        4*(-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
-
-        R1(J)=(((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CMINUSL(J+1)*
-        CMINUS2L(J)))*((UMINUSL(J+1)*UMINUS2L(J) +
-        4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
-
-        P21(J)=(((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CPLUSL(J-1)*
-        CMINUS2L(J)))*((UPLUSL(J-1)*UMINUS2L(J) -
-        4*(J-LAM+0.5)*(J+LAM-0.5))**2)
-
-        Q21(J)=(((J+0.5))/(2*J*(J+1)*
-        CPLUSL(J)*CMINUS2L(J)))*(0.5*(UPLUSL(J)*UMINUS2L(J) -
-        4*(-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
-
-        R21(J)= (((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CPLUSL(J+1)*
-        CMINUS2L(J)))*((UPLUSL(J+1)*UMINUS2L(J) -
-        4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
-
-        P12(J)=(((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CMINUSL(J-1)*
-        CPLUS2L(J)))*((UMINUSL(J-1)*UPLUS2L(J) -
-        4*(J-LAM+0.5)*(J+LAM-0.5))**2.)
-
-        Q12(J)=(((J+0.5))/(2*J*(J+1)*
-        CMINUSL(J)*CPLUS2L(J)))*(0.5*(UMINUSL(J)*UPLUS2L(J) -
-        4*(-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
-
-        R12(J)= (((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CMINUSL(J+1)*
-        CPLUS2L(J)))*((UMINUSL(J+1)*UPLUS2L(J) -
-        4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
-
-        P2(J)=(((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CPLUSL(J-1)*
-        CPLUS2L(J)))*((UPLUSL(J-1)*UPLUS2L(J) +
-        4*(J-LAM+0.5)*(J+LAM-0.5))**2.)
-
-        Q2(J)=(((J+0.5))/(2*J*(J+1)*
-        CPLUSL(J)*CPLUS2L(J)))*(0.5*(UPLUSL(J)*UPLUS2L(J) +
-        4*(-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
-
-        R2(J)=(((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CPLUSL(J+1)*
-        CPLUS2L(J)))*((UPLUSL(J+1)*UPLUS2L(J) +
-        4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
-
-        """
-
-
-        LAM = LAML  # remember, both LAML, LAM2L are the same
 
         _P1 = lambda J: \
             (((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CMINUSL(J-1)*CMINUS2L(J)))* \
             ((UMINUSL(J-1)*UMINUS2L(J) + 4*(J-LAM+0.5)*(J+LAM-0.5))**2.)
 
-
         _Q1 = lambda J: \
-            (((J-LMIN-0.5)*(J+0.5)*(J+LMIN+1.5))/(4*J*(J+1)*
-            CMINUSL(J)*CMINUS2L(J)))*((UMINUSL(J)*UMINUS2L(J) +
-            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
-
+            ((J+0.5)/(2*J*(J+1)*CMINUSL(J)*CMINUS2L(J)))* \
+            (((LAM+0.5)*UMINUSL(J)*UMINUS2L(J) + 4*(LAM-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
 
         _R1 = lambda J: \
-            (((J+LMIN+1.5)*(J+LMIN+2.5))/(8*(J+1)*CMINUSL(J+1)*
-            CMINUS2L(J)))*((UMINUSL(J+1)*UMINUS2L(J) +
-            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+            (((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CMINUSL(J+1)*CMINUS2L(J)))* \
+            ((UMINUSL(J+1)*UMINUS2L(J) + 4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
 
         _P21 = lambda J: \
-            (((J-LMIN-1.5)*(J-LMIN-0.5))/(8*J*CPLUSL(J-1)*
-            CMINUS2L(J)))*((UPLUSL(J-1)*UMINUS2L(J) -
-            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
+            (((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CPLUSL(J-1)*CMINUS2L(J)))* \
+            ((UPLUSL(J-1)*UMINUS2L(J) - 4*(J-LAM+0.5)*(J+LAM-0.5))**2)
 
         _Q21 = lambda J: \
-            (((J-LMIN-0.5)*(J+0.5)*(J+LMIN+1.5))/(4*J*(J+1)*
-            CPLUSL(J)*CMINUS2L(J)))*((UPLUSL(J)*UMINUS2L(J) -
-            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
-
+            (((J+0.5))/(2*J*(J+1)*CPLUSL(J)*CMINUS2L(J)))* \
+            ((LAM+0.5)*(UPLUSL(J)*UMINUS2L(J) - 4*(LAM-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
 
         _R21 = lambda J: \
-            (((J+LMIN+1.5)*(J+LMIN+2.5))/(8*(J+1)*CPLUSL(J+1)*
-            CMINUS2L(J)))*((UPLUSL(J+1)*UMINUS2L(J) -
-            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
-
+            (((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CPLUSL(J+1)*CMINUS2L(J)))* \
+            ((UPLUSL(J+1)*UMINUS2L(J) - 4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
 
         _P12 = lambda J: \
-            (((J-LMIN-1.5)*(J-LMIN-0.5))/
-            (8*J*CMINUSL(J-1)*CPLUS2L(J)))*\
-            ((UMINUSL(J-1)*UPLUS2L(J) - 4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
-
+            (((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CMINUSL(J-1)*CPLUS2L(J)))* \
+            ((UMINUSL(J-1)*UPLUS2L(J) - 4*(J-LAM+0.5)*(J+LAM-0.5))**2.)
 
         _Q12 = lambda J: \
-            (((J-LMIN-0.5)*(J+0.5)*(J+LMIN+1.5))/(4*J*(J+1)*
-            CMINUSL(J)*CPLUS2L(J)))*((UMINUSL(J)*UPLUS2L(J) -
-            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
-
+            (((J+0.5))/(2*J*(J+1)*CMINUSL(J)*CPLUS2L(J)))*\
+            ((LAM+0.5)*(UMINUSL(J)*UPLUS2L(J) - 4*(LAM-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
 
         _R12 = lambda J: \
-            (((J+LMIN+1.5)*(J+LMIN+2.5))/(8*(J+1)*CMINUSL(J+1)*
-            CPLUS2L(J)))*((UMINUSL(J+1)*UPLUS2L(J) -
-            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
-
+            (((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CMINUSL(J+1)*CPLUS2L(J)))* \
+            ((UMINUSL(J+1)*UPLUS2L(J) - 4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
 
         _P2 = lambda J: \
-            (((J-LMIN-1.5)*(J-LMIN-0.5))/(8*J*CPLUSL(J-1)*
-            CPLUS2L(J)))*((UPLUSL(J-1)*UPLUS2L(J) +
-            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
-
+            (((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CPLUSL(J-1)*CPLUS2L(J)))* \
+            ((UPLUSL(J-1)*UPLUS2L(J) + 4*(J-LAM+0.5)*(J+LAM-0.5))**2.)
 
         _Q2 = lambda J: \
-            (((J-LMIN-0.5)*(J+0.5)*(J+LMIN+1.5))/(4*J*(J+1)*
-            CPLUSL(J)*CPLUS2L(J)))*((UPLUSL(J)*UPLUS2L(J) +
-            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
-
+            (((J+0.5))/(2*J*(J+1)* CPLUSL(J)*CPLUS2L(J)))* \
+            ((LAM+0.5)*(UPLUSL(J)*UPLUS2L(J) + 4*(LAM-0.5)*(J-LAM+0.5)*(J+LAM+0.5))**2.)
 
         _R2 = lambda J: \
-            (((J+LMIN+1.5)*(J+LMIN+2.5))/(8*(J+1)*CPLUSL(J+1)*
-            CPLUS2L(J)))*((UPLUSL(J+1)*UPLUS2L(J) +
-            4*(J-LMIN+0.5)*(J+LMIN+0.5))**2.)
-
+            (((J-LAM+0.5)*(J+LAM+1.5))/(4*(J+1)*CPLUSL(J+1)*CPLUS2L(J)))* \
+            ((UPLUSL(J+1)*UPLUS2L(J) + 4*(J-LAM+1.5)*(J+LAM+0.5))**2.)
 
         return (
          ("P1", _P1),
@@ -424,13 +351,25 @@ class _MTDoublet1(_MultiplicityToolbox):
         #     nao se modifica as formulas abaixo
 
 
-        # TODO sort inverted term for Doublet1
 
         BL = BEL - AEL * (vl + 0.5)
         B2L = BE2L - AE2L * (v2l + 0.5)
 
         YL = AL / BL
         Y2L = A2L / B2L
+
+
+        # TODO Ask BLB below, not sure if this holds for DeltaLambda = 1
+        # p61: “[...] Y= A/B. The term is called normal if A > 0, and inverted if A < 0”
+        # p126: “in the case of inverted terms, Y is to be substituted with negative sign”
+
+
+        # TODO activate this
+        # if YL < 0:
+        #     YL = -YL
+        # if Y2L < 0:
+        #     Y2L = -Y2L
+
 
         UPLUSL = lambda J: ((LAML**2.)*YL*(YL-4) + 4*((J+0.5)**2.))**0.5 + LAML*(YL-2)
         UMINUSL= lambda J: ((LAML**2.)*YL*(YL-4) + 4*((J+0.5)**2.))**0.5 - LAML*(YL-2)
@@ -865,7 +804,7 @@ class _MTTriplet1(_MultiplicityToolbox):
 def multiplicity_toolbox(molconsts, flag_normalize=None):
     """Factory function that returns a MultiplicityToolbox descendant appropriate to molconsts"""
 
-    C = [_MTSinglet, _MTDoublet1, _MTTriplet1]
+    C = [_MTSinglet, _MTDoublet0, _MTDoublet1, _MTTriplet1]
 
     absDeltaLambda = abs(molconsts["from_spdf"]-molconsts["to_spdf"])
 
@@ -875,7 +814,9 @@ def multiplicity_toolbox(molconsts, flag_normalize=None):
            cls.multiplicity2l == molconsts["to_mult"]:
             return cls(molconsts, flag_normalize)
 
-    raise ValueError("Could not find a suitable class for given molecular constants")
+    raise ValueError("Could not find a suitable class for given molecular constants "
+     "(I need abs(\u0394\u039B)={}; multiplicity'={}; multiplicity''={})".format(
+     int(absDeltaLambda), int(molconsts["from_mult"]), int(molconsts["to_mult"])))
 
 
 class NoLineStrength(Exception):

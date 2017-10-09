@@ -40,6 +40,121 @@ _LAYSP_FRAME1 = 6
 # Margin for frames inside frames
 _LAYMN_FRAME1 = 0
 
+
+
+################################################################################
+class _XHLF(a99.XLogMainWindow):
+    """
+    Window to show Hönl-London factors for given MolConsts object
+    Args:
+      parent=None: nevermind
+      text: string
+    """
+
+    def __init__(self, parent, moldb, molconsts, fcfs):
+        a99.XLogMainWindow.__init__(self, parent)
+
+        self.moldb = moldb
+        self.molconsts = molconsts
+        self.fcfs = fcfs
+
+        cw = self.centralWidget = QWidget()
+        self.setCentralWidget(cw)
+
+
+        # # Vertical layout: toolbar and text are stacked
+
+        lv = self.layout_main = QVBoxLayout(cw)
+
+        # ## Horizontal layout: toolbar
+
+        lh = self.layout_molecule = QHBoxLayout()
+        lv.addLayout(lh)
+
+        ###
+        la = self.keep_ref(QLabel("Multiply by Franck-Condon Factors"))
+        la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+        lh.addWidget(la)
+        ###
+        cb = self.checkbox_fcf = QCheckBox()
+        lh.addWidget(cb)
+
+        ###
+        b = self.keep_ref(QPushButton("&Calculate"))
+        lh.addWidget(b)
+        b.clicked.connect(self._calculate)
+        ###
+        lh.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
+        ###
+
+        # ## Text area
+
+        cw = self.textEdit = QPlainTextEdit()
+        lv.addWidget(cw)
+        cw.setReadOnly(True)  # allows copy but not editing
+        cw.setFont(a99.MONO_FONT)
+
+        self.setWindowTitle("Hönl-London factors")
+        self.setGeometry(0, 0, 800, 600)
+        a99.place_center(self)
+        a99.nerdify(self)
+
+    def _calculate(self):
+
+        flag_fcf = self.checkbox_fcf.isChecked()
+
+        if flag_fcf:
+            if self.fcfs is None or len(self.fcfs) == 0:
+                self.add_log_error("FCFs not available", True)
+
+        try:
+            import f311.explorer as ex
+            import f311.physics as ph
+            import f311.convmol as cm
+            import tabulate
+
+            l_text = []
+
+            self.status("Calculating...")
+            molconsts = copy.deepcopy(self.molconsts)
+            molconsts.None_to_zero()
+            for vl in range(10):
+                for v2l in range(10):
+                    l_text.extend(a99.format_box("vl, v2l = ({}, {})".format(vl, v2l)))
+
+                    factor = 1.
+                    if flag_fcf:
+                        try:
+                            factor = self.fcfs[(vl, v2l)]
+                        except KeyError:
+                            l_text.append("Franck-Condon Factor not available")
+                            continue
+
+                    rows, header = [], None
+                    for J in range(40):
+                        mtools = ph.multiplicity_toolbox(molconsts, flag_normalize=True)
+                        mtools.populate(vl, v2l, J)
+
+                        if header is None:
+                            branches = [key[3] for key in mtools.dict_sj]
+                            header = ["J"]+branches+["Sum"]
+
+                        vv = mtools.dict_sj.values()
+                        total = sum([x*factor for x in vv if x != ph.NO_LINE_STRENGTH])
+                        rows.append([J+.5]+["{:.5e}".format(x*factor) if x != ph.NO_LINE_STRENGTH else "-" for x in vv]+["{:.9g}".format(total)])
+
+                    l_text.append(tabulate.tabulate(rows, header))
+                    l_text.append("")
+
+            text = "\n".join(l_text)
+            self.textEdit.setPlainText(text)
+            self.status("")
+        except Exception as E:
+            self.add_log_error(a99.str_exc(E), True)
+
+
+
+
 class WMolecularConstants(a99.WBase):
     """
     Widget for the user to type or obtain many molecular constants
@@ -358,43 +473,15 @@ class WMolecularConstants(a99.WBase):
     def view_hlf(self):
         """Opens text window with HLFs on them"""
 
-        try:
-            import f311.explorer as ex
-            import f311.physics as ph
-            import f311.convmol as cm
-            import tabulate
 
-            l_text = []
-
-            self.status("Calculating...")
-            molconsts = copy.deepcopy(self._molconsts)
-            molconsts.None_to_zero()
-            for vl in range(10):
-                for v2l in range(10):
-                    l_text.extend(a99.format_box("vl, v2l = ({}, {})".format(vl, v2l)))
-
-                    rows, header = [], None
-                    for J in range(40):
-                        mtools = ph.multiplicity_toolbox(molconsts, flag_normalize=True)
-                        mtools.populate(vl, v2l, J)
-
-                        if header is None:
-                            branches = [key[3] for key in mtools.dict_sj]
-                            header = ["J"]+branches+["Sum"]
-
-                        vv = mtools.dict_sj.values()
-                        total = sum([x for x in vv if x != ph.NO_LINE_STRENGTH])
-                        rows.append([J+.5]+["{:.5e}".format(x) if x != ph.NO_LINE_STRENGTH else "-" for x in vv]+["{:.9g}".format(total)])
-
-                    l_text.append(tabulate.tabulate(rows, header))
-                    l_text.append("")
-
-            text = "\n".join(l_text)
-            form = ex.XText(self, text, "Hönl-London factors")
-            self.status("")
+        if self.moldb is None:
+            a99.show_error("Cannot view HLFs because I need a molecular constants database")
+        elif self.molconsts is None:
+            a99.show_error("Cannot view HLFs because I am blank")
+        else:
+            form = _XHLF(self, self.moldb, self.molconsts, self._get_fcf_dict())
             form.show()
-        except Exception as E:
-            self.add_log_error(a99.str_exc(E), True)
+
 
     ################################################################################################
     # # Qt override

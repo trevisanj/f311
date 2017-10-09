@@ -279,7 +279,6 @@ class XFileMolecules(QMainWindow):
                     except:
                         # In case of error saving file, will not exit the program
                         event.ignore()
-                        raise()
         if event.isAccepted():
             self.close_editor()
 
@@ -293,7 +292,6 @@ class XFileMolecules(QMainWindow):
             a99.show_message("Help file mled.html was opened in web browser.")
         except Exception as e:
             a99.show_error(str(e))
-            raise
 
     def on_save(self, _):
         self.disable_save_actions()
@@ -301,7 +299,6 @@ class XFileMolecules(QMainWindow):
             self.save()
         except Exception as e:
             a99.show_error(str(e))
-            raise
         finally:
             self.enable_save_actions()
 
@@ -316,7 +313,6 @@ class XFileMolecules(QMainWindow):
                     self.save_as(new_filename)
         except Exception as e:
             a99.show_error(str(e))
-            raise
         finally:
             self.enable_save_actions()
 
