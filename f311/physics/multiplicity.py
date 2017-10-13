@@ -359,16 +359,12 @@ class _MTDoublet1(_MultiplicityToolbox):
         Y2L = A2L / B2L
 
 
-        # TODO Ask BLB below, not sure if this holds for DeltaLambda = 1
         # p61: “[...] Y= A/B. The term is called normal if A > 0, and inverted if A < 0”
         # p126: “in the case of inverted terms, Y is to be substituted with negative sign”
-
-
-        # TODO activate this
-        # if YL < 0:
-        #     YL = -YL
-        # if Y2L < 0:
-        #     Y2L = -Y2L
+        if YL < 0:
+            YL = -YL
+        if Y2L < 0:
+            Y2L = -Y2L
 
 
         UPLUSL = lambda J: ((LAML**2.)*YL*(YL-4) + 4*((J+0.5)**2.))**0.5 + LAML*(YL-2)

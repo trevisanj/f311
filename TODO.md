@@ -27,6 +27,9 @@
 
 ### Documentation
 
+- scripts: one page per script
+
+
 - Release notes: roughly what has been done since the beginning
 
 - Examples/demos: I think that a good way is to write tests first, each "def test_*()" who wishes to become a demo will have to have a nice docstring,

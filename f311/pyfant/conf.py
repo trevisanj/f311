@@ -73,6 +73,7 @@ class SID(object):
 
     @property
     def id_maker(self):
+        """IdMaker instance"""
         return self.__id_maker
     @id_maker.setter
     def id_maker(self, x):
@@ -223,6 +224,7 @@ class Conf(object):
 
     @property
     def sid(self):
+        """SID object"""
         return self.__sid
 
     @sid.setter
@@ -231,7 +233,9 @@ class Conf(object):
 
     @property
     def opt(self):
+        """FileOptions object"""
         return self.__opt
+
     @opt.setter
     def opt(self, x):
         self.__opt = x
