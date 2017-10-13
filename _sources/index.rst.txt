@@ -1,10 +1,38 @@
-F311 -- Python 3 Astronomy-related API and scripts
+F311 -- Astronomy-related Python 3 API and scripts
 ==================================================
 
-.. literalinclude:: ../../examples/pyfant/photometry0.py
+Welcome
+
+Introduction
+------------
+
+``f311`` is a Python 3 package containing a set of sub-packages
+and scripts related to selected topics on Astronomy.
+
+The sub-packages can be imported as follows:
+
+.. code::
+
+    import f311.pyfant as pf
+    import f311.convmol as cm
+    import f311.explorer as ex
+    import f311.filetypes as ft
+    import f311.physics as ph
+    import f311.aosss as ao
 
 
-Welcome to the F311 documentation!
+List of scripts
+---------------
+
+.. code:: shell
+
+Running ``programs.py`` on the shell will print something like this::
+
+
+
+
+
+`Project F311 on GitHub <https://github.com/trevisanj/f311>`__
 
 .. toctree::
    :maxdepth: 1
@@ -18,12 +46,6 @@ Welcome to the F311 documentation!
    aosss
    cheat
 
-Introduction
-------------
-
-``f311`` is a Python 3 package containing an Astronomy-related API and several scripts.
-
-`Project F311 on GitHub <https://github.com/trevisanj/f311>`__
 
 List of scripts
 ---------------
@@ -130,24 +152,6 @@ Running ``programs.py`` on the shell will print something like this::
 
 
 
-Sub-packages
-------------
-
-When f311 is installed, several sub-packages are made available (see left menu).
-Each sub-package contains its own API.
-
-One possible way to import these sub-packages is as follows:
-
-.. code::
-
-    import f311.pyfant as pf
-    import f311.convmol as cm
-    import f311.explorer as ex
-    import f311.filetypes as ft
-    import f311.physics as ph
-    import f311.aosss as ao
-
-For usage and examples, see the sub-packages pages.
 
 Acknowledgement
 ---------------

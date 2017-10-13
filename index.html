@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>F311 – Python 3 Astronomy-related API and scripts &mdash; F311 17.9.27.0 documentation</title>
+  <title>F311 – Astronomy-related Python 3 API and scripts &mdash; F311 17.9.27.0 documentation</title>
   
 
   
@@ -146,7 +146,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>F311 &#8211; Python 3 Astronomy-related API and scripts</li>
+      <li>F311 &#8211; Astronomy-related Python 3 API and scripts</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -165,37 +165,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="f311-python-3-astronomy-related-api-and-scripts">
-<h1>F311 &#8211; Python 3 Astronomy-related API and scripts<a class="headerlink" href="#f311-python-3-astronomy-related-api-and-scripts" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-
-<span class="n">l0</span><span class="p">,</span> <span class="n">lf</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">250000</span>
-<span class="n">x</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">l0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">lf</span><span class="p">),</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="s2">&quot;UBVRI&quot;</span><span class="p">:</span>
-    <span class="n">bp</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">UBVTabulated</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bp</span><span class="o">.</span><span class="n">ufunc</span><span class="p">()(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">l0</span><span class="p">,</span> <span class="n">lf</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Tabulated&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="s2">&quot;UBVRIYJHKLMNQ&quot;</span><span class="p">:</span>
-    <span class="n">bp</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">UBVParametric</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bp</span><span class="o">.</span><span class="n">ufunc</span><span class="p">()(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">l0</span><span class="p">,</span> <span class="n">lf</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Wavelength ($\AA$)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Parametric&quot;</span><span class="p">)</span>
-<span class="n">l</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+  <div class="section" id="f311-astronomy-related-python-3-api-and-scripts">
+<h1>F311 &#8211; Astronomy-related Python 3 API and scripts<a class="headerlink" href="#f311-astronomy-related-python-3-api-and-scripts" title="Permalink to this headline">¶</a></h1>
+<p>Welcome</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">f311</span></code> is a Python 3 package containing a set of sub-packages
+and scripts related to selected topics on Astronomy.</p>
+<p>The sub-packages can be imported as follows:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.convmol</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+<span class="kn">import</span> <span class="nn">f311.physics</span> <span class="k">as</span> <span class="nn">ph</span>
+<span class="kn">import</span> <span class="nn">f311.aosss</span> <span class="k">as</span> <span class="nn">ao</span>
 </pre></div>
 </div>
-<p>Welcome to the F311 documentation!</p>
+</div>
+<div class="section" id="list-of-scripts">
+<h2>List of scripts<a class="headerlink" href="#list-of-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Running <code class="docutils literal"><span class="pre">programs.py</span></code> on the shell will print something like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>`Project F311 on GitHub &lt;https://github.com/trevisanj/f311&gt;`__
+</pre></div>
+</div>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
@@ -208,13 +200,9 @@
 <li class="toctree-l1"><a class="reference internal" href="cheat.html">Project <code class="docutils literal"><span class="pre">f311</span></code> Cheat Sheet</a></li>
 </ul>
 </div>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">f311</span></code> is a Python 3 package containing an Astronomy-related API and several scripts.</p>
-<p><a class="reference external" href="https://github.com/trevisanj/f311">Project F311 on GitHub</a></p>
 </div>
-<div class="section" id="list-of-scripts">
-<h2>List of scripts<a class="headerlink" href="#list-of-scripts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>List of scripts<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Running <code class="docutils literal"><span class="pre">programs.py</span></code> on the shell will print something like this:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>Package &#39;aosss&#39;
 ===============
@@ -313,21 +301,6 @@ PFANT Fortran binaries
     nulbad .... found
 </pre></div>
 </div>
-</div>
-<div class="section" id="sub-packages">
-<h2>Sub-packages<a class="headerlink" href="#sub-packages" title="Permalink to this headline">¶</a></h2>
-<p>When f311 is installed, several sub-packages are made available (see left menu).
-Each sub-package contains its own API.</p>
-<p>One possible way to import these sub-packages is as follows:</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
-<span class="kn">import</span> <span class="nn">f311.convmol</span> <span class="k">as</span> <span class="nn">cm</span>
-<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
-<span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
-<span class="kn">import</span> <span class="nn">f311.physics</span> <span class="k">as</span> <span class="nn">ph</span>
-<span class="kn">import</span> <span class="nn">f311.aosss</span> <span class="k">as</span> <span class="nn">ao</span>
-</pre></div>
-</div>
-<p>For usage and examples, see the sub-packages pages.</p>
 </div>
 <div class="section" id="acknowledgement">
 <h2>Acknowledgement<a class="headerlink" href="#acknowledgement" title="Permalink to this headline">¶</a></h2>

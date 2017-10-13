@@ -21,9 +21,9 @@ Applications
 ------------
 
 The applications related to package f311.pyfant are listed below. For them to work, you need to
-`install PFANT <http://trevisanj.github.io/PFANT/install.html>`.
+`install PFANT <http://trevisanj.github.io/PFANT/install.html>`_.
 
-The `PFANT Quick Start <http://trevisanj.github.io/PFANT/quick.html>` serves as a guide to
+The `PFANT Quick Start <http://trevisanj.github.io/PFANT/quick.html>`_ serves as a guide to
 using these applications.
 
 Graphical applications
