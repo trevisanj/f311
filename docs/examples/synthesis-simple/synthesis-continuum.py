@@ -1,4 +1,4 @@
-"""Runs synthesis over short wavelength range, then plots normalized and convolved spectrum"""
+"""Runs synthesis over large wavelength range, then plots continuum"""
 
 import f311.pyfant as pf
 import f311.explorer as ex
@@ -12,21 +12,26 @@ if __name__ == "__main__":
     # partition functions, etc.
     pf.link_to_data()
 
-    # # First run
     # Creates object that will run the four Fortran executables (innewmarcs, hydro2, pfant, nulbad)
     obj = pf.Combo()
+    oo = obj.conf.opt
     # synthesis interval start (angstrom)
-    obj.conf.opt.llzero = 6530
+    oo.llzero = 2500
     # synthesis interval end (angstrom)
-    obj.conf.opt.llfin = 6535
+    oo.llfin = 30000
+    # savelength step (angstrom)
+    oo.pas = 1.
+    # Turns off hydrogen lines
+    oo.no_h = True
+    # Turns off atomic lines
+    oo.no_atoms = True
+    # Turns off molecular lines
+    oo.no_molecules = True
 
-    # Runs Fortrans and hangs until done
     obj.run()
-
-    # Loads result files into memory. obj.result is a dictionary containing elements ...
     obj.load_result()
     print("obj.result = {}".format(obj.result))
     res = obj.result
-    ex.draw_spectra_overlapped([res["norm"], res["convolved"]])
-    plt.savefig("norm-convolved.png")
+    ex.draw_spectra([res["cont"]], setup=ex.PlotSpectrumSetup(fmt_ylabel=None))
+    plt.savefig("continuum.png")
     plt.show()

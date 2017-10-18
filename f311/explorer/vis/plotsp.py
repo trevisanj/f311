@@ -14,7 +14,7 @@ import a99
 import f311.filetypes as ft
 
 __all__ = ["plot_spectra", "plot_spectra_overlapped", "plot_spectra_pieces_pdf",
- "plot_spectra_pages_pdf", "draw_spectra", "PlotSpectrumSetup"]
+ "plot_spectra_pages_pdf", "draw_spectra", "PlotSpectrumSetup", "draw_spectra_overlapped"]
 
 
 _T = 0.02  # percentual amount of extra space on left, right, top, bottom of graphics
@@ -84,13 +84,13 @@ def plot_spectra_overlapped(ss, title=None, setup=_default_setup):
       setup: PlotSpectrumSetup object
     """
 
-    n = len(ss)
+    draw_spectra_overlapped(ss, title, setup)
+    plt.show()
 
+
+def draw_spectra_overlapped(ss, title=None, setup=_default_setup):
     a99.format_BLB()
     f = plt.figure()
-
-    xmin = 1e38
-    xmax = -1e38
     xunit, yunit = None, None
     for i, s in enumerate(ss):
         if xunit is None:
@@ -109,24 +109,19 @@ def plot_spectra_overlapped(ss, title=None, setup=_default_setup):
         y = s.y
         ax.plot(s.x, y, label=str(s.title))
 
-    # plt.xlabel('Wavelength ({})'.format(xunit))
     # plt.ylabel('({})'.format(yunit))
     # **Note** Takes last spectrum as reference to mount x-label
     _set_plot(plt.xlabel, setup.fmt_xlabel, s)
     xmin, xmax, ymin_, ymax, xspan, yspan = _calc_max_min(ss)
     ymin = ymin_ if setup.ymin is None else setup.ymin
-    plt.xlim([xmin-xspan*_T, xmax+xspan*_T])
-    plt.ylim([ymin-yspan*_T, ymax+yspan*_T])
-
-
+    plt.xlim([xmin - xspan * _T, xmax + xspan * _T])
+    plt.ylim([ymin - yspan * _T, ymax + yspan * _T])
     if setup.flag_legend:
         leg = plt.legend(loc=0)
         a99.format_legend(leg)
-
     plt.tight_layout()
     if title is not None:
         f.canvas.set_window_title(title)
-    plt.show()
 
 
 def plot_spectra_pieces_pdf(ss, aint=10, pdf_filename='pieces.pdf', setup=_default_setup):
@@ -204,7 +199,8 @@ def plot_spectra_pages_pdf(ss, pdf_filename='pages.pdf', setup=_default_setup):
         fig = plt.figure()
         plt.plot(s.x, s.y, c=_FAV_COLOR)
         _set_plot(plt.xlabel, setup.fmt_xlabel, s)
-        _set_plot(plt.ylabel, setup.fmt_ylabel, s)
+        if setup.fmt_ylabel:
+            _set_plot(plt.ylabel, setup.fmt_ylabel, s)
         _set_plot(plt.title, setup.fmt_title, s)
         # plt.xlabel('Wavelength ({})'.format(s.xunit))
         # plt.ylabel('({})'.format(s.yunit))

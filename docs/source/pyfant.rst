@@ -43,6 +43,21 @@ Command-line tools
 Coding using the API
 --------------------
 
+Spectral synthesis
+~~~~~~~~~~~~~~~~~~
+
+.. literalinclude:: ../examples/synthesis-simple/synthesis-simple.py
+
+.. figure:: ../figures/norm-convolved.png
+   :align: center
+
+Continuum
+~~~~~~~~~
+
+.. literalinclude:: ../examples/synthesis-simple/synthesis-continuum.py
+
+.. figure:: ../figures/continuum.png
+   :align: center
 
 Plot hydrogen profiles
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -51,24 +66,6 @@ Plot hydrogen profiles
 
 .. figure:: ../figures/hydrogen-profiles.png
    :align: center
-
-Spectral synthesis
-~~~~~~~~~~~~~~~~~~
-
-.. code:: python
-
-   import f311.pyfant as pf
-   import f311.explorer as ex
-   obj = pf.Pfant()
-   obj.run()
-   obj.load_result()
-   ex.plot_spectra([obj.result["cont"], obj.result["spec"], obj.result["norm"]])
-
-
-
-
-
-
 
 API reference
 -------------

@@ -1,5 +1,5 @@
 """
-Runs PFANT's hydro2, loads thalpha, thbeta, etc., then draws a matplotlib subplot
+Calculates hydrogen lines profiles, then plots them in several 3D subplots
 """
 
 import f311.pyfant as pf
@@ -15,6 +15,7 @@ from mpl_toolkits.mplot3d import Axes3D  # yes, required (see below)
 def mylog(*args):
     print("^^ {}".format(", ".join(args)))
 
+
 def main(flag_cleanup=True):
     tmpdir = a99.new_filename("hydrogen-profiles")
 
@@ -24,13 +25,11 @@ def main(flag_cleanup=True):
     os.mkdir(tmpdir)
     try:
         pf.link_to_data()
-
         _main()
     finally:
         # Restores current directory
         os.chdir(pwd)
         # Removes temporary directory
-        # os.rmdir(tmpdir)
         if flag_cleanup:
             mylog("Removing directory '{}'...".format(tmpdir))
             shutil.rmtree(tmpdir)
@@ -56,6 +55,7 @@ def _main():
 
     _plot_profiles(eh.result["profiles"])
 
+
 def _plot_profiles(profiles):
     fig = plt.figure()
     i = 0
@@ -71,8 +71,6 @@ def _plot_profiles(profiles):
     plt.tight_layout()
     plt.savefig("hydrogen-profiles.png")
     plt.show()
-
-
 
 
 if __name__ == "__main__":
