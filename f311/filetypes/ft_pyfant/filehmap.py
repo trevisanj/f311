@@ -12,7 +12,7 @@ class HmapRow(a99.AttrsPart):
 
     attrs = ["fn", "na", "nb", "clam", "kiex", "c1"]
 
-    def __init__(self):
+    def __init__(self, fn=None, na=None, nb=None, clam=None, kiex=None, c1=None):
         a99.AttrsPart.__init__(self)
         self.fn = None
         self.na = None
@@ -20,6 +20,10 @@ class HmapRow(a99.AttrsPart):
         self.clam = None
         self.kiex = None
         self.c1 = None
+
+    def __repr__(self):
+        aa = ", ".join(["{}={}".format(key, self.__getattribute__(key)) for key in self.attrs])
+        return "HMapRow({})".format(aa)
 
 
 @a99.froze_it

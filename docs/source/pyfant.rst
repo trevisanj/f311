@@ -43,7 +43,17 @@ Command-line tools
 Coding using the API
 --------------------
 
-Spectral synthesis example:
+
+Plot hydrogen profiles
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. literalinclude:: ../examples/plot-hydrogen-profiles/plot-hydrogen-profiles.py
+
+.. figure:: ../figures/hydrogen-profiles.png
+   :align: center
+
+Spectral synthesis
+~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -54,7 +64,11 @@ Spectral synthesis example:
    obj.load_result()
    ex.plot_spectra([obj.result["cont"], obj.result["spec"], obj.result["norm"]])
 
-.. todo:: More examples
+
+
+
+
+
 
 API reference
 -------------

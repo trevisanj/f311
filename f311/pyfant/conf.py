@@ -106,10 +106,10 @@ class SID(object):
             self.__id_maker.make_id(self.__flag_split_dirs)
 
     def clean(self, flag_remove_dir=True):
-        """Deletes directory with all files inside.
+        """Deletes session directory with all files inside.
 
         Args:
-          flag_remove_dif=True: if not set, will only delete the contents,
+          flag_remove_dir=True: if not set, will only delete the contents,
             keeping the directory
         """
 
@@ -332,6 +332,10 @@ class Conf(object):
         """Analogous to get_file_main()"""
         return self.get_file_generic("abonds", opt)
 
+    def get_file_hmap(self, opt=None):
+        """Analogous to get_file_main()"""
+        return self.get_file_generic("hmap", opt)
+
     def get_file_generic(self, name, opt=None):
         """
         Returns new File<sth> object, depending on name
@@ -343,9 +347,10 @@ class Conf(object):
         if opt is None:
             opt = self.__opt
         selfattr = self.__getattribute__("file_"+name)
-        optattr = opt.__getattribute__("fn_"+name)
         if selfattr is not None:
             return selfattr
+
+        optattr = opt.__getattribute__("fn_"+name)
         file_ = getattr(ft, "File"+name.capitalize())()
         if optattr is None:
             file_.load()  # will try to load default file

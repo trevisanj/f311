@@ -10,7 +10,8 @@ import shutil
 import a99
 # from .. import pyfant as pf
 from .. import filetypes as ft
-
+from . import paths
+import a99
 
 __all__ = [
     "run_parallel", "setup_inputs", "copy_star", "link_to_data", "create_or_replace_or_skip_links",
@@ -135,10 +136,28 @@ def setup_inputs(dest_dir='.', star='sun-asplund-2009', common='common', h=True,
     create_or_replace_or_skip_links([fc(z) for z in zz], dest_dir=dest_dir)
 
 
-def copy_star(src_dir):
+def copy_star(src_dir=None, starname=None):
+    """
+    Copies files such as main.dat and abonds.dat from PFANT/data/some_directory into local directory
+
+    Args:
+        src_dir: absolute path to directory containing PFANT star data files FileMain and FileAbonds
+                 (and optionally FileDissoc files, which will be also copied if present)
+        starname: if passed, will ignore src_dir and make it from starname instead, considering
+                  starname as a subdirectory of PFANT/data/
+    """
     star_classes = [ft.FileMain, ft.FileDissoc, ft.FileAbonds]
 
-    print(("Will look inside directory %s" % src_dir))
+    if starname is not None:
+        src_dir = os.path.join(paths.get_pfant_data_path(), starname)
+
+    if src_dir is None and starname is None:
+        raise ValueError("Supply either src_dir or starname")
+
+    if not os.path.isdir(src_dir):
+        raise ValueError("'{}' is not a valid directory".format(src_dir))
+
+    a99.get_python_logger().debug("Will look inside directory %s" % src_dir)
 
     # makes list of files to analyse
     types = ('*.dat', '*.mod')
@@ -149,10 +168,18 @@ def copy_star(src_dir):
     copy_or_skip_files(ff)
 
 
-def link_to_data(src_dir):
-    star_classes = [ft.FileMain, ft.FileDissoc, ft.FileAbonds]
+def link_to_data(src_dir=None):
+    """Creates symbolic links to files '*.dat', '*.mod', '*.moo' within src_dir, skipping certain types
 
-    print(("Will look inside directory %s" % src_dir))
+    Args:
+        src_dir: directory containing files to be linked to. If omitted, it defaults to
+                 PFANT/data/common
+    """
+
+    if src_dir is None:
+        src_dir = paths.get_pfant_path('data', 'common')
+
+    a99.get_python_logger().debug("Will look inside directory %s" % src_dir)
 
     # makes list of files to analyse
     types = ('*.dat', '*.mod', '*.moo')
@@ -177,7 +204,7 @@ def create_or_replace_or_skip_links(ff, dest_dir="."):
         ptd = os.path.join(dest_dir, name)  # path to destination
 
         flag_skip = False
-        print(("Considering file '%s' ..." % name))
+        a99.get_python_logger().info(("Considering file '%s' ..." % name))
         if os.path.isfile(ptd) and not os.path.islink(ptd):
             a99.print_skipped("file exists in local directory")
             flag_skip = True
@@ -201,7 +228,7 @@ def create_or_replace_or_skip_links(ff, dest_dir="."):
                 else:
                     s_action = "created"
                 a99.create_symlink(f, ptd)
-                print(("   ... %s link" % s_action))
+                a99.get_python_logger().info("   ... %s link" % s_action)
             except Exception as e:
                 a99.print_error("Error creating link: %s" % str(e))
 
@@ -218,7 +245,7 @@ def copy_or_skip_files(ff, dest_dir="."):
         name = os.path.split(f)[1]
 
         flag_skip = False
-        print(("Considering file '%s' ..." % name))
+        a99.get_python_logger().info("Considering file '%s' ..." % name)
         if os.path.isfile(name):
             a99.print_skipped("file exists in local directory")
             flag_skip = True
@@ -233,7 +260,7 @@ def copy_or_skip_files(ff, dest_dir="."):
         if not flag_skip:
             try:
                 shutil.copy(f, dest_dir)
-                print("   ... file copied")
+                a99.get_python_logger().info("   ... file copied")
             except Exception as e:
                 a99.print_error("Error copying file: %s" % str(e))
 

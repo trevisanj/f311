@@ -6,10 +6,11 @@ Welcome
 Introduction
 ------------
 
-``f311`` is a Python 3 package containing a set of sub-packages
-and scripts related to selected topics on Astronomy.
+``f311`` is a Python 3 package containing many resources on selected topics in Astronomy.
+Once installed, the package makes available a collection of scripts and an API
+(application programming interface).
 
-The sub-packages can be imported as follows:
+The package is organized in sub-packages, which can be imported as follows:
 
 .. code::
 
@@ -20,19 +21,6 @@ The sub-packages can be imported as follows:
     import f311.physics as ph
     import f311.aosss as ao
 
-
-List of scripts
----------------
-
-.. code:: shell
-
-Running ``programs.py`` on the shell will print something like this::
-
-
-
-
-
-`Project F311 on GitHub <https://github.com/trevisanj/f311>`__
 
 .. toctree::
    :maxdepth: 1
@@ -46,6 +34,7 @@ Running ``programs.py`` on the shell will print something like this::
    aosss
    cheat
 
+`Project F311 on GitHub <https://github.com/trevisanj/f311>`_
 
 List of scripts
 ---------------

@@ -5,7 +5,7 @@ from .errors import *
 from threading import Lock
 import a99
 from .. import filetypes as ft
-
+from collections import OrderedDict
 
 __all__ = ["Runnable", "RunnableStatus", "ExecutableStatus", "Executable",
            "Innewmarcs", "Hydro2", "Pfant", "Nulbad", "Combo"]
@@ -118,7 +118,7 @@ class Runnable(object):
         self._flag_error = False
         # Will contain error message if finished with error
         self._error_message = ""
-        # Will contain results DataFile objects (keys vary depending on the Runnable subclas
+        # Will contain results DataFile objects (keys vary depending on the Runnable subclass
         self._result = {}
 
     def get_status(self):
@@ -357,10 +357,27 @@ class Hydro2(Executable):
         self._exe_path = "hydro2"
 
     def load_result(self):
-        # Loading hydro2 result is not implemented at the moment, but it could by reconstructing the
-        # whole case (wavelength range, hmap.dat) and inferring which files hydro2 generated.
-        # This is analogous to figuring out the nulbad output filename
-        a99.get_python_logger().info("hydro2 load_result() not implemented")
+        """
+        Makes self._result["profiles"] = {filename0: FileToH0, filename1: FileToH1, ...}
+
+        Tolerant to non-existing files, but will crash if existing files pointed to at the
+        FileHmap fail to load.
+        """
+
+        fhmap = self.conf.get_file_hmap()
+        if fhmap is None:
+            raise RuntimeError("Cannot find my hmap file")
+
+        profiles = self._result["profiles"] = OrderedDict()
+        for row in fhmap.rows:
+            value = None
+            if os.path.exists(row.fn):
+                fh = ft.FileToH()
+                fh.load(row.fn)
+                value = fh
+
+            profiles[row.fn] = value
+
 
 
 @a99.froze_it

@@ -8,6 +8,10 @@ import a99
 import f311.filetypes as ft
 from ..basic import Vis
 
+
+__all__ = ["VisFileToH", "draw_toh", "VisAtoms", "VisMolecules", "VisMain", "VisAbonds",]
+
+
 class VisFileToH(Vis):
     """
     Plots hydrogen lines: each atmospheric layer is plotted as a y-axis-dislocated
@@ -21,19 +25,24 @@ class VisFileToH(Vis):
         fig = plt.figure()
         mpl.rcParams['legend.fontsize'] = 10
         fig.canvas.set_window_title(self.title)  # requires the Axes3D module
+        # requires the Axes3D module
         ax = fig.gca(projection='3d')
-        x = np.concatenate((2 * r.lambdh[0] - r.lambdh[-2::-1], r.lambdh))
-        _y = np.ones(len(x))
-        for i in range(r.th.shape[1]):
-            z = np.concatenate((r.th[-2::-1, i], r.th[:, i]))
-            # ax.plot(x, _y * (i + 1), np.log10(z), label='a', color='k')
-            ax.plot(x, _y * (i + 1), z, label='a', color='k')
-        ax.set_xlabel('Wavelength ($\AA$)')
-        ax.set_ylabel("Atmospheric layer #")
+        draw_toh(r, ax)
         # ax.set_zlabel('log10(Intensity)')
         # ax.set_zlabel('?')
         plt.tight_layout()
         plt.show()
+
+
+def draw_toh(r, ax):
+    x = np.concatenate((2 * r.lambdh[0] - r.lambdh[-2::-1], r.lambdh))
+    _y = np.ones(len(x))
+    for i in range(r.th.shape[1]):
+        z = np.concatenate((r.th[-2::-1, i], r.th[:, i]))
+        # ax.plot(x, _y * (i + 1), np.log10(z), label='a', color='k')
+        ax.plot(x, _y * (i + 1), z, label='a', color='k')
+    ax.set_xlabel('Wavelength ($\AA$)')
+    ax.set_ylabel("Atmospheric layer #")
 
 
 # # Editors
