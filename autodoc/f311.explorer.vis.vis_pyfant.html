@@ -182,21 +182,27 @@
 <span id="f311-explorer-vis-vis-pyfant-vismany-module"></span><h2>f311.explorer.vis.vis_pyfant.vismany module<a class="headerlink" href="#module-f311.explorer.vis.vis_pyfant.vismany" title="Permalink to this headline">¶</a></h2>
 <p>Visualization classes for pyfant file types</p>
 <dl class="class">
-<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAbonds">
-<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">VisAbonds</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAbonds" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisFileToH">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">VisFileToH</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisFileToH" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
-<p>Opens the abed window.</p>
+<p>Plots hydrogen lines: each atmospheric layer is plotted as a y-axis-dislocated
+Spectrum in a 3D plot.</p>
 <dl class="attribute">
-<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAbonds.action">
-<code class="descname">action</code><em class="property"> = 'Edit using abundances file editor'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAbonds.action" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisFileToH.action">
+<code class="descname">action</code><em class="property"> = 'Visualize hydrogen lines profiles'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisFileToH.action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAbonds.input_classes">
-<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.fileabonds.FileAbonds'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAbonds.input_classes" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisFileToH.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filetoh.FileToH'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisFileToH.input_classes" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
+
+<dl class="function">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.draw_toh">
+<code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">draw_toh</code><span class="sig-paren">(</span><em>r</em>, <em>ax</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.draw_toh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="class">
 <dt id="f311.explorer.vis.vis_pyfant.vismany.VisAtoms">
@@ -216,19 +222,18 @@
 </dd></dl>
 
 <dl class="class">
-<dt id="f311.explorer.vis.vis_pyfant.vismany.VisFileToH">
-<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">VisFileToH</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisFileToH" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMolecules">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">VisMolecules</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMolecules" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
-<p>Plots hydrogen lines: each atmospheric layer is plotted as a y-axis-dislocated
-Spectrum in a 3D plot.</p>
+<p>Opens the mled window.</p>
 <dl class="attribute">
-<dt id="f311.explorer.vis.vis_pyfant.vismany.VisFileToH.action">
-<code class="descname">action</code><em class="property"> = 'Visualize hydrogen lines profiles'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisFileToH.action" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMolecules.action">
+<code class="descname">action</code><em class="property"> = 'Edit using molecular lines editor'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMolecules.action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="f311.explorer.vis.vis_pyfant.vismany.VisFileToH.input_classes">
-<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filetoh.FileToH'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisFileToH.input_classes" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMolecules.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filemolecules.FileMolecules'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMolecules.input_classes" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -251,18 +256,18 @@ Spectrum in a 3D plot.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMolecules">
-<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">VisMolecules</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMolecules" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAbonds">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">VisAbonds</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAbonds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
-<p>Opens the mled window.</p>
+<p>Opens the abed window.</p>
 <dl class="attribute">
-<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMolecules.action">
-<code class="descname">action</code><em class="property"> = 'Edit using molecular lines editor'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMolecules.action" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAbonds.action">
+<code class="descname">action</code><em class="property"> = 'Edit using abundances file editor'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAbonds.action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMolecules.input_classes">
-<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filemolecules.FileMolecules'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMolecules.input_classes" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAbonds.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.fileabonds.FileAbonds'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAbonds.input_classes" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

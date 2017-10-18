@@ -43,18 +43,29 @@ Command-line tools
 Coding using the API
 --------------------
 
-Spectral synthesis example:
+Spectral synthesis
+~~~~~~~~~~~~~~~~~~
 
-.. code:: python
+.. literalinclude:: ../examples/synthesis-simple/synthesis-simple.py
 
-   import f311.pyfant as pf
-   import f311.explorer as ex
-   obj = pf.Pfant()
-   obj.run()
-   obj.load_result()
-   ex.plot_spectra([obj.result["cont"], obj.result["spec"], obj.result["norm"]])
+.. figure:: ../figures/norm-convolved.png
+   :align: center
 
-.. todo:: More examples
+Continuum
+~~~~~~~~~
+
+.. literalinclude:: ../examples/synthesis-simple/synthesis-continuum.py
+
+.. figure:: ../figures/continuum.png
+   :align: center
+
+Plot hydrogen profiles
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. literalinclude:: ../examples/plot-hydrogen-profiles/plot-hydrogen-profiles.py
+
+.. figure:: ../figures/hydrogen-profiles.png
+   :align: center
 
 API reference
 -------------

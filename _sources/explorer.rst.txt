@@ -8,7 +8,7 @@ File edit & visualization, including file-explorer-like ``explorer.py`` (:numref
 
 .. _figexplorer:
 
-.. figure:: img/explorer.png
+.. figure:: ../figures/explorer.png
    :align: center
 
     -- ``explorer.py`` screenshot.

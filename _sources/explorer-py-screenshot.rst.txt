@@ -1,5 +1,5 @@
 ``explorer.py`` screenshot
 ==========================
 
-.. figure:: img/explorer.png
+.. figure:: ../figures/explorer.png
    :align: center

@@ -267,6 +267,12 @@ if it has been called before and skip most operations if so.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="f311.pyfant.conf.Conf.get_file_hmap">
+<code class="descname">get_file_hmap</code><span class="sig-paren">(</span><em>opt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.Conf.get_file_hmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to get_file_main()</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="f311.pyfant.conf.Conf.get_file_main">
 <code class="descname">get_file_main</code><span class="sig-paren">(</span><em>opt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.Conf.get_file_main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tries to figure out a FileMain from current context (i.e., directory contents and command-line options)</p>
@@ -416,12 +422,12 @@ executables. To be called <em>before</em> create_data_files</p>
 <dl class="method">
 <dt id="f311.pyfant.conf.SID.clean">
 <code class="descname">clean</code><span class="sig-paren">(</span><em>flag_remove_dir=True</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.SID.clean" title="Permalink to this definition">¶</a></dt>
-<dd><p>Deletes directory with all files inside.</p>
+<dd><p>Deletes session directory with all files inside.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flag_remove_dif=True</strong> &#8211; if not set, will only delete the contents,
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flag_remove_dir=True</strong> &#8211; if not set, will only delete the contents,
 keeping the directory</td>
 </tr>
 </tbody>
@@ -960,7 +966,10 @@ executable.</p>
 <dl class="method">
 <dt id="f311.pyfant.runnables.Hydro2.load_result">
 <code class="descname">load_result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.runnables.Hydro2.load_result" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Makes self._result[&#8220;profiles&#8221;] = {filename0: FileToH0, filename1: FileToH1, ...}</p>
+<p>Tolerant to non-existing files, but will crash if existing files pointed to at the
+FileHmap fail to load.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="f311.pyfant.runnables.Hydro2.sequence_index">
@@ -1156,13 +1165,38 @@ maximum number of simultaneous processes.</li>
 
 <dl class="function">
 <dt id="f311.pyfant.util.copy_star">
-<code class="descclassname">f311.pyfant.util.</code><code class="descname">copy_star</code><span class="sig-paren">(</span><em>src_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.copy_star" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descclassname">f311.pyfant.util.</code><code class="descname">copy_star</code><span class="sig-paren">(</span><em>src_dir=None</em>, <em>starname=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.copy_star" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies files such as main.dat and abonds.dat from PFANT/data/some_directory into local directory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>src_dir</strong> &#8211; absolute path to directory containing PFANT star data files FileMain and FileAbonds
+(and optionally FileDissoc files, which will be also copied if present)</li>
+<li><strong>starname</strong> &#8211; if passed, will ignore src_dir and make it from starname instead, considering
+starname as a subdirectory of PFANT/data/</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="f311.pyfant.util.link_to_data">
-<code class="descclassname">f311.pyfant.util.</code><code class="descname">link_to_data</code><span class="sig-paren">(</span><em>src_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.link_to_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descclassname">f311.pyfant.util.</code><code class="descname">link_to_data</code><span class="sig-paren">(</span><em>src_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.link_to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates symbolic links to files &#8216;<em>.dat&#8217;, &#8216;</em>.mod&#8217;, &#8216;<a href="#id1"><span class="problematic" id="id2">*</span></a>.moo&#8217; within src_dir, skipping certain types</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>src_dir</strong> &#8211; directory containing files to be linked to. If omitted, it defaults to
+PFANT/data/common</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="f311.pyfant.util.create_or_replace_or_skip_links">
