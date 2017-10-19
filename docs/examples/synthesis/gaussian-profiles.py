@@ -26,12 +26,10 @@ if __name__ == "__main__":
     # # 1) Creates "impulse" spectrum
     fsp = ft.FileSpectrumPfant()
     sp = ft.Spectrum()
-    N = 3001
+    N = 2001
     sp.x = (np.arange(0, N, dtype=float)-(N-1)/2)*0.001+5000
     sp.y = np.zeros((N,), dtype=float)
     sp.y[int((N-1)/2)] = 1.
-
-    ex.plot_spectra([sp])
 
     fsp.spectrum = sp
     fsp.save_as("flux.norm")
@@ -50,7 +48,7 @@ if __name__ == "__main__":
     # # 3) Plots
     ex.draw_spectra_overlapped(spectra)
     K = 0.7
-    a99.set_figure_size(plt.gcf(), 1000*K, 500*K)
+    a99.set_figure_size(plt.gcf(), 1300*K, 500*K)
     plt.tight_layout()
     plt.savefig("gaussian-profiles.png")
     plt.show()

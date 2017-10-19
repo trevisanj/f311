@@ -142,6 +142,17 @@ Running ``programs.py`` on the shell will print something like this::
 
 
 
+List of acronyms
+----------------
+
+**API** -- application programming interface
+
+**GUI** -- graphical user interface
+
+**FWHM** -- full with at half maximum
+
+
+
 Acknowledgement
 ---------------
 

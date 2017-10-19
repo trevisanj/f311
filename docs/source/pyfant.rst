@@ -6,7 +6,6 @@ Welcome!!
 pyfant is a Python interface for the `PFANT Spectral Synthesis
 Software <http://trevisanj.github.io/PFANT>`__ for Astronomy.
 
-
 Spectral synthesis softwares have a fundamental role in Astronomy.
 It is a crucial step in determining stellar properties
 - such as temperature, metallicity, and chemical abundances -
@@ -17,6 +16,12 @@ It is of great interest that the software has a comprehensive and intuitive user
 easiness of parameter input and its multiple variations, and also tools for incorporating data
 like atomic/molecular lines, atmospheric models, etc.
 
+Package ``f311.pyfant`` provides a Python interface to the PFANT Fortran binaries, including the
+ability to run the Fortran binaries in parallel in a multi-processing scheme via API or GUI.
+
+manipulate and save PFANT data files using ``f311.filetypes``, allow for complex batch operations.
+
+
 Applications
 ------------
 
@@ -24,7 +29,7 @@ The applications related to package f311.pyfant are listed below. For them to wo
 `install PFANT <http://trevisanj.github.io/PFANT/install.html>`_.
 
 The `PFANT Quick Start <http://trevisanj.github.io/PFANT/quick.html>`_ serves as a guide to
-using these applications.
+using some of these applications.
 
 Graphical applications
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -43,10 +48,15 @@ Command-line tools
 Coding using the API
 --------------------
 
+This section contains a series of examples on how to use the PFANT Fortran executables from a
+Python script. These "bindings" to the Fortran binaries, together with the ability to load,
+manipulate and save PFANT data files using ``f311.filetypes``, allow for complex batch operations.
+
+
 Spectral synthesis
 ~~~~~~~~~~~~~~~~~~
 
-.. literalinclude:: ../examples/synthesis-simple/synthesis-simple.py
+.. literalinclude:: ../examples/synthesis/synthesis-simple.py
 
 .. figure:: ../figures/norm-convolved.png
    :align: center
@@ -58,7 +68,7 @@ Spectral synthesis - convolutions
 The following example convolves the synthetic spectrum (file "flux.norm") with Gaussian profiles of
 different FWHMs.
 
-.. literalinclude:: ../examples/synthesis-simple/synthesis-many-convolutions.py
+.. literalinclude:: ../examples/synthesis/synthesis-many-convolutions.py
 
 .. figure:: ../figures/many-convs.png
    :align: center
@@ -66,7 +76,7 @@ different FWHMs.
 Spectral synthesis - Continuum
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. literalinclude:: ../examples/synthesis-simple/synthesis-continuum.py
+.. literalinclude:: ../examples/synthesis/synthesis-continuum.py
 
 .. figure:: ../figures/continuum.png
    :align: center
@@ -78,7 +88,7 @@ Gaussian profiles as nulbad outputs
 ``nulbad`` is one of the Fortran executables of the PFANT package. It is the one that convolves
 the synthetic spectrum calculated by ``pfant`` with a Gaussian profile specified by a "fwhm" parameter.
 
-.. literalinclude:: ../examples/synthesis-simple/gaussian-profiles.py
+.. literalinclude:: ../examples/synthesis/gaussian-profiles.py
 
 .. figure:: ../figures/gaussian-profiles.png
    :align: center

@@ -3,7 +3,7 @@
 import f311.pyfant as pf
 import f311.explorer as ex
 import matplotlib.pyplot as plt
-
+import a99
 
 if __name__ == "__main__":
     # Copies files main.dat and abonds.dat to local directory (for given star)
@@ -33,5 +33,8 @@ if __name__ == "__main__":
     print("obj.result = {}".format(obj.result))
     res = obj.result
     ex.draw_spectra([res["cont"]], setup=ex.PlotSpectrumSetup(fmt_ylabel=None))
+    K = .75
+    a99.set_figure_size(plt.gcf(), 1300*K, 450*K)
+    plt.tight_layout()
     plt.savefig("continuum.png")
     plt.show()
