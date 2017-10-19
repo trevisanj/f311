@@ -5,10 +5,8 @@ import os
 
 if a99.yesno("Delete everything from all subdirectories, except .py files", True):
     for dirname, dirnames, filenames in os.walk(".", False):
-        print("DDDDDDDDDDDDDD", dirname, dirnames, filenames)
         deleted_all = True
         for filename in filenames:
-            print("FFFFFFFFFFFF", filename)
             if not (filename.startswith(".") or filename.endswith(".py")):
                 target = os.path.join(dirname, filename)
                 print("Deleting file '{}'...".format(target))
