@@ -41,22 +41,38 @@ class FileSpectrumPfant(FileSpectrum):
 
     default_filename = "flux.norm"
 
+    @property
+    def l0(self):
+        if self.spectrum is not None:
+            if self.spectrum.x is not None:
+                return self.spectrum.x[0]
+        return None
+
+    @property
+    def lf(self):
+        if self.spectrum is not None:
+            if self.spectrum.x is not None:
+                return self.spectrum.x[-1]
+        return None
+
+    @property
+    def pas(self):
+        if self.spectrum is not None:
+            return self.spectrum.delta_lambda
+        return None
+
     def __init__(self):
         FileSpectrum.__init__(self)
 
-        self.ikeytot = None
-        self.tit = None
-        self.tetaef = None
-        self.glog = None
-        self.asalog = None
-        self.modeles_nhe = None
-        self.amg = None
-        self.l0 = None
-        self.lf = None
-        self.pas = None
-        self.echx = None
-        self.echy = None
-        self.fwhm = None
+        self.tit = ""
+        self.tetaef = 0.
+        self.glog = 0.
+        self.asalog = 0.
+        self.modeles_nhe = 0.
+        self.amg = 0.
+        self.echx = 0.
+        self.echy = 0.
+        self.fwhm = 0.
 
     def _do_load(self, filename):
 #    55                            1.17895        1.55000       -0.54000        0.08511        0.00000    3083.0    3630.0    3083.0    3093.0      2001        0.00500        5.00000        1.00000        0.12000
@@ -161,6 +177,47 @@ class FileSpectrumPfant(FileSpectrum):
         sp.y = np.array(y)
 
 #        logging.debug("Just read PFANT Spectrum '%s'" % filename)
+
+    def _do_save_as(self, filename):
+#    55                            1.17895        1.55000       -0.54000        0.08511        0.00000    3083.0    3630.0    3083.0    3093.0      2001        0.00500        5.00000        1.00000        0.12000
+# 12345                    123456789012345               123456789012345               123456789012345          1234567890          1234567890          123456789012345               123456789012345
+#      12345678901234567890               123456789012345               123456789012345               1234567890          1234567890          1234567890               123456789012345               123456789012345
+# ikeytot                                                                                             l0                                                pas
+# 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+# 0         10        20        30        40        50        60        70        80        90        100       110       120       130       140       150
+
+        with open(filename, 'w') as h:
+
+
+            fmt = "{:5d}{:20s}" \
+                  "{:15.5f}{:15.5f}{:15.5f}{:15.5f}{:15.5f}" \
+                  "{:10.1f}{:10.1f}{:10.1f}{:10.1f}" \
+                  "{:10d}" \
+                  "{:15.5f}{:15.5f}{:15.5f}{:15.5f}\n"
+
+            ikeytot = 1
+            itot = len(self.spectrum.y)
+
+            h.write(fmt.format(
+                ikeytot,
+                self.tit,
+                self.tetaef,
+                self.glog,
+                self.asalog,
+                self.modeles_nhe,
+                self.amg,
+                self.l0,
+                self.lf,
+                self.l0,
+                self.lf,
+                itot,
+                self.pas,
+                self.echx,
+                self.echy,
+                self.fwhm
+            ))
+
+            h.write("".join(["{:15.5f}".format(a) for a in self.spectrum.y])+"\n")
 
 
 class FileSpectrumNulbad(FileSpectrum):

@@ -51,12 +51,36 @@ Spectral synthesis
 .. figure:: ../figures/norm-convolved.png
    :align: center
 
-Continuum
-~~~~~~~~~
+
+Spectral synthesis - convolutions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following example convolves the synthetic spectrum (file "flux.norm") with Gaussian profiles of
+different FWHMs.
+
+.. literalinclude:: ../examples/synthesis-simple/synthesis-many-convolutions.py
+
+.. figure:: ../figures/many-convs.png
+   :align: center
+
+Spectral synthesis - Continuum
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. literalinclude:: ../examples/synthesis-simple/synthesis-continuum.py
 
 .. figure:: ../figures/continuum.png
+   :align: center
+
+
+Gaussian profiles as nulbad outputs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+``nulbad`` is one of the Fortran executables of the PFANT package. It is the one that convolves
+the synthetic spectrum calculated by ``pfant`` with a Gaussian profile specified by a "fwhm" parameter.
+
+.. literalinclude:: ../examples/synthesis-simple/gaussian-profiles.py
+
+.. figure:: ../figures/gaussian-profiles.png
    :align: center
 
 Plot hydrogen profiles
