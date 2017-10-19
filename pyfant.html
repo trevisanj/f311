@@ -104,7 +104,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#coding-using-the-api">Coding using the API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#spectral-synthesis">Spectral synthesis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#continuum">Continuum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spectral-synthesis-convolutions">Spectral synthesis - convolutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spectral-synthesis-continuum">Spectral synthesis - Continuum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gaussian-profiles-as-nulbad-outputs">Gaussian profiles as nulbad outputs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#plot-hydrogen-profiles">Plot hydrogen profiles</a></li>
 </ul>
 </li>
@@ -194,12 +196,15 @@ spectral energy distribution or specific spectral lines and regions.
 It is of great interest that the software has a comprehensive and intuitive user interface and
 easiness of parameter input and its multiple variations, and also tools for incorporating data
 like atomic/molecular lines, atmospheric models, etc.</p>
+<p>Package <code class="docutils literal"><span class="pre">f311.pyfant</span></code> provides a Python interface to the PFANT Fortran binaries, including the
+ability to run the Fortran binaries in parallel in a multi-processing scheme via API or GUI.</p>
+<p>manipulate and save PFANT data files using <code class="docutils literal"><span class="pre">f311.filetypes</span></code>, allow for complex batch operations.</p>
 <div class="section" id="applications">
 <h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
 <p>The applications related to package f311.pyfant are listed below. For them to work, you need to
 <a class="reference external" href="http://trevisanj.github.io/PFANT/install.html">install PFANT</a>.</p>
 <p>The <a class="reference external" href="http://trevisanj.github.io/PFANT/quick.html">PFANT Quick Start</a> serves as a guide to
-using these applications.</p>
+using some of these applications.</p>
 <div class="section" id="graphical-applications">
 <h3>Graphical applications<a class="headerlink" href="#graphical-applications" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -218,6 +223,9 @@ using these applications.</p>
 </div>
 <div class="section" id="coding-using-the-api">
 <h2>Coding using the API<a class="headerlink" href="#coding-using-the-api" title="Permalink to this headline">¶</a></h2>
+<p>This section contains a series of examples on how to use the PFANT Fortran executables from a
+Python script. These &#8220;bindings&#8221; to the Fortran binaries, together with the ability to load,
+manipulate and save PFANT data files using <code class="docutils literal"><span class="pre">f311.filetypes</span></code>, allow for complex batch operations.</p>
 <div class="section" id="spectral-synthesis">
 <h3>Spectral synthesis<a class="headerlink" href="#spectral-synthesis" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Runs synthesis over short wavelength range, then plots normalized and convolved spectrum&quot;&quot;&quot;</span>
@@ -258,14 +266,71 @@ using these applications.</p>
 <img alt="_images/norm-convolved.png" src="_images/norm-convolved.png" />
 </div>
 </div>
-<div class="section" id="continuum">
-<h3>Continuum<a class="headerlink" href="#continuum" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="spectral-synthesis-convolutions">
+<h3>Spectral synthesis - convolutions<a class="headerlink" href="#spectral-synthesis-convolutions" title="Permalink to this headline">¶</a></h3>
+<p>The following example convolves the synthetic spectrum (file &#8220;flux.norm&#8221;) with Gaussian profiles of
+different FWHMs.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="sd">&quot;&quot;&quot;Runs synthesis over short wavelength range, then plots normalized and convolved spectrum&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">a99</span>
+
+<span class="c1"># FWHM (full width at half of maximum) of Gaussian profiles in angstrom</span>
+<span class="n">FWHMS</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Copies files main.dat and abonds.dat to local directory (for given star)</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
+    <span class="c1"># Creates symbolic links to all non-star-specific files</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">link_to_data</span><span class="p">()</span>
+
+    <span class="c1"># # 1) Spectral synthesis</span>
+    <span class="c1"># Creates object that will run the four Fortran executables (innewmarcs, hydro2, pfant, nulbad)</span>
+    <span class="n">ecombo</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Combo</span><span class="p">()</span>
+    <span class="c1"># synthesis interval start (angstrom)</span>
+    <span class="n">ecombo</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">llzero</span> <span class="o">=</span> <span class="mi">6530</span>
+    <span class="c1"># synthesis interval end (angstrom)</span>
+    <span class="n">ecombo</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">llfin</span> <span class="o">=</span> <span class="mi">6535</span>
+    <span class="c1"># Runs Fortrans and hangs until done</span>
+    <span class="n">ecombo</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="n">ecombo</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
+    <span class="c1"># Retains un-convolved spectrum for comparison</span>
+    <span class="n">spectra</span> <span class="o">=</span> <span class="p">[</span><span class="n">ecombo</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;norm&quot;</span><span class="p">]]</span>
+
+    <span class="c1"># # 2) Convolutions</span>
+    <span class="k">for</span> <span class="n">fwhm</span> <span class="ow">in</span> <span class="n">FWHMS</span><span class="p">:</span>
+        <span class="n">enulbad</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Nulbad</span><span class="p">()</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">fwhm</span> <span class="o">=</span> <span class="n">fwhm</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
+        <span class="c1"># Appends convolved spectrum for comparison</span>
+        <span class="n">spectra</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">enulbad</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;convolved&quot;</span><span class="p">])</span>
+
+    <span class="c1"># # 3) Plots</span>
+    <span class="n">ex</span><span class="o">.</span><span class="n">draw_spectra_overlapped</span><span class="p">(</span><span class="n">spectra</span><span class="p">)</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="mf">1.1</span>
+    <span class="n">a99</span><span class="o">.</span><span class="n">set_figure_size</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="mi">1000</span><span class="o">*</span><span class="n">K</span><span class="p">,</span> <span class="mi">500</span><span class="o">*</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;many-convs.png&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/many-convs.png" src="_images/many-convs.png" />
+</div>
+</div>
+<div class="section" id="spectral-synthesis-continuum">
+<h3>Spectral synthesis - Continuum<a class="headerlink" href="#spectral-synthesis-continuum" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Runs synthesis over large wavelength range, then plots continuum&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
 <span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
+<span class="kn">import</span> <span class="nn">a99</span>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="c1"># Copies files main.dat and abonds.dat to local directory (for given star)</span>
@@ -295,12 +360,79 @@ using these applications.</p>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;obj.result = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">result</span>
     <span class="n">ex</span><span class="o">.</span><span class="n">draw_spectra</span><span class="p">([</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;cont&quot;</span><span class="p">]],</span> <span class="n">setup</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">PlotSpectrumSetup</span><span class="p">(</span><span class="n">fmt_ylabel</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="o">.</span><span class="mi">75</span>
+    <span class="n">a99</span><span class="o">.</span><span class="n">set_figure_size</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="mi">1300</span><span class="o">*</span><span class="n">K</span><span class="p">,</span> <span class="mi">450</span><span class="o">*</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;continuum.png&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="figure align-center">
 <img alt="_images/continuum.png" src="_images/continuum.png" />
+</div>
+</div>
+<div class="section" id="gaussian-profiles-as-nulbad-outputs">
+<h3>Gaussian profiles as nulbad outputs<a class="headerlink" href="#gaussian-profiles-as-nulbad-outputs" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">nulbad</span></code> is one of the Fortran executables of the PFANT package. It is the one that convolves
+the synthetic spectrum calculated by <code class="docutils literal"><span class="pre">pfant</span></code> with a Gaussian profile specified by a &#8220;fwhm&#8221; parameter.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Nulbad&#39;s &quot;impulse response&quot;</span>
+
+<span class="sd">Saves &quot;impulse&quot; spectrum (just a spike at lambda=5000 angstrom) as &quot;flux.norm&quot;,</span>
+<span class="sd">then runs `nulbad` repeatedly to get a range of Gaussian profiles.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">a99</span>
+<span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="c1"># FWHM (full width at half of maximum) of Gaussian profiles in angstrom</span>
+<span class="n">FWHMS</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Copies files main.dat and abonds.dat to local directory (for given star)</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
+    <span class="c1"># Creates symbolic links to all non-star-specific files</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">link_to_data</span><span class="p">()</span>
+
+    <span class="c1"># # 1) Creates &quot;impulse&quot; spectrum</span>
+    <span class="n">fsp</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">FileSpectrumPfant</span><span class="p">()</span>
+    <span class="n">sp</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">Spectrum</span><span class="p">()</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">2001</span>
+    <span class="n">sp</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mf">0.001</span><span class="o">+</span><span class="mi">5000</span>
+    <span class="n">sp</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">sp</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="nb">int</span><span class="p">((</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">1.</span>
+
+    <span class="n">fsp</span><span class="o">.</span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">sp</span>
+    <span class="n">fsp</span><span class="o">.</span><span class="n">save_as</span><span class="p">(</span><span class="s2">&quot;flux.norm&quot;</span><span class="p">)</span>
+
+    <span class="c1"># # 2) Convolutions</span>
+    <span class="n">spectra</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">fwhm</span> <span class="ow">in</span> <span class="n">FWHMS</span><span class="p">:</span>
+        <span class="n">enulbad</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Nulbad</span><span class="p">()</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">fwhm</span> <span class="o">=</span> <span class="n">fwhm</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+        <span class="c1"># Appends convolved spectrum for comparison</span>
+        <span class="n">spectra</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">enulbad</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;convolved&quot;</span><span class="p">])</span>
+
+    <span class="c1"># # 3) Plots</span>
+    <span class="n">ex</span><span class="o">.</span><span class="n">draw_spectra_overlapped</span><span class="p">(</span><span class="n">spectra</span><span class="p">)</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="mf">0.7</span>
+    <span class="n">a99</span><span class="o">.</span><span class="n">set_figure_size</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="mi">1300</span><span class="o">*</span><span class="n">K</span><span class="p">,</span> <span class="mi">500</span><span class="o">*</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;gaussian-profiles.png&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/gaussian-profiles.png" src="_images/gaussian-profiles.png" />
 </div>
 </div>
 <div class="section" id="plot-hydrogen-profiles">
