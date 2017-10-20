@@ -390,11 +390,16 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> &#8211; receives an AtomicLine object as argument.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> &#8211; <p>callable:</p>
+<ul class="simple">
+<li>receives an AtomicLine object as argument,</li>
+<li>must return True or False (meaning whether or not you want that atomic line)</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
-<p>Example: lambda line: line.algf &gt;= -7</p>
+<p>&#8220;function&#8221; example: <code class="docutils literal"><span class="pre">lambda</span> <span class="pre">line:</span> <span class="pre">line.algf</span> <span class="pre">&gt;=</span> <span class="pre">-7</span></code></p>
 </dd></dl>
 
 <dl class="method">
@@ -420,11 +425,22 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> &#8211; receives an AtomicLine object as argument.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> &#8211; <p>callable:</p>
+<ul class="simple">
+<li>receives an AtomicLine object as argument,</li>
+<li>must return True or False (meaning whether or not you want that atomic line)</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
-<p>Example: lambda line: line.algf &gt;= -7</p>
+<p>&#8220;function&#8221; example: <code class="docutils literal"><span class="pre">lambda</span> <span class="pre">line:</span> <span class="pre">line.algf</span> <span class="pre">&gt;=</span> <span class="pre">-7</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_pyfant.fileatoms.FileAtoms.find_atom">
+<code class="descname">find_atom</code><span class="sig-paren">(</span><em>search</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileatoms.FileAtoms.find_atom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Atom object given search string such as &#8220;Fe1&#8221;; may raise ValueError or IndexError</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -451,6 +467,18 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 <dt id="f311.filetypes.ft_pyfant.fileatoms.FileAtoms.lines">
 <code class="descname">lines</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileatoms.FileAtoms.lines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merges all AtomicLine objects. Returns a list.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_pyfant.fileatoms.FileAtoms.llfin">
+<code class="descname">llfin</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileatoms.FileAtoms.llfin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum wavelength</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_pyfant.fileatoms.FileAtoms.llzero">
+<code class="descname">llzero</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileatoms.FileAtoms.llzero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum wavelength</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -516,6 +544,18 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 <dt id="f311.filetypes.ft_pyfant.fileatoms.Atom.lambda_">
 <code class="descname">lambda_</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileatoms.Atom.lambda_" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_pyfant.fileatoms.Atom.llfin">
+<code class="descname">llfin</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileatoms.Atom.llfin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum wavelength</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_pyfant.fileatoms.Atom.llzero">
+<code class="descname">llzero</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileatoms.Atom.llzero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum wavelength</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.fileatoms.Atom.one_liner_str">
@@ -1215,7 +1255,7 @@ attributes, except for redundant attributes, i.e.:</p>
 
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info">
-<code class="descname">gui_info</code><em class="property"> = {'molecule': {'formula': [None, &quot;formula of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;]}, 'pfantmol': {'description': [None, 'free text'], 'bm': [None, 'mass of second element'], 'ua': [None, 'value of partition function for first element'], 'am': [None, 'mass of first element'], 'do': [None, 'dissociation constant (eV)'], 'ub': [None, 'value of partition function for second element'], 'cro': [None, 'delta Kronecker (1: Sigma-Sigma transitions; 0: non-Sigma transitions)'], 'te': [None, 'electronic term'], 'fe': [None, 'oscillator strength']}, 'state': {'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'A': [None, 'Coupling counstant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)']}, 'system': {'to_label': ['State&quot;', None], 'from_label': [&quot;State'&quot;, None], 'to_spdf': ['Λ&quot;', '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'from_spdf': [&quot;Λ'&quot;, '0/1/2/3 meaning Σ/Π/Δ/Φ']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info" title="Permalink to this definition">¶</a></dt>
+<code class="descname">gui_info</code><em class="property"> = {'system': {'to_spdf': ['Λ&quot;', '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'to_label': ['State&quot;', None], 'from_spdf': [&quot;Λ'&quot;, '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'from_label': [&quot;State'&quot;, None]}, 'pfantmol': {'fe': [None, 'oscillator strength'], 'ua': [None, 'value of partition function for first element'], 'do': [None, 'dissociation constant (eV)'], 'cro': [None, 'delta Kronecker (1: Sigma-Sigma transitions; 0: non-Sigma transitions)'], 'am': [None, 'mass of first element'], 'ub': [None, 'value of partition function for second element'], 'bm': [None, 'mass of second element'], 'description': [None, 'free text'], 'te': [None, 'electronic term']}, 'state': {'A': [None, 'Coupling counstant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)']}, 'molecule': {'formula': [None, &quot;formula of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;]}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1404,6 +1444,18 @@ information for each molecule inside a Molecule object.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="f311.filetypes.ft_pyfant.filemolecules.FileMolecules.llfin">
+<code class="descname">llfin</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.FileMolecules.llfin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum wavelength</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_pyfant.filemolecules.FileMolecules.llzero">
+<code class="descname">llzero</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.FileMolecules.llzero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum wavelength</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemolecules.FileMolecules.lmbdam">
 <code class="descname">lmbdam</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.FileMolecules.lmbdam" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -1497,6 +1549,18 @@ information for each molecule inside a Molecule object.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="f311.filetypes.ft_pyfant.filemolecules.Molecule.llfin">
+<code class="descname">llfin</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.Molecule.llfin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum wavelength</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_pyfant.filemolecules.Molecule.llzero">
+<code class="descname">llzero</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.Molecule.llzero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum wavelength</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemolecules.Molecule.lmbdam">
 <code class="descname">lmbdam</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.Molecule.lmbdam" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -1579,6 +1643,18 @@ but I suspect this is the upper one.</li>
 <dt id="f311.filetypes.ft_pyfant.filemolecules.SetOfLines.jj">
 <code class="descname">jj</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines.jj" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Attention</strong> Returns numpy array</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_pyfant.filemolecules.SetOfLines.llfin">
+<code class="descname">llfin</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines.llfin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum wavelength</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_pyfant.filemolecules.SetOfLines.llzero">
+<code class="descname">llzero</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines.llzero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum wavelength</p>
 </dd></dl>
 
 <dl class="attribute">
