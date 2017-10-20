@@ -1,6 +1,7 @@
 from ... import filetypes as ft
 from .basic import Vis
-# from ... import explorer as ex
+import matplotlib.pyplot as plt
+
 
 __all__ = ["VisPrint", "VisSpectrum"]
 
@@ -24,5 +25,6 @@ class VisSpectrum(Vis):
     def _do_use(self, m):
         from f311 import explorer as ex
         s = m.spectrum
+        plt.figure()
         ex.plot_spectra([s])
 

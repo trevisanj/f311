@@ -13,7 +13,8 @@ __all__ = ["adjust_atomic_symbol", "description_to_symbols", "symbols_to_formula
            "iz_to_branch", "branch_to_iz",
            "get_default_data_path", "iz_to_branch_alt", "branch_to_iz_alt",
            "molconsts_to_system_str", "greek_to_spdf", "spdf_to_greek",
-           "SS_PLAIN", "SS_ALL_SPECIAL", "SS_RAW", "SS_SUPERSCRIPT"
+           "SS_PLAIN", "SS_ALL_SPECIAL", "SS_RAW", "SS_SUPERSCRIPT",
+           "str_to_elem_ioni",
            ]
 
 
@@ -28,6 +29,19 @@ def adjust_atomic_symbol(x):
     """Makes sure atomic symbol is right-aligned and upper case (PFANT convention)."""
     assert isinstance(x, str)
     return "%2s" % (x.strip().upper())
+
+
+def str_to_elem_ioni(search):
+    """str_to_elem_ioni("C1") --> (adjust_atomic_symbol("C"), 1)"""
+    r = re.search("(\w+)(\d+)", search)
+    if r is None:
+        raise ValueError(
+            "Invalid search string: '{}' (must be '<element><ioni>')".format(search))
+    elem, ioni = r.groups()
+    elem = adjust_atomic_symbol(elem)
+    ioni = int(ioni)
+    return elem, ioni
+
 
 # Formulas that can be recognized in PFANT molecule header information ("titulo")
 # This exists for backward compatibility. New molecules should have its symbols informed separately

@@ -81,6 +81,33 @@ Spectral synthesis - Continuum
 .. figure:: ../figures/continuum.png
    :align: center
 
+Spectral synthesis - Separate atomic species
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+PFANT atomic lines files contains wavelength, log_gf and other tabulated information for several
+(element, ionization level) atomic species.
+
+The following code calculates isolated atomic spectra for a list of arbitrarily chosen atomic species.
+
+.. literalinclude:: ../examples/synthesis/synthesis-atoms.py
+
+.. figure:: ../figures/synthesis-atoms.png
+   :align: center
+
+Spectral synthesis - Separate molecules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. literalinclude:: ../examples/synthesis/synthesis-molecules.py
+
+.. figure:: ../figures/synthesis-molecules-0.png
+   :align: center
+
+.. figure:: ../figures/synthesis-molecules-1.png
+   :align: center
+
+etc.
+
 
 Gaussian profiles as nulbad outputs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -36,6 +36,16 @@ class SetOfLines(a99.AttrsPart):
     attrs = ["vl", "v2l", "qqv", "ggv", "bbv", "ddv", "fact", "num_lines", "state_from", "state_to"]
 
     @property
+    def llzero(self):
+        """Minimum wavelength"""
+        return min(self._lmbdam)
+
+    @property
+    def llfin(self):
+        """Maximum wavelength"""
+        return max(self._lmbdam)
+
+    @property
     def lmbdam(self):
         """**Attention** Returns numpy array"""
         return np.array(self._lmbdam)
@@ -146,6 +156,16 @@ class Molecule(a99.AttrsPart):
              "te", "cro", "s", "nv", "num_lines"]
 
     @property
+    def llzero(self):
+        """Minimum wavelength"""
+        return min([a.llzero for a in self.sol])
+
+    @property
+    def llfin(self):
+        """Maximum wavelength"""
+        return max([a.llfin for a in self.sol])
+
+    @property
     def lmbdam(self):
         return np.hstack([x.lmbdam for x in self.sol])
 
@@ -253,6 +273,16 @@ class FileMolecules(DataFile):
     editors = ["mled.py"]
 
     @property
+    def llzero(self):
+        """Minimum wavelength"""
+        return min([a.llzero for a in self.molecules])
+
+    @property
+    def llfin(self):
+        """Maximum wavelength"""
+        return max([a.llfin for a in self.molecules])
+
+    @property
     def num_lines(self):
         """Total number of spectral line, counting all molecules."""
         return sum([x.num_lines for x in self.molecules])
@@ -340,7 +370,7 @@ class FileMolecules(DataFile):
         self.molecules = []
 
         # Literal in second row of file, sortta used as a file title/description
-        self.titm = None
+        self.titm = ""
 
     def __len__(self):
         return len(self.molecules)

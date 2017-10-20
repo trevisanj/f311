@@ -46,6 +46,7 @@ if __name__ == "__main__":
         spectra.append(enulbad.result["convolved"])
 
     # # 3) Plots
+    f = plt.figure()
     ex.draw_spectra_overlapped(spectra)
     K = 0.7
     a99.set_figure_size(plt.gcf(), 1300*K, 500*K)

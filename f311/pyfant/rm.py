@@ -376,6 +376,12 @@ class RunnableManager(QObject, threading.Thread):
 
     def __unlocked_add_runnables(self, runnables):
         n = len(self.__runnables)
+
+        # Checks whether runnables are configures to deliver their output to session directory
+        for runnable in runnables:
+            if not runnable.conf.flag_output_to_dir:
+                raise RuntimeError("Cannot add runnable with flag_output_to_dir set to False, this cannot end well")
+
         self.__runnables.extend(runnables)
         self.__idxs_to_run.extend(list(range(n, n + len(runnables))))
 

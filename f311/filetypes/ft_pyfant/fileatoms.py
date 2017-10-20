@@ -9,7 +9,7 @@ import numpy as np
 import tabulate
 import a99
 from .. import DataFile, adjust_atomic_symbol
-
+import re
 
 @a99.froze_it
 class Atom(a99.AttrsPart):
@@ -19,6 +19,16 @@ class Atom(a99.AttrsPart):
     Atom is identified by key symbol+ionization
     """
     attrs = ["elem", "ioni"]
+
+    @property
+    def llzero(self):
+        """Minimum wavelength"""
+        return min([x.lambda_ for x in self.lines])
+
+    @property
+    def llfin(self):
+        """Maximum wavelength"""
+        return max([x.lambda_ for x in self.lines])
 
     # Properties that iterate through the AtomicLine objects to mount vectors
     @property
@@ -103,6 +113,16 @@ class FileAtoms(DataFile):
     editors = ["ated.py"]
 
     @property
+    def llzero(self):
+        """Minimum wavelength"""
+        return min([a.llzero for a in self.atoms])
+
+    @property
+    def llfin(self):
+        """Maximum wavelength"""
+        return max([a.llfin for a in self.atoms])
+
+    @property
     def num_lines(self):
         ret = sum(map(len, self.atoms))
         return ret
@@ -155,6 +175,18 @@ class FileAtoms(DataFile):
         headers = ["Species", "Number of lines"]
         return tabulate.tabulate(data, headers)
 
+    def find_atom(self, search):
+        """Returns Atom object given search string such as "Fe1"; may raise ValueError or IndexError"""
+        import f311.filetypes as ft
+        elem, ioni = ft.str_to_elem_ioni(search)
+
+        for atom in self.atoms:
+            if atom.elem == elem and atom.ioni == ioni:
+                return atom
+
+        raise IndexError("Cannot find '{}'".format(search))
+
+
     def cut(self, llzero, llfin):
         """Keeps only the lines with their llzero <= lambda_ <= llfin."""
         for i in reversed(list(range(len(self)))):
@@ -168,9 +200,12 @@ class FileAtoms(DataFile):
         Filters atomic lines for which function(line) is true.
 
         Args:
-          function: receives an AtomicLine object as argument.
+            function: callable:
 
-        Example: lambda line: line.algf >= -7
+                - receives an AtomicLine object as argument,
+                - must return True or False (meaning whether or not you want that atomic line)
+
+        "function" example: ``lambda line: line.algf >= -7``
         """
         for i in reversed(list(range(len(self)))):
             atom = self.atoms[i]

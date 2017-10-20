@@ -24,7 +24,7 @@ __all__ = [
 # Terminal-based interface
 
 
-def run_parallel(rr, max_simultaneous=None, flag_console=True, runnable_manager=None, flag_verbose=False):
+def run_parallel(rr, max_simultaneous=None, flag_console=False, runnable_manager=None, flag_verbose=False):
     """
     Args:
         rr: list of Runnable instances

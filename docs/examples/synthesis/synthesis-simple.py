@@ -27,6 +27,7 @@ if __name__ == "__main__":
     obj.load_result()
     print("obj.result = {}".format(obj.result))
     res = obj.result
+    plt.figure()
     ex.draw_spectra_overlapped([res["norm"], res["convolved"]])
     plt.savefig("norm-convolved.png")
     plt.show()

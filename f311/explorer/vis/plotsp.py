@@ -40,7 +40,9 @@ class PlotSpectrumSetup(object):
         flag_legend: Whether to show legend in plot
     """
     def __init__(self, fmt_xlabel="{.xunit}", fmt_ylabel="{.yunit}", fmt_title="{.title}",
-                 ymin=None, flag_legend=True):
+                 ymin=None, flag_legend=True, flag_xlabel=True, flag_ylabel=True):
+        self.flag_xlabel = flag_xlabel
+        self.flag_ylabel = flag_ylabel
         self.fmt_xlabel = fmt_xlabel
         self.fmt_ylabel = fmt_ylabel
         self.fmt_title = fmt_title
@@ -84,13 +86,13 @@ def plot_spectra_overlapped(ss, title=None, setup=_default_setup):
       setup: PlotSpectrumSetup object
     """
 
+    plt.figure()
     draw_spectra_overlapped(ss, title, setup)
     plt.show()
 
 
 def draw_spectra_overlapped(ss, title=None, setup=_default_setup):
     a99.format_BLB()
-    f = plt.figure()
     xunit, yunit = None, None
     for i, s in enumerate(ss):
         if xunit is None:
@@ -111,7 +113,8 @@ def draw_spectra_overlapped(ss, title=None, setup=_default_setup):
 
     # plt.ylabel('({})'.format(yunit))
     # **Note** Takes last spectrum as reference to mount x-label
-    _set_plot(plt.xlabel, setup.fmt_xlabel, s)
+    if setup.flag_xlabel and setup.fmt_xlabel:
+        _set_plot(plt.xlabel, setup.fmt_xlabel, s)
     xmin, xmax, ymin_, ymax, xspan, yspan = _calc_max_min(ss)
     ymin = ymin_ if setup.ymin is None else setup.ymin
     plt.xlim([xmin - xspan * _T, xmax + xspan * _T])
@@ -160,7 +163,8 @@ def plot_spectra_pieces_pdf(ss, aint=10, pdf_filename='pieces.pdf', setup=_defau
             s_cut = ex.cut_spectrum(s, lambda0, lambda1)
             ax = plt.gca()
             ax.plot(s_cut.x, s_cut.y, label=s.title)
-        plt.xlabel('Wavelength (interval: [{0:g}, {1:g}])'.format(lambda0, lambda1))
+        if setup.flag_xlabel and setup.fmt_xlabel:
+            plt.xlabel('Wavelength (interval: [{0:g}, {1:g}])'.format(lambda0, lambda1))
         xspan = lambda1-lambda0
         ax.set_xlim([lambda0 - xspan * _T, lambda1 + xspan * _T])
         ax.set_ylim([ymin - yspan * _T, ymax + yspan * _T])
@@ -198,13 +202,11 @@ def plot_spectra_pages_pdf(ss, pdf_filename='pages.pdf', setup=_default_setup):
         title = s.title
         fig = plt.figure()
         plt.plot(s.x, s.y, c=_FAV_COLOR)
-        _set_plot(plt.xlabel, setup.fmt_xlabel, s)
-        if setup.fmt_ylabel:
+        if setup.flag_xlabel and setup.fmt_xlabel:
+            _set_plot(plt.xlabel, setup.fmt_xlabel, s)
+        if setup.flag_ylabel and setup.fmt_ylabel:
             _set_plot(plt.ylabel, setup.fmt_ylabel, s)
         _set_plot(plt.title, setup.fmt_title, s)
-        # plt.xlabel('Wavelength ({})'.format(s.xunit))
-        # plt.ylabel('({})'.format(s.yunit))
-        # plt.title(title)
         plt.xlim([xmin-xspan*_T, xmax+xspan*_T])
         plt.ylim([ymin-yspan*_T, ymax+yspan*_T])
         plt.tight_layout()
@@ -241,9 +243,7 @@ def draw_spectra(ss, title=None, num_rows=None, setup=_default_setup):
     else:
         num_cols = int(np.ceil(float(n) / num_rows))
     a99.format_BLB()
-    # if n == 1:
-    #     fig = plt.figure()
-    # else:
+
     fig, axarr = plt.subplots(num_rows, num_cols, sharex=True, squeeze=False)
     xmin = 1e38
     xmax = -1e38
@@ -289,7 +289,8 @@ def draw_spectra(ss, title=None, num_rows=None, setup=_default_setup):
         ax.set_xlim([xmin - span * _T, xmax + span * _T])
     for j in range(num_cols):
         ax = axarr[num_rows - 1, j]
-        _set_plot(ax.set_xlabel, setup.fmt_xlabel, s)
+        if setup.flag_xlabel and setup.fmt_xlabel:
+            _set_plot(ax.set_xlabel, setup.fmt_xlabel, s)
     plt.tight_layout()
     if title is not None:
         fig.canvas.set_window_title(title)
