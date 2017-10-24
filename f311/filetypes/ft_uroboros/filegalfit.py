@@ -1,7 +1,7 @@
 import a99
 from .. import DataFile
 from astropy.io import fits
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 __all__ = ["FileGalfit"]
 
@@ -49,6 +49,8 @@ class FileGalfit(DataFile):
         f = fits.open(filename)
 
         info = f.info(False)
+
+
         # Example:
         #     [(0, 'PRIMARY', 'PrimaryHDU', 8, (720, 720), 'float32', ''),
         #      (1, 'INPUT_fuv', 'ImageHDU', 40, (720, 720), 'float64', ''),
@@ -64,15 +66,22 @@ class FileGalfit(DataFile):
 
         kinds = defaultdict(lambda: [])
         kind_names = ("INPUT", "MODEL", "RESIDUAL")
+        counts = Counter()
         idxs = {}
 
         for record in info[1:]:  # skips "PRIMARY"
             index = record[0]
             name = record[1]
             if name.startswith(kind_names):
+                counts[kind_name] += 1
                 kind_name, band_name = name.split("_")
                 kinds[kind_name].append(band_name)
                 idxs[(kind_name, band_name)] = index
+
+        # Validation: must find at least one INPUT, one MODEL, and one RESIDUAL
+        for kind_name in kind_names:
+            if kind_name not in counts:
+                raise RuntimeError("Cannot find a frame containing the word '{}' in its name".format(kind_name))
 
         # Validation: band names of all kinds must match
         if kinds["INPUT"] != kinds["MODEL"]:

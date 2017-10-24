@@ -13,7 +13,7 @@ if __name__ == "__main__":
     pf.copy_star(starname="sun-grevesse-1996")
     pf.link_to_data()
 
-    # Loads full atomic lines file
+    # Loads full molecular lines file
     fmol = ft.FileMolecules()
     fmol.load()
 

@@ -206,18 +206,18 @@ def create_or_replace_or_skip_links(ff, dest_dir="."):
         flag_skip = False
         a99.get_python_logger().info(("Considering file '%s' ..." % name))
         if os.path.isfile(ptd) and not os.path.islink(ptd):
-            a99.print_skipped("file exists in local directory")
+            _print_skipped("file exists in local directory")
             flag_skip = True
         else:
             obj = ft.load_with_classes(f, [ft.FileMain, ft.FileAbonds, ft.FileDissoc, ft.FileToH])
             if obj is not None:
-                a99.print_skipped("detected type %s" % obj.__class__.__name__)
+                _print_skipped("detected type %s" % obj.__class__.__name__)
                 flag_skip = True
             else:
                 obj = ft.load_with_classes(f, [ft.FileModBin])
                 if obj is not None:
                     if len(obj) == 1:
-                        a99.print_skipped("%s of only one record" % obj.__class__.__name__)
+                        _print_skipped("%s of only one record" % obj.__class__.__name__)
                         flag_skip = True
 
         if not flag_skip:
@@ -247,14 +247,14 @@ def copy_or_skip_files(ff, dest_dir="."):
         flag_skip = False
         a99.get_python_logger().info("Considering file '%s' ..." % name)
         if os.path.isfile(name):
-            a99.print_skipped("file exists in local directory")
+            _print_skipped("file exists in local directory")
             flag_skip = True
         else:
             obj = ft.load_with_classes(f, [ft.FileMain, ft.FileAbonds, ft.FileDissoc])
             if obj is not None:
                 pass
             else:
-                a99.print_skipped("neither main, abonds, nor dissoc file")
+                _print_skipped("neither main, abonds, nor dissoc file")
                 flag_skip = True
 
         if not flag_skip:
@@ -264,3 +264,7 @@ def copy_or_skip_files(ff, dest_dir="."):
             except Exception as e:
                 a99.print_error("Error copying file: %s" % str(e))
 
+
+def _print_skipped(reason):
+    """Standardized printing for when a file was skipped."""
+    a99.get_python_logger().info("   ... SKIPPED ({0!s}).".format(reason))

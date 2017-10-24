@@ -73,6 +73,16 @@ class Spectrum(object):
         return self.x[-1]
 
     @property
+    def llzero(self):
+        """Lower bound of wavelength vector. Synonym with l0"""
+        return self.x[0]
+
+    @property
+    def llfin(self):
+        """Upper bound of wavelength vector. Synonym with lf"""
+        return self.x[-1]
+
+    @property
     def flux(self):
         """Flux vector. Equivalent to `y`"""
         return self.y

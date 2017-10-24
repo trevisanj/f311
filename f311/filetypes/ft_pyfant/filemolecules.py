@@ -522,7 +522,7 @@ class FileMolecules(DataFile):
             a99.write_lf(h, self.titm)
             a99.write_lf(h, " ".join([str(x.nv) for x in self.molecules]))
             for i_m, m in enumerate(self.molecules):
-                print("Saving '{}': molecule {}/{}".format(filename, i_m+1, len(self.molecules)))
+                a99.get_python_logger().info("Saving '{}': molecule {}/{}".format(filename, i_m+1, len(self.molecules)))
 
                 # # Assembles "titulo"
                 # ## Transitions

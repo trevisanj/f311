@@ -4,7 +4,17 @@ import a99
 import os
 import re
 
-__all__ = ["FilePy"]
+__all__ = ["FilePy", "ConfigDict", "FilePyConfig"]
+
+
+@a99.froze_it
+class ConfigDict(dict):
+    """Data class to store config options as dictionary"""
+    def __missing__(self, key):
+        return None
+
+    def __repr__(self):
+        return "{}({})".format(self.__class__.__name__, dict.__repr__(self))
 
 
 class FilePy(DataFile):
@@ -61,3 +71,28 @@ class FilePy(DataFile):
             attrname = varname
 
         setattr(self, attrname, obj)
+
+
+
+class FilePyConfig(FilePy):
+    """Base class for config files. Inherit and set class variable 'modulevarname' besides usual"""
+
+    attrs = ["obj"]
+
+    # Name of variable in module
+    modulevarname = "obj"
+
+    def __init__(self):
+        FilePy.__init__(self)
+        self.obj = ConfigDict()
+
+    def _do_load(self, filename):
+        module = a99.import_module(filename)
+        self._copy_attr(module, self.modulevarname, ConfigDict, "obj")
+
+    def _do_save_as(self, filename):
+        with open(filename, "w") as h:
+            h.write("{}\n"
+                    "from f311.filetypes import ConfigDict\n"
+                    "\n"
+                    "{} = {}\n".format(self._get_header(), self.modulevarname, a99.make_code_readable(repr(self.obj))))

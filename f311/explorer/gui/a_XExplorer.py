@@ -592,7 +592,6 @@ class XExplorer(QMainWindow):
         with self.__lock_propss:
             ii = self.tableWidget.selectedIndexes()
             i_rows = {idx.row() for idx in ii}
-            # print "AS LINHA", i_rows
             propss = [self.__propss[i_row] for i_row in i_rows]
             return propss
 
