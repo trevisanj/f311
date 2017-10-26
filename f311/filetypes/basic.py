@@ -14,8 +14,81 @@ __all__ = ["adjust_atomic_symbol", "description_to_symbols", "symbols_to_formula
            "get_default_data_path", "iz_to_branch_alt", "branch_to_iz_alt",
            "molconsts_to_system_str", "greek_to_spdf", "spdf_to_greek",
            "SS_PLAIN", "SS_ALL_SPECIAL", "SS_RAW", "SS_SUPERSCRIPT",
-           "str_to_elem_ioni",
+           "str_to_elem_ioni", "parse_system_str", "split_molecules_description"
            ]
+
+
+# **        ****                ******        ****                ******        ****
+#   **    **    ******    ******      **    **    ******    ******      **    **    ******    ******
+#     ****            ****              ****            ****              ****            ****
+#
+# Multiplicity- and spdf-related conversion and formatting routines
+
+# # System styles
+# Example: "A 2 SIGMA - X 2 PI"
+SS_PLAIN = -1
+# multiplicity as superscript, spdf as Greek letter name
+SS_SUPERSCRIPT = 2
+# multiplicity as superscript, spdf as Greek letter
+SS_ALL_SPECIAL = 0
+# Does not convert SPDF to string. Example: "A 2 0 - X 2 1"
+SS_RAW = 1
+
+__A = ["Sigma", "Pi", "Delta", "Phi"]
+
+_SPDF_TO_GREEK = dict(zip(range(len(__A)), __A))
+_GREEK_TO_SPDF = dict(zip(__A, range(len(__A))))
+
+def greek_to_spdf(greek):
+    """Converts Greek letter name (e.g., "sigma", "Sigma" (case **sensitive**)) to int value in [0, 1, 2, 3]"""
+    try:
+        ret = _GREEK_TO_SPDF[greek]
+    except KeyError:
+        raise ValueError("Invalid SPDF: '{}' (value must be in {})".format(greek, list(_SPDF_TO_GREEK.values())))
+    return ret
+
+def spdf_to_greek(number):
+    """Converts int value in [0, 1, 2, 3] to the name of a Greek letter (all uppercase)"""
+    try:
+        return _SPDF_TO_GREEK[number]
+    except KeyError:
+        # "?" is the "zero-element"
+        return "?"
+
+
+def molconsts_to_system_str(molconsts, style=SS_ALL_SPECIAL):
+    """Compiles electronic system information into string
+
+    Args:
+        molconsts: dict-like containing keys 'from_label', 'from_mult', 'from_spdf', 'to_label',
+                    'to_mult', 'to_spdf'
+
+        style: rendering style: one of SS_*
+
+    Returns:
+        str
+    """
+
+    if style == SS_PLAIN:
+        fmult = lambda x: x
+        fspdf = lambda x:spdf_to_greek(x)
+    elif style == SS_ALL_SPECIAL:
+        fmult = lambda x: a99.int_to_superscript(x)
+        fspdf = lambda x: a99.greek_to_unicode(spdf_to_greek(x).capitalize())
+    elif style == SS_RAW:
+        fmult = lambda x: x
+        fspdf = lambda x: x
+    elif style == SS_SUPERSCRIPT:
+        fmult = lambda x: a99.int_to_superscript(x)
+        fspdf = lambda x:spdf_to_greek(x)
+    else:
+        raise ValueError("Invalid style: {}".format(style))
+
+    return "{} {} {} - {} {} {}".format(molconsts["from_label"], fmult(int(molconsts["from_mult"])),
+                                    fspdf(molconsts["from_spdf"]), molconsts["to_label"],
+                                    fmult(int(molconsts["to_mult"])), fspdf(molconsts["to_spdf"]))
+
+
 
 
 # **        ****                ******        ****                ******        ****
@@ -60,6 +133,69 @@ _BUILTIN_FORMULAS = {
      "TIO": ["TI", "O"],
      "CO": ["C", "O"],
 }
+
+__TRBLOCK = [lambda x: x, lambda x: int(x), lambda x: greek_to_spdf(x.capitalize())]
+# lambda functions to convert the parsed bits, in sync with (from_label, ..., to_spdf)
+_PSS_TRANSFORMS = __TRBLOCK * 2
+
+def parse_system_str(string):
+    """
+    Parses "system string" --> (from_label, from_mult, from_spdf, to_label, to_mult, to_spdf)
+
+    Args:
+        string: see convention below
+
+    **Convention** system string::
+
+        "from_label from_mult from_spdf_greek - from_label from_mult from_spdf_greek"
+        or
+        "label mult spdf_greek" (assumed initial and final state are the same).
+
+        **Note** (*spdf*) are Greek letter names, case-INsensitive;
+                 extra "+"/"-" (for example, in "SIGMA+") is ignored
+
+    System string examples::
+
+        "[A 2 Sigma - X 2 Pi]"
+
+        "[X 1 SIGMA+]"
+
+    """
+
+    expr = re.compile(
+        "\[\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)[+-]{0,1}\s*-+\s*\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)[+-]{0,1}\s*\]")
+    groups = expr.search(string)
+    if groups is not None:
+        _pieces = [groups[i] for i in range(1, 7)]
+    else:
+        # Initial and final state are the same. Example "12C16O INFRARED [X 1 SIGMA+]"
+        expr = re.compile("\[\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)[+-]{0,1}\s*\]")
+
+        groups = expr.search(string)
+        if groups is not None:
+            _pieces = [groups[i] for i in range(1, 4)] * 2
+
+        if groups is None:
+            raise ValueError("Could not understand str '{}'".format(string))
+
+
+    pieces = [f(piece) for f, piece in zip(_PSS_TRANSFORMS, _pieces)]
+
+    return pieces
+
+
+def split_molecules_description(descr):
+    """Breaks PFANT molecule description into "(name) (system) (optional notes)" --> (name, system, notes)
+
+    System is identified by enclosing square brackets ("[", "]")
+    """
+
+    match = re.match("(.+?)\s*(\[.+\])\s*(.*)", descr)
+
+    if match is None:
+        raise ValueError("Invalid PFANT molecule description: '{}'".format(descr))
+
+    return match.groups()
 
 
 def description_to_symbols(descr):
@@ -245,76 +381,5 @@ def copy_default_data_file(filename, module=None):
 def __get_filetypes_module():
     from f311 import filetypes as ft
     return ft
-
-
-# **        ****                ******        ****                ******        ****
-#   **    **    ******    ******      **    **    ******    ******      **    **    ******    ******
-#     ****            ****              ****            ****              ****            ****
-#
-# Multiplicity- and spdf-related conversion and formatting routines
-
-# # System styles
-# Example: "A 2 SIGMA - X 2 PI"
-SS_PLAIN = -1
-# multiplicity as superscript, spdf as Greek letter name
-SS_SUPERSCRIPT = 2
-# multiplicity as superscript, spdf as Greek letter
-SS_ALL_SPECIAL = 0
-# Does not convert SPDF to string. Example: "A 2 0 - X 2 1"
-SS_RAW = 1
-
-__A = ["Sigma", "Pi", "Delta", "Phi"]
-
-_SPDF_TO_GREEK = dict(zip(range(len(__A)), __A))
-_GREEK_TO_SPDF = dict(zip(__A, range(len(__A))))
-
-def greek_to_spdf(greek):
-    """Converts Greek letter name (e.g., "sigma", "Sigma" (case **sensitive**)) to int value in [0, 1, 2, 3]"""
-    try:
-        ret = _GREEK_TO_SPDF[greek]
-    except KeyError:
-        raise ValueError("Invalid SPDF: '{}' (possible values: {})".format(greek, _SPDF_TO_GREEK))
-    return ret
-
-def spdf_to_greek(number):
-    """Converts int value in [0, 1, 2, 3] to the name of a Greek letter (all uppercase)"""
-    try:
-        return _SPDF_TO_GREEK[number]
-    except KeyError:
-        # "?" is the "zero-element"
-        return "?"
-
-
-def molconsts_to_system_str(molconsts, style=SS_ALL_SPECIAL):
-    """Compiles electronic system information into string
-
-    Args:
-        molconsts: dict-like containing keys 'from_label', 'from_mult', 'from_spdf', 'to_label',
-                    'to_mult', 'to_spdf'
-
-        style: rendering style: one of SS_*
-
-    Returns:
-        str
-    """
-
-    if style == SS_PLAIN:
-        fmult = lambda x: x
-        fspdf = lambda x:spdf_to_greek(x)
-    elif style == SS_ALL_SPECIAL:
-        fmult = lambda x: a99.int_to_superscript(x)
-        fspdf = lambda x: a99.greek_to_unicode(spdf_to_greek(x).capitalize())
-    elif style == SS_RAW:
-        fmult = lambda x: x
-        fspdf = lambda x: x
-    elif style == SS_SUPERSCRIPT:
-        fmult = lambda x: a99.int_to_superscript(x)
-        fspdf = lambda x:spdf_to_greek(x)
-    else:
-        raise ValueError("Invalid style: {}".format(style))
-
-    return "{} {} {} - {} {} {}".format(molconsts["from_label"], fmult(int(molconsts["from_mult"])),
-                                    fspdf(molconsts["from_spdf"]), molconsts["to_label"],
-                                    fmult(int(molconsts["to_mult"])), fspdf(molconsts["to_spdf"]))
 
 

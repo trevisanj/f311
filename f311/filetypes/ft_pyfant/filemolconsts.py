@@ -9,7 +9,7 @@ class FileMolConsts(FilePy):
     """Python source containing 'fobj = MolConsts(...)"""
 
     description = "molecular constants"
-    default_filename = "molconsts.py"
+    default_filename = "configmolconsts.py"
     attrs = ["molconsts"]
     editors = ["mced.py"]
 

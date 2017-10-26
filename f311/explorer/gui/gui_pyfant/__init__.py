@@ -10,3 +10,4 @@ from .a_XFileMain import *
 from .a_XFileMolecules import *
 from .a_XMainAbonds import *
 from .a_XMolLinesEditor import *
+from .a_WContinuum import *

@@ -288,6 +288,11 @@ class FileMolecules(DataFile):
         return sum([x.num_lines for x in self.molecules])
 
     @property
+    def num_sols(self):
+        """Total number of spectral line, counting all molecules."""
+        return sum([len(x) for x in self.molecules])
+
+    @property
     def lmbdam(self):
         return np.hstack([np.hstack([x.lmbdam for x in m.sol]) for m in self.molecules])
 

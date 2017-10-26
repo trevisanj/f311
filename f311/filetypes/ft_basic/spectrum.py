@@ -3,6 +3,7 @@ from astropy import units as u
 from scipy import interp
 import numpy as np
 import a99
+import os
 
 __all__ = ["Spectrum", "fnu", "flambda"]
 
@@ -47,8 +48,8 @@ class Spectrum(object):
     def title(self):
         """"Title" of the spectrum. Calculated, read-only property"""
         ret = None
-        if ret is None:
-            ret = self.filename
+        if ret is None and self.filename is not None:
+            ret = os.path.split(self.filename)[1]
         if ret is None:
             ret = self.more_headers.get("ORIGIN")
         return ret

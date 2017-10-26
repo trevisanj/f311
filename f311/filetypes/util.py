@@ -57,6 +57,8 @@ def load_with_classes(filename, classes):
         # # also cannot let OSError through because astropy.io.fits raises OSError!!
         # except OSError:
         #     raise
+        except FileNotFoundError:
+            raise
         except Exception as e:  # (ValueError, NotImplementedError):
             # Note: for debugging, switch the below to True
             if a99.logging_level == logging.DEBUG:

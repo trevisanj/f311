@@ -14,7 +14,8 @@ import a99
 import f311.filetypes as ft
 
 __all__ = ["plot_spectra", "plot_spectra_overlapped", "plot_spectra_pieces_pdf",
- "plot_spectra_pages_pdf", "draw_spectra", "PlotSpectrumSetup", "draw_spectra_overlapped"]
+ "plot_spectra_pages_pdf", "draw_spectra", "PlotSpectrumSetup", "draw_spectra_overlapped",
+ "calc_max_min"]
 
 
 _T = 0.02  # percentual amount of extra space on left, right, top, bottom of graphics
@@ -50,8 +51,8 @@ class PlotSpectrumSetup(object):
         self.flag_legend = flag_legend
 
     def __repr__(self):
-        return "{}('{}', '{}', '{}', {}, {})".format(self.__class__.__name__,self.fmt_xlabel, self.fmt_ylabel,
-                                           self.fmt_title, self.ymin, self.flag_legend)
+        return "{}('{}', '{}', '{}', {}, {})".format(self.__class__.__name__,self.fmt_xlabel,
+          self.fmt_ylabel, self.fmt_title, self.ymin, self.flag_legend)
 
 
 _default_setup = PlotSpectrumSetup()
@@ -115,7 +116,7 @@ def draw_spectra_overlapped(ss, title=None, setup=_default_setup):
     # **Note** Takes last spectrum as reference to mount x-label
     if setup.flag_xlabel and setup.fmt_xlabel:
         _set_plot(plt.xlabel, setup.fmt_xlabel, s)
-    xmin, xmax, ymin_, ymax, xspan, yspan = _calc_max_min(ss)
+    xmin, xmax, ymin_, ymax, xspan, yspan = calc_max_min(ss)
     ymin = ymin_ if setup.ymin is None else setup.ymin
     plt.xlim([xmin - xspan * _T, xmax + xspan * _T])
     plt.ylim([ymin - yspan * _T, ymax + yspan * _T])
@@ -143,7 +144,7 @@ def plot_spectra_pieces_pdf(ss, aint=10, pdf_filename='pieces.pdf', setup=_defau
 
     import f311.explorer as ex
 
-    xmin, xmax, ymin_, ymax, _, yspan = _calc_max_min(ss)
+    xmin, xmax, ymin_, ymax, _, yspan = calc_max_min(ss)
     ymin = ymin_ if setup.ymin is None else setup.ymin
 
     num_pages = int(math.ceil((xmax-xmin)/aint)) # rightmost point may be left out...or not
@@ -193,7 +194,7 @@ def plot_spectra_pages_pdf(ss, pdf_filename='pages.pdf', setup=_default_setup):
       TODO
     """
     logger = a99.get_python_logger()
-    xmin, xmax, ymin_, ymax, xspan, yspan = _calc_max_min(ss)
+    xmin, xmax, ymin_, ymax, xspan, yspan = calc_max_min(ss)
     ymin = ymin_ if setup.ymin is None else setup.ymin
     num_pages = len(ss)
     a99.format_BLB()
@@ -218,7 +219,7 @@ def plot_spectra_pages_pdf(ss, pdf_filename='pages.pdf', setup=_default_setup):
     logger.info("File {0!s} successfully created.".format(pdf_filename))
 
 
-def _calc_max_min(ss):
+def calc_max_min(ss):
     """"Calculates (x, y) (max, min) for a list of Spectrum objects.
 
     Returns (xmin, xmax, ymin, ymax, xspan, yspan)

@@ -18,7 +18,8 @@ class MolConsts(dict):
              "state2l_omega_e", "state2l_B_e", "state2l_beta_e", "state2l_omega_ex_e",
              "state2l_alpha_e",
              "state2l_A", "state2l_omega_ey_e", "state2l_D_e", "name", "formula",
-             "id_molecule", "id_pfantmol", "id_system", "id_statel", "id_state2l"]
+             "id_molecule", "id_pfantmol", "id_system", "id_statel", "id_state2l",
+             "pfant_name", "pfant_notes"]
 
     def __init__(self, *args, **kwargs):
         dict.__init__(self, *args, **kwargs)
@@ -85,7 +86,7 @@ class MolConsts(dict):
 
     def populate_parse_str(self, string):
         """
-        Populates (from_*) and (to_*) taking string as input
+        Populates (from_*) and (to_*) taking PFANT molecule description string as input
 
         Args:
             string: str following convention below
@@ -94,14 +95,7 @@ class MolConsts(dict):
                        Formula at start of string, followed by ignored characters until square
                        bracket.
 
-        **Convention** system string:
-
-            "from_label from_mult from_spdf_greek - from_label from_mult from_spdf_greek"
-            or
-            "label mult spdf_greek" (assumed initial and final state are the same).
-
-            **Note** (*spdf*) are Greek letter names, case-INsensitive;
-                     extra "+"/"-" (for example, in "SIGMA+") is ignored
+        For the *system string* convention, see f311.filetypes.parse_system_str()
 
         FSS examples:
 
@@ -111,31 +105,20 @@ class MolConsts(dict):
         """
 
         fieldnames = ["from_label", "from_mult", "from_spdf", "to_label", "to_mult", "to_spdf"]
-        __trblock = [lambda x: x, lambda x: int(x), lambda x: basic.greek_to_spdf(x.capitalize())]
-        transforms = __trblock * 2
 
         # Formula
         symbols = basic.description_to_symbols(string)
         if symbols is not None:
             self["formula"] = basic.symbols_to_formula(symbols)
 
-        # Parses system
-        expr = re.compile("\[\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)[+-]{0,1}\s*-+\s*\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)[+-]{0,1}\s*\]")
-        groups = expr.search(string)
-        if groups is not None:
-            pieces = [groups[i] for i in range(1, 7)]
-        else:
-            # Initial and final state are the same. Example "12C16O INFRARED [X 1 SIGMA+]"
-            expr = re.compile("\[\s*([a-zA-Z])\s*(\d+)\s*([a-zA-Z0-9]+)[+-]{0,1}\s*\]")
+        # System
+        self.update(zip(fieldnames, basic.parse_system_str(string)))
 
-            groups = expr.search(string)
-            if groups is not None:
-                pieces = [groups[i] for i in range(1, 4)]*2
+        # PFANT name and notes
+        name, _, notes = basic.split_molecules_description(string)
+        self["pfant_name"] = name
+        self["pfant_notes"] = notes
 
-            if groups is None:
-                raise ValueError("Could not understand str '{}'".format(string))
-
-        self.update(zip(fieldnames, [f(piece) for f, piece in zip(transforms, pieces)]))
 
     def populate_all_using_str(self, db, string):
         import f311.filetypes as ft

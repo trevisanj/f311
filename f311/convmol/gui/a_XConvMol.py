@@ -478,13 +478,6 @@ class _WKuruczPanel(a99.WBase):
 
         lw.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-    def _set_flag(self, w, value):
-        save = w.blockSignals(True)
-        try:
-            w.setChecked(bool(value))
-        finally:
-            w.blockSignals(save)
-
     def _set_iso(self, value):
         if value is None:
             idx = 0
@@ -575,7 +568,7 @@ class _WConv(a99.WConfigEditor):
 
     @flag_hlf.setter
     def flag_hlf(self, value):
-        self._set_flag(self.checkbox_hlf, value)
+        a99.set_checkbox_value(self.checkbox_hlf, value)
 
     @property
     def flag_normhlf(self):
@@ -583,7 +576,7 @@ class _WConv(a99.WConfigEditor):
 
     @flag_normhlf.setter
     def flag_normhlf(self, value):
-        self._set_flag(self.checkbox_normhlf, value)
+        a99.set_checkbox_value(self.checkbox_normhlf, value)
 
     @property
     def flag_fcf(self):
@@ -591,7 +584,7 @@ class _WConv(a99.WConfigEditor):
 
     @flag_fcf.setter
     def flag_fcf(self, value):
-        self._set_flag(self.checkbox_fcf, value)
+        a99.set_checkbox_value(self.checkbox_fcf, value)
 
     @property
     def flag_special_fcf(self):
@@ -599,7 +592,7 @@ class _WConv(a99.WConfigEditor):
 
     @flag_special_fcf.setter
     def flag_special_fcf(self, value):
-        self._set_flag(self.checkbox_special_fcf, value)
+        a99.set_checkbox_value(self.checkbox_special_fcf, value)
 
     @property
     def flag_spinl(self):
@@ -607,7 +600,7 @@ class _WConv(a99.WConfigEditor):
 
     @flag_spinl.setter
     def flag_spinl(self, value):
-        self._set_flag(self.checkbox_spinl, value)
+        a99.set_checkbox_value(self.checkbox_spinl, value)
 
     @property
     def flag_quiet(self):
@@ -615,7 +608,7 @@ class _WConv(a99.WConfigEditor):
 
     @flag_quiet.setter
     def flag_quiet(self, value):
-        self._set_flag(self.checkbox_quiet, value)
+        a99.set_checkbox_value(self.checkbox_quiet, value)
 
 
     def __init__(self, parent_form):
@@ -973,7 +966,7 @@ class _WConv(a99.WConfigEditor):
             vis = ex.VisMolecules()
             vis.use(f)
 
-    def _set_flag(self, w, value):
+    def _set_checkbox_value(self, w, value):
         save = w.blockSignals(True)
         try:
             w.setChecked(bool(value))
