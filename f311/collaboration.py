@@ -8,11 +8,37 @@ import importlib
 import a99
 
 __all__ = [
-    "classes_txt", "classes_bin", "classes_sp", "classes_file", "classes_collection"
+    "classes_txt", "classes_bin", "classes_sp", "classes_file", "classes_collection",
+    "get_suitable_vis_classes", "get_suitable_vis_list_classes"
     ]
 
 
-__COLLABORATORS = ["f311.filetypes"]
+def get_suitable_vis_classes(obj):
+    """Retuns a list of Vis classes that can handle obj."""
+
+    ret = []
+    for class_ in classes_vis():
+        if isinstance(obj, class_.input_classes):
+            ret.append(class_)
+    return ret
+
+
+def get_suitable_vis_list_classes(objs):
+    """Retuns a list of VisList classes that can handle a list of objects."""
+
+    from f311 import explorer as ex
+
+    ret = []
+    for class_ in classes_vis():
+        if isinstance(class_, ex.VisList):
+            flag_can = True
+            for obj in objs:
+                if not isinstance(obj, class_.item_input_classes):
+                    flag_can = False
+                    break
+            if flag_can:
+                ret.append(class_)
+    return ret
 
 
 # def collaborators():
@@ -45,7 +71,6 @@ def classes_sp():
         __setup()
     return _classes_sp
 
-
 def classes_file():
     """All known File* classes"""
     if __flag_first:
@@ -61,6 +86,13 @@ def classes_collection():
     return classes_sp() + [ft.FileSpectrumList, ft.FileSparseCube, ft.FileFullCube]
 
 
+def classes_vis():
+    """All known Vis* classes"""
+    if __flag_first:
+        __setup()
+    return _classes_vis
+
+
 def _collect_classes(m):
     """
     Adds entries to _classes_*
@@ -69,6 +101,7 @@ def _collect_classes(m):
         m: module object that must contain the following sub-modules: datatypes, vis
     """
     from f311 import filetypes as ft
+    from f311 import explorer as ex
 
     def _extend(classes, newclasses):
         """Filters out classes already present in list.
@@ -89,6 +122,9 @@ def _collect_classes(m):
     _extend(_classes_sp, [class_ for class_ in file_classes if issubclass(class_, ft.FileSpectrum)])
     # All kwown File* classes
     _extend(_classes_file, file_classes)
+    # All kwnown Vis* classes
+
+    _extend(_classes_vis, a99.get_classes_in_module(m, ex.Vis))
 
 
 # # List of classes representing all file formats either read or written
@@ -97,6 +133,7 @@ _classes_txt = []
 _classes_bin = []
 _classes_sp = []
 _classes_file = []
+_classes_vis = []
 __flag_first = True
 __collaborators = OrderedDict()  # (("f311.filetypes",  f311.filetypes),))
 
@@ -105,7 +142,7 @@ def __setup():
     """Will be executed in the first time someone calls classes_*() """
     global __collaborators, __flag_first
     __flag_first = False
-    for pkgname in __COLLABORATORS:
+    for pkgname in COLLABORATORS:
         try:
             pkg = importlib.import_module(pkgname)
             a99.get_python_logger().info("Imported collaborator package '{}'".format(pkgname))

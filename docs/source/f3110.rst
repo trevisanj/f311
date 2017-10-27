@@ -1,0 +1,15 @@
+Package f311
+============
+
+The root package provides the collaboration model implementation.
+
+The collaboration model allows ``f311.COLLABORATORS`` to contribute with
+
+- ``DataFile`` subclasses, i.e., implement handling (load, save, etc.) of new file types;
+- ``Vis`` subclasses, i.e., implement visualizations for these files;
+- Standalone scripts placed in the directory ``packagename/scripts``
+
+API reference
+-------------
+
+:doc:`autodoc/f311`
