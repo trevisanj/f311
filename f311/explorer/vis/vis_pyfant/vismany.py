@@ -91,3 +91,27 @@ class VisAbonds(Vis):
         from f311 import explorer as ex
         form = a99.keep_ref(ex.XFileAbonds(self.parent_form, r))
         form.show()
+
+
+class VisWhatever(Vis):
+    cls_form = None
+
+    def _do_use(self, r):
+        cls_form = self._get_cls_form()
+        form = a99.keep_ref(cls_form(self.parent_form, r))
+        form.show()
+
+    def _get_cls_form(self):
+        """Method to return the class of the form to instantiate"""
+        raise NotImplementedError()
+
+
+class VisOptions(VisWhatever):
+    """Allows for editing a FileOptions object"""
+    input_classes = (ft.FileOptions,)
+    action = "Edit using command-line options file editor"
+
+    def _get_cls_form(self):
+        import f311.explorer as ex
+        return ex.XFileOptions
+

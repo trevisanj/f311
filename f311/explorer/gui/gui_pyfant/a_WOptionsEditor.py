@@ -117,7 +117,7 @@ class _Option(a99.AttrsPart):
         return value
 
 
-class WOptionsEditor(QWidget):
+class WOptionsEditor(a99.WEditor):
     """
     FileOptions editor widget.
 
@@ -125,18 +125,10 @@ class WOptionsEditor(QWidget):
       parent=None
     """
 
-    # Emitted whenever any value changes
-    changed = pyqtSignal()
-
     def __init__(self, parent=None):
-        QWidget.__init__(self, parent)
+        a99.WEditor.__init__(self, parent)
 
         # # Setup & accessible attributes
-
-        # Whether all the values in the fields are valid or not
-        self.flag_valid = False
-        self.f = None  # FileOptions object
-        self.logger = a99.get_python_logger()
 
         # # Internal stuff that must not be accessed from outside
 
@@ -149,9 +141,8 @@ class WOptionsEditor(QWidget):
 
         # # Central layout
 
-        la = self.layout_main = QVBoxLayout()
+        la = self.layout_editor
         a99.set_margin(la, 0)
-        self.setLayout(la)
 
         # ## Toolbar: checkboxes with executables
         l1 = self.layout_exes = QHBoxLayout()
@@ -571,7 +562,7 @@ class WOptionsEditor(QWidget):
                     # todo No consensus yet if it is better to show the default values
                     # option.update_edit_with_default()
             except:
-                self.logger.exception("Processing option '%s'" % option.name)
+                a99.get_python_logger().exception("Processing option '%s'" % option.name)
                 raise
         self.__update_from_data(ft.FileOptions(), True)
 
@@ -606,13 +597,12 @@ class WOptionsEditor(QWidget):
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Interface
 
-    def load(self, x):
+    def _do_load(self, x):
         assert isinstance(x, ft.FileOptions)
-        self.f = x
+        self._f = x
         self.__update_from_data(flag_reset=True)
         # this is called to perform file validation upon loading
         self.__update_data()
-        self.setEnabled(True)
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Qt override
@@ -763,7 +753,7 @@ class WOptionsEditor(QWidget):
                 emsg = str(E)
             a99.get_python_logger().exception("Updating Options object")
 
-        self.flag_valid = not flag_error
+        self._flag_valid = not flag_error
         self.__set_error_text(emsg)
 
     def __update_gui_visible_options(self):

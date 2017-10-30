@@ -24,14 +24,16 @@ __all__ = [
 # Terminal-based interface
 
 
-def run_parallel(rr, max_simultaneous=None, flag_console=False, runnable_manager=None, flag_verbose=False):
+def run_parallel(rr, max_simultaneous=None, flag_console=False, runnable_manager=None,
+                 flag_verbose=False, flag_exit_if_fail=False):
     """
     Args:
         rr: list of Runnable instances
         max_simultaneous: (defaults to RunnableManager.max_simultaneous)
-            maximum number of simultaneous processes.
+            maximum number of simultaneous processes. **Note** ineffective if runnable_manager is passed
         runnable_manager: if passed, will use passed; if not, will create new.
-        flag_verbose: whether of not to log any messages (besides console)
+        flag_verbose: whether of not to log any messages (besides console) **Note** if runnable_manager is passed, it will keep its own
+        flag_exit_if_fail: exit as soon as possible if any runnable fails? **Note** ineffective if runnable_manager is passed
 
     Returns: the RunnableManager object
     """
@@ -43,7 +45,8 @@ def run_parallel(rr, max_simultaneous=None, flag_console=False, runnable_manager
         assert isinstance(runnable_manager, pf.RunnableManager)
         rm = runnable_manager
     else:
-        rm = pf.RunnableManager(max_simultaneous=max_simultaneous, flag_verbose=flag_verbose)
+        rm = pf.RunnableManager(max_simultaneous=max_simultaneous, flag_verbose=flag_verbose,
+                                flag_exit_if_fail=flag_exit_if_fail)
     flag_had_to_start = False
     if not rm.flag_start_called:
         rm.start()

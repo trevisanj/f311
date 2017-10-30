@@ -96,3 +96,7 @@ class FilePyConfig(FilePy):
                     "from f311.filetypes import ConfigDict\n"
                     "\n"
                     "{} = {}\n".format(self._get_header(), self.modulevarname, a99.make_code_readable(repr(self.obj))))
+
+    def init_default(self):
+        # Already created OK
+        pass

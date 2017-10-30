@@ -21,7 +21,7 @@ __all__ = ["FileMolDB"]
 
 
 class FileMolDB(FileSQLiteDB):
-    description = "Database of Molecular Constants"
+    """Database of Molecular Constants"""
     default_filename = "moldb.sqlite"
     editors = ["convmol.py"]
     gui_info = {

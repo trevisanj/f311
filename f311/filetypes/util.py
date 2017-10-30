@@ -4,11 +4,10 @@ Miscellanea routines that depend on other modules and sub-packages.
 
 import logging
 import a99
-# from f311 import filetypes as ft
 from astropy.io import fits
-import tabulate
-from collections import namedtuple, OrderedDict
+from collections import OrderedDict
 import textwrap
+
 
 # TODO usage example for list_data_types(), or even a script
 
@@ -80,13 +79,13 @@ def load_any_file(filename):
         A DataFile descendant, whose specific class depends on the file format detected, or None
         if the file canonot be loaded
     """
-    from f311 import filetypes as ft
+    import f311
 
     # Splits attempts using ((binary X text) file) criterion
     if a99.is_text_file(filename):
-        return load_with_classes(filename, ft.classes_txt())
+        return load_with_classes(filename, f311.classes_txt())
     else:
-        return load_with_classes(filename, ft.classes_bin())
+        return load_with_classes(filename, f311.classes_bin())
 
 
 def load_spectrum(filename):
@@ -96,9 +95,9 @@ def load_spectrum(filename):
     Returns:
         a Spectrum, or None
     """
-    from f311 import filetypes as ft
+    import f311
 
-    f = load_with_classes(filename, ft.classes_sp())
+    f = load_with_classes(filename, f311.classes_sp())
     if f:
         return f.spectrum
     return None
@@ -106,7 +105,7 @@ def load_spectrum(filename):
 
 def load_spectrum_fits_messed_x(filename, sp_ref=None):
     """Loads FITS file spectrum that does not have the proper headers. Returns a Spectrum"""
-    from f311 import filetypes as ft
+    import f311.filetypes as ft
 
     # First tries to load as usual
     f = load_with_classes(filename, (ft.FileSpectrumFits,))
@@ -141,6 +140,7 @@ def load_spectrum_fits_messed_x(filename, sp_ref=None):
 FILE_TYPE_INFO_ATTRS = OrderedDict(zip(["description", "default_filename", "classname", "editors"],
                                        ["Description", "Default filename", "Class name", "Editors"]))
 
+
 def get_filetypes_info(editor_quote="`"):
     """
     Reports available data types
@@ -152,12 +152,11 @@ def get_filetypes_info(editor_quote="`"):
         list: list of FileTypeInfo
     """
     NONE_REPL = ""
-    from f311 import filetypes as ft
+    import f311
     data = []  # [FileTypeInfo, ...]
 
-    for attr in ft.classes_file():
-        doc = attr.__doc__
-        doc = attr.__name__ if doc is None else doc.strip().split("\n")[0]
+    for attr in f311.classes_file():
+        description = a99.get_obj_doc0(attr)
 
         def_ = NONE_REPL if attr.default_filename is None else attr.default_filename
         ee = attr.editors
@@ -167,7 +166,7 @@ def get_filetypes_info(editor_quote="`"):
             # Example: "``mained.py``, ``x.py``"
             ee = ", ".join(["{0}{1}{0}".format(editor_quote, x, editor_quote) for x in ee])
 
-        data.append({"description": doc, "default_filename": def_, "classname": attr.__name__,
+        data.append({"description": description, "default_filename": def_, "classname": attr.__name__,
                      "editors": ee})
 
     data.sort(key=lambda x: x["description"])

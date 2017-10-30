@@ -12,6 +12,7 @@ import a99
 # from .... import explorer as ex
 import f311.filetypes as ft
 from .a_WSpectrumCollectionBase import *
+import f311
 
 
 class WSpectrumList(WSpectrumCollectionBase):
@@ -222,8 +223,8 @@ class WSpectrumList(WSpectrumCollectionBase):
         if not filenames:
             return
 
-        # classes = ft.classes_sp()+[ft.FileSpectrumList, ft.FileSparseCube]
-        classes = ft.classes_collection()
+        # classes = f311.classes_sp()+[ft.FileSpectrumList, ft.FileSparseCube]
+        classes = f311.classes_collection()
         report, successful, failed = ["<b>Results</b>"], [], []
         for filename in filenames:
             filename = str(filename)

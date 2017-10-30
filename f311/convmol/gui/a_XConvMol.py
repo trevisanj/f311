@@ -990,8 +990,6 @@ class XConvMol(ex.XFileMainWindow):
         e2 = self.w_conv = _WConv(self)
         self.tabWidget.addTab(e2, "")
 
-        # TODO Many of these can be editor properties
-
         self.pages.append(ex.MyPage(text_tab="Molecular constants database (Alt+&1)",
          cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,), wild="*.sqlite", editor=e0, flag_autosave=True))
 

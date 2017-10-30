@@ -14,7 +14,7 @@ __all__ = ["adjust_atomic_symbol", "description_to_symbols", "symbols_to_formula
            "get_default_data_path", "iz_to_branch_alt", "branch_to_iz_alt",
            "molconsts_to_system_str", "greek_to_spdf", "spdf_to_greek",
            "SS_PLAIN", "SS_ALL_SPECIAL", "SS_RAW", "SS_SUPERSCRIPT",
-           "str_to_elem_ioni", "parse_system_str", "split_molecules_description"
+           "str_to_elem_ioni", "parse_system_str", "split_molecules_description",
            ]
 
 
@@ -381,5 +381,4 @@ def copy_default_data_file(filename, module=None):
 def __get_filetypes_module():
     from f311 import filetypes as ft
     return ft
-
 

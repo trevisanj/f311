@@ -1,5 +1,3 @@
-"""Represents SQLite database of molecular constants"""
-
 import a99
 from .. import FileSQLiteDB
 import tabulate
@@ -14,7 +12,8 @@ __all__ = ["FileHitranDB"]
 
 
 class FileHitranDB(FileSQLiteDB):
-    description = "HITRAN Molecules Catalogue"
+    """HITRAN Molecules Catalogue"""
+
     default_filename = "hitrandb.sqlite"
 
     def _create_schema(self):

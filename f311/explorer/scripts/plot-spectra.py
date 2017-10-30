@@ -35,6 +35,7 @@ import logging
 import glob
 import f311.explorer as ex
 import f311.filetypes as ft
+import f311
 
 a99.logging_level = logging.INFO
 a99.flag_log_file = True
@@ -91,7 +92,7 @@ if __name__ == "__main__":
     flag_ok = False
     for x in ff:
         print("Reading file '{0!s}'...".format(x))
-        f = ft.load_with_classes(x, ft.classes_sp())
+        f = ft.load_with_classes(x, f311.classes_sp())
         if f is None:
             a99.print_error("... type not recognized, sorry")
         else:

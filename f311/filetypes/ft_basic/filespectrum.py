@@ -17,6 +17,7 @@ import numpy as np
 
 
 class FileSpectrum(DataFile):
+    """Base class for all files representing a single 1D spectrum"""
     attrs = ['spectrum']
     editors = ["splisted.py"]
 

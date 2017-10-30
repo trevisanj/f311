@@ -94,36 +94,38 @@ def plot_spectra_overlapped(ss, title=None, setup=_default_setup):
 
 def draw_spectra_overlapped(ss, title=None, setup=_default_setup):
     a99.format_BLB()
-    xunit, yunit = None, None
-    for i, s in enumerate(ss):
-        if xunit is None:
-            xunit = s.xunit
-        else:
-            if xunit != s.xunit:
-                raise RuntimeError("Spectra x-units do not match")
+    if len(ss) > 0:
+        xunit, yunit = None, None
+        for i, s in enumerate(ss):
+            if xunit is None:
+                xunit = s.xunit
+            else:
+                if xunit != s.xunit:
+                    raise RuntimeError("Spectra x-units do not match")
 
-        if yunit is None:
-            yunit = s.yunit
-        else:
-            if yunit != s.yunit:
-                raise RuntimeError("Spectra x-units do not match")
+            if yunit is None:
+                yunit = s.yunit
+            else:
+                if yunit != s.yunit:
+                    raise RuntimeError("Spectra x-units do not match")
 
-        ax = plt.gca()
-        y = s.y
-        ax.plot(s.x, y, label=str(s.title))
+            ax = plt.gca()
+            y = s.y
+            ax.plot(s.x, y, label=str(s.title))
 
-    # plt.ylabel('({})'.format(yunit))
-    # **Note** Takes last spectrum as reference to mount x-label
-    if setup.flag_xlabel and setup.fmt_xlabel:
-        _set_plot(plt.xlabel, setup.fmt_xlabel, s)
-    xmin, xmax, ymin_, ymax, xspan, yspan = calc_max_min(ss)
-    ymin = ymin_ if setup.ymin is None else setup.ymin
-    plt.xlim([xmin - xspan * _T, xmax + xspan * _T])
-    plt.ylim([ymin - yspan * _T, ymax + yspan * _T])
-    if setup.flag_legend:
-        leg = plt.legend(loc=0)
-        a99.format_legend(leg)
-    plt.tight_layout()
+        # plt.ylabel('({})'.format(yunit))
+        # **Note** Takes last spectrum as reference to mount x-label
+        if setup.flag_xlabel and setup.fmt_xlabel:
+            _set_plot(plt.xlabel, setup.fmt_xlabel, s)
+        xmin, xmax, ymin_, ymax, xspan, yspan = calc_max_min(ss)
+        ymin = ymin_ if setup.ymin is None else setup.ymin
+        plt.xlim([xmin - xspan * _T, xmax + xspan * _T])
+        plt.ylim([ymin - yspan * _T, ymax + yspan * _T])
+        if setup.flag_legend:
+            leg = plt.legend(loc=0)
+            a99.format_legend(leg)
+        plt.tight_layout()
+
     if title is not None:
         plt.gfc().canvas.set_window_title(title)
 
@@ -227,8 +229,9 @@ def calc_max_min(ss):
     xmin, xmax, ymin, ymax = 1e38, -1e38, 1e38, -1e38
     for s in ss:
         assert isinstance(s, ft.Spectrum)
-        xmin, xmax = min(min(s.x), xmin), max(max(s.x), xmax)
-        ymin, ymax = min(min(s.y), ymin), max(max(s.y), ymax)
+        if len(s.x) > 0:
+            xmin, xmax = min(min(s.x), xmin), max(max(s.x), xmax)
+            ymin, ymax = min(min(s.y), ymin), max(max(s.y), ymax)
     xspan = xmax-xmin
     yspan = ymax - ymin
     return xmin, xmax, ymin, ymax, xspan, yspan

@@ -303,6 +303,8 @@ class XExplorer(QMainWindow):
 
         self.__flag_creating = False
 
+        a99.place_center(self, 1000, 620)
+
     def set_dir(self, dir_):
         """Sets directory, auto-loads, updates all GUI contents."""
 
@@ -424,7 +426,10 @@ class XExplorer(QMainWindow):
 
     def __update_info(self):
         """Updates "visualization options" and "file info" areas."""
+
         from f311 import explorer as ex
+        import f311
+
         t = self.tableWidget
         z = self.listWidgetVis
         z.clear()
@@ -437,7 +442,7 @@ class XExplorer(QMainWindow):
             # Visualization options
             if p.flag_scanned:
                 if isinstance(p.f, ft.DataFile):
-                    classes.extend(ex.get_suitable_vis_classes(p.f))
+                    classes.extend(f311.get_suitable_vis_classes(p.f))
                     if ex.VisPrint in classes:
                         classes.remove(ex.VisPrint)
                 if p.flag_text:

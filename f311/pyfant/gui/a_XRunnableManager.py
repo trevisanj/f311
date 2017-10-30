@@ -257,6 +257,7 @@ class XRunnableManager(QMainWindow):
             a99.show_error("%s: %s" % (MSG, str(e)))
 
     def on_collect_errors(self):
+        # TODO **duplicate code** export a_XExplorer's one and use because the latter is more complete
         try:
             k = a99.ErrorCollector()
             k.collect_errors(".")

@@ -10,7 +10,7 @@ __all__ = ["FileOptions"]
 @a99.froze_it
 class FileOptions(FilePy):
     """
-    `x.py` Command-line Options
+    PFANT Command-line Options
 
     For each xxxx attribute not starting with "_" there exists
     a variable in config.f90 named config_xxxx, and

@@ -210,9 +210,18 @@ class XFileMainWindowBase(a99.XLogMainWindow):
         # Maybe this is set on purpose before loading attempt to leave new load_dir set (?)
         self.load_dir, _ = os.path.split(filename)
 
-        f = ft.load_with_classes(filename, page.clss_load)
-        if f is None:
-            raise RuntimeError("Could not load '{0!s}'".format(filename))
+        clss = page.clss_load
+        if len(clss) == 1:
+            # If there is only one class to handle the file, will load it in a way that eventual
+            # load errors will raise
+            f = clss[0]()
+            f.load(filename)
+        else:
+            # At the moment, the multi-class alternative will not display particular error information
+            # if the file does not load
+            f = ft.load_with_classes(filename, page.clss_load)
+            if f is None:
+                raise RuntimeError("Could not load '{0!s}'".format(filename))
 
         self.load(f, index)
 
