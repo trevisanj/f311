@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -609,19 +610,14 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 </div>
 <div class="section" id="module-f311.filetypes.ft_pyfant.filehitrandb">
 <span id="f311-filetypes-ft-pyfant-filehitrandb-module"></span><h2>f311.filetypes.ft_pyfant.filehitrandb module<a class="headerlink" href="#module-f311.filetypes.ft_pyfant.filehitrandb" title="Permalink to this headline">¶</a></h2>
-<p>Represents SQLite database of molecular constants</p>
 <dl class="class">
 <dt id="f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.filehitrandb.</code><code class="descname">FileHitranDB</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB" title="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB</span></code></a></p>
+<p>HITRAN Molecules Catalogue</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.default_filename">
 <code class="descname">default_filename</code><em class="property"> = 'hitrandb.sqlite'</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.default_filename" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.description">
-<code class="descname">description</code><em class="property"> = 'HITRAN Molecules Catalogue'</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1220,14 +1216,10 @@ attributes, except for redundant attributes, i.e.:</p>
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.filemoldb.</code><code class="descname">FileMolDB</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB" title="f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB</span></code></a></p>
+<p>Database of Molecular Constants</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.default_filename">
 <code class="descname">default_filename</code><em class="property"> = 'moldb.sqlite'</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.default_filename" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.description">
-<code class="descname">description</code><em class="property"> = 'Database of Molecular Constants'</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1255,7 +1247,7 @@ attributes, except for redundant attributes, i.e.:</p>
 
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info">
-<code class="descname">gui_info</code><em class="property"> = {'system': {'to_spdf': ['Λ&quot;', '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'to_label': ['State&quot;', None], 'from_spdf': [&quot;Λ'&quot;, '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'from_label': [&quot;State'&quot;, None]}, 'pfantmol': {'fe': [None, 'oscillator strength'], 'ua': [None, 'value of partition function for first element'], 'do': [None, 'dissociation constant (eV)'], 'cro': [None, 'delta Kronecker (1: Sigma-Sigma transitions; 0: non-Sigma transitions)'], 'am': [None, 'mass of first element'], 'ub': [None, 'value of partition function for second element'], 'bm': [None, 'mass of second element'], 'description': [None, 'free text'], 'te': [None, 'electronic term']}, 'state': {'A': [None, 'Coupling counstant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)']}, 'molecule': {'formula': [None, &quot;formula of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;]}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info" title="Permalink to this definition">¶</a></dt>
+<code class="descname">gui_info</code><em class="property"> = {'pfantmol': {'bm': [None, 'mass of second element'], 'fe': [None, 'oscillator strength'], 'am': [None, 'mass of first element'], 'do': [None, 'dissociation constant (eV)'], 'te': [None, 'electronic term'], 'cro': [None, 'delta Kronecker (1: Sigma-Sigma transitions; 0: non-Sigma transitions)'], 'ub': [None, 'value of partition function for second element'], 'ua': [None, 'value of partition function for first element'], 'description': [None, 'free text']}, 'system': {'from_label': [&quot;State'&quot;, None], 'from_spdf': [&quot;Λ'&quot;, '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'to_spdf': ['Λ&quot;', '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'to_label': ['State&quot;', None]}, 'molecule': {'formula': [None, &quot;formula of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;]}, 'state': {'A': [None, 'Coupling counstant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1468,6 +1460,12 @@ information for each molecule inside a Molecule object.</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemolecules.FileMolecules.num_lines">
 <code class="descname">num_lines</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.FileMolecules.num_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total number of spectral line, counting all molecules.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_pyfant.filemolecules.FileMolecules.num_sols">
+<code class="descname">num_sols</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.FileMolecules.num_sols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total number of spectral line, counting all molecules.</p>
 </dd></dl>
 

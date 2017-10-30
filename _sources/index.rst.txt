@@ -26,6 +26,7 @@ The package is organized in sub-packages, which can be imported as follows:
    :maxdepth: 1
 
    install
+   f3110
    pyfant
    convmol
    explorer

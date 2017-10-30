@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -179,10 +180,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="f311.pyfant.gui.html">f311.pyfant.gui package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="f311.pyfant.gui.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="f311.pyfant.gui.html#module-f311.pyfant.gui.a_XMulti">f311.pyfant.gui.a_XMulti module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="f311.pyfant.gui.html#module-f311.pyfant.gui.a_XPFANT">f311.pyfant.gui.a_XPFANT module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="f311.pyfant.gui.html#module-f311.pyfant.gui.a_XRunnableManager">f311.pyfant.gui.a_XRunnableManager module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="f311.pyfant.gui.html#module-f311.pyfant.gui">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="f311.pyfant.gui.html#f311-pyfant-gui-a-xmulti-module">f311.pyfant.gui.a_XMulti module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="f311.pyfant.gui.html#f311-pyfant-gui-a-xpfant-module">f311.pyfant.gui.a_XPFANT module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="f311.pyfant.gui.html#f311-pyfant-gui-a-xrunnablemanager-module">f311.pyfant.gui.a_XRunnableManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="f311.pyfant.gui.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -588,7 +589,7 @@ otherwise it will not work</p>
 <p>RunnableManager classs</p>
 <dl class="class">
 <dt id="f311.pyfant.rm.RunnableManager">
-<em class="property">class </em><code class="descclassname">f311.pyfant.rm.</code><code class="descname">RunnableManager</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.rm.RunnableManager" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">f311.pyfant.rm.</code><code class="descname">RunnableManager</code><span class="sig-paren">(</span><em>*args</em>, <em>max_simultaneous=None</em>, <em>flag_auto_clean=False</em>, <em>flag_verbose=False</em>, <em>flag_exit_if_fail=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.rm.RunnableManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt5.QtCore.QObject</span></code>, <code class="xref py py-class docutils literal"><span class="pre">threading.Thread</span></code></p>
 <p>Thread takes care of other threads.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1121,7 +1122,7 @@ pfant and nulbad, for example, you can pass [e_pfant, e_nulbad]</td>
 <p>Rule: only &#8216;gui/&#8217; modules can import util!!!</p>
 <dl class="function">
 <dt id="f311.pyfant.util.run_parallel">
-<code class="descclassname">f311.pyfant.util.</code><code class="descname">run_parallel</code><span class="sig-paren">(</span><em>rr</em>, <em>max_simultaneous=None</em>, <em>flag_console=False</em>, <em>runnable_manager=None</em>, <em>flag_verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.run_parallel" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.pyfant.util.</code><code class="descname">run_parallel</code><span class="sig-paren">(</span><em>rr</em>, <em>max_simultaneous=None</em>, <em>flag_console=False</em>, <em>runnable_manager=None</em>, <em>flag_verbose=False</em>, <em>flag_exit_if_fail=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.run_parallel" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1129,9 +1130,10 @@ pfant and nulbad, for example, you can pass [e_pfant, e_nulbad]</td>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>rr</strong> &#8211; list of Runnable instances</li>
 <li><strong>max_simultaneous</strong> &#8211; (defaults to RunnableManager.max_simultaneous)
-maximum number of simultaneous processes.</li>
+maximum number of simultaneous processes. <strong>Note</strong> ineffective if runnable_manager is passed</li>
 <li><strong>runnable_manager</strong> &#8211; if passed, will use passed; if not, will create new.</li>
-<li><strong>flag_verbose</strong> &#8211; whether of not to log any messages (besides console)</li>
+<li><strong>flag_verbose</strong> &#8211; whether of not to log any messages (besides console) <strong>Note</strong> if runnable_manager is passed, it will keep its own</li>
+<li><strong>flag_exit_if_fail</strong> &#8211; exit as soon as possible if any runnable fails? <strong>Note</strong> ineffective if runnable_manager is passed</li>
 </ul>
 </td>
 </tr>
@@ -1236,20 +1238,8 @@ PFANT/data/common</td>
 </dd></dl>
 
 </div>
-<div class="section" id="module-f311.pyfant">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.pyfant" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="f311.pyfant.get_config">
-<code class="descclassname">f311.pyfant.</code><code class="descname">get_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.get_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns PyfantConfigObj object that corresponds to file ~/.ftpyfant.conf</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="f311.pyfant.get_custom_multisession_dirname">
-<code class="descclassname">f311.pyfant.</code><code class="descname">get_custom_multisession_dirname</code><span class="sig-paren">(</span><em>session_id</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.get_custom_multisession_dirname" title="Permalink to this definition">¶</a></dt>
-<dd><p>This defines how custom directory name is made up</p>
-</dd></dl>
-
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Package f311 &mdash; F311 17.9.27.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
+        <link rel="next" title="Spectral synthesis (f311.pyfant)" href="pyfant.html"/>
+        <link rel="prev" title="F311 Installation" href="install.html"/>
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> F311
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                17.9.27.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Package f311</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#print-file-handling-classes-information">Print file handling classes information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-reference">API reference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filetypes.html">File handling API (<code class="docutils literal"><span class="pre">f311.filetypes</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Selected topics on Physics (<code class="docutils literal"><span class="pre">f311.physics</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat.html">Project <code class="docutils literal"><span class="pre">f311</span></code> Cheat Sheet</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">F311</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Package f311</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/f3110.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="package-f311">
+<h1>Package f311<a class="headerlink" href="#package-f311" title="Permalink to this headline">¶</a></h1>
+<p>The root package provides the collaboration model implementation.</p>
+<p>The collaboration model allows <code class="docutils literal"><span class="pre">f311.COLLABORATORS</span></code> to contribute with</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">DataFile</span></code> subclasses, i.e., implement handling (load, save, etc.) of new file types;</li>
+<li><code class="docutils literal"><span class="pre">Vis</span></code> subclasses, i.e., implement visualizations for these files;</li>
+<li>Standalone scripts placed in the directory <code class="docutils literal"><span class="pre">packagename/scripts</span></code></li>
+</ul>
+<div class="section" id="print-file-handling-classes-information">
+<h2>Print file handling classes information<a class="headerlink" href="#print-file-handling-classes-information" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Lists different subsets of DataFile subclasses&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">f311</span>
+
+<span class="n">titles</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;1D spectrum&quot;</span><span class="p">)</span>
+<span class="n">allclasses</span> <span class="o">=</span> <span class="p">(</span><span class="n">f311</span><span class="o">.</span><span class="n">classes_txt</span><span class="p">(),</span> <span class="n">f311</span><span class="o">.</span><span class="n">classes_bin</span><span class="p">(),</span> <span class="n">f311</span><span class="o">.</span><span class="n">classes_sp</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">title</span><span class="p">,</span> <span class="n">classes</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">titles</span><span class="p">,</span> <span class="n">allclasses</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">*** Classes that can handle </span><span class="si">{}</span><span class="s2"> files***&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">title</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">cls</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:25}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">cls</span><span class="o">.</span><span class="n">__doc__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>The output should be something like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>*** Classes that can handle text files***
+FileAbXFwhm              : `x.py` Differential Abundances and FWHMs (Python source)
+FileAbonds               : PFANT Stellar Chemical Abundances
+FileAbsoru2              : &quot;Absoru2&quot; file
+FileAtoms                : PFANT Atomic Lines
+FileConfigConvMol        : Python source containing &#39;config_conv = ConfigConv(...)
+FileDissoc               : PFANT Stellar Dissociation Equilibrium Information
+FileFCF                  : File containing Franck-Condon Factors (FCFs)
+FileHmap                 : PFANT Hygrogen Lines Map
+FileKuruczMolecule       : Kurucz molecular lines file
+FileKuruczMoleculeBase   : Base class for the two types of Kurucz molecular lines file
+FileKuruczMoleculeOld    : Kurucz molecular lines file, old format #0
+FileKuruczMoleculeOld1   : Kurucz molecular lines file, old format #1
+FileMain                 : PFANT Stellar Main Configuration
+FileModTxt               : MARCS Atmospheric Model (text file)
+FileMolConsts            : Python source containing &#39;fobj = MolConsts(...)
+FileMolecules            : PFANT Molecular Lines
+FileOpa                  : MARCS &quot;.opa&quot; (opacity model) file format.
+FileOptions              : `x.py` Command-line Options
+FilePar                  : WebSim-COMPASS &quot;.par&quot; (parameters) file
+FilePartit               : PFANT Partition Function
+FilePlezTiO              : Plez molecular lines file, TiO format
+FilePy                   : Configuration file saved as a .py Python source script
+FilePyConfig             : Base class for config files. Inherit and set class variable &#39;modulevarname&#39; besides usual
+FileSpectrum             : Base class for all files representing a single 1D spectrum
+FileSpectrumNulbad       : PFANT Spectrum (`nulbad` output)
+FileSpectrumPfant        : PFANT Spectrum (`pfant` output)
+FileSpectrumXY           : &quot;Lambda-flux&quot; Spectrum (2-column text file)
+FileToH                  : PFANT Hydrogen Line Profile
+FileVald3                : VALD3 atomic or molecular lines file
+
+*** Classes that can handle binary files***
+FileFullCube             : FITS Data Cube (&quot;full&quot; opposed to &quot;sparse&quot;)
+FileGalfit               : FITS file with frames named INPUT_*, MODEL_*, RESIDUAL_*, which is the output of Galfit software
+FileHitranDB             : HITRAN Molecules Catalogue
+FileModBin               : PFANT Atmospheric Model (binary file)
+FileMolDB                : Database of Molecular Constants
+FileMoo                  : Atmospheric model or grid of models (with opacities included)
+FileSQLiteDB             : Represents a SQLite database file.
+FileSparseCube           : FITS Sparse Data Cube (storage to take less disk space)
+FileSpectrumFits         : FITS Spectrum
+FileSpectrumList         : FITS Spectrum List
+
+*** Classes that can handle 1D spectrum files***
+FileSpectrum             : Base class for all files representing a single 1D spectrum
+FileSpectrumFits         : FITS Spectrum
+FileSpectrumNulbad       : PFANT Spectrum (`nulbad` output)
+FileSpectrumPfant        : PFANT Spectrum (`pfant` output)
+FileSpectrumXY           : &quot;Lambda-flux&quot; Spectrum (2-column text file)
+</pre></div>
+</div>
+<div class="section" id="api-reference">
+<h3>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="autodoc/f311.html"><span class="doc">f311 package</span></a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pyfant.html" class="btn btn-neutral float-right" title="Spectral synthesis (f311.pyfant)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral" title="F311 Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, JT.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'17.9.27.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

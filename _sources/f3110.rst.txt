@@ -1,0 +1,74 @@
+Package f311
+============
+
+The root package provides the collaboration model implementation.
+
+The collaboration model allows ``f311.COLLABORATORS`` to contribute with
+
+- ``DataFile`` subclasses, i.e., implement handling (load, save, etc.) of new file types;
+- ``Vis`` subclasses, i.e., implement visualizations for these files;
+- Standalone scripts placed in the directory ``packagename/scripts``
+
+Print file handling classes information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. literalinclude:: ../examples/f311/print-collaboration.py
+
+The output should be something like::
+
+    *** Classes that can handle text files***
+    FileAbXFwhm              : `x.py` Differential Abundances and FWHMs (Python source)
+    FileAbonds               : PFANT Stellar Chemical Abundances
+    FileAbsoru2              : "Absoru2" file
+    FileAtoms                : PFANT Atomic Lines
+    FileConfigConvMol        : Python source containing 'config_conv = ConfigConv(...)
+    FileDissoc               : PFANT Stellar Dissociation Equilibrium Information
+    FileFCF                  : File containing Franck-Condon Factors (FCFs)
+    FileHmap                 : PFANT Hygrogen Lines Map
+    FileKuruczMolecule       : Kurucz molecular lines file
+    FileKuruczMoleculeBase   : Base class for the two types of Kurucz molecular lines file
+    FileKuruczMoleculeOld    : Kurucz molecular lines file, old format #0
+    FileKuruczMoleculeOld1   : Kurucz molecular lines file, old format #1
+    FileMain                 : PFANT Stellar Main Configuration
+    FileModTxt               : MARCS Atmospheric Model (text file)
+    FileMolConsts            : Python source containing 'fobj = MolConsts(...)
+    FileMolecules            : PFANT Molecular Lines
+    FileOpa                  : MARCS ".opa" (opacity model) file format.
+    FileOptions              : `x.py` Command-line Options
+    FilePar                  : WebSim-COMPASS ".par" (parameters) file
+    FilePartit               : PFANT Partition Function
+    FilePlezTiO              : Plez molecular lines file, TiO format
+    FilePy                   : Configuration file saved as a .py Python source script
+    FilePyConfig             : Base class for config files. Inherit and set class variable 'modulevarname' besides usual
+    FileSpectrum             : Base class for all files representing a single 1D spectrum
+    FileSpectrumNulbad       : PFANT Spectrum (`nulbad` output)
+    FileSpectrumPfant        : PFANT Spectrum (`pfant` output)
+    FileSpectrumXY           : "Lambda-flux" Spectrum (2-column text file)
+    FileToH                  : PFANT Hydrogen Line Profile
+    FileVald3                : VALD3 atomic or molecular lines file
+
+    *** Classes that can handle binary files***
+    FileFullCube             : FITS Data Cube ("full" opposed to "sparse")
+    FileGalfit               : FITS file with frames named INPUT_*, MODEL_*, RESIDUAL_*, which is the output of Galfit software
+    FileHitranDB             : HITRAN Molecules Catalogue
+    FileModBin               : PFANT Atmospheric Model (binary file)
+    FileMolDB                : Database of Molecular Constants
+    FileMoo                  : Atmospheric model or grid of models (with opacities included)
+    FileSQLiteDB             : Represents a SQLite database file.
+    FileSparseCube           : FITS Sparse Data Cube (storage to take less disk space)
+    FileSpectrumFits         : FITS Spectrum
+    FileSpectrumList         : FITS Spectrum List
+
+    *** Classes that can handle 1D spectrum files***
+    FileSpectrum             : Base class for all files representing a single 1D spectrum
+    FileSpectrumFits         : FITS Spectrum
+    FileSpectrumNulbad       : PFANT Spectrum (`nulbad` output)
+    FileSpectrumPfant        : PFANT Spectrum (`pfant` output)
+    FileSpectrumXY           : "Lambda-flux" Spectrum (2-column text file)
+
+
+API reference
+-------------
+
+:doc:`autodoc/f311`
+

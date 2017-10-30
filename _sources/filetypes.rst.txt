@@ -71,6 +71,15 @@ The following code lists all supported data types in a table:
     `x.py` Command-line Options                                   | options.py
     `x.py` Differential Abundances and FWHMs (Python source)      | abxfwhm.py
 
+
+Examples
+--------
+
+Convert 1D spectral file to FITS format
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. literalinclude:: ../../docs/examples/filetypes/convert-to-fits.py
+
 API reference
 -------------
 

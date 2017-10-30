@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -396,40 +397,45 @@ it will be expected that the class &#8220;root&#8221; package will have a subpac
 <code class="descclassname">f311.filetypes.basic.</code><code class="descname">str_to_elem_ioni</code><span class="sig-paren">(</span><em>&quot;C1&quot;) --&gt; (adjust_atomic_symbol(&quot;C&quot;)</em>, <em>1</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.str_to_elem_ioni" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="function">
+<dt id="f311.filetypes.basic.parse_system_str">
+<code class="descclassname">f311.filetypes.basic.</code><code class="descname">parse_system_str</code><span class="sig-paren">(</span><em>string</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.parse_system_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses &#8220;system string&#8221; &#8211;&gt; (from_label, from_mult, from_spdf, to_label, to_mult, to_spdf)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>string</strong> &#8211; see convention below</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Convention</strong> system string:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;from_label from_mult from_spdf_greek - from_label from_mult from_spdf_greek&quot;</span>
+<span class="ow">or</span>
+<span class="s2">&quot;label mult spdf_greek&quot;</span> <span class="p">(</span><span class="n">assumed</span> <span class="n">initial</span> <span class="ow">and</span> <span class="n">final</span> <span class="n">state</span> <span class="n">are</span> <span class="n">the</span> <span class="n">same</span><span class="p">)</span><span class="o">.</span>
+
+<span class="o">**</span><span class="n">Note</span><span class="o">**</span> <span class="p">(</span><span class="o">*</span><span class="n">spdf</span><span class="o">*</span><span class="p">)</span> <span class="n">are</span> <span class="n">Greek</span> <span class="n">letter</span> <span class="n">names</span><span class="p">,</span> <span class="n">case</span><span class="o">-</span><span class="n">INsensitive</span><span class="p">;</span>
+         <span class="n">extra</span> <span class="s2">&quot;+&quot;</span><span class="o">/</span><span class="s2">&quot;-&quot;</span> <span class="p">(</span><span class="k">for</span> <span class="n">example</span><span class="p">,</span> <span class="ow">in</span> <span class="s2">&quot;SIGMA+&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="n">ignored</span>
+</pre></div>
 </div>
-<div class="section" id="module-f311.filetypes.classcatalog">
-<span id="f311-filetypes-classcatalog-module"></span><h2>f311.filetypes.classcatalog module<a class="headerlink" href="#module-f311.filetypes.classcatalog" title="Permalink to this headline">¶</a></h2>
-<p>Class Catalog &#8211; resources to retrieve File* classes by different criteria</p>
-<dl class="function">
-<dt id="f311.filetypes.classcatalog.classes_txt">
-<code class="descclassname">f311.filetypes.classcatalog.</code><code class="descname">classes_txt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.classcatalog.classes_txt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Classes to consider when attempts to load a text file (see load_any_file())</p>
+<p>System string examples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;[A 2 Sigma - X 2 Pi]&quot;</span>
+
+<span class="s2">&quot;[X 1 SIGMA+]&quot;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
-<dt id="f311.filetypes.classcatalog.classes_bin">
-<code class="descclassname">f311.filetypes.classcatalog.</code><code class="descname">classes_bin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.classcatalog.classes_bin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Classes to consider when attempts to load a binary file (see load_any_file())</p>
+<dt id="f311.filetypes.basic.split_molecules_description">
+<code class="descclassname">f311.filetypes.basic.</code><code class="descname">split_molecules_description</code><span class="sig-paren">(</span><em>descr</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.basic.split_molecules_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Breaks PFANT molecule description into &#8220;(name) (system) (optional notes)&#8221; &#8211;&gt; (name, system, notes)</p>
+<p>System is identified by enclosing square brackets (&#8220;[&#8221;, &#8220;]&#8221;)</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="f311.filetypes.classcatalog.classes_sp">
-<code class="descclassname">f311.filetypes.classcatalog.</code><code class="descname">classes_sp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.classcatalog.classes_sp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Classes to consider when attempts to load a spectrum file (see load_spectrum())</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="f311.filetypes.classcatalog.classes_file">
-<code class="descclassname">f311.filetypes.classcatalog.</code><code class="descname">classes_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.classcatalog.classes_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>All known File* classes</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="f311.filetypes.classcatalog.classes_collection">
-<code class="descclassname">f311.filetypes.classcatalog.</code><code class="descname">classes_collection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.classcatalog.classes_collection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns list of File* classes that can be converted to a SpectrumCollection</p>
-</dd></dl>
-
+</div>
+<div class="section" id="f311-filetypes-classcatalog-module">
+<h2>f311.filetypes.classcatalog module<a class="headerlink" href="#f311-filetypes-classcatalog-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-f311.filetypes.util">
 <span id="f311-filetypes-util-module"></span><h2>f311.filetypes.util module<a class="headerlink" href="#module-f311.filetypes.util" title="Permalink to this headline">¶</a></h2>

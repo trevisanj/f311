@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -289,6 +290,30 @@ HDUList.readall()</p>
 <p>This class is not intendend to be instantialized. It is an ancestor class for other classes.</p>
 </dd></dl>
 
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.filepy.ConfigDict">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filepy.</code><code class="descname">ConfigDict</code><a class="headerlink" href="#f311.filetypes.ft_basic.filepy.ConfigDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
+<p>Data class to store config options as dictionary</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.filetypes.ft_basic.filepy.FilePyConfig">
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filepy.</code><code class="descname">FilePyConfig</code><a class="headerlink" href="#f311.filetypes.ft_basic.filepy.FilePyConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.filepy.FilePy" title="f311.filetypes.ft_basic.filepy.FilePy"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filepy.FilePy</span></code></a></p>
+<p>Base class for config files. Inherit and set class variable &#8216;modulevarname&#8217; besides usual</p>
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.filepy.FilePyConfig.attrs">
+<code class="descname">attrs</code><em class="property"> = ['obj']</em><a class="headerlink" href="#f311.filetypes.ft_basic.filepy.FilePyConfig.attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.filepy.FilePyConfig.modulevarname">
+<code class="descname">modulevarname</code><em class="property"> = 'obj'</em><a class="headerlink" href="#f311.filetypes.ft_basic.filepy.FilePyConfig.modulevarname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-f311.filetypes.ft_basic.filespectrum">
 <span id="f311-filetypes-ft-basic-filespectrum-module"></span><h2>f311.filetypes.ft_basic.filespectrum module<a class="headerlink" href="#module-f311.filetypes.ft_basic.filespectrum" title="Permalink to this headline">¶</a></h2>
@@ -297,6 +322,7 @@ HDUList.readall()</p>
 <dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrum">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filespectrum.</code><code class="descname">FileSpectrum</code><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
+<p>Base class for all files representing a single 1D spectrum</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrum.attrs">
 <code class="descname">attrs</code><em class="property"> = ['spectrum']</em><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrum.attrs" title="Permalink to this definition">¶</a></dt>
@@ -519,6 +545,18 @@ itself is changed and nothing is returned</p>
 <dt id="f311.filetypes.ft_basic.spectrum.Spectrum.lf">
 <code class="descname">lf</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.lf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upper bound of wavelength vector</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.llfin">
+<code class="descname">llfin</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.llfin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upper bound of wavelength vector. Synonym with lf</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_basic.spectrum.Spectrum.llzero">
+<code class="descname">llzero</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.llzero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lower bound of wavelength vector. Synonym with l0</p>
 </dd></dl>
 
 <dl class="method">
