@@ -800,8 +800,8 @@ class _WConv(a99.WConfigEditor):
         self._update_w_out_flag_valid()
 
     def _source_changed(self):
-        if self._flag_updating_gui:
-            return
+        # if self._flag_updating_gui:
+        #     return
 
             # print("Widget", ds.widget, "is visible?", ds.widget.isVisible())
         self._update_fobj()
@@ -927,7 +927,7 @@ class _WConv(a99.WConfigEditor):
         molconsts = self.w_molconsts.f.molconsts
 
         molconsts_fieldnames_ignore = ["id_molecule", "id_pfantmol", "id_system", "id_statel",
-                                       "id_state2l"]
+                                       "id_state2l", "pfant_notes", "pfant_name"]
         if molconsts["id_molecule"] is None:
             errors.append("Molecule not selected")
 

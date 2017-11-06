@@ -28,3 +28,6 @@ class FileMolConsts(FilePy):
                     "from f311.filetypes import MolConsts\n"
                     "\n"
                     "molconsts = {}\n".format(self._get_header(), self.molconsts))
+
+    def init_default(self):
+        pass

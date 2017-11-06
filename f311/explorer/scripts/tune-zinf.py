@@ -32,8 +32,7 @@ import os.path
 import a99
 import f311.filetypes as ft
 import f311.explorer as ex
-import f311.filetypes as ft
-import f311.explorer as ex
+import f311.pyfant as pf
 
 
 a99.logging_level = logging.INFO
@@ -126,7 +125,7 @@ if __name__ == "__main__":
 
 
 
-    # ## As suggested by M. Trevisan, adds 0.5 to all abundances, except ...
+    # ## As suggested by M. Trevisan, adds 0.5 to all abundances, except EXCEPTIONS
     K_ADD = 0.5
     EXCEPTIONS = ["FE", "HE"]
     logger.info("Preparing abundances (Adding %g to all abundances, " % K_ADD)

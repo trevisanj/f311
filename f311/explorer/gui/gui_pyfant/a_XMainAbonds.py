@@ -18,7 +18,7 @@ __all__ = ["XMainAbonds"]
 
 
 ################################################################################
-class XMainAbonds(QMainWindow):
+class XMainAbonds(a99.XLogMainWindow):
     """
     Args:
       parent=None: nevermind
@@ -27,7 +27,7 @@ class XMainAbonds(QMainWindow):
 
     def __init__(self, parent=None, file_main=None, file_abonds=None):
         # State variables
-        QMainWindow.__init__(self, parent)
+        a99.XLogMainWindow.__init__(self, parent)
         # XRunnableManager instance
         self._manager_form = None
         # RunnableManager instance
@@ -161,16 +161,16 @@ class XMainAbonds(QMainWindow):
         tt.addTab(w0, self.tab_texts[2])
         l0 = QVBoxLayout(w0)
 
-        # #### File label
-        l1 = self.c293wd = QHBoxLayout()
-        l0.addLayout(l1)
-        w = QLabel("<b>File:<b>")
-        l1.addWidget(w)
-        w = self.label_fn_options = QLabel()
-        l1.addWidget(w)
-        l1.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
+        # # #### File label
+        # l1 = self.c293wd = QHBoxLayout()
+        # l0.addLayout(l1)
+        # w = QLabel("<b>File:<b>")
+        # l1.addWidget(w)
+        # w = self.label_fn_options = QLabel()
+        # l1.addWidget(w)
+        # l1.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
-        oe = self.oe = WOptionsEditor()
+        oe = self.oe = WOptionsEditor(self)
         oe.changed.connect(self.on_options_edited)
         l0.addWidget(oe)
         #        tt.tabBar()
@@ -180,7 +180,7 @@ class XMainAbonds(QMainWindow):
 
         # ### These sequences couldn't be set above because the widgets didn't exist yet
         self.editors = [self.me, self.ae, self.oe]
-        self.labels_fn = [self.label_fn_main, self.label_fn_abonds, self.label_fn_options]
+        self.labels_fn = [self.label_fn_main, self.label_fn_abonds, self.oe.label_fn]
         assert len(self.tab_texts) == len(self.flags_changed) == \
                len(self.save_as_texts) == len(self.open_texts) == len(self.clss) == \
                len(self.editors) == len(self.labels_fn)

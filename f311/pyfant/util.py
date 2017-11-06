@@ -52,6 +52,11 @@ def run_parallel(rr, max_simultaneous=None, flag_console=False, runnable_manager
         rm.start()
         flag_had_to_start = True
 
+    for runnable in rr:
+        if not runnable.conf.flag_output_to_dir:
+            a99.get_python_logger().warning("run_parallel() set Runnable \"{}\"'s flag_output_to_dir to True".format(runnable.name))
+            runnable.conf.flag_output_to_dir = True
+
     rm.add_runnables(rr)
 
     # Primitive thread monitor

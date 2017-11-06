@@ -46,13 +46,17 @@ class Spectrum(object):
 
     @property
     def title(self):
-        """"Title" of the spectrum. Calculated, read-only property"""
-        ret = None
+        """"Title" of the spectrum. Returns self._title or if None, other options"""
+        ret = self._title
         if ret is None and self.filename is not None:
             ret = os.path.split(self.filename)[1]
         if ret is None:
             ret = self.more_headers.get("ORIGIN")
         return ret
+
+    @title.setter
+    def title(self, value):
+        self._title = value
 
     @property
     def wavelength(self):
@@ -144,6 +148,7 @@ class Spectrum(object):
         self.xunit = u.angstrom
         self.yunit = fnu
         self.filename = None
+        self.title = None
 
     def __len__(self):
         """Corresponds to nulbad "ktot"."""

@@ -426,6 +426,11 @@ class Conf(object):
         return ft.FileModBin.default_filename if self.__opt.fn_modeles is None \
          else self.__opt.fn_modeles
 
+    def get_fn_molecules(self):
+        """Returns name of molecular lines file"""
+        return ft.FileMolecules.default_filename if self.__opt.fn_molecules is None \
+         else self.__opt.fn_molecules
+
     def get_args(self):
         """
         Returns a list of command-line arguments (only options that have been set)

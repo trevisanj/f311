@@ -80,11 +80,15 @@ if __name__ == "__main__":
 
     # Compiles list of file names.
     # Each item in args.fn list may have wildcards, and these will be expanded
-    # into actual filenames.
+    # into actual filenames, then duplicates are eliminated
     patterns = args.fn
-    ff = []
+    _ff = []
     for pattern in patterns:
-        ff.extend(glob.glob(pattern))
+        _ff.extend(glob.glob(pattern))
+    ff = []
+    for f in _ff:
+        if f not in ff:
+            ff.append(f)
 
     # classes = [FileSpectrumPfant, FileSpectrumNulbad, FileSpectrumXY, FileSpectrumFits]
 
