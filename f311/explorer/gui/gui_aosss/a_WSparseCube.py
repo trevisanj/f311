@@ -28,11 +28,8 @@ class WSparseCube(WSpectrumCollectionBase):
             self._refs.append(obj)
             return obj
 
-        # Whether all the values in the fields are valid or not
-        self.flag_valid = False
         # Internal flag to prevent taking action when some field is updated programatically
         self.flag_process_changes = False
-
 
         # # Creates actions
 

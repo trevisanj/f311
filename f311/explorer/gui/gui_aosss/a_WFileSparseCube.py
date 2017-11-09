@@ -43,7 +43,6 @@ class WFileSparseCube(a99.WEditor):
         self.map_update_vis = [self.plot_spectra, self.plot_colors]
         # Whether there is sth in yellow background in the Headers tab
         self.flag_header_changed = False
-        self.f = None  # FileSparseCube object
         self.obj_square = None
 
         # # Central layout
@@ -59,16 +58,6 @@ class WFileSparseCube(a99.WEditor):
         wfilett0 = self.keep_ref(QWidget())
         lwfilett0 = QVBoxLayout(wfilett0)
         a99.set_margin(lwfilett0, 0)
-
-        # ### Line showing the File Name
-        wfile = self.keep_ref(QWidget())
-        lwfilett0.addWidget(wfile)
-        l1 = self.keep_ref(QHBoxLayout(wfile))
-        a99.set_margin(l1, 0)
-        l1.addWidget(self.keep_ref(QLabel("<b>File:<b>")))
-        w = self.label_fn_sky = QLabel()
-        l1.addWidget(w)
-        l1.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
         # ### Tabbed widget occupying left of horizontal splitter (OPTIONS TAB)
         tt0 = self.tabWidgetOptions = QTabWidget(self)
@@ -307,14 +296,11 @@ class WFileSparseCube(a99.WEditor):
              os.path.splitext(ft.FileSparseCube.default_filename)[1])
             x = x1
 
-        self.f = x
+        self._f = x
         self.wsptable.set_collection(x.sparsecube)
         self.__update_gui(True)
         self._flag_valid = True  # assuming that file does not come with errors
         self.setEnabled(True)
-
-    def update_gui_label_fn(self):
-        self.__update_gui_label_fn()
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Qt override
@@ -342,7 +328,10 @@ class WFileSparseCube(a99.WEditor):
             self.set_flag_header_changed(sth)
 
     def on_spectra_edited(self):
-        self.__update_gui_vis()
+        try:
+            self.__update_gui_vis()
+        except Exception as e:
+            self.add_log_error(a99.str_exc(e), True, e)
         self.changed.emit()
 
     def on_place_spectrum_edited(self):
@@ -353,7 +342,7 @@ class WFileSparseCube(a99.WEditor):
         self.__update_gui_header()
 
     def header_apply(self):
-        if self.__update_f_header(self.f.sparsecube):
+        if self.__update_f_header(self._f.sparsecube):
             self.__update_gui(True)
 
     def current_tab_changed_vis(self):
@@ -372,7 +361,7 @@ class WFileSparseCube(a99.WEditor):
     # TODO don't worry, this shouldn't be here anyway
     def crop_clicked(self):
         try:
-            sky = self.f.sparsecube
+            sky = self._f.sparsecube
 
             specs = (("x_range", {"value": "[%d, %d]" % (0, sky.width - 1)}),
                      ("y_range", {"value": "[%d, %d]" % (0, sky.height - 1)}),
@@ -398,7 +387,7 @@ class WFileSparseCube(a99.WEditor):
                     continue
 
                 # Works with clone, then replaces original, to ensure atomic operation
-                clone = copy.deepcopy(self.f)
+                clone = copy.deepcopy(self._f)
                 clone.filename = None
                 try:
                     clone.sparsecube.crop(x0, x1, y0, y1, lambda0, lambda1)
@@ -411,13 +400,12 @@ class WFileSparseCube(a99.WEditor):
                 form1.show()
 
                 # # Replaces original
-                # self.f = clone
+                # self._f = clone
                 # self.__update_gui(True)
                 break
 
         except Exception as E:
-            self.add_log_error("Crop failed: %s" % a99.str_exc(E), True)
-            raise
+            self.add_log_error("Crop failed: %s" % a99.str_exc(E), True, E)
 
     def export_ccube_clicked(self):
         fn = QFileDialog.getSaveFileName(self, "Save file in %s format" % ft.FileFullCube.description,
@@ -425,27 +413,26 @@ class WFileSparseCube(a99.WEditor):
         if fn:
             try:
                 fn = str(fn)
-                wcube = self.f.sparsecube.to_full_cube()
+                wcube = self._f.sparsecube.to_full_cube()
                 fccube = ft.FileFullCube()
                 fccube.wcube = wcube
                 fccube.save_as(fn)
             except Exception as E:
-                self.add_log_error("Failed export: %s" % a99.str_exc(E), True)
-                raise
+                self.add_log_error("Failed export: %s" % a99.str_exc(E), True, E)
 
     def replot_colors(self):
         self.plot_colors()
 
     def on_colors_click(self, event):
         x, y = int(event.xdata + .5), int(event.ydata + .5)
-        if 0 <= x < self.f.sparsecube.width and 0 <= y < self.f.sparsecube.height:
+        if 0 <= x < self._f.sparsecube.width and 0 <= y < self._f.sparsecube.height:
             self.wsptable.spinbox_x.setValue(x)
             self.wsptable.spinbox_y.setValue(y)
             self.plot_colors()
 
     def on_collect_fieldnames(self):
         # TODO confirmation
-        self.edit_fieldnames.setPlainText(str(self.f.sparsecube.collect_fieldnames()))
+        self.edit_fieldnames.setPlainText(str(self._f.sparsecube.collect_fieldnames()))
 
     # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
     # # Internal gear
@@ -455,10 +442,9 @@ class WFileSparseCube(a99.WEditor):
             self.changed.emit()
 
     def __update_gui(self, flag_header=False):
-        """Updates GUI to reflect what is in self.f"""
+        """Updates GUI to reflect what is in self._f"""
         self.flag_process_changes = False
         try:
-            self.__update_gui_label_fn()
             self.wsptable.update()
             self.__update_gui_vis()
             if flag_header:
@@ -476,13 +462,9 @@ class WFileSparseCube(a99.WEditor):
             else:
                 self.flag_update_pending[i] = True
 
-    def __update_gui_label_fn(self):
-        text = self._make_fn_text()
-        self.label_fn_sky.setText(text)
-
     def __update_gui_header(self):
         """Updates header controls only"""
-        sky = self.f.sparsecube
+        sky = self._f.sparsecube
         self.spinbox_width.setValue(sky.width)
         self.spinbox_height.setValue(sky.height)
         self.spinbox_hrfactor.setValue(sky.hrfactor)
@@ -500,9 +482,8 @@ class WFileSparseCube(a99.WEditor):
             for _, edit, _, _, _, _, _ in self._map1:
                 a99.style_widget_changed(edit, False)
 
-    def __update_f(self):
-        o = self.f
-        sky = self.f.sparsecube
+    def _update_fobj(self):
+        sky = self._f.sparsecube
         self._flag_valid = self.__update_f_header(sky)
 
     def __update_f_header(self, sky):
@@ -545,14 +526,14 @@ class WFileSparseCube(a99.WEditor):
     def plot_spectra(self):
         from f311 import explorer as ex
         # self.clear_markers()
-        if self.f is None:
+        if self._f is None:
             return
 
         try:
             fig = self.figure0
             fig.clear()
             ax = fig.gca(projection='3d')
-            ex.draw_cube_3d(ax, self.f.sparsecube)
+            ex.draw_cube_3d(ax, self._f.sparsecube)
             fig.tight_layout()
             self.canvas0.draw()
 
@@ -563,7 +544,7 @@ class WFileSparseCube(a99.WEditor):
     def plot_colors(self):
         from f311 import explorer as ex
         # self.clear_markers()
-        if self.f is None:
+        if self._f is None:
             return
 
         try:
@@ -582,7 +563,7 @@ class WFileSparseCube(a99.WEditor):
             except:
                 a99.get_python_logger().exception("Cannot draw square")
                 pass  # Nevermind (does not draw square)
-            self.obj_square = ex.draw_cube_colors(ax, self.f.sparsecube, vrange, sqx, sqy, flag_scale, method)
+            self.obj_square = ex.draw_cube_colors(ax, self._f.sparsecube, vrange, sqx, sqy, flag_scale, method)
 
             fig.tight_layout()
             self.canvas1.draw()

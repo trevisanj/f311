@@ -6,7 +6,7 @@ import a99
 # import moldb as db
 from .a_WFileMolConsts import *
 import os
-from ..a_XFileMainWindowBase import *
+from ..a_XFileMainWindow import *
 
 __all__ = ["XFileMolConsts"]
 

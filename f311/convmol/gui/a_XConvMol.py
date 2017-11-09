@@ -980,24 +980,21 @@ class XConvMol(ex.XFileMainWindow):
         e0 = self.w_moldb = WFileMolDB(self)
         e0.changed.connect(self._on_w_moldb_changed)
         e0.loaded.connect(self._on_w_moldb_loaded)
-        self.tabWidget.addTab(e0, "")
 
         # Qt stuff tab #1: FileMolConsts editor
         e1 = self.w_molconsts = WFileMolConsts(self)
-        self.tabWidget.addTab(e1, "")
 
         # Qt stuff tab #2: FileConv editor TODO FileConv does not exist yet self.conv a Conv
         e2 = self.w_conv = _WConv(self)
-        self.tabWidget.addTab(e2, "")
 
-        self.pages.append(ex.MyPage(text_tab="Molecular constants database (Alt+&1)",
-         cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,), wild="*.sqlite", editor=e0, flag_autosave=True))
+        self.pages.append(ex.MyPage(text_tab="Molecular constants database",
+                                    cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,), wild="*.sqlite", editor=e0, flag_autosave=True))
 
-        self.pages.append(ex.MyPage(text_tab="Molecular constants (Alt+&2)",
-         cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,), wild="*.py", editor=e1))
+        self.pages.append(ex.MyPage(text_tab="Molecular constants",
+                                    cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,), wild="*.py", editor=e1))
 
-        self.pages.append(ex.MyPage(text_tab="Conversion (Alt+&3)",
-         cls_save=ft.FileConfigConvMol, clss_load=(ft.FileConfigConvMol,), wild="*.py", editor=e2))
+        self.pages.append(ex.MyPage(text_tab="Conversion",
+                                    cls_save=ft.FileConfigConvMol, clss_load=(ft.FileConfigConvMol,), wild="*.py", editor=e2))
 
         self.setWindowTitle("(to) PFANT Molecular Lines Converter")
         self.installEventFilter(self)

@@ -13,22 +13,15 @@ __all__ = ["XFileMolDB"]
 
 class XFileMolDB(XFileMainWindow):
     def _add_stuff(self):
-        XFileMainWindow._add_stuff(self)
-
         import f311.filetypes as ft
         import f311.explorer as ex
 
-        lv = self.keep_ref(QVBoxLayout(self.gotting))
         me = self.w_moldb = WFileMolDB(self)
-        lv.addWidget(me)
         me.changed.connect(self._on_changed)
 
         # # Synchronized sequences
-        _VVV = ft.FileMolDB.description
         self.pages.append(ex.MyPage(
-         text_tab="{} (Alt+&1)".format(_VVV),
-         text_saveas="Save %s as..." % _VVV,
-         text_load="Load %s" % _VVV,
+         text_tab=ft.FileMolDB.description,
          cls_save=ft.FileMolDB, clss_load=(ft.FileMolDB,), wild="*.sqlite",
          editor=me, flag_autosave=True
         ))

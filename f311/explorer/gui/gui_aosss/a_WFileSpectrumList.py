@@ -40,7 +40,6 @@ class WFileSpectrumList(a99.WEditor):
         self.flag_process_changes = False
         # Whether there is sth in yellow background in the Headers tab
         self.flag_header_changed = False
-        self.f = None  # FileSpectrumList object
         self.obj_square = None
 
         # # Central layout
@@ -56,16 +55,6 @@ class WFileSpectrumList(a99.WEditor):
         wfilett0 = keep_ref(QWidget())
         lwfilett0 = QVBoxLayout(wfilett0)
         a99.set_margin(lwfilett0, 0)
-
-        # ### Line showing the File Name
-        wfile = keep_ref(QWidget())
-        lwfilett0.addWidget(wfile)
-        l1 = keep_ref(QHBoxLayout(wfile))
-        a99.set_margin(l1, 0)
-        l1.addWidget(keep_ref(QLabel("<b>File:<b>")))
-        w = self.label_fn = QLabel()
-        l1.addWidget(w)
-        l1.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
         # ### Tabbed widget occupying left of horizontal splitter (OPTIONS TAB)
         tt0 = self.tabWidgetOptions = QTabWidget(self)
@@ -130,7 +119,7 @@ class WFileSpectrumList(a99.WEditor):
         y = self.edit_fieldnames = QPlainTextEdit()
         y.textChanged.connect(self.on_header_edited)
         x.setBuddy(y)
-        map.append((x, y, "&Field names", "'header' information for each spectrum", "", lambda: self.f.splist.fieldnames,
+        map.append((x, y, "&Field names", "'header' information for each spectrum", "", lambda: self._f.splist.fieldnames,
                    lambda: self.edit_fieldnames.toPlainText()))
         ###
 
@@ -175,7 +164,7 @@ class WFileSpectrumList(a99.WEditor):
         assert isinstance(x, (ft.FileSpectrum, ft.FileSpectrumList, ft.FileFullCube))
 
         # Converts from FileFullCube to FileSpectrumList format, if necessary
-        f1 = None
+        x1 = None
         if isinstance(x, ft.FileFullCube):
             x1 = ft.FileSpectrumList()
             x1.splist.from_full_cube(x.wcube)
@@ -187,7 +176,7 @@ class WFileSpectrumList(a99.WEditor):
              os.path.splitext(ft.FileSpectrumList.default_filename)[1])
             x = x1
 
-        self.f = x
+        self._f = x
         self.wsptable.set_collection(x.splist)
         self.__update_gui(True)
         self._flag_valid = True  # assuming that file does not come with errors
@@ -248,7 +237,7 @@ class WFileSpectrumList(a99.WEditor):
             if not sp:
                 raise RuntimeError("Spectrum not loaded")
             sp = copy.deepcopy(sp)
-            self.f.splist.add_spectrum(sp)
+            self._f.splist.add_spectrum(sp)
             self.__update_gui()
             flag_emit = True
         except Exception as E:
@@ -261,7 +250,7 @@ class WFileSpectrumList(a99.WEditor):
         self.__update_gui_header()
 
     def header_apply(self):
-        if self.update_splist_headers(self.f.splist):
+        if self.update_splist_headers(self._f.splist):
             self.__update_gui(True)
 
     def current_tab_changed_vis(self):
@@ -275,7 +264,7 @@ class WFileSpectrumList(a99.WEditor):
     def on_collect_fieldnames(self):
         # TODO confirmation
 
-        self.edit_fieldnames.setPlainText(str(self.f.splist.collect_fieldnames()))
+        self.edit_fieldnames.setPlainText(str(self._f.splist.collect_fieldnames()))
 
     #        self.__update_gui(True)
 
@@ -293,10 +282,9 @@ class WFileSpectrumList(a99.WEditor):
             self.changed.emit()
 
     def __update_gui(self, flag_header=False):
-        """Updates GUI to reflect what is in self.f"""
+        """Updates GUI to reflect what is in self._f"""
         self.flag_process_changes = False
         try:
-            self.__update_gui_label_fn()
             self.wsptable.update()
             if flag_header:
                 self.__update_gui_header()
@@ -305,7 +293,7 @@ class WFileSpectrumList(a99.WEditor):
 
     def __update_gui_header(self):
         """Updates header controls only"""
-        splist = self.f.splist
+        splist = self._f.splist
         self.edit_fieldnames.setPlainText(str(splist.fieldnames))
         self.set_flag_header_changed(False)
 
@@ -322,7 +310,7 @@ class WFileSpectrumList(a99.WEditor):
                 a99.style_widget_changed(edit, False)
 
     def __update_f(self):
-        self._flag_valid = self.update_splist_headers(self.f.splist)
+        self._flag_valid = self.update_splist_headers(self._f.splist)
 
     def __new_window(self, clone):
         """Opens new FileSparseCube in new window"""
@@ -334,8 +322,8 @@ class WFileSpectrumList(a99.WEditor):
         """Uses block and opens result in new window"""
         from f311 import explorer as ex
 
-        # Does not touch the original self.f
-        clone = copy.deepcopy(self.f)
+        # Does not touch the original self._f
+        clone = copy.deepcopy(self._f)
         clone.filename = None
         slblock = ex.SLB_UseSpectrumBlock()
         for i, sp in enumerate(clone.splist.spectra):
@@ -346,7 +334,7 @@ class WFileSpectrumList(a99.WEditor):
         """Uses block and opens result in new window"""
         # Here not cloning current spectrum list, but trusting the block
         block.flag_copy_wavelength = True
-        output = block.use(self.f.splist)
+        output = block.use(self._f.splist)
         f = self.__new_from_existing()
         f.splist = output
         self.__new_window(f)

@@ -39,7 +39,6 @@ if __name__ == "__main__":
     moldb = ft.FileMolDB()
     moldb.init_default()
     try:
-
         fobj = None
         if args.fn is not None:
             fobj = ft.FileMolConsts()
