@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
     # "-l" mode
     if args.list:
-        print(a99.fmt_ascii_h1("Subdirectories of '%s" % pf.get_pfant_data_path()))
+        print("\n".join(a99.format_h1("Subdirectories of '%s'" % pf.get_pfant_data_path())))
         for dirname in pf.get_pfant_data_subdirs():
             print(dirname)
         sys.exit()
