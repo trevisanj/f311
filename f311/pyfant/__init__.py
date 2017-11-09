@@ -1,3 +1,5 @@
+"""Python interface to the PFANT spectral synthesis software (Fortran)"""
+
 # # Temporary imports
 #   =================
 # These modules should be be del'eted at the end
