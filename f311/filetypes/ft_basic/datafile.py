@@ -68,6 +68,8 @@ class DataFile(a99.AttrsPart):
             filename = self.filename
         if filename is None:
             filename = self.default_filename
+        if filename is None:
+            raise RuntimeError("Class '{}' has no default filename".format(self.__class__.__name__))
         self._do_save_as(filename)
         self.filename = filename
 

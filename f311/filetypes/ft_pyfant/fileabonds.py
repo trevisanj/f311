@@ -8,6 +8,8 @@ from .filedissoc import FileDissoc
 import tabulate
 
 
+int
+
 class FileAbonds(DataFile):
     """PFANT Stellar Chemical Abundances"""
 
@@ -27,6 +29,20 @@ class FileAbonds(DataFile):
         # overall
         self.notes = ""
 
+    def __iter__(self):
+        yield "hello"
+        yield "ok"
+        yield "now"
+        for i in range(10):
+            yield i
+        yield "hello"
+        yield "ok"
+        yield "now"
+
+
+
+
+
     def __str__(self):
         data = zip(self.ele, self.abol, self.notes_per_ele)
         headers = ["El", "Abund", "Notes"]
@@ -37,6 +53,11 @@ class FileAbonds(DataFile):
         #   "-- ------ "+"-"*nn]+
         #  ["{:>2s} {:>6.2f} {}".format(a, b, c)
         #   for a, b, c in zip(self.ele, self.abol, self.notes_per_ele)])
+
+    def __add__(self, other):
+        if not isinstance(other, FileAbonds):
+            raise TypeError("I don't want a {}".format(other.__class__.__name__))
+        return "I dont know"
 
     def __len__(self):
         """Returns length of "ele" attribute."""
@@ -65,6 +86,13 @@ class FileAbonds(DataFile):
                 self.ele.append(adjust_atomic_symbol(ele))
                 self.abol.append(float(abol))
                 self.notes_per_ele.append(notes.strip())
+
+    def _do_save_as(self, filename):
+        with open(filename, "w") as h:
+            h.writelines([' %-2s%6.2f %s\n' % (self.ele[i], self.abol[i], self.notes_per_ele[i])
+                          for i in range(len(self))])
+            c = " "+self.notes.replace("\n", "<br>") if len(self.notes) > 0 else ""
+            h.writelines(['1'+c+'\n', '1\n'])
 
     def get_file_dissoc(self):
         """Creates a new FileDissoc object.
@@ -187,11 +215,4 @@ class FileAbonds(DataFile):
     #              "Element \"%s\", kept original %g" % (elem, f.cclog[i])))
     #     return f, log
 
-
-    def _do_save_as(self, filename):
-        with open(filename, "w") as h:
-            h.writelines([' %-2s%6.2f %s\n' % (self.ele[i], self.abol[i], self.notes_per_ele[i])
-                          for i in range(len(self))])
-            c = " "+self.notes.replace("\n", "<br>") if len(self.notes) > 0 else ""
-            h.writelines(['1'+c+'\n', '1\n'])
 

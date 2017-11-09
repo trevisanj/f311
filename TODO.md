@@ -2,10 +2,18 @@
 
 ## Ask BLB
 
-- Conferir o DELTAK com a Beatriz!!!
-
+- Why no He lines?
+- Missing partition function values for F, Ne in partit.dat (have to skip these lines in VALD-to-PFANT conversion)
 
 ## GENERAL
+
+- x.py, tab 3: raiing exception if edit field is empty
+
+- explorer.py: opening extra window
+
+- x.py, tab 3: verify if files exist
+
+- run4.py + fileoptions + x.py tab3: move documentation ifnroamtion to inside fileoptions so that I can publish the descriptions of the parameters in `run4.py --help`
 
 - File .spec taking too long to open
 
@@ -27,7 +35,12 @@
 
 ### Documentation
 
+- write one page per script
+
+- write down lots of examples
+
 #### specific examples:
+
 
 - pyfant: varying "pas"
 

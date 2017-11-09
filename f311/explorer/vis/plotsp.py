@@ -127,7 +127,7 @@ def draw_spectra_overlapped(ss, title=None, setup=_default_setup):
         plt.tight_layout()
 
     if title is not None:
-        plt.gfc().canvas.set_window_title(title)
+        plt.gcf().canvas.set_window_title(title)
 
 
 def plot_spectra_pieces_pdf(ss, aint=10, pdf_filename='pieces.pdf', setup=_default_setup):
