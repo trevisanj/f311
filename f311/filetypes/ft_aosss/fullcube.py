@@ -57,9 +57,45 @@ class FullCube(a99.AttrsPart):
         assert isinstance(hdu, fits.PrimaryHDU)
 
         # ensures all required headers are present
-        keys = ["NAXIS1", "NAXIS2", "NAXIS3"]
+        keys = ["NAXIS1", "NAXIS2"]
         for key in keys:
-            assert key in hdu.header, 'Key "%s" not found in headers' % key
+            if key not in hdu.header:
+                raise ValueError('Key "%s" not found in headers' % key)
+
+        # 20171110 If the data is 2D, we make it 3D by assuming only one row in first dimension
+
+
+        shape = hdu.data.shape
+
+        if len(shape) == 2:
+            a99.get_python_logger().info("HDU data is 2D, will add y axis with only one row to make it 3D")
+
+            hdu.data = hdu.data.reshape((shape[0], 1, shape[1]))
+
+            shape = hdu.data.shape
+
+            _map = [("CRVAL3", lambda: hdu.header["CRVAL2"]),
+                    ("CDELT3", lambda: hdu.header["CDELT2"]),
+                    ("CDELT2", lambda: hdu.header["CDELT1"]),
+                    ("CDELT1", lambda: 1),
+                    ]
+
+
+            # _map = [("NAXIS3", lambda: hdu.header["NAXIS2"]),
+            #         ("NAXIS2", lambda: hdu.header["NAXIS1"]),
+            #         ("NAXIS1", lambda: 1),
+            #         ("CRVAL3", lambda: hdu.header["CRVAL2"]),
+            #         ("CDELT3", lambda: hdu.header["CDELT2"]),
+            #         ("CDELT2", lambda: hdu.header["CDELT1"]),
+            #         ("CDELT1", lambda: 1),
+            #         ]
+
+            for key, f_value in _map:
+                try:
+                    hdu.header[key] = f_value()
+                except KeyError:
+                    a99.get_python_logger().warning("Trying to convert 2D to 3D: necessary header key missing: '{}'".format(key))
+
 
         if not "CDELT3" in hdu.header:
             a99.get_python_logger().warning("HDU lacks header 'CDELT3', assumed 1.0")
@@ -80,6 +116,7 @@ class FullCube(a99.AttrsPart):
         delta_lambda = hdu.header["CDELT3"]
         nlambda = hdu.header["NAXIS3"]
         self.hdu = hdu
+
         self.set_wavelength(np.array([l0 + k * delta_lambda for k in range(0, nlambda)]))
 
     def __len__(self):

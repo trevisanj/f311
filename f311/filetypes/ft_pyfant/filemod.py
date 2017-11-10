@@ -258,9 +258,11 @@ class FileOpa(DataFile):
         Based on http://marcs.astro.uu.se/documents/auxiliary/readopa.f
         """
 
-        with open(filename, "r") as h:
-            self.mcode, self.ndp, self.swave = struct.unpack("1x 4s 5s 10s", a99.readline_strip(h))
-            if self.mcode != "MRXF":
+
+
+        with open(filename, "rb") as h:
+            self.mcode, self.ndp, self.swave = struct.unpack("1x 4s 5s 10s", h.readline().strip(b"\n"))
+            if self.mcode != b"MRXF":
                 # Does not satisfy magic string
                 raise RuntimeError("Model code '{0!s}' is not 'MRXF'".format(self.mcode))
             self.ndp = int(self.ndp)

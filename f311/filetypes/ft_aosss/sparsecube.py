@@ -190,9 +190,12 @@ class SparseCube(SpectrumCollection):
     #     return hdul
     #
     def from_full_cube(self, full_cube):
-        assert isinstance(full_cube, FullCube)
+        if not isinstance(full_cube, FullCube):
+            raise TypeError("Argument fullcube must be a FullCube, not a {}".format(full_cube.__class__.__name__))
         hdu = full_cube.hdu
-        assert isinstance(hdu, fits.PrimaryHDU)
+        if not isinstance(hdu, fits.PrimaryHDU):
+            raise TypeError("fullcube.hdu must be a astropy.fits.PrimaryHDU, not a {}".format(hdu.__class__.__name__))
+
         data = hdu.data
         nlambda, nY, nX = data.shape
 
@@ -204,15 +207,18 @@ class SparseCube(SpectrumCollection):
         self.__flag_update = False
         try:
             # TODO implement threshold, i.e., abs(...) <= epsilon
-            xx, yy = np.where(sum(data, 0) != 0)
+            yy, xx = np.where(sum(data, 0) != 0)
 
             for i, j in zip(xx, yy):
                 sp = full_cube.get_spectrum(i, j)
                 # discards edges that are zeros
                 where_positive = np.where(sp.flux > 0)[0]
-                sp.cut_idxs(where_positive[0], where_positive[-1] + 1)
-                sp.pixel_x, sp.pixel_y = i, j
-                self.add_spectrum(sp)
+                if len(where_positive) > 0:
+                    sp.cut_idxs(where_positive[0], where_positive[-1] + 1)
+                    if len(sp) > 1:
+                        # Spectrum must have at least two points
+                        sp.pixel_x, sp.pixel_y = i, j
+                        self.add_spectrum(sp)
 
             self.height = nY
             self.width = nX

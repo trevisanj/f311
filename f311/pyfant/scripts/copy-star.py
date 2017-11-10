@@ -50,14 +50,16 @@ if __name__ == "__main__":
 
     # "-l" mode
     if args.list:
-        print("\n".join(a99.format_h1("Subdirectories of '%s'" % pf.get_pfant_data_path())))
+        print("\n".join(a99.format_h1("Subdirectories of '{}'".format(pf.get_pfant_data_path()))))
         for dirname in pf.get_pfant_data_subdirs():
             print(dirname)
         sys.exit()
         
     # figures out the path to directory (dir_)
     if flag_menu:
+        print("\nLooking into directory '{}'...".format(pf.get_pfant_data_path()))
         dirnames = pf.get_pfant_star_subdirs()
+        dirnames.sort()
         choice = a99.menu("Choose a star", [x.capitalize() for x in dirnames],
                       cancel_label="quit", flag_allow_empty=True, flag_cancel=False)
         if choice is None or choice <= 0:
