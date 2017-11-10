@@ -38,51 +38,16 @@ class SetOfLines(a99.AttrsPart):
     @property
     def llzero(self):
         """Minimum wavelength"""
-        return min(self._lmbdam)
+        return min(self.lmbdam)
 
     @property
     def llfin(self):
         """Maximum wavelength"""
-        return max(self._lmbdam)
+        return max(self.lmbdam)
 
-    @property
-    def lmbdam(self):
-        """**Attention** Returns numpy array"""
-        return np.array(self._lmbdam)
 
-    @lmbdam.setter
-    def lmbdam(self, value):
-        self._lmbdam = value
-
-    @property
-    def sj(self):
-        """**Attention** Returns numpy array"""
-        return np.array(self._sj)
-
-    @sj.setter
-    def sj(self, value):
-        self._sj = value
-
-    @property
-    def jj(self):
-        """**Attention** Returns numpy array"""
-        return np.array(self._jj)
-
-    @jj.setter
-    def jj(self, value):
-        self._jj = value
-
-    @property
-    def branch(self):
-        """**Attention** Returns numpy array"""
-        return np.array(self._branch)
-
-    @branch.setter
-    def branch(self, value):
-        self._branch = value
-
-    def __init__(self, vl=None, v2l=None, qqv=None, ggv=None, bbv=None, ddv=None, fact=None,
-                 state_from=None, state_to=None):
+    def __init__(self, vl=-1, v2l=-1, qqv=0, ggv=0, bbv=0, ddv=0, fact=0,
+                 state_from="", state_to=""):
         a99.AttrsPart.__init__(self)
 
         self.vl = vl
@@ -98,10 +63,10 @@ class SetOfLines(a99.AttrsPart):
         self.state_to = state_to
 
         # Vectors are keps as lists in order to .append_line() to work
-        self._lmbdam = []
-        self._sj = []
-        self._jj = []
-        self._branch = []
+        self.lmbdam = []
+        self.sj = []
+        self.jj = []
+        self.branch = []
 
     @property
     def num_lines(self):
@@ -117,7 +82,7 @@ class SetOfLines(a99.AttrsPart):
     def __iter__(self):
         """Creates MyDBRow objects to represent each molecular line"""
         fieldnames = ["lmbdam", "sj", "jj", "branch"]
-        for t in zip(self._lmbdam, self._sj, self._jj, self._branch):
+        for t in zip(self.lmbdam, self.sj, self.jj, self.branch):
             obj = a99.MyDBRow()
             for fieldname, value in zip(fieldnames, t):
                 obj[fieldname] = value
@@ -126,28 +91,28 @@ class SetOfLines(a99.AttrsPart):
     def cut(self, lzero, lfin):
         """Reduces the number of lines to only the ones whose lmbdam is inside [lzero, lfin]"""
         l, s, j, b = [], [], [], []
-        for _l, _s, _j, _b in zip(self._lmbdam, self._sj, self._jj, self._branch):
+        for _l, _s, _j, _b in zip(self.lmbdam, self.sj, self.jj, self.branch):
             if lzero <= _l <= lfin:
                 l.append(_l)
                 s.append(_s)
                 j.append(_j)
                 b.append(_b)
-        self._lmbdam, self._sj, self._jj, self._branch = l, s, j, b
+        self.lmbdam, self.sj, self.jj, self.branch = l, s, j, b
 
     def append_line(self, lmbdam, sj, jj, branch):
-        self._lmbdam.append(lmbdam)
-        self._sj.append(sj)
-        self._jj.append(jj)
-        self._branch.append(branch)
+        self.lmbdam.append(lmbdam)
+        self.sj.append(sj)
+        self.jj.append(jj)
+        self.branch.append(branch)
 
     def sort(self):
-        """Sort **in-place**. However, replaces the internal vectors"""
+        """Sorts by wavelength **in-place**"""
 
         ii = np.argsort(self.lmbdam)
-        self._lmbdam = list(self.lmbdam[ii])
-        self._sj = list(self.sj[ii])
-        self._jj = list(self.jj[ii])
-        self._branch = list(self.branch[ii])
+        self.lmbdam = [self.lmbdam[i] for i in ii]
+        self.sj = [self.sj[i] for i in ii]
+        self.jj = [self.jj[i] for i in ii]
+        self.branch = [self.branch[i] for i in ii]
 
 
 @a99.froze_it
@@ -167,19 +132,19 @@ class Molecule(a99.AttrsPart):
 
     @property
     def lmbdam(self):
-        return np.hstack([x.lmbdam for x in self.sol])
+        return np.hstack([np.array(x.lmbdam) for x in self.sol])
 
     @property
     def sj(self):
-        return np.hstack([x.sj for x in self.sol])
+        return np.hstack([np.array(x.sj) for x in self.sol])
 
     @property
     def jj(self):
-        return np.hstack([x.jj for x in self.sol])
+        return np.hstack([np.array(x.jj) for x in self.sol])
 
     @property
     def branch(self):
-        return np.hstack([x.branch for x in self.sol])
+        return np.hstack([np.array(x.branch) for x in self.sol])
 
     @property
     def nv(self):
@@ -221,19 +186,19 @@ class Molecule(a99.AttrsPart):
         # look for where variable km_titulo is read from file
         #
         # "titulo" is loaded from file, but not used when saving the file
-        self.titulo = None
-        self.description = None
+        self.titulo = ""
+        self.description = ""
         self.symbols = None
-        self.fe = None
-        self.do = None
-        self.mm = None
-        self.am = None
-        self.bm = None
-        self.ua = None
-        self.ub = None
-        self.te = None
-        self.cro = None
-        self.s = None
+        self.fe = 0.
+        self.do = 0.
+        self.mm = 0.
+        self.am = 0.
+        self.bm = 0.
+        self.ua = 0.
+        self.ub = 0.
+        self.te = 0.
+        self.cro = 0.
+        self.s = 0.
 
         self.sol = []  # list of SetOfLines objects
 
@@ -258,7 +223,6 @@ class Molecule(a99.AttrsPart):
                 del self.sol[i]
 
 
-# TODO Save information in molecule header
 @a99.froze_it
 class FileMolecules(DataFile):
     """
@@ -294,19 +258,19 @@ class FileMolecules(DataFile):
 
     @property
     def lmbdam(self):
-        return np.hstack([np.hstack([x.lmbdam for x in m.sol]) for m in self.molecules])
+        return np.hstack([m.lmbdam for m in self.molecules])
 
     @property
     def sj(self):
-        return np.hstack([np.hstack([x.sj for x in m.sol]) for m in self.molecules])
+        return np.hstack([m.sj for m in self.molecules])
 
     @property
     def jj(self):
-        return np.hstack([np.hstack([x.jj for x in m.sol]) for m in self.molecules])
+        return np.hstack([m.jj for m in self.molecules])
 
     @property
     def branch(self):
-        return np.hstack([np.hstack([x.branch for x in m.sol]) for m in self.molecules])
+        return np.hstack([m.branch for m in self.molecules])
 
     @property
     def qqv(self):
@@ -485,7 +449,7 @@ class FileMolecules(DataFile):
                     # Now reads lines
                     sol_iter = iter(m.sol)  # iterator to change the current set-of-lines with the "numlin" flag
                     o = next(sol_iter)  # current set-of-lines
-                    # o._lmbdam, o._sj, o._jj, o._branch = [], [], [], []
+                    # o.lmbdam, o.sj, o.jj, o.branch = [], [], [], []
                     while True:
                         # Someone added "*" signs as a 6th column of some lines
                         # which was causing my reading to crash.
@@ -501,10 +465,10 @@ class FileMolecules(DataFile):
 
                         r += 1
 
-                        o._lmbdam.append(lmbdam)
-                        o._sj.append(sj)
-                        o._jj.append(jj)
-                        o._branch.append(iz)
+                        o.lmbdam.append(lmbdam)
+                        o.sj.append(sj)
+                        o.jj.append(jj)
+                        o.branch.append(iz)
 
                         if numlin > 0:
                             if numlin == 9:
@@ -560,7 +524,7 @@ class FileMolecules(DataFile):
                     for j in range(num_lines):
                         numlin = 0 if j < num_lines-1 else 9 if i == num_sol-1 else 1
                         a99.write_lf(h, "%.10g %.10g %.10g %s %d" %
-                                     (s._lmbdam[j], s._sj[j], s._jj[j], s._branch[j], numlin))
+                                     (s.lmbdam[j], s.sj[j], s.jj[j], s.branch[j], numlin))
 
 
 def molconsts_to_molecule(molconsts):

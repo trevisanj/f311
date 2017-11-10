@@ -410,6 +410,7 @@ class XFileMolecules(QMainWindow):
                 w.setCurrentRow(0)
 
     def set_sol(self, j):
+        self.marker_row = None  # no longer valid, whatever it was
         self.sol_index = j
         self.sol = self.f.molecules[self.mol_index].sol[j]
         self.update_sol_info()
@@ -596,13 +597,17 @@ class XFileMolecules(QMainWindow):
 
     def MolLinesEditor_cell_changed(self, row, column, value):
         """Called by the molecular lines editor to notify that a value has changed."""
-        attr_name = SOL_ATTR_NAMES[column]
-        v = self.sol.__getattribute__(attr_name)
-        if v[row] != value:
-            v[row] = value
-            self.flag_changed = True
-            self.plot_lines()
-            self.update_window_title()
+
+        try:
+            attr_name = SOL_ATTR_NAMES[column]
+            v = self.sol.__getattribute__(attr_name)
+            if v[row] != value:
+                v[row] = value
+                self.flag_changed = True
+                self.plot_lines()
+                self.update_window_title()
+        except Exception as e:
+            a99.get_python_logger().exception("XFileMolecules.MolLinesEditor_cell_changed() raised")
 
     def set_editor_sol(self):
         """Sets the set-of-lines of the editor."""

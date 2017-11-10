@@ -56,6 +56,8 @@ if __name__ == "__main__":
       help='lists subdirectories of '+pf.get_pfant_data_path())
     parser.add_argument('-p', '--path', action='store_true',
       help='system path mode')
+    parser.add_argument('-y', '--yes', action="store_true",
+                        help="Automatically answers 'yes' to eventual question")
     parser.add_argument('directory', type=str, nargs="?", default="common",
      help='name of directory (either a subdirectory of PFANT/data or the path '
           'to a valid system directory (see modes of operation)')
@@ -82,7 +84,9 @@ if __name__ == "__main__":
     else:
         dir_ = pf.get_pfant_path('data', args.directory)
 
-    if len(sys.argv) == 1:
+    flag_ask = not args.path and not args.yes
+
+    if flag_ask:
         while True:
             ans = input("Create links to PFANT data files in '%s' (Y/n)? " %
                             dir_).upper()
