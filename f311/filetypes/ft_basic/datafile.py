@@ -5,6 +5,8 @@ Ancestor class for all classes that represent an input file.
 
 import a99
 import os
+import a99
+
 
 __all__ = ["DataFile"]
 
@@ -18,9 +20,6 @@ class DataFile(a99.AttrsPart):
                       (b) if there are no testable magic characters, test for absurd
                           within _do_load(). Try to crash early.
     """
-    # Description, e.g. "main configuration"
-    # TODO investigate further, I think this attribute did not succeed
-    description = ""
     # Descendants shoulds set this
     default_filename = None
     # Whether it is a text file format (otherwise binary)
@@ -29,6 +28,11 @@ class DataFile(a99.AttrsPart):
     flag_collect = True
     # List of script names that can edit this file type
     editors = None
+
+
+    @a99.classproperty
+    def description(cls):
+        return a99.get_obj_doc0(cls)
 
     def __init__(self):
         a99.AttrsPart.__init__(self)

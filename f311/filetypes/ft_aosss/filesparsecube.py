@@ -11,7 +11,6 @@ from astropy.io import fits
 class FileSparseCube(DataFile):
     """FITS Sparse Data Cube (storage to take less disk space)"""
     attrs = ['sparsecube']
-    description = "Data Cube (FITS file)"
     default_filename = "default.sparsecube"
     flag_txt = False
 

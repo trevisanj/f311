@@ -7,9 +7,8 @@ __all__ = ["FileConfigConvMol"]
 
 @a99.froze_it
 class FileConfigConvMol(FilePyConfig):
-    """Python source containing 'config_conv = ConfigConv(...)"""
+    """Configuration file for molecular lines conversion GUI (Python code)"""
 
-    description = "configuration file for molecular lines conversion GUI"
     default_filename = "configconvmol.py"
     attrs = ["obj"]
     editors = []

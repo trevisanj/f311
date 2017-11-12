@@ -7,14 +7,13 @@ __all__ = ["FileGalfit"]
 
 @a99.froze_it
 class FileGalfit(DataFile):
-    """FITS file with frames named INPUT_*, MODEL_*, RESIDUAL_*, which is the output of Galfit software
+    """FITS file with frames named INPUT_*, MODEL_*, RESIDUAL_* (Galfit software output)
 
     When file is loaded, the band_names property will be filled
 
     IF INPUT_*, MODEL_* and RESIDUAL_* do not have the same band names, the file is "rejected"
     """
     attrs = []
-    description = "Galfit output"
     default_filename = None
     flag_txt = False
 

@@ -159,7 +159,8 @@ class XFileMainWindowBase(a99.XLogMainWindow):
     def _add_log_tab(self):
         """Adds element to pages and new tab"""
 
-        text_tab = "Log (Alt+&{})".format(len(self.pages)+1)
+        # text_tab = "Log (Alt+&{})".format(len(self.pages)+1)
+        text_tab = "Log"
 
         self.pages.append(MyPage(text_tab=text_tab))
 
@@ -348,7 +349,7 @@ class XFileMainWindowBase(a99.XLogMainWindow):
     def _update_gui_text_tabs(self):
         """Iterates through pages to update tab texts"""
         for index, page in enumerate(self.pages):
-            self.tabWidget.setTabText(index, page.text_tab + (" (changed)" if page.flag_changed else ""))
+            self.tabWidget.setTabText(index, "{} (Alt+&{}){}".format(page.text_tab, index+1, (" (changed)" if page.flag_changed else "")))
 
     def _generic_reset(self):
         page = self._get_page()

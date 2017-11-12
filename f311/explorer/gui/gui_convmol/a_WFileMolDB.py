@@ -28,7 +28,7 @@ class WFileMolDB(a99.WEditor):
         a99.set_margin(l0, 2)
         l0.setSpacing(2)
 
-        a = self.title_mol = QLabel(a99.format_title0("Molecules (Alt+&4)"))
+        a = self.title_mol = QLabel(a99.format_title0("Molecules (Alt+&M)"))
         l0.addWidget(a)
 
         w = self.keep_ref(QLineEdit())

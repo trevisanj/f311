@@ -6,7 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SPHINXPROJ    = pyperdrive
 SOURCEDIR     = source
-BUILDDIR      = ../../f311-docs
+BUILDDIR      = ../../docs
 
 # Put it first so that "make" without argument is like "make help".
 help:

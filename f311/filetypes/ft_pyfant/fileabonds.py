@@ -13,7 +13,6 @@ int
 class FileAbonds(DataFile):
     """PFANT Stellar Chemical Abundances"""
 
-    description = "chemical abundances"
     default_filename = "abonds.dat"
     attrs = ["notes", "ele", "abol", "notes_per_ele"]
     editors = ["abed.py", "x.py"]

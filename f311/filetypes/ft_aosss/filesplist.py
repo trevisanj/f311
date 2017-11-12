@@ -15,7 +15,6 @@ from .. import DataFile
 class FileSpectrumList(DataFile):
     """FITS Spectrum List"""
     attrs = ['splist']
-    description = "Spectrum List"
     default_filename = "default.splist"
     flag_txt = False
 

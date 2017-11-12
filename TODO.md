@@ -98,8 +98,6 @@ further investigation required
 
   - Fill origin when converting from FileFullCube to FileSpectrumList (somehow)
   - XHelpDialog is too ugly
-  - Investigate what this a_XAtomsHistogram is about
-  - Warn assumptions in ConvMol
 
   
 ## aosss

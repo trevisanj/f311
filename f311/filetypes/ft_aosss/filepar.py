@@ -10,7 +10,6 @@ from collections import OrderedDict
 class FilePar(DataFile):
     """WebSim-COMPASS ".par" (parameters) file"""
 
-    description = "Session parameters"
     default_filename = None
     attrs = ["params"]
 

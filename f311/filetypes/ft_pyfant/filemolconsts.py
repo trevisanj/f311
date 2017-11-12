@@ -6,9 +6,8 @@ __all__ = ["FileMolConsts"]
 
 @a99.froze_it
 class FileMolConsts(FilePy):
-    """Python source containing 'fobj = MolConsts(...)"""
+    """Molecular constants config file (Python code)"""
 
-    description = "molecular constants"
     default_filename = "configmolconsts.py"
     attrs = ["molconsts"]
     editors = ["mced.py"]

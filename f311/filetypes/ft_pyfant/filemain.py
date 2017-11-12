@@ -10,14 +10,13 @@ NINE_HUNDRED = 900
 @a99.froze_it
 class FileMain(DataFile):
     """
-    PFANT Stellar Main Configuration
+    PFANT Main Stellar Configuration
 
     Imitates the logic of reader_main.f90::read_main().
 
     Attributes match reader_main.f90::main_* (minus the "main_" prefix)
     """
 
-    description = "main configuration"
     default_filename = "main.dat"
     attrs = ["titrav", "pas", "fwhm", "ivtot", "vvt", "tolv",
              "teff", "glog", "asalog", "nhe", "ptdisk", "mu",

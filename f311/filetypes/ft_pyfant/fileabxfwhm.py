@@ -22,7 +22,7 @@ _COMMENT2 = """# Convolutions specification for fwhm parameter:
 
 @a99.froze_it
 class FileAbXFwhm(FilePy):
-    __doc__ = """`x.py` Differential Abundances and FWHMs (Python source)
+    __doc__ = """`x.py` Differential Abundances X FWHMs (Python source)
 
 This file is actually Python source. Here is a sample:
 
@@ -37,8 +37,6 @@ pfant_names = []
 conv = [0.08, 0.6,  0.04]
 """ % (_COMMENT0, _COMMENT1, _COMMENT2)
 
-
-    description = "abundances X FWHM's"
     default_filename = "abxfwhm.py"
     attrs = ["ab", "conv"]
     editors = ["x.py"]

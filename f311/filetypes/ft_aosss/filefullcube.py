@@ -11,7 +11,9 @@ from .. import DataFile
 @a99.froze_it
 class FileFullCube(DataFile):
     """
-    FITS Data Cube ("full" opposed to "sparse")
+    WebSim Compass Data Cube (FITS file)
+
+    "full" opposed to "sparse"
 
     **Note** normally, the DataFile classes load operation reads all contents
     and closes the file, however this class keeps the file **open** as an
@@ -20,7 +22,7 @@ class FileFullCube(DataFile):
     HDUList.readall()
     """
     attrs = ['wcube']
-    description = "WebSim Compass Data Cube (FITS file)"
+    description = ""
     default_filename = "default.fullcube"
     flag_txt = False
 
