@@ -1,6 +1,7 @@
 Script ``hitran-scraper.py``
 ============================
 
+<<<<<<< HEAD
 .. include:: leave-hitran-scraper.rst
 
 Usage examples
@@ -163,3 +164,6 @@ To work properly with these data in your code, you may have a look at the HAPI s
 superbly documented.
 
 Within f311, the code in :meth:`f311.convmol.conv_hitran.hitran_to_sols` contains a usage example of HITRAN data.
+=======
+.. include:: leave-hitran-scraper.rst
+>>>>>>> 64705efb15be4fe17d743e35d4e3bdac3ca4db5f
