@@ -1,7 +1,6 @@
 Script ``nist-scraper.py``
 ==========================
 
-<<<<<<< HEAD
 .. include:: leave-nist-scraper.rst
 
 Usage examples
@@ -52,6 +51,3 @@ will print
     B ²Sigma⁺  69774       660                                  5.086                         0.000929            1.8698   B → A R    35965.5
     A ²Sigma⁺  32684.1    3178.86       92.917                 17.358      0.7868     -0.016  0.002039            1.0121   A ↔ X R    32402.4
     X ²Pi_i        0      3737.76       84.8813                18.9108     0.7242             0.001938            0.96966  1/2 ← 3/2    126.23  -139.21
-=======
-.. include:: leave-nist-scraper.rst
->>>>>>> 64705efb15be4fe17d743e35d4e3bdac3ca4db5f
