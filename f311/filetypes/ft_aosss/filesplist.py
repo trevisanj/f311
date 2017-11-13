@@ -17,6 +17,7 @@ class FileSpectrumList(DataFile):
     attrs = ['splist']
     default_filename = "default.splist"
     flag_txt = False
+    editors = ["splisted.py"]
 
     def __init__(self):
         DataFile.__init__(self)

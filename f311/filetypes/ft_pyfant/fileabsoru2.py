@@ -4,7 +4,7 @@ from .. import DataFile
 
 
 class FileAbsoru2(DataFile):
-    """"Absoru2" file
+    """PFANT "Absoru2" file
 
     Reader/writes not implemented (will be implemented when there is the need for so)"""
 

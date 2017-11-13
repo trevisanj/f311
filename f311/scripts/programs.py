@@ -11,8 +11,11 @@ import glob
 import sys
 import a99
 import f311
+import re
 
-
+# These values must match those of the same variables in <project-root>/docs/gen-script-pages.py
+SUBDIR = "autoscripts"
+PREFIX_EDITABLE = "editable-"
 
 
 def _add_PFANT(d):
@@ -42,7 +45,8 @@ def _format_programs_dict(allinfo, format):
 
         title = "{} -- {}".format(name, descr)
 
-        ret.extend(a99.format_h1(title, format) + [""])
+        # **Note** Using h3/h4 because ot ReST context of use, but it is possible to change this
+        ret.extend(a99.format_h3(title, format) + [""])
         linesp, module_len = a99.format_exe_info(exeinfo, format, ind)
         ret.extend(linesp)
 
@@ -63,6 +67,9 @@ if __name__ == "__main__":
                         choices=["text", "markdown-list", "markdown-table", "rest-list"])
     parser.add_argument('-p', '--pkgname', type=str, help='List programs from this package only', default="(all)")
     parser.add_argument('-l', '--list-packages', action="store_true", help='Lists all packages')
+    parser.add_argument('-k', '--rest-links', action="store_true",
+     help='If format=="rest-list", '
+          'renders program names as links to their respective documentation pages')
     parser.add_argument('-_', '--protected', action="store_true", help="Includes protected scripts (starting with '_')_")
     args = parser.parse_args()
 
@@ -80,6 +87,19 @@ if __name__ == "__main__":
 
     allinfo = _get_programs_dict(pkgname_only, args.protected)
     strlist = _format_programs_dict(allinfo, args.format)
-    print("\n".join(strlist))
+
+
+    _out = "\n".join(strlist)
+
+    if args.format.startswith("rest") and args.rest_links:
+        out = re.sub("\* ``(.*)\.py``",
+                     lambda match: "* :doc:`{0}.py <{1}/{2}{0}>`".format(match.group(1), SUBDIR, PREFIX_EDITABLE),
+                     _out)
+    else:
+        out = _out
+
+
+    print(out)
+
     print("github.com/trevisanj/f311\n")
 

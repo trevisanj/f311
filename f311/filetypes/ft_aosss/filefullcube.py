@@ -11,7 +11,7 @@ from .. import DataFile
 @a99.froze_it
 class FileFullCube(DataFile):
     """
-    WebSim Compass Data Cube (FITS file)
+    FITS WebSim Compass Data Cube
 
     "full" opposed to "sparse"
 
@@ -25,6 +25,7 @@ class FileFullCube(DataFile):
     description = ""
     default_filename = "default.fullcube"
     flag_txt = False
+    editors = ["cubeed.py"]
 
     def __init__(self):
         DataFile.__init__(self)

@@ -86,11 +86,20 @@ def classes_sp():
     return _classes_sp
 
 
-def classes_file():
-    """All known File* classes"""
+def classes_file(flag_leaf=False):
+    """All known File* classes
+
+    Args:
+        flag_leaf: returns only classes that do not have subclasses
+                   ("leaf" nodes as in a class tree graph)
+    """
     if __flag_first:
         __setup()
-    return _classes_file
+
+    if not flag_leaf:
+        return _classes_file
+
+    return [cls for cls in _classes_file if cls not in _classes_file_superclass]
 
 
 def classes_collection():
@@ -141,6 +150,9 @@ def _collect_classes(m):
 
     _extend(_classes_vis, a99.get_classes_in_module(m, ex.Vis))
 
+    global _classes_file_superclass
+    _classes_file_superclass = [cls.__bases__[0] for cls in _classes_file]
+
 
 # # List of classes representing all file formats either read or written
 #   ====================================================================
@@ -148,6 +160,7 @@ _classes_txt = []
 _classes_bin = []
 _classes_sp = []
 _classes_file = []
+_classes_file_superclass = []  # superclasses of items in _classes_file
 _classes_vis = []
 __flag_first = True
 __collaborators = OrderedDict()
@@ -225,7 +238,7 @@ def _get_programs_dict():
             package = importlib.import_module(pkgname)
         except ModuleNotFoundError:
             # I think it is better to be silent when a collaborator package is not installed
-            pass
+            continue
 
         path_ = os.path.join(os.path.split(package.__file__)[0], "scripts")
         bulk = a99.get_exe_info(path_, flag_protected=True)

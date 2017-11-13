@@ -141,12 +141,13 @@ FILE_TYPE_INFO_ATTRS = OrderedDict(zip(["description", "default_filename", "clas
                                        ["Description", "Default filename", "Class name", "Editors"]))
 
 
-def get_filetypes_info(editor_quote="`"):
+def get_filetypes_info(editor_quote="`", flag_leaf=True):
     """
     Reports available data types
 
     Args:
-        editor_quote: character to put the editors between
+        editor_quote: character to enclose the name of the editor script between.
+        flag_leaf: see tabulate_filetypes_rest()
 
     Returns:
         list: list of FileTypeInfo
@@ -155,7 +156,7 @@ def get_filetypes_info(editor_quote="`"):
     import f311
     data = []  # [FileTypeInfo, ...]
 
-    for attr in f311.classes_file():
+    for attr in f311.classes_file(flag_leaf):
         description = a99.get_obj_doc0(attr)
 
         def_ = NONE_REPL if attr.default_filename is None else attr.default_filename
@@ -179,6 +180,12 @@ def filetypes_info_to_rows_header(infos, attrnames=None, header=None, flag_wrap_
     """
     Converts filetype information to a (multiline_rows, header) tuple that can be more easily be tabulated
 
+    **Attention** uses ReST syntax, using a "|br|" marker for line break. It requires the .rst source
+                  file to contain the following bit:
+
+        .. |br| raw:: html
+
+           <br />
 
     Args:
         infos: list of FileTypeInfo
@@ -199,7 +206,7 @@ def filetypes_info_to_rows_header(infos, attrnames=None, header=None, flag_wrap_
         header = [FILE_TYPE_INFO_ATTRS[key] for key in attrnames]
 
     if flag_wrap_description:
-        wr = textwrap.TextWrapper(width=description_width, subsequent_indent=" ")
+        wr = textwrap.TextWrapper(width=description_width, subsequent_indent="|br| ")
 
     data = []
     for i, info in enumerate(infos):
@@ -220,7 +227,8 @@ def filetypes_info_to_rows_header(infos, attrnames=None, header=None, flag_wrap_
 # a99.markdown_table(("File type description", "Default filen
 
 
-def tabulate_filetypes_rest(attrnames=None, header=None, flag_wrap_description=True, description_width=40):
+def tabulate_filetypes_rest(attrnames=None, header=None, flag_wrap_description=True,
+                            description_width=40, flag_leaf=True):
     """
     Generates a reST multirow table
 
@@ -231,10 +239,11 @@ def tabulate_filetypes_rest(attrnames=None, header=None, flag_wrap_description=T
         flag_wrap_description: whether to wrap the description text
         description_width: width to wrap the description text (effective only if
                            flag_wrap_description is True)
-
+        flag_leaf: returns only classes that do not have subclasses
+                   ("leaf" nodes as in a class tree graph)
     """
 
-    infos = get_filetypes_info(editor_quote="``")
+    infos = get_filetypes_info(editor_quote="``", flag_leaf=flag_leaf)
     rows, header = filetypes_info_to_rows_header(infos, attrnames, header, flag_wrap_description,
                                                  description_width)
     ret = a99.rest_table(rows, header)
