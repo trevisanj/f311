@@ -194,7 +194,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>λair</strong> &#8211; air wavelength in Angstrom</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>λair</strong> – air wavelength in Angstrom</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">vacuum wavelength in Angstrom</td>
 </tr>
@@ -211,7 +211,7 @@
 </dl>
 <p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The following code converts wavelength=5500 Angstrom to wavenumber in cm**-1:</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span><span class="n">e8</span><span class="o">/</span><span class="n">air_to_vacuum</span><span class="p">(</span><span class="mf">5500.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">1e8</span><span class="o">/</span><span class="n">air_to_vacuum</span><span class="p">(</span><span class="mf">5500.</span><span class="p">)</span>
 <span class="go">18176.768046090445</span>
 </pre></div>
 </div>
@@ -245,7 +245,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>λvac</strong> &#8211; vacuum wavelength in Angstrom</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>λvac</strong> – vacuum wavelength in Angstrom</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">air wavelength in Angstrom</td>
 </tr>
@@ -261,7 +261,7 @@
 </dl>
 <p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The following code converts wavenumber=2000 cm**-1 to wavelength in Angstrom</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vacuum_to_air</span><span class="p">(</span><span class="mi">1</span><span class="n">e8</span><span class="o">/</span><span class="mi">2000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vacuum_to_air</span><span class="p">(</span><span class="mf">1e8</span><span class="o">/</span><span class="mi">2000</span><span class="p">)</span>
 <span class="go">49986.36934549974</span>
 </pre></div>
 </div>
@@ -291,7 +291,7 @@
 <dl class="data">
 <dt id="f311.physics.constants.H">
 <code class="descclassname">f311.physics.constants.</code><code class="descname">H</code><em class="property"> = 6.6261e-27</em><a class="headerlink" href="#f311.physics.constants.H" title="Permalink to this definition">¶</a></dt>
-<dd><p>Planck&#8217;s constant in cm**2*g/s</p>
+<dd><p>Planck’s constant in cm**2*g/s</p>
 </dd></dl>
 
 </div>
@@ -306,23 +306,23 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sp</strong> &#8211; <cite>f311.filetypes.Spectrum</cite> instance. <strong>flux unit</strong> must be <code class="docutils literal"><span class="pre">erg/cm**2/s/Hz</span></code> aka &#8220;Fnu&#8221;</li>
-<li><strong>bp</strong> &#8211; <p>Bandpass object, or string in &#8220;UBVRIYJHKLMNQ&#8221;. How it works:</p>
+<li><strong>sp</strong> – <cite>f311.filetypes.Spectrum</cite> instance. <strong>flux unit</strong> must be <code class="docutils literal"><span class="pre">erg/cm**2/s/Hz</span></code> aka “Fnu”</li>
+<li><strong>bp</strong> – <p>Bandpass object, or string in “UBVRIYJHKLMNQ”. How it works:</p>
 <ul>
-<li>If string in &#8220;UBVRI&#8221;, creates a UBVTabular Bandpass object;</li>
+<li>If string in “UBVRI”, creates a UBVTabular Bandpass object;</li>
 <li>If string otherwise, creates a UBVParametric object.</li>
 </ul>
 </li>
-<li><strong>system</strong> &#8211; <p>reference magnitude system. Possible values:</p>
+<li><strong>system</strong> – <p>reference magnitude system. Possible values:</p>
 <ul>
 <li><code class="docutils literal"><span class="pre">&quot;stdflux&quot;</span></code>: literature reference values for bands U,B,V,R,I,J,H,K only</li>
 <li><code class="docutils literal"><span class="pre">&quot;vega&quot;</span></code>: uses the Vega star spectrum as a reference</li>
 <li><code class="docutils literal"><span class="pre">&quot;ab&quot;</span></code>: AB[solute] magnitude system</li>
 </ul>
 </li>
-<li><strong>zero_point</strong> &#8211; subtracts this value from the calculated magnitude to implement some desired
+<li><strong>zero_point</strong> – subtracts this value from the calculated magnitude to implement some desired
 correction.</li>
-<li><strong>flag_force_band_range</strong> &#8211; <p>this flag has effect when the spectrum does not completely overlap
+<li><strong>flag_force_band_range</strong> – <p>this flag has effect when the spectrum does not completely overlap
 the bandpass filter. How it works:</p>
 <ul>
 <li><code class="docutils literal"><span class="pre">False</span></code> (default): restricts the weighted mean flux calculation to the overlap
@@ -388,9 +388,9 @@ range between the spectrum and the filter</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>tabular</strong> &#8211; ((wl, y), ...), 0 &lt;= y &lt;= 1</li>
-<li><strong>parametric</strong> &#8211; ((wl, fwhm), ...)</li>
-<li><strong>ref_mean_flux</strong> &#8211; reference mean flux passing through filter at magnitude 0 in Jy units</li>
+<li><strong>tabular</strong> – ((wl, y), …), 0 &lt;= y &lt;= 1</li>
+<li><strong>parametric</strong> – ((wl, fwhm), …)</li>
+<li><strong>ref_mean_flux</strong> – reference mean flux passing through filter at magnitude 0 in Jy units</li>
 </ul>
 </td>
 </tr>
@@ -430,7 +430,7 @@ range between the spectrum and the filter</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> &#8211; band name. Choices: U,B,V,R,I</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> – band name. Choices: U,B,V,R,I</td>
 </tr>
 </tbody>
 </table>
@@ -456,8 +456,8 @@ range between the spectrum and the filter</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> &#8211; band name. Choices: U,B,V,R,I,Y,J,H,K,L,M,N,Q</li>
-<li><strong>num_stds=3</strong> &#8211; number of standard deviations to left and right of midpoint to consider as
+<li><strong>name</strong> – band name. Choices: U,B,V,R,I,Y,J,H,K,L,M,N,Q</li>
+<li><strong>num_stds=3</strong> – number of standard deviations to left and right of midpoint to consider as
 band limits. Does not affect self.ufunc()</li>
 </ul>
 </td>
@@ -479,7 +479,7 @@ band limits. Does not affect self.ufunc()</li>
 <dl class="function">
 <dt id="f311.physics.photometry.get_ubv_bandpasses">
 <code class="descclassname">f311.physics.photometry.</code><code class="descname">get_ubv_bandpasses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.photometry.get_ubv_bandpasses" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns list with UBVRI... Bandpass objects</p>
+<dd><p>Returns list with UBVRI… Bandpass objects</p>
 </dd></dl>
 
 <dl class="function">
@@ -491,8 +491,8 @@ band limits. Does not affect self.ufunc()</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>bp</strong> &#8211; Bandpass object, or band name, e.g., &#8220;U&#8221;</li>
-<li><strong>system</strong> &#8211; {&#8220;stdflux&#8221;, &#8220;ab&#8221;, &#8220;vega&#8221;} reference magnitude system</li>
+<li><strong>bp</strong> – Bandpass object, or band name, e.g., “U”</li>
+<li><strong>system</strong> – {“stdflux”, “ab”, “vega”} reference magnitude system</li>
 </ul>
 </td>
 </tr>
@@ -511,8 +511,8 @@ band limits. Does not affect self.ufunc()</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>flux</strong> &#8211; float (erg/cm**2/s/Hz), of Spectrum instance</li>
-<li><strong>system</strong><strong>, </strong><strong>zero_point</strong> (<em>bp</em><em>,</em><em></em>) &#8211; see calculate_magnitude()</li>
+<li><strong>flux</strong> – float (erg/cm**2/s/Hz), of Spectrum instance</li>
+<li><strong>system</strong><strong>, </strong><strong>zero_point</strong> (<em>bp</em><em>,</em>) – see calculate_magnitude()</li>
 </ul>
 </td>
 </tr>
@@ -535,7 +535,7 @@ band limits. Does not affect self.ufunc()</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>bp</strong> &#8211; band name or BandPass object</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>bp</strong> – band name or BandPass object</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">BandPass object. If <cite>bp</cite> is already a BandPass object, returns <cite>bp</cite></td>
 </tr>
@@ -627,15 +627,15 @@ band limits. Does not affect self.ufunc()</li>
 <dl class="function">
 <dt id="f311.physics.rainbow.spectrum_to_rgb">
 <code class="descclassname">f311.physics.rainbow.</code><code class="descname">spectrum_to_rgb</code><span class="sig-paren">(</span><em>sp</em>, <em>visible_range=None</em>, <em>method=0</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.rainbow.spectrum_to_rgb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes weighted average of rainbow colors RGB&#8217;s</p>
+<dd><p>Takes weighted average of rainbow colors RGB’s</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sp</strong> &#8211; Spectrum instance</li>
-<li><strong>visible_range=None</strong> &#8211; if passed, affine-transforms the rainbow colors</li>
-<li><strong>method</strong> &#8211; <ul>
+<li><strong>sp</strong> – Spectrum instance</li>
+<li><strong>visible_range=None</strong> – if passed, affine-transforms the rainbow colors</li>
+<li><strong>method</strong> – <ul>
 <li><code class="docutils literal"><span class="pre">0</span></code>: rainbow colors</li>
 <li><code class="docutils literal"><span class="pre">1</span></code>: RGB (alternative method using red, green, blue only instead of full range of rainbow colors)</li>
 </ul>

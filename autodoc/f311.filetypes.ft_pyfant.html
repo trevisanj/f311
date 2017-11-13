@@ -188,11 +188,6 @@
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="f311.filetypes.ft_pyfant.fileabonds.FileAbonds.description">
-<code class="descname">description</code><em class="property"> = 'chemical abundances'</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileabonds.FileAbonds.description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.fileabonds.FileAbonds.editors">
 <code class="descname">editors</code><em class="property"> = ['abed.py', 'x.py']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileabonds.FileAbonds.editors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -204,14 +199,14 @@
 <p>To do so, it loads the default dissoc.dat file from ftpyfant/data/default
 directory and searches for the new abundances within self using the
 element symbol as key.</p>
-<p>The abundance values are &#8220;corrected&#8221; by subtracting 12.</p>
+<p>The abundance values are “corrected” by subtracting 12.</p>
 <p>If element is not found in self, list.index() raises.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.fileabonds.FileAbonds.get_turbospectrum_str">
 <code class="descname">get_turbospectrum_str</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileabonds.FileAbonds.get_turbospectrum_str" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns ((atomic number, abundance), ...) string for TurboSpectrum.</p>
+<dd><p>Returns ((atomic number, abundance), …) string for TurboSpectrum.</p>
 <p>Returns a text string to be pasted in a script that runs TurboSpectrum.</p>
 <p>Elements whose symbol is not found in the periodic table are skipped
 without warning.</p>
@@ -242,7 +237,7 @@ alphabetically.</p>
 <dt id="f311.filetypes.ft_pyfant.fileabsoru2.FileAbsoru2">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.fileabsoru2.</code><code class="descname">FileAbsoru2</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileabsoru2.FileAbsoru2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
-<p>&#8220;Absoru2&#8221; file</p>
+<p>PFANT “Absoru2” file</p>
 <p>Reader/writes not implemented (will be implemented when there is the need for so)</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.fileabsoru2.FileAbsoru2.default_filename">
@@ -259,17 +254,17 @@ alphabetically.</p>
 <dt id="f311.filetypes.ft_pyfant.fileabxfwhm.FileAbXFwhm">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.fileabxfwhm.</code><code class="descname">FileAbXFwhm</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileabxfwhm.FileAbXFwhm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.filepy.FilePy" title="f311.filetypes.ft_basic.filepy.FilePy"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filepy.FilePy</span></code></a></p>
-<p><cite>x.py</cite> Differential Abundances and FWHMs (Python source)</p>
+<p><cite>x.py</cite> Differential Abundances X FWHMs (Python source)</p>
 <p>This file is actually Python source. Here is a sample:</p>
 <p># Specification of differential abundances for each chemical.
 # Differential abundance is a number to add to original value in abonds.dat.
 # All lists of abundances for each element must have the same length.
-ab = {&#8220;Ca&#8221;: [-.3, 0, .3, .5],</p>
+ab = {“Ca”: [-.3, 0, .3, .5],</p>
 <blockquote>
-<div>&#8220;Si&#8221;: [-.3, 0, .3, .5]}</div></blockquote>
+<div>“Si”: [-.3, 0, .3, .5]}</div></blockquote>
 <p># Name for each pfant run. They will be part of spectrum file names.
 # This is optional. If not used, sequential numbers will be used instead.
-# Example: pfant_names = [&#8220;A&#8221;, &#8220;B&#8221;, &#8220;C&#8221;, &#8220;D&#8221;]
+# Example: pfant_names = [“A”, “B”, “C”, “D”]
 pfant_names = []</p>
 <p># Convolutions specification for fwhm parameter:
 # [first value, last value, step]
@@ -301,11 +296,6 @@ be lost.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="f311.filetypes.ft_pyfant.fileabxfwhm.FileAbXFwhm.description">
-<code class="descname">description</code><em class="property"> = &quot;abundances X FWHM's&quot;</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileabxfwhm.FileAbXFwhm.description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.fileabxfwhm.FileAbXFwhm.editors">
 <code class="descname">editors</code><em class="property"> = ['x.py']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileabxfwhm.FileAbXFwhm.editors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -313,13 +303,13 @@ be lost.</p>
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.fileabxfwhm.FileAbXFwhm.get_fwhms">
 <code class="descname">get_fwhms</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileabxfwhm.FileAbXFwhm.get_fwhms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns FWHM&#8217;s as a numpy vector.</p>
+<dd><p>Returns FWHM’s as a numpy vector.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.fileabxfwhm.FileAbXFwhm.pfant_names">
 <code class="descname">pfant_names</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileabxfwhm.FileAbXFwhm.pfant_names" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of &#8220;names&#8221; for each pfant run.</p>
+<dd><p>List of “names” for each pfant run.</p>
 <p>Must be empty or be of same size as any list of self.ab</p>
 </dd></dl>
 
@@ -391,7 +381,7 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> &#8211; <p>callable:</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> – <p>callable:</p>
 <ul class="simple">
 <li>receives an AtomicLine object as argument,</li>
 <li>must return True or False (meaning whether or not you want that atomic line)</li>
@@ -400,7 +390,7 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 </tr>
 </tbody>
 </table>
-<p>&#8220;function&#8221; example: <code class="docutils literal"><span class="pre">lambda</span> <span class="pre">line:</span> <span class="pre">line.algf</span> <span class="pre">&gt;=</span> <span class="pre">-7</span></code></p>
+<p>“function” example: <code class="docutils literal"><span class="pre">lambda</span> <span class="pre">line:</span> <span class="pre">line.algf</span> <span class="pre">&gt;=</span> <span class="pre">-7</span></code></p>
 </dd></dl>
 
 <dl class="method">
@@ -411,7 +401,7 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> &#8211; receives an Atomic object as argument.
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> – receives an Atomic object as argument.
 Example: lambda atom: atom.ioni &lt;= 2</td>
 </tr>
 </tbody>
@@ -426,7 +416,7 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> &#8211; <p>callable:</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>function</strong> – <p>callable:</p>
 <ul class="simple">
 <li>receives an AtomicLine object as argument,</li>
 <li>must return True or False (meaning whether or not you want that atomic line)</li>
@@ -435,13 +425,13 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 </tr>
 </tbody>
 </table>
-<p>&#8220;function&#8221; example: <code class="docutils literal"><span class="pre">lambda</span> <span class="pre">line:</span> <span class="pre">line.algf</span> <span class="pre">&gt;=</span> <span class="pre">-7</span></code></p>
+<p>“function” example: <code class="docutils literal"><span class="pre">lambda</span> <span class="pre">line:</span> <span class="pre">line.algf</span> <span class="pre">&gt;=</span> <span class="pre">-7</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.fileatoms.FileAtoms.find_atom">
 <code class="descname">find_atom</code><span class="sig-paren">(</span><em>search</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileatoms.FileAtoms.find_atom" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns Atom object given search string such as &#8220;Fe1&#8221;; may raise ValueError or IndexError</p>
+<dd><p>Returns Atom object given search string such as “Fe1”; may raise ValueError or IndexError</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -628,7 +618,7 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> &#8211; arguments passed to query_state()</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> – arguments passed to query_state()</td>
 </tr>
 </tbody>
 </table>
@@ -643,7 +633,7 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.query_isotopologue">
 <code class="descname">query_isotopologue</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.query_isotopologue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convenience function to query &#8216;isotopologue&#8217; table</p>
+<dd><p>Convenience function to query ‘isotopologue’ table</p>
 <p>Args, Returns: see query_molecule</p>
 <p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">FileHitranDB</span><span class="p">()</span>
@@ -656,12 +646,12 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.query_molecule">
 <code class="descname">query_molecule</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehitrandb.FileHitranDB.query_molecule" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convenience function to query &#8216;molecule&#8217; table</p>
+<dd><p>Convenience function to query ‘molecule’ table</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> &#8211; filter fieldname=value pairs to be passed to WHERE clause</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> – filter fieldname=value pairs to be passed to WHERE clause</td>
 </tr>
 </tbody>
 </table>
@@ -679,7 +669,7 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
 <p>PFANT Hygrogen Lines Map</p>
 <p>Imitates the logic of reader_hmap.f90::read_hmap().</p>
-<p>Attributes match reader_hmap.f90::hmap_* (minus the &#8220;<a href="#id3"><span class="problematic" id="id4">hmap_</span></a>&#8221; prefix)</p>
+<p>Attributes match reader_hmap.f90::hmap_* (minus the “<a href="#id3"><span class="problematic" id="id4">hmap_</span></a>” prefix)</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filehmap.FileHmap.attrs">
 <code class="descname">attrs</code><em class="property"> = ['rows']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehmap.FileHmap.attrs" title="Permalink to this definition">¶</a></dt>
@@ -1027,9 +1017,9 @@ ATMOS/wrk4/bruno/Mole/CN/cnbx36.txt</p>
 <dt id="f311.filetypes.ft_pyfant.filemain.FileMain">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.filemain.</code><code class="descname">FileMain</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemain.FileMain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
-<p>PFANT Stellar Main Configuration</p>
+<p>PFANT Main Stellar Configuration</p>
 <p>Imitates the logic of reader_main.f90::read_main().</p>
-<p>Attributes match reader_main.f90::main_* (minus the &#8220;<a href="#id5"><span class="problematic" id="id6">main_</span></a>&#8221; prefix)</p>
+<p>Attributes match reader_main.f90::main_* (minus the “<a href="#id5"><span class="problematic" id="id6">main_</span></a>” prefix)</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemain.FileMain.attrs">
 <code class="descname">attrs</code><em class="property"> = ['titrav', 'pas', 'fwhm', 'ivtot', 'vvt', 'tolv', 'teff', 'glog', 'asalog', 'nhe', 'ptdisk', 'mu', 'flprefix', 'llzero', 'llfin', 'aint']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemain.FileMain.attrs" title="Permalink to this definition">¶</a></dt>
@@ -1038,11 +1028,6 @@ ATMOS/wrk4/bruno/Mole/CN/cnbx36.txt</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemain.FileMain.default_filename">
 <code class="descname">default_filename</code><em class="property"> = 'main.dat'</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemain.FileMain.default_filename" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="f311.filetypes.ft_pyfant.filemain.FileMain.description">
-<code class="descname">description</code><em class="property"> = 'main configuration'</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemain.FileMain.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1061,9 +1046,9 @@ ATMOS/wrk4/bruno/Mole/CN/cnbx36.txt</p>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
 <p>PFANT Atmospheric Model (binary file)</p>
 <p>File may have several 1200-byte records.</p>
-<p>Files created by the innermarcs executable (usually named &#8220;modeles.mod&#8221;)</p>
+<p>Files created by the innermarcs executable (usually named “modeles.mod”)</p>
 <p>Imitates the logic of reader_modeles.f90::read_modele().</p>
-<p>Attributes match reader_modeles.f90:modeles_* (minus the &#8220;<a href="#id7"><span class="problematic" id="id8">modeles_</span></a>&#8221; prefix)</p>
+<p>Attributes match reader_modeles.f90:modeles_* (minus the “<a href="#id7"><span class="problematic" id="id8">modeles_</span></a>” prefix)</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemod.FileModBin.attrs">
 <code class="descname">attrs</code><em class="property"> = ['records']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemod.FileModBin.attrs" title="Permalink to this definition">¶</a></dt>
@@ -1092,10 +1077,10 @@ ATMOS/wrk4/bruno/Mole/CN/cnbx36.txt</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.parts.AttrsPart</span></code></p>
 <p>Single record from a99 atmospheric model file</p>
 <p>Note: while a infile:modeles may have several 1200-byte records stored in it,
-this class only stores one of these records, specified by &#8220;inum&#8221;  argument
+this class only stores one of these records, specified by “inum”  argument
 of load()</p>
 <p>Imitates the logic of reader_modeles.f90::read_modele().</p>
-<p>Attributes match reader_modeles.f90:modeles_* (minus the &#8220;<a href="#id9"><span class="problematic" id="id10">modeles_</span></a>&#8221; prefix)</p>
+<p>Attributes match reader_modeles.f90:modeles_* (minus the “<a href="#id9"><span class="problematic" id="id10">modeles_</span></a>” prefix)</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemod.ModRecord.attrs">
 <code class="descname">attrs</code><em class="property"> = ['ntot', 'teff', 'glog', 'asalog', 'asalalf', 'nhe', 'tit', 'tiabs', 'nh', 'teta', 'pe', 'pg', 'log_tau_ross']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemod.ModRecord.attrs" title="Permalink to this definition">¶</a></dt>
@@ -1114,7 +1099,7 @@ of load()</p>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
 <p>MARCS Atmospheric Model (text file)</p>
 <p>Not to be confused with PFANT Atmospheric Model (binary file), as
-both share the same &#8221;.mod&#8221; extension</p>
+both share the same “.mod” extension</p>
 <p><a class="reference external" href="http://marcs.astro.uu.se/">http://marcs.astro.uu.se/</a></p>
 <p>This file contains a single atmospheric model for a given
 (teff, glog, asalog)</p>
@@ -1129,7 +1114,7 @@ both share the same &#8221;.mod&#8221; extension</p>
 <dt id="f311.filetypes.ft_pyfant.filemod.FileOpa">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.filemod.</code><code class="descname">FileOpa</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemod.FileOpa" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
-<p>MARCS &#8221;.opa&#8221; (opacity model) file format.</p>
+<p>MARCS “.opa” (opacity model) file format.</p>
 <p>Reference: <a class="reference external" href="http://marcs.astro.uu.se">http://marcs.astro.uu.se</a></p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemod.FileOpa.attrs">
@@ -1181,7 +1166,7 @@ both share the same &#8221;.mod&#8221; extension</p>
 <dt id="f311.filetypes.ft_pyfant.filemod.MooRecord">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.filemod.</code><code class="descname">MooRecord</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemod.MooRecord" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.parts.AttrsPart</span></code></p>
-<p>Single record from a &#8221;.moo&#8221; file</p>
+<p>Single record from a “.moo” file</p>
 <p>The attributes are almost a concatenation of ModRecord with FileOpa
 attributes, except for redundant attributes, i.e.:</p>
 <blockquote>
@@ -1224,7 +1209,7 @@ attributes, except for redundant attributes, i.e.:</p>
 
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.editors">
-<code class="descname">editors</code><em class="property"> = ['convmol.py']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.editors" title="Permalink to this definition">¶</a></dt>
+<code class="descname">editors</code><em class="property"> = ['convmol.py', 'moldbed.py']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.editors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1247,7 +1232,7 @@ attributes, except for redundant attributes, i.e.:</p>
 
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info">
-<code class="descname">gui_info</code><em class="property"> = {'pfantmol': {'bm': [None, 'mass of second element'], 'fe': [None, 'oscillator strength'], 'am': [None, 'mass of first element'], 'do': [None, 'dissociation constant (eV)'], 'te': [None, 'electronic term'], 'cro': [None, 'delta Kronecker (1: Sigma-Sigma transitions; 0: non-Sigma transitions)'], 'ub': [None, 'value of partition function for second element'], 'ua': [None, 'value of partition function for first element'], 'description': [None, 'free text']}, 'system': {'from_label': [&quot;State'&quot;, None], 'from_spdf': [&quot;Λ'&quot;, '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'to_spdf': ['Λ&quot;', '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'to_label': ['State&quot;', None]}, 'molecule': {'formula': [None, &quot;formula of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;]}, 'state': {'A': [None, 'Coupling counstant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info" title="Permalink to this definition">¶</a></dt>
+<code class="descname">gui_info</code><em class="property"> = {'molecule': {'formula': [None, &quot;formula of molecule, &lt;i&gt;e.g.&lt;/i&gt;, 'OH'&quot;]}, 'pfantmol': {'description': [None, 'free text'], 'fe': [None, 'oscillator strength'], 'do': [None, 'dissociation constant (eV)'], 'am': [None, 'mass of first element'], 'bm': [None, 'mass of second element'], 'ua': [None, 'value of partition function for first element'], 'ub': [None, 'value of partition function for second element'], 'te': [None, 'electronic term'], 'cro': [None, 'delta Kronecker (1: Sigma-Sigma transitions; 0: non-Sigma transitions)']}, 'state': {'omega_e': ['ω&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ex_e': ['ω&lt;sub&gt;e&lt;/sub&gt;x&lt;sub&gt;e&lt;/sub&gt;', 'vibrational constant – second term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'omega_ey_e': ['ω&lt;sub&gt;e&lt;/sub&gt;y&lt;sub&gt;e&lt;/sub&gt;', ' vibrational constant – third term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'B_e': ['B&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant in equilibrium position (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'alpha_e': ['α&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'D_e': ['D&lt;sub&gt;e&lt;/sub&gt;', 'centrifugal distortion constant (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'beta_e': ['β&lt;sub&gt;e&lt;/sub&gt;', 'rotational constant – first term, centrifugal force (cm&lt;sup&gt;-1&lt;/sup&gt;)'], 'A': [None, 'Coupling counstant (cm&lt;sup&gt;-1&lt;/sup&gt;)']}, 'system': {'from_label': [&quot;State'&quot;, None], 'from_spdf': [&quot;Λ'&quot;, '0/1/2/3 meaning Σ/Π/Δ/Φ'], 'to_label': ['State&quot;', None], 'to_spdf': ['Λ&quot;', '0/1/2/3 meaning Σ/Π/Δ/Φ']}}</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.gui_info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1259,8 +1244,8 @@ attributes, except for redundant attributes, i.e.:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>molconsts</strong> &#8211; a MolConsts</li>
-<li><strong>notes</strong> &#8211; table system.notes value, in case of new record</li>
+<li><strong>molconsts</strong> – a MolConsts</li>
+<li><strong>notes</strong> – table system.notes value, in case of new record</li>
 </ul>
 </td>
 </tr>
@@ -1276,7 +1261,7 @@ attributes, except for redundant attributes, i.e.:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> &#8211; arguments passed to query_state()</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> – arguments passed to query_state()</td>
 </tr>
 </tbody>
 </table>
@@ -1291,19 +1276,19 @@ attributes, except for redundant attributes, i.e.:</p>
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.query_fcf">
 <code class="descname">query_fcf</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.query_fcf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convenience function to query &#8216;fcf&#8217; table</p>
+<dd><p>Convenience function to query ‘fcf’ table</p>
 <p>Args, Returns: see query_molecule</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.query_molecule">
 <code class="descname">query_molecule</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.query_molecule" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convenience function to query &#8216;molecule&#8217; table</p>
+<dd><p>Convenience function to query ‘molecule’ table</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> &#8211; filter fieldname=value pairs to be passed to WHERE clause</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> – filter fieldname=value pairs to be passed to WHERE clause</td>
 </tr>
 </tbody>
 </table>
@@ -1313,21 +1298,21 @@ attributes, except for redundant attributes, i.e.:</p>
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.query_pfantmol">
 <code class="descname">query_pfantmol</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.query_pfantmol" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convenience function to query &#8216;pfantmol&#8217; table (joins with table molecule)</p>
+<dd><p>Convenience function to query ‘pfantmol’ table (joins with table molecule)</p>
 <p>Args, Returns: see query_molecule</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.query_state">
 <code class="descname">query_state</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.query_state" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convenience function to query &#8216;state&#8217; table (joins with table molecule)</p>
+<dd><p>Convenience function to query ‘state’ table (joins with table molecule)</p>
 <p>Args, Returns: see query_molecule</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.filemoldb.FileMolDB.query_system">
 <code class="descname">query_system</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemoldb.FileMolDB.query_system" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convenience function to query &#8216;system&#8217; table (joins with table molecule)</p>
+<dd><p>Convenience function to query ‘system’ table (joins with table molecule)</p>
 <p>Args, Returns: see query_molecule</p>
 </dd></dl>
 
@@ -1587,28 +1572,28 @@ information for each molecule inside a Molecule object.</p>
 
 <dl class="class">
 <dt id="f311.filetypes.ft_pyfant.filemolecules.SetOfLines">
-<em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.filemolecules.</code><code class="descname">SetOfLines</code><span class="sig-paren">(</span><em>vl=None</em>, <em>v2l=None</em>, <em>qqv=None</em>, <em>ggv=None</em>, <em>bbv=None</em>, <em>ddv=None</em>, <em>fact=None</em>, <em>state_from=None</em>, <em>state_to=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.filemolecules.</code><code class="descname">SetOfLines</code><span class="sig-paren">(</span><em>vl=-1</em>, <em>v2l=-1</em>, <em>qqv=0</em>, <em>ggv=0</em>, <em>bbv=0</em>, <em>ddv=0</em>, <em>fact=0</em>, <em>state_from=''</em>, <em>state_to=''</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.parts.AttrsPart</span></code></p>
-<p>Represents a &#8220;Set-Of-Lines&#8221; (vibrational transition with unique (vl, v2l))</p>
+<p>Represents a “Set-Of-Lines” (vibrational transition with unique (vl, v2l))</p>
 <dl class="docutils">
 <dt><strong>Attention</strong> Some properties return numpy arrays despite internally the data is stored as lists.</dt>
-<dd>This was a bad idea but I won&#8217;t change this anymore to avoid breaking client code</dd>
+<dd>This was a bad idea but I won’t change this anymore to avoid breaking client code</dd>
 </dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>vl=None</strong> &#8211; upper vibrational state (v&#8217;)</li>
-<li><strong>v2l=None</strong> &#8211; lower vibrational state (v&#8221;)</li>
-<li><strong>qqv=None</strong> &#8211; Franck-Condon Factor</li>
-<li><strong>ggv=None</strong> &#8211; TODO ?doc? (calculated from diatomic molecular constants)</li>
-<li><strong>bbv=None</strong> &#8211; TODO ?doc? (calculated from diatomic molecular constants)</li>
-<li><strong>ddv=None</strong> &#8211; TODO ?doc? (calculated from diatomic molecular constants)</li>
-<li><strong>fact=None</strong> &#8211; TODO ?doc? (usually =1.)</li>
-<li><strong>state_from=None</strong> &#8211; Transition letter; however I am not sure whether this is the lower or upper,
+<li><strong>vl=None</strong> – upper vibrational state (v’)</li>
+<li><strong>v2l=None</strong> – lower vibrational state (v”)</li>
+<li><strong>qqv=None</strong> – Franck-Condon Factor</li>
+<li><strong>ggv=None</strong> – TODO ?doc? (calculated from diatomic molecular constants)</li>
+<li><strong>bbv=None</strong> – TODO ?doc? (calculated from diatomic molecular constants)</li>
+<li><strong>ddv=None</strong> – TODO ?doc? (calculated from diatomic molecular constants)</li>
+<li><strong>fact=None</strong> – TODO ?doc? (usually =1.)</li>
+<li><strong>state_from=None</strong> – Transition letter; however I am not sure whether this is the lower or upper,
 but I suspect this is the lower one.</li>
-<li><strong>state_to=None</strong> &#8211; Transition letter; however I am not sure whether this is the lower or upper,
+<li><strong>state_to=None</strong> – Transition letter; however I am not sure whether this is the lower or upper,
 but I suspect this is the upper one.</li>
 </ul>
 </td>
@@ -1625,22 +1610,10 @@ but I suspect this is the upper one.</li>
 <code class="descname">attrs</code><em class="property"> = ['vl', 'v2l', 'qqv', 'ggv', 'bbv', 'ddv', 'fact', 'num_lines', 'state_from', 'state_to']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines.attrs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="f311.filetypes.ft_pyfant.filemolecules.SetOfLines.branch">
-<code class="descname">branch</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines.branch" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>Attention</strong> Returns numpy array</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.filemolecules.SetOfLines.cut">
 <code class="descname">cut</code><span class="sig-paren">(</span><em>lzero</em>, <em>lfin</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines.cut" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduces the number of lines to only the ones whose lmbdam is inside [lzero, lfin]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="f311.filetypes.ft_pyfant.filemolecules.SetOfLines.jj">
-<code class="descname">jj</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines.jj" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>Attention</strong> Returns numpy array</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -1656,26 +1629,14 @@ but I suspect this is the upper one.</li>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="f311.filetypes.ft_pyfant.filemolecules.SetOfLines.lmbdam">
-<code class="descname">lmbdam</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines.lmbdam" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>Attention</strong> Returns numpy array</p>
-</dd></dl>
-
-<dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemolecules.SetOfLines.num_lines">
 <code class="descname">num_lines</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines.num_lines" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="f311.filetypes.ft_pyfant.filemolecules.SetOfLines.sj">
-<code class="descname">sj</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines.sj" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>Attention</strong> Returns numpy array</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.filemolecules.SetOfLines.sort">
 <code class="descname">sort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemolecules.SetOfLines.sort" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sort <strong>in-place</strong>. However, replaces the internal vectors</p>
+<dd><p>Sorts by wavelength <strong>in-place</strong></p>
 </dd></dl>
 
 </dd></dl>
@@ -1688,8 +1649,8 @@ but I suspect this is the upper one.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>molconsts</strong> &#8211; a dict-like object combining field values from tables &#8216;molecule&#8217;, &#8216;state&#8217;,
-&#8216;pfantmol&#8217;, and &#8216;system&#8217; from a FileMolDB database</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>molconsts</strong> – a dict-like object combining field values from tables ‘molecule’, ‘state’,
+‘pfantmol’, and ‘system’ from a FileMolDB database</td>
 </tr>
 </tbody>
 </table>
@@ -1702,10 +1663,10 @@ but I suspect this is the upper one.</li>
 <dt id="f311.filetypes.ft_pyfant.fileoptions.FileOptions">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.fileoptions.</code><code class="descname">FileOptions</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileoptions.FileOptions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.filepy.FilePy" title="f311.filetypes.ft_basic.filepy.FilePy"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filepy.FilePy</span></code></a></p>
-<p><cite>x.py</cite> Command-line Options</p>
-<p>For each xxxx attribute not starting with &#8220;_&#8221; there exists
+<p>PFANT Command-line Options</p>
+<p>For each xxxx attribute not starting with “_” there exists
 a variable in config.f90 named config_xxxx, and
-a command-line option &#8220;&#8211;xxxx&#8221;</p>
+a command-line option “–xxxx”</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.fileoptions.FileOptions.attrs">
 <code class="descname">attrs</code><em class="property"> = ['abs', 'absoru', 'aint', 'allow', 'amores', 'convol', 'explain', 'flam', 'flprefix', 'fn_abonds', 'fn_absoru2', 'fn_atoms', 'fn_cv', 'fn_dissoc', 'fn_flux', 'fn_hmap', 'fn_lines', 'fn_log', 'fn_logging', 'fn_main', 'fn_modeles', 'fn_modgrid', 'fn_molecules', 'fn_moo', 'fn_opa', 'fn_partit', 'fn_progress', 'fwhm', 'interp', 'kik', 'kq', 'llfin', 'llzero', 'logging_console', 'logging_file', 'logging_level', 'no_atoms', 'no_h', 'no_molecules', 'norm', 'opa', 'pas', 'pat', 'play', 'sca', 'zinf', 'zph']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileoptions.FileOptions.attrs" title="Permalink to this definition">¶</a></dt>
@@ -1714,11 +1675,6 @@ a command-line option &#8220;&#8211;xxxx&#8221;</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.fileoptions.FileOptions.default_filename">
 <code class="descname">default_filename</code><em class="property"> = 'options.py'</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileoptions.FileOptions.default_filename" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="f311.filetypes.ft_pyfant.fileoptions.FileOptions.description">
-<code class="descname">description</code><em class="property"> = 'command-line options'</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileoptions.FileOptions.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1771,9 +1727,9 @@ a command-line option &#8220;&#8211;xxxx&#8221;</p>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
 <p>PFANT Hydrogen Line Profile</p>
 <p>Imitates the logic of reader_filetoh.f90::read_filetoh(). Difference: pfant
-reads second row as single character-variable &#8220;ttt&#8221;, but hydro2 saves 5 values
+reads second row as single character-variable “ttt”, but hydro2 saves 5 values
 in second row. I am reading these values.</p>
-<p>Attributes match reader_filetoh.f90:filetoh_r_* (minus the &#8220;<a href="#id11"><span class="problematic" id="id12">filetoh_r_</span></a>&#8221; prefix)</p>
+<p>Attributes match reader_filetoh.f90:filetoh_r_* (minus the “<a href="#id11"><span class="problematic" id="id12">filetoh_r_</span></a>” prefix)</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filetoh.FileToH.attrs">
 <code class="descname">attrs</code><em class="property"> = ['titre', 'ntot', 'zut1', 'zut2', 'zut3', 'th', 'lambdh', 'jmax']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filetoh.FileToH.attrs" title="Permalink to this definition">¶</a></dt>
@@ -1805,8 +1761,8 @@ in second row. I am reading these values.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>flag_parse_atoms=True</strong> &#8211; whether or not to parse the atomic lines</li>
-<li><strong>flag_parse_molecules=True</strong> &#8211; whether or not to parse the molecular lines</li>
+<li><strong>flag_parse_atoms=True</strong> – whether or not to parse the atomic lines</li>
+<li><strong>flag_parse_molecules=True</strong> – whether or not to parse the molecular lines</li>
 </ul>
 </td>
 </tr>
@@ -1815,8 +1771,8 @@ in second row. I am reading these values.</p>
 <p>Species are encoded as follows.</p>
 <p>self.speciess (double s) is a dictionary where</p>
 <blockquote>
-<div><p>key: (formula, ionization), e.g. (&#8220;MgH&#8221;, 1)
-value: &#8220;sets of lines&#8221;, dict where</p>
+<div><p>key: (formula, ionization), e.g. (“MgH”, 1)
+value: “sets of lines”, dict where</p>
 <blockquote>
 <div><dl class="docutils">
 <dt>key: 0 (int) if atom (not implemented)</dt>

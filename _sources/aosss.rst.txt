@@ -62,8 +62,8 @@ It is also possible to inform a redshift so that the chemical lines will be acco
 
 **Figure** -- ``z=3.5``
 
-.. |image1| image:: ../figures/chart-z-0.png
-.. |image2| image:: ../figures/chart-z-35.png
+.. |image1| image:: figures/chart-z-0.png
+.. |image2| image:: figures/chart-z-35.png
 
 
 
@@ -157,7 +157,7 @@ will open file "index.html" in browser
 
 **Figure** -- Reports index
 
-.. |image0| image:: ../figures/index-html.png
+.. |image0| image:: figures/index-html.png
 
 Edit Spectrum List file
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -215,11 +215,11 @@ In the following steps, we will:
 |imaget4|
 
 
-.. |imaget0| image:: ../figures/splisted-tut-0.png
-.. |imaget1| image:: ../figures/splisted-tut-1.png
-.. |imaget2| image:: ../figures/splisted-tut-2.png
-.. |imaget3| image:: ../figures/splisted-tut-3.png
-.. |imaget4| image:: ../figures/splisted-tut-4.png
+.. |imaget0| image:: figures/splisted-tut-0.png
+.. |imaget1| image:: figures/splisted-tut-1.png
+.. |imaget2| image:: figures/splisted-tut-2.png
+.. |imaget3| image:: figures/splisted-tut-3.png
+.. |imaget4| image:: figures/splisted-tut-4.png
 
 
 API reference

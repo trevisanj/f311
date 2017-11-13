@@ -170,17 +170,239 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="f311-explorer-vis-vis-pyfant-modgrid-module">
-<h2>f311.explorer.vis.vis_pyfant.modgrid module<a class="headerlink" href="#f311-explorer-vis-vis-pyfant-modgrid-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-f311.explorer.vis.vis_pyfant.modgrid">
+<span id="f311-explorer-vis-vis-pyfant-modgrid-module"></span><h2>f311.explorer.vis.vis_pyfant.modgrid module<a class="headerlink" href="#module-f311.explorer.vis.vis_pyfant.modgrid" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="f311.explorer.vis.vis_pyfant.modgrid.plot_mod_grid">
+<code class="descclassname">f311.explorer.vis.vis_pyfant.modgrid.</code><code class="descname">plot_mod_grid</code><span class="sig-paren">(</span><em>ff</em>, <em>title=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.modgrid.plot_mod_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots Teff x glog x metallicity in 3D</p>
+</dd></dl>
+
 </div>
-<div class="section" id="f311-explorer-vis-vis-pyfant-vismany-module">
-<h2>f311.explorer.vis.vis_pyfant.vismany module<a class="headerlink" href="#f311-explorer-vis-vis-pyfant-vismany-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-f311.explorer.vis.vis_pyfant.vismany">
+<span id="f311-explorer-vis-vis-pyfant-vismany-module"></span><h2>f311.explorer.vis.vis_pyfant.vismany module<a class="headerlink" href="#module-f311.explorer.vis.vis_pyfant.vismany" title="Permalink to this headline">¶</a></h2>
+<p>Visualization classes for pyfant file types</p>
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisFileToH">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">VisFileToH</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisFileToH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>Plots hydrogen lines: each atmospheric layer is plotted as a y-axis-dislocated
+Spectrum in a 3D plot.</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisFileToH.action">
+<code class="descname">action</code><em class="property"> = 'Visualize hydrogen lines profiles'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisFileToH.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisFileToH.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filetoh.FileToH'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisFileToH.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.draw_toh">
+<code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">draw_toh</code><span class="sig-paren">(</span><em>r</em>, <em>ax</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.draw_toh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAtoms">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">VisAtoms</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAtoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>Opens the ated window.</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAtoms.action">
+<code class="descname">action</code><em class="property"> = 'Edit using atomic lines editor'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAtoms.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAtoms.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.fileatoms.FileAtoms'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAtoms.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMolecules">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">VisMolecules</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMolecules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>Opens the mled window.</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMolecules.action">
+<code class="descname">action</code><em class="property"> = 'Edit using molecular lines editor'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMolecules.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMolecules.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filemolecules.FileMolecules'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMolecules.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMain">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">VisMain</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>Opens the mained window.</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMain.action">
+<code class="descname">action</code><em class="property"> = 'Edit using main configuration file editor'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMain.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisMain.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filemain.FileMain'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisMain.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAbonds">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismany.</code><code class="descname">VisAbonds</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAbonds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>Opens the abed window.</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAbonds.action">
+<code class="descname">action</code><em class="property"> = 'Edit using abundances file editor'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAbonds.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismany.VisAbonds.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.fileabonds.FileAbonds'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismany.VisAbonds.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="f311-explorer-vis-vis-pyfant-vismod-module">
-<h2>f311.explorer.vis.vis_pyfant.vismod module<a class="headerlink" href="#f311-explorer-vis-vis-pyfant-vismod-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-f311.explorer.vis.vis_pyfant.vismod">
+<span id="f311-explorer-vis-vis-pyfant-vismod-module"></span><h2>f311.explorer.vis.vis_pyfant.vismod module<a class="headerlink" href="#module-f311.explorer.vis.vis_pyfant.vismod" title="Permalink to this headline">¶</a></h2>
+<p>Visualization classes for atmospheric models</p>
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisMarcs">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismod.</code><code class="descname">VisMarcs</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisMarcs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>Similar to VisModRecord but accepts FileModTxt</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisMarcs.action">
+<code class="descname">action</code><em class="property"> = 'Visualize model'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisMarcs.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisMarcs.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filemod.FileModTxt'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisMarcs.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisOpa">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismod.</code><code class="descname">VisOpa</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisOpa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>Visualizer for FileOpa class</p>
+<p>Plots vectors ???</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisOpa.action">
+<code class="descname">action</code><em class="property"> = 'Visualize opacities file'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisOpa.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisOpa.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filemod.FileOpa'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisOpa.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisModCurves">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismod.</code><code class="descname">VisModCurves</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisModCurves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>Plots vectors
+(teff, glog, asalog, asalalf, nhe) in 2D (record #)x(value) plots, and
+(nh, teta, pe, pg, log_tau_ross) (layer #)x(record #)x(value) 3D plots</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisModCurves.action">
+<code class="descname">action</code><em class="property"> = '(nh, teta, pe, pg, log_tau_ross) per layer curves in 3D'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisModCurves.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisModCurves.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filemod.FileMoo'&gt;, &lt;class 'f311.filetypes.ft_pyfant.filemod.FileModBin'&gt;)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisModCurves.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisMarcsSaveAsMod">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismod.</code><code class="descname">VisMarcsSaveAsMod</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisMarcsSaveAsMod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>Asks user for file name and saves as a binary .mod file</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisMarcsSaveAsMod.action">
+<code class="descname">action</code><em class="property"> = 'Save as a binary &quot;.mod&quot; file'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisMarcsSaveAsMod.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisMarcsSaveAsMod.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filemod.FileModTxt'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisMarcsSaveAsMod.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisVector">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismod.</code><code class="descname">VisVector</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisVector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>(glog, teff, [Fe/H]) same-x-axis stacked subplots</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisVector.action">
+<code class="descname">action</code><em class="property"> = '(glog, teff, [Fe/H]) same-x-axis stacked subplots'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisVector.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisVector.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filemod.FileMoo'&gt;, &lt;class 'f311.filetypes.ft_pyfant.filemod.FileModBin'&gt;)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisVector.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisGrid">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismod.</code><code class="descname">VisGrid</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>(glog, teff, [Fe/H]) 3D scatterplot</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisGrid.action">
+<code class="descname">action</code><em class="property"> = '(glog, teff, [Fe/H]) 3D scatterplot'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisGrid.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisGrid.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filemod.FileMoo'&gt;, &lt;class 'f311.filetypes.ft_pyfant.filemod.FileModBin'&gt;)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisGrid.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisModRecord">
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.vis_pyfant.vismod.</code><code class="descname">VisModRecord</code><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisModRecord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="f311.explorer.vis.html#f311.explorer.vis.basic.Vis" title="f311.explorer.vis.basic.Vis"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.vis.basic.Vis</span></code></a></p>
+<p>Plots vectors (nh, teta, pe, pg, log_tau_ross) of “.mod” file in 5 subplots sharing
+the same x-axis.</p>
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisModRecord.action">
+<code class="descname">action</code><em class="property"> = 'Visualize single record'</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisModRecord.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.explorer.vis.vis_pyfant.vismod.VisModRecord.input_classes">
+<code class="descname">input_classes</code><em class="property"> = (&lt;class 'f311.filetypes.ft_pyfant.filemod.FileModBin'&gt;,)</em><a class="headerlink" href="#f311.explorer.vis.vis_pyfant.vismod.VisModRecord.input_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-f311.explorer.vis.vis_pyfant">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.explorer.vis.vis_pyfant" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

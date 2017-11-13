@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -171,7 +172,7 @@
 </div>
 <div class="section" id="module-f311.explorer.basic.maths">
 <span id="f311-explorer-basic-maths-module"></span><h2>f311.explorer.basic.maths module<a class="headerlink" href="#module-f311.explorer.basic.maths" title="Permalink to this headline">¶</a></h2>
-<p>Low-level maths def&#8217;s</p>
+<p>Low-level maths def’s</p>
 <dl class="function">
 <dt id="f311.explorer.basic.maths.bc_rubber">
 <code class="descclassname">f311.explorer.basic.maths.</code><code class="descname">bc_rubber</code><span class="sig-paren">(</span><em>vx</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.basic.maths.bc_rubber" title="Permalink to this definition">¶</a></dt>
@@ -180,7 +181,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vx</strong> &#8211; vector</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vx</strong> – vector</td>
 </tr>
 </tbody>
 </table>
@@ -195,14 +196,14 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vx</strong> &#8211; 1-D numpy array</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vx</strong> – 1-D numpy array</td>
 </tr>
 </tbody>
 </table>
 <p>Returns: the rubberband: a 1-D numpy array with same shape as vx</p>
 <p>This function stretches a polygonal line from below vx. The vertices of this multi-segment line
 will touch troughs of vx without crossing vx</p>
-<p>This was inspired on &#8211; but is not equivalent to &#8211; OPUS SB_Rubberband baseline correction [1].
+<p>This was inspired on – but is not equivalent to – OPUS SB_Rubberband baseline correction [1].
 However, this one is parameterless, whereas OPUS RBBC asks for a number of points.</p>
 <p class="rubric">References</p>
 <p>[1] Bruker Optik GmbH, OPUS 5 Reference Manual. Ettlingen: Bruker, 2004.</p>
@@ -211,17 +212,17 @@ However, this one is parameterless, whereas OPUS RBBC asks for a number of point
 <dl class="function">
 <dt id="f311.explorer.basic.maths.poly_baseline">
 <code class="descclassname">f311.explorer.basic.maths.</code><code class="descname">poly_baseline</code><span class="sig-paren">(</span><em>flux</em>, <em>order</em>, <em>epsilon=None</em>, <em>maxit=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.basic.maths.poly_baseline" title="Permalink to this definition">¶</a></dt>
-<dd><p>&#8221;
+<dd><p>”
 Polynomial baseline</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>vx</strong> &#8211; np 1D array (&#8220;flux&#8221;)</li>
-<li><strong>order</strong> &#8211; polynomial order</li>
-<li><strong>epsilon</strong> &#8211; tolerance to stop iterations. If zero or no value given, will default to sqrt(1/30*num_points)</li>
-<li><strong>maxit</strong> &#8211; if informed, will restrict the maximum number of iterations to this value</li>
+<li><strong>vx</strong> – np 1D array (“flux”)</li>
+<li><strong>order</strong> – polynomial order</li>
+<li><strong>epsilon</strong> – tolerance to stop iterations. If zero or no value given, will default to sqrt(1/30*num_points)</li>
+<li><strong>maxit</strong> – if informed, will restrict the maximum number of iterations to this value</li>
 </ul>
 </td>
 </tr>

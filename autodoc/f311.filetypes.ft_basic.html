@@ -194,7 +194,7 @@ within _do_load(). Try to crash early.</li>
 
 <dl class="attribute">
 <dt id="f311.filetypes.ft_basic.datafile.DataFile.description">
-<code class="descname">description</code><em class="property"> = ''</em><a class="headerlink" href="#f311.filetypes.ft_basic.datafile.DataFile.description" title="Permalink to this definition">¶</a></dt>
+<code class="descname">description</code><em class="property"> = 'Class representing a file in disk'</em><a class="headerlink" href="#f311.filetypes.ft_basic.datafile.DataFile.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -217,7 +217,7 @@ within _do_load(). Try to crash early.</li>
 <code class="descname">init_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.datafile.DataFile.init_default" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes object with its default values</p>
 <p>Tries to load self.default_filename from default
-data directory. For safety, filename is reset to None so that it doesn&#8217;t point to the
+data directory. For safety, filename is reset to None so that it doesn’t point to the
 original file.</p>
 </dd></dl>
 
@@ -235,7 +235,7 @@ original file.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>optional</em>) &#8211; defaults to self.filename. If passed, self.filename
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>optional</em>) – defaults to self.filename. If passed, self.filename
 will be updated to filename.</td>
 </tr>
 </tbody>
@@ -292,7 +292,7 @@ HDUList.readall()</p>
 
 <dl class="class">
 <dt id="f311.filetypes.ft_basic.filepy.ConfigDict">
-<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filepy.</code><code class="descname">ConfigDict</code><a class="headerlink" href="#f311.filetypes.ft_basic.filepy.ConfigDict" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filepy.</code><code class="descname">ConfigDict</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.filepy.ConfigDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
 <p>Data class to store config options as dictionary</p>
 </dd></dl>
@@ -301,10 +301,15 @@ HDUList.readall()</p>
 <dt id="f311.filetypes.ft_basic.filepy.FilePyConfig">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filepy.</code><code class="descname">FilePyConfig</code><a class="headerlink" href="#f311.filetypes.ft_basic.filepy.FilePyConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.filepy.FilePy" title="f311.filetypes.ft_basic.filepy.FilePy"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filepy.FilePy</span></code></a></p>
-<p>Base class for config files. Inherit and set class variable &#8216;modulevarname&#8217; besides usual</p>
+<p>Base class for config files. Inherit and set class variable ‘modulevarname’ besides usual</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_basic.filepy.FilePyConfig.attrs">
 <code class="descname">attrs</code><em class="property"> = ['obj']</em><a class="headerlink" href="#f311.filetypes.ft_basic.filepy.FilePyConfig.attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.filetypes.ft_basic.filepy.FilePyConfig.init_default">
+<code class="descname">init_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.filepy.FilePyConfig.init_default" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -346,8 +351,8 @@ HDUList.readall()</p>
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filespectrum.</code><code class="descname">FileSpectrumPfant</code><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrumPfant" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrum" title="f311.filetypes.ft_basic.filespectrum.FileSpectrum"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filespectrum.FileSpectrum</span></code></a></p>
 <p>PFANT Spectrum (<cite>pfant</cite> output)</p>
-<p>This file alternates a &#8220;header&#8221; line where most of the information is
-repeated, and a &#8220;values&#8221; line, with the values of the flux
+<p>This file alternates a “header” line where most of the information is
+repeated, and a “values” line, with the values of the flux
 corresponding to the lambda interval lzero-lfin</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrumPfant.default_filename">
@@ -383,7 +388,7 @@ corresponding to the lambda interval lzero-lfin</p>
 <dt id="f311.filetypes.ft_basic.filespectrum.FileSpectrumXY">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_basic.filespectrum.</code><code class="descname">FileSpectrumXY</code><a class="headerlink" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrumXY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#f311.filetypes.ft_basic.filespectrum.FileSpectrum" title="f311.filetypes.ft_basic.filespectrum.FileSpectrum"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.filespectrum.FileSpectrum</span></code></a></p>
-<p>&#8220;Lambda-flux&#8221; Spectrum (2-column text file)</p>
+<p>“Lambda-flux” Spectrum (2-column text file)</p>
 <p>File may have comment lines; these will be ignored altogether, because the file
 is read with numpy.loadtxt()</p>
 </dd></dl>
@@ -440,7 +445,7 @@ that implement specific database schemas.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flag_force_new</strong> &#8211; returns a new connection irrespective of one already being open.
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flag_force_new</strong> – returns a new connection irrespective of one already being open.
 Does <strong>not</strong> close existing open connection</td>
 </tr>
 </tbody>
@@ -452,7 +457,7 @@ Does <strong>not</strong> close existing open connection</td>
 <code class="descname">get_table_info</code><span class="sig-paren">(</span><em>tablename</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_basic.filesqlitedb.FileSQLiteDB.get_table_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns information about fields of a specific table</p>
 <p>Returns:  dict of MyDBRow indexed by field name</p>
-<p><strong>Note</strong> Fields &#8220;caption&#8221; and &#8220;tooltip&#8221; are added to rows using information in moldb.gui_info</p>
+<p><strong>Note</strong> Fields “caption” and “tooltip” are added to rows using information in moldb.gui_info</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -466,7 +471,7 @@ Does <strong>not</strong> close existing open connection</td>
 <dd><p>Overriden to take default database and save locally</p>
 <p>The issue was that init_default() sets self.filename to None; however there can be no
 SQLite database without a corresponding file (not using <em>memory</em> here)</p>
-<p>Should not keep default file open either (as it is in the API directory and shouldn&#8217;t be
+<p>Should not keep default file open either (as it is in the API directory and shouldn’t be
 messed by user)</p>
 </dd></dl>
 
@@ -583,8 +588,8 @@ itself is changed and nothing is returned</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>new_wavelength</strong> &#8211; new wavelength vector</li>
-<li><strong>kind</strong> &#8211; interpolation kind to be passed to scipy.interpolate.interp1d</li>
+<li><strong>new_wavelength</strong> – new wavelength vector</li>
+<li><strong>kind</strong> – interpolation kind to be passed to scipy.interpolate.interp1d</li>
 </ul>
 </td>
 </tr>
@@ -595,7 +600,7 @@ itself is changed and nothing is returned</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_basic.spectrum.Spectrum.title">
 <code class="descname">title</code><a class="headerlink" href="#f311.filetypes.ft_basic.spectrum.Spectrum.title" title="Permalink to this definition">¶</a></dt>
-<dd><p>&#8220;Title&#8221; of the spectrum. Calculated, read-only property</p>
+<dd><p>“Title” of the spectrum. Returns self._title or if None, other options</p>
 </dd></dl>
 
 <dl class="method">

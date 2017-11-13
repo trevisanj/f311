@@ -211,23 +211,23 @@ using some of these applications.</p>
 <div class="section" id="graphical-applications">
 <h3>Graphical applications<a class="headerlink" href="#graphical-applications" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">x.py</span></code> &#8211; PFANT Launcher &#8211; Graphical Interface for Spectral Synthesis</li>
+<li><code class="docutils literal"><span class="pre">x.py</span></code> – PFANT Launcher – Graphical Interface for Spectral Synthesis</li>
 </ul>
 </div>
 <div class="section" id="command-line-tools">
 <h3>Command-line tools<a class="headerlink" href="#command-line-tools" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">copy-star.py</span></code> &#8211; Copies stellar data files (such as main.dat, abonds.dat, dissoc.dat) to local directory</li>
-<li><code class="docutils literal"><span class="pre">link.py</span></code> &#8211; Creates symbolic links to PFANT data files as an alternative to copying these (sometimes large) files into local directory</li>
-<li><code class="docutils literal"><span class="pre">run4.py</span></code> &#8211; Runs the four Fortran binaries in sequence: <code class="docutils literal"><span class="pre">innewmarcs</span></code>, <code class="docutils literal"><span class="pre">hydro2</span></code>, <code class="docutils literal"><span class="pre">pfant</span></code>, <code class="docutils literal"><span class="pre">nulbad</span></code></li>
-<li><code class="docutils literal"><span class="pre">save-pdf.py</span></code> &#8211; Looks for files &#8220;<em>.norm&#8221; inside directories session-</em> and saves one figure per page in a PDF file</li>
+<li><code class="docutils literal"><span class="pre">copy-star.py</span></code> – Copies stellar data files (such as main.dat, abonds.dat, dissoc.dat) to local directory</li>
+<li><code class="docutils literal"><span class="pre">link.py</span></code> – Creates symbolic links to PFANT data files as an alternative to copying these (sometimes large) files into local directory</li>
+<li><code class="docutils literal"><span class="pre">run4.py</span></code> – Runs the four Fortran binaries in sequence: <code class="docutils literal"><span class="pre">innewmarcs</span></code>, <code class="docutils literal"><span class="pre">hydro2</span></code>, <code class="docutils literal"><span class="pre">pfant</span></code>, <code class="docutils literal"><span class="pre">nulbad</span></code></li>
+<li><code class="docutils literal"><span class="pre">save-pdf.py</span></code> – Looks for files “<em>.norm” inside directories session-</em> and saves one figure per page in a PDF file</li>
 </ul>
 </div>
 </div>
 <div class="section" id="coding-using-the-api">
 <h2>Coding using the API<a class="headerlink" href="#coding-using-the-api" title="Permalink to this headline">¶</a></h2>
 <p>This section contains a series of examples on how to use the PFANT Fortran executables from a
-Python script. These &#8220;bindings&#8221; to the Fortran binaries, together with the ability to load,
+Python script. These “bindings” to the Fortran binaries, together with the ability to load,
 manipulate and save PFANT data files using <code class="docutils literal"><span class="pre">f311.filetypes</span></code>, allow for complex batch operations.</p>
 <div class="section" id="spectral-synthesis">
 <h3>Spectral synthesis<a class="headerlink" href="#spectral-synthesis" title="Permalink to this headline">¶</a></h3>
@@ -238,7 +238,7 @@ manipulate and save PFANT data files using <code class="docutils literal"><span 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="c1"># Copies files main.dat and abonds.dat to local directory (for given star)</span>
     <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
     <span class="c1"># Creates symbolic links to all non-star-specific files, such as atomic &amp; molecular lines,</span>
@@ -272,7 +272,7 @@ manipulate and save PFANT data files using <code class="docutils literal"><span 
 </div>
 <div class="section" id="spectral-synthesis-convolutions">
 <h3>Spectral synthesis - convolutions<a class="headerlink" href="#spectral-synthesis-convolutions" title="Permalink to this headline">¶</a></h3>
-<p>The following example convolves the synthetic spectrum (file &#8220;flux.norm&#8221;) with Gaussian profiles of
+<p>The following example convolves the synthetic spectrum (file “flux.norm”) with Gaussian profiles of
 different FWHMs.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 
@@ -286,7 +286,7 @@ different FWHMs.</p>
 <span class="c1"># FWHM (full width at half of maximum) of Gaussian profiles in angstrom</span>
 <span class="n">FWHMS</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="c1"># Copies files main.dat and abonds.dat to local directory (for given star)</span>
     <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
     <span class="c1"># Creates symbolic links to all non-star-specific files</span>
@@ -337,7 +337,7 @@ different FWHMs.</p>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">a99</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="c1"># Copies files main.dat and abonds.dat to local directory (for given star)</span>
     <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
     <span class="c1"># Creates symbolic links to all non-star-specific files, such as atomic &amp; molecular lines,</span>
@@ -392,7 +392,7 @@ different FWHMs.</p>
 <span class="c1"># [&quot;&lt;element name&gt;&lt;ionization level&gt;&quot;, ...]</span>
 <span class="n">MY_SPECIES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fe1&quot;</span><span class="p">,</span> <span class="s2">&quot;Fe2&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca1&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca2&quot;</span><span class="p">,</span> <span class="s2">&quot;Na1&quot;</span><span class="p">,</span> <span class="s2">&quot;Si1&quot;</span><span class="p">]</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
     <span class="n">pf</span><span class="o">.</span><span class="n">link_to_data</span><span class="p">()</span>
 
@@ -459,7 +459,7 @@ different FWHMs.</p>
 <span class="n">SUBPLOT_NUM_ROWS</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">SUBPLOT_NUM_COLS</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
     <span class="n">pf</span><span class="o">.</span><span class="n">link_to_data</span><span class="p">()</span>
 
@@ -543,7 +543,7 @@ different FWHMs.</p>
 <div class="section" id="gaussian-profiles-as-nulbad-outputs">
 <h3>Gaussian profiles as nulbad outputs<a class="headerlink" href="#gaussian-profiles-as-nulbad-outputs" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal"><span class="pre">nulbad</span></code> is one of the Fortran executables of the PFANT package. It is the one that convolves
-the synthetic spectrum calculated by <code class="docutils literal"><span class="pre">pfant</span></code> with a Gaussian profile specified by a &#8220;fwhm&#8221; parameter.</p>
+the synthetic spectrum calculated by <code class="docutils literal"><span class="pre">pfant</span></code> with a Gaussian profile specified by a “fwhm” parameter.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Nulbad&#39;s &quot;impulse response&quot;</span>
 
@@ -563,7 +563,7 @@ the synthetic spectrum calculated by <code class="docutils literal"><span class=
 <span class="c1"># FWHM (full width at half of maximum) of Gaussian profiles in angstrom</span>
 <span class="n">FWHMS</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="c1"># Copies files main.dat and abonds.dat to local directory (for given star)</span>
     <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
     <span class="c1"># Creates symbolic links to all non-star-specific files</span>
@@ -682,7 +682,7 @@ the synthetic spectrum calculated by <code class="docutils literal"><span class=
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">(</span><span class="n">flag_cleanup</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>

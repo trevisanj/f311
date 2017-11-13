@@ -58,7 +58,7 @@ Spectral synthesis
 
 .. literalinclude:: ../examples/synthesis/synthesis-simple.py
 
-.. figure:: ../figures/norm-convolved.png
+.. figure:: figures/norm-convolved.png
    :align: center
 
 
@@ -70,7 +70,7 @@ different FWHMs.
 
 .. literalinclude:: ../examples/synthesis/synthesis-many-convolutions.py
 
-.. figure:: ../figures/many-convs.png
+.. figure:: figures/many-convs.png
    :align: center
 
 Spectral synthesis - Continuum
@@ -78,7 +78,7 @@ Spectral synthesis - Continuum
 
 .. literalinclude:: ../examples/synthesis/synthesis-continuum.py
 
-.. figure:: ../figures/continuum.png
+.. figure:: figures/continuum.png
    :align: center
 
 Spectral synthesis - Separate atomic species
@@ -91,7 +91,7 @@ The following code calculates isolated atomic spectra for a list of arbitrarily 
 
 .. literalinclude:: ../examples/synthesis/synthesis-atoms.py
 
-.. figure:: ../figures/synthesis-atoms.png
+.. figure:: figures/synthesis-atoms.png
    :align: center
 
 Spectral synthesis - Separate molecules
@@ -100,10 +100,10 @@ Spectral synthesis - Separate molecules
 
 .. literalinclude:: ../examples/synthesis/synthesis-molecules.py
 
-.. figure:: ../figures/synthesis-molecules-0.png
+.. figure:: figures/synthesis-molecules-0.png
    :align: center
 
-.. figure:: ../figures/synthesis-molecules-1.png
+.. figure:: figures/synthesis-molecules-1.png
    :align: center
 
 etc.
@@ -117,7 +117,7 @@ the synthetic spectrum calculated by ``pfant`` with a Gaussian profile specified
 
 .. literalinclude:: ../examples/synthesis/gaussian-profiles.py
 
-.. figure:: ../figures/gaussian-profiles.png
+.. figure:: figures/gaussian-profiles.png
    :align: center
 
 Plot hydrogen profiles
@@ -125,7 +125,7 @@ Plot hydrogen profiles
 
 .. literalinclude:: ../examples/plot-hydrogen-profiles/plot-hydrogen-profiles.py
 
-.. figure:: ../figures/hydrogen-profiles.png
+.. figure:: figures/hydrogen-profiles.png
    :align: center
 
 API reference

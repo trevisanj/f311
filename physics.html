@@ -96,6 +96,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -185,7 +186,7 @@
 <li>Photometry (AB/Vega/Standard)</li>
 <li>Spectrum-to-RGB (red, green, blue) color conversion</li>
 <li>Air-to-vacuum (&amp; vice versa) wavelenght conversion</li>
-<li>Calculation of Hönl-London factors according to formulas in Kovács&#8217; 1969 [1]</li>
+<li>Calculation of Hönl-London factors according to formulas in Kovács’ 1969 [1]</li>
 </ul>
 </div>
 <div class="section" id="examples">
@@ -194,7 +195,7 @@
 <h3>Air-to-vacuum (&amp; vice versa) wavelength conversion<a class="headerlink" href="#air-to-vacuum-vice-versa-wavelength-conversion" title="Permalink to this headline">¶</a></h3>
 <p>The following code reproduces the figure
 shown in VALD3 Wiki (<a class="reference external" href="http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion">http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion</a>)
-(&#8220;comparison of the Morton and the inverse transformation by NP between 2000 Å and 100000 Å.&#8221;)</p>
+(“comparison of the Morton and the inverse transformation by NP between 2000 Å and 100000 Å.”)</p>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">f311.physics</span> <span class="k">as</span> <span class="nn">ph</span>
@@ -254,7 +255,7 @@ such that all HLFs for a given J must add up to 1.0:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">1.0</span>
 </pre></div>
 </div>
-<p>The formulas for the HLFs were taken from the book <em>Istvan Kovacs, &#8220;Rotational Structure in the spectra of diatomic molecules. American Elsevier, 1969</em></p>
+<p>The formulas for the HLFs were taken from the book <em>Istvan Kovacs, “Rotational Structure in the spectra of diatomic molecules. American Elsevier, 1969</em></p>
 </div>
 </div>
 <div class="section" id="api-reference">

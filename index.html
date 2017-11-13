@@ -147,7 +147,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>F311 &#8211; Astronomy-related Python 3 API and scripts</li>
+      <li>F311 – Astronomy-related Python 3 API and scripts</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -167,7 +167,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="f311-astronomy-related-python-3-api-and-scripts">
-<h1>F311 &#8211; Astronomy-related Python 3 API and scripts<a class="headerlink" href="#f311-astronomy-related-python-3-api-and-scripts" title="Permalink to this headline">¶</a></h1>
+<h1>F311 – Astronomy-related Python 3 API and scripts<a class="headerlink" href="#f311-astronomy-related-python-3-api-and-scripts" title="Permalink to this headline">¶</a></h1>
 <p>Welcome</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
@@ -200,110 +200,100 @@ Once installed, the package makes available a collection of scripts and an API
 </div>
 <div class="section" id="list-of-scripts">
 <h2>List of scripts<a class="headerlink" href="#list-of-scripts" title="Permalink to this headline">¶</a></h2>
-<p>Running <code class="docutils literal"><span class="pre">programs.py</span></code> on the shell will print something like this:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>Package &#39;aosss&#39;
-===============
-
-  Graphical applications
-  ----------------------
-
-    wavelength-chart.py ......... Draws chart showing spectral lines of
-                                  interest, spectrograph wavelength ranges, ESO
-                                  atmospheric model, etc.
-
-  Command-line tools
-  ------------------
-
-    create-simulation-reports.py  Creates HTML reports from WebSim-COMPASS
-                                  output files
-    create-spectrum-lists.py .... Create several .splist (spectrum list) files
-                                  from WebSim-COMPASS output files; groups
-                                  spectra that share same wavelength vector
-    get-compass.py .............. Downloads WebSim-COMPASS simulations
-    list-mosaic-modes.py ........ Lists MOSAIC Spectrograph modes
-    organize-directory.py ....... Organizes simulation directory (creates
-                                  folders, moves files, creates &#39;index.html&#39;)
-
-Package &#39;convmol&#39;
-=================
-
-  Graphical applications
-  ----------------------
-
-    convmol.py ........ Conversion of molecular lines data to PFANT format
-
-  Command-line tools
-  ------------------
-
-    download-hitran.py  Downloads molecular lines from HITRAN database
-    print-nist.py ..... Downloads and prints molecular constants from NIST Web
-                        Book for a particular molecule
-
-Package &#39;explorer&#39;
-==================
-
-  Graphical applications
-  ----------------------
-
-    abed.py .......... Abundances file editor
-    ated.py .......... Atomic lines file editor
-    cubeed.py ........ Data Cube Editor, import/export WebSim-COMPASS data cubes
-    explorer.py ...... F311 Explorer --  list, visualize, and edit data files
-                       (_à la_ File Manager)
-    mained.py ........ Main configuration file editor.
-    mled.py .......... Molecular lines file editor.
-    splisted.py ...... Spectrum List Editor
-    tune-zinf.py ..... Tunes the &quot;zinf&quot; parameter for each atomic line in atomic
-                       lines file
-
-  Command-line tools
-  ------------------
-
-    create-grid.py ... Merges several atmospheric models into a single file
-                       (_i.e._, the &quot;grid&quot;)
-    cut-atoms.py ..... Cuts atomic lines file to wavelength interval specified
-    cut-molecules.py . Cuts molecular lines file to wavelength interval
-                       specified
-    cut-spectrum.py .. Cuts spectrum file to wavelength interval specified
-    plot-spectra.py .. Plots spectra on screen or creates PDF file
-    vald3-to-atoms.py  Converts VALD3 atomic/molecular lines file to PFANT
-                       atomic lines file.
-
-Package &#39;pyfant&#39;
-================
-
-  Graphical applications
-  ----------------------
-
-    x.py ........ PFANT Launcher -- Graphical Interface for Spectral Synthesis
-
-  Command-line tools
-  ------------------
-
-    copy-star.py  Copies stellar data files (such as main.dat, abonds.dat,
-                  dissoc.dat) to local directory
-    link.py ..... Creates symbolic links to PFANT data files as an alternative
-                  to copying these (sometimes large) files into local directory
-    run4.py ..... Runs the four Fortran binaries in sequence: `innewmarcs`,
-                  `hydro2`, `pfant`, `nulbad`
-    save-pdf.py . Looks for files &quot;*.norm&quot; inside directories session-* and
-                  saves one figure per page in a PDF file
-
-PFANT Fortran binaries
-======================
-
-    innewmarcs  found
-    hydro2 .... found
-    pfant ..... found
-    nulbad .... found
-</pre></div>
+<div class="section" id="f311-aosss-adaptive-optics-systems-simulation-support">
+<h3>f311.aosss – “Adaptive Optics Systems Simulation Support”<a class="headerlink" href="#f311-aosss-adaptive-optics-systems-simulation-support" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="graphical-applications">
+<h4>Graphical applications<a class="headerlink" href="#graphical-applications" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="autoscripts/editable-wavelength-chart.html"><span class="doc">wavelength-chart.py</span></a>: Draws chart showing spectral lines of interest, spectrograph wavelength ranges, ESO atmospheric .</li>
+</ul>
+</div>
+<div class="section" id="command-line-tools">
+<h4>Command-line tools<a class="headerlink" href="#command-line-tools" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="autoscripts/editable-create-simulation-reports.html"><span class="doc">create-simulation-reports.py</span></a>: Creates HTML reports from WebSim-COMPASS output files</li>
+<li><a class="reference internal" href="autoscripts/editable-create-spectrum-lists.html"><span class="doc">create-spectrum-lists.py</span></a>: Create several .splist (spectrum list) files from WebSim-COMPASS output files; groups r</li>
+<li><a class="reference internal" href="autoscripts/editable-get-compass.html"><span class="doc">get-compass.py</span></a>: Downloads WebSim-COMPASS simulations</li>
+<li><a class="reference internal" href="autoscripts/editable-list-mosaic-modes.html"><span class="doc">list-mosaic-modes.py</span></a>: Lists MOSAIC Spectrograph modes</li>
+<li><a class="reference internal" href="autoscripts/editable-organize-directory.html"><span class="doc">organize-directory.py</span></a>: Organizes simulation directory (creates folders, moves files, creates ‘index.html’)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="f311-convmol-conversion-of-molecular-lines-files">
+<h3>f311.convmol – Conversion of molecular lines files.<a class="headerlink" href="#f311-convmol-conversion-of-molecular-lines-files" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>Graphical applications<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="autoscripts/editable-convmol.html"><span class="doc">convmol.py</span></a>: Conversion of molecular lines data to PFANT format</li>
+<li><a class="reference internal" href="autoscripts/editable-mced.html"><span class="doc">mced.py</span></a>: Editor for molecular constants file</li>
+<li><a class="reference internal" href="autoscripts/editable-moldbed.html"><span class="doc">moldbed.py</span></a>: Editor for molecules SQLite database</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h4>Command-line tools<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="autoscripts/editable-hitran-scraper.html"><span class="doc">hitran-scraper.py</span></a>: Retrieves molecular lines from the HITRAN database [Gordon2016]</li>
+<li><a class="reference internal" href="autoscripts/editable-nist-scraper.html"><span class="doc">nist-scraper.py</span></a>: Retrieves and prints a table of molecular constants from the NIST Chemistry Web Book.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="f311-explorer-object-oriented-framework-to-handle-file-types">
+<h3>f311.explorer – Object-oriented framework to handle file types:<a class="headerlink" href="#f311-explorer-object-oriented-framework-to-handle-file-types" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h4>Graphical applications<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="autoscripts/editable-abed.html"><span class="doc">abed.py</span></a>: Abundances file editor</li>
+<li><a class="reference internal" href="autoscripts/editable-ated.html"><span class="doc">ated.py</span></a>: Atomic lines file editor</li>
+<li><a class="reference internal" href="autoscripts/editable-cubeed.html"><span class="doc">cubeed.py</span></a>: Data Cube Editor, import/export WebSim-COMPASS data cubes</li>
+<li><a class="reference internal" href="autoscripts/editable-explorer.html"><span class="doc">explorer.py</span></a>: F311 Explorer –  list, visualize, and edit data files (_à <a href="#id7"><span class="problematic" id="id8">la_</span></a> File Manager)</li>
+<li><a class="reference internal" href="autoscripts/editable-mained.html"><span class="doc">mained.py</span></a>: Main configuration file editor.</li>
+<li><a class="reference internal" href="autoscripts/editable-mled.html"><span class="doc">mled.py</span></a>: Molecular lines file editor.</li>
+<li><a class="reference internal" href="autoscripts/editable-optionsed.html"><span class="doc">optionsed.py</span></a>: PFANT command-line options file editor.</li>
+<li><a class="reference internal" href="autoscripts/editable-splisted.html"><span class="doc">splisted.py</span></a>: Spectrum List Editor</li>
+<li><a class="reference internal" href="autoscripts/editable-tune-zinf.html"><span class="doc">tune-zinf.py</span></a>: Tunes the “zinf” parameter for each atomic line in atomic lines file</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h4>Command-line tools<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="autoscripts/editable-create-grid.html"><span class="doc">create-grid.py</span></a>: Merges several atmospheric models into a single file (_i.e._, the “grid”)</li>
+<li><a class="reference internal" href="autoscripts/editable-cut-atoms.html"><span class="doc">cut-atoms.py</span></a>: Cuts atomic lines file to wavelength interval specified</li>
+<li><a class="reference internal" href="autoscripts/editable-cut-molecules.html"><span class="doc">cut-molecules.py</span></a>: Cuts molecular lines file to wavelength interval specified</li>
+<li><a class="reference internal" href="autoscripts/editable-cut-spectrum.html"><span class="doc">cut-spectrum.py</span></a>: Cuts spectrum file to wavelength interval specified</li>
+<li><a class="reference internal" href="autoscripts/editable-plot-spectra.html"><span class="doc">plot-spectra.py</span></a>: Plots spectra on screen or creates PDF file</li>
+<li><a class="reference internal" href="autoscripts/editable-vald3-to-atoms.html"><span class="doc">vald3-to-atoms.py</span></a>: Converts VALD3 atomic/molecular lines file to PFANT atomic lines file.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="f311-pyfant-python-interface-to-the-pfant-spectral-synthesis-software-fortran">
+<h3>f311.pyfant – Python interface to the PFANT spectral synthesis software (Fortran)<a class="headerlink" href="#f311-pyfant-python-interface-to-the-pfant-spectral-synthesis-software-fortran" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h4>Graphical applications<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="autoscripts/editable-x.html"><span class="doc">x.py</span></a>: PFANT Launcher – Graphical Interface for Spectral Synthesis</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h4>Command-line tools<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="autoscripts/editable-copy-star.html"><span class="doc">copy-star.py</span></a>: Copies stellar data files (such as main.dat, abonds.dat, dissoc.dat) to local directory</li>
+<li><a class="reference internal" href="autoscripts/editable-link.html"><span class="doc">link.py</span></a>: Creates symbolic links to PFANT data files as an alternative to copying these (sometimes large) files into local directoy</li>
+<li><a class="reference internal" href="autoscripts/editable-merge-molecules.html"><span class="doc">merge-molecules.py</span></a>: Merges several PFANT molecular lines file into a single one</li>
+<li><span class="xref std std-doc">run-multi.py`</span>: Runs pfant and nulbad in “multi mode” (equivalent to Tab 4 in <code class="docutils literal"><span class="pre">x.py</span> <span class="pre">&lt;autoscripts/editable-run-multi.py</span></code>: Runs pfant and nulbad in “multi mod)</li>
+<li><a class="reference internal" href="autoscripts/editable-run4.html"><span class="doc">run4.py</span></a>: Runs the four Fortran binaries in sequence: <cite>innewmarcs</cite>, <cite>hydro2</cite>, <cite>pfant</cite>, <cite>nulbad</cite></li>
+</ul>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">You can use <code class="docutils literal"><span class="pre">programs.py</span></code> to list available scripts.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="list-of-acronyms">
 <h2>List of acronyms<a class="headerlink" href="#list-of-acronyms" title="Permalink to this headline">¶</a></h2>
-<p><strong>API</strong> &#8211; application programming interface</p>
-<p><strong>GUI</strong> &#8211; graphical user interface</p>
-<p><strong>FWHM</strong> &#8211; full with at half maximum</p>
+<p><strong>API</strong> – application programming interface</p>
+<p><strong>GUI</strong> – graphical user interface</p>
+<p><strong>FWHM</strong> – full with at half maximum</p>
 </div>
 <div class="section" id="acknowledgement">
 <h2>Acknowledgement<a class="headerlink" href="#acknowledgement" title="Permalink to this headline">¶</a></h2>
@@ -319,7 +309,7 @@ at University of São Paulo, Brazil).</p>
 <li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 <li><a class="reference internal" href="license.html"><span class="doc">License</span></a></li>
 </ul>
-<img alt="_images/key-white.png" src="_images/key-white.png" />
+<img alt="art/key-white.png" src="art/key-white.png" />
 </div>
 </div>
 
