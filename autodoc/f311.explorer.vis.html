@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -252,8 +253,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sparsecube</strong> &#8211; SparseCube instance</li>
-<li><strong>height_threshold</strong> &#8211; maximum cube height to plot actual spectra.
+<li><strong>sparsecube</strong> – SparseCube instance</li>
+<li><strong>height_threshold</strong> – maximum cube height to plot actual spectra.
 If the cube height is greated than this, line segments will be drawn
 instead of plotting the spectra (for speed)</li>
 </ul>
@@ -262,7 +263,7 @@ instead of plotting the spectra (for speed)</li>
 </tbody>
 </table>
 <p>data cube            mapped to 3D axis
-&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;   &#8212;&#8212;&#8212;&#8212;&#8212;&#8211;
+——————   —————–
 X pixel coordinate   x
 Y pixel coordinate   z
 Z wavelength         y</p>
@@ -277,8 +278,8 @@ Z wavelength         y</p>
 <dd>ax: matplotlib axis
 sparsecube: SparseCube instance
 vrange: visible range
-sqx: &#8220;place spectrum&#8221; x
-sqy: &#8220;place spectrum&#8221; y</dd>
+sqx: “place spectrum” x
+sqy: “place spectrum” y</dd>
 </dl>
 <p>Returns: matplotlib plot object representing square, or None</p>
 </dd></dl>
@@ -297,12 +298,12 @@ sqy: &#8220;place spectrum&#8221; y</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>ss</strong> &#8211; list of Spectrum objects</li>
-<li><strong>title=None</strong> &#8211; window title</li>
-<li><strong>num_rows=None</strong> &#8211; (optional) number of rows for subplot grid. If not passed,
+<li><strong>ss</strong> – list of Spectrum objects</li>
+<li><strong>title=None</strong> – window title</li>
+<li><strong>num_rows=None</strong> – (optional) number of rows for subplot grid. If not passed,
 num_rows will be the number of plots, and the number of columns will be 1.
 If passed, number of columns is calculated automatically.</li>
-<li><strong>setup</strong> &#8211; PlotSpectrumSetup object</li>
+<li><strong>setup</strong> – PlotSpectrumSetup object</li>
 </ul>
 </td>
 </tr>
@@ -319,9 +320,9 @@ If passed, number of columns is calculated automatically.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>ss</strong> &#8211; list of Spectrum objects</li>
-<li><strong>title=None</strong> &#8211; window title</li>
-<li><strong>setup</strong> &#8211; PlotSpectrumSetup object</li>
+<li><strong>ss</strong> – list of Spectrum objects</li>
+<li><strong>title=None</strong> – window title</li>
+<li><strong>setup</strong> – PlotSpectrumSetup object</li>
 </ul>
 </td>
 </tr>
@@ -339,10 +340,10 @@ one interval per page of the PDF file.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>ss</strong> &#8211; list of Spectrum objects</li>
-<li><strong>aint</strong> &#8211; wavelength interval for each plot</li>
-<li><strong>pdf_filename</strong> &#8211; name of output file</li>
-<li><strong>setup</strong> &#8211; PlotSpectrumSetup object</li>
+<li><strong>ss</strong> – list of Spectrum objects</li>
+<li><strong>aint</strong> – wavelength interval for each plot</li>
+<li><strong>pdf_filename</strong> – name of output file</li>
+<li><strong>setup</strong> – PlotSpectrumSetup object</li>
 </ul>
 </td>
 </tr>
@@ -361,9 +362,9 @@ one interval per page of the PDF file.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>ss</strong> &#8211; list of Spectrum objects</li>
-<li><strong>pdf_filename</strong> &#8211; name of output file</li>
-<li><strong>TODO</strong> &#8211; </li>
+<li><strong>ss</strong> – list of Spectrum objects</li>
+<li><strong>pdf_filename</strong> – name of output file</li>
+<li><strong>TODO</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -379,23 +380,35 @@ one interval per page of the PDF file.</p>
 
 <dl class="class">
 <dt id="f311.explorer.vis.plotsp.PlotSpectrumSetup">
-<em class="property">class </em><code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">PlotSpectrumSetup</code><span class="sig-paren">(</span><em>fmt_xlabel='{.xunit}'</em>, <em>fmt_ylabel='{.yunit}'</em>, <em>fmt_title='{.title}'</em>, <em>ymin=None</em>, <em>flag_legend=True</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.PlotSpectrumSetup" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">PlotSpectrumSetup</code><span class="sig-paren">(</span><em>fmt_xlabel='{.xunit}'</em>, <em>fmt_ylabel='{.yunit}'</em>, <em>fmt_title='{.title}'</em>, <em>ymin=None</em>, <em>flag_legend=True</em>, <em>flag_xlabel=True</em>, <em>flag_ylabel=True</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.PlotSpectrumSetup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>fmt_xlabel</strong> &#8211; format string for x-label</li>
-<li><strong>fmt_ylabel</strong> &#8211; format string for y-label</li>
-<li><strong>fmt_title</strong> &#8211; format string for title</li>
-<li><strong>ymin</strong> &#8211; (optional) force mininum y-value</li>
-<li><strong>flag_legend</strong> &#8211; Whether to show legend in plot</li>
+<li><strong>fmt_xlabel</strong> – format string for x-label</li>
+<li><strong>fmt_ylabel</strong> – format string for y-label</li>
+<li><strong>fmt_title</strong> – format string for title</li>
+<li><strong>ymin</strong> – (optional) force mininum y-value</li>
+<li><strong>flag_legend</strong> – Whether to show legend in plot</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.explorer.vis.plotsp.draw_spectra_overlapped">
+<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">draw_spectra_overlapped</code><span class="sig-paren">(</span><em>ss</em>, <em>title=None</em>, <em>setup=PlotSpectrumSetup('{.xunit}'</em>, <em>'{.yunit}'</em>, <em>'{.title}'</em>, <em>None</em>, <em>True)</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.draw_spectra_overlapped" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="f311.explorer.vis.plotsp.calc_max_min">
+<code class="descclassname">f311.explorer.vis.plotsp.</code><code class="descname">calc_max_min</code><span class="sig-paren">(</span><em>ss</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.vis.plotsp.calc_max_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>“Calculates (x, y) (max, min) for a list of Spectrum objects.</p>
+<p>Returns (xmin, xmax, ymin, ymax, xspan, yspan)</p>
 </dd></dl>
 
 </div>

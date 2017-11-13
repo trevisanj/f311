@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -181,7 +182,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent=None</strong> &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent=None</strong> – </td>
 </tr>
 </tbody>
 </table>
@@ -226,7 +227,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent=None</strong> &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent=None</strong> – </td>
 </tr>
 </tbody>
 </table>
@@ -281,8 +282,8 @@
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="f311.explorer.gui.gui_pyfant.a_WFileAbonds.WFileAbonds.on_textEditComments_textChanged">
-<code class="descname">on_textEditComments_textChanged</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.gui_pyfant.a_WFileAbonds.WFileAbonds.on_textEditComments_textChanged" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.explorer.gui.gui_pyfant.a_WFileAbonds.WFileAbonds.on_textEditNotes_textChanged">
+<code class="descname">on_textEditNotes_textChanged</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.gui_pyfant.a_WFileAbonds.WFileAbonds.on_textEditNotes_textChanged" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -311,7 +312,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent=None</strong> &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent=None</strong> – </td>
 </tr>
 </tbody>
 </table>
@@ -350,29 +351,19 @@
 <dl class="class">
 <dt id="f311.explorer.gui.gui_pyfant.a_WOptionsEditor.WOptionsEditor">
 <em class="property">class </em><code class="descclassname">f311.explorer.gui.gui_pyfant.a_WOptionsEditor.</code><code class="descname">WOptionsEditor</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.gui_pyfant.a_WOptionsEditor.WOptionsEditor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt5.QtWidgets.QWidget</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.gui.a_WEditor.WEditor</span></code></p>
 <p>FileOptions editor widget.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent=None</strong> &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent=None</strong> – </td>
 </tr>
 </tbody>
 </table>
-<dl class="attribute">
-<dt id="f311.explorer.gui.gui_pyfant.a_WOptionsEditor.WOptionsEditor.changed">
-<code class="descname">changed</code><a class="headerlink" href="#f311.explorer.gui.gui_pyfant.a_WOptionsEditor.WOptionsEditor.changed" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="method">
 <dt id="f311.explorer.gui.gui_pyfant.a_WOptionsEditor.WOptionsEditor.eventFilter">
 <code class="descname">eventFilter</code><span class="sig-paren">(</span><em>obj_focused</em>, <em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.gui_pyfant.a_WOptionsEditor.WOptionsEditor.eventFilter" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="f311.explorer.gui.gui_pyfant.a_WOptionsEditor.WOptionsEditor.load">
-<code class="descname">load</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.gui_pyfant.a_WOptionsEditor.WOptionsEditor.load" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -461,7 +452,7 @@
 </div>
 <div class="section" id="module-f311.explorer.gui.gui_pyfant.a_XFileAbonds">
 <span id="f311-explorer-gui-gui-pyfant-a-xfileabonds-module"></span><h2>f311.explorer.gui.gui_pyfant.a_XFileAbonds module<a class="headerlink" href="#module-f311.explorer.gui.gui_pyfant.a_XFileAbonds" title="Permalink to this headline">¶</a></h2>
-<p>abed &#8211; ABundances file EDitor window.</p>
+<p>abed – ABundances file EDitor window.</p>
 <dl class="class">
 <dt id="f311.explorer.gui.gui_pyfant.a_XFileAbonds.XFileAbonds">
 <em class="property">class </em><code class="descclassname">f311.explorer.gui.gui_pyfant.a_XFileAbonds.</code><code class="descname">XFileAbonds</code><span class="sig-paren">(</span><em>parent=None</em>, <em>file_abonds=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.gui_pyfant.a_XFileAbonds.XFileAbonds" title="Permalink to this definition">¶</a></dt>
@@ -471,8 +462,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>parent=None</strong> &#8211; nevermind</li>
-<li><strong>file_abonds</strong> (<em>optional</em>) &#8211; </li>
+<li><strong>parent=None</strong> – nevermind</li>
+<li><strong>file_abonds</strong> (<em>optional</em>) – </li>
 </ul>
 </td>
 </tr>
@@ -699,7 +690,7 @@
 <dl class="method">
 <dt id="f311.explorer.gui.gui_pyfant.a_XFileAtoms.XFileAtoms.update_atom_info">
 <code class="descname">update_atom_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.gui_pyfant.a_XFileAtoms.XFileAtoms.update_atom_info" title="Permalink to this definition">¶</a></dt>
-<dd><p>Updates the &#8220;number of lines&#8221; label.</p>
+<dd><p>Updates the “number of lines” label.</p>
 </dd></dl>
 
 <dl class="method">
@@ -722,7 +713,7 @@ object.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_atoms</strong> &#8211; FileAtoms object.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_atoms</strong> – FileAtoms object.</td>
 </tr>
 </tbody>
 </table>
@@ -746,8 +737,8 @@ object.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>parent=None</strong> &#8211; nevermind</li>
-<li><strong>file_main</strong> (<em>optional</em>) &#8211; </li>
+<li><strong>parent=None</strong> – nevermind</li>
+<li><strong>file_main</strong> (<em>optional</em>) – </li>
 </ul>
 </td>
 </tr>
@@ -1038,14 +1029,14 @@ object.</p>
 <dl class="class">
 <dt id="f311.explorer.gui.gui_pyfant.a_XMainAbonds.XMainAbonds">
 <em class="property">class </em><code class="descclassname">f311.explorer.gui.gui_pyfant.a_XMainAbonds.</code><code class="descname">XMainAbonds</code><span class="sig-paren">(</span><em>parent=None</em>, <em>file_main=None</em>, <em>file_abonds=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.gui_pyfant.a_XMainAbonds.XMainAbonds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt5.QtWidgets.QMainWindow</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.gui.a_XLogMainWindow.XLogMainWindow</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>parent=None</strong> &#8211; nevermind</li>
-<li><strong>file_main</strong> (<em>optional</em>) &#8211; </li>
+<li><strong>parent=None</strong> – nevermind</li>
+<li><strong>file_main</strong> (<em>optional</em>) – </li>
 </ul>
 </td>
 </tr>

@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -184,8 +185,14 @@ American Elsevier, 1969</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Multiplicity_(chemistry">https://en.wikipedia.org/wiki/Multiplicity_(chemistry</a>)</p>
 <dl class="function">
 <dt id="f311.physics.multiplicity.multiplicity_toolbox">
-<code class="descclassname">f311.physics.multiplicity.</code><code class="descname">multiplicity_toolbox</code><span class="sig-paren">(</span><em>mol_consts</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.multiplicity.multiplicity_toolbox" title="Permalink to this definition">¶</a></dt>
-<dd><p>Factory function that returns a MultiplicityToolbox descendant appropriate to mol_consts</p>
+<code class="descclassname">f311.physics.multiplicity.</code><code class="descname">multiplicity_toolbox</code><span class="sig-paren">(</span><em>molconsts</em>, <em>flag_normalize=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.physics.multiplicity.multiplicity_toolbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factory function that returns a MultiplicityToolbox descendant appropriate to molconsts</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="f311.physics.multiplicity.NoLineStrength">
+<em class="property">exception </em><code class="descclassname">f311.physics.multiplicity.</code><code class="descname">NoLineStrength</code><a class="headerlink" href="#f311.physics.multiplicity.NoLineStrength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
 </div>

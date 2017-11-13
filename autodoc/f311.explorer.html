@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -269,19 +270,6 @@
 </div>
 <div class="section" id="module-f311.explorer.classcatalog">
 <span id="f311-explorer-classcatalog-module"></span><h2>f311.explorer.classcatalog module<a class="headerlink" href="#module-f311.explorer.classcatalog" title="Permalink to this headline">¶</a></h2>
-<p>&#8220;Collaboration&#8221; with other packages</p>
-<dl class="function">
-<dt id="f311.explorer.classcatalog.classes_vis">
-<code class="descclassname">f311.explorer.classcatalog.</code><code class="descname">classes_vis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.classcatalog.classes_vis" title="Permalink to this definition">¶</a></dt>
-<dd><p>All known Vis* classes</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="f311.explorer.classcatalog.get_suitable_vis_classes">
-<code class="descclassname">f311.explorer.classcatalog.</code><code class="descname">get_suitable_vis_classes</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.classcatalog.get_suitable_vis_classes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retuns a list of Vis classes that can handle obj.</p>
-</dd></dl>
-
 </div>
 <div class="section" id="module-f311.explorer.from_vald">
 <span id="f311-explorer-from-vald-module"></span><h2>f311.explorer.from_vald module<a class="headerlink" href="#module-f311.explorer.from_vald" title="Permalink to this headline">¶</a></h2>
@@ -294,7 +282,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_obj</strong> &#8211; file-like object, e.g., returned by open()</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_obj</strong> – file-like object, e.g., returned by open()</td>
 </tr>
 </tbody>
 </table>
@@ -306,7 +294,7 @@
 <div class="section" id="module-f311.explorer.util">
 <span id="f311-explorer-util-module"></span><h2>f311.explorer.util module<a class="headerlink" href="#module-f311.explorer.util" title="Permalink to this headline">¶</a></h2>
 <p>Miscellanea routines that depend on other modules and sub-packages.</p>
-<p>Rule: only &#8216;gui/&#8217; modules can import util!!!</p>
+<p>Rule: only ‘gui/’ modules can import util!!!</p>
 <dl class="function">
 <dt id="f311.explorer.util.cut_spectrum">
 <code class="descclassname">f311.explorer.util.</code><code class="descname">cut_spectrum</code><span class="sig-paren">(</span><em>sp</em>, <em>l0</em>, <em>lf</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.util.cut_spectrum" title="Permalink to this definition">¶</a></dt>
@@ -316,9 +304,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sp</strong> &#8211; Spectrum instance</li>
-<li><strong>l0</strong> &#8211; initial wavelength</li>
-<li><strong>lf</strong> &#8211; final wavelength</li>
+<li><strong>sp</strong> – Spectrum instance</li>
+<li><strong>l0</strong> – initial wavelength</li>
+<li><strong>lf</strong> – final wavelength</li>
 </ul>
 </td>
 </tr>

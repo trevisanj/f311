@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -174,21 +175,21 @@
 <dl class="function">
 <dt id="f311.aosss.basic.compile_simids">
 <code class="descclassname">f311.aosss.basic.</code><code class="descname">compile_simids</code><span class="sig-paren">(</span><em>specs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.basic.compile_simids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compiles a list of simulation IDs (e.g., &#8216;C000793&#8217;) from a sequence of specifications</p>
+<dd><p>Compiles a list of simulation IDs (e.g., ‘C000793’) from a sequence of specifications</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>specs</strong> &#8211; <p><code class="docutils literal"><span class="pre">[spec0,</span> <span class="pre">spec1,</span> <span class="pre">...]</span></code>, where each element may be:</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>specs</strong> – <p><code class="docutils literal"><span class="pre">[spec0,</span> <span class="pre">spec1,</span> <span class="pre">...]</span></code>, where each element may be:</p>
 <ul class="simple">
 <li>a number (convertible to int), or</li>
-<li>a range such as &#8216;1000-1010&#8217; (string)</li>
+<li>a range such as ‘1000-1010’ (string)</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<p>Returns: list of strings starting with &#8220;C&#8221;</p>
+<p>Returns: list of strings starting with “C”</p>
 </dd></dl>
 
 </div>
@@ -205,16 +206,16 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> &#8211; name of spectrograph mode</li>
-<li><strong>abbreviation</strong> &#8211; abbreviation of spectrograph mode</li>
-<li><strong>aperture</strong> &#8211; aperture in (arcsec)</li>
-<li><strong>multiplex</strong> &#8211; maximum number of simultaneous objects being observed (unitless)</li>
-<li><strong>wavelength_range</strong> &#8211; [lambda_min, lambda_max] (angstrom)</li>
-<li><strong>resolving_power</strong> &#8211; lambda/delta_lambda (unitless)</li>
-<li><strong>fov</strong> &#8211; field-of-view (arcmin**2)</li>
-<li><strong>flag_glao</strong> &#8211; whether or not Ground-Layer Adaptive Optics is available for this mode</li>
-<li><strong>flag_moao</strong> &#8211; whether of not Multi-Object Adaptive Optics is available for this mode</li>
-<li><strong>pixel_size</strong> &#8211; spatial pixel size</li>
+<li><strong>name</strong> – name of spectrograph mode</li>
+<li><strong>abbreviation</strong> – abbreviation of spectrograph mode</li>
+<li><strong>aperture</strong> – aperture in (arcsec)</li>
+<li><strong>multiplex</strong> – maximum number of simultaneous objects being observed (unitless)</li>
+<li><strong>wavelength_range</strong> – [lambda_min, lambda_max] (angstrom)</li>
+<li><strong>resolving_power</strong> – lambda/delta_lambda (unitless)</li>
+<li><strong>fov</strong> – field-of-view (arcmin**2)</li>
+<li><strong>flag_glao</strong> – whether or not Ground-Layer Adaptive Optics is available for this mode</li>
+<li><strong>flag_moao</strong> – whether of not Multi-Object Adaptive Optics is available for this mode</li>
+<li><strong>pixel_size</strong> – spatial pixel size</li>
 </ul>
 </td>
 </tr>
@@ -239,8 +240,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>simid</strong> &#8211; simulation ID. This should be a string starting with a &#8220;C&#8221;, e.g., &#8220;C000793&#8221;</li>
-<li><strong>dir</strong> &#8211; directory containing the simulation ouput files</li>
+<li><strong>simid</strong> – simulation ID. This should be a string starting with a “C”, e.g., “C000793”</li>
+<li><strong>dir</strong> – directory containing the simulation ouput files</li>
 </ul>
 </td>
 </tr>
@@ -257,7 +258,7 @@
 <dl class="function">
 <dt id="f311.aosss.report.create_index">
 <code class="descclassname">f311.aosss.report.</code><code class="descname">create_index</code><span class="sig-paren">(</span><em>dir_='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.report.create_index" title="Permalink to this definition">¶</a></dt>
-<dd><p>[re]created &#8216;index.html&#8217; of report*</p>
+<dd><p>[re]created ‘index.html’ of report*</p>
 </dd></dl>
 
 </div>
@@ -272,12 +273,12 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>dir</strong> &#8211; input &amp; output directory</li>
-<li><strong>pipeline_stage=&quot;spintg&quot;</strong> &#8211; <p>input &#8220;stage&#8221;, i.e., which stage of the pipeline will be loaded.
+<li><strong>dir</strong> – input &amp; output directory</li>
+<li><strong>pipeline_stage=&quot;spintg&quot;</strong> – <p>input “stage”, i.e., which stage of the pipeline will be loaded.
 Possible values:</p>
 <ul>
-<li>&#8220;spintg&#8221;: integrated spectrum (final stage)</li>
-<li>&#8220;ifu_noseeing&#8221;: take first spectrum of 7x1 data cube TODO explain</li>
+<li>”spintg”: integrated spectrum (final stage)</li>
+<li>”ifu_noseeing”: take first spectrum of 7x1 data cube TODO explain</li>
 </ul>
 </li>
 </ul>
@@ -320,7 +321,7 @@ Possible values:</p>
 </div>
 <div class="section" id="module-f311.aosss">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.aosss" title="Permalink to this headline">¶</a></h2>
-<p>&#8220;Adaptive Optics Systems Simulation Support&#8221;</p>
+<p>“Adaptive Optics Systems Simulation Support”</p>
 <dl class="function">
 <dt id="f311.aosss.get_config">
 <code class="descclassname">f311.aosss.</code><code class="descname">get_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.get_config" title="Permalink to this definition">¶</a></dt>

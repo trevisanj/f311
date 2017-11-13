@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -200,7 +201,7 @@ executables.</p>
 <em class="property">class </em><code class="descclassname">f311.pyfant.conf.</code><code class="descname">Conf</code><a class="headerlink" href="#f311.pyfant.conf.Conf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Class holds the configuration of an executable.</p>
-<p>Most options are initialized do None. This means that they won&#8217;t be added to the
+<p>Most options are initialized do None. This means that they won’t be added to the
 command line.</p>
 <dl class="method">
 <dt id="f311.pyfant.conf.Conf.close_popen_text_dest">
@@ -226,7 +227,7 @@ if it has been called before and skip most operations if so.</p>
 <dl class="attribute">
 <dt id="f311.pyfant.conf.Conf.flag_log_file">
 <code class="descname">flag_log_file</code><a class="headerlink" href="#f311.pyfant.conf.Conf.flag_log_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Log Fortran messages to &#8220;&lt;session dir&gt;/fortran.log&#8221; (default=True)?</p>
+<dd><p>Log Fortran messages to “&lt;session dir&gt;/fortran.log” (default=True)?</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -257,8 +258,8 @@ if it has been called before and skip most operations if so.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> &#8211; string</li>
-<li><strong>opt</strong> &#8211; FileOptions object</li>
+<li><strong>name</strong> – string</li>
+<li><strong>opt</strong> – FileOptions object</li>
 </ul>
 </td>
 </tr>
@@ -267,15 +268,21 @@ if it has been called before and skip most operations if so.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="f311.pyfant.conf.Conf.get_file_hmap">
+<code class="descname">get_file_hmap</code><span class="sig-paren">(</span><em>opt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.Conf.get_file_hmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to get_file_main()</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="f311.pyfant.conf.Conf.get_file_main">
 <code class="descname">get_file_main</code><span class="sig-paren">(</span><em>opt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.Conf.get_file_main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tries to figure out a FileMain from current context (i.e., directory contents and command-line options)</p>
-<p>Precedence: self.file_main &gt; (file specified by opt.fn_main) &gt; (f311&#8217;s default data file)</p>
+<p>Precedence: self.file_main &gt; (file specified by opt.fn_main) &gt; (f311’s default data file)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>opt</strong> &#8211; FileOptions or None</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>opt</strong> – FileOptions or None</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">FileMain or None</td>
 </tr>
@@ -307,6 +314,12 @@ if it has been called before and skip most operations if so.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="f311.pyfant.conf.Conf.get_fn_molecules">
+<code class="descname">get_fn_molecules</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.Conf.get_fn_molecules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns name of molecular lines file</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="f311.pyfant.conf.Conf.get_fwhm">
 <code class="descname">get_fwhm</code><span class="sig-paren">(</span><em>opt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.Conf.get_fwhm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns FWHM from command-line option if present, otherwise from main file</p>
@@ -319,9 +332,9 @@ if it has been called before and skip most operations if so.</p>
 <dl class="docutils">
 <dt>Reproduces nulbad logic in determining its output filename, i.e.,</dt>
 <dd><ol class="first last arabic simple">
-<li>uses &#8211;fn_cv if present; if not,</li>
+<li>uses –fn_cv if present; if not,</li>
 <li>gets flprefix from main configuration file and adds
-(&#8221;.norm&#8221; or &#8221;.spec&#8221;) + &#8221;.nulbad.&#8221; + &lt;fwhm in 5.3 format&gt;</li>
+(“.norm” or “.spec”) + “.nulbad.” + &lt;fwhm in 5.3 format&gt;</li>
 </ol>
 </dd>
 </dl>
@@ -335,7 +348,7 @@ if it has been called before and skip most operations if so.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>type</strong> &#8211; &#8220;spec&#8221;, &#8220;norm&#8221;, or &#8220;cont&#8221;</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>type</strong> – “spec”, “norm”, or “cont”</td>
 </tr>
 </tbody>
 </table>
@@ -351,7 +364,8 @@ for more information.</p>
 <dl class="attribute">
 <dt id="f311.pyfant.conf.Conf.opt">
 <code class="descname">opt</code><a class="headerlink" href="#f311.pyfant.conf.Conf.opt" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>FileOptions object</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="f311.pyfant.conf.Conf.popen_text_dest">
@@ -368,20 +382,21 @@ executables. To be called <em>before</em> create_data_files</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequence</strong> &#8211; list containing one or more i_* values such as innewmarcs etc</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequence</strong> – list containing one or more i_* values such as innewmarcs etc</td>
 </tr>
 </tbody>
 </table>
 <dl class="docutils">
 <dt>Note: in order to link pfant-&gt;nulbad correctly,</dt>
-<dd>nulbad &#8220;&#8211;fn_flux&#8221; option will not be used.</dd>
+<dd>nulbad “–fn_flux” option will not be used.</dd>
 </dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="f311.pyfant.conf.Conf.sid">
 <code class="descname">sid</code><a class="headerlink" href="#f311.pyfant.conf.Conf.sid" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>SID object</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -409,17 +424,17 @@ executables. To be called <em>before</em> create_data_files</p>
 <dt id="f311.pyfant.conf.SID">
 <em class="property">class </em><code class="descclassname">f311.pyfant.conf.</code><code class="descname">SID</code><span class="sig-paren">(</span><em>id_maker</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.SID" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>SID &#8211; Session Id and Directory</p>
+<p>SID – Session Id and Directory</p>
 <p>Part of code that finds new session id and creates corresponding directory</p>
 <dl class="method">
 <dt id="f311.pyfant.conf.SID.clean">
 <code class="descname">clean</code><span class="sig-paren">(</span><em>flag_remove_dir=True</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.conf.SID.clean" title="Permalink to this definition">¶</a></dt>
-<dd><p>Deletes directory with all files inside.</p>
+<dd><p>Deletes session directory with all files inside.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flag_remove_dif=True</strong> &#8211; if not set, will only delete the contents,
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flag_remove_dir=True</strong> – if not set, will only delete the contents,
 keeping the directory</td>
 </tr>
 </tbody>
@@ -444,14 +459,15 @@ keeping the directory</td>
 <code class="descname">id</code><a class="headerlink" href="#f311.pyfant.conf.SID.id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information used to create a session directory and to identify this directory.</p>
 <p>When this property is set, the session directory
-(probably named &#8220;session-&lt;session_id&gt;&#8221;) is created
+(probably named “session-&lt;session_id&gt;”) is created
 immediately.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="f311.pyfant.conf.SID.id_maker">
 <code class="descname">id_maker</code><a class="headerlink" href="#f311.pyfant.conf.SID.id_maker" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>IdMaker instance</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="f311.pyfant.conf.SID.join_with_session_dir">
@@ -490,7 +506,7 @@ the same id.</p>
 <dt id="f311.pyfant.errors.FileConsistencyError">
 <em class="property">exception </em><code class="descclassname">f311.pyfant.errors.</code><code class="descname">FileConsistencyError</code><a class="headerlink" href="#f311.pyfant.errors.FileConsistencyError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
-<p>Things that must match within file don&#8217;t.</p>
+<p>Things that must match within file don’t.</p>
 </dd></dl>
 
 <dl class="exception">
@@ -508,7 +524,7 @@ the same id.</p>
 <dt id="f311.pyfant.multirunnable.MultiRunnable">
 <em class="property">class </em><code class="descclassname">f311.pyfant.multirunnable.</code><code class="descname">MultiRunnable</code><span class="sig-paren">(</span><em>file_main</em>, <em>file_abonds</em>, <em>options</em>, <em>file_abxfwhm</em>, <em>custom_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.multirunnable.MultiRunnable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#f311.pyfant.runnables.Runnable" title="f311.pyfant.runnables.Runnable"><code class="xref py py-class docutils literal"><span class="pre">f311.pyfant.runnables.Runnable</span></code></a></p>
-<p>Differential abundances X FWHM&#8217;s runnable.</p>
+<p>Differential abundances X FWHM’s runnable.</p>
 <dl class="method">
 <dt id="f311.pyfant.multirunnable.MultiRunnable.get_status">
 <code class="descname">get_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.multirunnable.MultiRunnable.get_status" title="Permalink to this definition">¶</a></dt>
@@ -534,7 +550,7 @@ the same id.</p>
 <dl class="function">
 <dt id="f311.pyfant.paths.get_pfant_path">
 <code class="descclassname">f311.pyfant.paths.</code><code class="descname">get_pfant_path</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.paths.get_pfant_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns absolute path to the &#8220;PFANT&#8221; directory.</p>
+<dd><p>Returns absolute path to the “PFANT” directory.</p>
 <p>PFANT binaries must be in PATH,
 otherwise it will not work</p>
 <p>Arguments passed will be incorporated into path</p>
@@ -579,7 +595,7 @@ otherwise it will not work</p>
 <p>RunnableManager classs</p>
 <dl class="class">
 <dt id="f311.pyfant.rm.RunnableManager">
-<em class="property">class </em><code class="descclassname">f311.pyfant.rm.</code><code class="descname">RunnableManager</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.rm.RunnableManager" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">f311.pyfant.rm.</code><code class="descname">RunnableManager</code><span class="sig-paren">(</span><em>*args</em>, <em>max_simultaneous=None</em>, <em>flag_auto_clean=False</em>, <em>flag_verbose=False</em>, <em>flag_exit_if_fail=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.rm.RunnableManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt5.QtCore.QObject</span></code>, <code class="xref py py-class docutils literal"><span class="pre">threading.Thread</span></code></p>
 <p>Thread takes care of other threads.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -587,9 +603,9 @@ otherwise it will not work</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
-<li><strong>max_simultaneous=multiprocessing.cpu_count</strong><strong>(</strong><strong></strong><strong>)</strong><strong></strong> &#8211; </li>
-<li><strong>flag_auto_clean=False</strong> &#8211; if set, will load result and remove the session
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>max_simultaneous=multiprocessing.cpu_count</strong><strong>(</strong><strong>)</strong> – </li>
+<li><strong>flag_auto_clean=False</strong> – if set, will load result and remove the session
 directory as soon as a runnable has finished</li>
 </ul>
 </td>
@@ -957,7 +973,10 @@ executable.</p>
 <dl class="method">
 <dt id="f311.pyfant.runnables.Hydro2.load_result">
 <code class="descname">load_result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.runnables.Hydro2.load_result" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Makes self._result[“profiles”] = {filename0: FileToH0, filename1: FileToH1, …}</p>
+<p>Tolerant to non-existing files, but will crash if existing files pointed to at the
+FileHmap fail to load.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="f311.pyfant.runnables.Hydro2.sequence_index">
@@ -1017,7 +1036,7 @@ number of iterations in attribute ikeytot.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequence</strong> (<em>optional</em>) &#8211; sequence of executables to run. Defaults to
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequence</strong> (<em>optional</em>) – sequence of executables to run. Defaults to
 [e_innewmarcs, e_hydro2, e_pfant, e_nulbad]. If you want to run only
 pfant and nulbad, for example, you can pass [e_pfant, e_nulbad]</td>
 </tr>
@@ -1106,20 +1125,21 @@ pfant and nulbad, for example, you can pass [e_pfant, e_nulbad]</td>
 <div class="section" id="module-f311.pyfant.util">
 <span id="f311-pyfant-util-module"></span><h2>f311.pyfant.util module<a class="headerlink" href="#module-f311.pyfant.util" title="Permalink to this headline">¶</a></h2>
 <p>Miscellanea routines that depend on other pyfant modules.</p>
-<p>Rule: only &#8216;gui/&#8217; modules can import util!!!</p>
+<p>Rule: only ‘gui/’ modules can import util!!!</p>
 <dl class="function">
 <dt id="f311.pyfant.util.run_parallel">
-<code class="descclassname">f311.pyfant.util.</code><code class="descname">run_parallel</code><span class="sig-paren">(</span><em>rr</em>, <em>max_simultaneous=None</em>, <em>flag_console=True</em>, <em>runnable_manager=None</em>, <em>flag_verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.run_parallel" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.pyfant.util.</code><code class="descname">run_parallel</code><span class="sig-paren">(</span><em>rr</em>, <em>max_simultaneous=None</em>, <em>flag_console=False</em>, <em>runnable_manager=None</em>, <em>flag_verbose=False</em>, <em>flag_exit_if_fail=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.run_parallel" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>rr</strong> &#8211; list of Runnable instances</li>
-<li><strong>max_simultaneous</strong> &#8211; (defaults to RunnableManager.max_simultaneous)
-maximum number of simultaneous processes.</li>
-<li><strong>runnable_manager</strong> &#8211; if passed, will use passed; if not, will create new.</li>
-<li><strong>flag_verbose</strong> &#8211; whether of not to log any messages (besides console)</li>
+<li><strong>rr</strong> – list of Runnable instances</li>
+<li><strong>max_simultaneous</strong> – (defaults to RunnableManager.max_simultaneous)
+maximum number of simultaneous processes. <strong>Note</strong> ineffective if runnable_manager is passed</li>
+<li><strong>runnable_manager</strong> – if passed, will use passed; if not, will create new.</li>
+<li><strong>flag_verbose</strong> – whether of not to log any messages (besides console) <strong>Note</strong> if runnable_manager is passed, it will keep its own</li>
+<li><strong>flag_exit_if_fail</strong> – exit as soon as possible if any runnable fails? <strong>Note</strong> ineffective if runnable_manager is passed</li>
 </ul>
 </td>
 </tr>
@@ -1137,13 +1157,13 @@ maximum number of simultaneous processes.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>dest_dir='.'</strong> &#8211; directory where files and links will be created</li>
-<li><strong>star='sun-asplund-2009'</strong> &#8211; directory (relative to PFANT/data) for stellar data</li>
-<li><strong>common='common'</strong> &#8211; directory (relative to PFANT/data) for star-independent data files</li>
-<li><strong>h=True</strong> &#8211; whether to look for hmap.dat</li>
-<li><strong>atoms=True</strong> &#8211; whether to look for atoms.dat</li>
-<li><strong>molecules=True</strong> &#8211; whether to look for molecules.dat</li>
-<li><strong>opa=True</strong> &#8211; whether to look for grid.moo</li>
+<li><strong>dest_dir='.'</strong> – directory where files and links will be created</li>
+<li><strong>star='sun-asplund-2009'</strong> – directory (relative to PFANT/data) for stellar data</li>
+<li><strong>common='common'</strong> – directory (relative to PFANT/data) for star-independent data files</li>
+<li><strong>h=True</strong> – whether to look for hmap.dat</li>
+<li><strong>atoms=True</strong> – whether to look for atoms.dat</li>
+<li><strong>molecules=True</strong> – whether to look for molecules.dat</li>
+<li><strong>opa=True</strong> – whether to look for grid.moo</li>
 </ul>
 </td>
 </tr>
@@ -1153,13 +1173,38 @@ maximum number of simultaneous processes.</li>
 
 <dl class="function">
 <dt id="f311.pyfant.util.copy_star">
-<code class="descclassname">f311.pyfant.util.</code><code class="descname">copy_star</code><span class="sig-paren">(</span><em>src_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.copy_star" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descclassname">f311.pyfant.util.</code><code class="descname">copy_star</code><span class="sig-paren">(</span><em>src_dir=None</em>, <em>starname=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.copy_star" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies files such as main.dat and abonds.dat from PFANT/data/some_directory into local directory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>src_dir</strong> – absolute path to directory containing PFANT star data files FileMain and FileAbonds
+(and optionally FileDissoc files, which will be also copied if present)</li>
+<li><strong>starname</strong> – if passed, will ignore src_dir and make it from starname instead, considering
+starname as a subdirectory of PFANT/data/</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="f311.pyfant.util.link_to_data">
-<code class="descclassname">f311.pyfant.util.</code><code class="descname">link_to_data</code><span class="sig-paren">(</span><em>src_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.link_to_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descclassname">f311.pyfant.util.</code><code class="descname">link_to_data</code><span class="sig-paren">(</span><em>src_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.util.link_to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates symbolic links to files ‘<em>.dat’, ‘</em>.mod’, ‘<a href="#id1"><span class="problematic" id="id2">*</span></a>.moo’ within src_dir, skipping certain types</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>src_dir</strong> – directory containing files to be linked to. If omitted, it defaults to
+PFANT/data/common</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="f311.pyfant.util.create_or_replace_or_skip_links">
@@ -1170,8 +1215,8 @@ maximum number of simultaneous processes.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>ff</strong> &#8211; list of full path to files</li>
-<li><strong>dest_dir=&quot;.&quot;</strong> &#8211; destination directory</li>
+<li><strong>ff</strong> – list of full path to files</li>
+<li><strong>dest_dir=&quot;.&quot;</strong> – destination directory</li>
 </ul>
 </td>
 </tr>
@@ -1189,8 +1234,8 @@ maximum number of simultaneous processes.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>ff</strong> &#8211; list of full paths to files to be copied</li>
-<li><strong>dest_dir=&quot;.&quot;</strong> &#8211; destination directory</li>
+<li><strong>ff</strong> – list of full paths to files to be copied</li>
+<li><strong>dest_dir=&quot;.&quot;</strong> – destination directory</li>
 </ul>
 </td>
 </tr>
@@ -1201,6 +1246,7 @@ maximum number of simultaneous processes.</li>
 </div>
 <div class="section" id="module-f311.pyfant">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.pyfant" title="Permalink to this headline">¶</a></h2>
+<p>Python interface to the PFANT spectral synthesis software (Fortran)</p>
 <dl class="function">
 <dt id="f311.pyfant.get_config">
 <code class="descclassname">f311.pyfant.</code><code class="descname">get_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.get_config" title="Permalink to this definition">¶</a></dt>

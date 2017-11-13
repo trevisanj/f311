@@ -96,6 +96,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -223,14 +224,14 @@ option for more information</p>
 </pre></div>
 </div>
 <p><img alt="image1" src="_images/chart-z-0.png" /></p>
-<p><strong>Figure</strong> &#8211; Lines with zero redshift</p>
+<p><strong>Figure</strong> – Lines with zero redshift</p>
 <p>This application creates a chart stacking the MOSAIC spectrograph wavelength coverages and
 an ESO Earth atmospheric model. This may serve either as a reference to MOSAIC wavelength invervals for each
 mode (on this, see also <code class="docutils literal"><span class="pre">list-mosaic-modes.py</span></code>) or to verify the Earth atmospheric emission/trasmission
 in a wavelength region of observational interest.</p>
 <p>It is also possible to inform a redshift so that the chemical lines will be accordingly displaced:</p>
 <p><img alt="image2" src="_images/chart-z-35.png" /></p>
-<p><strong>Figure</strong> &#8211; <code class="docutils literal"><span class="pre">z=3.5</span></code></p>
+<p><strong>Figure</strong> – <code class="docutils literal"><span class="pre">z=3.5</span></code></p>
 </div>
 <div class="section" id="download-simulation-results">
 <h3>Download simulation results<a class="headerlink" href="#download-simulation-results" title="Permalink to this headline">¶</a></h3>
@@ -240,13 +241,13 @@ WebSim-COMPASS server.</p>
 WebSim-COMPASS webpage. The former enhances the latter in which:</p>
 <ul class="simple">
 <li>It can download several simulations in a single command</li>
-<li>It is possible to specify the &#8220;stage&#8221; of the simulation pipeline to download results from. For example,
-it is possible to download only the &#8220;spintg&#8221; file, skipping the large data cubes from intermediary stages.</li>
+<li>It is possible to specify the “stage” of the simulation pipeline to download results from. For example,
+it is possible to download only the “spintg” file, skipping the large data cubes from intermediary stages.</li>
 </ul>
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">get</span><span class="o">-</span><span class="n">compass</span><span class="o">.</span><span class="n">py</span> <span class="mi">1700</span><span class="o">-</span><span class="mi">1721</span> <span class="o">--</span><span class="n">stage</span> <span class="n">spintg</span>
 </pre></div>
 </div>
-<p>will download results for simulations <em>C001700</em>, <em>C001701</em>, ...,
+<p>will download results for simulations <em>C001700</em>, <em>C001701</em>, …,
 <em>C001721</em> <strong>into the local directory</strong>, after which you will see files
 <code class="docutils literal"><span class="pre">C*.fits</span></code>, <code class="docutils literal"><span class="pre">C*.par</span></code>, <code class="docutils literal"><span class="pre">C*.out</span></code></p>
 </div>
@@ -255,7 +256,7 @@ it is possible to download only the &#8220;spintg&#8221; file, skipping the larg
 <div class="section" id="group-resulting-spectra-in-a-single-file">
 <h4>Group resulting spectra in a single file<a class="headerlink" href="#group-resulting-spectra-in-a-single-file" title="Permalink to this headline">¶</a></h4>
 <p>This step is required for later analysis using <code class="docutils literal"><span class="pre">splisted.py</span></code></p>
-<p>The following command will group all files &#8220;C*_spintg.fits&#8221; into a single &#8221;.splist&#8221; (Spectrum List) file,
+<p>The following command will group all files “C*_spintg.fits” into a single “.splist” (Spectrum List) file,
 which can later be opened using <code class="docutils literal"><span class="pre">splisted.py</span></code></p>
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span>$ create-spectrum-lists.py
 .
@@ -276,13 +277,13 @@ results.</p>
 </div>
 <div class="section" id="organize-the-directory">
 <h4>Organize the directory<a class="headerlink" href="#organize-the-directory" title="Permalink to this headline">¶</a></h4>
-<p>At this point, the current directory has a large number of files (&#8221;.fits&#8221;, &#8221;.html&#8221;, &#8221;.png&#8221;, etc.),
-whereas for our analysis, only the &#8221;.splist&#8221; file is required.</p>
+<p>At this point, the current directory has a large number of files (“.fits”, “.html”, “.png”, etc.),
+whereas for our analysis, only the “.splist” file is required.</p>
 <p><code class="docutils literal"><span class="pre">organize-directory.py</span></code> will:</p>
 <ul class="simple">
-<li>create a directory named &#8220;raw&#8221; where it will copy &#8221;.fits&#8221;, &#8221;.par&#8221; and &#8221;.out&#8221; files</li>
-<li>create a directory named &#8220;reports&#8221; where it will copy &#8221;.html&#8221; and &#8221;.png&#8221; files. In addition, it will
-create a file &#8220;index.html&#8221; that will serve as an index for the &#8221;.html&#8221; files</li>
+<li>create a directory named “raw” where it will copy “.fits”, “.par” and “.out” files</li>
+<li>create a directory named “reports” where it will copy “.html” and “.png” files. In addition, it will
+create a file “index.html” that will serve as an index for the “.html” files</li>
 </ul>
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span>organize-directory.py
 .
@@ -301,9 +302,9 @@ Continue (Y/n)?
 <span class="n">xdg</span><span class="o">-</span><span class="nb">open</span> <span class="n">index</span><span class="o">.</span><span class="n">html</span>
 </pre></div>
 </div>
-<p>will open file &#8220;index.html&#8221; in browser</p>
+<p>will open file “index.html” in browser</p>
 <p><img alt="image0" src="_images/index-html.png" /></p>
-<p><strong>Figure</strong> &#8211; Reports index</p>
+<p><strong>Figure</strong> – Reports index</p>
 </div>
 <div class="section" id="edit-spectrum-list-file">
 <h3>Edit Spectrum List file<a class="headerlink" href="#edit-spectrum-list-file" title="Permalink to this headline">¶</a></h3>
@@ -326,24 +327,24 @@ Continue (Y/n)?
 </ol>
 <p><img alt="imaget0" src="_images/splisted-tut-0.png" /></p>
 <ol class="arabic simple" start="2">
-<li>Click on &#8220;Plot Overlapped&#8221;. A plot window opens. From this plot, we can see that the region
+<li>Click on “Plot Overlapped”. A plot window opens. From this plot, we can see that the region
 16508-16534 seems to be free of atmospheric contamination. You may close the plot window</li>
 </ol>
 <p><img alt="imaget1" src="_images/splisted-tut-1.png" /></p>
 <ol class="arabic simple" start="3">
-<li>Click on &#8220;To Scalar&#8221;. Another window opens</li>
-<li>Type &#8220;ToScalar_SNR(16508, 16534)&#8221;</li>
-<li>Click on &#8220;OK&#8221;</li>
+<li>Click on “To Scalar”. Another window opens</li>
+<li>Type “ToScalar_SNR(16508, 16534)”</li>
+<li>Click on “OK”</li>
 </ol>
 <p><img alt="imaget2" src="_images/splisted-tut-2.png" /></p>
 <ol class="arabic simple" start="6">
-<li>Notice that a new column &#8220;SNR&#8221; appear in the table. Click on &#8220;X-Y Plot&#8221;</li>
+<li>Notice that a new column “SNR” appear in the table. Click on “X-Y Plot”</li>
 </ol>
 <p><img alt="imaget3" src="_images/splisted-tut-3.png" /></p>
 <ol class="arabic simple" start="7">
-<li>Select &#8220;Error bars&#8221;</li>
-<li>Select &#8220;OBS_DIT&#8221;</li>
-<li>Click on &#8220;Redraw&#8221;</li>
+<li>Select “Error bars”</li>
+<li>Select “OBS_DIT”</li>
+<li>Click on “Redraw”</li>
 </ol>
 <p><img alt="imaget4" src="_images/splisted-tut-4.png" /></p>
 </div>

@@ -38,8 +38,8 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
-        <link rel="next" title="Spectral synthesis (f311.pyfant)" href="pyfant.html"/>
-        <link rel="prev" title="F311 – Python 3 Astronomy-related API and scripts" href="index.html"/>
+        <link rel="next" title="Package f311" href="f3110.html"/>
+        <link rel="prev" title="F311 – Astronomy-related Python 3 API and scripts" href="index.html"/>
     <link href="_static/style.css" rel="stylesheet" type="text/css">
 
 
@@ -106,6 +106,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -181,9 +182,9 @@
 <p>Python 3 version required: Python 3.4.6+, Python 3.5.3+, or Python 3.6+ (<a class="reference external" href="https://packaging.python.org/guides/migrating-to-pypi-org/">https://packaging.python.org/guides/migrating-to-pypi-org/</a>)</p>
 <div class="section" id="method-1-using-anaconda-without-virtual-environment">
 <h2>Method 1: Using Anaconda without virtual environment<a class="headerlink" href="#method-1-using-anaconda-without-virtual-environment" title="Permalink to this headline">¶</a></h2>
-<p>This will make Anaconda&#8217;s Python 3 the default <code class="docutils literal"><span class="pre">python</span></code> command for your user account.
-Make sure you don&#8217;t mind this, otherwise follow Method 2.</p>
-<p>First install Anaconda or Miniconda. When you do so, please make sure that you <strong>answer &#8220;yes&#8221; to this (or similar) question</strong>:</p>
+<p>This will make Anaconda’s Python 3 the default <code class="docutils literal"><span class="pre">python</span></code> command for your user account.
+Make sure you don’t mind this, otherwise follow Method 2.</p>
+<p>First install Anaconda or Miniconda. When you do so, please make sure that you <strong>answer “yes” to this (or similar) question</strong>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>Do you wish the installer to prepend the Miniconda3 install location
 to PATH in your /home/j/.bashrc ? [yes|no]
 &gt;&gt; yes
@@ -200,7 +201,7 @@ to PATH in your /home/j/.bashrc ? [yes|no]
 <h2>Method 2: Using Anaconda virtual environment<a class="headerlink" href="#method-2-using-anaconda-virtual-environment" title="Permalink to this headline">¶</a></h2>
 <p>This method uses a <strong>conda</strong> virtual environment. It works with a separate installation of Python and related packages.</p>
 <p>First you will need to have Anaconda or Miniconda installed. If you have none of these installed yet, just install Miniconda.</p>
-<p>Once Anaconda/Miniconda is installed, create a new virtual environment called &#8220;astroenv&#8221; (or any name you like):</p>
+<p>Once Anaconda/Miniconda is installed, create a new virtual environment called “astroenv” (or any name you like):</p>
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">astroenv</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.5</span> <span class="c1"># or 3.6</span>
 </pre></div>
 </div>
@@ -209,7 +210,7 @@ to PATH in your /home/j/.bashrc ? [yes|no]
 </pre></div>
 </div>
 <p>Now install the packages:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span> <span class="n">pyqt5</span> <span class="n">a99</span> <span class="n">f311</span>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">bs4</span> <span class="n">lxml</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span> <span class="n">pyqt5</span> <span class="n">a99</span> <span class="n">f311</span>
 </pre></div>
 </div>
 <p><strong>Note</strong> Every time you want to work with F311, you will need to activate the environment:</p>
@@ -225,7 +226,7 @@ to PATH in your /home/j/.bashrc ? [yes|no]
 <h2>Method 3: Developer mode<a class="headerlink" href="#method-3-developer-mode" title="Permalink to this headline">¶</a></h2>
 <p>This allows you to pull the most recent version of the code directly from GitHub.</p>
 <p>First, follow Method 1 or 2 above, <strong>but do not install f311</strong>, <em>i.e.</em>, the pip command should be:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">bs4</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span> <span class="n">pyqt5</span> <span class="n">a99</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">astropy</span> <span class="n">configobj</span> <span class="n">bs4</span> <span class="n">lxml</span> <span class="n">robobrowser</span> <span class="n">requests</span> <span class="n">fortranformat</span> <span class="n">tabulate</span> <span class="n">rows</span> <span class="n">pyqt5</span> <span class="n">a99</span>
 </pre></div>
 </div>
 <p>Second, clone the f311 GitHub repository:</p>
@@ -258,7 +259,7 @@ to PATH in your /home/j/.bashrc ? [yes|no]
 <div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">bs4</span><span class="o">.</span><span class="n">FeatureNotFound</span><span class="p">:</span> <span class="n">Couldn</span><span class="s1">&#39;t find a tree builder with the features you requested: lxml. Do you need to install a parser library?</span>
 </pre></div>
 </div>
-<p><strong>Solution</strong>: install package &#8220;lxml&#8221;: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">lxml</span></code></p>
+<p><strong>Solution</strong>: install package “lxml”: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">lxml</span></code></p>
 </div>
 </div>
 </div>
@@ -273,10 +274,10 @@ to PATH in your /home/j/.bashrc ? [yes|no]
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="pyfant.html" class="btn btn-neutral float-right" title="Spectral synthesis (f311.pyfant)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="f3110.html" class="btn btn-neutral float-right" title="Package f311" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="F311 – Python 3 Astronomy-related API and scripts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="F311 – Astronomy-related Python 3 API and scripts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

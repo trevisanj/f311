@@ -42,7 +42,7 @@ shown in VALD3 Wiki (http://www.astro.uu.se/valdwiki/Air-to-vacuum%20conversion)
 
 |image0|
 
-.. |image0| image:: img/air-vac.png
+.. |image0| image:: figures/air-vac.png
 
 Calculate the magnitude of a spectrum
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

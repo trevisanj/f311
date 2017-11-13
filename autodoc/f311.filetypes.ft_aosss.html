@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -175,7 +176,8 @@
 <dt id="f311.filetypes.ft_aosss.filefullcube.FileFullCube">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_aosss.filefullcube.</code><code class="descname">FileFullCube</code><a class="headerlink" href="#f311.filetypes.ft_aosss.filefullcube.FileFullCube" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
-<p>FITS Data Cube (&#8220;full&#8221; opposed to &#8220;sparse&#8221;)</p>
+<p>FITS WebSim Compass Data Cube</p>
+<p>“full” opposed to “sparse”</p>
 <p><strong>Note</strong> normally, the DataFile classes load operation reads all contents
 and closes the file, however this class keeps the file <strong>open</strong> as an
 astropy.io.fits.HDUList object in self.hdulist, because apparently many
@@ -193,7 +195,12 @@ HDUList.readall()</p>
 
 <dl class="attribute">
 <dt id="f311.filetypes.ft_aosss.filefullcube.FileFullCube.description">
-<code class="descname">description</code><em class="property"> = 'WebSim Compass Data Cube (FITS file)'</em><a class="headerlink" href="#f311.filetypes.ft_aosss.filefullcube.FileFullCube.description" title="Permalink to this definition">¶</a></dt>
+<code class="descname">description</code><em class="property"> = ''</em><a class="headerlink" href="#f311.filetypes.ft_aosss.filefullcube.FileFullCube.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="f311.filetypes.ft_aosss.filefullcube.FileFullCube.editors">
+<code class="descname">editors</code><em class="property"> = ['cubeed.py']</em><a class="headerlink" href="#f311.filetypes.ft_aosss.filefullcube.FileFullCube.editors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -210,7 +217,7 @@ HDUList.readall()</p>
 <dt id="f311.filetypes.ft_aosss.filepar.FilePar">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_aosss.filepar.</code><code class="descname">FilePar</code><a class="headerlink" href="#f311.filetypes.ft_aosss.filepar.FilePar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
-<p>WebSim-COMPASS &#8221;.par&#8221; (parameters) file</p>
+<p>WebSim-COMPASS “.par” (parameters) file</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_aosss.filepar.FilePar.attrs">
 <code class="descname">attrs</code><em class="property"> = ['params']</em><a class="headerlink" href="#f311.filetypes.ft_aosss.filepar.FilePar.attrs" title="Permalink to this definition">¶</a></dt>
@@ -219,11 +226,6 @@ HDUList.readall()</p>
 <dl class="attribute">
 <dt id="f311.filetypes.ft_aosss.filepar.FilePar.default_filename">
 <code class="descname">default_filename</code><em class="property"> = None</em><a class="headerlink" href="#f311.filetypes.ft_aosss.filepar.FilePar.default_filename" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="f311.filetypes.ft_aosss.filepar.FilePar.description">
-<code class="descname">description</code><em class="property"> = 'Session parameters'</em><a class="headerlink" href="#f311.filetypes.ft_aosss.filepar.FilePar.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -247,11 +249,6 @@ HDUList.readall()</p>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="f311.filetypes.ft_aosss.filesparsecube.FileSparseCube.description">
-<code class="descname">description</code><em class="property"> = 'Data Cube (FITS file)'</em><a class="headerlink" href="#f311.filetypes.ft_aosss.filesparsecube.FileSparseCube.description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
 <dt id="f311.filetypes.ft_aosss.filesparsecube.FileSparseCube.flag_txt">
 <code class="descname">flag_txt</code><em class="property"> = False</em><a class="headerlink" href="#f311.filetypes.ft_aosss.filesparsecube.FileSparseCube.flag_txt" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -266,7 +263,7 @@ HDUList.readall()</p>
 </div>
 <div class="section" id="module-f311.filetypes.ft_aosss.filesplist">
 <span id="f311-filetypes-ft-aosss-filesplist-module"></span><h2>f311.filetypes.ft_aosss.filesplist module<a class="headerlink" href="#module-f311.filetypes.ft_aosss.filesplist" title="Permalink to this headline">¶</a></h2>
-<p>&#8221;
+<p>”
 List of spectra sharing same wavenumber axis. Uses FITS format</p>
 <dl class="class">
 <dt id="f311.filetypes.ft_aosss.filesplist.FileSpectrumList">
@@ -284,8 +281,8 @@ List of spectra sharing same wavenumber axis. Uses FITS format</p>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="f311.filetypes.ft_aosss.filesplist.FileSpectrumList.description">
-<code class="descname">description</code><em class="property"> = 'Spectrum List'</em><a class="headerlink" href="#f311.filetypes.ft_aosss.filesplist.FileSpectrumList.description" title="Permalink to this definition">¶</a></dt>
+<dt id="f311.filetypes.ft_aosss.filesplist.FileSpectrumList.editors">
+<code class="descname">editors</code><em class="property"> = ['splisted.py']</em><a class="headerlink" href="#f311.filetypes.ft_aosss.filesplist.FileSpectrumList.editors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -392,15 +389,15 @@ and is layed from this point along the z-axis (i.e., wavelength axis)</p>
 <dl class="method">
 <dt id="f311.filetypes.ft_aosss.sparsecube.SparseCube.add_spectrum">
 <code class="descname">add_spectrum</code><span class="sig-paren">(</span><em>sp</em>, <em>default_pixel_x=None</em>, <em>default_pixel_y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_aosss.sparsecube.SparseCube.add_spectrum" title="Permalink to this definition">¶</a></dt>
-<dd><p>&#8220;Paints&#8221; pixel with given spectrum</p>
+<dd><p>“Paints” pixel with given spectrum</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sp</strong> &#8211; Spectrum instance</li>
-<li><strong>default_pixel_x</strong> &#8211; pixel x-coordinate if sp.pixel_x is None</li>
-<li><strong>default_pixel_y</strong> &#8211; pixel y-coordinate if sp.pixel_y is None</li>
+<li><strong>sp</strong> – Spectrum instance</li>
+<li><strong>default_pixel_x</strong> – pixel x-coordinate if sp.pixel_x is None</li>
+<li><strong>default_pixel_y</strong> – pixel y-coordinate if sp.pixel_y is None</li>
 </ul>
 </td>
 </tr>
@@ -447,7 +444,7 @@ wavelength - [lambda0, lambda1]</dd>
 <code class="descname">from_hdulist</code><span class="sig-paren">(</span><em>hdul</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_aosss.sparsecube.SparseCube.from_hdulist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks for required field names existence</p>
 <p>Toad successfully, file must have the following field names:
-&#8216;PIXEL-X&#8217;, &#8216;PIXEL-Y&#8217;, &#8216;Z-START&#8217;</p>
+‘PIXEL-X’, ‘PIXEL-Y’, ‘Z-START’</p>
 </dd></dl>
 
 <dl class="method">
@@ -460,8 +457,8 @@ wavelength - [lambda0, lambda1]</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>y</strong> (<em>x</em><em>,</em><em></em>) &#8211; 0-based pixel coordinates</li>
-<li><strong>flag_copy</strong> &#8211; disable vector copies to speed up but don&#8217;t the spectrum</li>
+<li><strong>y</strong> (<em>x</em><em>,</em>) – 0-based pixel coordinates</li>
+<li><strong>flag_copy</strong> – disable vector copies to speed up but don’t the spectrum</li>
 </ul>
 </td>
 </tr>
@@ -506,19 +503,19 @@ wavelength - [lambda0, lambda1]</dd>
 </div>
 <div class="section" id="module-f311.filetypes.ft_aosss.spcollection">
 <span id="f311-filetypes-ft-aosss-spcollection-module"></span><h2>f311.filetypes.ft_aosss.spcollection module<a class="headerlink" href="#module-f311.filetypes.ft_aosss.spcollection" title="Permalink to this headline">¶</a></h2>
-<p>&#8221;
+<p>”
 List of spectra sharing same wavenumber axis. Uses FITS format</p>
 <dl class="class">
 <dt id="f311.filetypes.ft_aosss.spcollection.SpectrumCollection">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_aosss.spcollection.</code><code class="descname">SpectrumCollection</code><a class="headerlink" href="#f311.filetypes.ft_aosss.spcollection.SpectrumCollection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.parts.AttrsPart</span></code></p>
-<p>Base class, maintains spectra with &#8220;more headers&#8221;; to/from HDU without much interpretation</p>
+<p>Base class, maintains spectra with “more headers”; to/from HDU without much interpretation</p>
 <dl class="method">
 <dt id="f311.filetypes.ft_aosss.spcollection.SpectrumCollection.add_spectrum">
 <code class="descname">add_spectrum</code><span class="sig-paren">(</span><em>sp</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_aosss.spcollection.SpectrumCollection.add_spectrum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds spectrum, no content check</p>
 <p>Updates self.fieldnames to expose sp.more_headers</p>
-<p>Nullifies spectrum filename and assigns the file basename to more_headers[&#8220;ORIGIN&#8221;]</p>
+<p>Nullifies spectrum filename and assigns the file basename to more_headers[“ORIGIN”]</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -535,7 +532,7 @@ List of spectra sharing same wavenumber axis. Uses FITS format</p>
 <dl class="method">
 <dt id="f311.filetypes.ft_aosss.spcollection.SpectrumCollection.collect_fieldnames">
 <code class="descname">collect_fieldnames</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_aosss.spcollection.SpectrumCollection.collect_fieldnames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of unique field names union&#8217;ing all spectra field names</p>
+<dd><p>Returns a list of unique field names union’ing all spectra field names</p>
 </dd></dl>
 
 <dl class="method">
@@ -565,7 +562,7 @@ List of spectra sharing same wavenumber axis. Uses FITS format</p>
 </div>
 <div class="section" id="module-f311.filetypes.ft_aosss.splist">
 <span id="f311-filetypes-ft-aosss-splist-module"></span><h2>f311.filetypes.ft_aosss.splist module<a class="headerlink" href="#module-f311.filetypes.ft_aosss.splist" title="Permalink to this headline">¶</a></h2>
-<p>&#8221;
+<p>”
 List of spectra sharing same wavenumber axis. Uses FITS format</p>
 <dl class="class">
 <dt id="f311.filetypes.ft_aosss.splist.SpectrumList">
@@ -609,7 +606,7 @@ points</p>
 <dl class="method">
 <dt id="f311.filetypes.ft_aosss.splist.SpectrumList.from_full_cube">
 <code class="descname">from_full_cube</code><span class="sig-paren">(</span><em>full_cube</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_aosss.splist.SpectrumList.from_full_cube" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds all cube &#8220;pixels&#8221; (i.e., spectra) that are not all zero</p>
+<dd><p>Adds all cube “pixels” (i.e., spectra) that are not all zero</p>
 <p>Very similar to SparseCube.from_full_cube() (bit simpler)</p>
 </dd></dl>
 

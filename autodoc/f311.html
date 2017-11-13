@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -371,7 +372,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="f311.filetypes.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="f311.filetypes.html#module-f311.filetypes.basic">f311.filetypes.basic module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="f311.filetypes.html#module-f311.filetypes.classcatalog">f311.filetypes.classcatalog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="f311.filetypes.html#f311-filetypes-classcatalog-module">f311.filetypes.classcatalog module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="f311.filetypes.html#module-f311.filetypes.util">f311.filetypes.util module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="f311.filetypes.html#module-f311.filetypes">Module contents</a></li>
 </ul>
@@ -491,8 +492,8 @@ as they present in almost any programming language.</p>
 
 <dl class="data">
 <dt id="f311.hapi.OPERATORS">
-<code class="descclassname">f311.hapi.</code><code class="descname">OPERATORS</code><em class="property"> = {'SEARCH': &lt;function &lt;lambda&gt;&gt;, '&amp;&amp;': &lt;function &lt;lambda&gt;&gt;, '+': &lt;function &lt;lambda&gt;&gt;, 'COUNT': &lt;function &lt;lambda&gt;&gt;, 'EQUAL': &lt;function &lt;lambda&gt;&gt;, 'MATCH': &lt;function &lt;lambda&gt;&gt;, 'AND': &lt;function &lt;lambda&gt;&gt;, 'LTE': &lt;function &lt;lambda&gt;&gt;, 'BETWEEN': &lt;function &lt;lambda&gt;&gt;, '||': &lt;function &lt;lambda&gt;&gt;, '=': &lt;function &lt;lambda&gt;&gt;, 'DIV': &lt;function &lt;lambda&gt;&gt;, 'DIFF': &lt;function &lt;lambda&gt;&gt;, 'MUL': &lt;function &lt;lambda&gt;&gt;, 'OR': &lt;function &lt;lambda&gt;&gt;, '~=': &lt;function &lt;lambda&gt;&gt;, '&lt;&gt;': &lt;function &lt;lambda&gt;&gt;, 'LT': &lt;function &lt;lambda&gt;&gt;, '-': &lt;function &lt;lambda&gt;&gt;, '&gt;=': &lt;function &lt;lambda&gt;&gt;, 'NOTEQUAL': &lt;function &lt;lambda&gt;&gt;, 'NE': &lt;function &lt;lambda&gt;&gt;, '&lt;=': &lt;function &lt;lambda&gt;&gt;, '!': &lt;function &lt;lambda&gt;&gt;, 'MORE': &lt;function &lt;lambda&gt;&gt;, 'NOT': &lt;function &lt;lambda&gt;&gt;, 'MTE': &lt;function &lt;lambda&gt;&gt;, 'MT': &lt;function &lt;lambda&gt;&gt;, 'RANGE': &lt;function &lt;lambda&gt;&gt;, 'SUBSET': &lt;function &lt;lambda&gt;&gt;, 'FINDALL': &lt;function &lt;lambda&gt;&gt;, '!=': &lt;function &lt;lambda&gt;&gt;, 'SUM': &lt;function &lt;lambda&gt;&gt;, 'LESS': &lt;function &lt;lambda&gt;&gt;, '==': &lt;function &lt;lambda&gt;&gt;, 'EQ': &lt;function &lt;lambda&gt;&gt;, 'MOREOREQUAL': &lt;function &lt;lambda&gt;&gt;, 'LESSOREQUAL': &lt;function &lt;lambda&gt;&gt;, 'LIST': &lt;function &lt;lambda&gt;&gt;, '*': &lt;function &lt;lambda&gt;&gt;, 'IN': &lt;function &lt;lambda&gt;&gt;, '/': &lt;function &lt;lambda&gt;&gt;, '&lt;': &lt;function &lt;lambda&gt;&gt;, '&gt;': &lt;function &lt;lambda&gt;&gt;, 'EQUALS': &lt;function &lt;lambda&gt;&gt;, '&amp;': &lt;function &lt;lambda&gt;&gt;, 'LIKE': &lt;function &lt;lambda&gt;&gt;, '|': &lt;function &lt;lambda&gt;&gt;}</em><a class="headerlink" href="#f311.hapi.OPERATORS" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>def evaluateExpression(root,VarDictionary,GroupIndexKey=None)</em> &#8211; # input = local tree root
+<code class="descclassname">f311.hapi.</code><code class="descname">OPERATORS</code><em class="property"> = {'LIST': &lt;function &lt;lambda&gt;&gt;, '&amp;': &lt;function &lt;lambda&gt;&gt;, '&amp;&amp;': &lt;function &lt;lambda&gt;&gt;, 'AND': &lt;function &lt;lambda&gt;&gt;, '|': &lt;function &lt;lambda&gt;&gt;, '||': &lt;function &lt;lambda&gt;&gt;, 'OR': &lt;function &lt;lambda&gt;&gt;, '!': &lt;function &lt;lambda&gt;&gt;, 'NOT': &lt;function &lt;lambda&gt;&gt;, 'RANGE': &lt;function &lt;lambda&gt;&gt;, 'BETWEEN': &lt;function &lt;lambda&gt;&gt;, 'IN': &lt;function &lt;lambda&gt;&gt;, 'SUBSET': &lt;function &lt;lambda&gt;&gt;, '&lt;': &lt;function &lt;lambda&gt;&gt;, 'LESS': &lt;function &lt;lambda&gt;&gt;, 'LT': &lt;function &lt;lambda&gt;&gt;, '&gt;': &lt;function &lt;lambda&gt;&gt;, 'MORE': &lt;function &lt;lambda&gt;&gt;, 'MT': &lt;function &lt;lambda&gt;&gt;, '&lt;=': &lt;function &lt;lambda&gt;&gt;, 'LESSOREQUAL': &lt;function &lt;lambda&gt;&gt;, 'LTE': &lt;function &lt;lambda&gt;&gt;, '&gt;=': &lt;function &lt;lambda&gt;&gt;, 'MOREOREQUAL': &lt;function &lt;lambda&gt;&gt;, 'MTE': &lt;function &lt;lambda&gt;&gt;, '=': &lt;function &lt;lambda&gt;&gt;, '==': &lt;function &lt;lambda&gt;&gt;, 'EQ': &lt;function &lt;lambda&gt;&gt;, 'EQUAL': &lt;function &lt;lambda&gt;&gt;, 'EQUALS': &lt;function &lt;lambda&gt;&gt;, '!=': &lt;function &lt;lambda&gt;&gt;, '&lt;&gt;': &lt;function &lt;lambda&gt;&gt;, '~=': &lt;function &lt;lambda&gt;&gt;, 'NE': &lt;function &lt;lambda&gt;&gt;, 'NOTEQUAL': &lt;function &lt;lambda&gt;&gt;, '+': &lt;function &lt;lambda&gt;&gt;, 'SUM': &lt;function &lt;lambda&gt;&gt;, '-': &lt;function &lt;lambda&gt;&gt;, 'DIFF': &lt;function &lt;lambda&gt;&gt;, '*': &lt;function &lt;lambda&gt;&gt;, 'MUL': &lt;function &lt;lambda&gt;&gt;, '/': &lt;function &lt;lambda&gt;&gt;, 'DIV': &lt;function &lt;lambda&gt;&gt;, 'MATCH': &lt;function &lt;lambda&gt;&gt;, 'LIKE': &lt;function &lt;lambda&gt;&gt;, 'SEARCH': &lt;function &lt;lambda&gt;&gt;, 'FINDALL': &lt;function &lt;lambda&gt;&gt;, 'COUNT': &lt;function &lt;lambda&gt;&gt;}</em><a class="headerlink" href="#f311.hapi.OPERATORS" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>def evaluateExpression(root,VarDictionary,GroupIndexKey=None)</em> – # input = local tree root
 # XXX: this could be very slow due to passing
 #      every time VarDictionary as a parameter
 # Two special cases: 1) root=varname
@@ -503,11 +504,11 @@ if type(root) in set([list,tuple]):</p>
 <div><p># root is not a leaf
 head = root[0].upper()
 # string constants are treated specially
-if head in set([&#8216;STR&#8217;,&#8217;STRING&#8217;]): # one arg</p>
+if head in set([‘STR’,’STRING’]): # one arg</p>
 <blockquote>
 <div>return operationSTR(root[1])</div></blockquote>
 <dl class="docutils">
-<dt>elif head in set([&#8216;SET&#8217;]):</dt>
+<dt>elif head in set([‘SET’]):</dt>
 <dd>return operationSET(root[1])</dd>
 </dl>
 <p>tail = root[1:]
@@ -517,54 +518,54 @@ for element in tail: # resolve tree by recursion</p>
 <blockquote>
 <div>args.append(evaluateExpression(element,VarDictionary,GroupIndexKey))</div></blockquote>
 <p># call functions with evaluated arguments
-if head in set([&#8216;LIST&#8217;]): # list arg</p>
+if head in set([‘LIST’]): # list arg</p>
 <blockquote>
 <div>return operationLIST(args)</div></blockquote>
 <dl class="docutils">
-<dt>elif head in set([&#8216;&amp;&#8217;,&#8217;&amp;&amp;&#8217;,&#8217;AND&#8217;]): # many args</dt>
+<dt>elif head in set([‘&amp;’,’&amp;&amp;’,’AND’]): # many args</dt>
 <dd>return operationAND(args)</dd>
-<dt>elif head in set([&#8216;|&#8217;,&#8217;||&#8217;,&#8217;OR&#8217;]): # many args</dt>
+<dt>elif head in set([‘|’,’||’,’OR’]): # many args</dt>
 <dd>return operationOR(args)</dd>
-<dt>elif head in set([&#8216;!&#8217;,&#8217;NOT&#8217;]): # one args</dt>
+<dt>elif head in set([‘!’,’NOT’]): # one args</dt>
 <dd>return operationNOT(args[0])</dd>
-<dt>elif head in set([&#8216;RANGE&#8217;,&#8217;BETWEEN&#8217;]): # three args</dt>
+<dt>elif head in set([‘RANGE’,’BETWEEN’]): # three args</dt>
 <dd>return operationRANGE(args[0],args[1],args[2])</dd>
-<dt>elif head in set([&#8216;IN&#8217;,&#8217;SUBSET&#8217;]): # two args</dt>
+<dt>elif head in set([‘IN’,’SUBSET’]): # two args</dt>
 <dd>return operationSUBSET(args[0],args[1])</dd>
-<dt>elif head in set([&#8216;&lt;&#8217;,&#8217;LESS&#8217;,&#8217;LT&#8217;]): # many args</dt>
+<dt>elif head in set([‘&lt;’,’LESS’,’LT’]): # many args</dt>
 <dd>return operationLESS(args)</dd>
-<dt>elif head in set([&#8216;&gt;&#8217;,&#8217;MORE&#8217;,&#8217;MT&#8217;]): # many args</dt>
+<dt>elif head in set([‘&gt;’,’MORE’,’MT’]): # many args</dt>
 <dd>return operationMORE(args)</dd>
-<dt>elif head in set([&#8216;&lt;=&#8217;,&#8217;LESSOREQUAL&#8217;,&#8217;LTE&#8217;]): # many args</dt>
+<dt>elif head in set([‘&lt;=’,’LESSOREQUAL’,’LTE’]): # many args</dt>
 <dd>return operationLESSOREQUAL(args)</dd>
-<dt>elif head in set([&#8216;&gt;=&#8217;,&#8217;MOREOREQUAL&#8217;,&#8217;MTE&#8217;]): # many args</dt>
+<dt>elif head in set([‘&gt;=’,’MOREOREQUAL’,’MTE’]): # many args</dt>
 <dd>return operationMOREOREQUAL(args)</dd>
-<dt>elif head in set([&#8216;=&#8217;,&#8217;==&#8217;,&#8217;EQ&#8217;,&#8217;EQUAL&#8217;,&#8217;EQUALS&#8217;]): # many args</dt>
+<dt>elif head in set([‘=’,’==’,’EQ’,’EQUAL’,’EQUALS’]): # many args</dt>
 <dd>return operationEQUAL(args)</dd>
-<dt>elif head in set([&#8216;!=&#8217;,&#8217;&lt;&gt;&#8217;,&#8217;~=&#8217;,&#8217;NE&#8217;,&#8217;NOTEQUAL&#8217;]): # two args</dt>
+<dt>elif head in set([‘!=’,’&lt;&gt;’,’~=’,’NE’,’NOTEQUAL’]): # two args</dt>
 <dd>return operationNOTEQUAL(args[0],args[1])</dd>
-<dt>elif head in set([&#8216;+&#8217;,&#8217;SUM&#8217;]): # many args</dt>
+<dt>elif head in set([‘+’,’SUM’]): # many args</dt>
 <dd>return operationSUM(args)</dd>
-<dt>elif head in set([&#8216;-&#8216;,&#8217;DIFF&#8217;]): # two args</dt>
+<dt>elif head in set([‘-‘,’DIFF’]): # two args</dt>
 <dd>return operationDIFF(args[0],args[1])</dd>
-<dt>elif head in set([&#8216;*&#8217;,&#8217;MUL&#8217;]): # many args</dt>
+<dt>elif head in set([‘*’,’MUL’]): # many args</dt>
 <dd>return operationMUL(args)</dd>
-<dt>elif head in set([&#8216;/&#8217;,&#8217;DIV&#8217;]): # two args</dt>
+<dt>elif head in set([‘/’,’DIV’]): # two args</dt>
 <dd>return operationDIV(args[0],args[1])</dd>
-<dt>elif head in set([&#8216;MATCH&#8217;,&#8217;LIKE&#8217;]): # two args</dt>
+<dt>elif head in set([‘MATCH’,’LIKE’]): # two args</dt>
 <dd>return operationMATCH(args[0],args[1])</dd>
-<dt>elif head in set([&#8216;SEARCH&#8217;]): # two args</dt>
+<dt>elif head in set([‘SEARCH’]): # two args</dt>
 <dd>return operationSEARCH(args[0],args[1])</dd>
-<dt>elif head in set([&#8216;FINDALL&#8217;]): # two args</dt>
+<dt>elif head in set([‘FINDALL’]): # two args</dt>
 <dd>return operationFINDALL(args[0],args[1])</dd>
 </dl>
-<p># &#8212; GROUPING OPERATIONS &#8212;
-elif head in set([&#8216;COUNT&#8217;]):</p>
+<p># — GROUPING OPERATIONS —
+elif head in set([‘COUNT’]):</p>
 <blockquote>
 <div>return groupCOUNT(GroupIndexKey)</div></blockquote>
 <dl class="docutils">
 <dt>else:</dt>
-<dd>raise Exception(&#8216;Unknown operator: %s&#8217; % root[0])</dd>
+<dd>raise Exception(‘Unknown operator: %s’ % root[0])</dd>
 </dl>
 </div></blockquote>
 <dl class="docutils">
@@ -590,8 +591,8 @@ return root</dd>
 <dl class="function">
 <dt id="f311.hapi.PROFILE_HT">
 <code class="descclassname">f311.hapi.</code><code class="descname">PROFILE_HT</code><span class="sig-paren">(</span><em>sg0</em>, <em>GamD</em>, <em>Gam0</em>, <em>Gam2</em>, <em>Shift0</em>, <em>Shift2</em>, <em>anuVC</em>, <em>eta</em>, <em>sg</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.PROFILE_HT" title="Permalink to this definition">¶</a></dt>
-<dd><p>#&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-
-#      &#8220;pCqSDHC&#8221;: partially-Correlated quadratic-Speed-Dependent Hard-Collision
+<dd><p>#————————————————-
+#      “pCqSDHC”: partially-Correlated quadratic-Speed-Dependent Hard-Collision
 #      Subroutine to Compute the complex normalized spectral shape of an
 #      isolated line by the pCqSDHC model
 #
@@ -614,7 +615,7 @@ return root</dd>
 #         <a class="reference external" href="http://dx.doi.org/10.1016/j.jqsrt.2013.10.015">http://dx.doi.org/10.1016/j.jqsrt.2013.10.015</a>
 #
 #      Input/Output Parameters of Routine (Arguments or Common)
-#      &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+#      ———————————
 #      T       : Temperature in Kelvin (Input).
 #      amM1    : Molar mass of the absorber in g/mol(Input).
 #      sg0     : Unperturbed line position in cm-1 (Input).
@@ -628,23 +629,23 @@ return root</dd>
 #      sg      : Current WaveNumber of the Computation in cm-1 (Input).
 #
 #      The function has two outputs:
-#      &#8212;&#8212;&#8212;&#8212;&#8212;&#8211;
+#      —————–
 #      (1): Real part of the normalized spectral shape (cm)
 #      (2): Imaginary part of the normalized spectral shape (cm)
 #
-#      Called Routines: &#8216;CPF&#8217;       (Complex Probability Function)
-#      &#8212;&#8212;&#8212;&#8212;&#8212;  &#8216;CPF3&#8217;      (Complex Probability Function for the region 3)
+#      Called Routines: ‘CPF’       (Complex Probability Function)
+#      —————  ‘CPF3’      (Complex Probability Function for the region 3)
 #
 #      Based on a double precision Fortran version
 #
-#&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-</p>
+#————————————————-</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="f311.hapi.PROFILE_HTP">
 <code class="descclassname">f311.hapi.</code><code class="descname">PROFILE_HTP</code><span class="sig-paren">(</span><em>sg0</em>, <em>GamD</em>, <em>Gam0</em>, <em>Gam2</em>, <em>Shift0</em>, <em>Shift2</em>, <em>anuVC</em>, <em>eta</em>, <em>sg</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.PROFILE_HTP" title="Permalink to this definition">¶</a></dt>
-<dd><p>#&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-
-#      &#8220;pCqSDHC&#8221;: partially-Correlated quadratic-Speed-Dependent Hard-Collision
+<dd><p>#————————————————-
+#      “pCqSDHC”: partially-Correlated quadratic-Speed-Dependent Hard-Collision
 #      Subroutine to Compute the complex normalized spectral shape of an
 #      isolated line by the pCqSDHC model
 #
@@ -667,7 +668,7 @@ return root</dd>
 #         <a class="reference external" href="http://dx.doi.org/10.1016/j.jqsrt.2013.10.015">http://dx.doi.org/10.1016/j.jqsrt.2013.10.015</a>
 #
 #      Input/Output Parameters of Routine (Arguments or Common)
-#      &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+#      ———————————
 #      T       : Temperature in Kelvin (Input).
 #      amM1    : Molar mass of the absorber in g/mol(Input).
 #      sg0     : Unperturbed line position in cm-1 (Input).
@@ -681,16 +682,16 @@ return root</dd>
 #      sg      : Current WaveNumber of the Computation in cm-1 (Input).
 #
 #      The function has two outputs:
-#      &#8212;&#8212;&#8212;&#8212;&#8212;&#8211;
+#      —————–
 #      (1): Real part of the normalized spectral shape (cm)
 #      (2): Imaginary part of the normalized spectral shape (cm)
 #
-#      Called Routines: &#8216;CPF&#8217;       (Complex Probability Function)
-#      &#8212;&#8212;&#8212;&#8212;&#8212;  &#8216;CPF3&#8217;      (Complex Probability Function for the region 3)
+#      Called Routines: ‘CPF’       (Complex Probability Function)
+#      —————  ‘CPF3’      (Complex Probability Function for the region 3)
 #
 #      Based on a double precision Fortran version
 #
-#&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-</p>
+#————————————————-</p>
 </dd></dl>
 
 <dl class="function">
@@ -834,32 +835,32 @@ where γ is the line width equal to the half base of the triangle.</p>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef_Doppler">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Doppler</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Doppler" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Doppler</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Doppler" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef_Gauss">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Gauss</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Gauss" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Gauss</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Gauss" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef_HT">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_HT</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_HT" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_HT</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_HT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef_Lorentz">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Lorentz</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Lorentz" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Lorentz</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Lorentz" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="f311.hapi.abscoef_Voigt">
-<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Voigt</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'p': 1.0</em>, <em>'T': 296.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Voigt" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.hapi.</code><code class="descname">abscoef_Voigt</code><span class="sig-paren">(</span><em>table=None</em>, <em>step=None</em>, <em>grid=None</em>, <em>env={'T': 296.0</em>, <em>'p': 1.0}</em>, <em>file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.hapi.abscoef_Voigt" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -877,15 +878,15 @@ D - relative abundance (optional)</dd>
 partitionFunction:  pointer to partition function (default is PYTIPS) (optional)
 Environment:  dictionary containing thermodynamic parameters.</p>
 <blockquote>
-<div>&#8216;p&#8217; - pressure in atmospheres,
-&#8216;T&#8217; - temperature in Kelvin
-Default={&#8216;p&#8217;:1.,&#8217;T&#8217;:296.}</div></blockquote>
+<div>‘p’ - pressure in atmospheres,
+‘T’ - temperature in Kelvin
+Default={‘p’:1.,’T’:296.}</div></blockquote>
 <p class="last">WavenumberRange:  wavenumber range to consider.
 WavenumberStep:   wavenumber step to consider.
 WavenumberWing:   absolute wing for calculating a lineshape (in cm-1)
 WavenumberWingHW:  relative wing for calculating a lineshape (in halfwidths)
 IntensityThreshold:  threshold for intensities
-GammaL:  specifies broadening parameter (&#8216;gamma_air&#8217; or &#8216;gamma_self&#8217;)
+GammaL:  specifies broadening parameter (‘gamma_air’ or ‘gamma_self’)
 HITRAN_units:  use cm2/molecule (True) or cm-1 (False) for absorption coefficient
 File:   write output to file (if specified)
 Format:  c-format of file output (accounts for significant digits in WavenumberStep)</p>
@@ -894,7 +895,7 @@ Format:  c-format of file output (accounts for significant digits in WavenumberS
 <dd>Wavenum: wavenumber grid with respect to parameters WavenumberRange and WavenumberStep
 Xsect: absorption coefficient calculated on the grid</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Calculate absorption coefficient using HT profile.
@@ -904,15 +905,15 @@ The choise of these parameters depends on properties of a particular linelist.
 Default values are a sort of guess which gives a decent precision (on average)
 for a reasonable amount of cpu time. To increase calculation accuracy,
 user should use a trial and error method.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>nu,coef = absorptionCoefficient_HT(((2,1),),&#8217;co2&#8217;,WavenumberStep=0.01,</dt>
-<dd>HITRAN_units=False,GammaL=&#8217;gamma_self&#8217;)</dd>
+<dt>nu,coef = absorptionCoefficient_HT(((2,1),),’co2’,WavenumberStep=0.01,</dt>
+<dd>HITRAN_units=False,GammaL=’gamma_self’)</dd>
 </dl>
 </div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -930,15 +931,15 @@ D - abundance (optional)</dd>
 partitionFunction:  pointer to partition function (default is PYTIPS) (optional)
 Environment:  dictionary containing thermodynamic parameters.</p>
 <blockquote>
-<div>&#8216;p&#8217; - pressure in atmospheres,
-&#8216;T&#8217; - temperature in Kelvin
-Default={&#8216;p&#8217;:1.,&#8217;T&#8217;:296.}</div></blockquote>
+<div>‘p’ - pressure in atmospheres,
+‘T’ - temperature in Kelvin
+Default={‘p’:1.,’T’:296.}</div></blockquote>
 <p class="last">WavenumberRange:  wavenumber range to consider.
 WavenumberStep:   wavenumber step to consider.
 WavenumberWing:   absolute wing for calculating a lineshape (in cm-1)
 WavenumberWingHW:  relative wing for calculating a lineshape (in halfwidths)
 IntensityThreshold:  threshold for intensities
-GammaL:  specifies broadening parameter (&#8216;gamma_air&#8217; or &#8216;gamma_self&#8217;)
+GammaL:  specifies broadening parameter (‘gamma_air’ or ‘gamma_self’)
 HITRAN_units:  use cm2/molecule (True) or cm-1 (False) for absorption coefficient
 File:   write output to file (if specified)
 Format:  c-format of file output (accounts for significant digits in WavenumberStep)</p>
@@ -947,7 +948,7 @@ Format:  c-format of file output (accounts for significant digits in WavenumberS
 <dd>Wavenum: wavenumber grid with respect to parameters OmegaRange and OmegaStep
 Xsect: absorption coefficient calculated on the grid</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Calculate absorption coefficient using Doppler (Gauss) profile.
@@ -957,15 +958,15 @@ The choise of these parameters depends on properties of a particular linelist.
 Default values are a sort of guess which give a decent precision (on average)
 for a reasonable amount of cpu time. To increase calculation accuracy,
 user should use a trial and error method.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>nu,coef = absorptionCoefficient_Doppler(((2,1),),&#8217;co2&#8217;,WavenumberStep=0.01,</dt>
-<dd>HITRAN_units=False,GammaL=&#8217;gamma_self&#8217;)</dd>
+<dt>nu,coef = absorptionCoefficient_Doppler(((2,1),),’co2’,WavenumberStep=0.01,</dt>
+<dd>HITRAN_units=False,GammaL=’gamma_self’)</dd>
 </dl>
 </div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -983,15 +984,15 @@ D - abundance (optional)</dd>
 partitionFunction:  pointer to partition function (default is PYTIPS) (optional)
 Environment:  dictionary containing thermodynamic parameters.</p>
 <blockquote>
-<div>&#8216;p&#8217; - pressure in atmospheres,
-&#8216;T&#8217; - temperature in Kelvin
-Default={&#8216;p&#8217;:1.,&#8217;T&#8217;:296.}</div></blockquote>
+<div>‘p’ - pressure in atmospheres,
+‘T’ - temperature in Kelvin
+Default={‘p’:1.,’T’:296.}</div></blockquote>
 <p class="last">WavenumberRange:  wavenumber range to consider.
 WavenumberStep:   wavenumber step to consider.
 WavenumberWing:   absolute wing for calculating a lineshape (in cm-1)
 WavenumberWingHW:  relative wing for calculating a lineshape (in halfwidths)
 IntensityThreshold:  threshold for intensities
-GammaL:  specifies broadening parameter (&#8216;gamma_air&#8217; or &#8216;gamma_self&#8217;)
+GammaL:  specifies broadening parameter (‘gamma_air’ or ‘gamma_self’)
 HITRAN_units:  use cm2/molecule (True) or cm-1 (False) for absorption coefficient
 File:   write output to file (if specified)
 Format:  c-format of file output (accounts for significant digits in WavenumberStep)</p>
@@ -1000,7 +1001,7 @@ Format:  c-format of file output (accounts for significant digits in WavenumberS
 <dd>Wavenum: wavenumber grid with respect to parameters OmegaRange and OmegaStep
 Xsect: absorption coefficient calculated on the grid</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Calculate absorption coefficient using Doppler (Gauss) profile.
@@ -1010,15 +1011,15 @@ The choise of these parameters depends on properties of a particular linelist.
 Default values are a sort of guess which give a decent precision (on average)
 for a reasonable amount of cpu time. To increase calculation accuracy,
 user should use a trial and error method.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>nu,coef = absorptionCoefficient_Doppler(((2,1),),&#8217;co2&#8217;,WavenumberStep=0.01,</dt>
-<dd>HITRAN_units=False,GammaL=&#8217;gamma_self&#8217;)</dd>
+<dt>nu,coef = absorptionCoefficient_Doppler(((2,1),),’co2’,WavenumberStep=0.01,</dt>
+<dd>HITRAN_units=False,GammaL=’gamma_self’)</dd>
 </dl>
 </div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1036,15 +1037,15 @@ D - relative abundance (optional)</dd>
 partitionFunction:  pointer to partition function (default is PYTIPS) (optional)
 Environment:  dictionary containing thermodynamic parameters.</p>
 <blockquote>
-<div>&#8216;p&#8217; - pressure in atmospheres,
-&#8216;T&#8217; - temperature in Kelvin
-Default={&#8216;p&#8217;:1.,&#8217;T&#8217;:296.}</div></blockquote>
+<div>‘p’ - pressure in atmospheres,
+‘T’ - temperature in Kelvin
+Default={‘p’:1.,’T’:296.}</div></blockquote>
 <p class="last">WavenumberRange:  wavenumber range to consider.
 WavenumberStep:   wavenumber step to consider.
 WavenumberWing:   absolute wing for calculating a lineshape (in cm-1)
 WavenumberWingHW:  relative wing for calculating a lineshape (in halfwidths)
 IntensityThreshold:  threshold for intensities
-GammaL:  specifies broadening parameter (&#8216;gamma_air&#8217; or &#8216;gamma_self&#8217;)
+GammaL:  specifies broadening parameter (‘gamma_air’ or ‘gamma_self’)
 HITRAN_units:  use cm2/molecule (True) or cm-1 (False) for absorption coefficient
 File:   write output to file (if specified)
 Format:  c-format of file output (accounts for significant digits in WavenumberStep)</p>
@@ -1053,7 +1054,7 @@ Format:  c-format of file output (accounts for significant digits in WavenumberS
 <dd>Wavenum: wavenumber grid with respect to parameters WavenumberRange and WavenumberStep
 Xsect: absorption coefficient calculated on the grid</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Calculate absorption coefficient using HT profile.
@@ -1063,15 +1064,15 @@ The choise of these parameters depends on properties of a particular linelist.
 Default values are a sort of guess which gives a decent precision (on average)
 for a reasonable amount of cpu time. To increase calculation accuracy,
 user should use a trial and error method.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>nu,coef = absorptionCoefficient_HT(((2,1),),&#8217;co2&#8217;,WavenumberStep=0.01,</dt>
-<dd>HITRAN_units=False,GammaL=&#8217;gamma_self&#8217;)</dd>
+<dt>nu,coef = absorptionCoefficient_HT(((2,1),),’co2’,WavenumberStep=0.01,</dt>
+<dd>HITRAN_units=False,GammaL=’gamma_self’)</dd>
 </dl>
 </div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1089,15 +1090,15 @@ D - relative abundance (optional)</dd>
 partitionFunction:  pointer to partition function (default is PYTIPS) (optional)
 Environment:  dictionary containing thermodynamic parameters.</p>
 <blockquote>
-<div>&#8216;p&#8217; - pressure in atmospheres,
-&#8216;T&#8217; - temperature in Kelvin
-Default={&#8216;p&#8217;:1.,&#8217;T&#8217;:296.}</div></blockquote>
+<div>‘p’ - pressure in atmospheres,
+‘T’ - temperature in Kelvin
+Default={‘p’:1.,’T’:296.}</div></blockquote>
 <p class="last">WavenumberRange:  wavenumber range to consider.
 WavenumberStep:   wavenumber step to consider.
 WavenumberWing:   absolute wing for calculating a lineshape (in cm-1)
 WavenumberWingHW:  relative wing for calculating a lineshape (in halfwidths)
 IntensityThreshold:  threshold for intensities
-GammaL:  specifies broadening parameter (&#8216;gamma_air&#8217; or &#8216;gamma_self&#8217;)
+GammaL:  specifies broadening parameter (‘gamma_air’ or ‘gamma_self’)
 HITRAN_units:  use cm2/molecule (True) or cm-1 (False) for absorption coefficient
 File:   write output to file (if specified)
 Format:  c-format of file output (accounts for significant digits in WavenumberStep)</p>
@@ -1106,7 +1107,7 @@ Format:  c-format of file output (accounts for significant digits in WavenumberS
 <dd>Wavenum: wavenumber grid with respect to parameters WavenumberRange and WavenumberStep
 Xsect: absorption coefficient calculated on the grid</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Calculate absorption coefficient using Lorentz profile.
@@ -1116,15 +1117,15 @@ The choise of these parameters depends on properties of a particular linelist.
 Default values are a sort of guess which gives a decent precision (on average)
 for a reasonable amount of cpu time. To increase calculation accuracy,
 user should use a trial and error method.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>nu,coef = absorptionCoefficient_Lorentz(((2,1),),&#8217;co2&#8217;,WavenumberStep=0.01,</dt>
-<dd>HITRAN_units=False,GammaL=&#8217;gamma_self&#8217;)</dd>
+<dt>nu,coef = absorptionCoefficient_Lorentz(((2,1),),’co2’,WavenumberStep=0.01,</dt>
+<dd>HITRAN_units=False,GammaL=’gamma_self’)</dd>
 </dl>
 </div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1142,15 +1143,15 @@ D - relative abundance (optional)</dd>
 partitionFunction:  pointer to partition function (default is PYTIPS) (optional)
 Environment:  dictionary containing thermodynamic parameters.</p>
 <blockquote>
-<div>&#8216;p&#8217; - pressure in atmospheres,
-&#8216;T&#8217; - temperature in Kelvin
-Default={&#8216;p&#8217;:1.,&#8217;T&#8217;:296.}</div></blockquote>
+<div>‘p’ - pressure in atmospheres,
+‘T’ - temperature in Kelvin
+Default={‘p’:1.,’T’:296.}</div></blockquote>
 <p class="last">WavenumberRange:  wavenumber range to consider.
 WavenumberStep:   wavenumber step to consider.
 WavenumberWing:   absolute wing for calculating a lineshape (in cm-1)
 WavenumberWingHW:  relative wing for calculating a lineshape (in halfwidths)
 IntensityThreshold:  threshold for intensities
-GammaL:  specifies broadening parameter (&#8216;gamma_air&#8217; or &#8216;gamma_self&#8217;)
+GammaL:  specifies broadening parameter (‘gamma_air’ or ‘gamma_self’)
 HITRAN_units:  use cm2/molecule (True) or cm-1 (False) for absorption coefficient
 File:   write output to file (if specified)
 Format:  c-format of file output (accounts for significant digits in WavenumberStep)</p>
@@ -1159,7 +1160,7 @@ Format:  c-format of file output (accounts for significant digits in WavenumberS
 <dd>Wavenum: wavenumber grid with respect to parameters WavenumberRange and WavenumberStep
 Xsect: absorption coefficient calculated on the grid</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Calculate absorption coefficient using SDVoigt profile.
@@ -1169,15 +1170,15 @@ The choise of these parameters depends on properties of a particular linelist.
 Default values are a sort of guess which gives a decent precision (on average)
 for a reasonable amount of cpu time. To increase calculation accuracy,
 user should use a trial and error method.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>nu,coef = absorptionCoefficient_SDVoigt(((2,1),),&#8217;co2&#8217;,WavenumberStep=0.01,</dt>
-<dd>HITRAN_units=False,GammaL=&#8217;gamma_self&#8217;)</dd>
+<dt>nu,coef = absorptionCoefficient_SDVoigt(((2,1),),’co2’,WavenumberStep=0.01,</dt>
+<dd>HITRAN_units=False,GammaL=’gamma_self’)</dd>
 </dl>
 </div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1195,15 +1196,15 @@ D - relative abundance (optional)</dd>
 partitionFunction:  pointer to partition function (default is PYTIPS) (optional)
 Environment:  dictionary containing thermodynamic parameters.</p>
 <blockquote>
-<div>&#8216;p&#8217; - pressure in atmospheres,
-&#8216;T&#8217; - temperature in Kelvin
-Default={&#8216;p&#8217;:1.,&#8217;T&#8217;:296.}</div></blockquote>
+<div>‘p’ - pressure in atmospheres,
+‘T’ - temperature in Kelvin
+Default={‘p’:1.,’T’:296.}</div></blockquote>
 <p class="last">WavenumberRange:  wavenumber range to consider.
 WavenumberStep:   wavenumber step to consider.
 WavenumberWing:   absolute wing for calculating a lineshape (in cm-1)
 WavenumberWingHW:  relative wing for calculating a lineshape (in halfwidths)
 IntensityThreshold:  threshold for intensities
-GammaL:  specifies broadening parameter (&#8216;gamma_air&#8217; or &#8216;gamma_self&#8217;)
+GammaL:  specifies broadening parameter (‘gamma_air’ or ‘gamma_self’)
 HITRAN_units:  use cm2/molecule (True) or cm-1 (False) for absorption coefficient
 File:   write output to file (if specified)
 Format:  c-format of file output (accounts for significant digits in WavenumberStep)</p>
@@ -1212,7 +1213,7 @@ Format:  c-format of file output (accounts for significant digits in WavenumberS
 <dd>Wavenum: wavenumber grid with respect to parameters WavenumberRange and WavenumberStep
 Xsect: absorption coefficient calculated on the grid</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Calculate absorption coefficient using Voigt profile.
@@ -1222,15 +1223,15 @@ The choise of these parameters depends on properties of a particular linelist.
 Default values are a sort of guess which gives a decent precision (on average)
 for a reasonable amount of cpu time. To increase calculation accuracy,
 user should use a trial and error method.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>nu,coef = absorptionCoefficient_Voigt(((2,1),),&#8217;co2&#8217;,WavenumberStep=0.01,</dt>
-<dd>HITRAN_units=False,GammaL=&#8217;gamma_self&#8217;)</dd>
+<dt>nu,coef = absorptionCoefficient_Voigt(((2,1),),’co2’,WavenumberStep=0.01,</dt>
+<dd>HITRAN_units=False,GammaL=’gamma_self’)</dd>
 </dl>
 </div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1242,26 +1243,26 @@ EXAMPLE OF USAGE:</p>
 AbsorptionCoefficient:  absorption coefficient on grid  (required)
 Environment:  dictionary containing path length in cm.</p>
 <blockquote>
-<div>Default={&#8216;l&#8217;:100.}</div></blockquote>
+<div>Default={‘l’:100.}</div></blockquote>
 <p class="last">File:         name of the output file                 (optional)
-Format: c format used in file output, default &#8216;%e %e&#8217; (optional)</p>
+Format: c format used in file output, default ‘%e %e’ (optional)</p>
 </dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>Wavenum: wavenumber grid
 Xsect:  transmittance spectrum calculated on the grid</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Calculate an absorption spectrum (dimensionless) based
 on previously calculated absorption coefficient.
 Absorption spectrum is calculated at an arbitrary
-optical path length &#8216;l&#8217; (1 m by default)</div></blockquote>
-<p>&#8212;
+optical path length ‘l’ (1 m by default)</div></blockquote>
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div>nu,absorp = absorptionSpectrum(nu,coef)</div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1274,15 +1275,15 @@ I: HITRAN isotopologue number</dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>Abbundance: natural abundance</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Return natural (Earth) abundance of HITRAN isotolopogue.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div>ab = abundance(1,1) # H2O</div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1375,14 +1376,14 @@ slit: slit function calculated over grid [-AF_wing; AF_wing]</p>
 <div>with the step equal to instrumental resolution.</div></blockquote>
 </dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Produce a simulation of experimental spectrum via the convolution
 of a “dry” spectrum with an instrumental function.
 Instrumental function is provided as a parameter and
 is calculated in a grid with the width=AF_wing and step=Resolution.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div><dl class="docutils">
@@ -1390,7 +1391,7 @@ EXAMPLE OF USAGE:</p>
 <dd>SlitFunction=SLIT_MICHELSON)</dd>
 </dl>
 </div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1449,17 +1450,17 @@ EXAMPLE OF USAGE:</p>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>none</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Open a database connection. A database is stored
 in a folder given in db input parameter.
 Default=data</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
-<div>db_begin(&#8216;bar&#8217;)</div></blockquote>
-<p>&#8212;</p>
+<div>db_begin(‘bar’)</div></blockquote>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1471,16 +1472,16 @@ EXAMPLE OF USAGE:</p>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>none</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Commit all changes made to opened database.
 All tables will be saved in corresponding files.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div>db_commit()</div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1512,16 +1513,16 @@ EXAMPLE OF USAGE:</p>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>none</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Print information about table, including
 parameter names, formats and wavenumber range.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
-<div>describe(&#8216;sampletab&#8217;)</div></blockquote>
-<p>&#8212;</p>
+<div>describe(‘sampletab’)</div></blockquote>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1533,16 +1534,16 @@ EXAMPLE OF USAGE:</p>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>none</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Print information about table, including
 parameter names, formats and wavenumber range.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
-<div>describeTable(&#8216;sampletab&#8217;)</div></blockquote>
-<p>&#8212;</p>
+<div>describeTable(‘sampletab’)</div></blockquote>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1554,15 +1555,15 @@ EXAMPLE OF USAGE:</p>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>none</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Deletes a table from local database.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
-<div>dropTable(&#8216;some_dummy_table&#8217;)</div></blockquote>
-<p>&#8212;</p>
+<div>dropTable(‘some_dummy_table’)</div></blockquote>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1593,24 +1594,24 @@ FixCol:      column-fixed (True) format of source column (optional)</dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>none</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Note, that this function is aimed to do some extra job on
 interpreting string parameters which is normally supposed
 to be done by the user.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>extractColumns(&#8216;sampletab&#8217;,SourceParameterName=&#8217;p5&#8217;,</dt>
-<dd>ParameterFormats=(&#8216;%d&#8217;,&#8217;%d&#8217;,&#8217;%d&#8217;),
-ParameterNames=(&#8216;p5_1&#8217;,&#8217;p5_2&#8217;,&#8217;p5_3&#8217;))</dd>
+<dt>extractColumns(‘sampletab’,SourceParameterName=’p5’,</dt>
+<dd>ParameterFormats=(‘%d’,’%d’,’%d’),
+ParameterNames=(‘p5_1’,’p5_2’,’p5_3’))</dd>
 </dl>
 <p>This example extracts three integer parameters from
-a source column &#8216;p5&#8217; and puts results in (&#8216;p5_1&#8217;,&#8217;p5_2&#8217;,&#8217;p5_3&#8217;).</p>
+a source column ‘p5’ and puts results in (‘p5_1’,’p5_2’,’p5_3’).</p>
 </div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1626,7 +1627,7 @@ numax:       upper wavenumber bound       (required)</dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>none</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Download line-by-line data from HITRANonline server
@@ -1635,11 +1636,11 @@ are the HITRAN molecule and isotopologue numbers.
 This function results in a table containing single
 isotopologue specie. To have multiple species in a
 single table use fetch_by_ids instead.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
-<div>fetch(&#8216;HOH&#8217;,1,1,4000,4100)</div></blockquote>
-<p>&#8212;</p>
+<div>fetch(‘HOH’,1,1,4000,4100)</div></blockquote>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1648,25 +1649,25 @@ EXAMPLE OF USAGE:</p>
 <dd><dl class="docutils">
 <dt>INPUT PARAMETERS:</dt>
 <dd>TableName:   local table name to fetch in (required)
-iso_id_list: list of isotopologue id&#8217;s    (required)
+iso_id_list: list of isotopologue id’s    (required)
 numin:       lower wavenumber bound       (required)
 numax:       upper wavenumber bound       (required)</dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>none</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Download line-by-line data from HITRANonline server
 and save it to local table. The input parameter iso_id_list
-contains list of &#8220;global&#8221; isotopologue Ids (see help on ISO_ID).
+contains list of “global” isotopologue Ids (see help on ISO_ID).
 Note: this function is required if user wants to download
 multiple species into single table.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
-<div>fetch_by_ids(&#8216;water&#8217;,[1,2,3,4],4000,4100)</div></blockquote>
-<p>&#8212;</p>
+<div>fetch_by_ids(‘water’,[1,2,3,4],4000,4100)</div></blockquote>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1699,16 +1700,16 @@ ParameterName:  name of column to get (required)</dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>ColumnData:     list of values from specified column</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Returns a column with a name ParameterName from
 table TableName. Column is returned as a list of values.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
-<div>p1 = getColumn(&#8216;sampletab&#8217;,&#8217;p1&#8217;)</div></blockquote>
-<p>&#8212;</p>
+<div>p1 = getColumn(‘sampletab’,’p1’)</div></blockquote>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1721,16 +1722,16 @@ ParameterNames:  list of column names to get (required)</dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>ListColumnData:   tuple of lists of values from specified column</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Returns columns with a names in ParameterNames from
 table TableName. Columns are returned as a tuple of lists.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
-<div>p1,p2,p3 = getColumns(&#8216;sampletab&#8217;,(&#8216;p1&#8217;,&#8217;p2&#8217;,&#8217;p3&#8217;))</div></blockquote>
-<p>&#8212;</p>
+<div>p1,p2,p3 = getColumns(‘sampletab’,(‘p1’,’p2’,’p3’))</div></blockquote>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1855,16 +1856,16 @@ Output:   enable (True) or suppress (False) text output (optional)</dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>none</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>none</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
-<div>group(&#8216;sampletab&#8217;,ParameterNames=(&#8216;p1&#8217;,(&#8216;sum&#8217;,&#8217;p2&#8217;)),GroupParameterNames=(&#8216;p1&#8217;))
-... makes grouping by p1,p2. For each group it calculates sum of p2 values.</div></blockquote>
-<p>&#8212;</p>
+<div>group(‘sampletab’,ParameterNames=(‘p1’,(‘sum’,’p2’)),GroupParameterNames=(‘p1’))
+… makes grouping by p1,p2. For each group it calculates sum of p2 values.</div></blockquote>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1947,15 +1948,15 @@ I: HITRAN isotopologue number</dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>IsoMass: isotopologue mass</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Return name of HITRAN isotolopogue.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div>isoname = isotopologueName(1,1) # H2O</div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -1993,15 +1994,15 @@ I: HITRAN isotopologue number</dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>MolMass: molecular mass</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Return molecular mass of HITRAN isotolopogue.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div>mass = molecularMass(1,1) # H2O</div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -2013,15 +2014,15 @@ EXAMPLE OF USAGE:</p>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>MolName: molecular name</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Return name of HITRAN molecule.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div>molname = moleculeName(1) # H2O</div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -2172,7 +2173,7 @@ step:  step to calculate temperatures  (optional)</dd>
 <dd>TT: list of temperatures (present only if T is a list)
 PartSum: partition sums calculated on a list of temperatures</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div><p>Calculate range of partition sums at different temperatures.
@@ -2200,12 +2201,12 @@ with a given step.</dd>
 </dd>
 </dl>
 </div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div>PartSum = partitionSum(1,1,[296,1000])
 TT,PartSum = partitionSum(1,1,[296,1000],step=0.1)</div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -2298,29 +2299,29 @@ AbsorptionCoefficient:  absorption coefficient on grid (required)
 Environment:  dictionary containing path length in cm.</p>
 <blockquote>
 <div>and temperature in Kelvin.
-Default={&#8216;l&#8217;:100.,&#8217;T&#8217;:296.}</div></blockquote>
+Default={‘l’:100.,’T’:296.}</div></blockquote>
 <p class="last">File:         name of the output file                 (optional)
-Format: c format used in file output, default &#8216;%e %e&#8217; (optional)</p>
+Format: c format used in file output, default ‘%e %e’ (optional)</p>
 </dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>Wavenum: wavenumber grid
 Xsect:  radiance spectrum calculated on the grid</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Calculate a radiance spectrum (in W/sr/cm^2/cm-1) based
 on previously calculated absorption coefficient.
 Radiance spectrum is calculated at an arbitrary
-optical path length &#8216;l&#8217; (1 m by default) and
-temperature &#8216;T&#8217; (296 K by default). For obtaining a
-physically meaningful result &#8216;T&#8217; must be the same
+optical path length ‘l’ (1 m by default) and
+temperature ‘T’ (296 K by default). For obtaining a
+physically meaningful result ‘T’ must be the same
 as a temperature which was used in absorption coefficient.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div>nu,radi = radianceSpectrum(nu,coef)</div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -2382,21 +2383,21 @@ File:     enable (True) or suppress (False) file output (optional)</dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>none</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Select or filter the data in some table
 either to standard output or to file (if specified)</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>select(&#8216;sampletab&#8217;,DestinationTableName=&#8217;outtab&#8217;,ParameterNames=(p1,p2),</dt>
-<dd>Conditions=((&#8216;and&#8217;,(&#8216;&gt;=&#8217;,&#8217;p1&#8217;,1),(&#8216;&lt;&#8217;,(&#8216;*&#8217;,&#8217;p1&#8217;,&#8217;p2&#8217;),20))))</dd>
+<dt>select(‘sampletab’,DestinationTableName=’outtab’,ParameterNames=(p1,p2),</dt>
+<dd>Conditions=((‘and’,(‘&gt;=’,’p1’,1),(‘&lt;’,(‘*’,’p1’,’p2’),20))))</dd>
 </dl>
 <p>Conditions means (p1&gt;=1 and p1*p2&lt;20)</p>
 </div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -2443,16 +2444,16 @@ File:     enable (True) or suppress (False) file output (optional)</dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>none</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
-<div>Sort a table by a list of it&#8217;s parameters or expressions.
+<div>Sort a table by a list of it’s parameters or expressions.
 The sorted table is saved in DestinationTableName (if specified).</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
-<div>sort(&#8216;sampletab&#8217;,ParameterNames=(p1,(&#8216;+&#8217;,p1,p2)))</div></blockquote>
-<p>&#8212;</p>
+<div>sort(‘sampletab’,ParameterNames=(p1,(‘+’,p1,p2)))</div></blockquote>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -2484,15 +2485,15 @@ EXAMPLE OF USAGE:</p>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>TableList: a list of available tables</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Return a list of tables present in database.</div></blockquote>
-<p>&#8212;
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div>lst = tableList()</div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -2504,26 +2505,26 @@ EXAMPLE OF USAGE:</p>
 AbsorptionCoefficient:  absorption coefficient on grid  (required)
 Environment:  dictionary containing path length in cm.</p>
 <blockquote>
-<div>Default={&#8216;l&#8217;:100.}</div></blockquote>
+<div>Default={‘l’:100.}</div></blockquote>
 <p class="last">File:         name of the output file                 (optional)
-Format: c format used in file output, default &#8216;%e %e&#8217; (optional)</p>
+Format: c format used in file output, default ‘%e %e’ (optional)</p>
 </dd>
 <dt>OUTPUT PARAMETERS:</dt>
 <dd>Wavenum: wavenumber grid
 Xsect:  transmittance spectrum calculated on the grid</dd>
 </dl>
-<p>&#8212;
+<p>—
 DESCRIPTION:</p>
 <blockquote>
 <div>Calculate a transmittance spectrum (dimensionless) based
 on previously calculated absorption coefficient.
 Transmittance spectrum is calculated at an arbitrary
-optical path length &#8216;l&#8217; (1 m by default)</div></blockquote>
-<p>&#8212;
+optical path length ‘l’ (1 m by default)</div></blockquote>
+<p>—
 EXAMPLE OF USAGE:</p>
 <blockquote>
 <div>nu,trans = transmittanceSpectrum(nu,coef)</div></blockquote>
-<p>&#8212;</p>
+<p>—</p>
 </dd></dl>
 
 <dl class="function">
@@ -2547,6 +2548,7 @@ EXAMPLE OF USAGE:</p>
 </div>
 <div class="section" id="module-f311">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311" title="Permalink to this headline">¶</a></h2>
+<p>Project f311</p>
 </div>
 </div>
 

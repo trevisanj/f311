@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -180,8 +181,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sparsecube</strong> &#8211; SparseCube instance</li>
-<li><strong>height_threshold</strong> &#8211; maximum cube height to plot actual spectra.
+<li><strong>sparsecube</strong> – SparseCube instance</li>
+<li><strong>height_threshold</strong> – maximum cube height to plot actual spectra.
 If the cube height is greated than this, line segments will be drawn
 instead of plotting the spectra (for speed)</li>
 </ul>
@@ -190,7 +191,7 @@ instead of plotting the spectra (for speed)</li>
 </tbody>
 </table>
 <p>data cube            mapped to 3D axis
-&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;   &#8212;&#8212;&#8212;&#8212;&#8212;&#8211;
+——————   —————–
 X pixel coordinate   x
 Y pixel coordinate   z
 Z wavelength         y</p>
@@ -205,8 +206,8 @@ Z wavelength         y</p>
 <dd>ax: matplotlib axis
 sparsecube: SparseCube instance
 vrange: visible range
-sqx: &#8220;place spectrum&#8221; x
-sqy: &#8220;place spectrum&#8221; y</dd>
+sqx: “place spectrum” x
+sqy: “place spectrum” y</dd>
 </dl>
 <p>Returns: matplotlib plot object representing square, or None</p>
 </dd></dl>

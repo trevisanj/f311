@@ -94,6 +94,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
@@ -209,23 +210,23 @@
 <p>[1] agrup.plez7.f</p>
 <dl class="function">
 <dt id="f311.convmol.calc_qgbd.calc_qgbd_tio_like">
-<code class="descclassname">f311.convmol.calc_qgbd.</code><code class="descname">calc_qgbd_tio_like</code><span class="sig-paren">(</span><em>mol_consts</em>, <em>v_lo</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.calc_qgbd.calc_qgbd_tio_like" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">f311.convmol.calc_qgbd.</code><code class="descname">calc_qgbd_tio_like</code><span class="sig-paren">(</span><em>molconsts</em>, <em>v_lo</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.calc_qgbd.calc_qgbd_tio_like" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates qv, gv, bv, dv in TiO-like fashion</p>
-<p>Based on Fortran source &#8216;agrup.plez7.f&#8217;</p>
+<p>Based on Fortran source ‘agrup.plez7.f’</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>mol_consts</strong> &#8211; dict-like object with keys:
-&#8220;omega_e&#8221;
-&#8220;omega_ex_e&#8221;
-&#8220;omega_ey_e&#8221;
-&#8220;B_e&#8221;
-&#8220;alpha_e&#8221;
-&#8220;D_e&#8221;
-&#8220;beta_e&#8221;</li>
-<li><strong>v_lo</strong> &#8211; (integer) low transition level</li>
+<li><strong>molconsts</strong> – dict-like object with keys:
+“omega_e”
+“omega_ex_e”
+“omega_ey_e”
+“B_e”
+“alpha_e”
+“D_e”
+“beta_e”</li>
+<li><strong>v_lo</strong> – (integer) low transition level</li>
 </ul>
 </td>
 </tr>
@@ -233,7 +234,7 @@
 </table>
 <dl class="docutils">
 <dt>Returns: qbdg, i.e., a dictionary with keys:</dt>
-<dd>&#8220;qv&#8221;, &#8220;gv&#8221;, &#8220;bv&#8221;, &#8220;dv&#8221;, &#8220;gzero&#8221;</dd>
+<dd>“qv”, “gv”, “bv”, “dv”, “gzero”</dd>
 </dl>
 </dd></dl>
 
@@ -243,23 +244,23 @@
 <p>HITRAN-specific conversion</p>
 <p class="rubric">References</p>
 <dl class="docutils">
-<dt>[1] Rothman, Laurence S., et al. &#8220;The HITRAN 2004 molecular spectroscopic database.&#8221;</dt>
+<dt>[1] Rothman, Laurence S., et al. “The HITRAN 2004 molecular spectroscopic database.”</dt>
 <dd>Journal of Quantitative Spectroscopy and Radiative Transfer 96.2 (2005): 139-204.</dd>
 </dl>
 <p>[2] extraehitran.f (First version: Jorge Melendez-Moreno, January 1999)</p>
 <dl class="function">
 <dt id="f311.convmol.conv_hitran.hitran_to_sols">
-<code class="descclassname">f311.convmol.conv_hitran.</code><code class="descname">hitran_to_sols</code><span class="sig-paren">(</span><em>mol_consts</em>, <em>lines</em>, <em>qgbd_calculator</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.conv_hitran.hitran_to_sols" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts HITRAN molecular lines data to PFANT &#8220;sets of lines&#8221;</p>
+<code class="descclassname">f311.convmol.conv_hitran.</code><code class="descname">hitran_to_sols</code><span class="sig-paren">(</span><em>molconsts</em>, <em>lines</em>, <em>qgbd_calculator</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.conv_hitran.hitran_to_sols" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts HITRAN molecular lines data to PFANT “sets of lines”</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>mol_consts</strong> &#8211; a dict-like object combining field values from tables &#8216;molecule&#8217;, &#8216;state&#8217;,
-&#8216;pfantmol&#8217;, and &#8216;system&#8217; from a FileMolDB database</li>
-<li><strong>lines</strong> &#8211; item from rom hapi.LOCAL_TABLE_CACHE (a dictionary)</li>
-<li><strong>qgbd_calculator</strong> &#8211; callable that can calculate &#8220;qv&#8221;, &#8220;gv&#8221;, &#8220;bv&#8221;, &#8220;dv&#8221;,
+<li><strong>molconsts</strong> – a dict-like object combining field values from tables ‘molecule’, ‘state’,
+‘pfantmol’, and ‘system’ from a FileMolDB database</li>
+<li><strong>lines</strong> – item from rom hapi.LOCAL_TABLE_CACHE (a dictionary)</li>
+<li><strong>qgbd_calculator</strong> – callable that can calculate “qv”, “gv”, “bv”, “dv”,
 e.g., calc_qbdg_tio_like()</li>
 </ul>
 </td>
@@ -274,26 +275,26 @@ e.g., calc_qbdg_tio_like()</li>
 <span id="f311-convmol-conv-kurucz-module"></span><h2>f311.convmol.conv_kurucz module<a class="headerlink" href="#module-f311.convmol.conv_kurucz" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="f311.convmol.conv_kurucz.ConvKurucz">
-<em class="property">class </em><code class="descclassname">f311.convmol.conv_kurucz.</code><code class="descname">ConvKurucz</code><span class="sig-paren">(</span><em>flag_hlf=False</em>, <em>flag_normhlf=False</em>, <em>flag_fcf=False</em>, <em>flag_quiet=False</em>, <em>flag_spinl=False</em>, <em>fcfs=None</em>, <em>iso=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.conv_kurucz.ConvKurucz" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">f311.convmol.conv_kurucz.</code><code class="descname">ConvKurucz</code><span class="sig-paren">(</span><em>flag_hlf=False</em>, <em>flag_fcf=False</em>, <em>flag_quiet=False</em>, <em>flag_special_fcf=False</em>, <em>flag_spinl=False</em>, <em>fcfs=None</em>, <em>iso=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.conv_kurucz.ConvKurucz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">f311.convmol.conv.Conv</span></code></p>
-<p>Converts Kurucz molecular lines data to PFANT &#8220;sets of lines&#8221;</p>
+<p>Converts Kurucz molecular lines data to PFANT “sets of lines”</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>flag_hlf</strong> &#8211; <p>Whether to calculate the gf&#8217;s using Honl-London factors or
-use Kurucz&#8217;s loggf instead</p>
+<li><strong>flag_hlf</strong> – <p>Whether to calculate the gf’s using Honl-London factors or
+use Kurucz’s loggf instead</p>
 <dl class="docutils">
 <dt><strong>*Note</strong> old format (FileKuruczMoleculeOld) does not have loggf information,</dt>
 <dd>therefore the only way to work with the latter file type is
 flag_hlf==True</dd>
 </dl>
 </li>
-<li><strong>flag_normhlf</strong> &#8211; Whether to multiply calculated gf&#8217;s by normalization factor</li>
-<li><strong>flag_fcf</strong> &#8211; Whether to multiply calculated gf&#8217;s by Franck-Condon Factor</li>
-<li><strong>flag_quiet</strong> &#8211; Will not log exceptions when a molecular line fails</li>
-<li><strong>flag_spinl</strong> &#8211; <dl class="docutils">
+<li><strong>flag_normhlf</strong> – Whether to multiply calculated gf’s by normalization factor</li>
+<li><strong>flag_fcf</strong> – Whether to multiply calculated gf’s by Franck-Condon Factor</li>
+<li><strong>flag_quiet</strong> – Will not log exceptions when a molecular line fails</li>
+<li><strong>flag_spinl</strong> – <dl class="docutils">
 <dt>Whether or not to use the spinl of the Kurucz line list</dt>
 <dd>for branch determination (spin2l is always used). Effect:</dd>
 </dl>
@@ -310,7 +311,7 @@ flag_hlf==True</dd>
 </li>
 </ul>
 </li>
-<li><strong>iso</strong> &#8211; <p>(int or None) isotope. If specified as int, only that isotope will be filtered;
+<li><strong>iso</strong> – <p>(int or None) isotope. If specified as int, only that isotope will be filtered;
 otherwise, all isotopes in file will be included. Isotope is
 field KuruczMolLine.iso (see KuruczMolLine, FileKuruczMol).</p>
 <dl class="docutils">
@@ -331,17 +332,17 @@ field KuruczMolLine.iso (see KuruczMolLine, FileKuruczMol).</p>
 <p>VALD3-specific conversion</p>
 <dl class="function">
 <dt id="f311.convmol.conv_vald3.vald3_to_sols">
-<code class="descclassname">f311.convmol.conv_vald3.</code><code class="descname">vald3_to_sols</code><span class="sig-paren">(</span><em>mol_consts</em>, <em>file_vald3</em>, <em>qgbd_calculator</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.conv_vald3.vald3_to_sols" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts HITRAN molecular lines data to PFANT &#8220;sets of lines&#8221;</p>
+<code class="descclassname">f311.convmol.conv_vald3.</code><code class="descname">vald3_to_sols</code><span class="sig-paren">(</span><em>molconsts</em>, <em>file_vald3</em>, <em>qgbd_calculator</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.conv_vald3.vald3_to_sols" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts HITRAN molecular lines data to PFANT “sets of lines”</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>mol_consts</strong> &#8211; a dict-like object combining field values from tables &#8216;molecule&#8217;, &#8216;state&#8217;,
-and &#8216;pfantmol&#8217; from a FileMolDB database</li>
-<li><strong>file_vald3</strong> &#8211; FileVald3 instance with only one species</li>
-<li><strong>qgbd_calculator</strong> &#8211; callable that can calculate &#8220;qv&#8221;, &#8220;gv&#8221;, &#8220;bv&#8221;, &#8220;dv&#8221;,
+<li><strong>molconsts</strong> – a dict-like object combining field values from tables ‘molecule’, ‘state’,
+and ‘pfantmol’ from a FileMolDB database</li>
+<li><strong>file_vald3</strong> – FileVald3 instance with only one species</li>
+<li><strong>qgbd_calculator</strong> – callable that can calculate “qv”, “gv”, “bv”, “dv”,
 e.g., calc_qbdg_tio_like()</li>
 </ul>
 </td>
@@ -369,11 +370,11 @@ e.g., calc_qbdg_tio_like()</li>
 </div>
 <div class="section" id="module-f311.convmol.fcf_oh">
 <span id="f311-convmol-fcf-oh-module"></span><h2>f311.convmol.fcf_oh module<a class="headerlink" href="#module-f311.convmol.fcf_oh" title="Permalink to this headline">¶</a></h2>
-<p>OH Franck-Condom Factors as in B. Castilho&#8217;s work (thesis)</p>
+<p>OH Franck-Condom Factors as in B. Castilho’s work (thesis)</p>
 <dl class="function">
 <dt id="f311.convmol.fcf_oh.get_fcf_oh">
 <code class="descclassname">f311.convmol.fcf_oh.</code><code class="descname">get_fcf_oh</code><span class="sig-paren">(</span><em>vl</em>, <em>v2l</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.convmol.fcf_oh.get_fcf_oh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns Franck-Condon Factor for OH given (v&#8217;, v&#8217;&#8216;)</p>
+<dd><p>Returns Franck-Condon Factor for OH given (v’, v’‘)</p>
 </dd></dl>
 
 </div>

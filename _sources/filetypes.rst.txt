@@ -4,7 +4,8 @@ File handling API (``f311.filetypes``)
 Introduction
 ------------
 
-*f311.filetypes* has classes to handle many different file formats used in Astronomy.
+*f311.filetypes* represents most of the non-visual essence of the F311 project.
+the. That package has classes to handle many different file formats used in Astronomy.
 
 All classes descend from :any:`DataFile` containing some basic methods:
 
@@ -12,66 +13,114 @@ All classes descend from :any:`DataFile` containing some basic methods:
 - ``save_as()``: saves file to disk
 - ``init_default()``: initializes file object with default information
 
+Supported file types
+--------------------
+
+The following table was generated in 12/Nov/2017. The "Editor" column shows the applications in
+the F311 project that can handle these files (*i.e.*, load/edit/save).
+
+All file types are also recognized by ``explorer.py``.
+
+
+.. |br| raw:: html
+
+   <br />
+
+
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| Description                                             | Default filename   | Class name             | Editors                        |
++=========================================================+====================+========================+================================+
+| "Lambda-flux" Spectrum (2-column text file)             |                    | FileSpectrumXY         | ``splisted.py``                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| Atmospheric model or grid of models (with opacities     | grid.moo           | FileMoo                |                                |
+| |br| included)                                          |                    |                        |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| Configuration file for molecular lines conversion GUI   | configconvmol.py   | FileConfigConvMol      |                                |
+| |br| (Python code)                                      |                    |                        |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| Database of Molecular Constants                         | moldb.sqlite       | FileMolDB              | ``convmol.py``, ``moldbed.py`` |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| FITS Sparse Data Cube (storage to take less disk space) | default.sparsecube | FileSparseCube         |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| FITS Spectrum                                           |                    | FileSpectrumFits       | ``splisted.py``                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| FITS Spectrum List                                      | default.splist     | FileSpectrumList       | ``splisted.py``                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| FITS WebSim Compass Data Cube                           | default.fullcube   | FileFullCube           | ``cubeed.py``                  |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| FITS file with frames named INPUT_*, MODEL_*,           |                    | FileGalfit             |                                |
+| |br| RESIDUAL_* (Galfit software output)                |                    |                        |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| File containing Franck-Condon Factors (FCFs)            |                    | FileFCF                |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| HITRAN Molecules Catalogue                              | hitrandb.sqlite    | FileHitranDB           |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| Kurucz molecular lines file                             |                    | FileKuruczMolecule     |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| Kurucz molecular lines file, old format #0              |                    | FileKuruczMoleculeOld  |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| Kurucz molecular lines file, old format #1              |                    | FileKuruczMoleculeOld1 |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| MARCS ".opa" (opacity model) file format.               | modeles.opa        | FileOpa                |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| MARCS Atmospheric Model (text file)                     |                    | FileModTxt             |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| Molecular constants config file (Python code)           | configmolconsts.py | FileMolConsts          | ``mced.py``                    |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT "Absoru2" file                                    | absoru2.dat        | FileAbsoru2            |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Atmospheric Model (binary file)                   | modeles.mod        | FileModBin             |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Atomic Lines                                      | atoms.dat          | FileAtoms              | ``ated.py``                    |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Command-line Options                              | options.py         | FileOptions            | ``x.py``                       |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Hydrogen Line Profile                             | thalpha            | FileToH                |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Hygrogen Lines Map                                | hmap.dat           | FileHmap               |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Main Stellar Configuration                        | main.dat           | FileMain               | ``mained.py``, ``x.py``        |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Molecular Lines                                   | molecules.dat      | FileMolecules          | ``mled.py``                    |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Partition Function                                | partit.dat         | FilePartit             |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Spectrum (`nulbad` output)                        |                    | FileSpectrumNulbad     | ``splisted.py``                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Spectrum (`pfant` output)                         | flux.norm          | FileSpectrumPfant      | ``splisted.py``                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Stellar Chemical Abundances                       | abonds.dat         | FileAbonds             | ``abed.py``, ``x.py``          |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| PFANT Stellar Dissociation Equilibrium Information      | dissoc.dat         | FileDissoc             |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| Plez molecular lines file, TiO format                   |                    | FilePlezTiO            |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| VALD3 atomic or molecular lines file                    |                    | FileVald3              |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| WebSim-COMPASS ".par" (parameters) file                 |                    | FilePar                |                                |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+| `x.py` Differential Abundances X FWHMs (Python source)  | abxfwhm.py         | FileAbXFwhm            | ``x.py``                       |
++---------------------------------------------------------+--------------------+------------------------+--------------------------------+
+
+
+
+By the way, the above table was generated with the following code:
+
+.. code-block:: python
+
+    import filetypes as ft
+    print("\n".join(ft.tabulate_filetypes_rest(55)))
+
 Examples
 --------
 
-The following example generates a random spectrum and saves it to disk as a FITS file.
+Convert 1D spectral file to FITS format
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code:: python
-
-
-    import f311.filetypes as ft
-    import numpy as np
-    f = ft.FileSpectrumFits()
-    f.spectrum.wavelength = np.linspace(5000., 5100., 100.)  # angstrom
-    f.spectrum.flux = np.random.random(100)+2.
-    f.save_as("random-spectrum.fits")
-
-
-The following code lists all supported data types in a table:
-
-.. code:: python
-
-    import f311.filetypes as ft
-    print("\n".join(ft.list_data_types()))
-
-::
-
-    File type                                                     | Default filename (for all purposes)
-    ------------------------------------------------------------- | -----------------------------------
-    "Absoru2" file                                                | absoru2.dat
-    "Lambda-flux" Spectrum (2-column text file)                   | -
-    Atmospheric model or grid of models (with opacities included) | grid.moo
-    Configuration file saved as a .py Python source script        | -
-    FITS Data Cube ("full" opposed to "sparse")                   | default.fullcube
-    FITS Sparse Data Cube (storage to take less disk space)       | default.sparsecube
-    FITS Spectrum                                                 | -
-    FITS Spectrum List                                            | default.splist
-    FileHitranDB                                                  | hitrandb.sqlite
-    FileMolDB                                                     | moldb.sqlite
-    FileSQLiteDB                                                  | -
-    FileSpectrum                                                  | -
-    Generic representation of a FITS file                         | -
-    Kurucz molecular lines file                                   | -
-    MARCS ".opa" (opacity model) file format.                     | modeles.opa
-    MARCS Atmospheric Model (text file)                           | -
-    PFANT Atmospheric Model (binary file)                         | modeles.mod
-    PFANT Atomic Lines                                            | atoms.dat
-    PFANT Hydrogen Line Profile                                   | thalpha
-    PFANT Hygrogen Lines Map                                      | hmap.dat
-    PFANT Molecular Lines                                         | molecules.dat
-    PFANT Partition Function                                      | partit.dat
-    PFANT Spectrum (`nulbad` output)                              | -
-    PFANT Spectrum (`pfant` output)                               | flux.norm
-    PFANT Stellar Chemical Abundances                             | abonds.dat
-    PFANT Stellar Dissociation Equilibrium Information            | dissoc.dat
-    PFANT Stellar Main Configuration                              | main.dat
-    VALD3 atomic or molecular lines file                          | -
-    WebSim-COMPASS ".par" (parameters) file                       | -
-    `x.py` Command-line Options                                   | options.py
-    `x.py` Differential Abundances and FWHMs (Python source)      | abxfwhm.py
+.. literalinclude:: ../../docs/examples/filetypes/convert-to-fits.py
 
 API reference
 -------------
 
 :doc:`autodoc/f311.filetypes`
+
