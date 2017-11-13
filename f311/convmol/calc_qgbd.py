@@ -47,8 +47,7 @@ def calc_qgbd_tio_like(molconsts, v_lo):
     gzero = omega_e / 2.0 - omega_ex_e / 4.0 + omega_ey_e / 8.0
     v_lo5 = v_lo + 0.5
 
-    # Franck-Condon factor
-    # TODO: calculate the Franck-Condon factor
+    # Franck-Condon factor. Currently always incorporated into "SJ"
     qv = 1.
     # rotational constant "B_v"
     bv = B_e - alpha_e * v_lo5

@@ -1,10 +1,5 @@
 # TODO list
 
-## Ask BLB
-
-- Why no He lines?
-- Missing partition function values for F, Ne in partit.dat (have to skip these lines in VALD-to-PFANT conversion)
-
 ## GENERAL
 
 - Introduce "notes" field for main.dat: could be sth like "<star name> # <notes>"
@@ -46,7 +41,7 @@
 
 ## Documentation
 
-- page per script
+- remove "editable-" from script pages because it makes ugly urls
 
 - write down lots of examples
 

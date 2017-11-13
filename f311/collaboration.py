@@ -207,7 +207,7 @@ def get_scripts_path(packagename):
 
 # List of **script** collaborator packages to look for scripts (**change to add**)
 __F311 = ["f311."+x for x in a99.get_subpackages_names(os.path.split(__file__)[0])]
-COLLABORATORS_S = __F311+["convmolworks"]
+COLLABORATORS_S = __F311+["convmolworks", "ariastro"]
 
 
 # {"packagename0": {"exeinfo": [ExeInfo00, ...], "description": description0}, ...}
