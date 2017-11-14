@@ -173,15 +173,13 @@ def hitran_to_sols(molconsts, lines, qgbd_calculator):
             A = data["a"][i]
 
             # A seguir normalizacion de factor de Honl-london (HLN)
-            # TODO ask BLB: is this formula always like this?
             Normaliza = 1/((2.0*J2l+1)*(2.0*S+1)*(2.0-DELTAK))
 
             # A seguir teremos a forca de oscilador
             # mas q sera normalizada segundo o programa da Beatriz
-            # TODO ask BLB: what we call the Honl-London factor, he calls the "forca de oscilador"
             gf = Normaliza*1.499*(2*Jl+1)*A/(nu**2)
 
-            J2l_pfant = int(J2l)  # ojo, estamos colocando J2L-0.5! TODO ask BLB: we write J2l or J2l-.5?
+            J2l_pfant = int(J2l)  # ojo, estamos colocando J2L-0.5! TODO ask BLB: we write J2l or J2l-.5? (20171114 I think this is wrong, molecules.dat has decimal values)
         except Exception as e:
             log.errors.append("#{}{} line: {}".format(i+1, a99.ordinal_suffix(i+1), a99.str_exc(e)))
             continue

@@ -10,38 +10,6 @@ import a99
 import sys
 
 
-# Temporary: no partition function for this
-# Except for hydrogen (this must be skipped)
-# _to_skip = ['H', 'NE', 'F', 'HE']
-
-
-# Symbols of elements with first letter uppercase and second letter (if present) lowercase
-_Symbols = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S',
-            'Cl', 'Ar', 'K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Ga',
-            'Ge', 'As', 'Se', 'Br', 'Kr', 'Rb', 'Sr', 'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd',
-            'Ag', 'Cd', 'In', 'Sn', 'Sb', 'Te', 'I', 'Xe', 'Cs', 'Ba', 'La', 'Ce', 'Pr', 'Nd', 'Pm',
-            'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Hf', 'Ta', 'W', 'Re', 'Os',
-            'Ir', 'Pt', 'Au', 'Hg', 'Tl', 'Pb', 'Bi', 'Po', 'At', 'Rn', 'Fr', 'Ra', 'Ac', 'Th',
-            'Pa', 'U']
-
-
-def vald3_to_atoms(file_obj):
-    """Converts data from a VALD3 file into a FileAtoms object.
-
-    Args:
-      file_obj: file-like object, e.g., returned by open()
-
-    Returns: a FileAtoms object.
-
-    VALD3 website: http://vald.astro.uu.se/
-    """
-
-    _logger = a99.get_python_logger()
-
-    def log_skipping(r, reason, row):
-        _logger.info("Skipping row #%d (%s)" % (r, reason))
-        _logger.info(str(row))
-
 # Here is a sample of a VALD3 file:
 #  1|                                                                   Lande factors      Damping parameters
 #  2|Elm Ion      WL_air(A)   log gf* E_low(eV) J lo  E_up(eV) J up  lower  upper   mean   Rad.  Stark  Waals
@@ -58,6 +26,35 @@ def vald3_to_atoms(file_obj):
 # 13|'  JK                                                           3s2.3p4.(3P<1>).7g     2[3]'
 # 14|'KP                Li 1 - K 5 Bell    2 KP        2 KP        2 KP        2 KP        2 KP        2 KP        2 KP        2 KP        2 KP      Ar+           '
 
+
+# Symbols of elements with first letter uppercase and second letter (if present) lowercase
+_Symbols = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S',
+            'Cl', 'Ar', 'K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Ga',
+            'Ge', 'As', 'Se', 'Br', 'Kr', 'Rb', 'Sr', 'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd',
+            'Ag', 'Cd', 'In', 'Sn', 'Sb', 'Te', 'I', 'Xe', 'Cs', 'Ba', 'La', 'Ce', 'Pr', 'Nd', 'Pm',
+            'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Hf', 'Ta', 'W', 'Re', 'Os',
+            'Ir', 'Pt', 'Au', 'Hg', 'Tl', 'Pb', 'Bi', 'Po', 'At', 'Rn', 'Fr', 'Ra', 'Ac', 'Th',
+            'Pa', 'U']
+
+
+def vald3_to_atoms(file_obj):
+    """
+    Converts data from a VALD3 file into a FileAtoms object.
+
+    Args:
+      file_obj: file-like object, e.g., returned by open()
+
+    Returns: a FileAtoms object
+
+    VALD3 website: http://vald.astro.uu.se/
+    """
+
+    _logger = a99.get_python_logger()
+
+    def log_skipping(r, reason, row):
+        _logger.info("Skipping row #%d (%s)" % (r, reason))
+        _logger.info(str(row))
+
     reader = csv.reader(file_obj)
     ret = ft.FileAtoms()
     edict = {}  # links atomic symbols with Atom objects created (key is atomic symbol)
@@ -68,21 +65,12 @@ def vald3_to_atoms(file_obj):
             r += 1
             if len(row) <=  12:  # Condition to detect row of interest
                 continue
-#            lde = float(row[7])
-#            if lde >= 99:
-#                continue  # skips molecule
 
             elem = row[0][1:row[0].index(" ")]
             if not elem in _Symbols:
-                #x = raw_input("Skipping #"+elem+"#")
+                # skips molecule
                 num_skip_mol += 1
-                continue  # skips molecule
-            # elem_cmp = elem.upper().strip()
-            # if not elem_cmp in SYMBOLS:
-            #     continue  # skips molecule
-
-            # if elem_cmp in _to_skip:
-            #    continue  # no partition function for this
+                continue
 
             # # Collects information and creates atomic line object.
             # Note: Variable names follow Fortran source variable names.
@@ -113,15 +101,17 @@ def vald3_to_atoms(file_obj):
             if _waals == 0:
                 line.ch = 0.3e-31
             else:
-                # Formula supplied by Elvis Cantelli:
-                # extracted from cross-entropy code by P. Barklem
                 try:
+                    # Formula supplied by Elvis Cantelli:
+                    # extracted from cross-entropy code by P. Barklem
                     line.ch = 10**(2.5*_waals-12.32)
                 except:
+                    # Catches error to log _waals value that gave rise to error
                     _logger.critical("Error calculating ch: waals=%g" % _waals)
                     raise
+
             # Setting gr to zero will cause PFANT to calculate it using a formula.
-            # See readers.f90::read_atoms() for the formula.
+            # See pfantlib.f90::read_atoms() for the formula.
             line.gr = 0.0
             # ge is not present in VALD3 file.
             # it enters as a multiplicative term in popadelh(). The original
@@ -132,10 +122,9 @@ def vald3_to_atoms(file_obj):
             # Never used in PFANT
             line.abondr = 1
 
-            # # Stores in object
+            # # Stores line in object
             elem = ft.adjust_atomic_symbol(elem)
-            key = elem+s_ioni  # will gb.py elements by this key
-
+            key = elem+s_ioni  # will group elements by this key
             if key in edict:
                 a = edict[key]
             else:
@@ -153,9 +142,5 @@ def vald3_to_atoms(file_obj):
     _logger.debug("Number of (element+ioni): %s" % len(ret))
     _logger.debug("Total number of atomic lines: %d" % (sum(len(a) for a in ret.atoms),))
     return ret
-
-
-
-
 
 

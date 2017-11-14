@@ -66,7 +66,6 @@ def vald3_to_sols(molconsts, file_vald3, qgbd_calculator):
             # A = data["a"][i]
 
             # A seguir normalizacion de factor de Honl-london (HLN)
-            # TODO ask BLB: is this formula always like this?
             Normaliza = 1/((2.0*line.J2l+1)*(2.0*S+1)*(2.0-DELTAK))
 
             # A seguir teremos a forca de oscilador
@@ -74,7 +73,7 @@ def vald3_to_sols(molconsts, file_vald3, qgbd_calculator):
             # gf = Normaliza*1.499*(2*Jl+1)*A/(nu**2)  <-- this was for HITRAN
             gf_pfant = Normaliza*10**line.loggf
 
-            J2l_pfant = int(line.J2l)  # ojo, estamos colocando J2L-0.5! TODO ask BLB: we write J2l or J2l-.5?
+            J2l_pfant = int(line.J2l)  # ojo, estamos colocando J2L-0.5!
         except Exception as e:
             log.errors.append("#{}{} line: {}".format(i+1, a99.ordinal_suffix(i+1), str(e)))
             continue

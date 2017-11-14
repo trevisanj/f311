@@ -77,9 +77,6 @@ class MolConsts(dict):
 
             0 otherwise
 
-        TODO ask BLB This relates to pfantlib.f90 "cro" variable and I believe these to be the same.
-
-
         This replaces using table pfantmol.cro field for the Honl-London factor normalization
         """
         return 1. if self["from_spdf"]+self["to_spdf"] == 0 else 0.
