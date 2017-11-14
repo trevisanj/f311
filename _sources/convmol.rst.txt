@@ -94,7 +94,9 @@ The following values are calculated using application ``convmol.py`` and stored 
 
 These terms are calculated as follows::
 
-    qv = qv(molecule, system, vl, v2l) is calculated using code by Singh [Sing1998]
+    qv = qv(molecule, system, vl, v2l) is calculated using code by Singh [Sing1998].
+                                       The Franck-Condon factors were already calculate for several
+                                       different molecules and are tabulated inside file "moldb.sqlite"
 
     Bv = B_e - alpha_e * (v2l + 0.5)
 
@@ -112,7 +114,8 @@ These terms are calculated as follows::
 
 *LS* is calculated using a different formula depending on:
 
-i. the multiplicities of the transition (currently implemented only cases where the initial and final state have multiplicity)
+i. the multiplicities of the transition (currently implemented only cases where the initial and
+   final state have same multiplicity)
 ii. the value and/or sign of (*DeltaLambda* = *LambdaL* - *Lambda2l*);
 iii. whether *A* is a positive or negative number;
 iv. the branch of the spectral line (see below how to determine the branch)
@@ -126,12 +129,18 @@ So::
 
 .. hint::
 
-    All the line strength formulas and logic to determine which formula to use are in module ``f311.physics.multiplicity``
+    All the line strength formulas and logic to determine which formula to use are
+    in module ``f311.physics.multiplicity``. The latter contains references to the formulas and
+    tables from [Kovacs] that were used for each specific (i, ii, iii, iv) case.
+
+.. todo::
+
+    Explain term formulas "u+/-", "c+/-"
 
 Normalization of the line strength
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Normalization is applied so that, for a given J,::
+Normalization is applied so that, for a given *J2l*,::
 
     sum([S[branch] for branch in all_branches]) == 1
 

@@ -274,7 +274,9 @@
 <li><em>Gv</em>: rotational constant</li>
 </ul>
 <p>These terms are calculated as follows:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qv</span> <span class="o">=</span> <span class="n">qv</span><span class="p">(</span><span class="n">molecule</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">vl</span><span class="p">,</span> <span class="n">v2l</span><span class="p">)</span> <span class="ow">is</span> <span class="n">calculated</span> <span class="n">using</span> <span class="n">code</span> <span class="n">by</span> <span class="n">Singh</span> <span class="p">[</span><span class="n">Sing1998</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qv</span> <span class="o">=</span> <span class="n">qv</span><span class="p">(</span><span class="n">molecule</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">vl</span><span class="p">,</span> <span class="n">v2l</span><span class="p">)</span> <span class="ow">is</span> <span class="n">calculated</span> <span class="n">using</span> <span class="n">code</span> <span class="n">by</span> <span class="n">Singh</span> <span class="p">[</span><span class="n">Sing1998</span><span class="p">]</span><span class="o">.</span>
+                                   <span class="n">The</span> <span class="n">Franck</span><span class="o">-</span><span class="n">Condon</span> <span class="n">factors</span> <span class="n">were</span> <span class="n">already</span> <span class="n">calculate</span> <span class="k">for</span> <span class="n">several</span>
+                                   <span class="n">different</span> <span class="n">molecules</span> <span class="ow">and</span> <span class="n">are</span> <span class="n">tabulated</span> <span class="n">inside</span> <span class="n">file</span> <span class="s2">&quot;moldb.sqlite&quot;</span>
 
 <span class="n">Bv</span> <span class="o">=</span> <span class="n">B_e</span> <span class="o">-</span> <span class="n">alpha_e</span> <span class="o">*</span> <span class="p">(</span><span class="n">v2l</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
 
@@ -293,7 +295,8 @@
 </ul>
 <p><em>LS</em> is calculated using a different formula depending on:</p>
 <ol class="lowerroman simple">
-<li>the multiplicities of the transition (currently implemented only cases where the initial and final state have multiplicity)</li>
+<li>the multiplicities of the transition (currently implemented only cases where the initial and
+final state have same multiplicity)</li>
 <li>the value and/or sign of (<em>DeltaLambda</em> = <em>LambdaL</em> - <em>Lambda2l</em>);</li>
 <li>whether <em>A</em> is a positive or negative number;</li>
 <li>the branch of the spectral line (see below how to determine the branch)</li>
@@ -306,11 +309,17 @@
 </div>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">All the line strength formulas and logic to determine which formula to use are in module <code class="docutils literal"><span class="pre">f311.physics.multiplicity</span></code></p>
+<p class="last">All the line strength formulas and logic to determine which formula to use are
+in module <code class="docutils literal"><span class="pre">f311.physics.multiplicity</span></code>. The latter contains references to the formulas and
+tables from [Kovacs] that were used for each specific (i, ii, iii, iv) case.</p>
+</div>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Explain term formulas “u+/-“, “c+/-“</p>
 </div>
 <div class="section" id="normalization-of-the-line-strength">
 <h5>Normalization of the line strength<a class="headerlink" href="#normalization-of-the-line-strength" title="Permalink to this headline">¶</a></h5>
-<p>Normalization is applied so that, for a given J,:</p>
+<p>Normalization is applied so that, for a given <em>J2l</em>,:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">S</span><span class="p">[</span><span class="n">branch</span><span class="p">]</span> <span class="k">for</span> <span class="n">branch</span> <span class="ow">in</span> <span class="n">all_branches</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
 </div>
