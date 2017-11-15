@@ -26,7 +26,7 @@ setup(
     name='f311',
     packages=find_packages(),
     include_package_data=True,
-    version='0.17.11.13.0',
+    version='0.17.11.15.0',
     license='GNU GPLv3',
     platforms='any',
     description='Astronomy-related API, command-line tools, and windowed applications',
@@ -35,7 +35,7 @@ setup(
     url='https://github.com/trevisanj/f311',
     keywords= ['astronomy', "fits", "spectroscopy", "spectral synthesis", "photometry",
                "honl-london", "nist", "hitran", "multiplicity"],
-    install_requires=["a99>=0.17.12.08.0"],
+    install_requires=["a99>=0.17.12.08.2"],
     scripts=scripts
 )
 
