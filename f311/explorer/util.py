@@ -9,7 +9,9 @@ import copy
 from .. import physics as ph
 import a99
 
-__all__ = ["cut_spectrum", "crop_splist",]
+__all__ = ["cut_spectrum", "get_rgb", "crop_splist",]
+
+
 def cut_spectrum(sp, l0, lf):
     """
     Cuts spectrum given a wavelength interval, leaving origina intact
