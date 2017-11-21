@@ -15,6 +15,7 @@ __all__ = ["adjust_atomic_symbol", "description_to_symbols", "symbols_to_formula
            "molconsts_to_system_str", "greek_to_spdf", "spdf_to_greek",
            "SS_PLAIN", "SS_ALL_SPECIAL", "SS_RAW", "SS_SUPERSCRIPT",
            "str_to_elem_ioni", "parse_system_str", "split_molecules_description",
+           "state_to_str"
            ]
 
 
@@ -56,6 +57,38 @@ def spdf_to_greek(number):
         return "?"
 
 
+def state_to_str(label, mult, spdf, style=SS_ALL_SPECIAL):
+    """Compiles electronic state information into string
+
+    Args:
+        label: e.g., "A"
+        mult: e.g., 2 (meaning doublet)
+        spdf: e.g., 0 (meaning Sigma)
+
+        style: rendering style: one of SS_*
+
+    Returns:
+        str
+    """
+
+    if style == SS_PLAIN:
+        fmult = lambda x: x
+        fspdf = lambda x:spdf_to_greek(x)
+    elif style == SS_ALL_SPECIAL:
+        fmult = lambda x: a99.int_to_superscript(x)
+        fspdf = lambda x: a99.greek_to_unicode(spdf_to_greek(x).capitalize())
+    elif style == SS_RAW:
+        fmult = lambda x: x
+        fspdf = lambda x: x
+    elif style == SS_SUPERSCRIPT:
+        fmult = lambda x: a99.int_to_superscript(x)
+        fspdf = lambda x:spdf_to_greek(x)
+    else:
+        raise ValueError("Invalid style: {}".format(style))
+
+    return "{} {} {}".format(label, fmult(int(mult)), fspdf(spdf))
+
+
 def molconsts_to_system_str(molconsts, style=SS_ALL_SPECIAL):
     """Compiles electronic system information into string
 
@@ -84,9 +117,11 @@ def molconsts_to_system_str(molconsts, style=SS_ALL_SPECIAL):
     else:
         raise ValueError("Invalid style: {}".format(style))
 
-    return "{} {} {} - {} {} {}".format(molconsts["from_label"], fmult(int(molconsts["from_mult"])),
-                                    fspdf(molconsts["from_spdf"]), molconsts["to_label"],
-                                    fmult(int(molconsts["to_mult"])), fspdf(molconsts["to_spdf"]))
+    return "{} - {}".format(
+        state_to_str(molconsts["from_label"], molconsts["from_mult"], molconsts["from_spdf"]),
+        state_to_str(molconsts["to_label"], molconsts["to_mult"], molconsts["to_spdf"]),
+    )
+
 
 
 

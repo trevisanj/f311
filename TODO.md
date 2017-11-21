@@ -2,6 +2,8 @@
 
 ## GENERAL
 
+- simplify directory structure. Expose all the shit
+
 - Introduce "notes" field for main.dat: could be sth like "<star name> # <notes>"
 
 - x.py, tab 3: verify if files exist

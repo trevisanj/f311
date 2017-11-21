@@ -18,18 +18,4 @@ from .filepleztio import *
 from .filefcf import *
 from .filemolconsts import *
 from .fileconfconvmol import *
-
-# from . import filemod
-# from . import filedissoc
-# from . import fileabonds
-# from . import fileabsoru2
-# from . import fileabxfwhm
-# from . import fileatoms
-# from . import filehmap
-# from . import filemain
-# from . import filemolecules
-# from . import fileoptions
-# from . import filepartit
-# from . import filetoh
-# from . import filevald3
-# from . import filekuruczmol
+from .filefcfinput import *
