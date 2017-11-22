@@ -1,18 +1,11 @@
+import copy
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import a99
-from .a_WDBState import WDBState
 import copy
 import f311.filetypes as ft
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-import a99
-from .a_WDBState import WDBState
-import copy
-import f311.filetypes as ft
-
+import io
 
 __all__ = ["WMolecularConstants"]
 
@@ -152,7 +145,88 @@ class _XHLF(a99.XLogMainWindow):
         except Exception as E:
             self.add_log_error(a99.str_exc(E), True)
 
+"""
+        sbx = self.spinBox_redshift = QDoubleSpinBox()
+        laa.setBuddy(sbx)
+        sbx.setSingleStep(.01)
+        sbx.setDecimals(2)
+        sbx.setMinimum(-.5)
+        sbx.setMaximum(17)
+        # sbx.valueChanged.connect(self.spinBoxValueChanged)
+        lwset.addWidget(sbx)
 
+"""
+
+class _XTRAPRBInput(a99.XLogMainWindow):
+    """
+    Window to show Hönl-London factors for given MolConsts object
+    Args:
+      parent=None: nevermind
+      text: string
+    """
+
+    def __init__(self, parent, molconsts):
+        a99.XLogMainWindow.__init__(self, parent)
+
+        self.molconsts = molconsts
+
+        cw = self.centralWidget = QWidget()
+        self.setCentralWidget(cw)
+
+
+        # # Vertical layout: toolbar and text are stacked
+
+        lv = self.layout_main = QVBoxLayout(cw)
+
+        # ## Horizontal layout: toolbar
+
+        lh = self.layout_toolbar = QHBoxLayout()
+        lv.addLayout(lh)
+
+
+        ###
+        TT = "Maximum vibrational quantum number for calculation of Franck-Condon factors"
+        la = self.keep_ref(QLabel("Maximum v'' (MAXV)"))
+        la.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+        lh.addWidget(la)
+        ###
+        sbx = self.spinBox_vmax = QSpinBox()
+        la.setBuddy(sbx)
+        sbx.setSingleStep(1)
+        sbx.setMinimum(2)
+        sbx.setMaximum(30)
+        sbx.setValue(12)  # default maxv in TRAPRBInputState.__init__()
+        lh.addWidget(sbx)
+
+        ###
+        b = self.keep_ref(QPushButton("&Generate"))
+        lh.addWidget(b)
+        b.clicked.connect(self._calculate)
+        ###
+        lh.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
+        ###
+
+        # ## Text area
+
+        cw = self.textEdit = QPlainTextEdit()
+        lv.addWidget(cw)
+        cw.setReadOnly(True)  # allows copy but not editing
+        cw.setFont(a99.MONO_FONT)
+
+        self.setWindowTitle(a99.get_obj_doc0(ft.FileTRAPRBInput))
+        self.setGeometry(0, 0, 800, 600)
+        a99.place_center(self)
+        a99.nerdify(self)
+
+    def _calculate(self):
+        f = ft.FileTRAPRBInput()
+        try:
+            f.from_molconsts(self.molconsts, maxv=self.spinBox_vmax.value())
+        except Exception as e:
+            self.add_log_error("Could not generate TRAPRB input: {}".format(a99.str_exc(e)), True, e)
+        else:
+            text = f.dumps()
+            self.textEdit.setPlainText(text)
 
 
 class WMolecularConstants(a99.WBase):
@@ -420,22 +494,32 @@ class WMolecularConstants(a99.WBase):
 
 
         # ## Toolbar at bottom
-        ltb = self.layout_toolbar = QHBoxLayout()
+        self.layout_toolbar = self._get_toolbar_bottom()
+
+        a99.nerdify(self)
+
+    def _get_toolbar_bottom(self):
+        ltb = QHBoxLayout()
         self.layout_main.addLayout(ltb)
         a99.set_margin(ltb, _LAYMN_TOOLBAR)
         ltb.setSpacing(_LAYSP_TOOLBAR)
-
-        ltb.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
-
         bb = self.button_zeros = QPushButton("Fill empty fields with zeros")
         bb.clicked.connect(self.None_to_zero)
         ltb.addWidget(bb)
+
+        ltb.addSpacerItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
         bb = self.button_zeros = QPushButton("View Hönl-London factors")
         bb.clicked.connect(self.view_hlf)
         ltb.addWidget(bb)
 
-        a99.nerdify(self)
+        bb = self.button_zeros = QPushButton("Generate TRAPRB input")
+        bb.setToolTip("Generates text to be used as input file for the TRAPRB Fortran code [Jarmain&McCallum1970]\n"
+                      "This code calculates Franck-Condon factors")
+        bb.clicked.connect(self.view_traprb)
+        ltb.addWidget(bb)
+
+        return ltb
 
     def __getitem__(self, fieldname):
         return self.molconsts[fieldname]
@@ -482,6 +566,25 @@ class WMolecularConstants(a99.WBase):
             form = _XHLF(self, self.moldb, self.molconsts, self._get_fcf_dict())
             form.show()
 
+    def view_traprb(self):
+        """Opens text window TRAPRB input as text"""
+
+        if not self._can_calculate():
+            return
+
+        form = _XTRAPRBInput(self, self.molconsts)
+        form.show()
+
+    def _can_calculate(self):
+        """Shows error if the case. Returns True/False"""
+        reason = None
+        if self.moldb is None:
+            reason = "I need a molecular constants database"
+        elif self.molconsts is None:
+            reason = "I am blank"
+        if reason:
+            a99.show_error(reason)
+        return reason is None
 
     ################################################################################################
     # # Qt override

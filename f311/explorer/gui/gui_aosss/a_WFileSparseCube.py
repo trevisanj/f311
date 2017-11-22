@@ -15,8 +15,8 @@ from PyQt5.QtWidgets import *
 from .a_XScaleSpectrum import *
 from .a_WSparseCube import *
 import a99
-# from .... import explorer as ex
 import f311.filetypes as ft
+
 
 _COLORS_SQ = [(.1, .6, .5), (.5, .1, .7)]
 _ITER_COLORS_SQ = cycle(_COLORS_SQ)

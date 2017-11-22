@@ -450,7 +450,6 @@ class XExplorer(QMainWindow):
                     # This will be properly handled in __visualize()
                     classes.append("txt")
 
-
                 for x in classes:
                     if x == "txt":
                         text = "View plain text"

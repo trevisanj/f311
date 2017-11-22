@@ -32,7 +32,7 @@ class XFileMolConsts(XFileMainWindowBase):
         # # Synchronized sequences
         _VVV = ft.FileMolConsts.description
         self.pages.append(ex.MyPage(
-         text_tab="{} (Alt+&1)".format(_VVV),
+         text_tab="{}".format(_VVV),
          text_saveas="Save %s as..." % _VVV,
          text_load="Load %s" % _VVV,
          cls_save=ft.FileMolConsts, clss_load=(ft.FileMolConsts,), wild="*.py",

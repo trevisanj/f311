@@ -2,13 +2,17 @@ from .. import DataFile
 import a99
 from ..molconsts import *
 from ..basic import state_to_str, SS_PLAIN
+from .. import DataFile
+from collections import OrderedDict
+import re
+import a99
+import io
+
+__all__ = ["FileTRAPRBOutput", "FileTRAPRBInput", "TRAPRBInputState"]
 
 
-__all__ = ["FileFCFInput", "FCFInputState"]
-
-
-class FCFInputState(object):
-    """Describes one of the two states in FileFCFInput"""
+class TRAPRBInputState(object):
+    """Describes one of the two states in FileTRAPRBInput"""
 
     def __init__(self, title="", ni=0, ns=1, igraph=0, ienerg=0, istate=2, zmu=0., rmin=0.75, rmax=3.5,
                  delr=0.005, maxv=12, be=0., de=0., kdmaxv=12, neig=0, ev=None, bv=None):
@@ -58,11 +62,9 @@ class FCFInputState(object):
         return a99.make_code_readable("{}({})".format(self.__class__.__name__, ", ".join(["{}={}".format(x, repr(getattr(self, x))) for x in attrs])))
 
 
-class FileFCFInput(DataFile):
+class FileTRAPRBInput(DataFile):
     """
-    Input file for Franck-Condon factors (FCF) calculation program
-
-    **History**: See FileFCF
+    Input file for the TRAPRB Fortran code (which calculates Franck-Condon factors)
 
     Here is one annotated sample file:
 
@@ -108,9 +110,8 @@ class FileFCFInput(DataFile):
 
     [AAA] Talks with Prof. Amaury Augusto de Almeida
 
-    [BLB] Prof. Beatriz Leonor Barbuy
-
-    [FCFcode] Fortran program that calculates the Franck-Condon factors
+    [Jarmain&McCallum1970] Jarmain, W. R., and J. C. McCallum.
+    "TRAPRB: a computer program for molecular transitions." University of Western Ontario (1970)
     """
 
     attrs = []
@@ -118,7 +119,7 @@ class FileFCFInput(DataFile):
     def __init__(self):
         DataFile.__init__(self)
 
-        self.states = [FCFInputState(), FCFInputState()]
+        self.states = [TRAPRBInputState(), TRAPRBInputState()]
 
     def from_molconsts(self, mc, maxv=None, ni=None, ns=None, igraph=None, ienerg=None, istate=None,
                        rmin=None, rmax=None, delr=None):
@@ -126,7 +127,7 @@ class FileFCFInput(DataFile):
         Calculates everything almost entirely based on a MolConsts object
 
         Information not present in mc may be passed as argument or let fall to same defaults as
-        FCFInputState.
+        TRAPRBInputState.
 
         Args:
             mc: MolConsts instance
@@ -141,7 +142,7 @@ class FileFCFInput(DataFile):
             rmax:
 
         **Note**:  default to
-                  FCFInputState defaults
+                  TRAPRBInputState defaults
 
         **Note**: kdmaxv is made = maxv
         """
@@ -153,7 +154,7 @@ class FileFCFInput(DataFile):
             ev = [0.] + [omega_e * (v + .5) - omega_ex_e * (v + .5) ** 2 for v in range(maxv + 1)]
             bv = [be] + [be - alpha_e * (v + .5) for v in range(maxv + 1)]
 
-            st = FCFInputState(
+            st = TRAPRBInputState(
                 title="{} {}".format(formula, state_to_str(label, mult, spdf, style=SS_PLAIN)),
                 ni=ni, ns=ns, igraph=igraph, ienerg=ienerg, istate=istate,
                 zmu=zmu,
@@ -168,7 +169,7 @@ class FileFCFInput(DataFile):
             )
             return st
 
-        default = FCFInputState()
+        default = TRAPRBInputState()
 
         maxv = maxv if maxv is not None else default.maxv
         ni = ni if ni is not None else default.ni
@@ -212,11 +213,21 @@ class FileFCFInput(DataFile):
 
         self.states = [st0, st1]
 
+    def dumps(self):
+        """Return string containing the same as file contents"""
+
+        c = io.StringIO()
+        self._write_to_stream(c)
+        c.seek(0)
+        return c.read()
 
     def _do_save_as(self, filename):
         with open(filename, "w") as h:
-            self._write_state(h, self.states[0])
-            self._write_state(h, self.states[1])
+            self._write_to_stream(h)
+
+    def _write_to_stream(self, h):
+        self._write_state(h, self.states[0])
+        self._write_state(h, self.states[1])
 
     def _write_state(self, h, st):
         h.write("{:50}{:3}{:3}{:3}{:3}{:3}\n".format(st.title, st.ni, st.ns, st.igraph, st.ienerg, st.istate))
@@ -247,7 +258,7 @@ class FileFCFInput(DataFile):
 
         # 1  OH A DOUBLET SIGMA UPPER STATE                   0  1  0  0  2
         line = h.readline()
-        assert isinstance(st, FCFInputState)
+        assert isinstance(st, TRAPRBInputState)
         st.title = line[0:50]
         st.ni = tint(line[50:53])
         st.ns = tint(line[53:56])
@@ -283,7 +294,7 @@ class FileFCFInput(DataFile):
         st.bv = read32(h)
 
 
-def tolerant(string, type_):
+def _tolerant(string, type_):
     """Tolerant int or float: empty string falls back to zero"""
     try:
         return type_(string)
@@ -294,9 +305,148 @@ def tolerant(string, type_):
 
 
 def tint(string):
-    return tolerant(string, int)
+    return _tolerant(string, int)
 
 
 def tfloat(string):
-    return tolerant(string, float)
+    return _tolerant(string, float)
+
+
+class FileTRAPRBOutput(DataFile):
+    """
+    Output file for the TRAPRB Fortran code (which calculates Franck-Condon factors)
+
+    Usage: attribute "fcfs" is a dictionary accessed by key (vl, v2l)
+
+    **History:**
+
+    This file is the output of the TRAPRB Fortran code published in 1970 [Jarmain&McCallum1970]
+
+    In 2015, I modified this Fortran code to compile with gfortran on request from
+    Prof. Amaury Augusto de Almeida,.
+
+    Bruno left several output files in his directory ATMOS:/wrk4/bruno/Mole/Fc
+    containing tabulated FCFs for several molecules. The initial reason why I created this class
+    was to read those files.
+
+    References:
+
+    [Jarmain&McCallum1970] Jarmain, W. R., and J. C. McCallum.
+    "TRAPRB: a computer program for molecular transitions." University of Western Ontario (1970)
+    """
+
+    attrs = ["fcfs"]
+
+    @property
+    def num_lines(self):
+        return len(self)
+
+    def __len__(self):
+        return len(self.fcfs)
+
+    def __getitem__(self, item):
+        return self.fcfs[item]
+
+    def __init__(self):
+        DataFile.__init__(self)
+
+        self.fcfs = OrderedDict()
+
+
+    def _do_load(self, filename):
+        # File part of interest looks like this:
+
+        #                                 V"   V""  FRANCK CONDON FACTOR     R-CENTROID
+        #
+        #                                  0   0    .8809749E+00             .1159111E+01
+        #                                  0   1    .6597226E-01             .1573085E+01
+        #                                  0   2    .4967269E-01             .1309538E+01
+        #                                  0   3    .4893512E-06             .5487973E+02
+        #                                  0   4    .1967671E-02             .1092197E+01
+        #                                  0   5    .5098846E-03             .7344212E+00
+        #                                  0   6    .3264353E-03             .8154120E+00
+        #                                  0   7    .1959470E-03             .8020893E+00
+        #                                  0   8    .1221533E-03             .7933001E+00
+        #                                  0   9    .7849922E-04             .7871405E+00
+        #                                  0  10    .5130633E-04             .7806426E+00
+        #
+        #                                 V"   V""  FRANCK CONDON FACTOR     R-CENTROID
+        #
+        #                                  1   0    .7950073E-01             .9007177E+00
+        #                                  1   1    .7301335E+00             .1176593E+01
+        #                                  1   2    .5329854E-01             .1873632E+01
+        #                                  1   3    .1172008E+00             .1293195E+01
+        #                                  1   4    .9687749E-03            -.1106724E+01
+        #                                  1   5    .8699398E-02             .1027710E+01
+        #                                  1   6    .3409328E-02             .7787252E+00
+        #                                  1   7    .2211213E-02             .8098937E+00
+        #                                  1   8    .1418452E-02             .8016906E+00
+        #                                  1   9    .9225228E-03             .7913423E+00
+        #                                  1  10    .6110833E-03             .7833238E+00
+        # 1
+        #
+        #                                 V"   V""  FRANCK CONDON FACTOR     R-CENTROID
+        #
+        #                                  2   0    .1939492E-01             .1045730E+01
+        #                                  2   1    .4528844E-01             .1349549E+01
+        #                                  2   2    .1031371E+00             .1003365E+01
+        #                                  2   3    .4823686E+00             .1247711E+01
+        #                                  2   4    .7587573E-01             .2082369E+01
+        #                                  2   5    .2123286E+00             .1379030E+01
+        #                                  2   6    .2887595E-02            -.1045935E+01
+        #                                  2   7    .1985530E-01             .9975332E+00
+        #                                  2   8    .1103128E-01             .8153041E+00
+        #                                  2   9    .7418684E-02             .8001242E+00
+        #                                  2  10    .5176848E-02             .7976580E+00
+        #
+
+        # magic characters
+        MAGIC = 'V"   V""  FRANCK CONDON FACTOR     R-CENTROID'
+
+        # possible states for parsing file
+        EXP_MAGIC = 0 # Expecting magic characters
+        EXP_BLANK = 1 # Expecting blank line
+        EXP_DATA = 2 # Expecting data, "1*" or blank line
+
+        # regular expression for extraction the data
+        rec = re.compile("\s*(\d+)\s*(\d+)\s*([\deE\.\+\-]+)")
+
+
+        with open(filename, "r") as h:
+            found = False
+            state = EXP_MAGIC
+            i = 0
+            try:
+                for line in h:
+                    i += 1
+                    if state == EXP_MAGIC:
+                       if line.strip() == MAGIC:
+                           state = EXP_BLANK
+                           found = True
+
+                    elif state == EXP_BLANK:
+                        if line.strip() == "":
+                            state = EXP_DATA
+                    elif state == EXP_DATA:
+                        if line.strip() == "" or line[0] == "1":
+                            state = EXP_MAGIC
+                        else:
+                            m = rec.match(line)
+                            if m is None:
+                                raise RuntimeError("Could not extract (vl, v2l, fcf)")
+                            vl, v2l, fcf = m.groups()
+                            vl = int(vl)
+                            v2l = int(v2l)
+
+                            if (vl, v2l) in self.fcfs:
+                                a99.get_python_logger().warning("Repeated (vl, v2l): ({}, {})".format(vl, v2l))
+
+                            fcf = float(fcf)
+                            self.fcfs[(vl, v2l)] = fcf
+            except Exception as e:
+                raise RuntimeError("Error in line {}".format(i)) from e
+
+
+            if not found:
+                raise RuntimeError("File does not appear to be a FileTRAPRBOutput")
 

@@ -166,7 +166,7 @@ def insert_franck_condon_factors():
         if filename is not None:
             # Can handle two different file formats
             try:
-                a = ft.FileFCF()
+                a = ft.FileTRAPRBOutput()
                 a.load(filename)
                 fcf_dict = a.fcfs
             except:

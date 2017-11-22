@@ -33,14 +33,14 @@ def test_load(tmpdir):
     with open(filename, "w") as f:
         f.write(_STREAM)
 
-    f = ft.FileFCFInput()
+    f = ft.FileTRAPRBInput()
     f.load(filename)
 
     assert f.states[0].__dict__ == \
-        ft.FCFInputState(title='1  NH A TRIPLET PI UPPER STATE                    ', ni=0, ns=1, igraph=0, ienerg=0, istate=2, zmu=0.94901603, rmin=0.75, rmax=3.5, delr=0.005, maxv=12, be=16.6745, de=29609.42, kdmaxv=12, neig=0, ev=[0.0, 1590.95, 4624.95, 7461.75, 10101.35, 12543.75, 14788.95, 16836.95, 18687.75, 20341.35, 21797.75, 23056.95, 24118.95, 24983.75], bv=[16.6745, 16.3018, 15.5564, 14.811, 14.0656, 13.3202, 12.5748, 11.8294, 11.084, 10.3386, 9.5932, 8.8478, 8.1024, 7.357]).__dict__
+        ft.TRAPRBInputState(title='1  NH A TRIPLET PI UPPER STATE                    ', ni=0, ns=1, igraph=0, ienerg=0, istate=2, zmu=0.94901603, rmin=0.75, rmax=3.5, delr=0.005, maxv=12, be=16.6745, de=29609.42, kdmaxv=12, neig=0, ev=[0.0, 1590.95, 4624.95, 7461.75, 10101.35, 12543.75, 14788.95, 16836.95, 18687.75, 20341.35, 21797.75, 23056.95, 24118.95, 24983.75], bv=[16.6745, 16.3018, 15.5564, 14.811, 14.0656, 13.3202, 12.5748, 11.8294, 11.084, 10.3386, 9.5932, 8.8478, 8.1024, 7.357]).__dict__
 
     assert f.states[1].__dict__ == \
-        ft.FCFInputState(title='1  NH X TRIPLET SIGMA  GROUND STATE               ', ni=0, ns=1, igraph=0, ienerg=0, istate=2, zmu=0.94901603, rmin=0.75, rmax=3.5, delr=0.005, maxv=12, be=16.6993, de=29609.42, kdmaxv=12, neig=0, ev=[0.0, 1621.51, 4747.01, 7715.81, 10527.91, 13183.31, 15682.01, 18024.01, 20209.31, 22237.91, 24109.81, 25825.01, 27383.51, 28785.31], bv=[16.6993, 16.3748, 15.7258, 15.0768, 14.4278, 13.7788, 13.1298, 12.4808, 11.8318, 11.1828, 10.5338, 9.8848, 9.2358, 8.5868]).__dict__
+        ft.TRAPRBInputState(title='1  NH X TRIPLET SIGMA  GROUND STATE               ', ni=0, ns=1, igraph=0, ienerg=0, istate=2, zmu=0.94901603, rmin=0.75, rmax=3.5, delr=0.005, maxv=12, be=16.6993, de=29609.42, kdmaxv=12, neig=0, ev=[0.0, 1621.51, 4747.01, 7715.81, 10527.91, 13183.31, 15682.01, 18024.01, 20209.31, 22237.91, 24109.81, 25825.01, 27383.51, 28785.31], bv=[16.6993, 16.3748, 15.7258, 15.0768, 14.4278, 13.7788, 13.1298, 12.4808, 11.8318, 11.1828, 10.5338, 9.8848, 9.2358, 8.5868]).__dict__
 
 
 _STREAM2 = """1  OH A DOUBLET SIGMA UPPER STATE                   0  1  0  0  2
@@ -73,12 +73,12 @@ def test_load_save_load(tmpdir):
     with open(filename, "w") as f:
         f.write(_STREAM2)
 
-    f = ft.FileFCFInput()
+    f = ft.FileTRAPRBInput()
     f.load(filename)
 
     f.save_as("guarana")
 
-    g = ft.FileFCFInput()
+    g = ft.FileTRAPRBInput()
     g.load("guarana")
 
     assert f.states[0].__dict__ == g.states[0].__dict__
@@ -89,5 +89,5 @@ def test_from_molconsts(tmpdir):
     os.chdir(str(tmpdir))
     mc = ft.some_molconsts()
 
-    f = ft.FileFCFInput()
+    f = ft.FileTRAPRBInput()
     f.from_molconsts(mc, 15)

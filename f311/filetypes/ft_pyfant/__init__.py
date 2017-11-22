@@ -15,7 +15,6 @@ from .filemoldb import *
 from .filehitrandb import *
 from .filekuruczmol import *
 from .filepleztio import *
-from .filefcf import *
 from .filemolconsts import *
 from .fileconfconvmol import *
-from .filefcfinput import *
+from .filetraprb import *

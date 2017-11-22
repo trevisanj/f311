@@ -512,7 +512,6 @@ class Conf(object):
         # ** pfant -> nulbad
         if FOR_PFANT in sequence or FOR_NULBAD in sequence:
             flprefix = self.get_flprefix(opt=opt)
-            self.logger.debug("PASSEI POR AQUI")
             opt.flprefix = sid.join_with_session_dir(flprefix)
 
         if FOR_NULBAD in sequence:
