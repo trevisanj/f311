@@ -246,6 +246,9 @@ class Executable(Runnable):
 
     def __run(self):
         """Called both from run() and run_from_combo()."""
+
+        self.conf.logger.debug("FLPREFIX NOW "+str(self.conf.opt.flprefix))
+
         args = self.conf.get_args()
         cmd_words = [self._exe_path] + args
 

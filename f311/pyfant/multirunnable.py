@@ -171,6 +171,7 @@ class MultiRunnable(runnables.Runnable):
             flprefix = "%s_%s" % (self.__file_main.titrav, pfant_name)
 
             pfant = pf.Pfant()
+            pfant.conf.flag_output_to_dir = False
             pfant.conf.opt = copy.copy(self.__options)
             pfant.conf.rename_outputs([pf.FOR_INNEWMARCS, pf.FOR_HYDRO2], sid=self.sid)
             pfant.conf.sid.id_maker = custom_id_maker
@@ -180,7 +181,7 @@ class MultiRunnable(runnables.Runnable):
             pfant.conf.file_abonds = file_abonds_
             pfant.conf.file_dissoc = file_abonds_.get_file_dissoc()
 
-            self.__logger.debug(pfant.conf.opt.flprefix)
+            self.__logger.debug("LOOK FLPREFIX "+str(pfant.conf.opt.flprefix))
 
             pfant_list.append(pfant)
         rm = self.__runnable_manager = pf.RunnableManager()
@@ -205,6 +206,7 @@ class MultiRunnable(runnables.Runnable):
 
             for fwhm in fwhms:
                 nulbad = pf.Nulbad()
+                nulbad.conf.flag_output_to_dir = False
                 nulbad.conf.sid.id_maker = custom_id_maker
                 nulbad.conf.opt = copy.copy(self.__options)
                 nulbad.conf.opt.fn_flux = pfant.conf.opt.flprefix+".norm"

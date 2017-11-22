@@ -8,8 +8,6 @@ from .filedissoc import FileDissoc
 import tabulate
 
 
-int
-
 class FileAbonds(DataFile):
     """PFANT Stellar Chemical Abundances"""
 
@@ -28,30 +26,15 @@ class FileAbonds(DataFile):
         # overall
         self.notes = ""
 
-    def __iter__(self):
-        yield "hello"
-        yield "ok"
-        yield "now"
-        for i in range(10):
-            yield i
-        yield "hello"
-        yield "ok"
-        yield "now"
-
-
-
-
-
     def __str__(self):
         data = zip(self.ele, self.abol, self.notes_per_ele)
         headers = ["El", "Abund", "Notes"]
-        return tabulate.tabulate(data, headers)
-        # nn = max(0 if x is None else len(x) for x in self.notes_per_ele)
-        # return "\n".join(
-        #  ["El  Abund Notes",
-        #   "-- ------ "+"-"*nn]+
-        #  ["{:>2s} {:>6.2f} {}".format(a, b, c)
-        #   for a, b, c in zip(self.ele, self.abol, self.notes_per_ele)])
+
+        notes = ""
+        if self.notes:
+            notes = "\n\nNotes\n-----\n{}".format(self.notes)
+
+        return tabulate.tabulate(data, headers)+notes
 
     def __add__(self, other):
         if not isinstance(other, FileAbonds):
@@ -75,7 +58,7 @@ class FileAbonds(DataFile):
                             # file validation
                             raise RuntimeError("'EOF' marker found at beginning of file, I need at least one element")
 
-                        self.notes = s[2:-1].replace("<br>", "\n")
+                        self.notes = s[10:].replace("<br>", "\n")
                         break
                 [ele, abol, notes] = s[1:3], s[3:9], s[10:]
 
@@ -90,7 +73,7 @@ class FileAbonds(DataFile):
         with open(filename, "w") as h:
             h.writelines([' %-2s%6.2f %s\n' % (self.ele[i], self.abol[i], self.notes_per_ele[i])
                           for i in range(len(self))])
-            c = " "+self.notes.replace("\n", "<br>") if len(self.notes) > 0 else ""
+            c = (" "*9)+self.notes.replace("\n", "<br>") if len(self.notes) > 0 else ""
             h.writelines(['1'+c+'\n', '1\n'])
 
     def get_file_dissoc(self):

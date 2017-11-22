@@ -166,8 +166,7 @@ class IdMaker(object):
         """Returns string which is the name of a filesystem directory."""
         if not flag_split_dirs:
             return self.session_prefix_singular+str(self.__i_id)
-        d0 = self.session_prefix_plural+\
-             str(int(self.__i_id//self.dirs_per_dir)*self.dirs_per_dir)
+        d0 = self.session_prefix_plural+str(int(self.__i_id//self.dirs_per_dir)*self.dirs_per_dir)
         d1 = self.session_prefix_singular+str(self.__i_id)
         return os.path.join(d0, d1)
 
@@ -513,6 +512,7 @@ class Conf(object):
         # ** pfant -> nulbad
         if FOR_PFANT in sequence or FOR_NULBAD in sequence:
             flprefix = self.get_flprefix(opt=opt)
+            self.logger.debug("PASSEI POR AQUI")
             opt.flprefix = sid.join_with_session_dir(flprefix)
 
         if FOR_NULBAD in sequence:
