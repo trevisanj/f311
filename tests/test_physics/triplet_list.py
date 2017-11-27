@@ -12,7 +12,7 @@ def test_adds_to_one0(tmpdir):
 
     for J2l in range(30):
         try:
-            mtools = ph.multiplicity_toolbox(consts)
+            mtools = ph.linestrength_toolbox(consts)
 
             mtools.populate(0, 0, J2l)
             sum_ = sum([x for x in mtools._dict_sj.values() if x > 0])

@@ -119,6 +119,33 @@ Convert 1D spectral file to FITS format
 
 .. literalinclude:: ../../docs/examples/filetypes/convert-to-fits.py
 
+
+Import Kurucz' molecular linelist file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. literalinclude:: ../../docs/examples/filetypes/import-kurucz.py
+
+.. code-block:: none
+
+    KuruczMolLine(lambda_=2877.558,
+                  loggf=-14.533,
+                  J2l=23.0,
+                  E2l=2354.082,
+                  Jl=24.0,
+                  El=37095.578,
+                  atomn0=6,
+                  atomn1=6,
+                  state2l='a',
+                  v2l=0,
+                  lambda_doubling2l='e',
+                  spin2l=1,
+                  statel='d',
+                  vl=10,
+                  lambda_doublingl='e',
+                  spinl=3,
+                  iso=12)
+
+
 API reference
 -------------
 

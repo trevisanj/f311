@@ -2,7 +2,7 @@
 
 
 __all__ = ["KuruczMolLine", "KuruczMolLineOld", "KuruczMolLineOld1", "FileKuruczMolecule", "FileKuruczMoleculeOld",
-           "FileKuruczMoleculeBase", "load_kurucz_mol", "FileKuruczMoleculeOld1",]
+           "FileKuruczMoleculeBase", "load_kurucz_mol", "FileKuruczMoleculeOld1", "FileKuruczMolecule1"]
 
 # from ..gear import *
 import sys
@@ -41,8 +41,8 @@ def load_kurucz_mol(filename):
         FileKuruczMoleculeBase: either FileKuruczMolecule or FileKuruczMoleculeOld
     """
     from f311 import filetypes as ft
-    return ft.load_with_classes(filename, [FileKuruczMolecule, FileKuruczMoleculeOld,
-                                           FileKuruczMoleculeOld1,])
+    return ft.load_with_classes(filename, [FileKuruczMolecule, FileKuruczMolecule1,
+                                           FileKuruczMoleculeOld, FileKuruczMoleculeOld1,])
 
 
 class FileKuruczMoleculeBase(DataFile):
@@ -181,6 +181,109 @@ class FileKuruczMolecule(FileKuruczMoleculeBase):
             #     e)).with_traceback(sys.exc_info()[2])
             raise RuntimeError("Error around %d%s row of file '%s': \"%s\"" %
                                (r + 1, a99.ordinal_suffix(r + 1), filename, a99.str_exc(e))) from e
+
+
+@a99.froze_it
+class FileKuruczMolecule1(FileKuruczMoleculeBase):
+    """
+    Kurucz molecular lines file following format of file "c2dabrookek.asc"
+    """
+
+    def _do_load(self, filename):
+
+        # **note** Kurucz puts always the "double-line" values before the "line" values
+        #
+        #     Wl(nm) loggf    J"   E(cm-1)   J'    E(cm-1) C C
+        #          |      |    |         |    |          | | |multiplicity
+        #          |      |    |         |    |          | | ||electronic state
+        #          |      |    |         |    |          | | |||v"=00
+        #          |      |    |         |    |          | | |||| lambda-doubling component
+        #          |      |    |         |    |          | | |||| |spin2l
+        #          |      |    |         |    |          | | |||| ||
+        #   287.7558-14.533 23.0  2354.082 24.0 -37095.578 6063a00e1  3d10e3  12 677  34741.495
+        #   287.7564-14.955 22.0  2282.704 23.0 -37024.124 6063a00f1  3d10f3  12 677  34741.419
+        #   287.7582-14.490 21.0  2214.696 22.0 -36955.900 6063a00e1  3d10e3  12 677  34741.205
+        #   287.7613-15.004 24.0  2428.453 25.0 -37169.280 6063a00f1  3d10f3  12 677  34740.828
+        #   287.7650-14.899 20.0  2149.765 21.0 -36890.147 6063a00f1  3d10f3  12 677  34740.382
+        #   287.7671-14.573 25.0  2506.275 26.0 -37246.411 6063a00e1  3d10e3  12 677  34740.136
+        #   287.7739-14.442 19.0  2088.132 20.0 -36827.442 6063a00e1  3d10e3  12 677  34739.310
+        # 0         1         2         3         4         5         6         7         8
+        # 012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+        #   205.0652 -7.621  4.5   355.915  4.5  49105.280 108X00f1   A07e1   16
+
+        filesize = os.path.getsize(filename)
+        num_lines = int(filesize/84)
+
+        with open(filename, "r") as h:
+            self._do_load_h(h, filename, num_lines)
+
+    def _do_load_h(self, h, filename, num_lines=0):
+        r = 0  # counts rows of file
+        ii = 0
+        try:
+            self.lines = []
+            while True:
+                s = h.readline().strip("\n")
+                if len(s) == 0:
+                    break
+
+                # Kurucz: "negative energies are predicted or extrapolated"
+                # (http: // kurucz.harvard.edu / linelists.html)
+                E2l = float(s[22:32])
+                if E2l < 0:
+                    E2l = -E2l
+                El = float(s[37:48])
+                if El < 0:
+                    El = -El
+
+                try:
+                    spin2l = int(s[57:58])
+                except ValueError:
+                    spin2l = 0
+
+                try:
+                    spinl = int(s[65:66])
+                except ValueError:
+                    spinl = 0
+
+                line = KuruczMolLine(
+                    float(s[0:10]) * 10,
+                    float(s[10:17]),
+                    float(s[17:22]),
+                    E2l,
+                    float(s[32:37]),
+                    El,
+                    int(s[48:50]),
+                    int(s[50:52]),
+                    s[53:54],
+                    int(s[54:56]),
+                    s[56:57],
+                    spin2l,
+                    s[61:62],
+                    int(s[62:64]),
+                    s[64:65],
+                    spinl,
+                    int(s[68:70]), )
+
+
+                self.lines.append(line)
+                r += 1
+                ii += 1
+                if ii == _PROGRESS_INDICATOR_PERIOD:
+                    a99.get_python_logger().info(
+                        "Loading '{}': {}".format(filename, a99.format_progress(r, num_lines)))
+                    ii = 0
+
+
+        except Exception as e:
+            # f = type(e)(("Error around %d%s row of file '%s'" %
+            #              (r + 1, a99.ordinal_suffix(r + 1), filename)) + ": " + str(
+            #     e)).with_traceback(sys.exc_info()[2])
+            raise RuntimeError("Error around %d%s row of file '%s': \"%s\"" %
+                               (r + 1, a99.ordinal_suffix(r + 1), filename, a99.str_exc(e))) from e
+
+
+
 
 
 @a99.froze_it

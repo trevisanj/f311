@@ -2,6 +2,8 @@
 
 ## GENERAL
 
+- moldbed: download from nist; execute traprb!
+
 - simplify directory structure. Expose all the shit
 
 - Introduce "notes" field for main.dat: could be sth like "<star name> # <notes>"
