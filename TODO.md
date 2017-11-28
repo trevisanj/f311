@@ -2,6 +2,10 @@
 
 ## GENERAL
 
+- detecting file type needs serious work
+
+- explorer.py: Load as... (force file type)
+
 - moldbed: download from nist; execute traprb!
 
 - simplify directory structure. Expose all the shit
