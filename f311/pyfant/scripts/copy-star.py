@@ -75,3 +75,11 @@ if __name__ == "__main__":
         print("'%s' is not a directory" % dir_)
         sys.exit(-1)
     pf.copy_star(dir_)
+
+    # print("\n")
+    # print("\n".join(a99.format_box("Attention")))
+    # print("File 'dissoc.dat' may require revision!\n\n"
+    #       "You may delete this file to assume atomic abundances in 'abonds.dat' for the molecules.\n\n"
+    #       "(this message should be deleted when all files 'dissoc.dat' provided with PFANT\n"
+    #       "finish being reviewed)\n\n"
+    #       "(2017-11-28)\n")
