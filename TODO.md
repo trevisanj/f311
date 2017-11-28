@@ -2,6 +2,8 @@
 
 ## GENERAL
 
+- move ariastro part to ariastro project
+
 - simplify directory structure. Expose all the shit
 
 - Introduce "notes" field for main.dat: could be sth like "<star name> # <notes>"

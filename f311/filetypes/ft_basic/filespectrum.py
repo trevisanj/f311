@@ -322,6 +322,10 @@ class FileSpectrumFits(FileSpectrum):
 
     def _do_load(self, filename):
         fits_obj = fits.open(filename)
+
+        if len(fits_obj) > 0:
+            raise RuntimeError("File has more than 1 frame, probably not a FITS spectrum")
+
         # fits_obj.info()
         hdu = fits_obj[0]
         hdu.verify()

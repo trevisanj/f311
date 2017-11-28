@@ -27,7 +27,7 @@ __all__ = [
 #
 # 20171027 added external package "convmol"
 #
-COLLABORATORS_C = ["f311.filetypes", "f311.explorer", "convmolworks"]
+COLLABORATORS_C = ["f311.filetypes", "f311.explorer", "convmolworks", "ariastro"]
 
 
 # **        ****                ******        ****                ******        ****

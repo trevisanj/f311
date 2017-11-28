@@ -33,7 +33,13 @@ class FileFullCube(DataFile):
         self.hdulist = None
 
     def _do_load(self, filename):
-        self.hdulist = fits.open(filename)
+        o = fits.open(filename)
+
+        if not "Puech" in o[0].header.comments["COMMENTS"]:
+            raise RuntimeError("Word 'Puech' not find in header comments")
+
+        self.hdulist = o
+
         self.wcube = FullCube(self.hdulist[0])
         self.filename = filename
 
