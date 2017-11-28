@@ -12,5 +12,4 @@ from .visspectrum import *
 from .plotsp import *
 from .vis_pyfant import *
 from .vis_aosss import *
-from .vis_uroboros import *
 from .draw_cube import *

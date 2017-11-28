@@ -26,7 +26,7 @@ setup(
     name='f311',
     packages=find_packages(),
     include_package_data=True,
-    version='0.17.11.23.0',
+    version='0.17.11.27.0',
     license='GNU GPLv3',
     platforms='any',
     description='Astronomy-related API, command-line tools, and windowed applications',

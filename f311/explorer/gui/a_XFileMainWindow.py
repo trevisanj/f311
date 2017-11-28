@@ -113,6 +113,10 @@ class XFileMainWindowBase(a99.XLogMainWindow):
         Args:
             fobjs: [filename or DataFile obj, ...]"""
         if fobjs is not None:
+            # tolerance
+            if not hasattr(fobjs, "__iter__"):
+                fobjs = [fobjs]
+
             for index, (fobj, page) in enumerate(zip(fobjs, self.pages)):
                 if fobj is None:
                     continue
