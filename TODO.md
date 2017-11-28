@@ -2,7 +2,7 @@
 
 ## GENERAL
 
-- move ariastro part to ariastro project
+- moldbed: download from nist; execute traprb!
 
 - simplify directory structure. Expose all the shit
 

@@ -534,7 +534,7 @@ class _WKuruczPanel(a99.WBase):
         try:
             cb.clear()
             if f is not None:
-                if f.__class__ != ft.FileKuruczMolecule:
+                if f.__class__  not in (ft.FileKuruczMolecule, ft.FileKuruczMolecule1):
                     cb.addItem("(all (file is old-format))")
                 else:
                     self._isotopes = list(set([line.iso for line in f]))
@@ -674,6 +674,7 @@ class _WConv(a99.WConfigEditor):
         a = self.keep_ref(QLabel("Calculate 'gf' based on\n"
                                  "Hönl-London factors (HLFs)"))
         w = self.checkbox_hlf = QCheckBox()
+        w.setChecked(True)
         w.stateChanged.connect(self.changed)
         w.setToolTip("If selected, will ignore 'loggf' from Kurucz file and\n"
                      "calculate 'gf' using Hönl-London factors formulas taken from Kovacz (1969)")
@@ -684,6 +685,7 @@ class _WConv(a99.WConfigEditor):
         a = self.keep_ref(QLabel("Apply normalization factor\n"
                                  "for HLFs to add up to 1 (for fixed J)"))
         w = self.checkbox_normhlf = QCheckBox()
+        w.setChecked(True)
         w.stateChanged.connect(self.changed)
         w.setToolTip("If selected, calculated 'gf's will be multiplied by\n"
                      "2 / ((2 * J2l + 1) * (2 * S + 1)*(2 - DELTAK))")
@@ -694,6 +696,7 @@ class _WConv(a99.WConfigEditor):
         a = self.keep_ref(QLabel("Multiply calculated 'gf' by\n"
                                  "Franck-Condon factor"))
         w = self.checkbox_fcf = QCheckBox()
+        w.setChecked(True)
         w.stateChanged.connect(self.changed)
         w.setToolTip("If selected, incorporates internally calculated Franck-Condon factor"
                      "into the calculated 'gf'")
@@ -701,17 +704,10 @@ class _WConv(a99.WConfigEditor):
         lg.addWidget(w, i_row, 1)
         i_row += 1
 
-        a = self.keep_ref(QLabel("Force 0.1 <= FCF < 1"))
-        w = self.checkbox_special_fcf = QCheckBox()
-        w.stateChanged.connect(self.changed)
-        w.setToolTip("(*temporary*) If selected, makes 'fcf = fcf * 10 ** -(math.floor(math.log10(fcf)) + 1)'")
-        lg.addWidget(a, i_row, 0)
-        lg.addWidget(w, i_row, 1)
-        i_row += 1
-
         a = self.keep_ref(QLabel("Use spin' for branch determination\n"
                                  "(spin'' is always used)"))
         w = self.checkbox_spinl = QCheckBox()
+        w.setChecked(True)
         w.stateChanged.connect(self.changed)
         w.setToolTip("If you tick this box, branches P12, P21, Q12, Q21, R21, R12 (i.e., with two numbers) become possible")
         lg.addWidget(a, i_row, 0)
@@ -723,6 +719,14 @@ class _WConv(a99.WConfigEditor):
         w.setChecked(True)
         w.stateChanged.connect(self.changed)
         w.setToolTip("If selected, will show less error messages")
+        lg.addWidget(a, i_row, 0)
+        lg.addWidget(w, i_row, 1)
+        i_row += 1
+
+        a = self.keep_ref(QLabel("Force 0.1 <= FCF < 1 (debugging option)"))
+        w = self.checkbox_special_fcf = QCheckBox()
+        w.stateChanged.connect(self.changed)
+        w.setToolTip("(*temporary*) If selected, makes 'fcf = fcf * 10 ** -(math.floor(math.log10(fcf)) + 1)'")
         lg.addWidget(a, i_row, 0)
         lg.addWidget(w, i_row, 1)
         i_row += 1

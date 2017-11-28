@@ -1,12 +1,14 @@
 # coding: utf-8
 """
-Multiplicity (Chemistry)
+Molecular line strength calculation
 
 References:
     Istvan Kovacs, Rotational Structure in the spectra of diatomic molecules.
     American Elsevier, 1969
 
     https://en.wikipedia.org/wiki/Multiplicity_(chemistry)
+
+    Bruno Castilho's work on ATMOS machine
 """
 
 
@@ -14,11 +16,35 @@ import math
 from f311 import filetypes as ft
 import a99
 
-__all__ = ["multiplicity_toolbox", "NoLineStrength", "NO_LINE_STRENGTH"]
+__all__ = ["linestrength_toolbox", "NoLineStrength", "NO_LINE_STRENGTH"]
 
 
-# Code to signal that there is no HLF for combination (vl, v2l, J, branch)
+def linestrength_toolbox(molconsts, flag_normalize=None):
+    """Factory function that returns a MultiplicityToolbox descendant appropriate to molconsts"""
+
+    C = [_LSTSinglet, _LSTDoublet0, _LSTDoublet1, _LSTTriplet0, _LSTTriplet1]
+
+    absDeltaLambda = abs(molconsts["from_spdf"]-molconsts["to_spdf"])
+
+    for cls in C:
+        if (cls.absDeltaLambda == "all" or cls.absDeltaLambda == absDeltaLambda) and \
+           cls.multiplicityl == molconsts["from_mult"] and \
+           cls.multiplicity2l == molconsts["to_mult"]:
+            return cls(molconsts, flag_normalize)
+
+    raise ValueError("Could not find a suitable class for given molecular constants "
+     "(I need abs(\u0394\u039B)={}; multiplicity'={}; multiplicity''={})".format(
+     int(absDeltaLambda), int(molconsts["from_mult"]), int(molconsts["to_mult"])))
+
+
+class NoLineStrength(Exception):
+    pass
+
+
+# Code to signal that there is no Hönl-London factor for combination (vl, v2l, J, branch)
+# (will be appear instead of HLF)
 NO_LINE_STRENGTH = -999999
+
 
 def _quanta_to_branch_singlet(Jl, J2l, spinl=None, spin2l=None):
     """
@@ -84,7 +110,7 @@ def _quanta_to_branch_same_multiplicity(Jl, J2l, spinl=None, spin2l=None):
     return ret
 
 
-class _MultiplicityToolbox(object):
+class _LineStrengthToolbox(object):
     """
     Tools: Kovacz' "Line strength" and and quanta-to-branch conversion
 
@@ -182,6 +208,9 @@ class _MultiplicityToolbox(object):
                 if isinstance(value, complex):
                     value = NO_LINE_STRENGTH
 
+            except ValueError:
+                # Here we expect "ValueError: math domain error" (sqrt of negative number)
+                value = NO_LINE_STRENGTH
             except ZeroDivisionError:
                 value = NO_LINE_STRENGTH
             self._dict_sj[(vl, v2l, J, branch)]  = value
@@ -191,27 +220,29 @@ class _MultiplicityToolbox(object):
         """Must be inherited and populate self with all branches for given (vl, v2l, J)"""
         raise NotImplementedError()
 
-# Incomplete class (provided as example here, so far)
-class _MTSinglet(_MultiplicityToolbox):
+
+# Incomplete class
+class _LSTSinglet(_LineStrengthToolbox):
     absDeltaLambda = "all"
     multiplicityl = 1
     multiplicity2l = 1
     quanta_to_branch = staticmethod(_quanta_to_branch_singlet)
 
 
-class _MTDoublet0(_MultiplicityToolbox):
+class _LSTDoublet(_LineStrengthToolbox):
     """
-    Line strengths for (doublet, Delta Lambda = +-1)
+    Line strengths for doublets (any Delta Lambda)
 
-    Formulas: Table 3.7 (p120); Formula 2.1.3-6 (p61)
-
-    Adapted from Fortran code: ATMOS/wrk4/bruno/Mole/OH/sjoh.f
+    Formulas: Formula 2.1.3-6 (p61)
     """
 
-    absDeltaLambda = 0
     multiplicityl = 2
     multiplicity2l = 2
     quanta_to_branch = staticmethod(_quanta_to_branch_same_multiplicity)
+
+    def _get_strengths(self, J, LAML, LAM2L, UPLUSL, UMINUSL,CPLUSL, CMINUSL, UPLUS2L,
+                       UMINUS2L, CPLUS2L, CMINUS2L, YL, Y2L,):
+        raise NotImplementedError()
 
     def _get_populate_data(self, vl, v2l, J):
         cc = self._molconsts
@@ -231,7 +262,6 @@ class _MTDoublet0(_MultiplicityToolbox):
         YL = AL / BL
         Y2L = A2L / B2L
 
-        # TODO Ask BLB below
         # p61: “[...] Y= A/B. The term is called normal if A > 0, and inverted if A < 0”
         # p126: “in the case of inverted terms, Y is to be substituted with negative sign”
         if YL < 0:
@@ -249,11 +279,23 @@ class _MTDoublet0(_MultiplicityToolbox):
         CPLUS2L = lambda J: 0.5*((UPLUS2L(J)**2.) + 4*(((J+0.5)**2.)-LAM2L**2.))
         CMINUS2L = lambda J: 0.5*((UMINUS2L(J)**2.)+4*(((J+0.5)**2.)-LAM2L**2.))
 
+        return self._get_strengths(J, LAML, LAM2L, UPLUSL, UMINUSL, CPLUSL, CMINUSL, UPLUS2L,
+                                   UMINUS2L, CPLUS2L, CMINUS2L, YL, Y2L,)
+
+
+class _LSTDoublet0(_LSTDoublet):
+    """
+    Line strengths for (doublet, Delta Lambda = 0)
+
+    Formulas: Table 3.6 (p127)
+    """
+
+    absDeltaLambda = 0
+
+    def _get_strengths(self, J, LAML, LAM2L, UPLUSL, UMINUSL,CPLUSL, CMINUSL, UPLUS2L,
+                       UMINUS2L, CPLUS2L, CMINUS2L, YL, Y2L,):
 
         LAM = LAML  # remember, both LAML, LAM2L are the same
-
-
-        # Some lost lambdas
 
         _P1 = lambda J: \
             (((J-LAM-0.5)*(J+LAM+0.5))/(4*J*CMINUSL(J-1)*CMINUS2L(J)))* \
@@ -319,66 +361,24 @@ class _MTDoublet0(_MultiplicityToolbox):
         )
 
 
-class _MTDoublet1(_MultiplicityToolbox):
+class _LSTDoublet1(_LSTDoublet):
     """
     Line strengths for (doublet, Delta Lambda = +-1)
 
-    Formulas: Table 3.7 (p120); Formula 2.1.3-6 (p61)
-
-    Adapted from Fortran code: ATMOS/wrk4/bruno/Mole/OH/sjoh.f
+    Formulas: Table 3.7 (p130)
     """
 
     absDeltaLambda = 1
-    multiplicityl = 2
-    multiplicity2l = 2
-    quanta_to_branch = staticmethod(_quanta_to_branch_same_multiplicity)
 
-    def _get_populate_data(self, vl, v2l, J):
-        cc = self._molconsts
-        LAML = cc["from_spdf"]
-        LAM2L = cc["to_spdf"]
-        AL = cc["statel_A"]
-        AEL = cc["statel_alpha_e"]
-        BEL = cc["statel_B_e"]
-        A2L = cc["state2l_A"]
-        AE2L = cc["state2l_alpha_e"]
-        BE2L = cc["state2l_B_e"]
-
-        # Original comment:
-        #
-        #     cada banda possue valores distintos de Y' e Y''
-        #     quando Y=A/B > 0, temos o termo normal, por isso
-        #     nao se modifica as formulas abaixo
-
-
-
-        BL = BEL - AEL * (vl + 0.5)
-        B2L = BE2L - AE2L * (v2l + 0.5)
-
-        YL = AL / BL
-        Y2L = A2L / B2L
-
-
-        # p61: “[...] Y= A/B. The term is called normal if A > 0, and inverted if A < 0”
-        # p126: “in the case of inverted terms, Y is to be substituted with negative sign”
-        if YL < 0:
-            YL = -YL
-        if Y2L < 0:
-            Y2L = -Y2L
-
-
-        UPLUSL = lambda J: ((LAML**2.)*YL*(YL-4) + 4*((J+0.5)**2.))**0.5 + LAML*(YL-2)
-        UMINUSL= lambda J: ((LAML**2.)*YL*(YL-4) + 4*((J+0.5)**2.))**0.5 - LAML*(YL-2)
-        CPLUSL = lambda J: 0.5*((UPLUSL(J)**2.) + 4*(((J+0.5)**2.) - LAML**2.))
-        CMINUSL = lambda J: 0.5*((UMINUSL(J)**2.) + 4*(((J+0.5)**2.) - LAML**2.))
-        UPLUS2L = lambda J: ((LAM2L**2.)*Y2L*(Y2L-4) + 4*((J+0.5)**2.))**0.5 + LAM2L*(Y2L-2)
-        UMINUS2L = lambda J: ((LAM2L**2.)*Y2L*(Y2L-4) + 4*((J+0.5)**2.))**0.5 - LAM2L*(Y2L-2)
-        CPLUS2L = lambda J: 0.5*((UPLUS2L(J)**2.) + 4*(((J+0.5)**2.)-LAM2L**2.))
-        CMINUS2L = lambda J: 0.5*((UMINUS2L(J)**2.)+4*(((J+0.5)**2.)-LAM2L**2.))
+    def _get_strengths(self, J, LAML, LAM2L, UPLUSL, UMINUSL,CPLUSL, CMINUSL, UPLUS2L,
+                       UMINUS2L, CPLUS2L, CMINUS2L, YL, Y2L,):
 
         # Original comment:
         #
         #     usa-se o menor valor de Lambda nas formulas abaixo
+        #
+        # p129: "[...] where the explicit Lambda values always mean the smaller of the two Lambda's
+        #        involved in the transition"
         LMIN = min(LAML, LAM2L)
 
         _P1 = lambda J: \
@@ -485,33 +485,25 @@ class _MTDoublet1(_MultiplicityToolbox):
             )
 
 
-class _MTTriplet1(_MultiplicityToolbox):
+class _LSTTriplet(_LineStrengthToolbox):
     """
-    Honl-London factors for (triplet, Delta Lambda = +-1)
+    Base class for Triplet cases (Delta Lambda = [0, -1, +1]), containing "U" and "C" formulas
 
-    Formulas: Table 3.10 (p136-p137); Formulas 2.1.4-8 to 2.1.4-10 (p69-p70)
+    Formulas: 2.1.4-8 to 2.1.4-10 (p69-p70)
 
     Adapted from Fortran code: ATMOS/wrk4/bruno/Mole/NH/sjnh.f
     """
 
-    absDeltaLambda = 1
     multiplicityl = 3
     multiplicity2l = 3
     quanta_to_branch = staticmethod(_quanta_to_branch_same_multiplicity)
 
+    def _get_strengths(self, J, LAML, LAM2L, U1PLUSL, U1MINUSL, U3PLUSL, U3MINUSL,  C1L, C2L, C3L,
+                       U1PLUS2L, U1MINUS2L, U3PLUS2L, U3MINUS2L, C12L, C22L, C32L, YL, Y2L):
+        raise NotImplementedError()
+
     def _get_populate_data(self, vl, v2l, J):
         cc = self._molconsts
-        LAML = cc["from_spdf"]
-        LAM2L = cc["to_spdf"]
-
-        # Original comment:
-        #
-        #     cada banda possue valores distintos de Y' e Y''
-        #     quando Y=A/B > 0, temos o termo normal, por isso
-        #     nao se modifica as formulas abaixo
-
-        # TODO link these names in the documentation, gui_info, caption, description, whatever
-
         LAML = cc["from_spdf"]
         LAM2L = cc["to_spdf"]
         AL = cc["statel_A"]
@@ -526,6 +518,21 @@ class _MTTriplet1(_MultiplicityToolbox):
 
         YL = AL / BL
         Y2L = A2L / B2L
+
+        # Lambdas for formulas C1 and C3 (see "p131" comment below)
+        LAMLC = LAML
+        LAM2LC = LAM2L
+
+        # p61: “[...] Y= A/B. The term is called normal if A > 0, and inverted if A < 0”
+        # p131: “in the case of inverted terms, Y is to be substituted with negative sign;
+        #        furthermore, -Lambda is to be written instead of Lambda in C1(J) and C3(J)
+
+        if YL < 0:
+            YL = -YL
+            LAMLC = -LAMLC
+        if Y2L < 0:
+            Y2L = -Y2L
+            LAM2LC = -LAM2LC
 
         # Original comment:
         #
@@ -547,14 +554,9 @@ class _MTTriplet1(_MultiplicityToolbox):
         U1MINUSL = lambda J: math.sqrt(LAML*LAML*YL*(YL-4)+4*J*J)-(LAML*(YL-2))
         U3PLUSL = lambda J: (LAML*LAML*YL*(YL-4)+4*(J+1)*(J+1))**.5+LAML*(YL-2)
         U3MINUSL = lambda J: ((LAML*LAML*YL*(YL-4)+4*(J+1)*(J+1))**0.5)-LAML*(YL-2)
-        C1L = lambda J: LAML*LAML*YL*(YL-4)*(J-LAML+1)*(J+LAML)+2*(2*J+1)*(J-LAML)*(J+LAML)*J
+        C1L = lambda J: LAMLC*LAMLC*YL*(YL-4)*(J-LAMLC+1)*(J+LAMLC)+2*(2*J+1)*(J-LAMLC)*(J+LAMLC)*J
         C2L = lambda J: LAML*LAML*YL*(YL-4)+4*J*(J+1)
-        C3L = lambda J: LAML*LAML*YL*(YL-4)*(J-LAML)*(J+LAML+1)+2*(2*J+1)*(J-LAML+1)*(J+1)*(J+LAML+1)
-
-        # Original comment:
-        #
-        #     idem para o estado eletronico inferior,
-        #     X 3Sig( lambda=0)
+        C3L = lambda J: LAMLC*LAMLC*YL*(YL-4)*(J-LAMLC)*(J+LAMLC+1)+2*(2*J+1)*(J-LAMLC+1)*(J+1)*(J+LAMLC+1)
 
         U1PLUS2L = lambda J: ((LAM2L*LAM2L*Y2L*(Y2L-4)+4*J*J))**.5+LAM2L*(Y2L-2)
         U1MINUS2L = lambda J: ((LAM2L*LAM2L*Y2L*(Y2L-4)+4*J*J))**.5-LAM2L*(Y2L-2)
@@ -562,14 +564,246 @@ class _MTTriplet1(_MultiplicityToolbox):
         U3MINUS2L = lambda J: ((LAM2L*LAM2L*Y2L*(Y2L-4)+4*(J+1)*(J+1))**.5)-LAM2L*(Y2L-2)
         C12L = lambda J: LAM2L*LAM2L*Y2L*(Y2L-4)*(J-LAM2L+1)*(J+LAM2L)+2*(2*J+1)*(J-LAM2L)*J*(J+LAM2L)
         C22L = lambda J: LAM2L*LAM2L*Y2L*(Y2L-4)+4*J*(J+1)
-        C32L = lambda J: LAM2L*LAM2L*Y2L*(Y2L-4)*(J-LAM2L)*(J+LAM2L+1)+2*(2*J+1)*(J-LAM2L+1)*(J+1)*(J+LAM2L+1)
+        C32L = lambda J: LAM2LC*LAM2LC*Y2L*(Y2L-4)*(J-LAM2LC)*(J+LAM2LC+1)+2*(2*J+1)*(J-LAM2LC+1)*(J+1)*(J+LAM2LC+1)
 
+        ret = self._get_strengths(J, LAML, LAM2L,
+                                  U1PLUSL, U1MINUSL, U3PLUSL, U3MINUSL,
+                                  C1L, C2L, C3L,
+                                  U1PLUS2L, U1MINUS2L, U3PLUS2L, U3MINUS2L,
+                                  C12L, C22L, C32L, YL, Y2L)
+
+        return ret
+
+
+class _LSTTriplet0(_LSTTriplet):
+    """
+    Honl-London factors for (triplet, Delta Lambda = +-1)
+
+    Formulas: Table 3.10 (p136-p137); Formulas 2.1.4-8 to 2.1.4-10 (p69-p70)
+
+    Adapted from Fortran code: ATMOS/wrk4/bruno/Mole/NH/sjc2kovacs.for (C2 Swan)
+    """
+
+    absDeltaLambda = 0
+
+    def _get_strengths(self, J, LAML, LAM2L, U1PLUSL, U1MINUSL, U3PLUSL, U3MINUSL,  C1L, C2L, C3L,
+                       U1PLUS2L, U1MINUS2L, U3PLUS2L, U3MINUS2L, C12L, C22L, C32L, YL, Y2L):
+
+        LAM = LAML  # LAML and LAM2L are the same
+
+
+        _P1 = lambda J: \
+         (((J-LAM)*(J+LAM))/(16*J*C1L(J-1)*C12L(J)))* \
+         (((J-LAM+1)*(J+LAM-1)*U1PLUSL(J-1)*U1PLUS2L(J)+
+         (J-LAM-1)*(J+LAM+1)*U1MINUSL(J-1)*U1MINUS2L(J)+
+         8*(J-LAM-1)*(J-LAM)*(J+LAM-1)*(J+LAM))**2)
+
+        _Q1 = lambda J: \
+         ((2*J+1)/(16*J*(J+1)*C1L(J)*C12L(J))) \
+         *(((LAM-1)*(J-LAM+1)*(J+LAM)*U1PLUSL(J)*U1PLUS2L(J)+
+         (LAM+1)*(J-LAM)*(J+LAM+1)*U1MINUSL(J)*U1MINUS2L(J)+
+         8*LAM*(J-LAM)*(J-LAM)*(J+LAM)*(J+LAM))**2)
+
+        _R1 = lambda J: \
+         (((J-LAM+1)*(J+LAM+1))/(16*(J+1)*
+         C1L(J+1)*C12L(J)))*(((J-LAM+2)*(J+LAM)*
+         U1PLUSL(J+1)*U1PLUS2L(J)+(J-LAM)*(J+LAM+2)*U1MINUSL(J+1)*
+         U1MINUS2L(J)+8*(J-LAM)*(J-LAM+1)*(J+LAM)*(J+LAM+1))**2)
+
+        _P21 = lambda J: \
+         (((J-LAM)*(J+LAM))/(2*J*C2L(J-1)*C12L(J)))* \
+         (((J-LAM+1)*(J+LAM-1)*U1PLUS2L(J)-
+         (J-LAM-1)*(J+LAM+1)*U1MINUS2L(J)-
+         2*LAM*(J-LAM)*(J+LAM)*(YL-2))**2)
+
+        _Q21 = lambda J: \
+         ((2*J+1)/(2*J*(J+1)*C2L(J)*C12L(J))) \
+         *(((LAM-1)*(J-LAM+1)*(J+LAM)*U1PLUS2L(J)-
+         (LAM+1)*(J-LAM)*(J+LAM+1)*U1MINUS2L(J)-
+         2*LAM*LAM*(J-LAM)*(J+LAM)*(YL-2))**2)
+
+        _R21 = lambda J: \
+         (((J-LAM+1)*(J+LAM+1))/(2*(J+1)*
+         C2L(J+1)*C12L(J)))*(((J-LAM+2)*(J+LAM)*
+         U1PLUS2L(J)-(J-LAM)*(J+LAM+2)*U1MINUS2L(J)-
+         2*LAM*(J-LAM)*(J+LAM)*(YL-2))**2)
+
+        _P31 = lambda J: \
+         (((J-LAM)*(J+LAM))/(16*J*C3L(J-1)*C12L(J)))* \
+         (((J-LAM+1)*(J+LAM-1)*U3MINUSL(J-1)*U1PLUS2L(J)+
+         (J-LAM-1)*(J+LAM+1)*U1MINUS2L(J)*U3PLUSL(J-1)-
+         8*(J-LAM)*(J+LAM)*(J-LAM)*(J+LAM))**2)
+
+        _Q31 = lambda J: \
+         ((2*J+1)/(16*J*(J+1)*C32L(J)*C12L(J))) \
+         *(((LAM-1)*(J-LAM+1)*(J+LAM)*U3MINUSL(J)*U1PLUS2L(J)+
+         (LAM+1)*(J-LAM)*(J+LAM+1)*U3PLUSL(J)*U1MINUS2L(J)-
+         8*LAM*(J-LAM)*(J-LAM+1)*(J+LAM)*(J+LAM+1))**2)
+
+        _R31 = lambda J: \
+         (((J-LAM+1)*(J+LAM+1))/(16*(J+1)*
+         C3L(J+1)*C12L(J)))*(((J-LAM+2)*(J+LAM)*U3MINUSL(J+1)*
+         U1PLUS2L(J)+(J-LAM)*(J+LAM+2)*U3PLUSL(J+1)*U1MINUS2L(J)-
+         8*(J-LAM)*(J-LAM+2)*(J+LAM)*(J+LAM+2))**2)
+
+        _P12 = lambda J: \
+         (((J-LAM)*(J+LAM))/(2*J*C1L(J-1)*C22L(J)))* \
+         (((J-LAM+1)*(J+LAM-1)*U1PLUSL(J-1)-
+         (J-LAM-1)*(J+LAM+1)*U1MINUSL(J-1)-
+         2*LAM*(J-LAM-1)*(J+LAM-1)*(Y2L-2))**2)
+
+        _Q12 = lambda J: \
+         ((2*J+1)/(2*J*(J+1)*C1L(J)*C22L(J))) \
+         *(((LAM-1)*(J-LAM+1)*(J+LAM)*U1PLUSL(J)-
+         (LAM+1)*(J-LAM)*(J+LAM+1)*U1MINUSL(J)-
+         2*LAM*LAM*(J-LAM)*(J+LAM)*(Y2L-2))**2)
+
+        _R12 = lambda J: \
+         (((J-LAM+1)*(J+LAM+1))/(2*(J+1)*
+         C1L(J+1)*C22L(J)))*(((J-LAM+2)*(J+LAM)*
+         U1PLUSL(J+1)-(J-LAM)*(J+LAM+2)*U1MINUSL(J+1)-
+         2*LAM*(J-LAM+1)*(J+LAM+1)*(Y2L-2))**2)
+
+        _P2 = lambda J: \
+         ((4*(J-LAM)*(J+LAM))/(J*C2L(J-1)*C22L(J)))* \
+         ((.5*LAM*LAM*(YL-2)*(Y2L-2)+(J-LAM-1)*(J+LAM+1)+
+         (J-LAM+1)*(J+LAM-1))**2)
+
+        _Q2 = lambda J: \
+         ((4*(2*J+1))/(J*(J+1)*C2L(J)*C22L(J)))* \
+         ((.5*LAM*LAM*LAM*(YL-2)*(Y2L-2)+
+         (LAM+1)*(J-LAM)*(J+LAM+1)+(LAM-1)*(J-LAM+1)*
+         (J+LAM))**2)
+
+        _R2 = lambda J: \
+         ((4*(J-LAM+1)*(J+LAM+1))/((J+1)*
+         C2L(J+1)*C22L(J)))*((.5*LAM*LAM*(YL-2)*(Y2L-2)+
+         (J-LAM)*(J+LAM+2)+(J-LAM+2)*(J+LAM))**2)
+
+        _P32 = lambda J: \
+         (((J-LAM)*(J+LAM))/(2*J*C3L(J-1)*C22L(J)))* \
+         (((J-LAM+1)*(J+LAM-1)*U3MINUSL(J-1)-
+         (J-LAM-1)*(J+LAM+1)*U3PLUSL(J-1)+
+         2*LAM*(J-LAM)*(J+LAM)*(Y2L-2))**2)
+
+        _Q32 = lambda J: \
+         ((2*J+1)/(2*J*(J+1)*C3L(J)*C22L(J))) \
+         *(((LAM-1)*(J-LAM+1)*(J+LAM)*U3MINUSL(J)-
+         (LAM+1)*(J-LAM)*(J+LAM+1)*U3PLUSL(J)+
+         2*LAM*LAM*(J-LAM+1)*(J+LAM+1)*(Y2L-2))**2)
+
+        _R32 = lambda J: \
+         (((J-LAM+1)*(J+LAM+1))/(2*(J+1)*
+         C3L(J+1)*C22L(J)))*(((J-LAM+2)*(J+LAM)*
+         U3MINUSL(J+1)-(J-LAM)*(J+LAM+2)*U3PLUSL(J+1)+
+         2*LAM*(J-LAM+2)*(J+LAM+2)*(Y2L-2))**2)
+
+        _P13 = lambda J: \
+         (((J-LAM)*(J+LAM))/(16*J*C1L(J-1)*C32L(J)))* \
+         (((J-LAM+1)*(J+LAM-1)*U1PLUSL(J)*U3MINUS2L(J)+
+         (J-LAM-1)*(J+LAM+1)*U1MINUSL(J-1)*U3PLUS2L(J)-
+         8*(J-LAM-1)*(J-LAM+1)*(J+LAM-1)*(J+LAM+1))**2)
+
+        _Q13 = lambda J: \
+         ((2*J+1)/(16*J*(J+1)*C1L(J)*C32L(J))) \
+         *(((LAM-1)*(J-LAM+1)*(J+LAM)*U1PLUSL(J)*U3MINUS2L(J)+
+         (LAM+1)*(J-LAM)*(J+LAM+1)*U1MINUSL(J)*U3PLUS2L(J)-
+         8*LAM*(J-LAM)*(J-LAM+1)*(J+LAM)*(J+LAM+1))**2)
+
+        _R13 = lambda J: \
+         (((J-LAM+1)*(J+LAM+1))/(16*(J+1)*
+         C1L(J+1)*C32L(J)))*(((J-LAM+2)*(J+LAM)*
+         U1PLUSL(J+1)*U3MINUS2L(J)+(J-LAM)*(J+LAM+2)*U1MINUSL(J+1)*
+         U3PLUS2L(J)-8*(J-LAM+1)*(J-LAM+1)*(J+LAM+1)*(J+LAM+1))**2)
+
+        _P23 = lambda J: \
+          (((J-LAM)*(J+LAM))/(2*J*C2L(J-1)*C32L(J)))* \
+          (((J-LAM+1)*(J+LAM-1)*U3MINUS2L(J)-
+          (J-LAM-1)*(J+LAM+1)*U3PLUS2L(J)+
+          2*LAM*(J-LAM+1)*(J+LAM+1)*(YL-2))**2)
+
+        _Q23 = lambda J: \
+         ((2*J+1)/(2*J*(J+1)*C2L(J)*C32L(J))) \
+         *(((LAM-1)*(J-LAM+1)*(J+LAM)*U3MINUS2L(J)-
+         (LAM+1)*(J-LAM)*(J+LAM+1)*U3PLUS2L(J)+
+         2*LAM*LAM*(J-LAM+1)*(J+LAM+1)*(YL-2))**2)
+
+        _R23 = lambda J: \
+         (((J-LAM+1)*(J+LAM+1))/(2*(J+1)*
+         C2L(J+1)*C32L(J)))*(((J-LAM+2)*(J+LAM)*
+         U3MINUS2L(J)-(J-LAM)*(J+LAM+2)*U3PLUS2L(J)+
+         2*LAM*(J-LAM+1)*(J+LAM+1)*(YL-2))**2)
+
+        _P3 = lambda J: \
+         (((J-LAM)*(J+LAM))/(16*J*C3L(J-1)*
+         C32L(J)))*(((J-LAM+1)*(J+LAM-1)*U3MINUSL(J-1)*
+         U3MINUS2L(J)+(J-LAM-1)*(J+LAM+1)*U3PLUSL(J-1)*U3PLUS2L(J)+
+         8*(J-LAM)*(J-LAM+1)*(J+LAM)*(J+LAM+1))**2)
+
+        _Q3 = lambda J: \
+         ((2*J+1)/(16*J*(J+1)*C3L(J)*C32L(J)))* \
+         (((LAM-1)*(J-LAM+1)*(J+LAM)*U3MINUSL(J)*U3MINUS2L(J)+
+         (LAM+1)*(J-LAM)*(J+LAM+1)*U3PLUSL(J)*U3PLUS2L(J)+
+         8*LAM*(J-LAM+1)*(J-LAM+1)*(J+LAM+1)*(J+LAM+1))**2)
+
+        _R3 = lambda J: \
+         (((J-LAM+1)*(J+LAM+1))/(16*(J+1)*
+         C3L(J+1)*C32L(J)))*(((J-LAM+2)*(J+LAM)*U3MINUSL(J+1)
+         *U3MINUS2L(J)+(J-LAM)*(J+LAM+2)*U3PLUSL(J+1)*U3PLUS2L(J)+
+         8*(J-LAM+1)*(J-LAM+2)*(J+LAM+1)*(J+LAM+2))**2)
+
+        return (
+             ("P1", _P1),
+             ("Q1", _Q1),
+             ("R1", _R1),
+             ("P21", _P21),
+             ("Q21", _Q21),
+             ("R21", _R21),
+             ("P31", _P31),
+             ("Q31", _Q31),
+             ("R31", _R31),
+             ("P12", _P12),
+             ("Q12", _Q12),
+             ("R12", _R12),
+             ("P2", _P2),
+             ("Q2", _Q2),
+             ("R2", _R2),
+             ("P32", _P32),
+             ("Q32", _Q32),
+             ("R32", _R32),
+             ("P13", _P13),
+             ("Q13", _Q13),
+             ("R13", _R13),
+             ("P23", _P23),
+             ("Q23", _Q23),
+             ("R23", _R23),
+             ("P3", _P3),
+             ("Q3", _Q3),
+             ("R3", _R3),
+            )
+
+
+class _LSTTriplet1(_LSTTriplet):
+    """
+    Honl-London factors for (triplet, Delta Lambda = +-1)
+
+    Formulas: Table 3.10 (p136-p137); Formulas 2.1.4-8 to 2.1.4-10 (p69-p70)
+
+    Adapted from Fortran code: ATMOS/wrk4/bruno/Mole/NH/sjnh.f
+    """
+
+    absDeltaLambda = 1
+
+    def _get_strengths(self, J, LAML, LAM2L, U1PLUSL, U1MINUSL, U3PLUSL, U3MINUSL,  C1L, C2L, C3L,
+                       U1PLUS2L, U1MINUS2L, U3PLUS2L, U3MINUS2L, C12L, C22L, C32L, YL, Y2L):
 
         # Original comment:
         #
         #     usa-se o menor valor de Lambda nas formulas abaixo
+        #
+        # p139: "The Lambda's occurring explicitly in the formulas mean once more the smaller
+        #        of the two Lambda's involved in the transition"
         LMIN = min(LAML, LAM2L)
-
 
         _P1 = lambda J: \
             ((J-LMIN-1)*(J-LMIN))/(32*J*C1L(J-1)*C12L(J))* \
@@ -795,25 +1029,3 @@ class _MTTriplet1(_MultiplicityToolbox):
              ("R3", lambda J: _P3(J+1)),
             )
 
-
-# TODO multiplicity is not the best term, should be sth more towards "transition"
-def multiplicity_toolbox(molconsts, flag_normalize=None):
-    """Factory function that returns a MultiplicityToolbox descendant appropriate to molconsts"""
-
-    C = [_MTSinglet, _MTDoublet0, _MTDoublet1, _MTTriplet1]
-
-    absDeltaLambda = abs(molconsts["from_spdf"]-molconsts["to_spdf"])
-
-    for cls in C:
-        if (cls.absDeltaLambda == "all" or cls.absDeltaLambda == absDeltaLambda) and \
-           cls.multiplicityl == molconsts["from_mult"] and \
-           cls.multiplicity2l == molconsts["to_mult"]:
-            return cls(molconsts, flag_normalize)
-
-    raise ValueError("Could not find a suitable class for given molecular constants "
-     "(I need abs(\u0394\u039B)={}; multiplicity'={}; multiplicity''={})".format(
-     int(absDeltaLambda), int(molconsts["from_mult"]), int(molconsts["to_mult"])))
-
-
-class NoLineStrength(Exception):
-    pass

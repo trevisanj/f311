@@ -14,7 +14,7 @@ def test_adds_to_one0(tmpdir):
     consts.None_to_zero()
 
 
-    mtools = ph.multiplicity_toolbox(consts)
+    mtools = ph.linestrength_toolbox(consts)
 
     for J2l in range(30):
         try:

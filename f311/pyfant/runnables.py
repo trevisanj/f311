@@ -7,7 +7,7 @@ import a99
 from .. import filetypes as ft
 from collections import OrderedDict
 
-__all__ = ["Runnable", "RunnableStatus", "ExecutableStatus", "Executable",
+__all__ = ["Runnable", "RunnableStatus", "ExecutableStatus", "PFANTExecutable",
            "Innewmarcs", "Hydro2", "Pfant", "Nulbad", "Combo"]
 
 
@@ -36,10 +36,10 @@ class RunnableStatus(object):
 
 @a99.froze_it
 class ExecutableStatus(object):
-    """Stores status related to Executable for reporting purposes."""
+    """Stores status related to PFANTExecutable for reporting purposes."""
     
     def __init__(self, executable):
-        assert isinstance(executable, Executable)
+        assert isinstance(executable, PFANTExecutable)
         self.exe_filename = executable.__class__.__name__.lower()
         self.executable = executable
         # used by pfant only
@@ -76,7 +76,7 @@ class Runnable(object):
 
     The run() method is blocking, i.e., it only returns when running is done.
 
-    This is a base class for Executable and Combo.
+    This is a base class for PFANTExecutable and Combo.
     """
 
     @property
@@ -155,9 +155,9 @@ class Runnable(object):
         raise NotImplementedError()
 
 
-class Executable(Runnable):
+class PFANTExecutable(Runnable):
     """
-    PFANT executables common ancestor class.
+    PFANT executables common ancestor class, or any other program
     """
 
     # Set at descendant class with a ftpyfant.conf.FOR_* value
@@ -261,10 +261,6 @@ class Executable(Runnable):
         try:
             self.__popen = subprocess.Popen(cmd_words, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
-            # if self.__stdout:
-            #     self.__popen = subprocess.Popen(cmd_words, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            # else:
-            #     self.__popen = subprocess.Popen(cmd_words)
             self._flag_running = True
             try:
                 if self.conf.popen_text_dest is not None:
@@ -273,26 +269,6 @@ class Executable(Runnable):
                         self.conf.popen_text_dest.write(line.decode("ascii"))
             finally:
                 self.__popen.stdout.close()
-
-
-#todo cleanup
-#                 self._flag_running = True
-#
-#                 if self.__stdout:  # TODO disabled PIPE stdout for popen
-#                     try:
-#                         for line in self.__popen.stdout:
-#                             self.__stdout.write(line)
-#                     finally:
-#                         # todo cleanup
-#                         # printOpenFiles()
-#
-#                         self.__popen.stdout.close()
-#                         self.__stdout.close()
-#
-# #todo cleanup
-#                         # print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-#                         # printOpenFiles()
-#                         # sys.exit()
 
             # blocks execution until finished
             self.__popen.wait()
@@ -329,13 +305,13 @@ class Executable(Runnable):
 
 
 @a99.froze_it
-class Innewmarcs(Executable):
+class Innewmarcs(PFANTExecutable):
     """Class representing the innewmarcs executable."""
 
     sequence_index = FOR_INNEWMARCS
 
     def __init__(self):
-        Executable.__init__(self)
+        PFANTExecutable.__init__(self)
         self._exe_path = "innewmarcs"
 
         # FileModBin object
@@ -350,13 +326,13 @@ class Innewmarcs(Executable):
 
 
 @a99.froze_it
-class Hydro2(Executable):
+class Hydro2(PFANTExecutable):
     """Class representing the hydro2 executable."""
 
     sequence_index = FOR_HYDRO2
 
     def __init__(self):
-        Executable.__init__(self)
+        PFANTExecutable.__init__(self)
         self._exe_path = "hydro2"
 
     def load_result(self):
@@ -384,13 +360,13 @@ class Hydro2(Executable):
 
 
 @a99.froze_it
-class Pfant(Executable):
+class Pfant(PFANTExecutable):
     """Class representing the pfant executable."""
 
     sequence_index = FOR_PFANT
 
     def __init__(self):
-        Executable.__init__(self)
+        PFANTExecutable.__init__(self)
         self._exe_path = "pfant"  # Path to PFANT executable (including executable name)
 
         # ** Variables assigned by poll_progress()
@@ -437,13 +413,13 @@ class Pfant(Executable):
 
 
 @a99.froze_it
-class Nulbad(Executable):
+class Nulbad(PFANTExecutable):
     """Class representing the nulbad executable."""
 
     sequence_index = FOR_NULBAD
 
     def __init__(self):
-        Executable.__init__(self)
+        PFANTExecutable.__init__(self)
         self._exe_path = "nulbad"
 
         # nulbad output
@@ -530,14 +506,14 @@ class Combo(Runnable):
         self.__sequence = [FOR_INNEWMARCS, FOR_HYDRO2, FOR_PFANT, FOR_NULBAD] \
             if sequence is None else translate_sequence(sequence)
 
-        # ** Executable instances
+        # ** PFANTExecutable instances
         self.__innewmarcs = Innewmarcs()
         self.__hydro2 = Hydro2()
         self.__pfant = Pfant()
         self.__nulbad = Nulbad()
 
         # ** Internal variables
-        self.__running_exe = None  # Executable object currently running
+        self.__running_exe = None  # PFANTExecutable object currently running
         # ComboStatus instance
         self.__status = RunnableStatus(self)
         # Conf instance

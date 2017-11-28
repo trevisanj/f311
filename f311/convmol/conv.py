@@ -86,7 +86,7 @@ class Conv(object):
 
     def multiplicity_toolbox(self):
         """Wraps f311.physics.multiplicity.multiplicity_toolbox()"""
-        return ph.multiplicity_toolbox(self.molconsts, flag_normalize=self.flag_normhlf)
+        return ph.linestrength_toolbox(self.molconsts, flag_normalize=self.flag_normhlf)
 
     # Must reimplement thig
     def _make_sols(self, lines):

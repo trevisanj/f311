@@ -125,7 +125,7 @@ class _XHLF(a99.XLogMainWindow):
 
                     rows, header = [], None
                     for J in range(40):
-                        mtools = ph.multiplicity_toolbox(molconsts, flag_normalize=True)
+                        mtools = ph.linestrength_toolbox(molconsts, flag_normalize=True)
                         mtools.populate(vl, v2l, J)
 
                         if header is None:

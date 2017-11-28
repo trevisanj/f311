@@ -132,7 +132,7 @@ def load_list_file(filename):
 
 # Electronic systems
 #
-# # TODO calculate FCFs for Tio, FeH, C2, CO
+# # TODO calculate FCFs for Tio, FeH, CO
 SYSTEMS_MAP = (
 ("CH", "cha.out", "A", 2, 2, "X", 2, 1, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),  # A2Delta - X2Pi
 ("CH", "chb.out", "B", 2, 0, "X", 2, 1, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
@@ -142,6 +142,7 @@ SYSTEMS_MAP = (
 ("OH", "oha.out", "A", 2, 0, "X", 2, 1, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),  # A2Sigma - X2Pi
 ("MgH", "mgha.out", "A", 2, 1, "X", 2, 0, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
 ("MgH", "mghb.out", "B", 2, 0, "X", 2, 0, "Source: 'ATMOS/wrk4/bruno/Mole/Fc'"),
+("C2", "c2swan.out", "d", 3, 1, "a", 3, 1, "Source: 'new calculations'"),
 )
 
 

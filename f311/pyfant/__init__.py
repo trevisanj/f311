@@ -28,6 +28,7 @@ from .util import *
 from .multirunnable import *
 from .gui import *
 from .paths import *
+from .traprbclass import *
 from . import gui
 
 
