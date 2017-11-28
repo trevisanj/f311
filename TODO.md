@@ -4,6 +4,8 @@
 
 - detecting file type needs serious work
 
+- test well these GUIs
+
 - explorer.py: Load as... (force file type)
 
 - moldbed: download from nist; execute traprb!
