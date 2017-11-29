@@ -11,13 +11,13 @@ import os
 import a99
 import subprocess
 import sys
+import argparse
+
 
 # These values must match those of the same variables in programs.py
 SUBDIR = "autoscripts"
-PREFIX_EDITABLE = "editable-"
+PREFIX_EDITABLE = "script-"
 PREFIX_AUTO = "leave-"
-
-allinfo = f311.get_programs_dict(None, flag_protected=False)
 
 
 def _get_help(script_name):
@@ -29,18 +29,44 @@ def _get_help(script_name):
     return subprocess.check_output([script_name, "--help"]).decode("utf8")
 
 
-def main():
+def main(allinfo, flag_page_only=False):
+
+
+    # Page to be saves as "scripts.rst"
+    index_page = [
+"Index of applications (scripts)",
+"===============================",
+"",
+".. toctree::",
+"    :maxdepth: 1",
+"",
+]
+
     for pkgname, infos in allinfo.items():
+        if pkgname in ("ariastro", "convmolworks"):
+            continue
+
         print("\n".join(a99.format_box(pkgname)))
         for info in infos["exeinfo"]:
             print("Processing '{}'...".format(info.filename))
 
             nameonly = os.path.splitext(info.filename)[0]
 
+#            page.append("    {} <autoscripts/{}{}>".format(info.description, PREFIX_EDITABLE, nameonly))
+            index_page.append("    autoscripts/{}{}".format(PREFIX_EDITABLE, nameonly))
+
+            if flag_page_only:
+                continue
+
             filename_auto = "{}{}.rst".format(PREFIX_AUTO, nameonly)
             path_editable = os.path.join("source", SUBDIR, "{}{}.rst".format(PREFIX_EDITABLE, nameonly))
 
-            _doc = _get_help(info.filename)
+            try:
+                _doc = _get_help(info.filename)
+            except subprocess.CalledProcessError:
+                print("***FAILED***")
+                continue
+
             doc = "\n".join(["    "+x for x in _doc.split("\n")])
             title = "Script ``{}``".format(info.filename)
             dash = "="*len(title)
@@ -69,7 +95,19 @@ def main():
 
             print("Wrote file '{}'".format(path_auto))
 
+    path_index = os.path.join("source", "scripts.rst")
+    with open(path_index, "w") as file:
+        file.write("\n".join(index_page))
+    print("\n\n\n")
+    print("Wrote scripts index file '{}'".format(path_index))
+
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description=__doc__,  formatter_class=a99.SmartFormatter)
+    parser.add_argument('-i', '--index-only', action="store_true", help='Generates scripts index page only (source/scripts.rst)')
+
+    args = parser.parse_args()
+
+    allinfo = f311.get_programs_dict(None, flag_protected=False)
+    main(allinfo, args.index_only)
 
 

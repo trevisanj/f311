@@ -16,16 +16,24 @@ Subpackages
 Submodules
 ----------
 
-f311.hapi module
-----------------
+f311\.collaboration module
+--------------------------
+
+.. automodule:: f311.collaboration
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+f311\.hapi module
+-----------------
 
 .. automodule:: f311.hapi
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.util module
-----------------
+f311\.util module
+-----------------
 
 .. automodule:: f311.util
     :members:

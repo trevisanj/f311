@@ -1,51 +1,51 @@
-f311.filetypes.ft_basic package
-===============================
+f311\.filetypes\.ft\_basic package
+==================================
 
 Submodules
 ----------
 
-f311.filetypes.ft_basic.datafile module
----------------------------------------
+f311\.filetypes\.ft\_basic\.datafile module
+-------------------------------------------
 
 .. automodule:: f311.filetypes.ft_basic.datafile
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_basic.filefits module
----------------------------------------
+f311\.filetypes\.ft\_basic\.filefits module
+-------------------------------------------
 
 .. automodule:: f311.filetypes.ft_basic.filefits
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_basic.filepy module
--------------------------------------
+f311\.filetypes\.ft\_basic\.filepy module
+-----------------------------------------
 
 .. automodule:: f311.filetypes.ft_basic.filepy
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_basic.filespectrum module
--------------------------------------------
+f311\.filetypes\.ft\_basic\.filespectrum module
+-----------------------------------------------
 
 .. automodule:: f311.filetypes.ft_basic.filespectrum
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_basic.filesqlitedb module
--------------------------------------------
+f311\.filetypes\.ft\_basic\.filesqlitedb module
+-----------------------------------------------
 
 .. automodule:: f311.filetypes.ft_basic.filesqlitedb
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_basic.spectrum module
----------------------------------------
+f311\.filetypes\.ft\_basic\.spectrum module
+-------------------------------------------
 
 .. automodule:: f311.filetypes.ft_basic.spectrum
     :members:

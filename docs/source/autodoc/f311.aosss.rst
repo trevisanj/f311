@@ -1,35 +1,35 @@
-f311.aosss package
-==================
+f311\.aosss package
+===================
 
 Submodules
 ----------
 
-f311.aosss.basic module
------------------------
+f311\.aosss\.basic module
+-------------------------
 
 .. automodule:: f311.aosss.basic
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.aosss.mosaic module
-------------------------
+f311\.aosss\.mosaic module
+--------------------------
 
 .. automodule:: f311.aosss.mosaic
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.aosss.report module
-------------------------
+f311\.aosss\.report module
+--------------------------
 
 .. automodule:: f311.aosss.report
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.aosss.util module
-----------------------
+f311\.aosss\.util module
+------------------------
 
 .. automodule:: f311.aosss.util
     :members:

@@ -1,5 +1,5 @@
-f311.convmol package
-====================
+f311\.convmol package
+=====================
 
 Subpackages
 -----------
@@ -13,58 +13,66 @@ Subpackages
 Submodules
 ----------
 
-f311.convmol.calc_qgbd module
------------------------------
+f311\.convmol\.calc\_qgbd module
+--------------------------------
 
 .. automodule:: f311.convmol.calc_qgbd
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.convmol.conv_hitran module
--------------------------------
+f311\.convmol\.conv module
+--------------------------
+
+.. automodule:: f311.convmol.conv
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+f311\.convmol\.conv\_hitran module
+----------------------------------
 
 .. automodule:: f311.convmol.conv_hitran
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.convmol.conv_kurucz module
--------------------------------
+f311\.convmol\.conv\_kurucz module
+----------------------------------
 
 .. automodule:: f311.convmol.conv_kurucz
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.convmol.conv_vald3 module
-------------------------------
+f311\.convmol\.conv\_plez module
+--------------------------------
+
+.. automodule:: f311.convmol.conv_plez
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+f311\.convmol\.conv\_vald3 module
+---------------------------------
 
 .. automodule:: f311.convmol.conv_vald3
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.convmol.convlog module
----------------------------
+f311\.convmol\.convlog module
+-----------------------------
 
 .. automodule:: f311.convmol.convlog
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.convmol.fcf_oh module
---------------------------
+f311\.convmol\.fcf\_oh module
+-----------------------------
 
 .. automodule:: f311.convmol.fcf_oh
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-f311.convmol.make_mol module
-----------------------------
-
-.. automodule:: f311.convmol.make_mol
     :members:
     :undoc-members:
     :show-inheritance:

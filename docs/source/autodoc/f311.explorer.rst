@@ -1,5 +1,5 @@
-f311.explorer package
-=====================
+f311\.explorer package
+======================
 
 Subpackages
 -----------
@@ -14,32 +14,16 @@ Subpackages
 Submodules
 ----------
 
-f311.explorer.basic module
---------------------------
-
-.. automodule:: f311.explorer.basic
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-f311.explorer.classcatalog module
+f311\.explorer\.from\_vald module
 ---------------------------------
-
-.. automodule:: f311.explorer.classcatalog
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-f311.explorer.from_vald module
-------------------------------
 
 .. automodule:: f311.explorer.from_vald
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.explorer.util module
--------------------------
+f311\.explorer\.util module
+---------------------------
 
 .. automodule:: f311.explorer.util
     :members:

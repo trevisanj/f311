@@ -1,5 +1,5 @@
-Spectral synthesis (``f311.pyfant``)
-====================================
+Spectral synthesis
+==================
 
 Welcome!!
 

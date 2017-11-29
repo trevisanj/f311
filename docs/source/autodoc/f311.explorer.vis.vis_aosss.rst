@@ -1,19 +1,19 @@
-f311.explorer.vis.vis_aosss package
-===================================
+f311\.explorer\.vis\.vis\_aosss package
+=======================================
 
 Submodules
 ----------
 
-f311.explorer.vis.vis_aosss.draw_cube module
---------------------------------------------
+f311\.explorer\.vis\.vis\_aosss\.draw\_cube module
+--------------------------------------------------
 
 .. automodule:: f311.explorer.vis.vis_aosss.draw_cube
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.explorer.vis.vis_aosss.vismisc module
-------------------------------------------
+f311\.explorer\.vis\.vis\_aosss\.vismisc module
+-----------------------------------------------
 
 .. automodule:: f311.explorer.vis.vis_aosss.vismisc
     :members:

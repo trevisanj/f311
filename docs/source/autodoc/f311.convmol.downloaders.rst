@@ -1,19 +1,19 @@
-f311.convmol.downloaders package
-================================
+f311\.convmol\.downloaders package
+==================================
 
 Submodules
 ----------
 
-f311.convmol.downloaders.downhitran module
-------------------------------------------
+f311\.convmol\.downloaders\.downhitran module
+---------------------------------------------
 
 .. automodule:: f311.convmol.downloaders.downhitran
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.convmol.downloaders.downnist module
-----------------------------------------
+f311\.convmol\.downloaders\.downnist module
+-------------------------------------------
 
 .. automodule:: f311.convmol.downloaders.downnist
     :members:

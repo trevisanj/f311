@@ -1,67 +1,67 @@
-f311.filetypes.ft_aosss package
-===============================
+f311\.filetypes\.ft\_aosss package
+==================================
 
 Submodules
 ----------
 
-f311.filetypes.ft_aosss.filefullcube module
--------------------------------------------
+f311\.filetypes\.ft\_aosss\.filefullcube module
+-----------------------------------------------
 
 .. automodule:: f311.filetypes.ft_aosss.filefullcube
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_aosss.filepar module
---------------------------------------
+f311\.filetypes\.ft\_aosss\.filepar module
+------------------------------------------
 
 .. automodule:: f311.filetypes.ft_aosss.filepar
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_aosss.filesparsecube module
----------------------------------------------
+f311\.filetypes\.ft\_aosss\.filesparsecube module
+-------------------------------------------------
 
 .. automodule:: f311.filetypes.ft_aosss.filesparsecube
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_aosss.filesplist module
------------------------------------------
+f311\.filetypes\.ft\_aosss\.filesplist module
+---------------------------------------------
 
 .. automodule:: f311.filetypes.ft_aosss.filesplist
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_aosss.fullcube module
----------------------------------------
+f311\.filetypes\.ft\_aosss\.fullcube module
+-------------------------------------------
 
 .. automodule:: f311.filetypes.ft_aosss.fullcube
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_aosss.sparsecube module
------------------------------------------
+f311\.filetypes\.ft\_aosss\.sparsecube module
+---------------------------------------------
 
 .. automodule:: f311.filetypes.ft_aosss.sparsecube
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_aosss.spcollection module
--------------------------------------------
+f311\.filetypes\.ft\_aosss\.spcollection module
+-----------------------------------------------
 
 .. automodule:: f311.filetypes.ft_aosss.spcollection
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.ft_aosss.splist module
--------------------------------------
+f311\.filetypes\.ft\_aosss\.splist module
+-----------------------------------------
 
 .. automodule:: f311.filetypes.ft_aosss.splist
     :members:

@@ -1,19 +1,19 @@
-f311.pyfant.basic package
-=========================
+f311\.pyfant\.basic package
+===========================
 
 Submodules
 ----------
 
-f311.pyfant.basic.conversion module
------------------------------------
+f311\.pyfant\.basic\.conversion module
+--------------------------------------
 
 .. automodule:: f311.pyfant.basic.conversion
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.pyfant.basic.misc module
------------------------------
+f311\.pyfant\.basic\.misc module
+--------------------------------
 
 .. automodule:: f311.pyfant.basic.misc
     :members:

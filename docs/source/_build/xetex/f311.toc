@@ -1,0 +1,123 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Using the API}{3}{section.1.1}
+\contentsline {section}{\numberline {1.2}Contributing to this project}{3}{section.1.2}
+\contentsline {section}{\numberline {1.3}List of scripts}{3}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}f311.aosss \textendash {} “Adaptive Optics Systems Simulation Support”}{3}{subsection.1.3.1}
+\contentsline {subsubsection}{Graphical applications}{3}{subsubsection*.3}
+\contentsline {subsubsection}{Command-line tools}{4}{subsubsection*.4}
+\contentsline {subsection}{\numberline {1.3.2}f311.convmol \textendash {} Conversion of molecular lines files.}{4}{subsection.1.3.2}
+\contentsline {subsubsection}{Graphical applications}{4}{subsubsection*.5}
+\contentsline {subsubsection}{Command-line tools}{4}{subsubsection*.6}
+\contentsline {subsection}{\numberline {1.3.3}f311.explorer \textendash {} Object-oriented framework to handle file types:}{4}{subsection.1.3.3}
+\contentsline {subsubsection}{Graphical applications}{4}{subsubsection*.7}
+\contentsline {subsubsection}{Command-line tools}{4}{subsubsection*.8}
+\contentsline {subsection}{\numberline {1.3.4}f311.pyfant \textendash {} Python interface to the PFANT spectral synthesis software (Fortran)}{5}{subsection.1.3.4}
+\contentsline {subsubsection}{Graphical applications}{5}{subsubsection*.9}
+\contentsline {subsubsection}{Command-line tools}{5}{subsubsection*.10}
+\contentsline {section}{\numberline {1.4}List of acronyms}{5}{section.1.4}
+\contentsline {section}{\numberline {1.5}Acknowledgement}{5}{section.1.5}
+\contentsline {chapter}{\numberline {2}F311 Installation}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Method 1: Using Anaconda without virtual environment}{7}{section.2.1}
+\contentsline {section}{\numberline {2.2}Method 2: Using Anaconda virtual environment}{7}{section.2.2}
+\contentsline {section}{\numberline {2.3}Method 3: Developer mode}{8}{section.2.3}
+\contentsline {section}{\numberline {2.4}Troubleshooting installation}{8}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}MatPlotLib and PyQt5}{8}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Problems with package bs4}{8}{subsection.2.4.2}
+\contentsline {chapter}{\numberline {3}Package f311}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Print file handling classes information}{9}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}API reference}{10}{subsection.3.1.1}
+\contentsline {chapter}{\numberline {4}Spectral synthesis}{11}{chapter.4}
+\contentsline {section}{\numberline {4.1}Applications}{11}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Graphical applications}{11}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Command-line tools}{11}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Coding using the API}{12}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Spectral synthesis}{12}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Spectral synthesis - convolutions}{12}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Spectral synthesis - Continuum}{14}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Spectral synthesis - Separate atomic species}{16}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}Spectral synthesis - Separate molecules}{18}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.6}Gaussian profiles as nulbad outputs}{19}{subsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2.7}Plot hydrogen profiles}{21}{subsection.4.2.7}
+\contentsline {section}{\numberline {4.3}API reference}{23}{section.4.3}
+\contentsline {chapter}{\numberline {5}Conversion of molecular lines lists}{25}{chapter.5}
+\contentsline {section}{\numberline {5.1}Introduction}{25}{section.5.1}
+\contentsline {section}{\numberline {5.2}Most relevant applications in F311 package}{25}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Graphical applications}{25}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Command-line tools}{25}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}How the conversion is made}{26}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Input molecular constants obtained from NIST database {[}NISTref{]} (all given in unit: cm**-1)}{26}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Input data from line list files (\sphinxstyleemphasis {e.g.} {[}Kurucz{]})}{26}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}Calculated outputs}{26}{subsection.5.3.3}
+\contentsline {subsubsection}{\sphinxstyleemphasis {Jl}/\sphinxstyleemphasis {J2l}-independent}{27}{subsubsection*.11}
+\contentsline {subsubsection}{\sphinxstyleemphasis {Jl}/\sphinxstyleemphasis {J2l}-dependent (\sphinxstyleemphasis {i.e.}, for each spectral line)}{27}{subsubsection*.12}
+\contentsline {paragraph}{Normalization of the line strength}{28}{paragraph*.13}
+\contentsline {paragraph}{How to determine the branch}{28}{paragraph*.14}
+\contentsline {section}{\numberline {5.4}API documentation}{28}{section.5.4}
+\contentsline {section}{\numberline {5.5}Bibliography}{28}{section.5.5}
+\contentsline {chapter}{\numberline {6}File explorer and editors}{29}{chapter.6}
+\contentsline {section}{\numberline {6.1}Introduction}{29}{section.6.1}
+\contentsline {section}{\numberline {6.2}List of applications}{29}{section.6.2}
+\contentsline {section}{\numberline {6.3}API reference}{30}{section.6.3}
+\contentsline {chapter}{\numberline {7}File handling API}{31}{chapter.7}
+\contentsline {section}{\numberline {7.1}Introduction}{31}{section.7.1}
+\contentsline {section}{\numberline {7.2}Supported file types}{31}{section.7.2}
+\contentsline {section}{\numberline {7.3}Examples}{32}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}Convert 1D spectral file to FITS format}{32}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}Import Kurucz’ molecular linelist file}{33}{subsection.7.3.2}
+\contentsline {section}{\numberline {7.4}API reference}{34}{section.7.4}
+\contentsline {chapter}{\numberline {8}Selected topics on Physics}{35}{chapter.8}
+\contentsline {section}{\numberline {8.1}Introduction}{35}{section.8.1}
+\contentsline {section}{\numberline {8.2}Examples}{35}{section.8.2}
+\contentsline {subsection}{\numberline {8.2.1}Air-to-vacuum (\& vice versa) wavelength conversion}{35}{subsection.8.2.1}
+\contentsline {subsection}{\numberline {8.2.2}Calculate the magnitude of a spectrum}{36}{subsection.8.2.2}
+\contentsline {subsection}{\numberline {8.2.3}Calculate Hönl-London factors for doublets}{37}{subsection.8.2.3}
+\contentsline {section}{\numberline {8.3}API reference}{37}{section.8.3}
+\contentsline {chapter}{\numberline {9}Adaptive Optics Systems Simulation Support (\sphinxstyleliteralintitle {f311.aosss})}{39}{chapter.9}
+\contentsline {section}{\numberline {9.1}Quick Start}{39}{section.9.1}
+\contentsline {subsection}{\numberline {9.1.1}List \sphinxstyleemphasis {aosss} applications}{39}{subsection.9.1.1}
+\contentsline {subsection}{\numberline {9.1.2}Find wavelength region for simulation}{39}{subsection.9.1.2}
+\contentsline {subsection}{\numberline {9.1.3}Download simulation results}{41}{subsection.9.1.3}
+\contentsline {subsection}{\numberline {9.1.4}Organize simulation results}{41}{subsection.9.1.4}
+\contentsline {subsubsection}{Group resulting spectra in a single file}{41}{subsubsection*.16}
+\contentsline {subsubsection}{Create reports (optional)}{41}{subsubsection*.17}
+\contentsline {subsubsection}{Organize the directory}{41}{subsubsection*.18}
+\contentsline {subsection}{\numberline {9.1.5}Browse through reports}{42}{subsection.9.1.5}
+\contentsline {subsection}{\numberline {9.1.6}Edit Spectrum List file}{44}{subsection.9.1.6}
+\contentsline {section}{\numberline {9.2}API reference}{47}{section.9.2}
+\contentsline {chapter}{\numberline {10}Index of applications (scripts)}{49}{chapter.10}
+\contentsline {section}{\numberline {10.1}Script \sphinxstyleliteralintitle {create-simulation-reports.py}}{49}{section.10.1}
+\contentsline {section}{\numberline {10.2}Script \sphinxstyleliteralintitle {create-spectrum-lists.py}}{49}{section.10.2}
+\contentsline {section}{\numberline {10.3}Script \sphinxstyleliteralintitle {get-compass.py}}{49}{section.10.3}
+\contentsline {section}{\numberline {10.4}Script \sphinxstyleliteralintitle {list-mosaic-modes.py}}{50}{section.10.4}
+\contentsline {section}{\numberline {10.5}Script \sphinxstyleliteralintitle {organize-directory.py}}{50}{section.10.5}
+\contentsline {section}{\numberline {10.6}Script \sphinxstyleliteralintitle {wavelength-chart.py}}{51}{section.10.6}
+\contentsline {section}{\numberline {10.7}Script \sphinxstyleliteralintitle {hitran-scraper.py}}{51}{section.10.7}
+\contentsline {subsection}{\numberline {10.7.1}Usage examples}{52}{subsection.10.7.1}
+\contentsline {subsection}{\numberline {10.7.2}Quick note on the HITRAN API}{54}{subsection.10.7.2}
+\contentsline {section}{\numberline {10.8}Script \sphinxstyleliteralintitle {nist-scraper.py}}{55}{section.10.8}
+\contentsline {subsection}{\numberline {10.8.1}Usage examples}{56}{subsection.10.8.1}
+\contentsline {section}{\numberline {10.9}Script \sphinxstyleliteralintitle {convmol.py}}{57}{section.10.9}
+\contentsline {section}{\numberline {10.10}Script \sphinxstyleliteralintitle {mced.py}}{57}{section.10.10}
+\contentsline {section}{\numberline {10.11}Script \sphinxstyleliteralintitle {moldbed.py}}{57}{section.10.11}
+\contentsline {section}{\numberline {10.12}Script \sphinxstyleliteralintitle {create-grid.py}}{58}{section.10.12}
+\contentsline {section}{\numberline {10.13}Script \sphinxstyleliteralintitle {cut-atoms.py}}{59}{section.10.13}
+\contentsline {section}{\numberline {10.14}Script \sphinxstyleliteralintitle {cut-molecules.py}}{59}{section.10.14}
+\contentsline {section}{\numberline {10.15}Script \sphinxstyleliteralintitle {cut-spectrum.py}}{59}{section.10.15}
+\contentsline {section}{\numberline {10.16}Script \sphinxstyleliteralintitle {plot-spectra.py}}{60}{section.10.16}
+\contentsline {section}{\numberline {10.17}Script \sphinxstyleliteralintitle {vald3-to-atoms.py}}{61}{section.10.17}
+\contentsline {section}{\numberline {10.18}Script \sphinxstyleliteralintitle {abed.py}}{61}{section.10.18}
+\contentsline {section}{\numberline {10.19}Script \sphinxstyleliteralintitle {ated.py}}{61}{section.10.19}
+\contentsline {section}{\numberline {10.20}Script \sphinxstyleliteralintitle {cubeed.py}}{62}{section.10.20}
+\contentsline {section}{\numberline {10.21}Script \sphinxstyleliteralintitle {explorer.py}}{62}{section.10.21}
+\contentsline {section}{\numberline {10.22}Script \sphinxstyleliteralintitle {mained.py}}{62}{section.10.22}
+\contentsline {section}{\numberline {10.23}Script \sphinxstyleliteralintitle {mled.py}}{63}{section.10.23}
+\contentsline {section}{\numberline {10.24}Script \sphinxstyleliteralintitle {optionsed.py}}{63}{section.10.24}
+\contentsline {section}{\numberline {10.25}Script \sphinxstyleliteralintitle {splisted.py}}{63}{section.10.25}
+\contentsline {section}{\numberline {10.26}Script \sphinxstyleliteralintitle {tune-zinf.py}}{63}{section.10.26}
+\contentsline {section}{\numberline {10.27}Script \sphinxstyleliteralintitle {copy-star.py}}{64}{section.10.27}
+\contentsline {section}{\numberline {10.28}Script \sphinxstyleliteralintitle {link.py}}{65}{section.10.28}
+\contentsline {section}{\numberline {10.29}Script \sphinxstyleliteralintitle {merge-molecules.py}}{66}{section.10.29}
+\contentsline {section}{\numberline {10.30}Script \sphinxstyleliteralintitle {run-multi.py}}{66}{section.10.30}
+\contentsline {section}{\numberline {10.31}Script \sphinxstyleliteralintitle {run4.py}}{68}{section.10.31}
+\contentsline {section}{\numberline {10.32}Script \sphinxstyleliteralintitle {x.py}}{69}{section.10.32}

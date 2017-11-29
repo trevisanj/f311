@@ -1,11 +1,10 @@
-Conversion of molecular spectral lines (``f311.convmol``)
-=========================================================
+Conversion of molecular lines lists
+===================================
 
 Introduction
 ------------
 
-
-Cconversion between different formats of files containing molecular spectral lines data.
+Conversion between different formats of files containing molecular spectral lines data.
 
 Conversion inputs:
 
@@ -28,15 +27,15 @@ Most relevant applications in F311 package
 Graphical applications
 ^^^^^^^^^^^^^^^^^^^^^^
 
-* :doc:`convmol.py <autoscripts/editable-convmol>`: Conversion of molecular lines data to PFANT format
-* :doc:`mced.py <autoscripts/editable-mced>`: Editor for molecular constants file
-* :doc:`moldbed.py <autoscripts/editable-moldbed>`: Editor for molecules SQLite database
+* :doc:`convmol.py <autoscripts/script-convmol>`: Conversion of molecular lines data to PFANT format
+* :doc:`mced.py <autoscripts/script-mced>`: Editor for molecular constants file
+* :doc:`moldbed.py <autoscripts/script-moldbed>`: Editor for molecules SQLite database
 
 Command-line tools
 ^^^^^^^^^^^^^^^^^^
 
-* :doc:`hitran-scraper.py <autoscripts/editable-hitran-scraper>`: Retrieves molecular lines from the HITRAN database [Gordon2016]
-* :doc:`nist-scraper.py <autoscripts/editable-nist-scraper>`: Retrieves and prints a table of molecular constants from the NIST Chemistry Web Book.
+* :doc:`hitran-scraper.py <autoscripts/script-hitran-scraper>`: Retrieves molecular lines from the HITRAN database [Gordon2016]
+* :doc:`nist-scraper.py <autoscripts/script-nist-scraper>`: Retrieves and prints a table of molecular constants from the NIST Chemistry Web Book.
 
 
 How the conversion is made

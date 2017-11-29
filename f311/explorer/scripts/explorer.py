@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""F311 Explorer --  list, visualize, and edit data files (_à la_ File Manager)"""
+"""F311 Explorer --  file manager-like application to list, visualize, and edit data files"""
 
 import a99
 import f311.filetypes as ft

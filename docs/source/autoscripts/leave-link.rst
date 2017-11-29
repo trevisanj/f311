@@ -44,8 +44,8 @@
     optional arguments:
       -h, --help  show this help message and exit
       -l, --list  lists subdirectories of
-                  /home/j/Documents/projects/astro/github/PFANT/data (default:
-                  False)
+                  /home/j/Documents/projects/astro/github/PFANT/code/data
+                  (default: False)
       -p, --path  system path mode (default: False)
       -y, --yes   Automatically answers 'yes' to eventual question (default:
                   False)

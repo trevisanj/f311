@@ -1,5 +1,5 @@
-Browse, read, write, visualize, edit files (``f311.explorer``)
-==============================================================
+File explorer and editors
+=========================
 
 Introduction
 ------------

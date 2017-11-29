@@ -59,12 +59,9 @@ def _list_packages():
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-    description=__doc__,
-    formatter_class=a99.SmartFormatter
-    )
+    parser = argparse.ArgumentParser(description=__doc__,  formatter_class=a99.SmartFormatter)
     parser.add_argument('format', type=str, help='Print format', nargs="?", default="text",
-                        choices=["text", "markdown-list", "markdown-table", "rest-list"])
+                        choices=["text", "markdown-list", "markdown-table", "rest-list", "rest-toctree"])
     parser.add_argument('-p', '--pkgname', type=str, help='List programs from this package only', default="(all)")
     parser.add_argument('-l', '--list-packages', action="store_true", help='Lists all packages')
     parser.add_argument('-k', '--rest-links', action="store_true",

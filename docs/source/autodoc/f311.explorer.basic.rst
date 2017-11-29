@@ -1,11 +1,19 @@
-f311.explorer.basic package
-===========================
+f311\.explorer\.basic package
+=============================
 
 Submodules
 ----------
 
-f311.explorer.basic.maths module
---------------------------------
+f311\.explorer\.basic\.conversion module
+----------------------------------------
+
+.. automodule:: f311.explorer.basic.conversion
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+f311\.explorer\.basic\.maths module
+-----------------------------------
 
 .. automodule:: f311.explorer.basic.maths
     :members:

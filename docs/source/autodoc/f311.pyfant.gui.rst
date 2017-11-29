@@ -1,27 +1,27 @@
-f311.pyfant.gui package
-=======================
+f311\.pyfant\.gui package
+=========================
 
 Submodules
 ----------
 
-f311.pyfant.gui.a_XMulti module
--------------------------------
+f311\.pyfant\.gui\.a\_XMulti module
+-----------------------------------
 
 .. automodule:: f311.pyfant.gui.a_XMulti
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.pyfant.gui.a_XPFANT module
--------------------------------
+f311\.pyfant\.gui\.a\_XPFANT module
+-----------------------------------
 
 .. automodule:: f311.pyfant.gui.a_XPFANT
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.pyfant.gui.a_XRunnableManager module
------------------------------------------
+f311\.pyfant\.gui\.a\_XRunnableManager module
+---------------------------------------------
 
 .. automodule:: f311.pyfant.gui.a_XRunnableManager
     :members:

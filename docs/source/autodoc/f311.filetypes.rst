@@ -1,5 +1,5 @@
-f311.filetypes package
-======================
+f311\.filetypes package
+=======================
 
 Subpackages
 -----------
@@ -13,24 +13,24 @@ Subpackages
 Submodules
 ----------
 
-f311.filetypes.basic module
----------------------------
+f311\.filetypes\.basic module
+-----------------------------
 
 .. automodule:: f311.filetypes.basic
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.classcatalog module
-----------------------------------
+f311\.filetypes\.molconsts module
+---------------------------------
 
-.. automodule:: f311.filetypes.classcatalog
+.. automodule:: f311.filetypes.molconsts
     :members:
     :undoc-members:
     :show-inheritance:
 
-f311.filetypes.util module
---------------------------
+f311\.filetypes\.util module
+----------------------------
 
 .. automodule:: f311.filetypes.util
     :members:
