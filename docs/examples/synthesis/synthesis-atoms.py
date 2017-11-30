@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import f311.filetypes as ft
 import a99
 
-# ["<element name><ionization level>", ...]
+# ["<element name><ionization level>", ...] for which to draw panels
 MY_SPECIES = ["Fe1", "Fe2", "Ca1", "Ca2", "Na1", "Si1"]
 
 if __name__ == "__main__":
@@ -16,7 +16,6 @@ if __name__ == "__main__":
     # Loads full atomic lines file
     fatoms = ft.FileAtoms()
     fatoms.load()
-
 
     runnables = []
     for elem_ioni in MY_SPECIES:

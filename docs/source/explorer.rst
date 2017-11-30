@@ -55,7 +55,3 @@ Command-line tools:
 - ``vald3-to-atoms.py`` -- Converts VALD3 atomic/molecular lines file to PFANT atomic lines file.
 
 
-API reference
--------------
-
-:doc:`autodoc/f311.explorer`

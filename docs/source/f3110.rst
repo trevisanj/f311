@@ -1,13 +1,24 @@
 Package f311
 ============
 
-The root package provides the collaboration model implementation.
+The ``f311`` "root" package provides the **collaboration model implementation**. This is a plugin
+model that allows 3rd-party **collaborator packages** to contribute with
 
-The collaboration model allows ``f311.COLLABORATORS`` to contribute with
+- ``DataFile`` subclasses, *i.e.*, implement handling (load, save, etc.) of new file types;
+- ``Vis`` subclasses, *i.e.*, implement visualizations for these files;
+- Standalone scripts that will be listed by ``programs.py``
 
-- ``DataFile`` subclasses, i.e., implement handling (load, save, etc.) of new file types;
-- ``Vis`` subclasses, i.e., implement visualizations for these files;
-- Standalone scripts placed in the directory ``packagename/scripts``
+3rd-party collaborator packages
+-------------------------------
+
+At present (2017-11-30), two 3rd-party collaborator packages are "registered" to work together with
+project F311 code:
+
+- `Package ariastro <http://github.com/aricorte/ariastro>`_
+- Package "convmolworks" (in-house)
+
+Examples
+--------
 
 Print file handling classes information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -17,24 +28,24 @@ Print file handling classes information
 The output should be something like::
 
     *** Classes that can handle text files***
-    FileAbXFwhm              : `x.py` Differential Abundances and FWHMs (Python source)
+    FileAbXFwhm              : `x.py` Differential Abundances X FWHMs (Python source)
     FileAbonds               : PFANT Stellar Chemical Abundances
-    FileAbsoru2              : "Absoru2" file
+    FileAbsoru2              : PFANT "Absoru2" file
     FileAtoms                : PFANT Atomic Lines
-    FileConfigConvMol        : Python source containing 'config_conv = ConfigConv(...)
+    FileConfigConvMol        : Configuration file for molecular lines conversion GUI (Python code)
     FileDissoc               : PFANT Stellar Dissociation Equilibrium Information
-    FileFCF                  : File containing Franck-Condon Factors (FCFs)
-    FileHmap                 : PFANT Hygrogen Lines Map
+    FileHmap                 : PFANT Hydrogen Lines Map
     FileKuruczMolecule       : Kurucz molecular lines file
+    FileKuruczMolecule1      : Kurucz molecular lines file following format of file "c2dabrookek.asc"
     FileKuruczMoleculeBase   : Base class for the two types of Kurucz molecular lines file
     FileKuruczMoleculeOld    : Kurucz molecular lines file, old format #0
     FileKuruczMoleculeOld1   : Kurucz molecular lines file, old format #1
-    FileMain                 : PFANT Stellar Main Configuration
+    FileMain                 : PFANT Main Stellar Configuration
     FileModTxt               : MARCS Atmospheric Model (text file)
-    FileMolConsts            : Python source containing 'fobj = MolConsts(...)
+    FileMolConsts            : Molecular constants config file (Python code)
     FileMolecules            : PFANT Molecular Lines
     FileOpa                  : MARCS ".opa" (opacity model) file format.
-    FileOptions              : `x.py` Command-line Options
+    FileOptions              : PFANT Command-line Options
     FilePar                  : WebSim-COMPASS ".par" (parameters) file
     FilePartit               : PFANT Partition Function
     FilePlezTiO              : Plez molecular lines file, TiO format
@@ -44,12 +55,13 @@ The output should be something like::
     FileSpectrumNulbad       : PFANT Spectrum (`nulbad` output)
     FileSpectrumPfant        : PFANT Spectrum (`pfant` output)
     FileSpectrumXY           : "Lambda-flux" Spectrum (2-column text file)
+    FileTRAPRBInput          : Input file for the TRAPRB Fortran code (which calculates Franck-Condon factors)
+    FileTRAPRBOutput         : Output file for the TRAPRB Fortran code (which calculates Franck-Condon factors)
     FileToH                  : PFANT Hydrogen Line Profile
     FileVald3                : VALD3 atomic or molecular lines file
 
     *** Classes that can handle binary files***
-    FileFullCube             : FITS Data Cube ("full" opposed to "sparse")
-    FileGalfit               : FITS file with frames named INPUT_*, MODEL_*, RESIDUAL_*, which is the output of Galfit software
+    FileFullCube             : FITS WebSim Compass Data Cube
     FileHitranDB             : HITRAN Molecules Catalogue
     FileModBin               : PFANT Atmospheric Model (binary file)
     FileMolDB                : Database of Molecular Constants
@@ -58,6 +70,7 @@ The output should be something like::
     FileSparseCube           : FITS Sparse Data Cube (storage to take less disk space)
     FileSpectrumFits         : FITS Spectrum
     FileSpectrumList         : FITS Spectrum List
+    FileGalfit               : FITS file with frames named INPUT_*, MODEL_*, RESIDUAL_* (Galfit software output)
 
     *** Classes that can handle 1D spectrum files***
     FileSpectrum             : Base class for all files representing a single 1D spectrum
@@ -65,10 +78,3 @@ The output should be something like::
     FileSpectrumNulbad       : PFANT Spectrum (`nulbad` output)
     FileSpectrumPfant        : PFANT Spectrum (`pfant` output)
     FileSpectrumXY           : "Lambda-flux" Spectrum (2-column text file)
-
-
-API reference
--------------
-
-:doc:`autodoc/f311`
-

@@ -222,7 +222,3 @@ In the following steps, we will:
 .. |imaget4| image:: figures/splisted-tut-4.png
 
 
-API reference
--------------
-
-:doc:`autodoc/f311.aosss`

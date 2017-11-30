@@ -145,9 +145,3 @@ Import Kurucz' molecular linelist file
                   spinl=3,
                   iso=12)
 
-
-API reference
--------------
-
-:doc:`autodoc/f311.filetypes`
-

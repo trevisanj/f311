@@ -34,7 +34,7 @@ setup(
     author_email='juliotrevisan@gmail.com',
     url='https://github.com/trevisanj/f311',
     keywords= ['astronomy', "fits", "spectroscopy", "spectral synthesis", "photometry",
-               "honl-london", "nist", "hitran", "multiplicity"],
+               "honl-london", "nist", "hitran", "multiplicity", "line strength", "kovacs", "franck-condon"],
     install_requires=["a99>=0.17.12.08.4"],
     scripts=scripts
 )

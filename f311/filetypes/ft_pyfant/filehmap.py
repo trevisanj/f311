@@ -29,7 +29,7 @@ class HmapRow(a99.AttrsPart):
 @a99.froze_it
 class FileHmap(DataFile):
     """
-    PFANT Hygrogen Lines Map
+    PFANT Hydrogen Lines Map
 
     Imitates the logic of reader_hmap.f90::read_hmap().
 

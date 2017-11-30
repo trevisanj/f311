@@ -154,31 +154,63 @@ htmlhelp_basename = 'f311doc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
-#
-# latex_elements = {
-#     # The paper size ('letterpaper' or 'a4paper').
-#     #
-#     # 'papersize': 'letterpaper',
-#
-#     # The font size ('10pt', '11pt' or '12pt').
-#     #
-#     # 'pointsize': '10pt',
-#
-#     # Additional stuff for the LaTeX preamble.
-#     #
-#     # 'preamble': '',
-#
-#     # Latex figure (float) alignment
-#     #
-#     # 'figure_align': 'htbp',
-# }
 
-# https://tex.stackexchange.com/questions/20182/how-to-use-unicode-characters-with-sphinx-rst-documents-and-properly-generate-pd
 latex_elements = {
-    'inputenc': '',
-    'utf8extra': '',
+    # The paper size ('letterpaper' or 'a4paper').
+    #
+    'papersize': 'a4paper',
+
+    # The font size ('10pt', '11pt' or '12pt').
+    #
+    # 'pointsize': '10pt',
+
+    'pointsize': '10pt',
+
+    # Additional stuff for the LaTeX preamble.
+    'preamble': r'''
+\usepackage{charter}
+\usepackage[defaultsans]{lato}
+\usepackage{inconsolata}
+''',
+
+
+    # Additional stuff for the LaTeX preamble.
+    #
+    # 'preamble': '',
+
+    # Latex figure (float) alignment
+    #
+    # 'figure_align': 'htbp',
 }
 
+# # https://tex.stackexchange.com/questions/20182/how-to-use-unicode-characters-with-sphinx-rst-documents-and-properly-generate-pd
+# latex_elements = {
+#     'inputenc': '',
+#     'utf8extra': '',
+#     'preamble': '''
+# \usepackage{fontspec}
+# \setsansfont{Arial}
+# \setromanfont{Arial}
+# \setmonofont[12pt]{DejaVu Sans Mono}
+# ''',
+# }
+
+# latex_elements = {
+#     'preamble': '''
+# % Enable unicode and use Courier New to ensure the card suit
+# % characters that are part of the 'random' module examples
+# % appear properly in the PDF output.
+# \\usepackage{fontspec}
+# \\setmonofont{Courier New}
+# ''',
+#     # disable font inclusion
+#     'fontpkg': '',
+#     'fontenc': '',
+#     # Fix Unicode handling by disabling the defaults for a few items
+#     # set by sphinx
+#     'inputenc': '',
+#     'utf8extra': '',
+# }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,

@@ -63,9 +63,9 @@ To deactivate the environment:
 Method 3: Developer mode
 ------------------------
 
-This allows you to pull the most recent version of the code directly from GitHub.
+This option allows you to download and modify the source code.
 
-First, follow Method 1 or 2 above, **but do not install f311**, *i.e.*, the pip command should be::
+First, make sure all the required packages are installed::
 
     pip install numpy scipy matplotlib astropy configobj bs4 lxml robobrowser requests fortranformat tabulate rows pyqt5 a99
 
@@ -92,6 +92,8 @@ Finally, install F311 in **developer** mode:
 Troubleshooting installation
 ----------------------------
 
+This section shows some possible errors and their solutions.
+
 MatPlotLib and PyQt5
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -101,7 +103,7 @@ MatPlotLib and PyQt5
    'GTK3Agg', 'cairo', 'TkAgg', 'pgf', 'MacOSX', 'GTK', 'WX', 'GTKCairo', 'Qt4Agg', 'svg', 'agg',
    'ps', 'emf', 'WebAgg', 'gdk', 'WXAgg', 'CocoaAgg', 'GTK3Cairo']
 
-**Solution**: update Matplotlib to version 1.4 or later
+**Solution**: upgrade Matplotlib to version 1.4 or later
 
 Problems with package bs4
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,5 +112,7 @@ Problems with package bs4
 
   bs4.FeatureNotFound: Couldn't find a tree builder with the features you requested: lxml. Do you need to install a parser library?
 
-**Solution**: install package "lxml": ``pip install lxml``
+**Solution**: install package "lxml"::
+
+    pip install lxml
 

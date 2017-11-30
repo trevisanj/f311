@@ -42,11 +42,20 @@ a99.flag_log_file = True
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=a99.SmartFormatter)
+    parser.add_argument('-u', "--unicode", action="store_true",
+                        help='Unicode output (default is to contain only ASCII characters)')
     parser.add_argument('formula', type=str, help='NIST formula', nargs=1)
     args = parser.parse_args()
 
-    data, header, title = cm.get_nist_webbook_constants(args.formula)
-    print("\n*** {} ***\n".format(title))
-    print(tabulate.tabulate(data, header))
+    data, header, title = cm.get_nist_webbook_constants(args.formula, args.unicode)
+    out = "\n*** {} ***\n\n{}".format(title, tabulate.tabulate(data, header))
+
+    if not args.unicode:
+        # Just in case some unicode characters are left
+        out = out.encode("ascii", "replace").decode()
+
+    print(out)
+
+
 
 

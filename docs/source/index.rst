@@ -8,20 +8,22 @@ Welcome!
 
    intro
    install
-   f3110
    pyfant
    convmol
    explorer
    filetypes
    physics
    aosss
+   f3110
    scripts
 
 .. only:: html
 
-    More
-    ----
+    API Reference
+    -------------
 
     * :ref:`genindex` (all symbols listed alphabetically)
     * :ref:`modindex` (whole f311 package tree)
+
+    .. hint:: You can also search using the sidebar box.
 

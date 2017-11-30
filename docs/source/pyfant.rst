@@ -1,9 +1,7 @@
 Spectral synthesis
 ==================
 
-Welcome!!
-
-pyfant is a Python interface for the `PFANT Spectral Synthesis
+This section describes the Python interface for the `PFANT Spectral Synthesis
 Software <http://trevisanj.github.io/PFANT>`__ for Astronomy.
 
 Spectral synthesis softwares have a fundamental role in Astronomy.
@@ -17,16 +15,13 @@ easiness of parameter input and its multiple variations, and also tools for inco
 like atomic/molecular lines, atmospheric models, etc.
 
 Package ``f311.pyfant`` provides a Python interface to the PFANT Fortran binaries, including the
-ability to run the Fortran binaries in parallel in a multi-processing scheme via API or GUI.
-
-manipulate and save PFANT data files using ``f311.filetypes``, allow for complex batch operations.
-
+ability to run the Fortran binaries in parallel *via* GUI or API.
 
 Applications
 ------------
 
 The applications related to package f311.pyfant are listed below. For them to work, you need to
-`install PFANT <http://trevisanj.github.io/PFANT/install.html>`_.
+have `PFANT <http://trevisanj.github.io/PFANT/install.html>`_ installed.
 
 The `PFANT Quick Start <http://trevisanj.github.io/PFANT/quick.html>`_ serves as a guide to
 using some of these applications.
@@ -52,6 +47,7 @@ This section contains a series of examples on how to use the PFANT Fortran execu
 Python script. These "bindings" to the Fortran binaries, together with the ability to load,
 manipulate and save PFANT data files using ``f311.filetypes``, allow for complex batch operations.
 
+.. todo:: Figure numbers because Latex does not place figures immediately after the code.
 
 Spectral synthesis
 ~~~~~~~~~~~~~~~~~~
@@ -128,7 +124,3 @@ Plot hydrogen profiles
 .. figure:: figures/hydrogen-profiles.png
    :align: center
 
-API reference
--------------
-
-:doc:`autodoc/f311.pyfant`
