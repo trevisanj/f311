@@ -25,13 +25,8 @@
     optional arguments:
       -h, --help  show this help message and exit
       -l, --list  lists subdirectories of
-<<<<<<< HEAD
                   /home/j/Documents/projects/astro/github/PFANT/code/data
                   (default: False)
-=======
-                  /home/j/Documents/projects/astro/github/PFANT/data (default:
-                  False)
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
       -p, --path  system path mode (default: False)
     
 

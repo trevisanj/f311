@@ -93,28 +93,16 @@
             
             
               <ul>
-<<<<<<< HEAD
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular lines lists</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explorer.html">File explorer and editors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../filetypes.html">File handling API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../physics.html">Selected topics on Physics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Index of applications (scripts)</a></li>
-=======
-<li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../filetypes.html">File handling API (<code class="docutils literal"><span class="pre">f311.filetypes</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../physics.html">Selected topics on Physics (<code class="docutils literal"><span class="pre">f311.physics</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cheat.html">Project <code class="docutils literal"><span class="pre">f311</span></code> Cheat Sheet</a></li>
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Index of applications (scripts)</a></li>
 </ul>
 
             
@@ -812,11 +800,7 @@ the actual thread objects.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Object with a run() method.</p>
 <p>The run() method is blocking, i.e., it only returns when running is done.</p>
-<<<<<<< HEAD
 <p>This is a base class for PFANTExecutable and Combo.</p>
-=======
-<p>This is a base class for Executable and Combo.</p>
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <dl class="method">
 <dt id="f311.pyfant.runnables.Runnable.clean">
 <code class="descname">clean</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.runnables.Runnable.clean" title="Permalink to this definition">¶</a></dt>
@@ -904,7 +888,6 @@ executable.</p>
 <dt id="f311.pyfant.runnables.ExecutableStatus">
 <em class="property">class </em><code class="descclassname">f311.pyfant.runnables.</code><code class="descname">ExecutableStatus</code><span class="sig-paren">(</span><em>executable</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.runnables.ExecutableStatus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<<<<<<< HEAD
 <p>Stores status related to PFANTExecutable for reporting purposes.</p>
 </dd></dl>
 
@@ -936,44 +919,10 @@ executable.</p>
 <dl class="attribute">
 <dt id="f311.pyfant.runnables.PFANTExecutable.opt">
 <code class="descname">opt</code><a class="headerlink" href="#f311.pyfant.runnables.PFANTExecutable.opt" title="Permalink to this definition">¶</a></dt>
-=======
-<p>Stores status related to Executable for reporting purposes.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="f311.pyfant.runnables.Executable">
-<em class="property">class </em><code class="descclassname">f311.pyfant.runnables.</code><code class="descname">Executable</code><a class="headerlink" href="#f311.pyfant.runnables.Executable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#f311.pyfant.runnables.Runnable" title="f311.pyfant.runnables.Runnable"><code class="xref py py-class docutils literal"><span class="pre">f311.pyfant.runnables.Runnable</span></code></a></p>
-<p>PFANT executables common ancestor class.</p>
-<dl class="attribute">
-<dt id="f311.pyfant.runnables.Executable.conf">
-<code class="descname">conf</code><a class="headerlink" href="#f311.pyfant.runnables.Executable.conf" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="f311.pyfant.runnables.Executable.exe_path">
-<code class="descname">exe_path</code><a class="headerlink" href="#f311.pyfant.runnables.Executable.exe_path" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="f311.pyfant.runnables.Executable.get_status">
-<code class="descname">get_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.runnables.Executable.get_status" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="f311.pyfant.runnables.Executable.kill">
-<code class="descname">kill</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.runnables.Executable.kill" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="f311.pyfant.runnables.Executable.opt">
-<code class="descname">opt</code><a class="headerlink" href="#f311.pyfant.runnables.Executable.opt" title="Permalink to this definition">¶</a></dt>
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <dd><p>Wraps self.__conf.opt</p>
 </dd></dl>
 
 <dl class="attribute">
-<<<<<<< HEAD
 <dt id="f311.pyfant.runnables.PFANTExecutable.returncode">
 <code class="descname">returncode</code><a class="headerlink" href="#f311.pyfant.runnables.PFANTExecutable.returncode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -981,40 +930,21 @@ executable.</p>
 <dl class="method">
 <dt id="f311.pyfant.runnables.PFANTExecutable.run">
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.runnables.PFANTExecutable.run" title="Permalink to this definition">¶</a></dt>
-=======
-<dt id="f311.pyfant.runnables.Executable.returncode">
-<code class="descname">returncode</code><a class="headerlink" href="#f311.pyfant.runnables.Executable.returncode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="f311.pyfant.runnables.Executable.run">
-<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.runnables.Executable.run" title="Permalink to this definition">¶</a></dt>
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <dd><p>Runs executable.</p>
 <p>Blocking routine. Only returns when executable finishes running.</p>
 </dd></dl>
 
 <dl class="method">
-<<<<<<< HEAD
 <dt id="f311.pyfant.runnables.PFANTExecutable.run_from_combo">
 <code class="descname">run_from_combo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.runnables.PFANTExecutable.run_from_combo" title="Permalink to this definition">¶</a></dt>
-=======
-<dt id="f311.pyfant.runnables.Executable.run_from_combo">
-<code class="descname">run_from_combo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.pyfant.runnables.Executable.run_from_combo" title="Permalink to this definition">¶</a></dt>
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <dd><p>Alternative to run executable (called from Combo class).</p>
 <p>This routine bypasses all the configuration that is done prior to running.
 (Combo.configure() will do the necessary configuration).</p>
 </dd></dl>
 
 <dl class="attribute">
-<<<<<<< HEAD
 <dt id="f311.pyfant.runnables.PFANTExecutable.sequence_index">
 <code class="descname">sequence_index</code><em class="property"> = -1</em><a class="headerlink" href="#f311.pyfant.runnables.PFANTExecutable.sequence_index" title="Permalink to this definition">¶</a></dt>
-=======
-<dt id="f311.pyfant.runnables.Executable.sequence_index">
-<code class="descname">sequence_index</code><em class="property"> = -1</em><a class="headerlink" href="#f311.pyfant.runnables.Executable.sequence_index" title="Permalink to this definition">¶</a></dt>
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <dd></dd></dl>
 
 </dd></dl>
@@ -1022,11 +952,7 @@ executable.</p>
 <dl class="class">
 <dt id="f311.pyfant.runnables.Innewmarcs">
 <em class="property">class </em><code class="descclassname">f311.pyfant.runnables.</code><code class="descname">Innewmarcs</code><a class="headerlink" href="#f311.pyfant.runnables.Innewmarcs" title="Permalink to this definition">¶</a></dt>
-<<<<<<< HEAD
 <dd><p>Bases: <a class="reference internal" href="#f311.pyfant.runnables.PFANTExecutable" title="f311.pyfant.runnables.PFANTExecutable"><code class="xref py py-class docutils literal"><span class="pre">f311.pyfant.runnables.PFANTExecutable</span></code></a></p>
-=======
-<dd><p>Bases: <a class="reference internal" href="#f311.pyfant.runnables.Executable" title="f311.pyfant.runnables.Executable"><code class="xref py py-class docutils literal"><span class="pre">f311.pyfant.runnables.Executable</span></code></a></p>
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <p>Class representing the innewmarcs executable.</p>
 <dl class="method">
 <dt id="f311.pyfant.runnables.Innewmarcs.load_result">
@@ -1043,11 +969,7 @@ executable.</p>
 <dl class="class">
 <dt id="f311.pyfant.runnables.Hydro2">
 <em class="property">class </em><code class="descclassname">f311.pyfant.runnables.</code><code class="descname">Hydro2</code><a class="headerlink" href="#f311.pyfant.runnables.Hydro2" title="Permalink to this definition">¶</a></dt>
-<<<<<<< HEAD
 <dd><p>Bases: <a class="reference internal" href="#f311.pyfant.runnables.PFANTExecutable" title="f311.pyfant.runnables.PFANTExecutable"><code class="xref py py-class docutils literal"><span class="pre">f311.pyfant.runnables.PFANTExecutable</span></code></a></p>
-=======
-<dd><p>Bases: <a class="reference internal" href="#f311.pyfant.runnables.Executable" title="f311.pyfant.runnables.Executable"><code class="xref py py-class docutils literal"><span class="pre">f311.pyfant.runnables.Executable</span></code></a></p>
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <p>Class representing the hydro2 executable.</p>
 <dl class="method">
 <dt id="f311.pyfant.runnables.Hydro2.load_result">
@@ -1067,11 +989,7 @@ FileHmap fail to load.</p>
 <dl class="class">
 <dt id="f311.pyfant.runnables.Pfant">
 <em class="property">class </em><code class="descclassname">f311.pyfant.runnables.</code><code class="descname">Pfant</code><a class="headerlink" href="#f311.pyfant.runnables.Pfant" title="Permalink to this definition">¶</a></dt>
-<<<<<<< HEAD
 <dd><p>Bases: <a class="reference internal" href="#f311.pyfant.runnables.PFANTExecutable" title="f311.pyfant.runnables.PFANTExecutable"><code class="xref py py-class docutils literal"><span class="pre">f311.pyfant.runnables.PFANTExecutable</span></code></a></p>
-=======
-<dd><p>Bases: <a class="reference internal" href="#f311.pyfant.runnables.Executable" title="f311.pyfant.runnables.Executable"><code class="xref py py-class docutils literal"><span class="pre">f311.pyfant.runnables.Executable</span></code></a></p>
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <p>Class representing the pfant executable.</p>
 <dl class="method">
 <dt id="f311.pyfant.runnables.Pfant.get_status">
@@ -1096,11 +1014,7 @@ number of iterations in attribute ikeytot.</p>
 <dl class="class">
 <dt id="f311.pyfant.runnables.Nulbad">
 <em class="property">class </em><code class="descclassname">f311.pyfant.runnables.</code><code class="descname">Nulbad</code><a class="headerlink" href="#f311.pyfant.runnables.Nulbad" title="Permalink to this definition">¶</a></dt>
-<<<<<<< HEAD
 <dd><p>Bases: <a class="reference internal" href="#f311.pyfant.runnables.PFANTExecutable" title="f311.pyfant.runnables.PFANTExecutable"><code class="xref py py-class docutils literal"><span class="pre">f311.pyfant.runnables.PFANTExecutable</span></code></a></p>
-=======
-<dd><p>Bases: <a class="reference internal" href="#f311.pyfant.runnables.Executable" title="f311.pyfant.runnables.Executable"><code class="xref py py-class docutils literal"><span class="pre">f311.pyfant.runnables.Executable</span></code></a></p>
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <p>Class representing the nulbad executable.</p>
 <dl class="method">
 <dt id="f311.pyfant.runnables.Nulbad.load_result">
@@ -1209,7 +1123,6 @@ pfant and nulbad, for example, you can pass [e_pfant, e_nulbad]</td>
 </dd></dl>
 
 </div>
-<<<<<<< HEAD
 <div class="section" id="module-f311.pyfant.traprbclass">
 <span id="f311-pyfant-traprbclass-module"></span><h2>f311.pyfant.traprbclass module<a class="headerlink" href="#module-f311.pyfant.traprbclass" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -1236,8 +1149,6 @@ pfant and nulbad, for example, you can pass [e_pfant, e_nulbad]</td>
 </dd></dl>
 
 </div>
-=======
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <div class="section" id="module-f311.pyfant.util">
 <span id="f311-pyfant-util-module"></span><h2>f311.pyfant.util module<a class="headerlink" href="#module-f311.pyfant.util" title="Permalink to this headline">¶</a></h2>
 <p>Miscellanea routines that depend on other pyfant modules.</p>

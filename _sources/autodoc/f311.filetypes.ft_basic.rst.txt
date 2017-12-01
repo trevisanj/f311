@@ -1,86 +1,51 @@
-<<<<<<< HEAD
 f311\.filetypes\.ft\_basic package
 ==================================
-=======
-f311.filetypes.ft_basic package
-===============================
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Submodules
 ----------
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_basic\.datafile module
 -------------------------------------------
-=======
-f311.filetypes.ft_basic.datafile module
----------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_basic.datafile
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_basic\.filefits module
 -------------------------------------------
-=======
-f311.filetypes.ft_basic.filefits module
----------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_basic.filefits
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_basic\.filepy module
 -----------------------------------------
-=======
-f311.filetypes.ft_basic.filepy module
--------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_basic.filepy
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_basic\.filespectrum module
 -----------------------------------------------
-=======
-f311.filetypes.ft_basic.filespectrum module
--------------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_basic.filespectrum
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_basic\.filesqlitedb module
 -----------------------------------------------
-=======
-f311.filetypes.ft_basic.filesqlitedb module
--------------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_basic.filesqlitedb
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_basic\.spectrum module
 -------------------------------------------
-=======
-f311.filetypes.ft_basic.spectrum module
----------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_basic.spectrum
     :members:

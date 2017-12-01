@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 f311\.explorer\.vis package
 ===========================
-=======
-f311.explorer.vis package
-=========================
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Subpackages
 -----------
@@ -17,65 +12,40 @@ Subpackages
 Submodules
 ----------
 
-<<<<<<< HEAD
 f311\.explorer\.vis\.basic module
 ---------------------------------
-=======
-f311.explorer.vis.basic module
-------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.explorer.vis.basic
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.explorer\.vis\.draw\_cube module
 --------------------------------------
-=======
-f311.explorer.vis.draw_cube module
-----------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.explorer.vis.draw_cube
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.explorer\.vis\.plotsp module
 ----------------------------------
-=======
-f311.explorer.vis.plotsp module
--------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.explorer.vis.plotsp
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.explorer\.vis\.visprint module
 ------------------------------------
-=======
-f311.explorer.vis.visprint module
----------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.explorer.vis.visprint
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.explorer\.vis\.visspectrum module
 ---------------------------------------
-=======
-f311.explorer.vis.visspectrum module
-------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.explorer.vis.visspectrum
     :members:

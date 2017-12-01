@@ -1,78 +1,17 @@
-<<<<<<< HEAD
 f311\.convmol\.gui package
 ==========================
-=======
-f311.convmol.gui package
-========================
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Submodules
 ----------
 
-<<<<<<< HEAD
 f311\.convmol\.gui\.a\_XConvMol module
 --------------------------------------
-=======
-f311.convmol.gui.a_WDBMolecule module
--------------------------------------
-
-.. automodule:: f311.convmol.gui.a_WDBMolecule
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-f311.convmol.gui.a_WDBState module
-----------------------------------
-
-.. automodule:: f311.convmol.gui.a_WDBState
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-f311.convmol.gui.a_WFileMolDB module
-------------------------------------
-
-.. automodule:: f311.convmol.gui.a_WFileMolDB
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-f311.convmol.gui.a_WMolConst module
------------------------------------
-
-.. automodule:: f311.convmol.gui.a_WMolConst
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-f311.convmol.gui.a_WStateConst module
--------------------------------------
-
-.. automodule:: f311.convmol.gui.a_WStateConst
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-f311.convmol.gui.a_XConvMol module
-----------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.convmol.gui.a_XConvMol
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
-=======
-f311.convmol.gui.a_XFileMolDB module
-------------------------------------
-
-.. automodule:: f311.convmol.gui.a_XFileMolDB
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Module contents
 ---------------

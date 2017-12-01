@@ -1,112 +1,67 @@
-<<<<<<< HEAD
 f311\.filetypes\.ft\_aosss package
 ==================================
-=======
-f311.filetypes.ft_aosss package
-===============================
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Submodules
 ----------
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_aosss\.filefullcube module
 -----------------------------------------------
-=======
-f311.filetypes.ft_aosss.filefullcube module
--------------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_aosss.filefullcube
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_aosss\.filepar module
 ------------------------------------------
-=======
-f311.filetypes.ft_aosss.filepar module
---------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_aosss.filepar
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_aosss\.filesparsecube module
 -------------------------------------------------
-=======
-f311.filetypes.ft_aosss.filesparsecube module
----------------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_aosss.filesparsecube
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_aosss\.filesplist module
 ---------------------------------------------
-=======
-f311.filetypes.ft_aosss.filesplist module
------------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_aosss.filesplist
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_aosss\.fullcube module
 -------------------------------------------
-=======
-f311.filetypes.ft_aosss.fullcube module
----------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_aosss.fullcube
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_aosss\.sparsecube module
 ---------------------------------------------
-=======
-f311.filetypes.ft_aosss.sparsecube module
------------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_aosss.sparsecube
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_aosss\.spcollection module
 -----------------------------------------------
-=======
-f311.filetypes.ft_aosss.spcollection module
--------------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_aosss.spcollection
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.filetypes\.ft\_aosss\.splist module
 -----------------------------------------
-=======
-f311.filetypes.ft_aosss.splist module
--------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.filetypes.ft_aosss.splist
     :members:

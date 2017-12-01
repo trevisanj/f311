@@ -1,16 +1,12 @@
 F311 Installation
 =================
 
-<<<<<<< HEAD
 Package ``f311`` can be installed using the following command on your shell::
 
     pip install f311
 
 If the above fails, or you had a different installation procedure in mind,
 you may find more useful information below.
-=======
-Python 3 version required: Python 3.4.6+, Python 3.5.3+, or Python 3.6+ (https://packaging.python.org/guides/migrating-to-pypi-org/)
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Method 1: Using Anaconda without virtual environment
 ----------------------------------------------------
@@ -28,15 +24,9 @@ First install Anaconda or Miniconda. When you do so, please make sure that you *
 After Anaconda/Miniconda installation, close the terminal and open it again so that your PATH is updated.
 **Or if your shell is bash**, you can just type ``source ~/.bashrc`` on the terminal.
 
-<<<<<<< HEAD
 Now install package ``f311`` using pip::
 
    pip install f311
-=======
-Now install some packages using pip::
-
-   pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99 f311
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Method 2: Using Anaconda virtual environment
 --------------------------------------------
@@ -57,19 +47,11 @@ Activate this new virtual environment:
 
    source activate astroenv
 
-<<<<<<< HEAD
 Now install package ``f311``:
 
 .. code:: shell
 
    pip install f311
-=======
-Now install the packages:
-
-.. code:: shell
-
-   pip install numpy scipy matplotlib astropy configobj bs4 lxml robobrowser requests fortranformat tabulate rows pyqt5 a99 f311
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 **Note** Every time you want to work with F311, you will need to activate the environment:
 
@@ -86,20 +68,10 @@ To deactivate the environment:
 Method 3: Developer mode
 ------------------------
 
-<<<<<<< HEAD
 This option allows you to download and modify the source code.
 
 
 Clone the f311 GitHub repository:
-=======
-This allows you to pull the most recent version of the code directly from GitHub.
-
-First, follow Method 1 or 2 above, **but do not install f311**, *i.e.*, the pip command should be::
-
-    pip install numpy scipy matplotlib astropy configobj bs4 lxml robobrowser requests fortranformat tabulate rows pyqt5 a99
-
-Second, clone the f311 GitHub repository:
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. code:: shell
 
@@ -118,7 +90,6 @@ Finally, install F311 in **developer** mode:
    cd f311
    python setup.py develop
 
-<<<<<<< HEAD
 Upgrade ``f311``
 ----------------
 
@@ -147,13 +118,10 @@ packages should be automatically installed** during the installation process.
 - rows
 - pyqt5
 - a99
-=======
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Troubleshooting installation
 ----------------------------
 
-<<<<<<< HEAD
 This section shows some possible errors and their solutions.
 
 Python version and release
@@ -165,8 +133,6 @@ Furthermore, in order to install correctly using the ``pip`` command, the Python
 Python 3.4.6+, Python 3.5.3+, or Python 3.6+ (according to https://packaging.python.org/guides/migrating-to-pypi-org/).
 
 
-=======
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 MatPlotLib and PyQt5
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -176,11 +142,7 @@ MatPlotLib and PyQt5
    'GTK3Agg', 'cairo', 'TkAgg', 'pgf', 'MacOSX', 'GTK', 'WX', 'GTKCairo', 'Qt4Agg', 'svg', 'agg',
    'ps', 'emf', 'WebAgg', 'gdk', 'WXAgg', 'CocoaAgg', 'GTK3Cairo']
 
-<<<<<<< HEAD
 **Solution**: upgrade Matplotlib to version 1.4 or later
-=======
-**Solution**: update Matplotlib to version 1.4 or later
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Problems with package bs4
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -189,7 +151,6 @@ Problems with package bs4
 
   bs4.FeatureNotFound: Couldn't find a tree builder with the features you requested: lxml. Do you need to install a parser library?
 
-<<<<<<< HEAD
 **Solution**: install package "lxml"::
 
     pip install lxml
@@ -198,7 +159,3 @@ Other problems
 ~~~~~~~~~~~~~~
 If you have other installation problems or have a suggestion, please open an issue at the project
 site on `GitHub <http://github.com/trevisanj/f311>`_.
-=======
-**Solution**: install package "lxml": ``pip install lxml``
-
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f

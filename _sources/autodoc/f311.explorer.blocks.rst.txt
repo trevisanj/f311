@@ -1,73 +1,43 @@
-<<<<<<< HEAD
 f311\.explorer\.blocks package
 ==============================
-=======
-f311.explorer.blocks package
-============================
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Submodules
 ----------
 
-<<<<<<< HEAD
 f311\.explorer\.blocks\.basic module
 ------------------------------------
-=======
-f311.explorer.blocks.basic module
----------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.explorer.blocks.basic
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.explorer\.blocks\.gb module
 ---------------------------------
-=======
-f311.explorer.blocks.gb module
-------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.explorer.blocks.gb
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.explorer\.blocks\.sb module
 ---------------------------------
-=======
-f311.explorer.blocks.sb module
-------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.explorer.blocks.sb
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.explorer\.blocks\.slb module
 ----------------------------------
-=======
-f311.explorer.blocks.slb module
--------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.explorer.blocks.slb
     :members:
     :undoc-members:
     :show-inheritance:
 
-<<<<<<< HEAD
 f311\.explorer\.blocks\.toscalar module
 ---------------------------------------
-=======
-f311.explorer.blocks.toscalar module
-------------------------------------
->>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.explorer.blocks.toscalar
     :members:
