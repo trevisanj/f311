@@ -1,0 +1,608 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>f311.explorer.blocks package &mdash; F311 17.9.27.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="../index.html"/>
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> F311
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                17.9.27.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular lines lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explorer.html">File explorer and editors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filetypes.html">File handling API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics.html">Selected topics on Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Index of applications (scripts)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">F311</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>f311.explorer.blocks package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/autodoc/f311.explorer.blocks.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="f311-explorer-blocks-package">
+<h1>f311.explorer.blocks package<a class="headerlink" href="#f311-explorer-blocks-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-f311.explorer.blocks.basic">
+<span id="f311-explorer-blocks-basic-module"></span><h2>f311.explorer.blocks.basic module<a class="headerlink" href="#module-f311.explorer.blocks.basic" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.explorer.blocks.basic.GroupBlock">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.basic.</code><code class="descname">GroupBlock</code><a class="headerlink" href="#f311.explorer.blocks.basic.GroupBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic._SpectrumListBlock</span></code></p>
+<p>Blocks whose output have only one spectrum (abbreviated “MDB”)</p>
+<p>The “merge down” idea is that output from these blocks have only one spectrum
+(still stored as a spectrum list though)</p>
+<p>This class has no gear and exists for grouping purposes only</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.basic.SpectrumBlock">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.basic.</code><code class="descname">SpectrumBlock</code><a class="headerlink" href="#f311.explorer.blocks.basic.SpectrumBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic._SpectrumBlock</span></code></p>
+<p>Spectrum-To-Spectrum</p>
+<dl class="method">
+<dt id="f311.explorer.blocks.basic.SpectrumBlock.use">
+<code class="descname">use</code><span class="sig-paren">(</span><em>inp</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.basic.SpectrumBlock.use" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.basic.SpectrumListBlock">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.basic.</code><code class="descname">SpectrumListBlock</code><a class="headerlink" href="#f311.explorer.blocks.basic.SpectrumListBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic._SpectrumListBlock</span></code></p>
+<p>Blocks whose output have the same number of spectra as the input (abbreviated “SpectrumListBlock”)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.basic.ToScalar">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.basic.</code><code class="descname">ToScalar</code><a class="headerlink" href="#f311.explorer.blocks.basic.ToScalar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic._SpectrumBlock</span></code></p>
+<p>Ancestor for Spectrum Blocks whose output is a scalar (abbreviated “SpToSca”)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.explorer.blocks.gb">
+<span id="f311-explorer-blocks-gb-module"></span><h2>f311.explorer.blocks.gb module<a class="headerlink" href="#module-f311.explorer.blocks.gb" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.explorer.blocks.gb.GB_UseNumPyFunc">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.gb.</code><code class="descname">GB_UseNumPyFunc</code><span class="sig-paren">(</span><em>func=&lt;function std&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.gb.GB_UseNumPyFunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.GroupBlock" title="f311.explorer.blocks.basic.GroupBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.GroupBlock</span></code></a></p>
+<p>Output contains single spectrum whose y-vector is calculated using a numpy function</p>
+<p>The numpy function must be able to operate on the first axis, e.g., np.mean(), np.std()</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.gb.GB_SNR">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.gb.</code><code class="descname">GB_SNR</code><span class="sig-paren">(</span><em>continua=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.gb.GB_SNR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.GroupBlock" title="f311.explorer.blocks.basic.GroupBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.GroupBlock</span></code></a></p>
+<p>Calculates the GB_SNR(lambda) = Power_signal(lambda)/Power_noise(lambda)</p>
+<p><strong>Warning</strong> Don’t use this block, empirical SNR is usually calculated <strong>per spectrum</strong>, as
+reinforced by EC and BLB (using IRAF procedure, which is Amplitude_RMS/std</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>continua</strong> – SpectrumList containing the continua that will be used as the “signal” level.
+If not passed, will be calculated from the input spectra using a SB_Rubberband(True) block</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<p>[1] <a class="reference external" href="https://en.wikipedia.org/wiki/Signal_averaging">https://en.wikipedia.org/wiki/Signal_averaging</a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.explorer.blocks.sb">
+<span id="f311-explorer-blocks-sb-module"></span><h2>f311.explorer.blocks.sb module<a class="headerlink" href="#module-f311.explorer.blocks.sb" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_Rubberband">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_Rubberband</code><span class="sig-paren">(</span><em>flag_upper=True</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.sb.SB_Rubberband" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumBlock" title="f311.explorer.blocks.basic.SpectrumBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumBlock</span></code></a></p>
+<p>Convex polygonal line (aka “rubberband”)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flag_upper=True</strong> – whether to stretch rubberband from above the
+spectrum; otherwise, stretches line from below</td>
+</tr>
+</tbody>
+</table>
+<p>Stretches a polygonal line from below/above the spectrum. The vertices of this multi-segment
+line will touch “troughs” of the spectrum without crossing the spectrum</p>
+<p>This was inspired on – but is not equivalent to – OPUS Rubberband baseline correction [1].
+However, this one is parameterless, whereas OPUS RBBC asks for a number of points</p>
+<p class="rubric">References</p>
+<p>[1] Bruker Optik GmbH, OPUS 5 Reference Manual. Ettlingen: Bruker, 2004.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_AddNoise">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_AddNoise</code><span class="sig-paren">(</span><em>std=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.sb.SB_AddNoise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumBlock" title="f311.explorer.blocks.basic.SpectrumBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumBlock</span></code></a></p>
+<p>Adds normally distributed (Gaussian) random noise</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>std=1.</strong> – standard deviation of Gaussian noise</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_FNuToFLambda">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_FNuToFLambda</code><a class="headerlink" href="#f311.explorer.blocks.sb.SB_FNuToFLambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.sb.SB_ConvertYUnit" title="f311.explorer.blocks.sb.SB_ConvertYUnit"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.sb.SB_ConvertYUnit</span></code></a></p>
+<p>Flux-nu to flux-lambda conversion. Assumes the wavelength axis is in angstrom</p>
+<dl class="docutils">
+<dt>Formula:</dt>
+<dd><p class="first">f_lambda = f_nu*(nu/lambda) = f_nu*c/lambda**2</p>
+<dl class="last docutils">
+<dt>where</dt>
+<dd>lambda is the wavelength in cm,
+c is the speed of light in cm/s
+f_lambda has irrelevant unit for this purpose</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_FLambdaToFNu">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_FLambdaToFNu</code><a class="headerlink" href="#f311.explorer.blocks.sb.SB_FLambdaToFNu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.sb.SB_ConvertYUnit" title="f311.explorer.blocks.sb.SB_ConvertYUnit"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.sb.SB_ConvertYUnit</span></code></a></p>
+<p>Flux-nu to flux-lambda conversion. Assumes the wavelength axis is in angstrom</p>
+<dl class="docutils">
+<dt>Formula:</dt>
+<dd>f_nu = f_lambda*(lambda/nu) = f_lambda*lambda**2/c</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_ElementWise">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_ElementWise</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.sb.SB_ElementWise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumBlock" title="f311.explorer.blocks.basic.SpectrumBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumBlock</span></code></a></p>
+<p>Applies specified function to spectrum flux</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>func</strong> – <p>a function that takes a vector (_i.e._, NumPy 1-D array) as input. It must return
+vector of same dimension as input.NumPy ufunc’s are suited for this.
+.. rubric:: Examples</p>
+<p>np.square
+np.exp</p>
+<dl class="docutils">
+<dt>It also be a lambda using list comprehension, for example:</dt>
+<dd>lambda v: [x**2 for x in v]</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_Extend">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_Extend</code><span class="sig-paren">(</span><em>fraction=0.1</em>, <em>flag_left=True</em>, <em>flag_right=False</em>, <em>fill_mode='poly_baseline'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.sb.SB_Extend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumBlock" title="f311.explorer.blocks.basic.SpectrumBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumBlock</span></code></a></p>
+<p>Extends to left and/or right side</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fraction</strong> – amount relative to number of points. Note that this
+applies individually to left and right (see below)</li>
+<li><strong>flag_left</strong> – whether to extend by fraction to left</li>
+<li><strong>flag_right</strong> – whether to extend by fraction to right</li>
+<li><strong>fill_mode='poly_baseline'</strong> – <p>how to fill the new points. Valid values:
+‘poly_baseline’: The y-value (left/right) to use is found by using a “coarse”</p>
+<blockquote>
+<div>2nd-order polynomial baseline. The baseline is “coarse” because it
+does not allow for many iterations until the baseline is found</div></blockquote>
+<p>’zero’: Fills with zero</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>SB_Extend(.1, True, True)  # if original has 100 points, resulting will have 120 points</p>
+<p>SB_Extend(.1, True, False)  # if original has 100 points, resulting will have 110 points</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_Cut">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_Cut</code><span class="sig-paren">(</span><em>l0</em>, <em>lf</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.sb.SB_Cut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumBlock" title="f311.explorer.blocks.basic.SpectrumBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumBlock</span></code></a></p>
+<p>Cuts spectrum given a wavelength interval</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>l0</strong> – initial wavelength</li>
+<li><strong>lf</strong> – final wavelength</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_Normalize">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_Normalize</code><span class="sig-paren">(</span><em>method='01'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.sb.SB_Normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumBlock" title="f311.explorer.blocks.basic.SpectrumBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumBlock</span></code></a></p>
+<p>Normalizes spectrum according to specified method</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>--</strong> (<em>method</em>) – “01”: normalizes between 0 and 1
+“1”: scales to have maximum at 1, keeping the 0 where it is</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_ConvertYUnit">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_ConvertYUnit</code><span class="sig-paren">(</span><em>new_unit</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.sb.SB_ConvertYUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumBlock" title="f311.explorer.blocks.basic.SpectrumBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumBlock</span></code></a></p>
+<p>Converts y-axis unit</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>new_unit</strong> – astropy.units.unit or str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_Add">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_Add</code><span class="sig-paren">(</span><em>value=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.sb.SB_Add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumBlock" title="f311.explorer.blocks.basic.SpectrumBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumBlock</span></code></a></p>
+<p>Adds constant value to y-values</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> – </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_Mul">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_Mul</code><span class="sig-paren">(</span><em>value=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.sb.SB_Mul" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumBlock" title="f311.explorer.blocks.basic.SpectrumBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumBlock</span></code></a></p>
+<p>Multiplies y-values by constant value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> – </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_MulByLambda">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_MulByLambda</code><a class="headerlink" href="#f311.explorer.blocks.sb.SB_MulByLambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumBlock" title="f311.explorer.blocks.basic.SpectrumBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumBlock</span></code></a></p>
+<p>Multiplies each y-point by its wavelength</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.sb.SB_DivByLambda">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.sb.</code><code class="descname">SB_DivByLambda</code><a class="headerlink" href="#f311.explorer.blocks.sb.SB_DivByLambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumBlock" title="f311.explorer.blocks.basic.SpectrumBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumBlock</span></code></a></p>
+<p>Divides each y-point by its wavelength</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.explorer.blocks.slb">
+<span id="f311-explorer-blocks-slb-module"></span><h2>f311.explorer.blocks.slb module<a class="headerlink" href="#module-f311.explorer.blocks.slb" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.explorer.blocks.slb.SLB_UseSpectrumBlock">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.slb.</code><code class="descname">SLB_UseSpectrumBlock</code><span class="sig-paren">(</span><em>sblock=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.slb.SLB_UseSpectrumBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumListBlock" title="f311.explorer.blocks.basic.SpectrumListBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumListBlock</span></code></a></p>
+<p>Calls sblock.use() for each individual spectrum</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.slb.SLB_ExtractContinua">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.slb.</code><code class="descname">SLB_ExtractContinua</code><a class="headerlink" href="#f311.explorer.blocks.slb.SLB_ExtractContinua" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.SpectrumListBlock" title="f311.explorer.blocks.basic.SpectrumListBlock"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.SpectrumListBlock</span></code></a></p>
+<p>Calculates upper envelopes and subtracts mean(noise std)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.explorer.blocks.toscalar">
+<span id="f311-explorer-blocks-toscalar-module"></span><h2>f311.explorer.blocks.toscalar module<a class="headerlink" href="#module-f311.explorer.blocks.toscalar" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.explorer.blocks.toscalar.ToScalar_SNR">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.toscalar.</code><code class="descname">ToScalar_SNR</code><span class="sig-paren">(</span><em>llzero</em>, <em>llfin</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.toscalar.ToScalar_SNR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.ToScalar" title="f311.explorer.blocks.basic.ToScalar"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.ToScalar</span></code></a></p>
+<p>Calculates Signal-to-noise ratio (SNR) using a part of the “signal” (i.e. the spectrum)</p>
+<dl class="docutils">
+<dt>Formula: SNR = sqrt((y_**2)) / std(<a href="#id1"><span class="problematic" id="id2">y_</span></a>),</dt>
+<dd><dl class="first last docutils">
+<dt>where:</dt>
+<dd><a href="#id3"><span class="problematic" id="id4">y_</span></a> is the  slice of of the spectrum flux vector within the range [llzero, llfin];
+the numerator is the RMS value of <a href="#id5"><span class="problematic" id="id6">y_</span></a></dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Note</strong> this has been tested to be consistent with IRAF SNR calculation</p>
+<p><strong>Note</strong> It is assumed that the “signal” is <em>stationary</em> within [llzero, llfin]
+meaning that the mean and variance of the “signal” is the same for all points within
+this region (more precisely “weak-sense stationary”
+(<a class="reference external" href="https://en.wikipedia.org/wiki/Stationary_process#Weak_or_wide-sense_stationarity">https://en.wikipedia.org/wiki/Stationary_process#Weak_or_wide-sense_stationarity</a>))</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.toscalar.ToScalar_Magnitude">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.toscalar.</code><code class="descname">ToScalar_Magnitude</code><span class="sig-paren">(</span><em>band_name</em>, <em>system='stdflux'</em>, <em>zero_point=0.0</em>, <em>flag_force_band_range=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.toscalar.ToScalar_Magnitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.ToScalar" title="f311.explorer.blocks.basic.ToScalar"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.ToScalar</span></code></a></p>
+<p>Calculates the magnitude of a spectrum</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">band_name: U/B/V/R/I/Y/J/H/K/L/M/N/Q
+system: reference magnitude system.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Choices:</dt>
+<dd>“stdflux”: literature reference values for bands U,B,V,R,I,J,H,K only
+“vega”: uses the Vega star spectrum as a reference
+“ab”: AB[solute] magnitude system</dd>
+</dl>
+</div></blockquote>
+<dl class="last docutils">
+<dt>zero_point: subtracts this value from the calculated magnitude to implement some desired</dt>
+<dd>correction.</dd>
+<dt>flag_force_band_range: (default: False) if set, will consider that the spectrum</dt>
+<dd>extends over the full range of the band even if it is narrower
+than that</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.blocks.toscalar.ToScalar_UseNumPyFunc">
+<em class="property">class </em><code class="descclassname">f311.explorer.blocks.toscalar.</code><code class="descname">ToScalar_UseNumPyFunc</code><span class="sig-paren">(</span><em>func=&lt;function mean&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.blocks.toscalar.ToScalar_UseNumPyFunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.blocks.basic.ToScalar" title="f311.explorer.blocks.basic.ToScalar"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.blocks.basic.ToScalar</span></code></a></p>
+<p>Reduces spectrum y-vector to scalar using a numpy function, e.g., np.mean(), np.std()</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.explorer.blocks">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.explorer.blocks" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, JT.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'17.9.27.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

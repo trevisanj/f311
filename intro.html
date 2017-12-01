@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; F311 17.9.27.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
+        <link rel="next" title="F311 Installation" href="install.html"/>
+        <link rel="prev" title="F311 – Astronomy-related Python 3 API and scripts" href="index.html"/>
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> F311
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                17.9.27.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-api">Using the API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-to-this-project">Contributing to this project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acknowledgement">Acknowledgement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bibliography">Bibliography</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f3110.html">Package f311</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular lines lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorer.html">File explorer and editors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filetypes.html">File handling API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Selected topics on Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Index of applications (scripts)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">F311</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/intro.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Project F311 encompasses a range of resources on selected Astronomy-related topics.</p>
+<p>F311 installs as a package for Python 3, thereby making available several
+GUI (graphical user interface) and command-line applications,
+and their accompanying Python APIs (application programming interfaces).</p>
+<p>The project is organized in sub-packages, whose main roles are related below:</p>
+<ul class="simple">
+<li><a class="reference internal" href="pyfant.html"><span class="doc">Package f311.pyfant</span></a> is a Python interface to the
+<a class="reference external" href="trevisanj.github.io/PFANT">PFANT</a> spectral synthesis Fortran code,
+containing the “PFANT launcher” application that can run several spectral synthesis “jobs”
+in parallel, and an API to create complex applications involving spectral synthesis.</li>
+<li><a class="reference internal" href="convmol.html"><span class="doc">Package f311.convmol</span></a> provides a GUI application to browse and edit a molecular constants database,
+and allows conversion of molecular linelists from several formats available to the PFANT format.</li>
+<li><a class="reference internal" href="explorer.html"><span class="doc">Package f311.explorer</span></a> contains most of the GUIs of the project, with a file-explorer-like application,
+GUI editors for several Astronomy-related file types, several visualization options for these files,
+and command-line tools to cut data files to a spectral range of interest, merge molecular
+inelists in a single file, etc.</li>
+<li><a class="reference internal" href="filetypes.html"><span class="doc">Package f311.filetypes</span></a> is an object-oriented, plugin-based API to load and save more than 40
+different file formats used in astronomy, including some FITS files structures, and most file
+types used by the PFANT software.</li>
+<li><a class="reference internal" href="physics.html"><span class="doc">Package f311.physics</span></a> provides an API on the following topics: photometry calculations,
+air-to-vacuum wavelength conversions, and calculation of molecular line strengths
+(Hönl-London factors) according to <a class="reference internal" href="#kovacs1969" id="id1">[Kovacs1969]</a>.</li>
+<li><a class="reference internal" href="aosss.html"><span class="doc">Package f311.aosss</span></a> provides a set of tools related to the E-ELT/MOSAIC spectrograph.
+More specifically, it was designed to organize and manipulate the set of output files generated
+by the <a class="reference external" href="http://websim-compass.obspm.fr/">WebSim-COMPASS</a> simulator of that spectrograph.</li>
+</ul>
+<p>After installed, it is possible to run the script <code class="docutils literal"><span class="pre">programs.py</span></code> to list all the applications
+included in the project.</p>
+<div class="section" id="using-the-api">
+<h2>Using the API<a class="headerlink" href="#using-the-api" title="Permalink to this headline">¶</a></h2>
+<p>One or more of the subpackages can be imported as follows:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.convmol</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+<span class="kn">import</span> <span class="nn">f311.physics</span> <span class="k">as</span> <span class="nn">ph</span>
+<span class="kn">import</span> <span class="nn">f311.aosss</span> <span class="k">as</span> <span class="nn">ao</span>
+</pre></div>
+</div>
+<p>Or alternatively (all symbols from all subpackages exposes in <code class="docutils literal"><span class="pre">f311</span></code> namespace),</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">f311</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="contributing-to-this-project">
+<h2>Contributing to this project<a class="headerlink" href="#contributing-to-this-project" title="Permalink to this headline">¶</a></h2>
+<p>Project F311 on <a class="reference external" href="https://github.com/trevisanj/f311">GitHub</a>.</p>
+</div>
+<div class="section" id="acknowledgement">
+<h2>Acknowledgement<a class="headerlink" href="#acknowledgement" title="Permalink to this headline">¶</a></h2>
+<p>The project started in 2015 at IAG-USP (Institute of Astronomy, Geophysics and Atmospheric Sciences
+at University of São Paulo, Brazil).</p>
+<p>Partially funded by FAPESP - Research Support Foundation of the State of São Paulo, Brazil (2015-2017).</p>
+</div>
+<div class="section" id="bibliography">
+<h2>Bibliography<a class="headerlink" href="#bibliography" title="Permalink to this headline">¶</a></h2>
+<table class="docutils citation" frame="void" id="kovacs1969" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Kovacs1969]</a></td><td>Istvan Kovacs, Rotational Structure in the spectra of diatomic molecules.
+American Elsevier, 1969.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install.html" class="btn btn-neutral float-right" title="F311 Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="F311 – Astronomy-related Python 3 API and scripts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, JT.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'17.9.27.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>File handling API &mdash; F311 17.9.27.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
+        <link rel="next" title="Selected topics on Physics" href="physics.html"/>
+        <link rel="prev" title="File explorer and editors" href="explorer.html"/>
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> F311
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                17.9.27.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f3110.html">Package f311</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular lines lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorer.html">File explorer and editors</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">File handling API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-file-types">Supported file types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#convert-1d-spectral-file-to-fits-format">Convert 1D spectral file to FITS format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-kurucz-molecular-linelist-file">Import Kurucz’ molecular linelist file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Selected topics on Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Index of applications (scripts)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">F311</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>File handling API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/filetypes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-handling-api">
+<h1>File handling API<a class="headerlink" href="#file-handling-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><em>f311.filetypes</em> represents most of the non-visual essence of the F311 project.
+the. That package has classes to handle many different file formats used in Astronomy.</p>
+<p>All classes descend from <a class="reference internal" href="autodoc/f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref any py py-class docutils literal"><span class="pre">DataFile</span></code></a> containing some basic methods:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">load()</span></code>: loads file from disk into internal object variables</li>
+<li><code class="docutils literal"><span class="pre">save_as()</span></code>: saves file to disk</li>
+<li><code class="docutils literal"><span class="pre">init_default()</span></code>: initializes file object with default information</li>
+</ul>
+</div>
+<div class="section" id="supported-file-types">
+<h2>Supported file types<a class="headerlink" href="#supported-file-types" title="Permalink to this headline">¶</a></h2>
+<p>The following table was generated in 12/Nov/2017. The “Editor” column shows the applications in
+the F311 project that can handle these files (<em>i.e.</em>, load/edit/save).</p>
+<p>All file types are also recognized by <code class="docutils literal"><span class="pre">explorer.py</span></code>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="15%" />
+<col width="18%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Description</th>
+<th class="head">Default filename</th>
+<th class="head">Class name</th>
+<th class="head">Editors</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>“Lambda-flux” Spectrum (2-column text file)</td>
+<td>&#160;</td>
+<td>FileSpectrumXY</td>
+<td><code class="docutils literal"><span class="pre">splisted.py</span></code></td>
+</tr>
+<tr class="row-odd"><td>Atmospheric model or grid of models (with opacities
+<br /> included)</td>
+<td>grid.moo</td>
+<td>FileMoo</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Configuration file for molecular lines conversion GUI
+<br /> (Python code)</td>
+<td>configconvmol.py</td>
+<td>FileConfigConvMol</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Database of Molecular Constants</td>
+<td>moldb.sqlite</td>
+<td>FileMolDB</td>
+<td><code class="docutils literal"><span class="pre">convmol.py</span></code>, <code class="docutils literal"><span class="pre">moldbed.py</span></code></td>
+</tr>
+<tr class="row-even"><td>FITS Sparse Data Cube (storage to take less disk space)</td>
+<td>default.sparsecube</td>
+<td>FileSparseCube</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>FITS Spectrum</td>
+<td>&#160;</td>
+<td>FileSpectrumFits</td>
+<td><code class="docutils literal"><span class="pre">splisted.py</span></code></td>
+</tr>
+<tr class="row-even"><td>FITS Spectrum List</td>
+<td>default.splist</td>
+<td>FileSpectrumList</td>
+<td><code class="docutils literal"><span class="pre">splisted.py</span></code></td>
+</tr>
+<tr class="row-odd"><td>FITS WebSim Compass Data Cube</td>
+<td>default.fullcube</td>
+<td>FileFullCube</td>
+<td><code class="docutils literal"><span class="pre">cubeed.py</span></code></td>
+</tr>
+<tr class="row-even"><td>FITS file with frames named INPUT_*, MODEL_*,
+<br /> RESIDUAL_* (Galfit software output)</td>
+<td>&#160;</td>
+<td>FileGalfit</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>File containing Franck-Condon Factors (FCFs)</td>
+<td>&#160;</td>
+<td>FileFCF</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>HITRAN Molecules Catalogue</td>
+<td>hitrandb.sqlite</td>
+<td>FileHitranDB</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Kurucz molecular lines file</td>
+<td>&#160;</td>
+<td>FileKuruczMolecule</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Kurucz molecular lines file, old format #0</td>
+<td>&#160;</td>
+<td>FileKuruczMoleculeOld</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Kurucz molecular lines file, old format #1</td>
+<td>&#160;</td>
+<td>FileKuruczMoleculeOld1</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>MARCS “.opa” (opacity model) file format.</td>
+<td>modeles.opa</td>
+<td>FileOpa</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>MARCS Atmospheric Model (text file)</td>
+<td>&#160;</td>
+<td>FileModTxt</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Molecular constants config file (Python code)</td>
+<td>configmolconsts.py</td>
+<td>FileMolConsts</td>
+<td><code class="docutils literal"><span class="pre">mced.py</span></code></td>
+</tr>
+<tr class="row-odd"><td>PFANT “Absoru2” file</td>
+<td>absoru2.dat</td>
+<td>FileAbsoru2</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>PFANT Atmospheric Model (binary file)</td>
+<td>modeles.mod</td>
+<td>FileModBin</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>PFANT Atomic Lines</td>
+<td>atoms.dat</td>
+<td>FileAtoms</td>
+<td><code class="docutils literal"><span class="pre">ated.py</span></code></td>
+</tr>
+<tr class="row-even"><td>PFANT Command-line Options</td>
+<td>options.py</td>
+<td>FileOptions</td>
+<td><code class="docutils literal"><span class="pre">x.py</span></code></td>
+</tr>
+<tr class="row-odd"><td>PFANT Hydrogen Line Profile</td>
+<td>thalpha</td>
+<td>FileToH</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>PFANT Hygrogen Lines Map</td>
+<td>hmap.dat</td>
+<td>FileHmap</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>PFANT Main Stellar Configuration</td>
+<td>main.dat</td>
+<td>FileMain</td>
+<td><code class="docutils literal"><span class="pre">mained.py</span></code>, <code class="docutils literal"><span class="pre">x.py</span></code></td>
+</tr>
+<tr class="row-even"><td>PFANT Molecular Lines</td>
+<td>molecules.dat</td>
+<td>FileMolecules</td>
+<td><code class="docutils literal"><span class="pre">mled.py</span></code></td>
+</tr>
+<tr class="row-odd"><td>PFANT Partition Function</td>
+<td>partit.dat</td>
+<td>FilePartit</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>PFANT Spectrum (<cite>nulbad</cite> output)</td>
+<td>&#160;</td>
+<td>FileSpectrumNulbad</td>
+<td><code class="docutils literal"><span class="pre">splisted.py</span></code></td>
+</tr>
+<tr class="row-odd"><td>PFANT Spectrum (<cite>pfant</cite> output)</td>
+<td>flux.norm</td>
+<td>FileSpectrumPfant</td>
+<td><code class="docutils literal"><span class="pre">splisted.py</span></code></td>
+</tr>
+<tr class="row-even"><td>PFANT Stellar Chemical Abundances</td>
+<td>abonds.dat</td>
+<td>FileAbonds</td>
+<td><code class="docutils literal"><span class="pre">abed.py</span></code>, <code class="docutils literal"><span class="pre">x.py</span></code></td>
+</tr>
+<tr class="row-odd"><td>PFANT Stellar Dissociation Equilibrium Information</td>
+<td>dissoc.dat</td>
+<td>FileDissoc</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Plez molecular lines file, TiO format</td>
+<td>&#160;</td>
+<td>FilePlezTiO</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>VALD3 atomic or molecular lines file</td>
+<td>&#160;</td>
+<td>FileVald3</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>WebSim-COMPASS “.par” (parameters) file</td>
+<td>&#160;</td>
+<td>FilePar</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><cite>x.py</cite> Differential Abundances X FWHMs (Python source)</td>
+<td>abxfwhm.py</td>
+<td>FileAbXFwhm</td>
+<td><code class="docutils literal"><span class="pre">x.py</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>By the way, the above table was generated with the following code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">filetypes</span> <span class="kn">as</span> <span class="nn">ft</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ft</span><span class="o">.</span><span class="n">tabulate_filetypes_rest</span><span class="p">(</span><span class="mi">55</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="convert-1d-spectral-file-to-fits-format">
+<h3>Convert 1D spectral file to FITS format<a class="headerlink" href="#convert-1d-spectral-file-to-fits-format" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Converts 1D spectral file of any supported type to FITS format.</span>
+
+<span class="sd">The new file is saved with name &quot;&lt;original-filename&gt;.fits&quot;.</span>
+
+<span class="sd">TODO handle non-equally spaced wavelength values</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Usage:</span><span class="se">\n\n</span><span class="s2">    convert-to-fits.py filename0 [filename1 [filename2 [...]]]</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Converting file &#39;</span><span class="si">{}</span><span class="s2">&#39;...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">spectrum</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">load_spectrum</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">spectrum</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File &#39;</span><span class="si">{}</span><span class="s2">&#39; not recognized as a 1D spectral file&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+                <span class="k">continue</span>
+
+            <span class="n">filename_new</span> <span class="o">=</span> <span class="n">filename</span><span class="o">+</span><span class="s2">&quot;.fits&quot;</span>
+
+            <span class="n">fnew</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">FileSpectrumFits</span><span class="p">()</span>
+            <span class="n">fnew</span><span class="o">.</span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">spectrum</span>
+            <span class="n">fnew</span><span class="o">.</span><span class="n">save_as</span><span class="p">(</span><span class="n">filename_new</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Successfully saved &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename_new</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Error converting file &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="import-kurucz-molecular-linelist-file">
+<h3>Import Kurucz’ molecular linelist file<a class="headerlink" href="#import-kurucz-molecular-linelist-file" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This example loads file &quot;c2dabrookek.asc&quot; and prints a memory representation of its first line.</span>
+
+<span class="sd">This file can be obtained at http://kurucz.harvard.edu/molecules/c2/. First lines of file:</span>
+
+<span class="sd">```</span>
+<span class="sd">  287.7558-14.533 23.0  2354.082 24.0 -37095.578 6063a00e1  3d10e3  12 677  34741.495</span>
+<span class="sd">  287.7564-14.955 22.0  2282.704 23.0 -37024.124 6063a00f1  3d10f3  12 677  34741.419</span>
+<span class="sd">  287.7582-14.490 21.0  2214.696 22.0 -36955.900 6063a00e1  3d10e3  12 677  34741.205</span>
+<span class="sd">  287.7613-15.004 24.0  2428.453 25.0 -37169.280 6063a00f1  3d10f3  12 677  34740.828</span>
+<span class="sd">  287.7650-14.899 20.0  2149.765 21.0 -36890.147 6063a00f1  3d10f3  12 677  34740.382</span>
+<span class="sd">```</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">load_any_file</span><span class="p">(</span><span class="s2">&quot;c2dabrookek.asc&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">,</span> <span class="s2">&quot;,</span><span class="se">\n</span><span class="s2">              &quot;</span><span class="p">))</span>
+
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>KuruczMolLine(lambda_=2877.558,
+              loggf=-14.533,
+              J2l=23.0,
+              E2l=2354.082,
+              Jl=24.0,
+              El=37095.578,
+              atomn0=6,
+              atomn1=6,
+              state2l=&#39;a&#39;,
+              v2l=0,
+              lambda_doubling2l=&#39;e&#39;,
+              spin2l=1,
+              statel=&#39;d&#39;,
+              vl=10,
+              lambda_doublingl=&#39;e&#39;,
+              spinl=3,
+              iso=12)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="physics.html" class="btn btn-neutral float-right" title="Selected topics on Physics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="explorer.html" class="btn btn-neutral" title="File explorer and editors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, JT.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'17.9.27.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

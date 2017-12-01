@@ -1,0 +1,769 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Spectral synthesis &mdash; F311 17.9.27.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
+        <link rel="next" title="Conversion of molecular lines lists" href="convmol.html"/>
+        <link rel="prev" title="F311 Installation" href="install.html"/>
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> F311
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                17.9.27.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spectral synthesis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#applications">Applications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#graphical-applications">Graphical applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-tools">Command-line tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#coding-using-the-api">Coding using the API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Spectral synthesis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spectral-synthesis-convolutions">Spectral synthesis - convolutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spectral-synthesis-continuum">Spectral synthesis - Continuum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spectral-synthesis-separate-atomic-species">Spectral synthesis - Separate atomic species</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spectral-synthesis-separate-molecules">Spectral synthesis - Separate molecules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gaussian-profiles-as-nulbad-outputs">Gaussian profiles as nulbad outputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plot-hydrogen-profiles">Plot hydrogen profiles</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular lines lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorer.html">File explorer and editors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filetypes.html">File handling API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Selected topics on Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f3110.html">Package f311</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Index of applications (scripts)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">F311</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Spectral synthesis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/pyfant.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="spectral-synthesis">
+<h1>Spectral synthesis<a class="headerlink" href="#spectral-synthesis" title="Permalink to this headline">¶</a></h1>
+<p>This section describes the Python interface for the <a class="reference external" href="http://trevisanj.github.io/PFANT">PFANT Spectral Synthesis
+Software</a> for Astronomy.</p>
+<p>Spectral synthesis softwares have a fundamental role in Astronomy.
+It is a crucial step in determining stellar properties
+- such as temperature, metallicity, and chemical abundances -
+in which the synthetic spectrum (or a combination of several of these) is compared with the
+measured spectrum of a star or a whole stellar population either by the full spectrum fitting,
+spectral energy distribution or specific spectral lines and regions.
+It is of great interest that the software has a comprehensive and intuitive user interface and
+easiness of parameter input and its multiple variations, and also tools for incorporating data
+like atomic/molecular lines, atmospheric models, etc.</p>
+<p>Package <code class="docutils literal"><span class="pre">f311.pyfant</span></code> provides a Python interface to the PFANT Fortran binaries, including the
+ability to run the Fortran binaries in parallel <em>via</em> GUI or API.</p>
+<div class="section" id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>The applications related to package f311.pyfant are listed below. For them to work, you need to
+have <a class="reference external" href="http://trevisanj.github.io/PFANT/install.html">PFANT</a> installed.</p>
+<p>The <a class="reference external" href="http://trevisanj.github.io/PFANT/quick.html">PFANT Quick Start</a> serves as a guide to
+using some of these applications.</p>
+<div class="section" id="graphical-applications">
+<h3>Graphical applications<a class="headerlink" href="#graphical-applications" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">x.py</span></code> – PFANT Launcher – Graphical Interface for Spectral Synthesis</li>
+</ul>
+</div>
+<div class="section" id="command-line-tools">
+<h3>Command-line tools<a class="headerlink" href="#command-line-tools" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">copy-star.py</span></code> – Copies stellar data files (such as main.dat, abonds.dat, dissoc.dat) to local directory</li>
+<li><code class="docutils literal"><span class="pre">link.py</span></code> – Creates symbolic links to PFANT data files as an alternative to copying these (sometimes large) files into local directory</li>
+<li><code class="docutils literal"><span class="pre">run4.py</span></code> – Runs the four Fortran binaries in sequence: <code class="docutils literal"><span class="pre">innewmarcs</span></code>, <code class="docutils literal"><span class="pre">hydro2</span></code>, <code class="docutils literal"><span class="pre">pfant</span></code>, <code class="docutils literal"><span class="pre">nulbad</span></code></li>
+<li><code class="docutils literal"><span class="pre">save-pdf.py</span></code> – Looks for files “<em>.norm” inside directories session-</em> and saves one figure per page in a PDF file</li>
+</ul>
+</div>
+</div>
+<div class="section" id="coding-using-the-api">
+<h2>Coding using the API<a class="headerlink" href="#coding-using-the-api" title="Permalink to this headline">¶</a></h2>
+<p>This section contains a series of examples on how to use the PFANT Fortran executables from a
+Python script. These “bindings” to the Fortran binaries, together with the ability to load,
+manipulate and save PFANT data files using <code class="docutils literal"><span class="pre">f311.filetypes</span></code>, allow for complex batch operations.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Figure numbers because Latex does not place figures immediately after the code.</p>
+</div>
+<div class="section" id="id1">
+<h3>Spectral synthesis<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Runs synthesis over short wavelength range, then plots normalized and convolved spectrum&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Copies files main.dat and abonds.dat to local directory (for given star)</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
+    <span class="c1"># Creates symbolic links to all non-star-specific files, such as atomic &amp; molecular lines,</span>
+    <span class="c1"># partition functions, etc.</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">link_to_data</span><span class="p">()</span>
+
+    <span class="c1"># # First run</span>
+    <span class="c1"># Creates object that will run the four Fortran executables (innewmarcs, hydro2, pfant, nulbad)</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Combo</span><span class="p">()</span>
+    <span class="c1"># synthesis interval start (angstrom)</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">llzero</span> <span class="o">=</span> <span class="mi">6530</span>
+    <span class="c1"># synthesis interval end (angstrom)</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">llfin</span> <span class="o">=</span> <span class="mi">6535</span>
+
+    <span class="c1"># Runs Fortrans and hangs until done</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+    <span class="c1"># Loads result files into memory. obj.result is a dictionary containing elements ...</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;obj.result = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">result</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ex</span><span class="o">.</span><span class="n">draw_spectra_overlapped</span><span class="p">([</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;norm&quot;</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;convolved&quot;</span><span class="p">]])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;norm-convolved.png&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/norm-convolved.png" src="_images/norm-convolved.png" />
+</div>
+</div>
+<div class="section" id="spectral-synthesis-convolutions">
+<h3>Spectral synthesis - convolutions<a class="headerlink" href="#spectral-synthesis-convolutions" title="Permalink to this headline">¶</a></h3>
+<p>The following example convolves the synthetic spectrum (file “flux.norm”) with Gaussian profiles of
+different FWHMs.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="sd">&quot;&quot;&quot;Runs synthesis over short wavelength range, then plots normalized and convolved spectrum&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">a99</span>
+
+<span class="c1"># FWHM (full width at half of maximum) of Gaussian profiles in angstrom</span>
+<span class="n">FWHMS</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Copies files main.dat and abonds.dat to local directory (for given star)</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
+    <span class="c1"># Creates symbolic links to all non-star-specific files</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">link_to_data</span><span class="p">()</span>
+
+    <span class="c1"># # 1) Spectral synthesis</span>
+    <span class="c1"># Creates object that will run the four Fortran executables (innewmarcs, hydro2, pfant, nulbad)</span>
+    <span class="n">ecombo</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Combo</span><span class="p">()</span>
+    <span class="c1"># synthesis interval start (angstrom)</span>
+    <span class="n">ecombo</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">llzero</span> <span class="o">=</span> <span class="mi">6530</span>
+    <span class="c1"># synthesis interval end (angstrom)</span>
+    <span class="n">ecombo</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">llfin</span> <span class="o">=</span> <span class="mi">6535</span>
+    <span class="c1"># Runs Fortrans and hangs until done</span>
+    <span class="n">ecombo</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="n">ecombo</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
+    <span class="c1"># Retains un-convolved spectrum for comparison</span>
+    <span class="n">spectra</span> <span class="o">=</span> <span class="p">[</span><span class="n">ecombo</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;norm&quot;</span><span class="p">]]</span>
+
+    <span class="c1"># # 2) Convolutions</span>
+    <span class="k">for</span> <span class="n">fwhm</span> <span class="ow">in</span> <span class="n">FWHMS</span><span class="p">:</span>
+        <span class="n">enulbad</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Nulbad</span><span class="p">()</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">fwhm</span> <span class="o">=</span> <span class="n">fwhm</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
+        <span class="c1"># Appends convolved spectrum for comparison</span>
+        <span class="n">spectra</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">enulbad</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;convolved&quot;</span><span class="p">])</span>
+
+    <span class="c1"># # 3) Plots</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ex</span><span class="o">.</span><span class="n">draw_spectra_overlapped</span><span class="p">(</span><span class="n">spectra</span><span class="p">)</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="mf">1.1</span>
+    <span class="n">a99</span><span class="o">.</span><span class="n">set_figure_size</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="mi">1000</span><span class="o">*</span><span class="n">K</span><span class="p">,</span> <span class="mi">500</span><span class="o">*</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;many-convs.png&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/many-convs.png" src="_images/many-convs.png" />
+</div>
+</div>
+<div class="section" id="spectral-synthesis-continuum">
+<h3>Spectral synthesis - Continuum<a class="headerlink" href="#spectral-synthesis-continuum" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Runs synthesis over large wavelength range, then plots continuum&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">a99</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Copies files main.dat and abonds.dat to local directory (for given star)</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
+    <span class="c1"># Creates symbolic links to all non-star-specific files, such as atomic &amp; molecular lines,</span>
+    <span class="c1"># partition functions, etc.</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">link_to_data</span><span class="p">()</span>
+
+    <span class="c1"># Creates object that will run the four Fortran executables (innewmarcs, hydro2, pfant, nulbad)</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Combo</span><span class="p">()</span>
+    <span class="n">oo</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span>
+    <span class="c1"># synthesis interval start (angstrom)</span>
+    <span class="n">oo</span><span class="o">.</span><span class="n">llzero</span> <span class="o">=</span> <span class="mi">2500</span>
+    <span class="c1"># synthesis interval end (angstrom)</span>
+    <span class="n">oo</span><span class="o">.</span><span class="n">llfin</span> <span class="o">=</span> <span class="mi">30000</span>
+    <span class="c1"># savelength step (angstrom)</span>
+    <span class="n">oo</span><span class="o">.</span><span class="n">pas</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="c1"># Turns off hydrogen lines</span>
+    <span class="n">oo</span><span class="o">.</span><span class="n">no_h</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="c1"># Turns off atomic lines</span>
+    <span class="n">oo</span><span class="o">.</span><span class="n">no_atoms</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="c1"># Turns off molecular lines</span>
+    <span class="n">oo</span><span class="o">.</span><span class="n">no_molecules</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">obj</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;obj.result = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">result</span>
+    <span class="n">ex</span><span class="o">.</span><span class="n">draw_spectra</span><span class="p">([</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;cont&quot;</span><span class="p">]],</span> <span class="n">setup</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">PlotSpectrumSetup</span><span class="p">(</span><span class="n">fmt_ylabel</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="o">.</span><span class="mi">75</span>
+    <span class="n">a99</span><span class="o">.</span><span class="n">set_figure_size</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="mi">1300</span><span class="o">*</span><span class="n">K</span><span class="p">,</span> <span class="mi">450</span><span class="o">*</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;continuum.png&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/continuum.png" src="_images/continuum.png" />
+</div>
+</div>
+<div class="section" id="spectral-synthesis-separate-atomic-species">
+<h3>Spectral synthesis - Separate atomic species<a class="headerlink" href="#spectral-synthesis-separate-atomic-species" title="Permalink to this headline">¶</a></h3>
+<p>PFANT atomic lines files contains wavelength, log_gf and other tabulated information for several
+(element, ionization level) atomic species.</p>
+<p>The following code calculates isolated atomic spectra for a list of arbitrarily chosen atomic species.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Runs synthesis for specified atomic species separately. No molecules or hydrogen lines.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+<span class="kn">import</span> <span class="nn">a99</span>
+
+<span class="c1"># [&quot;&lt;element name&gt;&lt;ionization level&gt;&quot;, ...] for which to draw panels</span>
+<span class="n">MY_SPECIES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fe1&quot;</span><span class="p">,</span> <span class="s2">&quot;Fe2&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca1&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca2&quot;</span><span class="p">,</span> <span class="s2">&quot;Na1&quot;</span><span class="p">,</span> <span class="s2">&quot;Si1&quot;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">link_to_data</span><span class="p">()</span>
+
+    <span class="c1"># Loads full atomic lines file</span>
+    <span class="n">fatoms</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">FileAtoms</span><span class="p">()</span>
+    <span class="n">fatoms</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+    <span class="n">runnables</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">elem_ioni</span> <span class="ow">in</span> <span class="n">MY_SPECIES</span><span class="p">:</span>
+        <span class="n">atom</span> <span class="o">=</span> <span class="n">fatoms</span><span class="o">.</span><span class="n">find_atom</span><span class="p">(</span><span class="n">elem_ioni</span><span class="p">)</span>
+
+        <span class="c1"># Creates atomic lines file object containing only one atom</span>
+        <span class="n">fatoms2</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">FileAtoms</span><span class="p">()</span>
+        <span class="n">fatoms2</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">atom</span><span class="p">]</span>
+
+        <span class="n">ecombo</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Combo</span><span class="p">()</span>
+        <span class="c1"># Overrides file &quot;atoms.dat&quot; with in-memory object</span>
+        <span class="n">ecombo</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">file_atoms</span> <span class="o">=</span> <span class="n">fatoms2</span>
+        <span class="n">ecombo</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">flag_output_to_dir</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">oo</span> <span class="o">=</span> <span class="n">ecombo</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span>
+        <span class="c1"># Assigns synthesis range to match atomic lines range</span>
+        <span class="n">oo</span><span class="o">.</span><span class="n">llzero</span><span class="p">,</span> <span class="n">oo</span><span class="o">.</span><span class="n">llfin</span> <span class="o">=</span> <span class="n">fatoms2</span><span class="o">.</span><span class="n">llzero</span><span class="p">,</span> <span class="n">fatoms2</span><span class="o">.</span><span class="n">llfin</span>
+        <span class="c1"># Turns off hydrogen lines</span>
+        <span class="n">oo</span><span class="o">.</span><span class="n">no_h</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># Turns off molecular lines</span>
+        <span class="n">oo</span><span class="o">.</span><span class="n">no_molecules</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">runnables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ecombo</span><span class="p">)</span>
+
+    <span class="n">pf</span><span class="o">.</span><span class="n">run_parallel</span><span class="p">(</span><span class="n">runnables</span><span class="p">)</span>
+
+    <span class="c1"># Draws figure</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">a99</span><span class="o">.</span><span class="n">format_BLB</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">ecombo</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">MY_SPECIES</span><span class="p">,</span> <span class="n">runnables</span><span class="p">)):</span>
+        <span class="n">ecombo</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ex</span><span class="o">.</span><span class="n">draw_spectra_overlapped</span><span class="p">([</span><span class="n">ecombo</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;spec&quot;</span><span class="p">]],</span>
+                                   <span class="n">setup</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">PlotSpectrumSetup</span><span class="p">(</span><span class="n">flag_xlabel</span><span class="o">=</span><span class="n">i</span><span class="o">/</span><span class="mi">3</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">flag_legend</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="n">K</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">a99</span><span class="o">.</span><span class="n">set_figure_size</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="mi">1300</span><span class="o">*</span><span class="n">K</span><span class="p">,</span> <span class="mi">740</span><span class="o">*</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;synthesis-atoms.png&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/synthesis-atoms.png" src="_images/synthesis-atoms.png" />
+</div>
+</div>
+<div class="section" id="spectral-synthesis-separate-molecules">
+<h3>Spectral synthesis - Separate molecules<a class="headerlink" href="#spectral-synthesis-separate-molecules" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Runs synthesis for molecular species separately. No atomic nor hydrogen lines.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+<span class="kn">import</span> <span class="nn">a99</span>
+
+<span class="n">SUBPLOT_NUM_ROWS</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">SUBPLOT_NUM_COLS</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">link_to_data</span><span class="p">()</span>
+
+    <span class="c1"># Loads full molecular lines file</span>
+    <span class="n">fmol</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">FileMolecules</span><span class="p">()</span>
+    <span class="n">fmol</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+
+    <span class="n">runnables</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">molecule</span> <span class="ow">in</span> <span class="n">fmol</span><span class="p">:</span>
+        <span class="n">fmol2</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">FileMolecules</span><span class="p">()</span>
+        <span class="n">fmol2</span><span class="o">.</span><span class="n">molecules</span> <span class="o">=</span> <span class="p">[</span><span class="n">molecule</span><span class="p">]</span>
+
+        <span class="n">ecombo</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Combo</span><span class="p">()</span>
+        <span class="c1"># Overrides file &quot;molecules.dat&quot; with in-memory object</span>
+        <span class="n">ecombo</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">file_molecules</span> <span class="o">=</span> <span class="n">fmol2</span>
+        <span class="n">ecombo</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">flag_output_to_dir</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">oo</span> <span class="o">=</span> <span class="n">ecombo</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span>
+        <span class="c1"># Assigns synthesis range to match atomic lines range</span>
+        <span class="n">oo</span><span class="o">.</span><span class="n">llzero</span><span class="p">,</span> <span class="n">oo</span><span class="o">.</span><span class="n">llfin</span> <span class="o">=</span> <span class="n">fmol2</span><span class="o">.</span><span class="n">llzero</span><span class="p">,</span> <span class="n">fmol2</span><span class="o">.</span><span class="n">llfin</span>
+        <span class="c1"># Turns off hydrogen lines</span>
+        <span class="n">oo</span><span class="o">.</span><span class="n">no_h</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># Turns off atomic lines</span>
+        <span class="n">oo</span><span class="o">.</span><span class="n">no_atoms</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># Adjusts the wavelength step according to the calculation interval</span>
+        <span class="n">oo</span><span class="o">.</span><span class="n">pas</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">oo</span><span class="o">.</span><span class="n">llfin</span><span class="o">*</span><span class="mf">1.</span><span class="o">/</span><span class="mi">20000</span><span class="o">/</span><span class="mf">2.5</span><span class="p">)</span><span class="o">*</span><span class="mf">2.5</span><span class="p">)</span>
+        <span class="n">oo</span><span class="o">.</span><span class="n">aint</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">50.</span><span class="p">,</span> <span class="n">oo</span><span class="o">.</span><span class="n">pas</span><span class="p">)</span>
+
+        <span class="n">runnables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ecombo</span><span class="p">)</span>
+
+    <span class="n">pf</span><span class="o">.</span><span class="n">run_parallel</span><span class="p">(</span><span class="n">runnables</span><span class="p">)</span>
+
+    <span class="n">num_panels</span> <span class="o">=</span> <span class="n">SUBPLOT_NUM_COLS</span><span class="o">*</span><span class="n">SUBPLOT_NUM_ROWS</span>
+    <span class="n">num_molecules</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">runnables</span><span class="p">)</span>
+    <span class="n">ifigure</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">a99</span><span class="o">.</span><span class="n">format_BLB</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_molecules</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">not_first</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">first_panel_of_figure</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">num_panels</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">num_panels</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.01</span>
+        <span class="n">is_panel</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num_molecules</span>
+
+        <span class="k">if</span> <span class="n">not_first</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">is_panel</span> <span class="ow">or</span> <span class="n">first_panel_of_figure</span><span class="p">):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+            <span class="n">K</span> <span class="o">=</span> <span class="mf">1.</span>
+            <span class="n">a99</span><span class="o">.</span><span class="n">set_figure_size</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="mi">1500</span> <span class="o">*</span> <span class="n">K</span><span class="p">,</span> <span class="mi">740</span> <span class="o">*</span> <span class="n">K</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+            <span class="n">filename_fig</span> <span class="o">=</span><span class="s2">&quot;synthesis-molecules-</span><span class="si">{}</span><span class="s2">.png&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ifigure</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saving figure &#39;</span><span class="si">{}</span><span class="s2">&#39;...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename_fig</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename_fig</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">ifigure</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">first_panel_of_figure</span> <span class="ow">and</span> <span class="n">is_panel</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">is_panel</span><span class="p">:</span>
+            <span class="n">ecombo</span> <span class="o">=</span> <span class="n">runnables</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">ecombo</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
+
+            <span class="n">isubplot</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">num_panels</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">SUBPLOT_NUM_ROWS</span><span class="p">,</span> <span class="n">SUBPLOT_NUM_COLS</span><span class="p">,</span> <span class="n">isubplot</span><span class="p">)</span>
+            <span class="n">ex</span><span class="o">.</span><span class="n">draw_spectra_overlapped</span><span class="p">([</span><span class="n">ecombo</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;spec&quot;</span><span class="p">]],</span>
+               <span class="n">setup</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">PlotSpectrumSetup</span><span class="p">(</span><span class="n">flag_xlabel</span><span class="o">=</span><span class="n">i</span><span class="o">/</span><span class="mi">3</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">flag_legend</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+            <span class="n">_title</span> <span class="o">=</span> <span class="n">fmol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">description</span>
+            <span class="k">if</span> <span class="s2">&quot;]&quot;</span> <span class="ow">in</span> <span class="n">_title</span><span class="p">:</span>
+                <span class="n">title</span> <span class="o">=</span> <span class="n">_title</span><span class="p">[:</span><span class="n">_title</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;]&quot;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">title</span> <span class="o">=</span> <span class="n">_title</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/synthesis-molecules-0.png" src="_images/synthesis-molecules-0.png" />
+</div>
+<div class="figure align-center">
+<img alt="_images/synthesis-molecules-1.png" src="_images/synthesis-molecules-1.png" />
+</div>
+<p>etc.</p>
+</div>
+<div class="section" id="gaussian-profiles-as-nulbad-outputs">
+<h3>Gaussian profiles as nulbad outputs<a class="headerlink" href="#gaussian-profiles-as-nulbad-outputs" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">nulbad</span></code> is one of the Fortran executables of the PFANT package. It is the one that convolves
+the synthetic spectrum calculated by <code class="docutils literal"><span class="pre">pfant</span></code> with a Gaussian profile specified by a “fwhm” parameter.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Nulbad&#39;s &quot;impulse response&quot;</span>
+
+<span class="sd">Saves &quot;impulse&quot; spectrum (just a spike at lambda=5000 angstrom) as &quot;flux.norm&quot;,</span>
+<span class="sd">then runs `nulbad` repeatedly to get a range of Gaussian profiles.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">a99</span>
+<span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="c1"># FWHM (full width at half of maximum) of Gaussian profiles in angstrom</span>
+<span class="n">FWHMS</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Copies files main.dat and abonds.dat to local directory (for given star)</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">copy_star</span><span class="p">(</span><span class="n">starname</span><span class="o">=</span><span class="s2">&quot;sun-grevesse-1996&quot;</span><span class="p">)</span>
+    <span class="c1"># Creates symbolic links to all non-star-specific files</span>
+    <span class="n">pf</span><span class="o">.</span><span class="n">link_to_data</span><span class="p">()</span>
+
+    <span class="c1"># # 1) Creates &quot;impulse&quot; spectrum</span>
+    <span class="n">fsp</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">FileSpectrumPfant</span><span class="p">()</span>
+    <span class="n">sp</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">Spectrum</span><span class="p">()</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">2001</span>
+    <span class="n">sp</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mf">0.001</span><span class="o">+</span><span class="mi">5000</span>
+    <span class="n">sp</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">sp</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="nb">int</span><span class="p">((</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">1.</span>
+
+    <span class="n">fsp</span><span class="o">.</span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">sp</span>
+    <span class="n">fsp</span><span class="o">.</span><span class="n">save_as</span><span class="p">(</span><span class="s2">&quot;flux.norm&quot;</span><span class="p">)</span>
+
+    <span class="c1"># # 2) Convolutions</span>
+    <span class="n">spectra</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">fwhm</span> <span class="ow">in</span> <span class="n">FWHMS</span><span class="p">:</span>
+        <span class="n">enulbad</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Nulbad</span><span class="p">()</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">fwhm</span> <span class="o">=</span> <span class="n">fwhm</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
+        <span class="n">enulbad</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+        <span class="c1"># Appends convolved spectrum for comparison</span>
+        <span class="n">spectra</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">enulbad</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;convolved&quot;</span><span class="p">])</span>
+
+    <span class="c1"># # 3) Plots</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ex</span><span class="o">.</span><span class="n">draw_spectra_overlapped</span><span class="p">(</span><span class="n">spectra</span><span class="p">)</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="mf">0.7</span>
+    <span class="n">a99</span><span class="o">.</span><span class="n">set_figure_size</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="mi">1300</span><span class="o">*</span><span class="n">K</span><span class="p">,</span> <span class="mi">500</span><span class="o">*</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;gaussian-profiles.png&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/gaussian-profiles.png" src="_images/gaussian-profiles.png" />
+</div>
+</div>
+<div class="section" id="plot-hydrogen-profiles">
+<h3>Plot hydrogen profiles<a class="headerlink" href="#plot-hydrogen-profiles" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Calculates hydrogen lines profiles, then plots them in several 3D subplots</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">f311.pyfant</span> <span class="k">as</span> <span class="nn">pf</span>
+<span class="kn">import</span> <span class="nn">f311.explorer</span> <span class="k">as</span> <span class="nn">ex</span>
+<span class="kn">import</span> <span class="nn">f311.filetypes</span> <span class="k">as</span> <span class="nn">ft</span>
+<span class="kn">import</span> <span class="nn">f311.physics</span> <span class="k">as</span> <span class="nn">ph</span>
+<span class="kn">import</span> <span class="nn">a99</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>  <span class="c1"># yes, required (see below)</span>
+
+<span class="k">def</span> <span class="nf">mylog</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;^^ </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">)))</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">flag_cleanup</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">tmpdir</span> <span class="o">=</span> <span class="n">a99</span><span class="o">.</span><span class="n">new_filename</span><span class="p">(</span><span class="s2">&quot;hydrogen-profiles&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Saves current directory</span>
+    <span class="n">pwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">mylog</span><span class="p">(</span><span class="s2">&quot;Creating directory &#39;</span><span class="si">{}</span><span class="s2">&#39;...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">))</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">pf</span><span class="o">.</span><span class="n">link_to_data</span><span class="p">()</span>
+        <span class="n">_main</span><span class="p">()</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1"># Restores current directory</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">pwd</span><span class="p">)</span>
+        <span class="c1"># Removes temporary directory</span>
+        <span class="k">if</span> <span class="n">flag_cleanup</span><span class="p">:</span>
+            <span class="n">mylog</span><span class="p">(</span><span class="s2">&quot;Removing directory &#39;</span><span class="si">{}</span><span class="s2">&#39;...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">))</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mylog</span><span class="p">(</span><span class="s2">&quot;Not cleaning up.&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_main</span><span class="p">():</span>
+    <span class="n">fm</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">FileMain</span><span class="p">()</span>
+    <span class="n">fm</span><span class="o">.</span><span class="n">init_default</span><span class="p">()</span>
+    <span class="n">fm</span><span class="o">.</span><span class="n">llzero</span><span class="p">,</span> <span class="n">fm</span><span class="o">.</span><span class="n">llfin</span> <span class="o">=</span> <span class="mf">1000.</span><span class="p">,</span> <span class="mf">200000.</span>  <span class="c1"># spectral synthesis range in Angstrom</span>
+
+    <span class="n">ei</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Innewmarcs</span><span class="p">()</span>
+    <span class="n">ei</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">file_main</span> <span class="o">=</span> <span class="n">fm</span>
+    <span class="n">ei</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="n">ei</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+
+    <span class="n">eh</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">Hydro2</span><span class="p">()</span>
+    <span class="n">eh</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">file_main</span> <span class="o">=</span> <span class="n">fm</span>
+    <span class="n">eh</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="n">eh</span><span class="o">.</span><span class="n">load_result</span><span class="p">()</span>
+    <span class="n">eh</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+
+    <span class="n">_plot_profiles</span><span class="p">(</span><span class="n">eh</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;profiles&quot;</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">_plot_profiles</span><span class="p">(</span><span class="n">profiles</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">filename</span><span class="p">,</span> <span class="n">ftoh</span> <span class="ow">in</span> <span class="n">profiles</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">ftoh</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mylog</span><span class="p">(</span><span class="s2">&quot;Drawing &#39;</span><span class="si">{}</span><span class="s2">&#39;...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+            <span class="c1"># ax = plt.subplot(2, 3, i+1)</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">ex</span><span class="o">.</span><span class="n">draw_toh</span><span class="p">(</span><span class="n">ftoh</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;hydrogen-profiles.png&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">flag_cleanup</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/hydrogen-profiles.png" src="_images/hydrogen-profiles.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="convmol.html" class="btn btn-neutral float-right" title="Conversion of molecular lines lists" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral" title="F311 Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, JT.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'17.9.27.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+.. code-block:: none
+
+    usage: link.py [-h] [-l] [-p] [-y] [directory]
+    
+    Creates symbolic links to PFANT data files as an alternative to copying these (sometimes large) files into local directory
+    
+    A star is specified by three data files whose typical names are:
+    main.dat, abonds.dat, and dissoc.dat .
+    
+    The other data files (atomic/molecular lines, partition function, etc.)
+    are star-independent, and this script is a proposed solution to keep you from
+    copying these files for every new case.
+    
+    How it works: link.py will look inside a given directory and create
+    symbolic links to files *.dat and *.mod.
+    
+    The following files will be skipped:
+      - main files, e.g. "main.dat"
+      - dissoc files, e.g., "dissoc.dat"
+      - abonds files, e.g., "abonds.dat"
+      - .mod files with a single model inside, e.g., "modeles.mod"
+      - hydrogen lines files, e.g., "thalpha", "thbeta"
+    
+    This script works in two different modes:
+    
+    a) default mode: looks for files in a subdirectory of PFANT/data
+       > link.py common
+       (will create links to filess inside PFANT/data/common)
+    
+    b) "-l" option: lists subdirectories of PFANT/data
+    
+    c) "-p" option: looks for files in a directory specified.
+       Examples:
+       > link.py -p /home/user/pfant-common-data
+       > link.py -p ../../pfant-common-data
+    
+    Note: in Windows, this script must be run as administrator.
+    
+    positional arguments:
+      directory   name of directory (either a subdirectory of PFANT/data or the
+                  path to a valid system directory (see modes of operation)
+                  (default: common)
+    
+    optional arguments:
+      -h, --help  show this help message and exit
+      -l, --list  lists subdirectories of
+                  /home/j/Documents/projects/astro/github/PFANT/code/data
+                  (default: False)
+      -p, --path  system path mode (default: False)
+      -y, --yes   Automatically answers 'yes' to eventual question (default:
+                  False)
+    
+
+This script belongs to package *f311.pyfant*

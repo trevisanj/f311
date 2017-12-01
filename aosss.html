@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Adaptive Optics Systems Simulation Support (f311.aosss) &mdash; F311 17.9.27.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
+        <link rel="next" title="Index of applications (scripts)" href="scripts.html"/>
+        <link rel="prev" title="Selected topics on Physics" href="physics.html"/>
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> F311
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                17.9.27.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f3110.html">Package f311</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular lines lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorer.html">File explorer and editors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filetypes.html">File handling API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Selected topics on Physics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#list-aosss-applications">List <em>aosss</em> applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#find-wavelength-region-for-simulation">Find wavelength region for simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-simulation-results">Download simulation results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#organize-simulation-results">Organize simulation results</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#group-resulting-spectra-in-a-single-file">Group resulting spectra in a single file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-reports-optional">Create reports (optional)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#organize-the-directory">Organize the directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#browse-through-reports">Browse through reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edit-spectrum-list-file">Edit Spectrum List file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Index of applications (scripts)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">F311</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/aosss.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="adaptive-optics-systems-simulation-support-f311-aosss">
+<h1>Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)<a class="headerlink" href="#adaptive-optics-systems-simulation-support-f311-aosss" title="Permalink to this headline">¶</a></h1>
+<p>The <em>aosss</em> package helps to automatize the simulation of Adaptive Optics Systems.</p>
+<div class="section" id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="list-aosss-applications">
+<h3>List <em>aosss</em> applications<a class="headerlink" href="#list-aosss-applications" title="Permalink to this headline">¶</a></h3>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">programs</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">p</span> <span class="n">aosss</span>
+
+
+<span class="n">Graphical</span> <span class="n">applications</span>
+<span class="o">----------------------</span>
+
+  <span class="n">wavelength</span><span class="o">-</span><span class="n">chart</span><span class="o">.</span><span class="n">py</span> <span class="o">.........</span> <span class="n">Draws</span> <span class="n">chart</span> <span class="n">showing</span> <span class="n">spectral</span> <span class="n">lines</span> <span class="n">of</span> <span class="n">interest</span><span class="p">,</span>
+                                <span class="n">spectrograph</span> <span class="n">wavelength</span> <span class="n">ranges</span><span class="p">,</span> <span class="n">ESO</span> <span class="n">atmospheric</span>
+                                <span class="n">model</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span>
+
+<span class="n">Command</span><span class="o">-</span><span class="n">line</span> <span class="n">tools</span>
+<span class="o">------------------</span>
+
+  <span class="n">create</span><span class="o">-</span><span class="n">simulation</span><span class="o">-</span><span class="n">reports</span><span class="o">.</span><span class="n">py</span>  <span class="n">Creates</span> <span class="n">HTML</span> <span class="n">reports</span> <span class="kn">from</span> <span class="nn">WebSim</span><span class="o">-</span><span class="n">COMPASS</span> <span class="n">output</span>
+                                <span class="n">files</span>
+  <span class="n">create</span><span class="o">-</span><span class="n">spectrum</span><span class="o">-</span><span class="n">lists</span><span class="o">.</span><span class="n">py</span> <span class="o">....</span> <span class="n">Create</span> <span class="n">several</span> <span class="o">.</span><span class="n">splist</span> <span class="p">(</span><span class="n">spectrum</span> <span class="nb">list</span><span class="p">)</span> <span class="n">files</span>
+                                <span class="kn">from</span> <span class="nn">WebSim</span><span class="o">-</span><span class="n">COMPASS</span> <span class="n">output</span> <span class="n">files</span><span class="p">;</span> <span class="n">groups</span> <span class="n">spectra</span>
+                                <span class="n">that</span> <span class="n">share</span> <span class="n">same</span> <span class="n">wavelength</span> <span class="n">vector</span>
+  <span class="n">get</span><span class="o">-</span><span class="n">compass</span><span class="o">.</span><span class="n">py</span> <span class="o">..............</span> <span class="n">Downloads</span> <span class="n">WebSim</span><span class="o">-</span><span class="n">COMPASS</span> <span class="n">simulations</span>
+  <span class="nb">list</span><span class="o">-</span><span class="n">mosaic</span><span class="o">-</span><span class="n">modes</span><span class="o">.</span><span class="n">py</span> <span class="o">........</span> <span class="n">Lists</span> <span class="n">MOSAIC</span> <span class="n">Spectrograph</span> <span class="n">modes</span>
+  <span class="n">organize</span><span class="o">-</span><span class="n">directory</span><span class="o">.</span><span class="n">py</span> <span class="o">.......</span> <span class="n">Organizes</span> <span class="n">simulation</span> <span class="n">directory</span> <span class="p">(</span><span class="n">creates</span> <span class="n">folders</span><span class="p">,</span>
+                                <span class="n">moves</span> <span class="n">files</span><span class="p">,</span> <span class="n">creates</span> <span class="s1">&#39;index.html&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note</strong> All the programs above can be called with the <code class="docutils literal"><span class="pre">--help</span></code> or <code class="docutils literal"><span class="pre">-h</span></code>
+option for more information</p>
+</div>
+<div class="section" id="find-wavelength-region-for-simulation">
+<h3>Find wavelength region for simulation<a class="headerlink" href="#find-wavelength-region-for-simulation" title="Permalink to this headline">¶</a></h3>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">wavelength</span><span class="o">-</span><span class="n">chart</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p><img alt="image1" src="_images/chart-z-0.png" /></p>
+<p><strong>Figure</strong> – Lines with zero redshift</p>
+<p>This application creates a chart stacking the MOSAIC spectrograph wavelength coverages and
+an ESO Earth atmospheric model. This may serve either as a reference to MOSAIC wavelength invervals for each
+mode (on this, see also <code class="docutils literal"><span class="pre">list-mosaic-modes.py</span></code>) or to verify the Earth atmospheric emission/trasmission
+in a wavelength region of observational interest.</p>
+<p>It is also possible to inform a redshift so that the chemical lines will be accordingly displaced:</p>
+<p><img alt="image2" src="_images/chart-z-35.png" /></p>
+<p><strong>Figure</strong> – <code class="docutils literal"><span class="pre">z=3.5</span></code></p>
+</div>
+<div class="section" id="download-simulation-results">
+<h3>Download simulation results<a class="headerlink" href="#download-simulation-results" title="Permalink to this headline">¶</a></h3>
+<p>The following example assumes that simulations coded from 1700 to 1721 already finished on the
+WebSim-COMPASS server.</p>
+<p><code class="docutils literal"><span class="pre">get-compass.py</span></code> is a Python script based on <code class="docutils literal"><span class="pre">get-compass.sh</span></code> which can be downloaded from the
+WebSim-COMPASS webpage. The former enhances the latter in which:</p>
+<ul class="simple">
+<li>It can download several simulations in a single command</li>
+<li>It is possible to specify the “stage” of the simulation pipeline to download results from. For example,
+it is possible to download only the “spintg” file, skipping the large data cubes from intermediary stages.</li>
+</ul>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">get</span><span class="o">-</span><span class="n">compass</span><span class="o">.</span><span class="n">py</span> <span class="mi">1700</span><span class="o">-</span><span class="mi">1721</span> <span class="o">--</span><span class="n">stage</span> <span class="n">spintg</span>
+</pre></div>
+</div>
+<p>will download results for simulations <em>C001700</em>, <em>C001701</em>, …,
+<em>C001721</em> <strong>into the local directory</strong>, after which you will see files
+<code class="docutils literal"><span class="pre">C*.fits</span></code>, <code class="docutils literal"><span class="pre">C*.par</span></code>, <code class="docutils literal"><span class="pre">C*.out</span></code></p>
+</div>
+<div class="section" id="organize-simulation-results">
+<h3>Organize simulation results<a class="headerlink" href="#organize-simulation-results" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="group-resulting-spectra-in-a-single-file">
+<h4>Group resulting spectra in a single file<a class="headerlink" href="#group-resulting-spectra-in-a-single-file" title="Permalink to this headline">¶</a></h4>
+<p>This step is required for later analysis using <code class="docutils literal"><span class="pre">splisted.py</span></code></p>
+<p>The following command will group all files “C*_spintg.fits” into a single “.splist” (Spectrum List) file,
+which can later be opened using <code class="docutils literal"><span class="pre">splisted.py</span></code></p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span>$ create-spectrum-lists.py
+.
+.
+.
+[INFO    ] Created file &#39;./group-spintg-00-C001700-C001721.splist&#39;
+[INFO    ] Created file &#39;./group-spintg-01-C001712-C001712.splist&#39;
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-reports-optional">
+<h4>Create reports (optional)<a class="headerlink" href="#create-reports-optional" title="Permalink to this headline">¶</a></h4>
+<p>This step creates HTML pages (one for each simulation) that help to navigate through the simulation
+results.</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">create</span><span class="o">-</span><span class="n">simulation</span><span class="o">-</span><span class="n">reports</span><span class="o">.</span><span class="n">py</span> <span class="mi">1700</span><span class="o">-</span><span class="mi">1721</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="organize-the-directory">
+<h4>Organize the directory<a class="headerlink" href="#organize-the-directory" title="Permalink to this headline">¶</a></h4>
+<p>At this point, the current directory has a large number of files (“.fits”, “.html”, “.png”, etc.),
+whereas for our analysis, only the “.splist” file is required.</p>
+<p><code class="docutils literal"><span class="pre">organize-directory.py</span></code> will:</p>
+<ul class="simple">
+<li>create a directory named “raw” where it will copy “.fits”, “.par” and “.out” files</li>
+<li>create a directory named “reports” where it will copy “.html” and “.png” files. In addition, it will
+create a file “index.html” that will serve as an index for the “.html” files</li>
+</ul>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span>organize-directory.py
+.
+.
+.
+[INFO    ]   - Move 108 objects
+[INFO    ]   - Create &#39;reports/index.html&#39;
+Continue (Y/n)?
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="browse-through-reports">
+<h3>Browse through reports<a class="headerlink" href="#browse-through-reports" title="Permalink to this headline">¶</a></h3>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">reports</span>
+<span class="n">xdg</span><span class="o">-</span><span class="nb">open</span> <span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+<p>will open file “index.html” in browser</p>
+<p><img alt="image0" src="_images/index-html.png" /></p>
+<p><strong>Figure</strong> – Reports index</p>
+</div>
+<div class="section" id="edit-spectrum-list-file">
+<h3>Edit Spectrum List file<a class="headerlink" href="#edit-spectrum-list-file" title="Permalink to this headline">¶</a></h3>
+<p>If you types the commands above to visualize reports, you will need to go back one directory level:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">..</span>
+</pre></div>
+</div>
+<p>Now open the Spectrum List Editor (part of the f311 package):</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">splisted</span><span class="o">.</span><span class="n">py</span> <span class="n">group</span><span class="o">-</span><span class="n">spintg</span><span class="o">-</span><span class="mi">00</span><span class="o">-</span><span class="n">C001700</span><span class="o">-</span><span class="n">C001721</span><span class="o">.</span><span class="n">splist</span>
+</pre></div>
+</div>
+<p>In the following steps, we will:</p>
+<ul class="simple">
+<li>Plot the spectra</li>
+<li>Calculate the Signal-to-noise ratio (SNR)</li>
+<li>Plot the Detector Integration Time (DIT) <em>vs</em> the SNR</li>
+</ul>
+<ol class="arabic simple">
+<li>Select all the spectra: click inside the table, then press <strong>Ctrl+A</strong></li>
+</ol>
+<p><img alt="imaget0" src="_images/splisted-tut-0.png" /></p>
+<ol class="arabic simple" start="2">
+<li>Click on “Plot Overlapped”. A plot window opens. From this plot, we can see that the region
+16508-16534 seems to be free of atmospheric contamination. You may close the plot window</li>
+</ol>
+<p><img alt="imaget1" src="_images/splisted-tut-1.png" /></p>
+<ol class="arabic simple" start="3">
+<li>Click on “To Scalar”. Another window opens</li>
+<li>Type “ToScalar_SNR(16508, 16534)”</li>
+<li>Click on “OK”</li>
+</ol>
+<p><img alt="imaget2" src="_images/splisted-tut-2.png" /></p>
+<ol class="arabic simple" start="6">
+<li>Notice that a new column “SNR” appear in the table. Click on “X-Y Plot”</li>
+</ol>
+<p><img alt="imaget3" src="_images/splisted-tut-3.png" /></p>
+<ol class="arabic simple" start="7">
+<li>Select “Error bars”</li>
+<li>Select “OBS_DIT”</li>
+<li>Click on “Redraw”</li>
+</ol>
+<p><img alt="imaget4" src="_images/splisted-tut-4.png" /></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scripts.html" class="btn btn-neutral float-right" title="Index of applications (scripts)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="physics.html" class="btn btn-neutral" title="Selected topics on Physics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, JT.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'17.9.27.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

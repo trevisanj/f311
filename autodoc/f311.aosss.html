@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>f311.aosss package &mdash; F311 17.9.27.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="F311 17.9.27.0 documentation" href="../index.html"/>
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> F311
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                17.9.27.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular lines lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explorer.html">File explorer and editors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filetypes.html">File handling API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics.html">Selected topics on Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Index of applications (scripts)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">F311</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>f311.aosss package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/autodoc/f311.aosss.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="f311-aosss-package">
+<h1>f311.aosss package<a class="headerlink" href="#f311-aosss-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-f311.aosss.basic">
+<span id="f311-aosss-basic-module"></span><h2>f311.aosss.basic module<a class="headerlink" href="#module-f311.aosss.basic" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="f311.aosss.basic.compile_simids">
+<code class="descclassname">f311.aosss.basic.</code><code class="descname">compile_simids</code><span class="sig-paren">(</span><em>specs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.basic.compile_simids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compiles a list of simulation IDs (e.g., ‘C000793’) from a sequence of specifications</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>specs</strong> – <p><code class="docutils literal"><span class="pre">[spec0,</span> <span class="pre">spec1,</span> <span class="pre">...]</span></code>, where each element may be:</p>
+<ul class="simple">
+<li>a number (convertible to int), or</li>
+<li>a range such as ‘1000-1010’ (string)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns: list of strings starting with “C”</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.aosss.mosaic">
+<span id="f311-aosss-mosaic-module"></span><h2>f311.aosss.mosaic module<a class="headerlink" href="#module-f311.aosss.mosaic" title="Permalink to this headline">¶</a></h2>
+<p>Spectrograph modes specifications</p>
+<dl class="class">
+<dt id="f311.aosss.mosaic.SpectrographMode">
+<em class="property">class </em><code class="descclassname">f311.aosss.mosaic.</code><code class="descname">SpectrographMode</code><span class="sig-paren">(</span><em>name=''</em>, <em>abbreviation=''</em>, <em>aperture=0.0</em>, <em>multiplex=0.0</em>, <em>wavelength_range=(0.0</em>, <em>0.0)</em>, <em>resolving_power=0.0</em>, <em>fov=0.0</em>, <em>flag_glao=False</em>, <em>flag_moao=False</em>, <em>pixel_size=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.mosaic.SpectrographMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.parts.AttrsPart</span></code></p>
+<p>Spectrograph mode specification</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> – name of spectrograph mode</li>
+<li><strong>abbreviation</strong> – abbreviation of spectrograph mode</li>
+<li><strong>aperture</strong> – aperture in (arcsec)</li>
+<li><strong>multiplex</strong> – maximum number of simultaneous objects being observed (unitless)</li>
+<li><strong>wavelength_range</strong> – [lambda_min, lambda_max] (angstrom)</li>
+<li><strong>resolving_power</strong> – lambda/delta_lambda (unitless)</li>
+<li><strong>fov</strong> – field-of-view (arcmin**2)</li>
+<li><strong>flag_glao</strong> – whether or not Ground-Layer Adaptive Optics is available for this mode</li>
+<li><strong>flag_moao</strong> – whether of not Multi-Object Adaptive Optics is available for this mode</li>
+<li><strong>pixel_size</strong> – spatial pixel size</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="f311.aosss.mosaic.SpectrographMode.attrs">
+<code class="descname">attrs</code><em class="property"> = ['name', 'abbreviation', 'aperture', 'multiplex', 'wavelength_range', 'resolving_power', 'fov', 'flag_glao', 'flag_moao', 'pixel_size']</em><a class="headerlink" href="#f311.aosss.mosaic.SpectrographMode.attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.aosss.report">
+<span id="f311-aosss-report-module"></span><h2>f311.aosss.report module<a class="headerlink" href="#module-f311.aosss.report" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="f311.aosss.report.create_simulation_report">
+<code class="descclassname">f311.aosss.report.</code><code class="descname">create_simulation_report</code><span class="sig-paren">(</span><em>simid</em>, <em>dir_='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.report.create_simulation_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates HTML output and several PNG files with coherent naming</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>simid</strong> – simulation ID. This should be a string starting with a “C”, e.g., “C000793”</li>
+<li><strong>dir</strong> – directory containing the simulation ouput files</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">name of output file created, which will be <code class="docutils literal"><span class="pre">&lt;dir_&gt;/report-&lt;simid&gt;.html</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.aosss.report.create_index">
+<code class="descclassname">f311.aosss.report.</code><code class="descname">create_index</code><span class="sig-paren">(</span><em>dir_='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.report.create_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>[re]created ‘index.html’ of report*</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.aosss.util">
+<span id="f311-aosss-util-module"></span><h2>f311.aosss.util module<a class="headerlink" href="#module-f311.aosss.util" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="f311.aosss.util.create_spectrum_lists">
+<code class="descclassname">f311.aosss.util.</code><code class="descname">create_spectrum_lists</code><span class="sig-paren">(</span><em>dir_</em>, <em>pipeline_stage='spintg'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.util.create_spectrum_lists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create several .splist files, grouping spectra by their wavelength vector</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dir</strong> – input &amp; output directory</li>
+<li><strong>pipeline_stage=&quot;spintg&quot;</strong> – <p>input “stage”, i.e., which stage of the pipeline will be loaded.
+Possible values:</p>
+<ul>
+<li>”spintg”: integrated spectrum (final stage)</li>
+<li>”ifu_noseeing”: take first spectrum of 7x1 data cube TODO explain</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.aosss.util.load_bulk">
+<code class="descclassname">f311.aosss.util.</code><code class="descname">load_bulk</code><span class="sig-paren">(</span><em>simid</em>, <em>dir_='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.util.load_bulk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads all files given the simulation id. Returns an list of BulkItem</p>
+<p>The keys are the same as in FILE_KEYWORDS, in the same order as well</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.aosss.util.BulkItem">
+<em class="property">class </em><code class="descclassname">f311.aosss.util.</code><code class="descname">BulkItem</code><span class="sig-paren">(</span><em>keyword=None</em>, <em>fileobj=None</em>, <em>filename=None</em>, <em>flag_exists=None</em>, <em>flag_supported=None</em>, <em>error=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.util.BulkItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This is each item returned by load_bulk</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="f311.aosss.util.load_eso_sky">
+<code class="descclassname">f311.aosss.util.</code><code class="descname">load_eso_sky</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.util.load_eso_sky" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads ESO sky model from data directory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="docutils literal"><span class="pre">(emission,</span> <span class="pre">transmission)</span></code> (two <cite>f311.filetypes.Spectrum</cite> objects)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.aosss">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.aosss" title="Permalink to this headline">¶</a></h2>
+<p>“Adaptive Optics Systems Simulation Support”</p>
+<dl class="function">
+<dt id="f311.aosss.get_config">
+<code class="descclassname">f311.aosss.</code><code class="descname">get_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.aosss.get_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns AAConfigObj object that corresponds to file ~/.f311.aosss.conf</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, JT.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'17.9.27.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
