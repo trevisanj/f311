@@ -2,7 +2,11 @@
 
     usage: nist-scraper.py [-h] formula
     
+<<<<<<< HEAD
     Retrieves and prints a table of molecular constants from the NIST Chemistry Web Book [NISTRef]
+=======
+    Retrieves and prints a table of molecular constants from the NIST Chemistry Web Book.
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
     
     To do so, it uses web scraping to navigate through several pages and parse the desired information
     from the book web pages.
@@ -14,6 +18,7 @@
     
         print-nist.py OH
     
+<<<<<<< HEAD
     **Note** This script was designed to work with **diatomic molecules** and may not work with other
              molecules.
     
@@ -28,6 +33,10 @@
     
     [NISTRef] http://webbook.nist.gov/chemistry/
     
+=======
+    **Disclaimer** This script may stop working if the NIST people update the Chemistry Web Book.
+    
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
     positional arguments:
       formula     NIST formula
     

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 f311\.convmol package
 =====================
+=======
+f311.convmol package
+====================
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Subpackages
 -----------
@@ -13,14 +18,20 @@ Subpackages
 Submodules
 ----------
 
+<<<<<<< HEAD
 f311\.convmol\.calc\_qgbd module
 --------------------------------
+=======
+f311.convmol.calc_qgbd module
+-----------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.convmol.calc_qgbd
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.convmol\.conv module
 --------------------------
 
@@ -31,48 +42,85 @@ f311\.convmol\.conv module
 
 f311\.convmol\.conv\_hitran module
 ----------------------------------
+=======
+f311.convmol.conv_hitran module
+-------------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.convmol.conv_hitran
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.convmol\.conv\_kurucz module
 ----------------------------------
+=======
+f311.convmol.conv_kurucz module
+-------------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.convmol.conv_kurucz
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.convmol\.conv\_plez module
 --------------------------------
 
 .. automodule:: f311.convmol.conv_plez
+=======
+f311.convmol.conv_vald3 module
+------------------------------
+
+.. automodule:: f311.convmol.conv_vald3
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.convmol\.conv\_vald3 module
 ---------------------------------
 
 .. automodule:: f311.convmol.conv_vald3
+=======
+f311.convmol.convlog module
+---------------------------
+
+.. automodule:: f311.convmol.convlog
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.convmol\.convlog module
 -----------------------------
 
 .. automodule:: f311.convmol.convlog
+=======
+f311.convmol.fcf_oh module
+--------------------------
+
+.. automodule:: f311.convmol.fcf_oh
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.convmol\.fcf\_oh module
 -----------------------------
 
 .. automodule:: f311.convmol.fcf_oh
+=======
+f311.convmol.make_mol module
+----------------------------
+
+.. automodule:: f311.convmol.make_mol
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
     :members:
     :undoc-members:
     :show-inheritance:

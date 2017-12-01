@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 f311\.explorer\.basic package
 =============================
+=======
+f311.explorer.basic package
+===========================
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Submodules
 ----------
 
+<<<<<<< HEAD
 f311\.explorer\.basic\.conversion module
 ----------------------------------------
 
@@ -14,6 +20,10 @@ f311\.explorer\.basic\.conversion module
 
 f311\.explorer\.basic\.maths module
 -----------------------------------
+=======
+f311.explorer.basic.maths module
+--------------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.explorer.basic.maths
     :members:

@@ -1,25 +1,48 @@
+<<<<<<< HEAD
 f311\.physics package
 =====================
+=======
+f311.physics package
+====================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    f311.physics.multiplicity
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Submodules
 ----------
 
+<<<<<<< HEAD
 f311\.physics\.airvacuum module
 -------------------------------
+=======
+f311.physics.airvacuum module
+-----------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.physics.airvacuum
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.physics\.constants module
 -------------------------------
+=======
+f311.physics.constants module
+-----------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.physics.constants
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.physics\.linestrength module
 ----------------------------------
 
@@ -30,22 +53,36 @@ f311\.physics\.linestrength module
 
 f311\.physics\.photometry module
 --------------------------------
+=======
+f311.physics.photometry module
+------------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.physics.photometry
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.physics\.rainbow module
 -----------------------------
+=======
+f311.physics.rainbow module
+---------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.physics.rainbow
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.physics\.units module
 ---------------------------
+=======
+f311.physics.units module
+-------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.physics.units
     :members:

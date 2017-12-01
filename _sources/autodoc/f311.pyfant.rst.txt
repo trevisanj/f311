@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 f311\.pyfant package
 ====================
+=======
+f311.pyfant package
+===================
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Subpackages
 -----------
@@ -12,54 +17,85 @@ Subpackages
 Submodules
 ----------
 
+<<<<<<< HEAD
 f311\.pyfant\.conf module
 -------------------------
+=======
+f311.pyfant.conf module
+-----------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.pyfant.conf
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.pyfant\.errors module
 ---------------------------
+=======
+f311.pyfant.errors module
+-------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.pyfant.errors
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.pyfant\.multirunnable module
 ----------------------------------
+=======
+f311.pyfant.multirunnable module
+--------------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.pyfant.multirunnable
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.pyfant\.paths module
 --------------------------
+=======
+f311.pyfant.paths module
+------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.pyfant.paths
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.pyfant\.rm module
 -----------------------
+=======
+f311.pyfant.rm module
+---------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.pyfant.rm
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.pyfant\.runnables module
 ------------------------------
+=======
+f311.pyfant.runnables module
+----------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.pyfant.runnables
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.pyfant\.traprbclass module
 --------------------------------
 
@@ -70,6 +106,10 @@ f311\.pyfant\.traprbclass module
 
 f311\.pyfant\.util module
 -------------------------
+=======
+f311.pyfant.util module
+-----------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.pyfant.util
     :members:

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 File handling API
 =================
+=======
+File handling API (``f311.filetypes``)
+======================================
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Introduction
 ------------
@@ -119,6 +124,7 @@ Convert 1D spectral file to FITS format
 
 .. literalinclude:: ../../docs/examples/filetypes/convert-to-fits.py
 
+<<<<<<< HEAD
 
 Import Kurucz' molecular linelist file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -144,4 +150,10 @@ Import Kurucz' molecular linelist file
                   lambda_doublingl='e',
                   spinl=3,
                   iso=12)
+=======
+API reference
+-------------
+
+:doc:`autodoc/f311.filetypes`
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 

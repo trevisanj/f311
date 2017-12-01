@@ -1,19 +1,34 @@
+<<<<<<< HEAD
 f311\.convmol\.downloaders package
 ==================================
+=======
+f311.convmol.downloaders package
+================================
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Submodules
 ----------
 
+<<<<<<< HEAD
 f311\.convmol\.downloaders\.downhitran module
 ---------------------------------------------
+=======
+f311.convmol.downloaders.downhitran module
+------------------------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.convmol.downloaders.downhitran
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.convmol\.downloaders\.downnist module
 -------------------------------------------
+=======
+f311.convmol.downloaders.downnist module
+----------------------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.convmol.downloaders.downnist
     :members:

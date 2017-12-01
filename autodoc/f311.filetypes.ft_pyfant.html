@@ -93,6 +93,7 @@
             
             
               <ul>
+<<<<<<< HEAD
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
@@ -103,6 +104,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../physics.html">Selected topics on Physics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../scripts.html">Index of applications (scripts)</a></li>
+=======
+<li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../f3110.html">Package f311</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filetypes.html">File handling API (<code class="docutils literal"><span class="pre">f311.filetypes</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics.html">Selected topics on Physics (<code class="docutils literal"><span class="pre">f311.physics</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheat.html">Project <code class="docutils literal"><span class="pre">f311</span></code> Cheat Sheet</a></li>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 </ul>
 
             
@@ -361,7 +373,11 @@ cause the source code to be rebuilt and become as boring as possible.</p>
 <dl class="method">
 <dt id="f311.filetypes.ft_pyfant.fileatoms.FileAtoms.cut">
 <code class="descname">cut</code><span class="sig-paren">(</span><em>llzero</em>, <em>llfin</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.filetypes.ft_pyfant.fileatoms.FileAtoms.cut" title="Permalink to this definition">¶</a></dt>
+<<<<<<< HEAD
 <dd><p>Keeps only the lines with their llzero &lt;= <a href="#id9"><span class="problematic" id="id10">lambda_</span></a> &lt;= llfin.</p>
+=======
+<dd><p>Keeps only the lines with their llzero &lt;= <a href="#id1"><span class="problematic" id="id2">lambda_</span></a> &lt;= llfin.</p>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 </dd></dl>
 
 <dl class="attribute">
@@ -579,6 +595,7 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 </dd></dl>
 
 </div>
+<<<<<<< HEAD
 <div class="section" id="module-f311.filetypes.ft_pyfant.fileconfconvmol">
 <span id="f311-filetypes-ft-pyfant-fileconfconvmol-module"></span><h2>f311.filetypes.ft_pyfant.fileconfconvmol module<a class="headerlink" href="#module-f311.filetypes.ft_pyfant.fileconfconvmol" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -609,6 +626,8 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 </dd></dl>
 
 </div>
+=======
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <div class="section" id="module-f311.filetypes.ft_pyfant.filedissoc">
 <span id="f311-filetypes-ft-pyfant-filedissoc-module"></span><h2>f311.filetypes.ft_pyfant.filedissoc module<a class="headerlink" href="#module-f311.filetypes.ft_pyfant.filedissoc" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -700,7 +719,11 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
 <p>PFANT Hygrogen Lines Map</p>
 <p>Imitates the logic of reader_hmap.f90::read_hmap().</p>
+<<<<<<< HEAD
 <p>Attributes match reader_hmap.f90::hmap_* (minus the “<a href="#id11"><span class="problematic" id="id12">hmap_</span></a>” prefix)</p>
+=======
+<p>Attributes match reader_hmap.f90::hmap_* (minus the “<a href="#id3"><span class="problematic" id="id4">hmap_</span></a>” prefix)</p>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filehmap.FileHmap.attrs">
 <code class="descname">attrs</code><em class="property"> = ['rows']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filehmap.FileHmap.attrs" title="Permalink to this definition">¶</a></dt>
@@ -1041,6 +1064,7 @@ Example: lambda atom: atom.ioni &lt;= 2</td>
 ATMOS/wrk4/bruno/Mole/CN/cnbx36.txt</p>
 </dd></dl>
 
+<<<<<<< HEAD
 <dl class="class">
 <dt id="f311.filetypes.ft_pyfant.filekuruczmol.FileKuruczMolecule1">
 <em class="property">class </em><code class="descclassname">f311.filetypes.ft_pyfant.filekuruczmol.</code><code class="descname">FileKuruczMolecule1</code><a class="headerlink" href="#f311.filetypes.ft_pyfant.filekuruczmol.FileKuruczMolecule1" title="Permalink to this definition">¶</a></dt>
@@ -1048,6 +1072,8 @@ ATMOS/wrk4/bruno/Mole/CN/cnbx36.txt</p>
 <p>Kurucz molecular lines file following format of file “c2dabrookek.asc”</p>
 </dd></dl>
 
+=======
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 </div>
 <div class="section" id="module-f311.filetypes.ft_pyfant.filemain">
 <span id="f311-filetypes-ft-pyfant-filemain-module"></span><h2>f311.filetypes.ft_pyfant.filemain module<a class="headerlink" href="#module-f311.filetypes.ft_pyfant.filemain" title="Permalink to this headline">¶</a></h2>
@@ -1057,7 +1083,11 @@ ATMOS/wrk4/bruno/Mole/CN/cnbx36.txt</p>
 <dd><p>Bases: <a class="reference internal" href="f311.filetypes.ft_basic.html#f311.filetypes.ft_basic.datafile.DataFile" title="f311.filetypes.ft_basic.datafile.DataFile"><code class="xref py py-class docutils literal"><span class="pre">f311.filetypes.ft_basic.datafile.DataFile</span></code></a></p>
 <p>PFANT Main Stellar Configuration</p>
 <p>Imitates the logic of reader_main.f90::read_main().</p>
+<<<<<<< HEAD
 <p>Attributes match reader_main.f90::main_* (minus the “<a href="#id13"><span class="problematic" id="id14">main_</span></a>” prefix)</p>
+=======
+<p>Attributes match reader_main.f90::main_* (minus the “<a href="#id5"><span class="problematic" id="id6">main_</span></a>” prefix)</p>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemain.FileMain.attrs">
 <code class="descname">attrs</code><em class="property"> = ['titrav', 'pas', 'fwhm', 'ivtot', 'vvt', 'tolv', 'teff', 'glog', 'asalog', 'nhe', 'ptdisk', 'mu', 'flprefix', 'llzero', 'llfin', 'aint']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemain.FileMain.attrs" title="Permalink to this definition">¶</a></dt>
@@ -1086,7 +1116,11 @@ ATMOS/wrk4/bruno/Mole/CN/cnbx36.txt</p>
 <p>File may have several 1200-byte records.</p>
 <p>Files created by the innermarcs executable (usually named “modeles.mod”)</p>
 <p>Imitates the logic of reader_modeles.f90::read_modele().</p>
+<<<<<<< HEAD
 <p>Attributes match reader_modeles.f90:modeles_* (minus the “<a href="#id15"><span class="problematic" id="id16">modeles_</span></a>” prefix)</p>
+=======
+<p>Attributes match reader_modeles.f90:modeles_* (minus the “<a href="#id7"><span class="problematic" id="id8">modeles_</span></a>” prefix)</p>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemod.FileModBin.attrs">
 <code class="descname">attrs</code><em class="property"> = ['records']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemod.FileModBin.attrs" title="Permalink to this definition">¶</a></dt>
@@ -1118,7 +1152,11 @@ ATMOS/wrk4/bruno/Mole/CN/cnbx36.txt</p>
 this class only stores one of these records, specified by “inum”  argument
 of load()</p>
 <p>Imitates the logic of reader_modeles.f90::read_modele().</p>
+<<<<<<< HEAD
 <p>Attributes match reader_modeles.f90:modeles_* (minus the “<a href="#id17"><span class="problematic" id="id18">modeles_</span></a>” prefix)</p>
+=======
+<p>Attributes match reader_modeles.f90:modeles_* (minus the “<a href="#id9"><span class="problematic" id="id10">modeles_</span></a>” prefix)</p>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filemod.ModRecord.attrs">
 <code class="descname">attrs</code><em class="property"> = ['ntot', 'teff', 'glog', 'asalog', 'asalalf', 'nhe', 'tit', 'tiabs', 'nh', 'teta', 'pe', 'pg', 'log_tau_ross']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filemod.ModRecord.attrs" title="Permalink to this definition">¶</a></dt>
@@ -1232,6 +1270,7 @@ attributes, except for redundant attributes, i.e.:</p>
 </dd></dl>
 
 </div>
+<<<<<<< HEAD
 <div class="section" id="module-f311.filetypes.ft_pyfant.filemolconsts">
 <span id="f311-filetypes-ft-pyfant-filemolconsts-module"></span><h2>f311.filetypes.ft_pyfant.filemolconsts module<a class="headerlink" href="#module-f311.filetypes.ft_pyfant.filemolconsts" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -1262,6 +1301,8 @@ attributes, except for redundant attributes, i.e.:</p>
 </dd></dl>
 
 </div>
+=======
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <div class="section" id="module-f311.filetypes.ft_pyfant.filemoldb">
 <span id="f311-filetypes-ft-pyfant-filemoldb-module"></span><h2>f311.filetypes.ft_pyfant.filemoldb module<a class="headerlink" href="#module-f311.filetypes.ft_pyfant.filemoldb" title="Permalink to this headline">¶</a></h2>
 <p>Represents SQLite database of molecular constants</p>
@@ -1787,6 +1828,7 @@ a command-line option “–xxxx”</p>
 </dd></dl>
 
 </div>
+<<<<<<< HEAD
 <div class="section" id="module-f311.filetypes.ft_pyfant.filepleztio">
 <span id="f311-filetypes-ft-pyfant-filepleztio-module"></span><h2>f311.filetypes.ft_pyfant.filepleztio module<a class="headerlink" href="#module-f311.filetypes.ft_pyfant.filepleztio" title="Permalink to this headline">¶</a></h2>
 <p>Plez atomic or molecular lines file</p>
@@ -1948,6 +1990,8 @@ several GB of RAM memory if fully loaded). See arguments list</p>
 </dd></dl>
 
 </div>
+=======
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <div class="section" id="module-f311.filetypes.ft_pyfant.filetoh">
 <span id="f311-filetypes-ft-pyfant-filetoh-module"></span><h2>f311.filetypes.ft_pyfant.filetoh module<a class="headerlink" href="#module-f311.filetypes.ft_pyfant.filetoh" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -1958,7 +2002,11 @@ several GB of RAM memory if fully loaded). See arguments list</p>
 <p>Imitates the logic of reader_filetoh.f90::read_filetoh(). Difference: pfant
 reads second row as single character-variable “ttt”, but hydro2 saves 5 values
 in second row. I am reading these values.</p>
+<<<<<<< HEAD
 <p>Attributes match reader_filetoh.f90:filetoh_r_* (minus the “<a href="#id19"><span class="problematic" id="id20">filetoh_r_</span></a>” prefix)</p>
+=======
+<p>Attributes match reader_filetoh.f90:filetoh_r_* (minus the “<a href="#id11"><span class="problematic" id="id12">filetoh_r_</span></a>” prefix)</p>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <dl class="attribute">
 <dt id="f311.filetypes.ft_pyfant.filetoh.FileToH.attrs">
 <code class="descname">attrs</code><em class="property"> = ['titre', 'ntot', 'zut1', 'zut2', 'zut3', 'th', 'lambdh', 'jmax']</em><a class="headerlink" href="#f311.filetypes.ft_pyfant.filetoh.FileToH.attrs" title="Permalink to this definition">¶</a></dt>
@@ -1977,6 +2025,7 @@ in second row. I am reading these values.</p>
 </dd></dl>
 
 </div>
+<<<<<<< HEAD
 <div class="section" id="module-f311.filetypes.ft_pyfant.filetraprb">
 <span id="f311-filetypes-ft-pyfant-filetraprb-module"></span><h2>f311.filetypes.ft_pyfant.filetraprb module<a class="headerlink" href="#module-f311.filetypes.ft_pyfant.filetraprb" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -2125,6 +2174,8 @@ TRAPRBInputState.</p>
 </dd></dl>
 
 </div>
+=======
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <div class="section" id="module-f311.filetypes.ft_pyfant.filevald3">
 <span id="f311-filetypes-ft-pyfant-filevald3-module"></span><h2>f311.filetypes.ft_pyfant.filevald3 module<a class="headerlink" href="#module-f311.filetypes.ft_pyfant.filevald3" title="Permalink to this headline">¶</a></h2>
 <p>VALD3 atomic or molecular lines file</p>

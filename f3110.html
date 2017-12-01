@@ -38,7 +38,11 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="F311 17.9.27.0 documentation" href="index.html"/>
+<<<<<<< HEAD
         <link rel="next" title="Spectral synthesis" href="pyfant.html"/>
+=======
+        <link rel="next" title="Spectral synthesis (f311.pyfant)" href="pyfant.html"/>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
         <link rel="prev" title="F311 Installation" href="install.html"/>
     <link href="_static/style.css" rel="stylesheet" type="text/css">
 
@@ -95,16 +99,24 @@
             
             
               <ul class="current">
+<<<<<<< HEAD
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Package f311</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#rd-party-collaborator-packages">3rd-party collaborator packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#print-file-handling-classes-information">Print file handling classes information</a></li>
+=======
+<li class="toctree-l1"><a class="reference internal" href="install.html">F311 Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Package f311</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#print-file-handling-classes-information">Print file handling classes information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-reference">API reference</a></li>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 </ul>
 </li>
 </ul>
 </li>
+<<<<<<< HEAD
 <li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular lines lists</a></li>
 <li class="toctree-l1"><a class="reference internal" href="explorer.html">File explorer and editors</a></li>
@@ -112,6 +124,15 @@
 <li class="toctree-l1"><a class="reference internal" href="physics.html">Selected topics on Physics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scripts.html">Index of applications (scripts)</a></li>
+=======
+<li class="toctree-l1"><a class="reference internal" href="pyfant.html">Spectral synthesis (<code class="docutils literal"><span class="pre">f311.pyfant</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convmol.html">Conversion of molecular spectral lines (<code class="docutils literal"><span class="pre">f311.convmol</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorer.html">Browse, read, write, visualize, edit files (<code class="docutils literal"><span class="pre">f311.explorer</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filetypes.html">File handling API (<code class="docutils literal"><span class="pre">f311.filetypes</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Selected topics on Physics (<code class="docutils literal"><span class="pre">f311.physics</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aosss.html">Adaptive Optics Systems Simulation Support (<code class="docutils literal"><span class="pre">f311.aosss</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat.html">Project <code class="docutils literal"><span class="pre">f311</span></code> Cheat Sheet</a></li>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 </ul>
 
             
@@ -177,6 +198,7 @@
             
   <div class="section" id="package-f311">
 <h1>Package f311<a class="headerlink" href="#package-f311" title="Permalink to this headline">¶</a></h1>
+<<<<<<< HEAD
 <p>The <code class="docutils literal"><span class="pre">f311</span></code> “root” package provides the <strong>collaboration model implementation</strong>. This is a plugin
 model that allows 3rd-party <strong>collaborator packages</strong> to contribute with</p>
 <ul class="simple">
@@ -197,6 +219,17 @@ project F311 code:</p>
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="print-file-handling-classes-information">
 <h3>Print file handling classes information<a class="headerlink" href="#print-file-handling-classes-information" title="Permalink to this headline">¶</a></h3>
+=======
+<p>The root package provides the collaboration model implementation.</p>
+<p>The collaboration model allows <code class="docutils literal"><span class="pre">f311.COLLABORATORS</span></code> to contribute with</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">DataFile</span></code> subclasses, i.e., implement handling (load, save, etc.) of new file types;</li>
+<li><code class="docutils literal"><span class="pre">Vis</span></code> subclasses, i.e., implement visualizations for these files;</li>
+<li>Standalone scripts placed in the directory <code class="docutils literal"><span class="pre">packagename/scripts</span></code></li>
+</ul>
+<div class="section" id="print-file-handling-classes-information">
+<h2>Print file handling classes information<a class="headerlink" href="#print-file-handling-classes-information" title="Permalink to this headline">¶</a></h2>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Lists different subsets of DataFile subclasses&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">f311</span>
 
@@ -211,6 +244,7 @@ project F311 code:</p>
 </div>
 <p>The output should be something like:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>*** Classes that can handle text files***
+<<<<<<< HEAD
 FileAbXFwhm              : `x.py` Differential Abundances X FWHMs (Python source)
 FileAbonds               : PFANT Stellar Chemical Abundances
 FileAbsoru2              : PFANT &quot;Absoru2&quot; file
@@ -229,6 +263,26 @@ FileMolConsts            : Molecular constants config file (Python code)
 FileMolecules            : PFANT Molecular Lines
 FileOpa                  : MARCS &quot;.opa&quot; (opacity model) file format.
 FileOptions              : PFANT Command-line Options
+=======
+FileAbXFwhm              : `x.py` Differential Abundances and FWHMs (Python source)
+FileAbonds               : PFANT Stellar Chemical Abundances
+FileAbsoru2              : &quot;Absoru2&quot; file
+FileAtoms                : PFANT Atomic Lines
+FileConfigConvMol        : Python source containing &#39;config_conv = ConfigConv(...)
+FileDissoc               : PFANT Stellar Dissociation Equilibrium Information
+FileFCF                  : File containing Franck-Condon Factors (FCFs)
+FileHmap                 : PFANT Hygrogen Lines Map
+FileKuruczMolecule       : Kurucz molecular lines file
+FileKuruczMoleculeBase   : Base class for the two types of Kurucz molecular lines file
+FileKuruczMoleculeOld    : Kurucz molecular lines file, old format #0
+FileKuruczMoleculeOld1   : Kurucz molecular lines file, old format #1
+FileMain                 : PFANT Stellar Main Configuration
+FileModTxt               : MARCS Atmospheric Model (text file)
+FileMolConsts            : Python source containing &#39;fobj = MolConsts(...)
+FileMolecules            : PFANT Molecular Lines
+FileOpa                  : MARCS &quot;.opa&quot; (opacity model) file format.
+FileOptions              : `x.py` Command-line Options
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 FilePar                  : WebSim-COMPASS &quot;.par&quot; (parameters) file
 FilePartit               : PFANT Partition Function
 FilePlezTiO              : Plez molecular lines file, TiO format
@@ -238,13 +292,21 @@ FileSpectrum             : Base class for all files representing a single 1D spe
 FileSpectrumNulbad       : PFANT Spectrum (`nulbad` output)
 FileSpectrumPfant        : PFANT Spectrum (`pfant` output)
 FileSpectrumXY           : &quot;Lambda-flux&quot; Spectrum (2-column text file)
+<<<<<<< HEAD
 FileTRAPRBInput          : Input file for the TRAPRB Fortran code (which calculates Franck-Condon factors)
 FileTRAPRBOutput         : Output file for the TRAPRB Fortran code (which calculates Franck-Condon factors)
+=======
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 FileToH                  : PFANT Hydrogen Line Profile
 FileVald3                : VALD3 atomic or molecular lines file
 
 *** Classes that can handle binary files***
+<<<<<<< HEAD
 FileFullCube             : FITS WebSim Compass Data Cube
+=======
+FileFullCube             : FITS Data Cube (&quot;full&quot; opposed to &quot;sparse&quot;)
+FileGalfit               : FITS file with frames named INPUT_*, MODEL_*, RESIDUAL_*, which is the output of Galfit software
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 FileHitranDB             : HITRAN Molecules Catalogue
 FileModBin               : PFANT Atmospheric Model (binary file)
 FileMolDB                : Database of Molecular Constants
@@ -253,7 +315,10 @@ FileSQLiteDB             : Represents a SQLite database file.
 FileSparseCube           : FITS Sparse Data Cube (storage to take less disk space)
 FileSpectrumFits         : FITS Spectrum
 FileSpectrumList         : FITS Spectrum List
+<<<<<<< HEAD
 FileGalfit               : FITS file with frames named INPUT_*, MODEL_*, RESIDUAL_* (Galfit software output)
+=======
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 *** Classes that can handle 1D spectrum files***
 FileSpectrum             : Base class for all files representing a single 1D spectrum
@@ -263,6 +328,12 @@ FileSpectrumPfant        : PFANT Spectrum (`pfant` output)
 FileSpectrumXY           : &quot;Lambda-flux&quot; Spectrum (2-column text file)
 </pre></div>
 </div>
+<<<<<<< HEAD
+=======
+<div class="section" id="api-reference">
+<h3>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="autodoc/f311.html"><span class="doc">f311 package</span></a></p>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 </div>
 </div>
 </div>
@@ -277,7 +348,11 @@ FileSpectrumXY           : &quot;Lambda-flux&quot; Spectrum (2-column text file)
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+<<<<<<< HEAD
         <a href="pyfant.html" class="btn btn-neutral float-right" title="Spectral synthesis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+=======
+        <a href="pyfant.html" class="btn btn-neutral float-right" title="Spectral synthesis (f311.pyfant)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
       
       
         <a href="install.html" class="btn btn-neutral" title="F311 Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

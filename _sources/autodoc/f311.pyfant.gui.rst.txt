@@ -1,27 +1,47 @@
+<<<<<<< HEAD
 f311\.pyfant\.gui package
 =========================
+=======
+f311.pyfant.gui package
+=======================
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Submodules
 ----------
 
+<<<<<<< HEAD
 f311\.pyfant\.gui\.a\_XMulti module
 -----------------------------------
+=======
+f311.pyfant.gui.a_XMulti module
+-------------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.pyfant.gui.a_XMulti
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.pyfant\.gui\.a\_XPFANT module
 -----------------------------------
+=======
+f311.pyfant.gui.a_XPFANT module
+-------------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.pyfant.gui.a_XPFANT
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.pyfant\.gui\.a\_XRunnableManager module
 ---------------------------------------------
+=======
+f311.pyfant.gui.a_XRunnableManager module
+-----------------------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.pyfant.gui.a_XRunnableManager
     :members:

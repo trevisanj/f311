@@ -1,35 +1,60 @@
+<<<<<<< HEAD
 f311\.aosss package
 ===================
+=======
+f311.aosss package
+==================
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 Submodules
 ----------
 
+<<<<<<< HEAD
 f311\.aosss\.basic module
 -------------------------
+=======
+f311.aosss.basic module
+-----------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.aosss.basic
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.aosss\.mosaic module
 --------------------------
+=======
+f311.aosss.mosaic module
+------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.aosss.mosaic
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.aosss\.report module
 --------------------------
+=======
+f311.aosss.report module
+------------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.aosss.report
     :members:
     :undoc-members:
     :show-inheritance:
 
+<<<<<<< HEAD
 f311\.aosss\.util module
 ------------------------
+=======
+f311.aosss.util module
+----------------------
+>>>>>>> c5473fdaf9d3e4b0797c38244dd0746cef6a450f
 
 .. automodule:: f311.aosss.util
     :members:
