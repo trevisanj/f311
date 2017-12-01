@@ -2,6 +2,10 @@
 
 ## GENERAL
 
+- reorganize sub-packages: current 6-subpackage split is not concise,
+  rather confounding & some interesting material is not exposed. aosss can be another project;
+  pyfant can be another project & incorporate convmol into it
+
 - detecting file type needs serious work
 
 - test well these GUIs

@@ -17,7 +17,6 @@ from .gui import *
 from .vis import *
 from .blocks import *
 from .util import *
-from .classcatalog import *
 from .blocks import *
 from .from_vald import *
 

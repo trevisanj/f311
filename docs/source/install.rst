@@ -1,7 +1,12 @@
 F311 Installation
 =================
 
-Python 3 version required: Python 3.4.6+, Python 3.5.3+, or Python 3.6+ (https://packaging.python.org/guides/migrating-to-pypi-org/)
+Package ``f311`` can be installed using the following command on your shell::
+
+    pip install f311
+
+If the above fails, or you had a different installation procedure in mind,
+you may find more useful information below.
 
 Method 1: Using Anaconda without virtual environment
 ----------------------------------------------------
@@ -19,9 +24,9 @@ First install Anaconda or Miniconda. When you do so, please make sure that you *
 After Anaconda/Miniconda installation, close the terminal and open it again so that your PATH is updated.
 **Or if your shell is bash**, you can just type ``source ~/.bashrc`` on the terminal.
 
-Now install some packages using pip::
+Now install package ``f311`` using pip::
 
-   pip install numpy scipy matplotlib astropy configobj bs4 robobrowser requests fortranformat tabulate rows pyqt5 a99 f311
+   pip install f311
 
 Method 2: Using Anaconda virtual environment
 --------------------------------------------
@@ -42,11 +47,11 @@ Activate this new virtual environment:
 
    source activate astroenv
 
-Now install the packages:
+Now install package ``f311``:
 
 .. code:: shell
 
-   pip install numpy scipy matplotlib astropy configobj bs4 lxml robobrowser requests fortranformat tabulate rows pyqt5 a99 f311
+   pip install f311
 
 **Note** Every time you want to work with F311, you will need to activate the environment:
 
@@ -65,11 +70,8 @@ Method 3: Developer mode
 
 This option allows you to download and modify the source code.
 
-First, make sure all the required packages are installed::
 
-    pip install numpy scipy matplotlib astropy configobj bs4 lxml robobrowser requests fortranformat tabulate rows pyqt5 a99
-
-Second, clone the f311 GitHub repository:
+Clone the f311 GitHub repository:
 
 .. code:: shell
 
@@ -88,11 +90,48 @@ Finally, install F311 in **developer** mode:
    cd f311
    python setup.py develop
 
+Upgrade ``f311``
+----------------
+
+Pacakge ``f311`` can be upgraded to a new version by typing::
+
+    pip install f311 --upgrade --no-deps
+
+
+Package dependencies
+--------------------
+
+``f311`` package dependencies are listed below. This list is provided only for reference, as **these
+packages should be automatically installed** during the installation process.
+
+- numpy
+- scipy
+- matplotlib
+- astropy
+- configobj
+- bs4
+- lxml
+- robobrowser
+- requests
+- fortranformat
+- tabulate
+- rows
+- pyqt5
+- a99
 
 Troubleshooting installation
 ----------------------------
 
 This section shows some possible errors and their solutions.
+
+Python version and release
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+``f311`` was designed to run with Python 3 (Python 2 support has been discontinued).
+
+Furthermore, in order to install correctly using the ``pip`` command, the Python release needs to be either
+Python 3.4.6+, Python 3.5.3+, or Python 3.6+ (according to https://packaging.python.org/guides/migrating-to-pypi-org/).
+
 
 MatPlotLib and PyQt5
 ~~~~~~~~~~~~~~~~~~~~
@@ -116,3 +155,7 @@ Problems with package bs4
 
     pip install lxml
 
+Other problems
+~~~~~~~~~~~~~~
+If you have other installation problems or have a suggestion, please open an issue at the project
+site on `GitHub <http://github.com/trevisanj/f311>`_.

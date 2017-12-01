@@ -35,7 +35,9 @@ setup(
     url='https://github.com/trevisanj/f311',
     keywords= ['astronomy', "fits", "spectroscopy", "spectral synthesis", "photometry",
                "honl-london", "nist", "hitran", "multiplicity", "line strength", "kovacs", "franck-condon"],
-    install_requires=["a99>=0.17.12.08.4"],
+    install_requires=["numpy", "scipy", "matplotlib", "astropy", "configobj", "bs4", "lxml",
+                      "robobrowser", "requests", "fortranformat", "tabulate", "rows", "pyqt5",
+                      "a99>=0.17.12.08.4"],
     scripts=scripts
 )
 
