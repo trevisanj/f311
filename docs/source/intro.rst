@@ -66,9 +66,10 @@ at University of São Paulo, Brazil).
 
 Partially funded by FAPESP - Research Support Foundation of the State of São Paulo, Brazil (2015-2017).
 
+.. only:: html
 
-Bibliography
-------------
+    Bibliography
+    ------------
 
 .. [Kovacs1969] Istvan Kovacs, Rotational Structure in the spectra of diatomic molecules.
    American Elsevier, 1969.

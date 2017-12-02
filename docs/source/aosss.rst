@@ -1,5 +1,5 @@
-Adaptive Optics Systems Simulation Support (``f311.aosss``)
-===========================================================
+Adaptive Optics Systems Simulation Support
+==========================================
 
 The *aosss* package helps to automatize the simulation of Adaptive Optics Systems.
 
