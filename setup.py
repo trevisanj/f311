@@ -37,7 +37,7 @@ setup(
                "honl-london", "nist", "hitran", "multiplicity", "line strength", "kovacs", "franck-condon"],
     install_requires=["numpy", "scipy", "matplotlib", "astropy", "configobj", "bs4", "lxml",
                       "robobrowser", "requests", "fortranformat", "tabulate", "rows", "pyqt5",
-                      "a99>=0.17.12.08.4"],
+                      "a99>=0.17.12.08.4", "airvacuumvald"],
     scripts=scripts
 )
 
