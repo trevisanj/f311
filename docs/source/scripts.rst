@@ -3,23 +3,6 @@ Index of applications (scripts)
 
 .. only:: html
 
-    f311.aosss -- "Adaptive Optics Systems Simulation Support"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Graphical applications
-    ^^^^^^^^^^^^^^^^^^^^^^
-
-    * :doc:`wavelength-chart.py <autoscripts/script-wavelength-chart>`: Draws chart showing spectral lines of interest, spectrograph wavelength ranges, ESO atmospheric .
-
-    Command-line tools
-    ^^^^^^^^^^^^^^^^^^
-
-    * :doc:`create-simulation-reports.py <autoscripts/script-create-simulation-reports>`: Creates HTML reports from WebSim-COMPASS output files
-    * :doc:`create-spectrum-lists.py <autoscripts/script-create-spectrum-lists>`: Create several .splist (spectrum list) files from WebSim-COMPASS output files; groups r
-    * :doc:`get-compass.py <autoscripts/script-get-compass>`: Downloads WebSim-COMPASS simulations
-    * :doc:`list-mosaic-modes.py <autoscripts/script-list-mosaic-modes>`: Lists MOSAIC Spectrograph modes
-    * :doc:`organize-directory.py <autoscripts/script-organize-directory>`: Organizes simulation directory (creates folders, moves files, creates 'index.html')
-
     f311.convmol -- Conversion of molecular lines files.
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

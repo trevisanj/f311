@@ -20,14 +20,25 @@ __all__ = [
     "classes_txt", "classes_bin", "classes_sp", "classes_file", "classes_collection",
     "get_suitable_vis_classes", "get_suitable_vis_list_classes",
     "get_scripts_path", "get_programs_dict",
+    "EXTERNAL_COLLABORATORS"
     ]
 
+# List of Python packages to be considered "external collaborators"
+#
+# These packages may contribute with:
+# - scripts
+# - DataFile subclasses
+# - Vis subclasses
+EXTERNAL_COLLABORATORS = ["pyfant", "aosss", "convmolworks", "ariastro"]
+
+__F311 = ["f311."+x for x in a99.get_subpackages_names(os.path.split(__file__)[0])]
 
 # List of **classes** collaborators packages (**change to add**)
 #
-# 20171027 added external package "convmol"
+COLLABORATORS_C = ["f311.filetypes", "f311.explorer", "pyfant"]+EXTERNAL_COLLABORATORS
+# List of **script** collaborator packages to look for scripts (**change to add**)
 #
-COLLABORATORS_C = ["f311.filetypes", "f311.explorer", "convmolworks", "ariastro"]
+COLLABORATORS_S = __F311+EXTERNAL_COLLABORATORS
 
 
 # **        ****                ******        ****                ******        ****
@@ -203,11 +214,6 @@ def __setup():
 def get_scripts_path(packagename):
     """**Convention** Returns full path to scripts directory"""
     return os.path.join(packagename, "scripts")
-
-
-# List of **script** collaborator packages to look for scripts (**change to add**)
-__F311 = ["f311."+x for x in a99.get_subpackages_names(os.path.split(__file__)[0])]
-COLLABORATORS_S = __F311+["convmolworks", "ariastro"]
 
 
 # {"packagename0": {"exeinfo": [ExeInfo00, ...], "description": description0}, ...}

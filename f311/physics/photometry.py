@@ -8,9 +8,10 @@ import numpy as np
 import collections
 from scipy.interpolate import interp1d
 import copy
-import a99
 import f311.filetypes as ft
-# from .. import physics as ph
+import astropy.units as u
+import os
+
 
 MAGNITUDE_BASE = 100. ** (1. / 5)  # approx. 2.512
 _REF_NUM_POINTS = 5000   # number of evaluation points over entire band range
@@ -89,7 +90,7 @@ def calculate_magnitude(sp, bp, system="stdflux", zero_point=0., flag_force_band
     Calculates magnitude from a Spectrum object.
 
     Args:
-        sp: `f311.filetypes.Spectrum` instance. **flux unit** must be ``erg/cm**2/s/Hz`` aka "Fnu"
+        sp: `f311.Spectrum` instance. **flux unit** must be ``erg/cm**2/s/Hz`` aka "Fnu"
         bp: Bandpass object, or string in "UBVRIYJHKLMNQ". How it works:
 
             - If string in "UBVRI", creates a UBVTabular Bandpass object;
@@ -174,11 +175,12 @@ def flux_to_mag(flux, bp, system="stdflux", zero_point=0.):
 
     Returns: float
     """
-    from f311 import physics as ph
+
+    fnu = u.erg / u.cm ** 2 / u.s / u.Hz
 
     if isinstance(flux, ft.Spectrum):
-        if flux.yunit != ph.fnu:
-            raise ValueError("Spectrum y-unit must be '{}', not '{}'".format(ph.fnu, flux.yunit))
+        if flux.yunit != fnu:
+            raise ValueError("Spectrum y-unit must be '{}', not '{}'".format(fnu, flux.yunit))
         flux = flux.y
     zero_flux = get_zero_flux(bp, system)
     return -2.5 * np.log10(flux / zero_flux) - zero_point
@@ -230,8 +232,8 @@ def __get_vega_spectrum():
 
 
 def __get_new_vega_spectrum():
-    from f311 import physics as ph
-    return ft.load_spectrum(a99.get_path("data", "pysynphot-vega-fnu.xy", module=ph))
+    import f311
+    return f311.load_spectrum(os.path.join(os.path.split(__file__)[0], "data", "pysynphot-vega-fnu.xy"))
 
 
 def get_vega_spectrum():
@@ -252,9 +254,7 @@ class Bandpass(object):
     This class is kept clean whereas UBVRIBands has examples and deeper documentation on parameters
 
     Args:
-        tabular: ((wl, y), ...), 0 <= y <= 1
-        parametric: ((wl, fwhm), ...)
-        ref_mean_flux: reference mean flux passing through filter at magnitude 0 in Jy units
+        name:
     """
 
     @property
@@ -374,7 +374,7 @@ class UBVTabulated(Bandpass):
     def _get_lf(self):
         return self.x[-1]
 
-    def ufunc(self):
+    def ufunc(self, flag_force_parametric=False):
         return interp1d(self.x, self.y, kind='linear', bounds_error=False, fill_value=0)
 
 
@@ -424,7 +424,7 @@ class UBVParametric(Bandpass):
     def _get_lf(self):
         return self._lf
 
-    def ufunc(self):
+    def ufunc(self, flag_force_parametric=False):
         return _ufunc_gauss(self.x0, self.fwhm)
 
 

@@ -25,6 +25,5 @@ class VisSpectrum(Vis):
     def _do_use(self, m):
         from f311 import explorer as ex
         s = m.spectrum
-        plt.figure()
-        ex.plot_spectra([s])
+        ex.plot_spectra_stacked([s])
 

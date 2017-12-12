@@ -503,7 +503,7 @@ class XExplorer(QMainWindow):
             elif vis_class == "sta":
                 propss = self.__lock_get_current_propss()
                 spectra = [p.f.spectrum for p in propss]
-                ex.plot_spectra(spectra)
+                ex.plot_spectra_stacked(spectra)
             elif vis_class == "modgrid":
                 propss = self.__lock_get_current_propss()
                 models = [p.f for p in propss]

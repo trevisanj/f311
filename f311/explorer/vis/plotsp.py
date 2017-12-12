@@ -13,8 +13,8 @@ import numpy as np
 import a99
 import f311.filetypes as ft
 
-__all__ = ["plot_spectra", "plot_spectra_overlapped", "plot_spectra_pieces_pdf",
- "plot_spectra_pages_pdf", "draw_spectra", "PlotSpectrumSetup", "draw_spectra_overlapped",
+__all__ = ["plot_spectra_stacked", "plot_spectra_overlapped", "plot_spectra_pieces_pdf",
+ "plot_spectra_pages_pdf", "draw_spectra_stacked", "PlotSpectrumSetup", "draw_spectra_overlapped",
  "calc_max_min"]
 
 
@@ -58,7 +58,7 @@ class PlotSpectrumSetup(object):
 _default_setup = PlotSpectrumSetup()
 
 
-def plot_spectra(ss, title=None, num_rows=None, setup=_default_setup):
+def plot_spectra_stacked(ss, title=None, num_rows=None, setup=_default_setup):
     """
     Plots one or more stacked in subplots sharing same x-axis.
 
@@ -72,7 +72,8 @@ def plot_spectra(ss, title=None, num_rows=None, setup=_default_setup):
 
     """
 
-    draw_spectra(ss, title, num_rows, setup)
+    plt.figure()
+    draw_spectra_stacked(ss, title, num_rows, setup)
     plt.show()
     # return fig
 
@@ -193,7 +194,6 @@ def plot_spectra_pages_pdf(ss, pdf_filename='pages.pdf', setup=_default_setup):
     Args:
       ss: list of Spectrum objects
       pdf_filename: name of output file
-      TODO
     """
     logger = a99.get_python_logger()
     xmin, xmax, ymin_, ymax, xspan, yspan = calc_max_min(ss)
@@ -237,7 +237,7 @@ def calc_max_min(ss):
     return xmin, xmax, ymin, ymax, xspan, yspan
 
 
-def draw_spectra(ss, title=None, num_rows=None, setup=_default_setup):
+def draw_spectra_stacked(ss, title=None, num_rows=None, setup=_default_setup):
     """Same as plot_spectra, but does not call plt.show(); returns figure"""
     n = len(ss)
     assert n > 0, "ss is empty"

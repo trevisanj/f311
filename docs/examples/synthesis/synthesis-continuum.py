@@ -32,7 +32,7 @@ if __name__ == "__main__":
     obj.load_result()
     print("obj.result = {}".format(obj.result))
     res = obj.result
-    ex.draw_spectra([res["cont"]], setup=ex.PlotSpectrumSetup(fmt_ylabel=None))
+    ex.draw_spectra_stacked([res["cont"]], setup=ex.PlotSpectrumSetup(fmt_ylabel=None))
     K = .75
     a99.set_figure_size(plt.gcf(), 1300*K, 450*K)
     plt.tight_layout()

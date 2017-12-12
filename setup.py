@@ -19,11 +19,13 @@ def find_scripts(pkgnames):
     return ret
 
 
+PACKAGE_NAME = "f311"
+
 pkgs = find_packages()
-scripts = find_scripts(["f311"])
+scripts = find_scripts([PACKAGE_NAME])
 
 setup(
-    name='f311',
+    name=PACKAGE_NAME,
     packages=find_packages(),
     include_package_data=True,
     version='0.17.11.28.0',

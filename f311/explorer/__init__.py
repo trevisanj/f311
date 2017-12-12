@@ -10,15 +10,10 @@ Object-oriented framework to handle file types:
 
 from . import gui
 from . import vis
-from . import blocks
 
-from .basic import *
 from .gui import *
 from .vis import *
-from .blocks import *
 from .util import *
-from .blocks import *
-from .from_vald import *
 
 
 # # Function to access package-specific config file

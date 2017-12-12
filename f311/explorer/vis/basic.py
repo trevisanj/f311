@@ -38,7 +38,7 @@ class Vis(object):
 
 
 class VisList(Vis):
-    """Vis subclass that can handle a list"""
+    """Vis subclass that can handle a list of objects to visualize simultaneously"""
 
     input_classes = (list)
     # Inform the element classes accepted

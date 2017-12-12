@@ -10,6 +10,3 @@ from .basic import *
 from .visprint import *
 from .visspectrum import *
 from .plotsp import *
-from .vis_pyfant import *
-from .vis_aosss import *
-from .draw_cube import *
