@@ -103,10 +103,10 @@ class DataFile(a99.AttrsPart):
         data directory. For safety, filename is reset to None so that it doesn't point to the
         original file.
         """
-        from f311 import filetypes as ft
+        import f311
         if self.default_filename is None:
             raise RuntimeError("Class '{}' has no default filename".format(self.__class__.__name__))
-        fullpath = ft.get_default_data_path(self.default_filename, module=ft)
+        fullpath = f311.get_default_data_path(self.default_filename, class_=self.__class__)
         self.load(fullpath)
         self.filename = None
 

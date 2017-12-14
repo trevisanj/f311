@@ -31,13 +31,13 @@ __all__ = [
 # - Vis subclasses
 EXTERNAL_COLLABORATORS = ["pyfant", "aosss", "convmolworks", "ariastro"]
 
-__F311 = ["f311."+x for x in a99.get_subpackages_names(os.path.split(__file__)[0])]
 
 # List of **classes** collaborators packages (**change to add**)
 #
-COLLABORATORS_C = ["f311.filetypes", "f311.explorer", "pyfant"]+EXTERNAL_COLLABORATORS
+COLLABORATORS_C = ["f311", "pyfant"]+EXTERNAL_COLLABORATORS
 # List of **script** collaborator packages to look for scripts (**change to add**)
 #
+__F311 = ["f311"]+["f311."+x for x in a99.get_subpackages_names(os.path.split(__file__)[0])]
 COLLABORATORS_S = __F311+EXTERNAL_COLLABORATORS
 
 

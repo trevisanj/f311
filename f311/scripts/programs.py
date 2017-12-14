@@ -20,7 +20,7 @@ PREFIX_EDITABLE = "editable-"
 
 def _add_PFANT(d):
     # This can be called (without much shame) a "gambiarra"
-    import f311.pyfant as pf
+    import pyfant as pf
     d["PFANT"] = {"description": "Spectral synthesis-related Fortran binaries",
                   "exeinfo": pf.get_fortrans()}
 
@@ -28,7 +28,7 @@ def _get_programs_dict(pkgname_only, flag_protected):
     """Returns dictionary {(package description): [ExeInfo0, ...], ...}"""
 
     allinfo = f311.get_programs_dict(pkgname_only, flag_protected)
-    if "f311.pyfant" in allinfo:
+    if "pyfant" in allinfo:
         _add_PFANT(allinfo)
     return allinfo
 

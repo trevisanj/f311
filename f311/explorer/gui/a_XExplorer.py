@@ -5,7 +5,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import a99
-import f311.filetypes as ft
+import f311
 import os
 import glob
 import os.path
@@ -61,10 +61,10 @@ class _FileProps(object):
         elif self.flag_scanned:
             ll = ["text file" if self.flag_text else "binary file"]
             if self.flag_error:
-                emsg = self.error_message or "not recognized as a PFANT data file"
+                emsg = self.error_message or "file type not recognized"
                 ll.append("<span style=\"font-weight: bold; color: {0!s}\">{1!s}</span>".format(a99.COLOR_ERROR, emsg))
             else:
-                ll.append("<span style=\"color: {0!s}\">PFANT type: <b>{1!s}</b></span>".format("#006000", self.f.__class__.__name__))
+                ll.append("<span style=\"color: {0!s}\">File type: <b>{1!s}</b></span>".format("#006000", self.f.__class__.__name__))
             ret = ("; ".join(ll))
         return ret
 
@@ -85,7 +85,7 @@ class LoadThread(QThread):
                 continue
             f = None
             try:
-                f = ft.load_any_file(props.filepath)
+                f = f311.load_any_file(props.filepath)
                 props.f = f
             except Exception as e:
                 # Suppresses exceptions
@@ -417,7 +417,6 @@ class XExplorer(QMainWindow):
 
     def __update_window_title(self):
         full_dir = os.path.abspath(self.dir)
-        # self.setWindowTitle("PFANT Explorer -- %s" % os.path.abspath(self.dir))
         self.setWindowTitle("F311 Explorer")
         self.lineEditDir.setText(full_dir)
 
@@ -441,7 +440,7 @@ class XExplorer(QMainWindow):
             p = propss[0]
             # Visualization options
             if p.flag_scanned:
-                if isinstance(p.f, ft.DataFile):
+                if isinstance(p.f, f311.DataFile):
                     classes.extend(f311.get_suitable_vis_classes(p.f))
                     if ex.VisPrint in classes:
                         classes.remove(ex.VisPrint)
@@ -466,8 +465,20 @@ class XExplorer(QMainWindow):
         elif npp >= 2:
             s0 = "{0:d} selected".format(npp)
             ff = [p.f for p in propss]
-            flag_spectra = all([isinstance(f, ft.FileSpectrum) for f in ff])
-            flag_mod = all([isinstance(f, ft.FileModBin) and len(f.records) > 1 for f in ff])
+            flag_spectra = all([isinstance(f, f311.FileSpectrum) for f in ff])
+
+            # gambiarra to visualize several PFANT .mod files
+            has_pyfant = False
+            try:
+                import pyfant
+                has_pyfant = True
+            except:
+                pass
+
+            flag_mod = False
+            if has_pyfant:
+                flag_mod = all([isinstance(f, pyfant.FileModBin) and len(f.records) > 1 for f in ff])
+
             if flag_spectra:
                 z.addItem(QListWidgetItem("Plot spectra stacked"))
                 classes.append("sta")
