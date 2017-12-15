@@ -72,7 +72,6 @@ def plot_spectra_stacked(ss, title=None, num_rows=None, setup=_default_setup):
 
     """
 
-    plt.figure()
     draw_spectra_stacked(ss, title, num_rows, setup)
     plt.show()
     # return fig
@@ -238,7 +237,7 @@ def calc_max_min(ss):
 
 
 def draw_spectra_stacked(ss, title=None, num_rows=None, setup=_default_setup):
-    """Same as plot_spectra, but does not call plt.show(); returns figure"""
+    """Same as plot_spectra_stacked(), but does not call plt.show(); returns figure"""
     n = len(ss)
     assert n > 0, "ss is empty"
     if not num_rows:

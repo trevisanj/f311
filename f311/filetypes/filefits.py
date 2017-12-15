@@ -1,4 +1,4 @@
-__all__ = ["FileFits"]
+__all__ = ["FileFits", "test_fits_magic"]
 
 from .datafile import DataFile
 from astropy.io import fits
@@ -32,3 +32,19 @@ class FileFits(DataFile):
     def _do_save_as(self, filename):
         """Saves HDU list to FITS file."""
         overwrite_fits(self.hdulist, filename)
+
+
+    def _test_magic(self, filename):
+        test_fits_magic(filename)
+
+
+def test_fits_magic(filename):
+    """For FITS files, we assume that they must start with "SIMPLE".
+
+    This may not be specified in the standard, but I have seen this in all the files I opened"""
+
+    with open(filename, "rb") as file:
+        chunk = file.read(4096 * 4)
+
+        if not b"SIMPLE" in chunk:
+            raise RuntimeError("File '{}' does not appear to be a FITS file".format(filename))

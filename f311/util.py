@@ -73,10 +73,10 @@ def load_with_classes(filename, classes):
 
 def load_any_file(filename):
     """
-    Attempts to load filename by trial-and-error using _classes as list of classes.
+    Attempts to load filename by trial-and-error
 
     Returns:
-        A DataFile descendant, whose specific class depends on the file format detected, or None
+        file: A DataFile descendant, whose specific class depends on the file format detected, or None
         if the file canonot be loaded
     """
     import f311
@@ -86,6 +86,22 @@ def load_any_file(filename):
         return load_with_classes(filename, f311.classes_txt())
     else:
         return load_with_classes(filename, f311.classes_bin())
+
+# def load_any_file_ex(filename):
+#     """
+#     Attempts to load filename by trial-and-error using _classes as list of classes.
+#
+#     Returns:
+#         file, log_dict: A DataFile descendant, whose specific class depends on the file format detected, or None
+#               if the file canonot be loaded
+#     """
+#     import f311
+#
+#     # Splits attempts using ((binary X text) file) criterion
+#     if a99.is_text_file(filename):
+#         return load_with_classes(filename, f311.classes_txt())
+#     else:
+#         return load_with_classes(filename, f311.classes_bin())
 
 
 def load_spectrum(filename):
@@ -168,7 +184,7 @@ def get_filetypes_info(editor_quote="`", flag_leaf=True):
             ee = ", ".join(["{0}{1}{0}".format(editor_quote, x, editor_quote) for x in ee])
 
         data.append({"description": description, "default_filename": def_, "classname": attr.__name__,
-                     "editors": ee})
+                     "editors": ee, "class": attr, "txtbin": "text" if attr.flag_txt else "binary"})
 
     data.sort(key=lambda x: x["description"])
 

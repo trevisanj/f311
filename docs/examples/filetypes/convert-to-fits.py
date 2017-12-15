@@ -6,7 +6,7 @@ The new file is saved with name "<original-filename>.fits".
 TODO handle non-equally spaced wavelength values
 """
 
-import f311.filetypes as ft
+import f311
 import sys
 import logging
 
@@ -19,7 +19,7 @@ if __name__ == "__main__":
         print("Converting file '{}'...".format(filename))
 
         try:
-            spectrum = ft.load_spectrum(filename)
+            spectrum = f311.load_spectrum(filename)
 
             if spectrum is None:
                 print("File '{}' not recognized as a 1D spectral file".format(filename))
@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
             filename_new = filename+".fits"
 
-            fnew = ft.FileSpectrumFits()
+            fnew = f311.FileSpectrumFits()
             fnew.spectrum = spectrum
             fnew.save_as(filename_new)
 

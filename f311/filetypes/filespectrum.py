@@ -10,7 +10,7 @@ from a99 import overwrite_fits, write_lf
 from astropy.io import fits
 import os
 import numpy as np
-
+from .filefits import test_fits_magic
 
 class FileSpectrum(DataFile):
     """Base class for all files representing a single 1D spectrum"""
@@ -81,3 +81,7 @@ class FileSpectrumFits(FileSpectrum):
 
         hdu = self.spectrum.to_hdu()
         overwrite_fits(hdu, filename)
+
+    def _test_magic(self, filename):
+        test_fits_magic(filename)
+

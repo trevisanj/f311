@@ -173,7 +173,8 @@ def flux_to_mag(flux, bp, system="stdflux", zero_point=0.):
         flux: float (erg/cm**2/s/Hz), of Spectrum instance
         bp, system, zero_point: see calculate_magnitude()
 
-    Returns: float
+    Returns:
+        float
     """
 
     fnu = u.erg / u.cm ** 2 / u.s / u.Hz
@@ -445,8 +446,6 @@ def _ufunc_gauss(x0, fwhm):
 
 
 # Standard flux, according to several references
-#
-# TODO get references: Bessel etc
 #
 # values taken from https://en.wikipedia.org/wiki/Apparent_magnitude
 # I- and J-band values agree with Evans, C.J., et al., A&A 527(2011): A50.

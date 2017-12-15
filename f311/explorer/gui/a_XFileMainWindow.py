@@ -5,6 +5,8 @@ import os
 from matplotlib import pyplot as plt
 import a99
 from f311 import filetypes as ft
+import f311
+
 
 __all__ = ["XFileMainWindow", "NullEditor", "XFileMainWindowBase", "MyPage", "NullEditor"]
 
@@ -225,7 +227,7 @@ class XFileMainWindowBase(a99.XLogMainWindow):
         else:
             # At the moment, the multi-class alternative will not display particular error information
             # if the file does not load
-            f = ft.load_with_classes(filename, page.clss_load)
+            f = f311.load_with_classes(filename, page.clss_load)
             if f is None:
                 raise RuntimeError("Could not load '{0!s}'".format(filename))
 
@@ -436,9 +438,3 @@ class XFileMainWindow(XFileMainWindowBase):
         # TODO make this flexible if needed
         if self.tabWidget.count() > 0:
             self.tabWidget.setCurrentIndex(0)
-
-    def _add_stuff(self):
-        pass
-        # # ### Custom Area tab will have a widget **without** a layout, named "gotting"
-        # w0 = self.gotting = QWidget()
-        # self.tabWidget.addTab(w0, "")

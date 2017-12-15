@@ -6,15 +6,15 @@
   rather confounding & some interesting material is not exposed. aosss can be another project;
   pyfant can be another project & incorporate convmol into it
 
-- detecting file type needs serious work
+- ~~detecting file type needs serious work~~
 
 - test well these GUIs
 
-- explorer.py: Load as... (force file type)
+- ~~explorer.py: Load as... (force file type)~~
 
 - moldbed: download from nist; execute traprb!
 
-- simplify directory structure. Expose all the shit
+- ~~simplify directory structure. Expose all the shit~~
 
 - Introduce "notes" field for main.dat: could be sth like "<star name> # <notes>"
 
@@ -24,7 +24,7 @@
 
 - x.py, tab 3: raiing exception if edit field is empty
 
-- explorer.py: opening extra window
+- explorer.py: opening extra window when plotting spectrum
 
 - run4.py + fileoptions + x.py tab3: move documentation ifnroamtion to inside fileoptions so that I can publish the descriptions of the parameters in `run4.py --help`
 

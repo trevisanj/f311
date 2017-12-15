@@ -96,7 +96,7 @@ if __name__ == "__main__":
     flag_ok = False
     for x in ff:
         print("Reading file '{0!s}'...".format(x))
-        f = ft.load_with_classes(x, f311.classes_sp())
+        f = f311.load_with_classes(x, f311.classes_sp())
         if f is None:
             a99.print_error("... type not recognized, sorry")
         else:
@@ -132,4 +132,4 @@ if __name__ == "__main__":
             if args.ovl:
                 ex.plot_spectra_overlapped(ss, "", setup=setup)
             else:
-                ex.plot_spectra(ss, "", setup=setup, num_rows=num_rows)
+                ex.plot_spectra_stacked(ss, "", setup=setup, num_rows=num_rows)

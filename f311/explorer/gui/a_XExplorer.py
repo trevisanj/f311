@@ -75,9 +75,11 @@ class _FileProps(object):
         return ret
 
 class LoadThread(QThread):
-    def __init__(self, parent, propss):
+    def __init__(self, parent, propss, cls=None):
+        # cls: specific class to use
         QThread.__init__(self, parent)
         self.propss = propss
+        self.cls = cls
 
     def run(self):
         for props in self.propss:
@@ -85,12 +87,17 @@ class LoadThread(QThread):
                 continue
             f = None
             try:
-                f = f311.load_any_file(props.filepath)
+                if self.cls:
+                    f = self.cls()
+                    f.load(props.filepath)
+                else:
+                    f = f311.load_any_file(props.filepath)
                 props.f = f
             except Exception as e:
                 # Suppresses exceptions
                 props.error_message = str(e)
                 a99.get_python_logger().exception("Loading file '{}'".format(props.filepath))
+                f = None
             finally:
                 props.flag_scanned = True
                 props.flag_error = f is None
@@ -151,9 +158,12 @@ class XExplorer(QMainWindow):
         # # Menu bar
         b = self.menuBar()
         m = self.menu_file = b.addMenu("&File")
-        ac = m.addAction("Attempt &load")
+        ac = self.action_load = m.addAction("Attempt &load")
         ac.setShortcut("Ctrl+L;Ctrl+O")
         ac.triggered.connect(self.on_load)
+        ac = self.action_load_as = m.addAction("Load &As...")
+        ac.setShortcut("Alt+A")
+        ac.triggered.connect(self.on_load_as)
         m.addSeparator()
         ac = m.addAction("&Refresh")
         ac.setShortcut("Ctrl+R")
@@ -238,6 +248,8 @@ class XExplorer(QMainWindow):
         t.resizeColumnsToContents()
         t.installEventFilter(self)
         t.selectionModel().selectionChanged.connect(self.selectionChanged)
+        t.setContextMenuPolicy(Qt.CustomContextMenu)
+        t.customContextMenuRequested.connect(self.on_tableWidget_customContextMenuRequested)
 
         sp.addWidget(w)
 
@@ -355,6 +367,12 @@ class XExplorer(QMainWindow):
             a99.show_error(str(e))
             raise
 
+    def on_tableWidget_customContextMenuRequested(self, position):
+        menu = QMenu()
+        menu.addAction(self.action_load)
+        menu.addAction(self.action_load_as)
+        action = menu.exec_(self.tableWidget.mapToGlobal(position))
+
     def selectionChanged(self, *args):
         if self.__flag_updating_table:
             return
@@ -362,11 +380,21 @@ class XExplorer(QMainWindow):
 
     def on_load(self, _=None):
         if not self.__flag_loading:
-            a99 = self.__lock_get_current_propss()
-            if len(a99) == 1 and not a99[0].isfile:
-                self.set_dir(a99[0].filepath)
+            pp = self.__lock_get_current_propss()
+            if len(pp) == 1 and not pp[0].isfile:
+                self.set_dir(pp[0].filepath)
             else:
                 self.__lock_load()
+
+    def on_load_as(self, _=None):
+        if not self.__flag_loading:
+            pp = self.__lock_get_current_propss()
+            if len(pp) == 1 and not pp[0].isfile:
+                return
+            else:
+                form = f311.XSelectDataFile()
+                if form.exec_():
+                    self.__lock_load(form.cls)
 
     def on_refresh(self, _=None):
         if not self.__flag_loading:
@@ -708,13 +736,13 @@ class XExplorer(QMainWindow):
             t.finished.connect(self.__finished_loading, Qt.QueuedConnection)
             t.start()
 
-    def __lock_load(self):
+    def __lock_load(self, cls=None):
         propss = self.__lock_get_current_propss()
         if len(propss) > 0:
             with self.__lock_propss:
                 self.__flag_loading = True
                 self.__set_status_text("Loading file(s), please wait...")
-                t = self.__load_thread = LoadThread(self, propss)
+                t = self.__load_thread = LoadThread(self, propss, cls)
                 t.finished.connect(self.__finished_loading)
                 t.start()
 

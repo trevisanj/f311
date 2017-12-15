@@ -3,12 +3,10 @@
 """F311 Explorer --  file manager-like application to list, visualize, and edit data files"""
 
 import a99
-import f311.filetypes as ft
-import f311.explorer as ex
-import f311.explorer as ex
 import sys
 import argparse
 import logging
+import f311
 
 
 a99.logging_level = logging.INFO
@@ -23,7 +21,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     app = a99.get_QApplication([])
-    form = ex.XExplorer(None, args.dir)
+    form = f311.XExplorer(None, args.dir)
     form.show()
     a99.place_center(form)
     sys.exit(app.exec_())

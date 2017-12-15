@@ -17,7 +17,7 @@ import copy
 
 __all__ = [
     "COLLABORATORS_C", "COLLABORATORS_S",
-    "classes_txt", "classes_bin", "classes_sp", "classes_file", "classes_collection",
+    "classes_txt", "classes_bin", "classes_sp", "classes_file",
     "get_suitable_vis_classes", "get_suitable_vis_list_classes",
     "get_scripts_path", "get_programs_dict",
     "EXTERNAL_COLLABORATORS"
@@ -111,14 +111,6 @@ def classes_file(flag_leaf=False):
         return _classes_file
 
     return [cls for cls in _classes_file if cls not in _classes_file_superclass]
-
-
-def classes_collection():
-    """
-    Returns list of File* classes that can be converted to a SpectrumCollection
-    """
-    from f311 import filetypes as ft
-    return classes_sp() + [ft.FileSpectrumList, ft.FileSparseCube, ft.FileFullCube]
 
 
 def classes_vis():

@@ -49,9 +49,11 @@ class DataFile(a99.AttrsPart):
                                   format(self.classname))
 
     def _test_magic(self, filename):
-        """Opens file just to verify whether it is what it is expected to be
+        """
+        Opens file just to verify whether it is what it is expected to be (**raise if not**)
 
         Implement this if you want to implement file type verification separate from _do_load()
+
         """
         pass
 
