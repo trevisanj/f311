@@ -2,7 +2,7 @@
 
     usage: explorer.py [-h] [dir]
     
-    F311 Explorer --  list, visualize, and edit data files (_à la_ File Manager)
+    F311 Explorer --  file manager-like application to list, visualize, and edit data files
     
     positional arguments:
       dir         directory name (default: .)
@@ -11,4 +11,4 @@
       -h, --help  show this help message and exit
     
 
-This script belongs to package *f311.explorer*
+This script belongs to package *f311*

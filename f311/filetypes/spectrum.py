@@ -139,11 +139,11 @@ class Spectrum(object):
         self.more_headers["YLABEL"] = value
 
     #*****************
-    def __init__(self):
+    def __init__(self, x=None, y=None):
         self._flag_created_by_block = False  # assertion
         self.more_headers = {}
-        self.x = None  # x-values
-        self.y = None  # y-values
+        self.x = x
+        self.y = y
         # Default units
         self.xunit = u.angstrom
         self.yunit = fnu

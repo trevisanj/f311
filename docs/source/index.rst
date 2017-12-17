@@ -8,12 +8,8 @@ Welcome!
 
    intro
    install
-   pyfant
-   convmol
    explorer
    filetypes
-   physics
-   aosss
    f3110
    scripts
 
@@ -27,3 +23,15 @@ Welcome!
 
     .. hint:: You can also search using the sidebar box.
 
+
+Graphical applications
+^^^^^^^^^^^^^^^^^^^^^^
+
+* :doc:`explorer.py <autoscripts/script-explorer>`: F311 Explorer --  file manager-like application to list, visualize, and edit data files
+
+Command-line tools
+^^^^^^^^^^^^^^^^^^
+
+* :doc:`cut-spectrum.py <autoscripts/script-cut-spectrum>`: Cuts spectrum file to wavelength interval specified
+* :doc:`plot-spectra.py <autoscripts/script-plot-spectra>`: Plots spectra on screen or creates PDF file
+* :doc:`programs.py <autoscripts/script-programs>`: Lists all programs available

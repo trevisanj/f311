@@ -15,7 +15,7 @@ import re
 
 # These values must match those of the same variables in <project-root>/docs/gen-script-pages.py
 SUBDIR = "autoscripts"
-PREFIX_EDITABLE = "editable-"
+PREFIX_EDITABLE = "script-"
 
 
 def _add_PFANT(d):
@@ -24,11 +24,11 @@ def _add_PFANT(d):
     d["PFANT"] = {"description": "Spectral synthesis-related Fortran binaries",
                   "exeinfo": pf.get_fortrans()}
 
-def _get_programs_dict(pkgname_only, flag_protected):
+def _get_programs_dict(pkgname_only, flag_protected, flag_no_pfant=False):
     """Returns dictionary {(package description): [ExeInfo0, ...], ...}"""
 
     allinfo = f311.get_programs_dict(pkgname_only, flag_protected)
-    if "pyfant" in allinfo:
+    if not flag_no_pfant and "pyfant" in allinfo:
         _add_PFANT(allinfo)
     return allinfo
 
@@ -67,7 +67,9 @@ if __name__ == "__main__":
     parser.add_argument('-k', '--rest-links', action="store_true",
      help='If format=="rest-list", '
           'renders program names as links to their respective documentation pages')
-    parser.add_argument('-_', '--protected', action="store_true", help="Includes protected scripts (starting with '_')_")
+    parser.add_argument('-n', '--no-pfant', action="store_true",
+     help='Does not list PFANT binaries')
+    parser.add_argument('-_', '--protected', action="store_true", help="Includes protected scripts (starting with '_')")
     args = parser.parse_args()
 
     pkgname_only = args.pkgname if args.pkgname is not "(all)" else None
@@ -82,7 +84,7 @@ if __name__ == "__main__":
             _list_packages()
             sys.exit()
 
-    allinfo = _get_programs_dict(pkgname_only, args.protected)
+    allinfo = _get_programs_dict(pkgname_only, args.protected, args.no_pfant)
     strlist = _format_programs_dict(allinfo, args.format)
 
 
@@ -95,8 +97,4 @@ if __name__ == "__main__":
     else:
         out = _out
 
-
     print(out)
-
-    print("github.com/trevisanj/f311\n")
-

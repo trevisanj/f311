@@ -18,4 +18,4 @@
       -h, --help  show this help message and exit
     
 
-This script belongs to package *f311.explorer*
+This script belongs to package *f311*

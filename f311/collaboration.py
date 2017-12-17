@@ -34,7 +34,7 @@ EXTERNAL_COLLABORATORS = ["pyfant", "aosss", "convmolworks", "ariastro"]
 
 # List of **classes** collaborators packages (**change to add**)
 #
-COLLABORATORS_C = ["f311", "pyfant"]+EXTERNAL_COLLABORATORS
+COLLABORATORS_C = ["f311"]+EXTERNAL_COLLABORATORS
 # List of **script** collaborator packages to look for scripts (**change to add**)
 #
 __F311 = ["f311"]+["f311."+x for x in a99.get_subpackages_names(os.path.split(__file__)[0])]

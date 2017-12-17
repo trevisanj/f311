@@ -55,4 +55,4 @@
                             Number of rows in subplot grid (default: (automatic))
     
 
-This script belongs to package *f311.explorer*
+This script belongs to package *f311*

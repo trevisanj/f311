@@ -30,4 +30,4 @@
       -p, --path  system path mode (default: False)
     
 
-This script belongs to package *f311.pyfant*
+This script belongs to package *pyfant*

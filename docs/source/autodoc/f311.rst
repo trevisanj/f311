@@ -6,12 +6,8 @@ Subpackages
 
 .. toctree::
 
-    f311.aosss
-    f311.convmol
     f311.explorer
     f311.filetypes
-    f311.physics
-    f311.pyfant
 
 Submodules
 ----------
@@ -28,6 +24,14 @@ f311\.hapi module
 -----------------
 
 .. automodule:: f311.hapi
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+f311\.pathfinder module
+-----------------------
+
+.. automodule:: f311.pathfinder
     :members:
     :undoc-members:
     :show-inheritance:

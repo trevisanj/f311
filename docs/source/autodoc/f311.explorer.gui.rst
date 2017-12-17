@@ -1,25 +1,8 @@
 f311\.explorer\.gui package
 ===========================
 
-Subpackages
------------
-
-.. toctree::
-
-    f311.explorer.gui.gui_aosss
-    f311.explorer.gui.gui_convmol
-    f311.explorer.gui.gui_pyfant
-
 Submodules
 ----------
-
-f311\.explorer\.gui\.a\_WChooseSpectrum module
-----------------------------------------------
-
-.. automodule:: f311.explorer.gui.a_WChooseSpectrum
-    :members:
-    :undoc-members:
-    :show-inheritance:
 
 f311\.explorer\.gui\.a\_XExplorer module
 ----------------------------------------
@@ -33,6 +16,14 @@ f311\.explorer\.gui\.a\_XFileMainWindow module
 ----------------------------------------------
 
 .. automodule:: f311.explorer.gui.a_XFileMainWindow
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+f311\.explorer\.gui\.a\_XSelectDataFile module
+----------------------------------------------
+
+.. automodule:: f311.explorer.gui.a_XSelectDataFile
     :members:
     :undoc-members:
     :show-inheritance:

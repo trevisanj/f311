@@ -52,7 +52,6 @@ def main(allinfo, flag_page_only=False):
 
             nameonly = os.path.splitext(info.filename)[0]
 
-#            page.append("    {} <autoscripts/{}{}>".format(info.description, PREFIX_EDITABLE, nameonly))
             index_page.append("    autoscripts/{}{}".format(PREFIX_EDITABLE, nameonly))
 
             if flag_page_only:
@@ -107,7 +106,13 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    allinfo = f311.get_programs_dict(None, flag_protected=False)
+    # Uses Sphinx configuration file to determine the package name
+    filename_conf = "source/conf.py"
+    conf = a99.import_module(filename_conf)
+    package_name = conf.project.lower()
+    print("Found from Sphinx configuration file '{}' that the package name is '{}'".format(filename_conf, package_name))
+
+    allinfo = f311.get_programs_dict(package_name, flag_protected=False)
     main(allinfo, args.index_only)
 
 
