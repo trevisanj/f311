@@ -1,5 +1,1 @@
 recursive-include f311/filetypes/data *
-recursive-include f311/aosss/data *
-recursive-include f311/physics/data *
-
-

@@ -14,8 +14,8 @@ SOME_CONSTANT = 10.
 
 # # Imports
 #   =======
-from .gear import *
-from .datatypes import *
+from .basic import *
+from .filetypes import *
 from .util import *
 from .vis import *
 from .gui import *
@@ -24,7 +24,7 @@ from .gui import *
 #   ===============================================
 def get_config():
     """Returns AAConfigObj object that corresponds to file ~/.mypackage.conf"""
-    return a99.get_config_obj(".my_package.conf")
+    return a99.get_config_obj(".mypackage.conf")
 
 
 # # Finally, gets rid of unwanted symbols in the workspace

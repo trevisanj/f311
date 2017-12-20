@@ -17,7 +17,7 @@ setup(
     author = 'João da Silva',
     author_email = 'your@email.here',
     url = 'http://github.com/your-github-user-name/my_package', # use the URL to the github repo
-    keywords= ['astronomy', "fits", "spectrum"],
-    install_requires = ['a99'],
+    keywords= ['your', 'keywords', 'here'],
+    install_requires = ['f311'],
     scripts = glob('scripts/*.py')  # Considers system scripts all .py files in 'scripts' directory
 )
