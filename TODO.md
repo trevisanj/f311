@@ -2,15 +2,9 @@
 
 ## Top priority
 
-- test well these GUIs
-
 ### Documentation
 
-- Explain what F311 is
-
 - scripts screenshots (aosss and pyfant as well)
-
-- update explorer list_file_types() example
 
 ## Low priority
 
