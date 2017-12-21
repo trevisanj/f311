@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>f311.explorer.gui package &mdash; F311 17.12.21.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="F311 17.12.21.0 documentation" href="../index.html"/>
+        <link rel="up" title="f311.explorer package" href="f311.explorer.html"/>
+        <link rel="next" title="f311.explorer.vis package" href="f311.explorer.vis.html"/>
+        <link rel="prev" title="f311.explorer package" href="f311.explorer.html"/>
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> F311
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                17.12.21.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">F311 Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Index of applications (scripts)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">Collaboration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">f311</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="f311.html">f311 package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="f311.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="f311.explorer.html">f311.explorer package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="f311.filetypes.html">f311.filetypes package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="f311.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="f311.html#module-f311.collaboration">f311.collaboration module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="f311.html#module-f311.hapi">f311.hapi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="f311.html#module-f311.pathfinder">f311.pathfinder module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="f311.html#module-f311.util">f311.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="f311.html#module-f311">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">F311</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">f311</a> &raquo;</li>
+        
+          <li><a href="f311.html">f311 package</a> &raquo;</li>
+        
+          <li><a href="f311.explorer.html">f311.explorer package</a> &raquo;</li>
+        
+      <li>f311.explorer.gui package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/autodoc/f311.explorer.gui.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="f311-explorer-gui-package">
+<h1>f311.explorer.gui package<a class="headerlink" href="#f311-explorer-gui-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-f311.explorer.gui.a_XExplorer">
+<span id="f311-explorer-gui-a-xexplorer-module"></span><h2>f311.explorer.gui.a_XExplorer module<a class="headerlink" href="#module-f311.explorer.gui.a_XExplorer" title="Permalink to this headline">¶</a></h2>
+<p>Explorer window.</p>
+<dl class="class">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer">
+<em class="property">class </em><code class="descclassname">f311.explorer.gui.a_XExplorer.</code><code class="descname">XExplorer</code><span class="sig-paren">(</span><em>parent=None</em>, <em>dir_='.'</em>, <em>_flag_set_dir=True</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt5.QtWidgets.QMainWindow</span></code></p>
+<p>“F311 Explorer” window</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>parent=None</strong> – </li>
+<li><strong>dir_=&quot;.&quot;</strong> – directory name</li>
+<li><strong>_flag_set_dir=True</strong> – will not set directory if False (testing purpose only)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.closeEvent">
+<code class="descname">closeEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.closeEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.eventFilter">
+<code class="descname">eventFilter</code><span class="sig-paren">(</span><em>obj</em>, <em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.eventFilter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.on_cd">
+<code class="descname">on_cd</code><span class="sig-paren">(</span><em>_=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.on_cd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.on_cd2">
+<code class="descname">on_cd2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.on_cd2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.on_collect_errors">
+<code class="descname">on_collect_errors</code><span class="sig-paren">(</span><em>_=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.on_collect_errors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.on_listWidgetVis_itemDoubleClicked">
+<code class="descname">on_listWidgetVis_itemDoubleClicked</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.on_listWidgetVis_itemDoubleClicked" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.on_load">
+<code class="descname">on_load</code><span class="sig-paren">(</span><em>_=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.on_load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.on_load_as">
+<code class="descname">on_load_as</code><span class="sig-paren">(</span><em>_=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.on_load_as" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.on_refresh">
+<code class="descname">on_refresh</code><span class="sig-paren">(</span><em>_=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.on_refresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.on_tableWidget_cellDoubleClicked">
+<code class="descname">on_tableWidget_cellDoubleClicked</code><span class="sig-paren">(</span><em>row</em>, <em>col</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.on_tableWidget_cellDoubleClicked" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.on_tableWidget_customContextMenuRequested">
+<code class="descname">on_tableWidget_customContextMenuRequested</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.on_tableWidget_customContextMenuRequested" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.on_timer_changed_timeout">
+<code class="descname">on_timer_changed_timeout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.on_timer_changed_timeout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.selectionChanged">
+<code class="descname">selectionChanged</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.selectionChanged" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XExplorer.XExplorer.set_dir">
+<code class="descname">set_dir</code><span class="sig-paren">(</span><em>dir_</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XExplorer.XExplorer.set_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets directory, auto-loads, updates all GUI contents.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.explorer.gui.a_XFileMainWindow">
+<span id="f311-explorer-gui-a-xfilemainwindow-module"></span><h2>f311.explorer.gui.a_XFileMainWindow module<a class="headerlink" href="#module-f311.explorer.gui.a_XFileMainWindow" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindow">
+<em class="property">class </em><code class="descclassname">f311.explorer.gui.a_XFileMainWindow.</code><code class="descname">XFileMainWindow</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase" title="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase"><code class="xref py py-class docutils literal"><span class="pre">f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase</span></code></a></p>
+<p>Application template with file operations in two tabs: (application area) and (log)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.gui.a_XFileMainWindow.NullEditor">
+<em class="property">class </em><code class="descclassname">f311.explorer.gui.a_XFileMainWindow.</code><code class="descname">NullEditor</code><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.NullEditor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Class to fulfill requirement in XFileMainWindow, easiest way out, no bother</p>
+<dl class="attribute">
+<dt id="f311.explorer.gui.a_XFileMainWindow.NullEditor.f">
+<code class="descname">f</code><em class="property"> = None</em><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.NullEditor.f" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase">
+<em class="property">class </em><code class="descclassname">f311.explorer.gui.a_XFileMainWindow.</code><code class="descname">XFileMainWindowBase</code><span class="sig-paren">(</span><em>parent=None</em>, <em>fobjs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">a99.gui.a_XLogMainWindow.XLogMainWindow</span></code></p>
+<p>Application template with file operations in two tabs: (application area) and (log)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>parent</strong> – passed to QMainWindow constructor</li>
+<li><strong>fobjs</strong> – sequence of DataFile objects to be loaded by their respective editors</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.closeEvent">
+<code class="descname">closeEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.closeEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.keyPressEvent">
+<code class="descname">keyPressEvent</code><span class="sig-paren">(</span><em>evt</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.keyPressEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>This handles Ctrl+PageUp, Ctrl+PageDown, Ctrl+Tab, Ctrl+Shift+Tab</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>fobj</em>, <em>index=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads given DataFile object. <strong>tolerant with None</strong></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fobj</strong> – object of one of accepted classes</li>
+<li><strong>index</strong> – tab index to load fobj into. If not passed, loads into current tab</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.load_filename">
+<code class="descname">load_filename</code><span class="sig-paren">(</span><em>filename</em>, <em>index=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.load_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads file given filename</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> – </li>
+<li><strong>index</strong> – tab index to load file into. If not passed, loads into current tab</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.load_many">
+<code class="descname">load_many</code><span class="sig-paren">(</span><em>fobjs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.load_many" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads as many files as the number of pages</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fobjs</strong> – [filename or DataFile obj, …]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.on_load">
+<code class="descname">on_load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.on_load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.on_reset">
+<code class="descname">on_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.on_reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.on_save">
+<code class="descname">on_save</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.on_save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.on_save_all">
+<code class="descname">on_save_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.on_save_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.on_save_as">
+<code class="descname">on_save_as</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.XFileMainWindowBase.on_save_as" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.gui.a_XFileMainWindow.MyPage">
+<em class="property">class </em><code class="descclassname">f311.explorer.gui.a_XFileMainWindow.</code><code class="descname">MyPage</code><span class="sig-paren">(</span><em>text_tab=''</em>, <em>flag_changed=False</em>, <em>text_saveas='Save as...'</em>, <em>text_load='Load...'</em>, <em>cls_save=None</em>, <em>clss_load=()</em>, <em>wild='*.*'</em>, <em>editor=None</em>, <em>flag_autosave=False</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.MyPage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Object holding data related to one tab in a XFileMainWindowBase object</p>
+<dl class="attribute">
+<dt id="f311.explorer.gui.a_XFileMainWindow.MyPage.flag_op">
+<code class="descname">flag_op</code><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.MyPage.flag_op" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.MyPage.make_text_load">
+<code class="descname">make_text_load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.MyPage.make_text_load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="f311.explorer.gui.a_XFileMainWindow.MyPage.make_text_saveas">
+<code class="descname">make_text_saveas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XFileMainWindow.MyPage.make_text_saveas" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">f311.explorer.gui.a_XFileMainWindow.</code><code class="descname">NullEditor</code></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Class to fulfill requirement in XFileMainWindow, easiest way out, no bother</p>
+<dl class="attribute">
+<dt>
+<code class="descname">f</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.explorer.gui.a_XSelectDataFile">
+<span id="f311-explorer-gui-a-xselectdatafile-module"></span><h2>f311.explorer.gui.a_XSelectDataFile module<a class="headerlink" href="#module-f311.explorer.gui.a_XSelectDataFile" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="f311.explorer.gui.a_XSelectDataFile.XSelectDataFile">
+<em class="property">class </em><code class="descclassname">f311.explorer.gui.a_XSelectDataFile.</code><code class="descname">XSelectDataFile</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XSelectDataFile.XSelectDataFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt5.QtWidgets.QDialog</span></code></p>
+<p>Window to select a DataFile descendant</p>
+<dl class="attribute">
+<dt id="f311.explorer.gui.a_XSelectDataFile.XSelectDataFile.cls">
+<code class="descname">cls</code><a class="headerlink" href="#f311.explorer.gui.a_XSelectDataFile.XSelectDataFile.cls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.explorer.gui.a_XText">
+<span id="f311-explorer-gui-a-xtext-module"></span><h2>f311.explorer.gui.a_XText module<a class="headerlink" href="#module-f311.explorer.gui.a_XText" title="Permalink to this headline">¶</a></h2>
+<p>XText: Window to show text; XHTML: window to show HTML.</p>
+<dl class="class">
+<dt id="f311.explorer.gui.a_XText.XText">
+<em class="property">class </em><code class="descclassname">f311.explorer.gui.a_XText.</code><code class="descname">XText</code><span class="sig-paren">(</span><em>parent=None</em>, <em>text=''</em>, <em>title=''</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XText.XText" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt5.QtWidgets.QMainWindow</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>parent=None</strong> – nevermind</li>
+<li><strong>text</strong> – string</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="f311.explorer.gui.a_XText.XHTML">
+<em class="property">class </em><code class="descclassname">f311.explorer.gui.a_XText.</code><code class="descname">XHTML</code><span class="sig-paren">(</span><em>parent=None</em>, <em>html=''</em>, <em>title=''</em><span class="sig-paren">)</span><a class="headerlink" href="#f311.explorer.gui.a_XText.XHTML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt5.QtWidgets.QMainWindow</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>parent=None</strong> – nevermind</li>
+<li><strong>html</strong> – string</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-f311.explorer.gui">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-f311.explorer.gui" title="Permalink to this headline">¶</a></h2>
+<p>Source files for the Graphical User Interface applications in this package</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="f311.explorer.vis.html" class="btn btn-neutral float-right" title="f311.explorer.vis package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="f311.explorer.html" class="btn btn-neutral" title="f311.explorer package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, JT.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'17.12.21.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
