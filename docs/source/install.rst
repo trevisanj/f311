@@ -95,7 +95,7 @@ Upgrade ``f311``
 
 Pacakge ``f311`` can be upgraded to a new version by typing::
 
-    pip install f311 --upgrade --no-deps
+    pip install f311 --upgrade
 
 
 Package dependencies

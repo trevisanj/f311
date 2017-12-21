@@ -1,7 +1,6 @@
 """XText: Window to show text; XHTML: window to show HTML."""
 __all__ = ["XText", "XHTML"]
 
-
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import a99
