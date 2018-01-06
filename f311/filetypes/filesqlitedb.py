@@ -30,8 +30,11 @@ class FileSQLiteDB(DataFile):
         DataFile.__init__(self)
         self._conn = None
 
-    # # Abstract
-    #   ========
+    # # Overridable
+    #   ===========
+
+    def _get_conn(self, filename):
+        return a99.get_conn(filename)
 
     def _create_schema(self):
         """Responsible for executing the CREATE TABLE statements
@@ -124,10 +127,14 @@ class FileSQLiteDB(DataFile):
         self._ensure_filename()
         return self.__get_conn(flag_force_new)
 
+    def get_column_names(self, tablename):
+        info = self.get_table_info(tablename)
+        return list(info.keys())
+
     def get_table_info(self, tablename):
         """Returns information about fields of a specific table
 
-        Returns:  dict of MyDBRow indexed by field name
+        Returns:  OrderedDict(("fieldname", MyDBRow), ...))
 
         **Note** Fields "caption" and "tooltip" are added to rows using information in moldb.gui_info
 
@@ -174,8 +181,10 @@ class FileSQLiteDB(DataFile):
         if flag_open_new:
             if filename is None:
                 filename = self.filename
-            conn = a99.get_conn(filename)
+            # funny that __get_conn() calls _get_conn() but that's it
+            conn = self._get_conn(filename)
             self._conn = conn
         else:
             conn = self._conn
         return conn
+

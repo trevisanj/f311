@@ -1,9 +1,3 @@
-# # Temporary imports
-#   =================
-# These modules should be be del'eted at the end
-import a99
-
-
 # # Setup
 #   =====
 SOME_CONSTANT = 10.
@@ -24,9 +18,7 @@ from .gui import *
 #   ===============================================
 def get_config():
     """Returns AAConfigObj object that corresponds to file ~/.mypackage.conf"""
+    import a99
     return a99.get_config_obj(".mypackage.conf")
 
 
-# # Finally, gets rid of unwanted symbols in the workspace
-#   ======================================================
-del a99

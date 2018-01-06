@@ -6,8 +6,10 @@ if sys.version_info[0] < 3:
 from setuptools import setup, find_packages
 from glob import glob
 
+PACKAGE_NAME = 'my_package'
+
 setup(
-    name = 'my_package',
+    name =PACKAGE_NAME,
     packages = find_packages(),
     include_package_data=True,
     version = '2000-b.c.',
@@ -19,5 +21,5 @@ setup(
     url = 'http://github.com/your-github-user-name/my_package', # use the URL to the github repo
     keywords= ['your', 'keywords', 'here'],
     install_requires = ['f311'],
-    scripts = glob('scripts/*.py')  # Considers system scripts all .py files in 'scripts' directory
+    scripts = glob(PACKAGE_NAME+'/scripts/*.py')  # Considers system scripts all .py files in 'scripts' directory
 )
