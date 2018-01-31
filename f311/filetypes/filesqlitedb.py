@@ -97,8 +97,14 @@ class FileSQLiteDB(DataFile):
     # # Interface
     #   =========
 
-    def _get_table_names(self):
-        return a99.get_table_names(self.__get_conn())
+    def ensure_exists(self):
+        """Create file and schema if it does not exist yet."""
+        self._ensure_filename()
+        if not os.path.isfile(self.filename):
+            self.create_schema()
+
+    def close_if_open(self):
+        return self._close_if_open()
 
     def delete(self):
         """Removes .sqlite file. **CAREFUL** needless say"""
@@ -159,6 +165,9 @@ class FileSQLiteDB(DataFile):
 
     # # Internal gear
     #   =============
+
+    def _get_table_names(self):
+        return a99.get_table_names(self.__get_conn())
 
     def _conn_is_open(self):
         """Tests sqlite3 connection, returns T/F"""
