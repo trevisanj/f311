@@ -97,7 +97,10 @@ class FileSQLiteDB(DataFile):
     # # Interface
     #   =========
 
-    def ensure_exists(self):
+    def commit(self):
+        self.get_conn().commit()
+
+    def ensure_schema(self):
         """Create file and schema if it does not exist yet."""
         self._ensure_filename()
         if not os.path.isfile(self.filename):
