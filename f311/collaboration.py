@@ -234,7 +234,7 @@ def _get_programs_dict():
     for pkgname in COLLABORATORS_S:
         try:
             package = importlib.import_module(pkgname)
-        except ModuleNotFoundError:
+        except ImportError:
             # I think it is better to be silent when a collaborator package is not installed
             continue
 
