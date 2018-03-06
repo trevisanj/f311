@@ -7,6 +7,7 @@ from .spectrum import Spectrum
 import logging
 from .datafile import DataFile
 from a99 import overwrite_fits, write_lf
+import a99
 from astropy.io import fits
 import os
 import numpy as np
@@ -42,11 +43,10 @@ class FileSpectrumXY(FileSpectrum):
         if A.shape[1] < 2:
             raise RuntimeError("File {0!s} must contain at least two columns".format(filename))
         if A.shape[1] > 2:
-            logging.warning("File {0!s} has more than two columns, taking only first and second".format(filename))
+            a99.get_python_logger().warning("File {0!s} has more than two columns, taking only first and second".format(filename))
         sp = self.spectrum = Spectrum()
         sp.x = A[:, 0]
         sp.y = A[:, 1]
-#        logging.debug("Just read XY Spectrum '%s'" % filename)
 
 
     def _do_save_as(self, filename):
