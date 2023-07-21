@@ -37,6 +37,17 @@ class FileSpectrumXY(FileSpectrum):
     """
 
     def _do_load(self, filename):
+        sp = self.spectrum = Spectrum()
+
+        # Reads metadata first
+        with open(filename, "r") as f:
+            for line in f:
+                if not line.startswith("#"):
+                    break
+                if line.startswith("# Title:"):
+                    sp.title = line[8:].strip()
+
+        # Now leaves it to numpy
         A = np.loadtxt(filename)
         if len(A.shape) < 2:
             raise RuntimeError("File {0!s} does not contain 2D array".format(filename))
@@ -44,13 +55,15 @@ class FileSpectrumXY(FileSpectrum):
             raise RuntimeError("File {0!s} must contain at least two columns".format(filename))
         if A.shape[1] > 2:
             a99.get_python_logger().warning("File {0!s} has more than two columns, taking only first and second".format(filename))
-        sp = self.spectrum = Spectrum()
         sp.x = A[:, 0]
         sp.y = A[:, 1]
 
 
     def _do_save_as(self, filename):
         with open(filename, "w") as h:
+            title = self.spectrum.title
+            if title:
+                write_lf(h, f"# Title: {title}")
             for x, y in zip(self.spectrum.x, self.spectrum.y):
                 write_lf(h, "{0:.10g} {1:.10g}".format(x, y))
 
