@@ -39,9 +39,15 @@ class PlotSpectrumSetup(object):
         fmt_title: format string for title
         ymin: (optional) force mininum y-value
         flag_legend: Whether to show legend in plot
+        flag_xlabel:
+        flag_ylabel:
+        flag_ignore_units: if True, mismatching units [between spectra] will be ignored
+        stylespecs: dictionary with optional keys "c<i>", "lw<i>", "s<i>" (color, line width and line style), where <i>
+                    is the 0-based spectrum index
     """
     def __init__(self, fmt_xlabel="{.xunit}", fmt_ylabel="{.yunit}", fmt_title="{.title}",
-                 ymin=None, flag_legend=True, flag_xlabel=True, flag_ylabel=True):
+                 ymin=None, flag_legend=True, flag_xlabel=True, flag_ylabel=True,
+                 flag_ignore_units=True, stylespecs=None):
         self.flag_xlabel = flag_xlabel
         self.flag_ylabel = flag_ylabel
         self.fmt_xlabel = fmt_xlabel
@@ -49,6 +55,8 @@ class PlotSpectrumSetup(object):
         self.fmt_title = fmt_title
         self.ymin = ymin
         self.flag_legend = flag_legend
+        self.flag_ignore_units=flag_ignore_units
+        self.stylespecs = stylespecs
 
     def __repr__(self):
         return "{}('{}', '{}', '{}', {}, {})".format(self.__class__.__name__,self.fmt_xlabel,
@@ -100,18 +108,18 @@ def draw_spectra_overlapped(ss, title=None, setup=_default_setup):
             if xunit is None:
                 xunit = s.xunit
             else:
-                if xunit != s.xunit:
+                if xunit != s.xunit and not setup.flag_ignore_units:
                     raise RuntimeError("Spectra x-units do not match")
 
             if yunit is None:
                 yunit = s.yunit
             else:
-                if yunit != s.yunit:
+                if yunit != s.yunit and not setup.flag_ignore_units:
                     raise RuntimeError("Spectra x-units do not match")
 
             ax = plt.gca()
             y = s.y
-            ax.plot(s.x, y, label=str(s.title))
+            _plot_with_styles(ax, s.x, y, str(s.title), setup.stylespecs, i)
 
         # plt.ylabel('({})'.format(yunit))
         # **Note** Takes last spectrum as reference to mount x-label
@@ -128,6 +136,13 @@ def draw_spectra_overlapped(ss, title=None, setup=_default_setup):
 
     if title is not None:
         plt.gcf().canvas.set_window_title(title)
+
+
+def _plot_with_styles(ax, x, y, label, stylespecs, i):
+    ax.plot(x, y, label=label,
+            c=stylespecs.get(f"c{i}"),
+            lw=stylespecs.get(f"lw{i}"),
+            linestyle=stylespecs.get(f"s{i}"))
 
 
 def plot_spectra_pieces_pdf(ss, aint=10, pdf_filename='pieces.pdf', setup=_default_setup):
@@ -278,13 +293,13 @@ def draw_spectra_stacked(ss, title=None, num_rows=None, setup=_default_setup):
         if xunit is None:
             xunit = s.xunit
         else:
-            if xunit != s.xunit:
+            if xunit != s.xunit and not setup.flag_ignore_units:
                 raise RuntimeError("Spectra x-units do not match")
 
         if yunit is None:
             yunit = s.yunit
         else:
-            if yunit != s.yunit:
+            if yunit != s.yunit and not setup.flag_ignore_units:
                 raise RuntimeError("Spectra x-units do not match")
 
     if any_span:
