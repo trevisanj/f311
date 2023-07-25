@@ -47,7 +47,7 @@ class PlotSpectrumSetup(object):
     """
     def __init__(self, fmt_xlabel="{.xunit}", fmt_ylabel="{.yunit}", fmt_title="{.title}",
                  ymin=None, flag_legend=True, flag_xlabel=True, flag_ylabel=True,
-                 flag_ignore_units=True, stylespecs=None):
+                 flag_ignore_units=True, stylespecs={}):
         self.flag_xlabel = flag_xlabel
         self.flag_ylabel = flag_ylabel
         self.fmt_xlabel = fmt_xlabel
