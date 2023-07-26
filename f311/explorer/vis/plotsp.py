@@ -135,7 +135,10 @@ def draw_spectra_overlapped(ss, title=None, setup=_default_setup):
         plt.tight_layout()
 
     if title is not None:
-        plt.gcf().canvas.set_window_title(title)
+        try:
+            plt.gcf().canvas.set_window_title(title)
+        except AttributeError:
+            plt.gcf().canvas.setWindowTitle(title)
 
 
 def _plot_with_styles(ax, x, y, label, stylespecs, i):
@@ -311,5 +314,8 @@ def draw_spectra_stacked(ss, title=None, num_rows=None, setup=_default_setup):
             _set_plot(ax.set_xlabel, setup.fmt_xlabel, s)
     plt.tight_layout()
     if title is not None:
-        fig.canvas.set_window_title(title)
+        try:
+            fig.canvas.set_window_title(title)
+        except AttributeError:
+            fig.canvas.setWindowTitle(title)
     return fig

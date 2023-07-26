@@ -72,7 +72,7 @@ if __name__ == "__main__":
     parser.add_argument('-_', '--protected', action="store_true", help="Includes protected scripts (starting with '_')")
     args = parser.parse_args()
 
-    pkgname_only = args.pkgname if args.pkgname is not "(all)" else None
+    pkgname_only = args.pkgname if args.pkgname != "(all)" else None
 
     if args.list_packages:
         _list_packages()
