@@ -1,45 +1,21 @@
 F311 Installation
 =================
 
-Package ``f311`` can be installed using the following command on your shell::
+.. note:: As of July 2023, we recommend using Anaconda/Miniconda and Python 3.11
 
-    pip install f311
-
-If the above fails, or you had a different installation procedure in mind,
-you may find more useful information below.
-
-Method 1: Using Anaconda without virtual environment
-----------------------------------------------------
-
-This will make Anaconda's Python 3 the default ``python`` command for your user account.
-Make sure you don't mind this, otherwise follow Method 2.
-
-First install Anaconda or Miniconda. When you do so, please make sure that you **answer "yes" to this (or similar) question**::
-
-    Do you wish the installer to prepend the Miniconda3 install location
-    to PATH in your /home/j/.bashrc ? [yes|no]
-    >> yes
-
-
-After Anaconda/Miniconda installation, close the terminal and open it again so that your PATH is updated.
-**Or if your shell is bash**, you can just type ``source ~/.bashrc`` on the terminal.
-
-Now install package ``f311`` using pip::
-
-   pip install f311
-
-Method 2: Using Anaconda virtual environment
+Setting up Anaconda virtual environment
 --------------------------------------------
 
-This method uses a **conda** virtual environment. It works with a separate installation of Python and related packages.
+A virtual environment is an isolated Python installation, which can be activated/deactivated at will, and does not
+interfere in the rest of your system.
 
-First you will need to have Anaconda or Miniconda installed. If you have none of these installed yet, just install Miniconda.
+First you will need to have Anaconda or Miniconda installed. If you are in doubt about this, just install **Miniconda**.
 
-Once Anaconda/Miniconda is installed, create a new virtual environment called "astroenv" (or any name you like):
+Once Anaconda/Miniconda is installed, create a new virtual environment called **astroenv** (or any name you like):
 
 .. code:: shell
 
-   conda create --name astroenv python=3.5 # or 3.6
+   conda create --name astroenv python=3.11
 
 Activate this new virtual environment:
 
@@ -47,13 +23,23 @@ Activate this new virtual environment:
 
    source activate astroenv
 
+Now, install PyQt5 manually using the following:
+
+.. code:: shell
+
+   conda install pyqt
+
+.. note:: **(about PyQt5)** The correct installation of PyQt5 can be challenging depending on one's system.
+          The above solution was found to work in July 2023. It is important to use ``conda`` (**not** ``pip``) for the
+          installation of PyQt5.
+
 Now install package ``f311``:
 
 .. code:: shell
 
    pip install f311
 
-**Note** Every time you want to work with F311, you will need to activate the environment:
+To activate the environment:
 
 .. code:: shell
 
@@ -65,13 +51,14 @@ To deactivate the environment:
 
    source deactivate
 
-Method 3: Developer mode
-------------------------
+Installing F311 in Developer Mode
+---------------------------------
 
-This option allows you to download and modify the source code.
+.. note:: Install F311 in developer mode only if you want to make changes to the source code.
 
+First, set up Anaconda/Miniconda and install PyQt5 as described above.
 
-Clone the f311 GitHub repository:
+Then, clone the F311 GitHub repository:
 
 .. code:: shell
 
@@ -83,26 +70,39 @@ or
 
    git clone http://github.com/trevisanj/f311
 
-Finally, install F311 in **developer** mode:
+Finally, install F311 in **developer mode**:
 
 .. code:: shell
 
    cd f311
    python setup.py develop
 
-Upgrade ``f311``
-----------------
+Upgrading package ``f311``
+--------------------------
 
-Pacakge ``f311`` can be upgraded to a new version by typing::
+If package ``f311`` is already installed, but you need to install a new version, please follow these instructions.
+
+Upgrading in the majority of cases
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Package ``f311`` can be upgraded to a new version by typing::
 
     pip install f311 --upgrade
+
+
+Upgrading F311 in developer mode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Enter the `f311` repository (directory) cloned from Github, then type::
+
+    git pull
+    python setup.py develop
 
 
 Package dependencies
 --------------------
 
-``f311`` package dependencies are listed below. This list is provided only for reference, as **these
-packages should be automatically installed** during the installation process.
+``f311`` package dependencies are listed below. This list is provided only for reference, as **most of these
+packages should be automatically installed** during the installation process (except for ``pyqt``).
 
 - numpy
 - scipy
@@ -113,10 +113,9 @@ packages should be automatically installed** during the installation process.
 - lxml
 - robobrowser
 - requests
-- fortranformat
 - tabulate
 - rows
-- pyqt5
+- pyqt
 - a99
 
 Troubleshooting installation
@@ -124,14 +123,14 @@ Troubleshooting installation
 
 This section shows some possible errors and their solutions.
 
-Python version and release
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+PtQt5
+~~~~~
 
-``f311`` was designed to run with Python 3 (Python 2 support has been discontinued).
+If you have PyQt5-related errors such as the following::
 
-Furthermore, in order to install correctly using the ``pip`` command, the Python release needs to be either
-Python 3.4.6+, Python 3.5.3+, or Python 3.6+ (according to https://packaging.python.org/guides/migrating-to-pypi-org/).
+    ImportError: [...]/QtGui.abi3.so: undefined symbol: _ZdaPvm, version Qt_5
 
+be sure to follow the above instructions to install PyQt5.
 
 MatPlotLib and PyQt5
 ~~~~~~~~~~~~~~~~~~~~

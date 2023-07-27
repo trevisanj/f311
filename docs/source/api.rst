@@ -26,6 +26,6 @@ Creating a collaborator project
    directory named ``template-project``
 2. Create new resources as listed in the beginning of this section;
 3. In order to make package `f311` "see" the new project, create a pull request for project
-   F311 on GitHub (https://github.com/trevisanj/f311), and append your package name to
+   f311 on GitHub (https://github.com/trevisanj/f311), and append your package name to
    the `f311.collaboration.EXTERNAL_COLLABORATORS` list.
 

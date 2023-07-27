@@ -28,7 +28,7 @@ setup(
     name=PACKAGE_NAME,
     packages=find_packages(),
     include_package_data=True,
-    version='23.7.26.0',
+    version='23.7.27.0',
     license='GNU GPLv3',
     platforms='any',
     description='Astronomy-related API, command-line tools, and windowed applications',
@@ -38,8 +38,8 @@ setup(
     keywords= ['astronomy', "fits", "spectroscopy", "spectral synthesis", "photometry",
                "honl-london", "nist", "hitran", "multiplicity", "line strength", "kovacs", "franck-condon"],
     install_requires=["numpy", "scipy", "matplotlib", "astropy", "configobj", "bs4", "lxml",
-                      "robobrowser", "requests", "fortranformat", "tabulate", "rows", "pyqt5",
-                      "a99>=18.3.1.0", "airvacuumvald"],
+                      "robobrowser", "requests", "tabulate", "rows",
+                      "a99>=23.7.27.0", "airvacuumvald"],
     scripts=scripts
 )
 

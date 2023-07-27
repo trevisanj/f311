@@ -1,4 +1,4 @@
-# F311
+# Project F311
 
 Collaborative model for Python programmers in Astronomy.
 
@@ -6,4 +6,4 @@ Collaborative model for Python programmers in Astronomy.
 
 http://trevisanj.github.io/f311
 
-![](docs/source/art/key-white.png)
+![](docs/art/key-white.png)
