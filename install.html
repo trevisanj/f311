@@ -48,7 +48,11 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">F311 Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setting-up-anaconda-virtual-environment">Setting up Anaconda virtual environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-f311-in-developer-mode">Installing F311 in Developer Mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#upgrade-f311">Upgrade <code class="docutils literal notranslate"><span class="pre">f311</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upgrading-package-f311">Upgrading package <code class="docutils literal notranslate"><span class="pre">f311</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#upgrading-in-the-majority-of-cases">Upgrading in the majority of cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#upgrading-f311-in-developer-mode">Upgrading F311 in developer mode</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#package-dependencies">Package dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting-installation">Troubleshooting installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ptqt5">PtQt5</a></li>
@@ -152,12 +156,24 @@ python<span class="w"> </span>setup.py<span class="w"> </span>develop
 </pre></div>
 </div>
 </section>
-<section id="upgrade-f311">
-<h2>Upgrade <code class="docutils literal notranslate"><span class="pre">f311</span></code><a class="headerlink" href="#upgrade-f311" title="Permalink to this heading">¶</a></h2>
+<section id="upgrading-package-f311">
+<h2>Upgrading package <code class="docutils literal notranslate"><span class="pre">f311</span></code><a class="headerlink" href="#upgrading-package-f311" title="Permalink to this heading">¶</a></h2>
+<p>If package <code class="docutils literal notranslate"><span class="pre">f311</span></code> is already installed, but you need to install a new version, please follow these instructions.</p>
+<section id="upgrading-in-the-majority-of-cases">
+<h3>Upgrading in the majority of cases<a class="headerlink" href="#upgrading-in-the-majority-of-cases" title="Permalink to this heading">¶</a></h3>
 <p>Package <code class="docutils literal notranslate"><span class="pre">f311</span></code> can be upgraded to a new version by typing:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">f311</span> <span class="o">--</span><span class="n">upgrade</span>
 </pre></div>
 </div>
+</section>
+<section id="upgrading-f311-in-developer-mode">
+<h3>Upgrading F311 in developer mode<a class="headerlink" href="#upgrading-f311-in-developer-mode" title="Permalink to this heading">¶</a></h3>
+<p>Enter the <cite>f311</cite> repository (directory) cloned from Github, then type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="package-dependencies">
 <h2>Package dependencies<a class="headerlink" href="#package-dependencies" title="Permalink to this heading">¶</a></h2>

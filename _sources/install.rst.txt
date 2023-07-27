@@ -77,12 +77,25 @@ Finally, install F311 in **developer mode**:
    cd f311
    python setup.py develop
 
-Upgrade ``f311``
-----------------
+Upgrading package ``f311``
+--------------------------
 
+If package ``f311`` is already installed, but you need to install a new version, please follow these instructions.
+
+Upgrading in the majority of cases
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Package ``f311`` can be upgraded to a new version by typing::
 
     pip install f311 --upgrade
+
+
+Upgrading F311 in developer mode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Enter the `f311` repository (directory) cloned from Github, then type::
+
+    git pull
+    python setup.py develop
 
 
 Package dependencies
