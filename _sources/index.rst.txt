@@ -25,20 +25,6 @@ By the end of 2017, the following projects were listed as *collaborators*:
 Project F311 is a collaborator to itself, providing classes to handle 1D spectral files (such as FITS, "x-y"),
 and a few scripts as listed below.
 
-.. note:: Projects **PyFANT** and **AOSSS** were recently split from F311 and are now separate
-          projects. If you are looking for the functionalities in these projects, please refer
-          to their respective links.
-
-
-Quick install
--------------
-
-.. code:: shell
-
-    pip install f311
-
-Or visit the :doc:`installation page <install>`.
-
 Importing the API
 -----------------
 

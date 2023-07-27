@@ -4,7 +4,7 @@ Examples
 List file types handled by all collaborator packages
 ----------------------------------------------------
 
-The current list considers projects aosss, ariastro, F311, and PyFANT.
+The current list considers projects aosss, ariastro, f311, and PyFANT.
 
 
 .. literalinclude:: ../examples/f311/print-collaboration.py

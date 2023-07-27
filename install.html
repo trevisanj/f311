@@ -1,81 +1,41 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>F311 Installation &mdash; F311 17.12.21.0 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F311 Installation &mdash; f311 23.7.27.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="F311 17.12.21.0 documentation" href="index.html"/>
-        <link rel="next" title="Index of applications (scripts)" href="scripts.html"/>
-        <link rel="prev" title="F311 – collaborative model for Python programmers in Astronomy" href="index.html"/>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Index of applications (scripts)" href="scripts.html" />
+    <link rel="prev" title="F311 – collaborative model for Python programmers in Astronomy" href="index.html" />
     <link href="_static/style.css" rel="stylesheet" type="text/css">
-
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
-
-          
-            <a href="index.html" class="icon icon-home"> F311
-          
-
-          
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> f311
           </a>
-
-          
-            
-            
               <div class="version">
-                17.12.21.0
+                23.7.27.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -83,26 +43,15 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">F311 Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#method-1-using-anaconda-without-virtual-environment">Method 1: Using Anaconda without virtual environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#method-2-using-anaconda-virtual-environment">Method 2: Using Anaconda virtual environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#method-3-developer-mode">Method 3: Developer mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#upgrade-f311">Upgrade <code class="docutils literal"><span class="pre">f311</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-anaconda-virtual-environment">Setting up Anaconda virtual environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-f311-in-developer-mode">Installing F311 in Developer Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upgrade-f311">Upgrade <code class="docutils literal notranslate"><span class="pre">f311</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#package-dependencies">Package dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting-installation">Troubleshooting installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#python-version-and-release">Python version and release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ptqt5">PtQt5</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#matplotlib-and-pyqt5">MatPlotLib and PyQt5</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#problems-with-package-bs4">Problems with package bs4</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-problems">Other problems</a></li>
@@ -116,268 +65,187 @@
 <li class="toctree-l1"><a class="reference internal" href="autodoc/modules.html">f311</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">F311</a>
-        
+          <a href="index.html">f311</a>
       </nav>
 
-
-      
       <div class="wy-nav-content">
         <div class="rst-content">
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
-      <li>F311 Installation</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">F311 Installation</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/install.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="f311-installation">
-<h1>F311 Installation<a class="headerlink" href="#f311-installation" title="Permalink to this headline">¶</a></h1>
-<p>Package <code class="docutils literal"><span class="pre">f311</span></code> can be installed using the following command on your shell:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">f311</span>
-</pre></div>
+             
+  <section id="f311-installation">
+<h1>F311 Installation<a class="headerlink" href="#f311-installation" title="Permalink to this heading">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As of July 2023, we recommend using Anaconda/Miniconda and Python 3.11</p>
 </div>
-<p>If the above fails, or you had a different installation procedure in mind,
-you may find more useful information below.</p>
-<div class="section" id="method-1-using-anaconda-without-virtual-environment">
-<h2>Method 1: Using Anaconda without virtual environment<a class="headerlink" href="#method-1-using-anaconda-without-virtual-environment" title="Permalink to this headline">¶</a></h2>
-<p>This will make Anaconda’s Python 3 the default <code class="docutils literal"><span class="pre">python</span></code> command for your user account.
-Make sure you don’t mind this, otherwise follow Method 2.</p>
-<p>First install Anaconda or Miniconda. When you do so, please make sure that you <strong>answer “yes” to this (or similar) question</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>Do you wish the installer to prepend the Miniconda3 install location
-to PATH in your /home/j/.bashrc ? [yes|no]
-&gt;&gt; yes
-</pre></div>
-</div>
-<p>After Anaconda/Miniconda installation, close the terminal and open it again so that your PATH is updated.
-<strong>Or if your shell is bash</strong>, you can just type <code class="docutils literal"><span class="pre">source</span> <span class="pre">~/.bashrc</span></code> on the terminal.</p>
-<p>Now install package <code class="docutils literal"><span class="pre">f311</span></code> using pip:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">f311</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="method-2-using-anaconda-virtual-environment">
-<h2>Method 2: Using Anaconda virtual environment<a class="headerlink" href="#method-2-using-anaconda-virtual-environment" title="Permalink to this headline">¶</a></h2>
-<p>This method uses a <strong>conda</strong> virtual environment. It works with a separate installation of Python and related packages.</p>
-<p>First you will need to have Anaconda or Miniconda installed. If you have none of these installed yet, just install Miniconda.</p>
-<p>Once Anaconda/Miniconda is installed, create a new virtual environment called “astroenv” (or any name you like):</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">astroenv</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.5</span> <span class="c1"># or 3.6</span>
+<section id="setting-up-anaconda-virtual-environment">
+<h2>Setting up Anaconda virtual environment<a class="headerlink" href="#setting-up-anaconda-virtual-environment" title="Permalink to this heading">¶</a></h2>
+<p>A virtual environment is an isolated Python installation, which can be activated/deactivated at will, and does not
+interfere in the rest of your system.</p>
+<p>First you will need to have Anaconda or Miniconda installed. If you are in doubt about this, just install <strong>Miniconda</strong>.</p>
+<p>Once Anaconda/Miniconda is installed, create a new virtual environment called <strong>astroenv</strong> (or any name you like):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>astroenv<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
 </pre></div>
 </div>
 <p>Activate this new virtual environment:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">astroenv</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>astroenv
 </pre></div>
 </div>
-<p>Now install package <code class="docutils literal"><span class="pre">f311</span></code>:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">f311</span>
+<p>Now, install PyQt5 manually using the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>pyqt
 </pre></div>
 </div>
-<p><strong>Note</strong> Every time you want to work with F311, you will need to activate the environment:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">astroenv</span>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>(about PyQt5)</strong> The correct installation of PyQt5 can be challenging depending on one’s system.
+The above solution was found to work in July 2023. It is important to use <code class="docutils literal notranslate"><span class="pre">conda</span></code> (<strong>not</strong> <code class="docutils literal notranslate"><span class="pre">pip</span></code>) for the
+installation of PyQt5.</p>
+</div>
+<p>Now install package <code class="docutils literal notranslate"><span class="pre">f311</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>f311
+</pre></div>
+</div>
+<p>To activate the environment:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>astroenv
 </pre></div>
 </div>
 <p>To deactivate the environment:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">deactivate</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>deactivate
 </pre></div>
 </div>
+</section>
+<section id="installing-f311-in-developer-mode">
+<h2>Installing F311 in Developer Mode<a class="headerlink" href="#installing-f311-in-developer-mode" title="Permalink to this heading">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Install F311 in developer mode only if you want to make changes to the source code.</p>
 </div>
-<div class="section" id="method-3-developer-mode">
-<h2>Method 3: Developer mode<a class="headerlink" href="#method-3-developer-mode" title="Permalink to this headline">¶</a></h2>
-<p>This option allows you to download and modify the source code.</p>
-<p>Clone the f311 GitHub repository:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">ssh</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">trevisanj</span><span class="o">/</span><span class="n">f311</span><span class="o">.</span><span class="n">git</span>
+<p>First, set up Anaconda/Miniconda and install PyQt5 as described above.</p>
+<p>Then, clone the F311 GitHub repository:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>ssh://git@github.com/trevisanj/f311.git
 </pre></div>
 </div>
 <p>or</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">trevisanj</span><span class="o">/</span><span class="n">f311</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>http://github.com/trevisanj/f311
 </pre></div>
 </div>
-<p>Finally, install F311 in <strong>developer</strong> mode:</p>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">f311</span>
-<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
+<p>Finally, install F311 in <strong>developer mode</strong>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>f311
+python<span class="w"> </span>setup.py<span class="w"> </span>develop
 </pre></div>
 </div>
-</div>
-<div class="section" id="upgrade-f311">
-<h2>Upgrade <code class="docutils literal"><span class="pre">f311</span></code><a class="headerlink" href="#upgrade-f311" title="Permalink to this headline">¶</a></h2>
-<p>Pacakge <code class="docutils literal"><span class="pre">f311</span></code> can be upgraded to a new version by typing:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">f311</span> <span class="o">--</span><span class="n">upgrade</span>
+</section>
+<section id="upgrade-f311">
+<h2>Upgrade <code class="docutils literal notranslate"><span class="pre">f311</span></code><a class="headerlink" href="#upgrade-f311" title="Permalink to this heading">¶</a></h2>
+<p>Package <code class="docutils literal notranslate"><span class="pre">f311</span></code> can be upgraded to a new version by typing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">f311</span> <span class="o">--</span><span class="n">upgrade</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="package-dependencies">
-<h2>Package dependencies<a class="headerlink" href="#package-dependencies" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">f311</span></code> package dependencies are listed below. This list is provided only for reference, as <strong>these
-packages should be automatically installed</strong> during the installation process.</p>
+</section>
+<section id="package-dependencies">
+<h2>Package dependencies<a class="headerlink" href="#package-dependencies" title="Permalink to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">f311</span></code> package dependencies are listed below. This list is provided only for reference, as <strong>most of these
+packages should be automatically installed</strong> during the installation process (except for <code class="docutils literal notranslate"><span class="pre">pyqt</span></code>).</p>
 <ul class="simple">
-<li>numpy</li>
-<li>scipy</li>
-<li>matplotlib</li>
-<li>astropy</li>
-<li>configobj</li>
-<li>bs4</li>
-<li>lxml</li>
-<li>robobrowser</li>
-<li>requests</li>
-<li>fortranformat</li>
-<li>tabulate</li>
-<li>rows</li>
-<li>pyqt5</li>
-<li>a99</li>
+<li><p>numpy</p></li>
+<li><p>scipy</p></li>
+<li><p>matplotlib</p></li>
+<li><p>astropy</p></li>
+<li><p>configobj</p></li>
+<li><p>bs4</p></li>
+<li><p>lxml</p></li>
+<li><p>robobrowser</p></li>
+<li><p>requests</p></li>
+<li><p>tabulate</p></li>
+<li><p>rows</p></li>
+<li><p>pyqt</p></li>
+<li><p>a99</p></li>
 </ul>
-</div>
-<div class="section" id="troubleshooting-installation">
-<h2>Troubleshooting installation<a class="headerlink" href="#troubleshooting-installation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="troubleshooting-installation">
+<h2>Troubleshooting installation<a class="headerlink" href="#troubleshooting-installation" title="Permalink to this heading">¶</a></h2>
 <p>This section shows some possible errors and their solutions.</p>
-<div class="section" id="python-version-and-release">
-<h3>Python version and release<a class="headerlink" href="#python-version-and-release" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">f311</span></code> was designed to run with Python 3 (Python 2 support has been discontinued).</p>
-<p>Furthermore, in order to install correctly using the <code class="docutils literal"><span class="pre">pip</span></code> command, the Python release needs to be either
-Python 3.4.6+, Python 3.5.3+, or Python 3.6+ (according to <a class="reference external" href="https://packaging.python.org/guides/migrating-to-pypi-org/">https://packaging.python.org/guides/migrating-to-pypi-org/</a>).</p>
+<section id="ptqt5">
+<h3>PtQt5<a class="headerlink" href="#ptqt5" title="Permalink to this heading">¶</a></h3>
+<p>If you have PyQt5-related errors such as the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ImportError</span><span class="p">:</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="o">/</span><span class="n">QtGui</span><span class="o">.</span><span class="n">abi3</span><span class="o">.</span><span class="n">so</span><span class="p">:</span> <span class="n">undefined</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">_ZdaPvm</span><span class="p">,</span> <span class="n">version</span> <span class="n">Qt_5</span>
+</pre></div>
 </div>
-<div class="section" id="matplotlib-and-pyqt5">
-<h3>MatPlotLib and PyQt5<a class="headerlink" href="#matplotlib-and-pyqt5" title="Permalink to this headline">¶</a></h3>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">Unrecognized</span> <span class="n">backend</span> <span class="n">string</span> <span class="s2">&quot;qt5agg&quot;</span><span class="p">:</span> <span class="n">valid</span> <span class="n">strings</span> <span class="n">are</span> <span class="p">[</span><span class="s1">&#39;GTKAgg&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="s1">&#39;pdf&#39;</span><span class="p">,</span>
-<span class="s1">&#39;GTK3Agg&#39;</span><span class="p">,</span> <span class="s1">&#39;cairo&#39;</span><span class="p">,</span> <span class="s1">&#39;TkAgg&#39;</span><span class="p">,</span> <span class="s1">&#39;pgf&#39;</span><span class="p">,</span> <span class="s1">&#39;MacOSX&#39;</span><span class="p">,</span> <span class="s1">&#39;GTK&#39;</span><span class="p">,</span> <span class="s1">&#39;WX&#39;</span><span class="p">,</span> <span class="s1">&#39;GTKCairo&#39;</span><span class="p">,</span> <span class="s1">&#39;Qt4Agg&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span>
-<span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;emf&#39;</span><span class="p">,</span> <span class="s1">&#39;WebAgg&#39;</span><span class="p">,</span> <span class="s1">&#39;gdk&#39;</span><span class="p">,</span> <span class="s1">&#39;WXAgg&#39;</span><span class="p">,</span> <span class="s1">&#39;CocoaAgg&#39;</span><span class="p">,</span> <span class="s1">&#39;GTK3Cairo&#39;</span><span class="p">]</span>
+<p>be sure to follow the above instructions to install PyQt5.</p>
+</section>
+<section id="matplotlib-and-pyqt5">
+<h3>MatPlotLib and PyQt5<a class="headerlink" href="#matplotlib-and-pyqt5" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ValueError:<span class="w"> </span>Unrecognized<span class="w"> </span>backend<span class="w"> </span>string<span class="w"> </span><span class="s2">&quot;qt5agg&quot;</span>:<span class="w"> </span>valid<span class="w"> </span>strings<span class="w"> </span>are<span class="w"> </span><span class="o">[</span><span class="s1">&#39;GTKAgg&#39;</span>,<span class="w"> </span><span class="s1">&#39;template&#39;</span>,<span class="w"> </span><span class="s1">&#39;pdf&#39;</span>,
+<span class="s1">&#39;GTK3Agg&#39;</span>,<span class="w"> </span><span class="s1">&#39;cairo&#39;</span>,<span class="w"> </span><span class="s1">&#39;TkAgg&#39;</span>,<span class="w"> </span><span class="s1">&#39;pgf&#39;</span>,<span class="w"> </span><span class="s1">&#39;MacOSX&#39;</span>,<span class="w"> </span><span class="s1">&#39;GTK&#39;</span>,<span class="w"> </span><span class="s1">&#39;WX&#39;</span>,<span class="w"> </span><span class="s1">&#39;GTKCairo&#39;</span>,<span class="w"> </span><span class="s1">&#39;Qt4Agg&#39;</span>,<span class="w"> </span><span class="s1">&#39;svg&#39;</span>,<span class="w"> </span><span class="s1">&#39;agg&#39;</span>,
+<span class="s1">&#39;ps&#39;</span>,<span class="w"> </span><span class="s1">&#39;emf&#39;</span>,<span class="w"> </span><span class="s1">&#39;WebAgg&#39;</span>,<span class="w"> </span><span class="s1">&#39;gdk&#39;</span>,<span class="w"> </span><span class="s1">&#39;WXAgg&#39;</span>,<span class="w"> </span><span class="s1">&#39;CocoaAgg&#39;</span>,<span class="w"> </span><span class="s1">&#39;GTK3Cairo&#39;</span><span class="o">]</span>
 </pre></div>
 </div>
 <p><strong>Solution</strong>: upgrade Matplotlib to version 1.4 or later</p>
-</div>
-<div class="section" id="problems-with-package-bs4">
-<h3>Problems with package bs4<a class="headerlink" href="#problems-with-package-bs4" title="Permalink to this headline">¶</a></h3>
-<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">bs4</span><span class="o">.</span><span class="n">FeatureNotFound</span><span class="p">:</span> <span class="n">Couldn</span><span class="s1">&#39;t find a tree builder with the features you requested: lxml. Do you need to install a parser library?</span>
+</section>
+<section id="problems-with-package-bs4">
+<h3>Problems with package bs4<a class="headerlink" href="#problems-with-package-bs4" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bs4.FeatureNotFound: Couldn&#39;t find a tree builder with the features you requested: lxml. Do you need to install a parser library?
 </pre></div>
 </div>
 <p><strong>Solution</strong>: install package “lxml”:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">lxml</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">lxml</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="other-problems">
-<h3>Other problems<a class="headerlink" href="#other-problems" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="other-problems">
+<h3>Other problems<a class="headerlink" href="#other-problems" title="Permalink to this heading">¶</a></h3>
 <p>If you have other installation problems or have a suggestion, please open an issue at the project
 site on <a class="reference external" href="http://github.com/trevisanj/f311">GitHub</a>.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
-           </div>
-           <div class="articleComments">
-            
            </div>
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="scripts.html" class="btn btn-neutral float-right" title="Index of applications (scripts)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral" title="F311 – collaborative model for Python programmers in Astronomy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="F311 – collaborative model for Python programmers in Astronomy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scripts.html" class="btn btn-neutral float-right" title="Index of applications (scripts)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2015-2017, JT.
-
-    </p>
+    <p>&#169; Copyright 2015-2023, JT.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'17.12.21.0',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
