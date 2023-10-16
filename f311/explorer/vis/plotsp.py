@@ -286,7 +286,8 @@ def draw_spectra_stacked(ss, title=None, num_rows=None, setup=_default_setup):
         ymin_now = ymin_ if setup.ymin is None else setup.ymin
         ax.set_ylim([ymin_now, ymin_now + (ymax - ymin_now) * (1 + _T)])  # prevents top of line from being hidden by plot box
 
-        _set_plot(ax.set_ylabel, setup.fmt_ylabel, s)
+        # 20231008 it is better to leave y-label empty than to guess it wrong
+        # _set_plot(ax.set_ylabel, setup.fmt_ylabel, s)
         _set_plot(ax.set_title, setup.fmt_title, s)
 
         if len(s.x) > 0:
