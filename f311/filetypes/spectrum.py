@@ -1,6 +1,6 @@
 from astropy.io import fits
 from astropy import units as u
-from scipy import interp
+from numpy import interp
 import numpy as np
 import a99
 import os
